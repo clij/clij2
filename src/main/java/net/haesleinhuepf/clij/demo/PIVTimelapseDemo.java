@@ -17,7 +17,8 @@ public class PIVTimelapseDemo {
         new ImageJ();
         CLIJ clij = CLIJ.getInstance();
 
-        ImagePlus imp = IJ.openImage("C:\\structure\\data\\piv\\julia\\z16_t30-50.tif");
+        //ImagePlus imp = IJ.openImage("C:\\structure\\data\\piv\\julia\\z16_t30-50.tif");
+        ImagePlus imp = IJ.openImage("C:\\structure\\data\\piv\\bruno\\G1.tif");
         IJ.run(imp, "32-bit", "");
 
         ParticleImageVelocimetryTimelapse pivt = new ParticleImageVelocimetryTimelapse();
@@ -37,15 +38,23 @@ public class PIVTimelapseDemo {
 
         ClearCLBuffer blurredDeltaX = clij.create(input);
         ClearCLBuffer blurredDeltaY = clij.create(input);
+        ClearCLBuffer temp1 = clij.create(input);
+        ClearCLBuffer temp2 = clij.create(input);
 
-        //clij.op().blur(deltaX, blurredDeltaX, (float)maxDelta, (float)maxDelta, 0f);
-        //clij.op().blur(deltaY, blurredDeltaY, (float)maxDelta, (float)maxDelta, 0f);
-        DifferenceOfGaussian3D.differenceOfGaussian(clij, deltaX, blurredDeltaX, (float)maxDelta, (float)maxDelta, 0f, (float)maxDelta * 2, (float)maxDelta * 2, 0f);
-        DifferenceOfGaussian3D.differenceOfGaussian(clij, deltaY, blurredDeltaY, (float)maxDelta, (float)maxDelta, 0f, (float)maxDelta * 2, (float)maxDelta * 2, 0f);
+        DifferenceOfGaussian3D.differenceOfGaussian(clij, deltaX, blurredDeltaX, (float)maxDelta / 2, (float)maxDelta / 2, 0f, (float)maxDelta * 2, (float)maxDelta * 2, 0f);
+        DifferenceOfGaussian3D.differenceOfGaussian(clij, deltaY, blurredDeltaY, (float)maxDelta / 2, (float)maxDelta / 2, 0f, (float)maxDelta * 2, (float)maxDelta * 2, 0f);
 
-        //LocalExtremaBox.localExtrema(clij, deltaX, blurredDeltaX, 1, 1, 0);
-        //LocalExtremaBox.localExtrema(clij, deltaY, blurredDeltaY, 1, 1, 0);
+        //clij.op().maximumBox(deltaX, blurredDeltaX, 1, 1, 3);
+        //clij.op().maximumBox(deltaY, blurredDeltaY, 1, 1, 3);
 
+        //LocalExtremaBox.localExtrema(clij, deltaX, temp1, 1, 1, 3);
+        //LocalExtremaBox.localExtrema(clij, deltaY, temp2, 1, 1, 3);
+
+        //clij.op().blur(temp1, blurredDeltaX, (float)maxDelta, (float)maxDelta, 0f);
+        //clij.op().blur(temp2, blurredDeltaY, (float)maxDelta, (float)maxDelta, 0f);
+
+        //clij.op().copy(deltaX, blurredDeltaX);
+        //clij.op().copy(deltaY, blurredDeltaY);
         clij.show(blurredDeltaX, "blurredDeltaX");
 
         ImagePlus deltaXImp = clij.pull(blurredDeltaX);

@@ -151,12 +151,13 @@ public class VisualiseVectorFieldsPlugin implements Command {
                     Color color = new Color(r, g, b);
 
                     //System.out.println(length);
-
-                    Line line = new Line(x, y, x + deltaX, y + deltaY);
-                    line.setStrokeColor(color);
-                    BasicStroke stroke = new BasicStroke(lineWidth);
-                    line.setStroke(stroke);
-                    overlay.add(line);
+                    if (deltaX != 0 && deltaY != 0) {
+                        Line line = new Line(x, y, x + deltaX, y + deltaY);
+                        line.setStrokeColor(color);
+                        BasicStroke stroke = new BasicStroke(lineWidth);
+                        line.setStroke(stroke);
+                        overlay.add(line);
+                    }
                 }
             }
         }
