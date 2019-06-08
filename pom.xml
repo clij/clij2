@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+		http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>net.haesleinhuepf</groupId>
+		<artifactId>clij-parent-pom</artifactId>
+		<version>1.0.2-BETA</version>
+		<relativePath />
+	</parent>
+
+	<groupId>net.haesleinhuepf</groupId>
+	<artifactId>clij-advanced-filters</artifactId>
+	<version>0.1.0</version>
+
+	<name>clij-piv-plugin</name>
+	<description>clij-advanced-filters</description>
+	<url>http://haesleinhuepf.net</url>
+	<inceptionYear>2019</inceptionYear>
+	<organization>
+		<name>MPI CBG</name>
+		<url>http://www.mpi-cbg.de</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>Simplified BSD License</name>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>haesleinhuepf</id>
+			<name>Robert Haase`</name>
+			<url>http://haesleinhuepf.net</url>
+			<organization>MPI CBG</organization>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>none</name>
+		</contributor>
+	</contributors>
+
+	<mailingLists>
+		<mailingList>
+			<name>ImageSc Forum</name>
+			<archive>http://forum.image.sc/</archive>
+		</mailingList>
+	</mailingLists>
+
+	<scm>
+		<connection>scm:git:git://github.com/clij/clij</connection>
+        <developerConnection>scm:git:git@github.com/clij/clij</developerConnection>
+        <tag>HEAD</tag>
+		<url>https://github.com/clij/clij</url>
+	</scm>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/clij/clij/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>None</system>
+	</ciManagement>
+
+	<properties>
+		<package-name>net.haesleinhuepf</package-name>
+		<license.licenseName>bsd_3</license.licenseName>
+		<license.copyrightOwners>Robert Haase, MPI CBG</license.copyrightOwners>
+		<imagej.app.directory>C:/programs/fiji-win64/Fiji.app/</imagej.app.directory>
+		<!--<imagej.app.directory>/home/rhaase/programs/fiji/Fiji.app/</imagej.app.directory>-->
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.haesleinhuepf</groupId>
+			<artifactId>clij_</artifactId>
+     	</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>clij</id>
+			<url>http://dl.bintray.com/haesleinhuepf/clij</url>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>bintray-haesleinhuepf-snapshots</id>
+			<name>bintray-snapshots</name>
+			<url>https://api.bintray.com/maven/haesleinhuepf/clij/clij-advanced-filters/;publish=1</url>
+		</repository>
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<argLine>-Xmx2G</argLine>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
