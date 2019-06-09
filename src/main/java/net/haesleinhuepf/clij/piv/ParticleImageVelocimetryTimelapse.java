@@ -22,29 +22,33 @@ public class ParticleImageVelocimetryTimelapse extends AbstractCLIJPlugin implem
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = pivOnTimelapse(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]), asInteger(args[3]));
+        boolean result = pivOnTimelapse(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]), (ClearCLBuffer)(args[3]), asInteger(args[4]), asInteger(args[5]), asInteger(args[6]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean pivOnTimelapse(CLIJ clij, ClearCLBuffer input, ClearCLBuffer destinationDeltaX, ClearCLBuffer destinationDeltaY, int maxDelta) {
+    public static boolean pivOnTimelapse(CLIJ clij, ClearCLBuffer input, ClearCLBuffer destinationDeltaX, ClearCLBuffer destinationDeltaY, ClearCLBuffer destinationDeltaZ, int maxDeltaX, int maxDeltaY, int maxDeltaZ) {
         ClearCLBuffer slice1 = clij.create(new long[] {input.getWidth(), input.getHeight()}, input.getNativeType());
         ClearCLBuffer slice2 = clij.create(slice1);
         ClearCLBuffer deltaXslice = clij.create(slice1);
         ClearCLBuffer deltaYslice = clij.create(slice1);
+        ClearCLBuffer deltaZslice = clij.create(slice1);
         for (int t = 0; t < input.getDepth() - 1; t++) {
+            System.out.println("PIVt " + t + "/" + input.getDepth());
             clij.op().copySlice(input, slice1, t);
             clij.op().copySlice(input, slice2, t + 1);
 
-            ParticleImageVelocimetry.particleImageVelocimetry2D(clij, slice1, slice2, deltaXslice, deltaYslice, maxDelta);
+            ParticleImageVelocimetry.particleImageVelocimetry(clij, slice1, slice2, deltaXslice, deltaYslice, deltaZslice, maxDeltaX, maxDeltaY, maxDeltaZ);
 
             clij.op().copySlice(deltaXslice, destinationDeltaX, t);
             clij.op().copySlice(deltaYslice, destinationDeltaY, t);
+            clij.op().copySlice(deltaZslice, destinationDeltaZ, t);
         }
         slice1.close();
         slice2.close();
         deltaXslice.close();
         deltaYslice.close();
+        deltaZslice.close();
         return true;
     }
 

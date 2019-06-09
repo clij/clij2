@@ -22,6 +22,7 @@ public class VisualiseVectorFieldOnTimelapsePlugin extends VisualiseVectorFields
 
         ImagePlus[] resultSlices = new ImagePlus[inputImage.getNSlices()];
         for (int t = 0; t < inputImage.getNSlices(); t++) {
+            System.out.println("PIV " + t + "/" + inputImage.getNSlices());
             ImagePlus inputSlice = new Duplicator().run(inputImage, t+1, t+1);
             inputSlice.setDisplayRange(inputImage.getDisplayRangeMin(), inputImage.getDisplayRangeMax());
             //inputSlice.updateAndDraw();

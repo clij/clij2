@@ -17,8 +17,8 @@ public class PIVTimelapseDemo {
         new ImageJ();
         CLIJ clij = CLIJ.getInstance();
 
-        //ImagePlus imp = IJ.openImage("C:\\structure\\data\\piv\\julia\\z16_t30-50.tif");
-        ImagePlus imp = IJ.openImage("C:\\structure\\data\\piv\\bruno\\G1.tif");
+        ImagePlus imp = IJ.openImage("C:\\structure\\data\\piv\\julia\\z16_t40-50.tif");
+        //ImagePlus imp = IJ.openImage("C:\\structure\\data\\piv\\bruno\\G1.tif");
         IJ.run(imp, "32-bit", "");
 
         ParticleImageVelocimetryTimelapse pivt = new ParticleImageVelocimetryTimelapse();
@@ -27,22 +27,29 @@ public class PIVTimelapseDemo {
         ClearCLBuffer input = clij.push(imp);
         ClearCLBuffer deltaX = clij.create(new long[]{input.getWidth(), input.getHeight(), input.getDepth() - 1}, input.getNativeType());
         ClearCLBuffer deltaY = clij.create(deltaX);
-        int maxDelta = 5;
+        ClearCLBuffer deltaZ = clij.create(deltaX);
+        int maxDeltaX = 5;
+        int maxDeltaY = 5;
+        int maxDeltaZ = 0;
 
-        pivt.setArgs(new Object[]{input, deltaX, deltaY, maxDelta});
+        System.out.println("pivt");
+
+        pivt.setArgs(new Object[]{input, deltaX, deltaY, deltaZ, maxDeltaX, maxDeltaY, maxDeltaZ});
         pivt.executeCL();
 
         clij.show(input, "input");
         clij.show(deltaX, "deltaX");
         clij.show(deltaY, "deltaY");
+        clij.show(deltaZ, "deltaZ");
 
+        //if (true) return;
         ClearCLBuffer blurredDeltaX = clij.create(input);
         ClearCLBuffer blurredDeltaY = clij.create(input);
         ClearCLBuffer temp1 = clij.create(input);
         ClearCLBuffer temp2 = clij.create(input);
 
-        DifferenceOfGaussian3D.differenceOfGaussian(clij, deltaX, blurredDeltaX, (float)maxDelta / 2, (float)maxDelta / 2, 0f, (float)maxDelta * 2, (float)maxDelta * 2, 0f);
-        DifferenceOfGaussian3D.differenceOfGaussian(clij, deltaY, blurredDeltaY, (float)maxDelta / 2, (float)maxDelta / 2, 0f, (float)maxDelta * 2, (float)maxDelta * 2, 0f);
+       // DifferenceOfGaussian3D.differenceOfGaussian(clij, deltaX, blurredDeltaX, (float)maxDeltaX / 2, (float)maxDeltaY / 2, 0f, (float)maxDeltaX * 2, (float)maxDeltaY * 2, 0f);
+        //DifferenceOfGaussian3D.differenceOfGaussian(clij, deltaY, blurredDeltaY, (float)maxDeltaX / 2, (float)maxDeltaY / 2, 0f, (float)maxDeltaX * 2, (float)maxDeltaY * 2, 0f);
 
         //clij.op().maximumBox(deltaX, blurredDeltaX, 1, 1, 3);
         //clij.op().maximumBox(deltaY, blurredDeltaY, 1, 1, 3);
@@ -50,12 +57,13 @@ public class PIVTimelapseDemo {
         //LocalExtremaBox.localExtrema(clij, deltaX, temp1, 1, 1, 3);
         //LocalExtremaBox.localExtrema(clij, deltaY, temp2, 1, 1, 3);
 
-        //clij.op().blur(temp1, blurredDeltaX, (float)maxDelta, (float)maxDelta, 0f);
-        //clij.op().blur(temp2, blurredDeltaY, (float)maxDelta, (float)maxDelta, 0f);
+        clij.op().blur(deltaX, blurredDeltaX, (float)maxDeltaX, (float)maxDeltaY, (float)maxDeltaZ);
+        clij.op().blur(deltaY, blurredDeltaY, (float)maxDeltaX, (float)maxDeltaY, (float)maxDeltaZ);
 
         //clij.op().copy(deltaX, blurredDeltaX);
         //clij.op().copy(deltaY, blurredDeltaY);
         clij.show(blurredDeltaX, "blurredDeltaX");
+        clij.show(blurredDeltaY, "blurredDeltaY");
 
         ImagePlus deltaXImp = clij.pull(blurredDeltaX);
         ImagePlus deltaYImp = clij.pull(blurredDeltaY);
@@ -70,7 +78,7 @@ public class PIVTimelapseDemo {
         vvfotp.setSilent(true);
         vvfotp.setLineWidth(1);
         vvfotp.setMinimumLength(0);
-        vvfotp.setMaximumLength(maxDelta);
+        vvfotp.setMaximumLength(maxDeltaX);
         vvfotp.setVectorXImage(deltaXImp);
         vvfotp.setVectorYImage(deltaYImp);
         vvfotp.setStepSize(5);

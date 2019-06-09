@@ -1,6 +1,10 @@
 package net.haesleinhuepf.clij.piv;
 
+import ij.ImagePlus;
+import ij.gui.NewImage;
+import ij.process.ImageProcessor;
 import net.haesleinhuepf.clij.CLIJ;
+import net.haesleinhuepf.clij.advancedfilters.Extrema;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.kernels.Kernels;
@@ -8,30 +12,29 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij.macro.modules.Clear;
 import org.scijava.plugin.Plugin;
+
+import java.util.HashMap;
 
 /**
  * Author: @haesleinhuepf
- * December 2018
+ * June 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_particleImageVelocimetry")
 public class ParticleImageVelocimetry extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        if (containsCLImageArguments()) {
-            return particleImageVelocimetry2D(clij, (ClearCLImage)( args[0]), (ClearCLImage)(args[1]), (ClearCLImage)(args[2]), (ClearCLImage)(args[3]), asInteger(args[4]));
-        } else {
-            Object[] args = openCLBufferArgs();
-            boolean result = particleImageVelocimetry2D(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]), (ClearCLBuffer)(args[3]), asInteger(args[4]));
-            releaseBuffers(args);
-            return result;
-        }
+        Object[] args = openCLBufferArgs();
+        boolean result = particleImageVelocimetry(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), (ClearCLBuffer) (args[2]), (ClearCLBuffer) (args[3]), (ClearCLBuffer) (args[4]), asInteger(args[5]), asInteger(args[6]), asInteger(args[7]));
+        releaseBuffers(args);
+        return result;
     }
 
     @Override
     public String getParameterHelpText() {
-        return "Image source1, Image source2, Image destinationDeltaX, Image destinationDeltaY, Number maxDelta";
+        return "Image source1, Image source2, Image destinationDeltaX, Image destinationDeltaY, Image destinationDeltaZ, Number maxDeltaX, Number maxDeltaY, Number maxDeltaZ";
     }
 
     @Override
@@ -46,34 +49,27 @@ public class ParticleImageVelocimetry extends AbstractCLIJPlugin implements CLIJ
         return "2D";
     }
 
-    public boolean particleImageVelocimetry2D( ClearCLBuffer input1,  ClearCLBuffer input2,  ClearCLBuffer vfX,  ClearCLBuffer vfY,  Integer maxDelta  ) {
-        return particleImageVelocimetry2D(clij, input1, input2, vfX, vfY, maxDelta);
-    }
-
-    public boolean particleImageVelocimetry2D( ClearCLImage input1,  ClearCLImage input2,  ClearCLImage vfX,  ClearCLImage vfY,  Integer maxDelta  ) {
-        return particleImageVelocimetry2D(clij, input1, input2, vfX, vfY, maxDelta);
-    }
-
-    public static boolean particleImageVelocimetry2D(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer vfX, ClearCLBuffer vfY, Integer maxDelta ) {
+    public static boolean particleImageVelocimetry(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer vfX, ClearCLBuffer vfY, ClearCLBuffer vfZ, Integer maxDeltaX, Integer maxDeltaY, Integer maxDeltaZ) {
         // prepare cross-correlation analysis
-        int meanRange = maxDelta + 1;
-        int scanRange = 5; // has influence on precision / correctness
+        int meanRangeX = 3;
+        int scanRangeX = meanRangeX; // has influence on precision / correctness
+        int meanRangeY = 3;
+        int scanRangeY = meanRangeY; // has influence on precision / correctness
+        int meanRangeZ = 0;
+        int scanRangeZ = meanRangeZ; // has influence on precision / correctness
 
         ClearCLBuffer meanInput1 = clij.create(input1);
         ClearCLBuffer meanInput2 = clij.create(input2);
 
 
         ClearCLBuffer crossCorrCoeff = clij.create(input1);
-        ClearCLBuffer crossCorrCoeffStack = clij.create(new long[] {input1.getWidth(), input1.getHeight(), 2 * maxDelta + 1}, input1.getNativeType());
+        ClearCLBuffer crossCorrCoeffStack = clij.create(new long[]{input1.getWidth(), input1.getHeight(), (2 * maxDeltaX + 1) * (2 * maxDeltaY + 1) * (2 * maxDeltaZ + 1)}, input1.getNativeType());
 
         // analyse shift in X
-        Kernels.meanBox(clij, input1, meanInput1, meanRange, 0, 0);
-        Kernels.meanBox(clij, input2, meanInput2, meanRange, 0, 0);
-        analyseShift(clij, input1, input2, vfX, maxDelta, scanRange, meanInput1, meanInput2, crossCorrCoeff, crossCorrCoeffStack, 0);
+        Kernels.meanBox(clij, input1, meanInput1, meanRangeX, meanRangeY, meanRangeZ);
+        Kernels.meanBox(clij, input2, meanInput2, meanRangeX, meanRangeY, meanRangeZ);
+        analyseShift(clij, input1, input2, vfX, vfY, vfZ, maxDeltaX, maxDeltaY, maxDeltaZ, scanRangeX, scanRangeY, scanRangeZ, meanInput1, meanInput2, crossCorrCoeff, crossCorrCoeffStack);
 
-        Kernels.meanBox(clij, input1, meanInput1, 0, meanRange, 0);
-        Kernels.meanBox(clij, input2, meanInput2, 0, meanRange, 0);
-        analyseShift(clij, input1, input2, vfY, maxDelta, scanRange, meanInput1, meanInput2, crossCorrCoeff, crossCorrCoeffStack, 1);
 
         meanInput1.close();
         meanInput2.close();
@@ -84,58 +80,79 @@ public class ParticleImageVelocimetry extends AbstractCLIJPlugin implements CLIJ
         return true;
     }
 
-    public static boolean particleImageVelocimetry2D(CLIJ clij, ClearCLImage input1, ClearCLImage input2, ClearCLImage vfX, ClearCLImage vfY, Integer maxDelta ) {
-        // prepare cross-correlation analysis
-        int meanRange = maxDelta + 1;
-        int scanRange = 1; // has influence on precision / correctness
+    private static void analyseShift(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer vfX, ClearCLBuffer vfY, ClearCLBuffer vfZ, int maxDeltaX, int maxDeltaY, int maxDeltaZ, int scanRangeX, int scanRangeY, int scanRangeZ, ClearCLBuffer meanInput1, ClearCLBuffer meanInput2, ClearCLBuffer crossCorrCoeff, ClearCLBuffer crossCorrCoeffStack) {
 
-        ClearCLImage meanInput1 = clij.create(input1);
-        ClearCLImage meanInput2 = clij.create(input2);
-
-
-        ClearCLImage crossCorrCoeff = clij.create(input1);
-        ClearCLImage crossCorrCoeffStack = clij.create(new long[] {input1.getWidth(), input1.getHeight(), 2 * maxDelta + 1}, input1.getChannelDataType());
-
-        // analyse shift in X
-        Kernels.meanBox(clij, input1, meanInput1, meanRange, 0, 0);
-        Kernels.meanBox(clij, input2, meanInput2, meanRange, 0, 0);
-        analyseShift(clij, input1, input2, vfX, maxDelta, scanRange, meanInput1, meanInput2, crossCorrCoeff, crossCorrCoeffStack, 0);
-
-        Kernels.meanBox(clij, input1, meanInput1, 0, meanRange, 0);
-        Kernels.meanBox(clij, input2, meanInput2, 0, meanRange, 0);
-        analyseShift(clij, input1, input2, vfY, maxDelta, scanRange, meanInput1, meanInput2, crossCorrCoeff, crossCorrCoeffStack, 1);
-
-        meanInput1.close();
-        meanInput2.close();
-
-        crossCorrCoeff.close();
-        crossCorrCoeffStack.close();
-
-        return true;
-    }
-
-    private static void analyseShift(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer vf, int maxDelta, int scanRange, ClearCLBuffer meanInput1, ClearCLBuffer meanInput2, ClearCLBuffer crossCorrCoeff, ClearCLBuffer crossCorrCoeffStack, int dimension) {
-        for (int i = -maxDelta; i <=maxDelta; i++) {
-            Kernels.crossCorrelation(clij, input1, meanInput1, input2, meanInput2, crossCorrCoeff, scanRange, i, dimension);
-            Kernels.copySlice(clij, crossCorrCoeff, crossCorrCoeffStack, i + maxDelta);
+        int count = 0;
+        double[][] coords = new double[(int)crossCorrCoeffStack.getDepth()][3];
+        for (int ix = -maxDeltaX; ix <= maxDeltaX; ix++) {
+            for (int iy = -maxDeltaY; iy <= maxDeltaY; iy++) {
+                for (int iz = -maxDeltaZ; iz <= maxDeltaZ; iz++) {
+                    crossCorrelation(clij, input1, meanInput1, input2, meanInput2, crossCorrCoeff, scanRangeX, scanRangeY, scanRangeZ, ix, iy, iz);
+                    Kernels.copySlice(clij, crossCorrCoeff, crossCorrCoeffStack, count);
+                    coords[count][0] = ix;
+                    coords[count][1] = iy;
+                    coords[count][2] = iz;
+                    count++;
+                }
+            }
         }
 
+        ClearCLBuffer coordMap = doubleArrayToImagePlus(clij, coords);
         ClearCLBuffer argMaxProj = clij.create(input1);
 
-        Kernels.argMaximumZProjection(clij, crossCorrCoeffStack, vf, argMaxProj);
-        Kernels.addImageAndScalar(clij, argMaxProj, vf, new Float(-maxDelta));
+        Kernels.argMaximumZProjection(clij, crossCorrCoeffStack, vfX, argMaxProj);
+        indexProjection(clij, argMaxProj, coordMap, vfX, 0, 0, 1, 0, 2);
+
+        Kernels.argMaximumZProjection(clij, crossCorrCoeffStack, vfY, argMaxProj);
+        indexProjection(clij, argMaxProj, coordMap, vfY, 0, 1, 1, 0, 2);
+
+        Kernels.argMaximumZProjection(clij, crossCorrCoeffStack, vfZ, argMaxProj);
+        indexProjection(clij, argMaxProj, coordMap, vfZ, 0, 2, 1, 0, 2);
+
+        argMaxProj.close();
     }
 
-    private static void analyseShift(CLIJ clij, ClearCLImage input1, ClearCLImage input2, ClearCLImage vf, int maxDelta, int scanRange, ClearCLImage meanInput1, ClearCLImage meanInput2, ClearCLImage crossCorrCoeff, ClearCLImage crossCorrCoeffStack, int dimension) {
-        for (int i = -maxDelta; i <=maxDelta; i++) {
-            Kernels.crossCorrelation(clij, input1, meanInput1, input2, meanInput2, crossCorrCoeff, scanRange, i, dimension);
-            Kernels.copySlice(clij, crossCorrCoeff, crossCorrCoeffStack, i + maxDelta);
+    private static boolean indexProjection(CLIJ clij, ClearCLBuffer index, ClearCLBuffer indexMap, ClearCLBuffer target, int indexDimension,
+                                   int fixed1, int fixedDimension1, int fixed2, int fixedDimension2) {
+
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("index_src1", index);
+        parameters.put("index_map_src1", indexMap);
+        parameters.put("dst", target);
+        parameters.put("indexDimension", indexDimension);
+        parameters.put("fixed1", fixed1);
+        parameters.put("fixedDimension1", fixedDimension1);
+        parameters.put("fixed2", fixed2);
+        parameters.put("fixedDimension2", fixedDimension2);
+
+        return clij.execute(ParticleImageVelocimetry.class, "piv.cl", "index_projection_3d", parameters);
+    }
+
+    private static ClearCLBuffer doubleArrayToImagePlus(CLIJ clij, double[][] coords) {
+        ImagePlus imp = NewImage.createFloatImage("img", coords.length, coords[0].length, 1, NewImage.FILL_BLACK);
+        ImageProcessor ip = imp.getProcessor();
+        for (int x = 0; x < coords.length; x++) {
+            for (int y = 0; y < coords[0].length; y++) {
+                ip.setf(x, y, (float)coords[x][y]);
+            }
         }
-
-        ClearCLImage argMaxProj = clij.create(input1);
-
-        Kernels.argMaximumZProjection(clij, crossCorrCoeffStack, vf, argMaxProj);
-        Kernels.addImageAndScalar(clij, argMaxProj, vf, new Float(-maxDelta));
+        return clij.push(imp);
     }
 
+    private static boolean crossCorrelation(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer meanInput1, ClearCLBuffer input2, ClearCLBuffer meanInput2, ClearCLBuffer crossCorrCoeff, int scanRangeX, int scanRangeY, int scanRangeZ, int ix, int iy, int iz) {
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src1", input1);
+        parameters.put("mean_src1", meanInput1);
+        parameters.put("src2", input2);
+        parameters.put("mean_src2", meanInput2);
+        parameters.put("dst", crossCorrCoeff);
+        parameters.put("radiusx", scanRangeX);
+        parameters.put("radiusy", scanRangeY);
+        parameters.put("radiusz", scanRangeZ);
+        parameters.put("ix", ix);
+        parameters.put("iy", iy);
+        parameters.put("iz", iz);
+
+        return clij.execute(ParticleImageVelocimetry.class, "piv.cl", "cross_correlation_3d", parameters);
+    }
 }
