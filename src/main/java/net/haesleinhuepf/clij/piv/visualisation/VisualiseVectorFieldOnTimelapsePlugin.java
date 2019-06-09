@@ -11,7 +11,7 @@ import org.scijava.plugin.Plugin;
 
 import java.awt.*;
 
-@Plugin(type = Command.class, menuPath = "Plugins>ImageJ on GPU (CLIJ)>Measure>PIV (experimental)>Visualise vector field on a timelapse")
+@Plugin(type = Command.class, menuPath = "Plugins>ImageJ on GPU (CLIJ)>Measure>PIV>Visualise vector field on a timelapse (experimental)")
 public class VisualiseVectorFieldOnTimelapsePlugin extends VisualiseVectorFieldsPlugin{
 
     @Override

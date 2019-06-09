@@ -13,6 +13,7 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij.macro.modules.Clear;
+import net.haesleinhuepf.clij.registration.DeformableRegistration2D;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -27,14 +28,14 @@ public class ParticleImageVelocimetry extends AbstractCLIJPlugin implements CLIJ
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = particleImageVelocimetry(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), (ClearCLBuffer) (args[2]), (ClearCLBuffer) (args[3]), (ClearCLBuffer) (args[4]), asInteger(args[5]), asInteger(args[6]), asInteger(args[7]));
+        boolean result = particleImageVelocimetry(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), (ClearCLBuffer) (args[2]), (ClearCLBuffer) (args[3]), (ClearCLBuffer) (args[4]), asInteger(args[5]), asInteger(args[6]), asInteger(args[7]), asBoolean(args[8]));
         releaseBuffers(args);
         return result;
     }
 
     @Override
     public String getParameterHelpText() {
-        return "Image source1, Image source2, Image destinationDeltaX, Image destinationDeltaY, Image destinationDeltaZ, Number maxDeltaX, Number maxDeltaY, Number maxDeltaZ";
+        return "Image source1, Image source2, Image destinationDeltaX, Image destinationDeltaY, Image destinationDeltaZ, Number maxDeltaX, Number maxDeltaY, Number maxDeltaZ, Boolean correctLocalShift";
     }
 
     @Override
@@ -49,7 +50,7 @@ public class ParticleImageVelocimetry extends AbstractCLIJPlugin implements CLIJ
         return "2D";
     }
 
-    public static boolean particleImageVelocimetry(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer vfX, ClearCLBuffer vfY, ClearCLBuffer vfZ, Integer maxDeltaX, Integer maxDeltaY, Integer maxDeltaZ) {
+    public static boolean particleImageVelocimetry(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer vfX, ClearCLBuffer vfY, ClearCLBuffer vfZ, Integer maxDeltaX, Integer maxDeltaY, Integer maxDeltaZ, boolean correctLocalShift) {
         // prepare cross-correlation analysis
         int meanRangeX = 3;
         int scanRangeX = meanRangeX; // has influence on precision / correctness
@@ -57,6 +58,14 @@ public class ParticleImageVelocimetry extends AbstractCLIJPlugin implements CLIJ
         int scanRangeY = meanRangeY; // has influence on precision / correctness
         int meanRangeZ = 0;
         int scanRangeZ = meanRangeZ; // has influence on precision / correctness
+
+        if (correctLocalShift) {
+            ClearCLBuffer copy = clij.create(input2);
+            clij.op().copy(input2, copy);
+
+            DeformableRegistration2D.deformableRegister(clij, input1, copy, input2, maxDeltaX, maxDeltaY);
+            copy.close();
+        }
 
         ClearCLBuffer meanInput1 = clij.create(input1);
         ClearCLBuffer meanInput2 = clij.create(input2);
@@ -88,6 +97,8 @@ public class ParticleImageVelocimetry extends AbstractCLIJPlugin implements CLIJ
             for (int iy = -maxDeltaY; iy <= maxDeltaY; iy++) {
                 for (int iz = -maxDeltaZ; iz <= maxDeltaZ; iz++) {
                     crossCorrelation(clij, input1, meanInput1, input2, meanInput2, crossCorrCoeff, scanRangeX, scanRangeY, scanRangeZ, ix, iy, iz);
+                    //System.out.println("ccc " + crossCorrCoeff.getDimension());
+                    //System.out.println("cccs " + crossCorrCoeffStack.getDimension());
                     Kernels.copySlice(clij, crossCorrCoeff, crossCorrCoeffStack, count);
                     coords[count][0] = ix;
                     coords[count][1] = iy;

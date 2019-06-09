@@ -13,7 +13,7 @@
 	</parent>
 
 	<groupId>net.haesleinhuepf</groupId>
-	<artifactId>clij-advanced-filters</artifactId>
+	<artifactId>clij-advanced-filters_</artifactId>
 	<version>0.1.0</version>
 
 	<name>clij-piv-plugin</name>

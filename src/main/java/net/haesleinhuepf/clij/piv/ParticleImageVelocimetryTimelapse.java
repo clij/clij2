@@ -22,12 +22,12 @@ public class ParticleImageVelocimetryTimelapse extends AbstractCLIJPlugin implem
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = pivOnTimelapse(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]), (ClearCLBuffer)(args[3]), asInteger(args[4]), asInteger(args[5]), asInteger(args[6]));
+        boolean result = pivOnTimelapse(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]), (ClearCLBuffer)(args[3]), asInteger(args[4]), asInteger(args[5]), asInteger(args[6]), asBoolean(args[7]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean pivOnTimelapse(CLIJ clij, ClearCLBuffer input, ClearCLBuffer destinationDeltaX, ClearCLBuffer destinationDeltaY, ClearCLBuffer destinationDeltaZ, int maxDeltaX, int maxDeltaY, int maxDeltaZ) {
+    public static boolean pivOnTimelapse(CLIJ clij, ClearCLBuffer input, ClearCLBuffer destinationDeltaX, ClearCLBuffer destinationDeltaY, ClearCLBuffer destinationDeltaZ, int maxDeltaX, int maxDeltaY, int maxDeltaZ, boolean correctLocalShift) {
         ClearCLBuffer slice1 = clij.create(new long[] {input.getWidth(), input.getHeight()}, input.getNativeType());
         ClearCLBuffer slice2 = clij.create(slice1);
         ClearCLBuffer deltaXslice = clij.create(slice1);
@@ -38,7 +38,7 @@ public class ParticleImageVelocimetryTimelapse extends AbstractCLIJPlugin implem
             clij.op().copySlice(input, slice1, t);
             clij.op().copySlice(input, slice2, t + 1);
 
-            ParticleImageVelocimetry.particleImageVelocimetry(clij, slice1, slice2, deltaXslice, deltaYslice, deltaZslice, maxDeltaX, maxDeltaY, maxDeltaZ);
+            ParticleImageVelocimetry.particleImageVelocimetry(clij, slice1, slice2, deltaXslice, deltaYslice, deltaZslice, maxDeltaX, maxDeltaY, maxDeltaZ, correctLocalShift);
 
             clij.op().copySlice(deltaXslice, destinationDeltaX, t);
             clij.op().copySlice(deltaYslice, destinationDeltaY, t);
@@ -54,7 +54,7 @@ public class ParticleImageVelocimetryTimelapse extends AbstractCLIJPlugin implem
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destinationDeltaX, Image destinationDeltaY, Number maxDelta";
+        return "Image source, Image destinationDeltaX, Image destinationDeltaY, Image destinationDeltaZ, Number maxDeltaX, Number maxDeltaY, Number maxDeltaZ, Boolean correctLocalShift";
     }
 
     @Override

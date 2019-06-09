@@ -29,7 +29,7 @@ import java.io.IOException;
  * 03 2019
  */
 
-@Plugin(type = Command.class, menuPath = "Plugins>ImageJ on GPU (CLIJ)>Measure>PIV (experimental)>Visualise vector field")
+@Plugin(type = Command.class, menuPath = "Plugins>ImageJ on GPU (CLIJ)>Measure>PIV>Visualise vector field (experimental)")
 public class VisualiseVectorFieldsPlugin implements Command {
 
     protected ImagePlus inputImage;
