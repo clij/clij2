@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>net.haesleinhuepf</groupId>
 		<artifactId>clij-parent-pom</artifactId>
-		<version>1.0.2-BETA</version>
+		<version>1.0.3-BETA</version>
 		<relativePath />
 	</parent>
 
