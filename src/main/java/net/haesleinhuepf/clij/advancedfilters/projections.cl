@@ -19,7 +19,7 @@ __kernel void stddev_project_3d_2d(
   sum = 0;
   for(int z = 0; z < GET_IMAGE_IN_DEPTH(src); z++)
   {
-    float value = (float)(READ_IMAGE_3D(src,sampler,(int4)(x,y,z,0)).x);
+    float value = (float)(READ_IMAGE_3D(src,sampler,(int4)(x,y,z,0)).x) - mean;
     sum = sum + (value * value);
   }
   float stdDev = sqrt((float2){sum / (count - 1), 0}).x;
