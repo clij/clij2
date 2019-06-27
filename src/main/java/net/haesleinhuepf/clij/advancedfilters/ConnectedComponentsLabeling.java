@@ -4,6 +4,7 @@ import ij.IJ;
 import ij.ImageJ;
 import ij.ImagePlus;
 import ij.gui.NewImage;
+import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
@@ -48,9 +49,10 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
     }
 
     public static boolean connectedComponentsLabeling(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
+
         ClearCLBuffer temp2 = clij.create(output);
 
-        ClearCLBuffer flag = clij.create(new long[]{1,1,1}, input.getNativeType());
+        ClearCLBuffer flag = clij.create(new long[]{1,1,1}, output.getNativeType());
 
         clij.op().set(flag, 0f);
 
@@ -65,19 +67,23 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
             //clij.show(temp1, "temp1 before " + iterationCount);
 
             if (iterationCount % 2 == 0) {
-                minimumBox(clij, output, flag, temp2, 3, 3, 0);
+                //System.out.println("O>T");
+                minimumBox(clij, output, flag, temp2, 3, 3, 3);
+                //clij.show(temp2, "temp2 after a " + iterationCount);
             } else {
-                minimumBox(clij, temp2, flag, output, 3, 3, 0);
+                //System.out.println("T>O");
+                minimumBox(clij, temp2, flag, output, 3, 3, 3);
+                //clij.show(output, "output after a " + iterationCount);
             }
-            //clij.show(temp2, "temp2 after a " + iterationCount);
             //clij.show(temp1, "temp1 after b " + iterationCount);
             //if (true) return;
 
             ImagePlus flagImp = clij.pull(flag);
             flagValue = flagImp.getProcessor().get(0,0);
+            //System.out.println("flag: " + flagValue);
             clij.op().set(flag, 0f);
             iterationCount = iterationCount + 1;
-            System.out.println(iterationCount);
+            //System.out.println(iterationCount);
         }
         if (iterationCount % 2 == 0) {
             clij.op().copy(output, temp2);
@@ -98,7 +104,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         boolean flip = false;
         for (Float key : indexFlipMap.keySet()) {
             Float value = indexFlipMap.get(key);
-            System.out.println("replace " + key + " " + value);
+            //System.out.println("replace " + key + " " + value);
 
             if (flip) {
                 replace(clij, temp2, output, key, value);
@@ -112,6 +118,8 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         }
         temp2.close();
         flag.close();
+
+        //new WaitForUserDialog("hello").show();
 
         return true;
     }

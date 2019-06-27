@@ -38,6 +38,7 @@ public class ConnectedComponentsLabelingTest {
 
         ClearCLBuffer input = clij.push(imp);
         ClearCLBuffer output = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
+
         connectedComponentsLabeling(clij, input, output);
 
         assertEquals(clij.op().maximumOfAllPixels(output), 2.0, 0.1);
@@ -45,6 +46,41 @@ public class ConnectedComponentsLabelingTest {
 
         input.close();
         output.close();
+
+
+
+    }
+
+    @Test
+    public void testBlobsLabeling() {
+        //new ImageJ();
+
+        ImagePlus imp = IJ.openImage("src/test/resources/blobs.tif");
+        //NewImage.createFloatImage("img", 100, 100, 1, NewImage.FILL_BLACK);
+
+        imp.setRoi(10, 10, 10, 10);
+        IJ.run(imp, "Add...", "value=1");
+        imp.setRoi(10, 30, 10, 10);
+        IJ.run(imp, "Add...", "value=1");
+
+        imp.show();
+
+        CLIJ clij = CLIJ.getInstance();
+
+        ClearCLBuffer input = clij.push(imp);
+        ClearCLBuffer thresholded = clij.create(input);
+        ClearCLBuffer output = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
+
+        clij.op().threshold(input, thresholded, 127f);
+        clij.show(thresholded, "thresholded");
+        connectedComponentsLabeling(clij, thresholded, output);
+
+        assertEquals(64.0, clij.op().maximumOfAllPixels(output), 0.1);
+        //clij.show(output, "result");
+
+        input.close();
+        output.close();
+        thresholded.close();
 
 
 

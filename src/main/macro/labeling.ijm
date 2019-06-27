@@ -36,4 +36,6 @@ Ext.CLIJ_connectedComponentsLabeling(mask, labelmap);
 Ext.CLIJ_pull(mask);
 
 Ext.CLIJ_pull(labelmap);
+run("glasbey on dark");
+
 
