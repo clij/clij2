@@ -34,7 +34,7 @@ public class Paste3D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
         parameters.put("destination_y", destination_y);
         parameters.put("destination_z", destination_z);
         parameters.put("dst", dst);
-        return clij.execute(Paste3D.class, "paste.cl", "paste_3d", parameters);
+        return clij.execute(Paste3D.class, "paste.cl", "paste_3d", src.getDimensions(), parameters);
     }
 
     @Override
@@ -60,6 +60,6 @@ public class Paste3D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getAvailableForDimensions() {
-        return "2D, 3D";
+        return "3D";
     }
 }

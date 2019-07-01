@@ -31,12 +31,12 @@ public class Paste2D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
         parameters.put("destination_x", destination_x);
         parameters.put("destination_y", destination_y);
         parameters.put("dst", dst);
-        return clij.execute(Paste2D.class, "paste.cl", "paste_2d", parameters);
+        return clij.execute(Paste2D.class, "paste.cl", "paste_2d", src.getDimensions(),parameters);
     }
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number destinationX, Number destinationY, Number destinationZ";
+        return "Image source, Image destination, Number destinationX, Number destinationY";
     }
 
 
@@ -57,6 +57,6 @@ public class Paste2D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getAvailableForDimensions() {
-        return "2D, 3D";
+        return "2D";
     }
 }
