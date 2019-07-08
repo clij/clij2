@@ -68,11 +68,11 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
 
             if (iterationCount % 2 == 0) {
                 //System.out.println("O>T");
-                minimumBox(clij, output, flag, temp2, 3, 3, 3);
+                minimumBox(clij, output, flag, temp2, 1, 1, 1);
                 //clij.show(temp2, "temp2 after a " + iterationCount);
             } else {
                 //System.out.println("T>O");
-                minimumBox(clij, temp2, flag, output, 3, 3, 3);
+                minimumBox(clij, temp2, flag, output, 1, 1, 1);
                 //clij.show(output, "output after a " + iterationCount);
             }
             //clij.show(temp1, "temp1 after b " + iterationCount);
