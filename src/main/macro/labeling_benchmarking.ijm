@@ -7,12 +7,11 @@
 // Author: Robert Haase
 // June 2019
 // ---------------------------------------------
-
+run("Close All");
 
 // Get test data
-//run("Blobs (25K)");
-run("T1 Head (2.4M, 16-bits)");
-//open("C:/structure/data/blobs.gif");
+run("Blobs (25K)");
+
 getDimensions(width, height, channels, slices, frames);
 input = getTitle();
 mask = "mask";
