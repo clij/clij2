@@ -25,16 +25,16 @@ __kernel void cross_correlation_3d( DTYPE_IMAGE_IN_3D src1,
     float sum3 = 0;
     for(int kx = -radiusx; kx < radiusx + 1; kx++)
     {
-        deltaPos[0] = get_global_id(0) + kx;
-        deltaPosI[0] = get_global_id(0) + kx + ix;
+        deltaPos.x = get_global_id(0) + kx;
+        deltaPosI.x = get_global_id(0) + kx + ix;
         for(int ky = -radiusy; ky < radiusy + 1; ky++)
         {
-            deltaPos[1] = get_global_id(1) + ky;
-            deltaPosI[1] = get_global_id(1) + ky + iy;
+            deltaPos.y = get_global_id(1) + ky;
+            deltaPosI.y = get_global_id(1) + ky + iy;
             for(int kz = -radiusz; kz < radiusz + 1; kz++)
             {
-                deltaPos[2] = get_global_id(2) + kz;
-                deltaPosI[2] = get_global_id(2) + kz + iz;
+                deltaPos.z = get_global_id(2) + kz;
+                deltaPosI.z = get_global_id(2) + kz + iz;
 
                 float Ia = READ_IMAGE_3D(src1, sampler, deltaPos).x;
                 float meanIa = READ_IMAGE_3D(mean_src1, sampler, deltaPos).x;
@@ -70,9 +70,29 @@ __kernel void index_projection_3d( DTYPE_IMAGE_IN_3D index_src1,
     float index = READ_IMAGE_3D(index_src1, sampler, pos).x;
 
     int4 indexPos = {0, 0, 0, 0};
-    indexPos[indexDimension] = index;
-    indexPos[fixedDimension1] = fixed1;
-    indexPos[fixedDimension2] = fixed2;
+    if (indexDimension == 0) {
+        indexPos.x = index;
+    } else if (indexDimension == 1) {
+        indexPos.y = index;
+    } else if (indexDimension == 2) {
+        indexPos.z = index;
+    }
+
+    if (fixedDimension1 == 0) {
+        indexPos.x = fixed1;
+    } else if (fixedDimension1 == 1) {
+        indexPos.y = fixed1;
+    } else if (fixedDimension1 == 2) {
+        indexPos.z = fixed1;
+    }
+
+    if (fixedDimension2 == 0) {
+        indexPos.x = fixed2;
+    } else if (fixedDimension2 == 1) {
+        indexPos.y = fixed2;
+    } else if (fixedDimension2 == 2) {
+        indexPos.z = fixed2;
+    }
 
     float value = READ_IMAGE_3D(index_map_src1, sampler, indexPos).x;
 
