@@ -4,6 +4,9 @@ This repository contains experimental / advanced filters based on [CLIJ](https:/
 ## Installation intructions
 Download `clij-advanced-filters_.jar` from the assets section under [releases](https://github.com/clij/clij-advanced-filters/releases) and copy it to the `plugins` directory of your Fiji installation. Restart Fiji.
 
+## Code examples
+Have a look in the [macros](https://github.com/clij/clij-advanced-filters/tree/master/src/main/macro) folder.
+
 Read more on the [CLIJ Website](https://clij.github.io).
 
 
