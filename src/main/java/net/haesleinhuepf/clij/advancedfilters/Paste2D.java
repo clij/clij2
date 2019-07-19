@@ -2,6 +2,7 @@ package net.haesleinhuepf.clij.advancedfilters;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -26,6 +27,15 @@ public class Paste2D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
     }
 
     public static boolean paste(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Integer destination_x, Integer destination_y) {
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src", src);
+        parameters.put("destination_x", destination_x);
+        parameters.put("destination_y", destination_y);
+        parameters.put("dst", dst);
+        return clij.execute(Paste2D.class, "paste.cl", "paste_2d", src.getDimensions(),parameters);
+    }
+
+    public static boolean paste(CLIJ clij, ClearCLImage src, ClearCLImage dst, Integer destination_x, Integer destination_y) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("destination_x", destination_x);

@@ -37,6 +37,16 @@ public class Paste3D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
         return clij.execute(Paste3D.class, "paste.cl", "paste_3d", src.getDimensions(), parameters);
     }
 
+    public static boolean paste(CLIJ clij, ClearCLImage src, ClearCLImage dst, Integer destination_x, Integer destination_y, Integer destination_z) {
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src", src);
+        parameters.put("destination_x", destination_x);
+        parameters.put("destination_y", destination_y);
+        parameters.put("destination_z", destination_z);
+        parameters.put("dst", dst);
+        return clij.execute(Paste3D.class, "paste.cl", "paste_3d", src.getDimensions(), parameters);
+    }
+
     @Override
     public String getParameterHelpText() {
         return "Image source, Image destination, Number destinationX, Number destinationY, Number destinationZ";
