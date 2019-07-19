@@ -37,7 +37,7 @@ public class TransposeYZ extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
 
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
-        return clij.create(new long[]{input.getHeight(), input.getWidth(), input.getDepth()}, input.getNativeType());
+        return clij.create(new long[]{input.getWidth(), input.getDepth(), input.getHeight()}, input.getNativeType());
     }
 
     @Override

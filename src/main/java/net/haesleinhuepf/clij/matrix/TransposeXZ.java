@@ -23,12 +23,12 @@ public class TransposeXZ extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
     public boolean executeCL() {
 
         Object[] args = openCLBufferArgs();
-        boolean result = transposeXY(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
+        boolean result = transposeXZ(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean transposeXY(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
+    public static boolean transposeXZ(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
         HashMap<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("src", input);
         parameters.put("dst", output);
@@ -37,7 +37,7 @@ public class TransposeXZ extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
 
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
-        return clij.create(new long[]{input.getHeight(), input.getWidth(), input.getDepth()}, input.getNativeType());
+        return clij.create(new long[]{input.getDepth(), input.getHeight(), input.getWidth()}, input.getNativeType());
     }
 
     @Override
