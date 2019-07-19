@@ -49,14 +49,14 @@ public class SpotDistanceMeasurments {
 
         GenerateDistanceMatrix.generateDistanceMatrix(clij, pointlist1, pointlist2, distanceMatrix);
 
-        clij.show(pointlist1, "pointlist2");
-        clij.show(pointlist2, "pointlist2");
-        clij.show(distanceMatrix, "distanceMatrix");
+        //clij.show(pointlist1, "pointlist2");
+        //clij.show(pointlist2, "pointlist2");
+        //clij.show(distanceMatrix, "distanceMatrix");
 
         ClearCLBuffer result = clij.create(new long[]{distanceMatrix.getWidth(), 1}, distanceMatrix.getNativeType());
         ShortestDistances.shortestDistances(clij, distanceMatrix, result);
 
-        clij.show(result, "shortest distance");
+        //clij.show(result, "shortest distance");
 
         double meanDistance = clij.op().sumPixels(result) / result.getWidth() / result.getHeight() / result.getDepth();
         System.out.println("mean distance: " + meanDistance);

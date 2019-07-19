@@ -34,7 +34,7 @@ public class SpotsToPointList extends AbstractCLIJPlugin implements CLIJMacroPlu
     public static boolean spotsToPointList(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
         ClearCLBuffer temp1 = clij.create(input.getDimensions(), NativeTypeEnum.Float);
         ConnectedComponentsLabeling.connectedComponentsLabeling(clij, input, temp1);
-        clij.show(temp1, "cca");
+        //clij.show(temp1, "cca");
 
         HashMap<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("src", temp1);

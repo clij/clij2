@@ -19,7 +19,7 @@ public class ShortestDistances extends AbstractCLIJPlugin implements CLIJMacroPl
 
     @Override
     public String getParameterHelpText() {
-        return "Image input_spots, Image destination_pointlist";
+        return "Image distance_matrix, Image destination_minimum_distances";
     }
 
     @Override
@@ -53,6 +53,6 @@ public class ShortestDistances extends AbstractCLIJPlugin implements CLIJMacroPl
 
     @Override
     public String getAvailableForDimensions() {
-        return "2D, 3D";
+        return "2D";
     }
 }
