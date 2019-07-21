@@ -34,7 +34,7 @@ public class SpotDistanceMeasurments {
         ClearCLBuffer shiftedDetected = clij.create(detected);
         AffineTransform3D at = new AffineTransform3D();
         at.translate(1.0, 0, 0);
-        clij.op().affineTransform(detected, shiftedDetected, at);
+        clij.op().affineTransform3D(detected, shiftedDetected, at);
 
 
         long numberOfSpots1 = (long) CountNonZeroPixels.countNonZeroPixels(clij, detected);

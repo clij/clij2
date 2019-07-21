@@ -17,7 +17,7 @@ import org.scijava.plugin.Plugin;
 import java.awt.geom.AffineTransform;
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_subtractBackground2D")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_lfrecon")
 public class LFRecon extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
@@ -99,7 +99,7 @@ public class LFRecon extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
         scaleTransform.set(1, 2, 2);
         at.concatenate(scaleTransform);
 
-        clij.op().affineTransform(input, temp, at);
+        clij.op().affineTransform3D(input, temp, at);
 
         clij.show(temp, "temp");
 
