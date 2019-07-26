@@ -68,7 +68,7 @@ public class TranslationRegistration extends AbstractCLIJPlugin implements CLIJM
         ClearCLBuffer bufferShiftCorrected = output;
         AffineTransform3D at = new AffineTransform3D();
         at.translate(delta);
-        clij.op().affineTransform(input2, bufferShiftCorrected, at);
+        clij.op().affineTransform3D(input2, bufferShiftCorrected, at);
 
         return true;
     }
