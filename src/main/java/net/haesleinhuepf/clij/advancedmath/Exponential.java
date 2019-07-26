@@ -24,23 +24,23 @@ import org.scijava.plugin.Plugin;
  * 
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_exp")
-public class Exp extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_exponential")
+public class Exponential extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
         if (containsCLImageArguments()) {
-            return exp(clij, (ClearCLImage)( args[0]), (ClearCLImage)(args[1]));
+            return exponential(clij, (ClearCLImage)( args[0]), (ClearCLImage)(args[1]));
         } else {
             Object[] args = openCLBufferArgs();
-            boolean result = exp(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+            boolean result = exponential(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
             releaseBuffers(args);
             return result;
         }
     }
 
 
-    public static boolean exp(CLIJ clij, ClearCLImage src, ClearCLImage dst) {
+    public static boolean exponential(CLIJ clij, ClearCLImage src, ClearCLImage dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
@@ -49,10 +49,10 @@ public class Exp extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpen
         // Test net.haesleinhuepf.advancedmath.ExpTest.java 
         //    failed on GPU 'Intel(R) UHD Graphics 630'
         //    passed on GPU 'Geforce GTX 1060'
-        return clij.execute(Exp.class, "advmath.cl", "exp_" + src.getDimension() + "d", parameters);
+        return clij.execute(Exponential.class, "advmath.cl", "exp_" + src.getDimension() + "d", parameters);
     }
 
-    public static boolean exp(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
+    public static boolean exponential(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
@@ -64,7 +64,7 @@ public class Exp extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpen
         // Test net.haesleinhuepf.advancedmath.ExpTest.java 
         //    failed on GPU 'Intel(R) UHD Graphics 630'
         //    passed on GPU 'Geforce GTX 1060'
-        return clij.execute(Exp.class, "advmath.cl", "exp_" + src.getDimension() + "d", parameters);
+        return clij.execute(Exponential.class, "advmath.cl", "exp_" + src.getDimension() + "d", parameters);
     }
         
     
@@ -76,7 +76,7 @@ public class Exp extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpen
 
     @Override
     public String getDescription() {
-        return "Computes baseE exponential of all pixels values.\n\nf(x) = exp(x)";
+        return "Computes base exponential of all pixels values.\n\nf(x) = exp(x)";
     }
     
     @Override

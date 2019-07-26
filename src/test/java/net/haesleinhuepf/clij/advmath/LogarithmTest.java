@@ -1,17 +1,17 @@
 package net.haesleinhuepf.clij.advmath;
 
+import net.haesleinhuepf.clij.advancedmath.Logarithm;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import ij.IJ;
 import ij.ImagePlus;
 import net.haesleinhuepf.clij.CLIJ;
-import net.haesleinhuepf.clij.advancedmath.Log;
 import net.haesleinhuepf.clij.test.TestUtilities;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class LogTest {
+public class LogarithmTest {
     private final static double tolerance = 0.01;
 
     @Test
@@ -28,7 +28,7 @@ public class LogTest {
         ClearCLImage src = clij.convert(testImp2D1, ClearCLImage.class);
         ClearCLImage dst = clij.createCLImage(src);
 
-        Log.log(clij, src, dst);
+        Logarithm.logarithm(clij, src, dst);
 
         ImagePlus logCL = clij.convert(dst, ImagePlus.class);
 
@@ -56,7 +56,7 @@ public class LogTest {
         ClearCLBuffer src = clij.convert(testImp2D1, ClearCLBuffer.class);
         ClearCLBuffer dst = clij.createCLBuffer(src);
 
-        Log.log(clij, src, dst);
+        Logarithm.logarithm(clij, src, dst);
 
         ImagePlus logCL = clij.convert(dst, ImagePlus.class);
 

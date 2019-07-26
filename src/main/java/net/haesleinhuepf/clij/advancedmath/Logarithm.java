@@ -24,36 +24,36 @@ import org.scijava.plugin.Plugin;
  * 
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_log")
-public class Log extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_logarithm")
+public class Logarithm extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
         if (containsCLImageArguments()) {
-            return log(clij, (ClearCLImage)( args[0]), (ClearCLImage)(args[1]));
+            return logarithm(clij, (ClearCLImage)( args[0]), (ClearCLImage)(args[1]));
         } else {
             Object[] args = openCLBufferArgs();
-            boolean result = log(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+            boolean result = logarithm(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
             releaseBuffers(args);
             return result;
         }
     }
 
     
-    public static boolean log(CLIJ clij, ClearCLImage src, ClearCLImage dst) {
+    public static boolean logarithm(CLIJ clij, ClearCLImage src, ClearCLImage dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
         
-        return clij.execute(Log.class, "advmath.cl", "log_" + src.getDimension() + "d", parameters);
+        return clij.execute(Logarithm.class, "advmath.cl", "log_" + src.getDimension() + "d", parameters);
     }
 
-    public static boolean log(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
+    public static boolean logarithm(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
 
-        return clij.execute(Log.class, "advmath.cl", "log_" + src.getDimension() + "d", parameters);
+        return clij.execute(Logarithm.class, "advmath.cl", "log_" + src.getDimension() + "d", parameters);
     }
      
     
@@ -64,7 +64,7 @@ public class Log extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpen
 
     @Override
     public String getDescription() {
-        return "Computes baseE logarithm of all pixels values.\n\nf(x) = log(x)";
+        return "Computes baseE logarithm of all pixels values.\n\nf(x) = logarithm(x)";
     }
 
     @Override
