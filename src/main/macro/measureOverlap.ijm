@@ -31,7 +31,7 @@ run("Close All");
 Ext.CLIJ_automaticThreshold(input, mask1, "Otsu");
 
 // create another mask to compare to 
-Ext.CLIJ_automaticThreshold(input, mask2, "Huang");
+Ext.CLIJ_automaticThreshold(input, mask2, "MinError");
 
 // measure overlap
 Ext.CLIJ_sorensenDiceJaccardIndex(mask1, mask2);
@@ -41,7 +41,7 @@ jaccardIndex = getResult("Jaccard_Index", nResults() - 1);
 Ext.CLIJ_clear();
 
 // output result
-IJ.log("Overlap: " + jaccardIndex + "%");
+IJ.log("Overlap: " + (jaccardIndex*100) + "%");
 
 
 
