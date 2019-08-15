@@ -2,8 +2,6 @@ package net.haesleinhuepf.clij.matrix;
 
 
 import net.haesleinhuepf.clij.CLIJ;
-import net.haesleinhuepf.clij.advancedfilters.ConnectedComponentsLabeling;
-import net.haesleinhuepf.clij.advancedfilters.CountNonZeroPixels;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
@@ -11,8 +9,6 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import org.scijava.plugin.Plugin;
-
-import java.util.HashMap;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_shortestDistances")
 public class ShortestDistances extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
@@ -33,7 +29,7 @@ public class ShortestDistances extends AbstractCLIJPlugin implements CLIJMacroPl
     public static boolean shortestDistances(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
         ClearCLBuffer temp = clij.create(new long[]{input.getWidth(), 1, input.getHeight()}, input.getNativeType());
 
-        TransposeYZ.transposeXY(clij, input, temp);
+        TransposeYZ.transposeYZ(clij, input, temp);
 
         clij.op().minimumZProjection(temp, output);
 

@@ -5,7 +5,6 @@ import ij.ImageJ;
 import ij.ImagePlus;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij.clearcl.viewer.ClearCLImageViewer;
 import net.haesleinhuepf.clij.registration.DeformableRegistration2D;
 
 public class DeformableRegistrationDemo {
@@ -26,7 +25,7 @@ public class DeformableRegistrationDemo {
 
         int maxDelta = 5;
 
-        DeformableRegistration2D.deformableRegister(clij, slice1, slice2, deformedSlice2, maxDelta, maxDelta);
+        DeformableRegistration2D.deformableRegistration2D(clij, slice1, slice2, deformedSlice2, maxDelta, maxDelta);
 
         clij.show(slice1, "slice1");
         clij.show(slice2, "slice2");

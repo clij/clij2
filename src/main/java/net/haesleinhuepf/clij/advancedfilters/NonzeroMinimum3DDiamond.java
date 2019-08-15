@@ -25,13 +25,13 @@ public class NonzeroMinimum3DDiamond extends AbstractCLIJPlugin implements CLIJM
         ClearCLBuffer output = (ClearCLBuffer) (args[1]);
 
         ClearCLBuffer flag = clij.create(new long[]{1,1,1}, output.getNativeType());
-        boolean result = nonzeroMinimumDiamond(clij, input, flag, output);
+        boolean result = nonzeroMinimum3DDiamond(clij, input, flag, output);
         flag.close();
         return result;
     }
 
 
-    public static boolean nonzeroMinimumDiamond(CLIJ clij, ClearCLBuffer src, ClearCLBuffer flag, ClearCLBuffer dst) {
+    public static boolean nonzeroMinimum3DDiamond(CLIJ clij, ClearCLBuffer src, ClearCLBuffer flag, ClearCLBuffer dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("flag_dst", flag);

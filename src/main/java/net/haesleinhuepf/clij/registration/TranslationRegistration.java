@@ -27,18 +27,18 @@ public class TranslationRegistration extends AbstractCLIJPlugin implements CLIJM
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = correctTranslation(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = translationRegistration(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean correctTranslation(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer output) {
+    public static boolean translationRegistration(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer output) {
 
         double[] center =centerOfMass(clij, input1);
-        return correctTranslation(clij, input2, output, center);
+        return translationRegistration(clij, input2, output, center);
     }
 
-    public static double[] centerOfMass(CLIJ clij, ClearCLBuffer input1) {
+    static double[] centerOfMass(CLIJ clij, ClearCLBuffer input1) {
         ClearCLBuffer thresholded = clij.create(input1.getDimensions(), NativeTypeEnum.Byte);
         clij.op().automaticThreshold(input1, thresholded, "default");
         //clij.show(thresholded, "thresholded");
@@ -50,7 +50,7 @@ public class TranslationRegistration extends AbstractCLIJPlugin implements CLIJM
         return center;
     }
 
-    public static boolean correctTranslation(CLIJ clij, ClearCLBuffer input2, ClearCLBuffer output, double[] targetCenter) {
+    public static boolean translationRegistration(CLIJ clij, ClearCLBuffer input2, ClearCLBuffer output, double[] targetCenter) {
 
         ClearCLBuffer thresholded = clij.create(input2.getDimensions(), NativeTypeEnum.Byte);
         clij.op().automaticThreshold(input2, thresholded, "default");

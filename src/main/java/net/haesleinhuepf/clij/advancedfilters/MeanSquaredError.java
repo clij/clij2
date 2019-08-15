@@ -3,8 +3,6 @@ package net.haesleinhuepf.clij.advancedfilters;
 import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij.clearcl.ClearCLImage;
-import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -25,7 +23,7 @@ public class MeanSquaredError extends AbstractCLIJPlugin implements CLIJMacroPlu
         Object[] args = openCLBufferArgs();
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
         ClearCLBuffer buffer2 = (ClearCLBuffer)( args[1]);
-        meanSquaredError = mse(clij, buffer1, buffer2);
+        meanSquaredError = meanSquaredError(clij, buffer1, buffer2);
         releaseBuffers(args);
 
 
@@ -36,7 +34,7 @@ public class MeanSquaredError extends AbstractCLIJPlugin implements CLIJMacroPlu
         return true;
     }
 
-    public static double mse(CLIJ clij, ClearCLBuffer buffer1, ClearCLBuffer buffer2) {
+    public static double meanSquaredError(CLIJ clij, ClearCLBuffer buffer1, ClearCLBuffer buffer2) {
         ClearCLBuffer difference = clij.create(buffer1);
         ClearCLBuffer squared = clij.create(buffer1);
 

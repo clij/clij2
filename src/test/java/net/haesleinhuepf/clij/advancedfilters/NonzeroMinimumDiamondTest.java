@@ -29,7 +29,7 @@ public class NonzeroMinimumDiamondTest {
         ClearCLBuffer outputRef = clij.create(input);
         ClearCLBuffer flag = clij.create(new long[]{1,1,1}, output.getNativeType());
 
-        NonzeroMinimum3DDiamond.nonzeroMinimumDiamond(clij, input, flag, output);
+        NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clij, input, flag, output);
         clij.op().minimumSphere(input, outputRef, 3, 3, 3);
 
         //clij.show(output, "output");

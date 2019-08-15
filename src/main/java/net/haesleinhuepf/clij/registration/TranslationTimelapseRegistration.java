@@ -20,12 +20,12 @@ public class TranslationTimelapseRegistration extends AbstractCLIJPlugin impleme
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = registerTimelapse(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        boolean result = translationTimelapseRegistration(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean registerTimelapse(CLIJ clij, ClearCLBuffer input, ClearCLBuffer destination) {
+    public static boolean translationTimelapseRegistration(CLIJ clij, ClearCLBuffer input, ClearCLBuffer destination) {
         ClearCLBuffer slice1 = clij.create(new long[] {input.getWidth(), input.getHeight()}, input.getNativeType());
 
         ClearCLBuffer registered = clij.create(slice1);
@@ -37,7 +37,7 @@ public class TranslationTimelapseRegistration extends AbstractCLIJPlugin impleme
                 center = TranslationRegistration.centerOfMass(clij, slice1);
                 clij.op().copySlice(slice1, destination, t);
             } else {
-                TranslationRegistration.correctTranslation(clij, slice1, registered, center);
+                TranslationRegistration.translationRegistration(clij, slice1, registered, center);
                 clij.op().copySlice(registered, destination, t);
             }
         }

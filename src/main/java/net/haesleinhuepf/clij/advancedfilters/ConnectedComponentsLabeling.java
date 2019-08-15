@@ -68,12 +68,12 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
 
             if (iterationCount % 2 == 0) {
                 //System.out.println("O>T");
-                NonzeroMinimum3DDiamond.nonzeroMinimumDiamond(clij, output, flag, temp2);
+                NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clij, output, flag, temp2);
                 //nonzeroMinimumBox(clij, output, flag, temp2, 1, 1, 1);
                 //clij.show(temp2, "temp2 after a " + iterationCount);
             } else {
                 //System.out.println("T>O");
-                NonzeroMinimum3DDiamond.nonzeroMinimumDiamond(clij, temp2, flag, output);
+                NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clij, temp2, flag, output);
                 //nonzeroMinimumBox(clij, temp2, flag, output, 1, 1, 1);
                 //clij.show(output, "output after a " + iterationCount);
             }
@@ -103,7 +103,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         return true;
     }
 
-    public static void shiftIntensitiesToCloseGaps(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
+    public static boolean shiftIntensitiesToCloseGaps(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
         int maximum = (int)clij.op().maximumOfAllPixels(input);
         float[] allNewIndices = new float[maximum + 1];
 
@@ -149,9 +149,10 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
                 clij.op().copy(input, output);
             }
         }
+        return true;
     }
 
-    public static void replace(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Float in, Float out) {
+    public static boolean replace(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Float in, Float out) {
         HashMap<String, Object> parameters = new HashMap<>();
 
         parameters.clear();
@@ -159,27 +160,27 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         parameters.put("dst", dst);
         parameters.put("in", in);
         parameters.put("out", out);
-        clij.execute(ConnectedComponentsLabeling.class, "cca.cl", "replace", parameters);
+        return clij.execute(ConnectedComponentsLabeling.class, "cca.cl", "replace", parameters);
     }
 
 
-    public static void replace(CLIJ clij, ClearCLBuffer src, ClearCLBuffer map, ClearCLBuffer dst) {
+    public static boolean replace(CLIJ clij, ClearCLBuffer src, ClearCLBuffer map, ClearCLBuffer dst) {
         HashMap<String, Object> parameters = new HashMap<>();
 
         parameters.clear();
         parameters.put("src", src);
         parameters.put("dst", dst);
         parameters.put("map", map);
-        clij.execute(ConnectedComponentsLabeling.class, "cca.cl", "replace_by_map", parameters);
+        return clij.execute(ConnectedComponentsLabeling.class, "cca.cl", "replace_by_map", parameters);
     }
 
-    public static void setNonZeroPixelsToPixelIndex(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
+    public static boolean setNonZeroPixelsToPixelIndex(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
         HashMap<String, Object> parameters = new HashMap<>();
 
         parameters.clear();
         parameters.put("src", src);
         parameters.put("dst", dst);
-        clij.execute(ConnectedComponentsLabeling.class, "cca.cl", "set_nonzero_pixels_to_pixelindex", parameters);
+        return clij.execute(ConnectedComponentsLabeling.class, "cca.cl", "set_nonzero_pixels_to_pixelindex", parameters);
     }
 
     public static boolean nonzeroMinimumBox(CLIJ clij, ClearCLBuffer src, ClearCLBuffer flag, ClearCLBuffer dst, int radiusX, int radiusY, int radiusZ) {

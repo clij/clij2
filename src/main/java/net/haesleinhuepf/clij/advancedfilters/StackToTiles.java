@@ -9,7 +9,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_binaryUnion")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_stackToTiles")
 public class StackToTiles extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

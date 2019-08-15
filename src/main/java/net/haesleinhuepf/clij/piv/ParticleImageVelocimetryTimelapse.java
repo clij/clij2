@@ -8,8 +8,6 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import org.scijava.plugin.Plugin;
 
-import java.util.HashMap;
-
 /**
  *
  *
@@ -22,12 +20,12 @@ public class ParticleImageVelocimetryTimelapse extends AbstractCLIJPlugin implem
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = pivOnTimelapse(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]), (ClearCLBuffer)(args[3]), asInteger(args[4]), asInteger(args[5]), asInteger(args[6]), asBoolean(args[7]));
+        boolean result = particleImageVelocimetryTimelapse(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]), (ClearCLBuffer)(args[3]), asInteger(args[4]), asInteger(args[5]), asInteger(args[6]), asBoolean(args[7]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean pivOnTimelapse(CLIJ clij, ClearCLBuffer input, ClearCLBuffer destinationDeltaX, ClearCLBuffer destinationDeltaY, ClearCLBuffer destinationDeltaZ, int maxDeltaX, int maxDeltaY, int maxDeltaZ, boolean correctLocalShift) {
+    public static boolean particleImageVelocimetryTimelapse(CLIJ clij, ClearCLBuffer input, ClearCLBuffer destinationDeltaX, ClearCLBuffer destinationDeltaY, ClearCLBuffer destinationDeltaZ, int maxDeltaX, int maxDeltaY, int maxDeltaZ, boolean correctLocalShift) {
         ClearCLBuffer slice1 = clij.create(new long[] {input.getWidth(), input.getHeight()}, input.getNativeType());
         ClearCLBuffer slice2 = clij.create(slice1);
         ClearCLBuffer deltaXslice = clij.create(slice1);

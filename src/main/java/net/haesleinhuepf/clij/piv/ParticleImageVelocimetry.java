@@ -4,15 +4,12 @@ import ij.ImagePlus;
 import ij.gui.NewImage;
 import ij.process.ImageProcessor;
 import net.haesleinhuepf.clij.CLIJ;
-import net.haesleinhuepf.clij.advancedfilters.Extrema;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
-import net.haesleinhuepf.clij.macro.modules.Clear;
 import net.haesleinhuepf.clij.registration.DeformableRegistration2D;
 import org.scijava.plugin.Plugin;
 
@@ -63,7 +60,7 @@ public class ParticleImageVelocimetry extends AbstractCLIJPlugin implements CLIJ
             ClearCLBuffer copy = clij.create(input2);
             clij.op().copy(input2, copy);
 
-            DeformableRegistration2D.deformableRegister(clij, input1, copy, input2, maxDeltaX, maxDeltaY);
+            DeformableRegistration2D.deformableRegistration2D(clij, input1, copy, input2, maxDeltaX, maxDeltaY);
             copy.close();
         }
 

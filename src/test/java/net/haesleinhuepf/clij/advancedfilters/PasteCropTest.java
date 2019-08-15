@@ -29,7 +29,7 @@ public class PasteCropTest {
 
         clij.op().crop(intermediate, output, 100, 100, 0);
 
-        double mse = MeanSquaredError.mse(clij, input, output);
+        double mse = MeanSquaredError.meanSquaredError(clij, input, output);
         double sumIn = clij.op().sumPixels(input);
         double sumOut = clij.op().sumPixels(output);
 
@@ -54,7 +54,7 @@ public class PasteCropTest {
 
         clij.op().crop(intermediate, output, 100, 100, 0);
 
-        double mse = MeanSquaredError.mse(clij, input, output);
+        double mse = MeanSquaredError.meanSquaredError(clij, input, output);
         double sumIn = clij.op().sumPixels(input);
         double sumOut = clij.op().sumPixels(output);
 

@@ -14,7 +14,7 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_extrema")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_localID")
 public class LocalID extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
@@ -25,19 +25,19 @@ public class LocalID extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = localid(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
+        boolean result = localID(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean localid(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer output) {
+    public static boolean localID(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer output) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", input1);
         parameters.put("localsizes", new long[]{4,4,4});
         parameters.put("dst", output);
 
-        return clij.execute(LocalID.class, "localid.cl", "localid", parameters);
+        return clij.execute(LocalID.class, "localID.cl", "localID", parameters);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class LocalID extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
         ClearCLBuffer input = clij.push(imp);
         ClearCLBuffer output = clij.create(input);
 
-        localid(clij, input, output);
+        localID(clij, input, output);
 
         clij.show(output, "result");
     }
