@@ -1,6 +1,7 @@
 package net.haesleinhuepf.clij.piv;
 
 import net.haesleinhuepf.clij.CLIJ;
+import net.haesleinhuepf.clij.advancedfilters.CrossCorrelation;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.kernels.Kernels;
@@ -116,7 +117,7 @@ public class FastParticleImageVelocimetry extends AbstractCLIJPlugin implements 
 
     private static void analyseShift(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer vf, int maxDelta, int scanRange, ClearCLBuffer meanInput1, ClearCLBuffer meanInput2, ClearCLBuffer crossCorrCoeff, ClearCLBuffer crossCorrCoeffStack, int dimension) {
         for (int i = -maxDelta; i <=maxDelta; i++) {
-            Kernels.crossCorrelation(clij, input1, meanInput1, input2, meanInput2, crossCorrCoeff, scanRange, i, dimension);
+            CrossCorrelation.crossCorrelation(clij, input1, meanInput1, input2, meanInput2, crossCorrCoeff, scanRange, i, dimension);
             Kernels.copySlice(clij, crossCorrCoeff, crossCorrCoeffStack, i + maxDelta);
         }
 
@@ -129,7 +130,7 @@ public class FastParticleImageVelocimetry extends AbstractCLIJPlugin implements 
 
     private static void analyseShift(CLIJ clij, ClearCLImage input1, ClearCLImage input2, ClearCLImage vf, int maxDelta, int scanRange, ClearCLImage meanInput1, ClearCLImage meanInput2, ClearCLImage crossCorrCoeff, ClearCLImage crossCorrCoeffStack, int dimension) {
         for (int i = -maxDelta; i <=maxDelta; i++) {
-            Kernels.crossCorrelation(clij, input1, meanInput1, input2, meanInput2, crossCorrCoeff, scanRange, i, dimension);
+            CrossCorrelation.crossCorrelation(clij, input1, meanInput1, input2, meanInput2, crossCorrCoeff, scanRange, i, dimension);
             Kernels.copySlice(clij, crossCorrCoeff, crossCorrCoeffStack, i + maxDelta);
         }
 
