@@ -125,8 +125,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
             System.out.println("replaceAWholeMap");
             ClearCLBuffer keyValueMap = clij.create(new long[]{allNewIndices.length, 1, 1}, NativeTypeEnum.Float);//clij.convert(indexFlipMap, ClearCLBuffer.class);
             keyValueMap.readFrom(FloatBuffer.wrap(allNewIndices), true);
-
-            clij.show(keyValueMap, "keyValueMap");
+            //clij.show(keyValueMap, "keyValueMap");
 
             replace(clij, input, keyValueMap, output);
 
