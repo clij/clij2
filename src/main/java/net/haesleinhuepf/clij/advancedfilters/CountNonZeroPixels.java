@@ -52,7 +52,7 @@ public class CountNonZeroPixels extends AbstractCLIJPlugin implements CLIJMacroP
             parameters.put("src", clImage);
             parameters.put("dst", clReducedImage);
             parameters.put("tolerance", new Float(0.001));
-            clij.execute(Kernels.class, "countnonzeropixels.cl", "count_non_zero_project_3d_2d", parameters);
+            clij.execute(CountNonZeroPixels.class, "countnonzeropixels.cl", "count_non_zero_project_3d_2d", parameters);
         }
 
         RandomAccessibleInterval rai = clij.convert(clReducedImage, RandomAccessibleInterval.class);
