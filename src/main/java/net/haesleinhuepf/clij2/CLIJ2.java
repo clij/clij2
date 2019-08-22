@@ -13,19 +13,25 @@ public class CLIJ2 {
     private static CLIJ2 instance;
     private CLIJ2Ops ops;
 
-    private CLIJ2(CLIJ clij) {
+    /**
+     * Marking this as deprecated as it will very likely go away before release.
+     * Use CLIJ2.getInstance() instead.
+     * @param clij
+     */
+    @Deprecated
+    public CLIJ2(CLIJ clij) {
         this.clij = clij;
         ops = new CLIJ2Ops(clij);
     }
 
-    public CLIJ2 getInstance() {
+    public static CLIJ2 getInstance() {
         if (instance == null) {
             instance = new CLIJ2(CLIJ.getInstance());
         }
         return instance;
     }
 
-    public CLIJ2 getInstance(String id) {
+    public static CLIJ2 getInstance(String id) {
         if (instance == null) {
             instance = new CLIJ2(CLIJ.getInstance(id));
         }
