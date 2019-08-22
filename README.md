@@ -6,7 +6,7 @@ Right now, this is very preliminary.
 
 ## Installation intructions
 Download Fiji and activate the `clij` update site as described [here](https://clij.github.io/clij-docs/installationInFiji). 
-Download []clij-advanced-filters_.jar](https://github.com/clij/clij-advanced-filters/releases/download/0.6.0-preprint_v2/clij-advanced-filters_-0.6.0.jar) and copy it to the `plugins` directory of your Fiji installation. Restart Fiji.
+Download [clij-advanced-filters_.jar](https://github.com/clij/clij-advanced-filters/releases/download/0.6.0-preprint_v2/clij-advanced-filters_-0.6.0.jar) and copy it to the `plugins` directory of your Fiji installation. Restart Fiji.
 
 ## Code examples
 Have a look in the [macros](https://github.com/clij/clij-advanced-filters/tree/master/src/main/macro) folder.
