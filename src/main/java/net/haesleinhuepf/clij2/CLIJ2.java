@@ -11,7 +11,7 @@ import net.haesleinhuepf.clij2.utilities.CLIJ2Ops;
 public class CLIJ2 {
     private CLIJ clij;
     private static CLIJ2 instance;
-    private CLIJ2Ops ops;
+    public final CLIJ2Ops op;
 
     /**
      * Marking this as deprecated as it will very likely go away before release.
@@ -21,7 +21,7 @@ public class CLIJ2 {
     @Deprecated
     public CLIJ2(CLIJ clij) {
         this.clij = clij;
-        ops = new CLIJ2Ops(clij);
+        op = new CLIJ2Ops(clij);
     }
 
     public static CLIJ2 getInstance() {
@@ -63,7 +63,12 @@ public class CLIJ2 {
         return clij.convert(object, klass);
     }
 
-    public CLIJ2Ops ops() {
-        return ops;
+    /**
+     * use op without brackets instead.
+     * @return
+     */
+    @Deprecated
+    public CLIJ2Ops op() {
+        return op;
     }
 }

@@ -2,6 +2,7 @@ package net.haesleinhuepf.clij.advancedfilters;
 
 import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
+import net.haesleinhuepf.clij.clearcl.ClearCL;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -37,30 +38,14 @@ public class GetSize extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
         return true;
     }
 
-    public static double countNonZeroPixels(CLIJ clij, ClearCLBuffer clImage) {
-        ClearCLBuffer clReducedImage = clImage;
-        if (clImage.getDimension() == 3) {
-            clReducedImage = clij.createCLBuffer(new long[]{clImage.getWidth(), clImage.getHeight()}, clImage.getNativeType());
-
-            HashMap<String, Object> parameters = new HashMap<>();
-            parameters.put("src", clImage);
-            parameters.put("dst", clReducedImage);
-            parameters.put("tolerance", new Float(0.001));
-            clij.execute(GetSize.class, "countnonzeropixels.cl", "count_non_zero_project_3d_2d", parameters);
+    public static long[] getSize(CLIJ clij, ClearCLBuffer buffer) {
+        if (buffer.getDimension() == 3) {
+            return new long[]{buffer.getWidth(), buffer.getHeight(), buffer.getDepth()};
+        } else {
+            return new long[]{buffer.getWidth(), buffer.getHeight()};
         }
-
-        RandomAccessibleInterval rai = clij.convert(clReducedImage, RandomAccessibleInterval.class);
-        Cursor cursor = Views.iterable(rai).cursor();
-        float sum = 0;
-        while (cursor.hasNext()) {
-            sum += ((RealType) cursor.next()).getRealFloat();
-        }
-
-        if (clImage != clReducedImage) {
-            clReducedImage.close();
-        }
-        return sum;
     }
+
 
 
     @Override

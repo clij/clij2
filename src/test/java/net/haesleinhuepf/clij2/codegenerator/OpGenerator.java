@@ -68,8 +68,9 @@ public class OpGenerator {
                 TranslationTimelapseRegistration.class,
                 SetWhereXequalsY.class,
                 Laplace.class,
-                Image2DToResultsTable.class,
-                WriteValuesToPositions.class
+                //Image2DToResultsTable.class,
+                WriteValuesToPositions.class,
+                GetSize.class
         };
 
 
@@ -82,7 +83,7 @@ public class OpGenerator {
         builder.append("import net.haesleinhuepf.clij.clearcl.ClearCLImage;\n");
         builder.append("import net.imglib2.realtransform.AffineTransform2D;\n");
         builder.append("import net.imglib2.realtransform.AffineTransform3D;\n");
-        builder.append("import ij.measure.ResultsTable;\n");
+        //builder.append("import ij.measure.ResultsTable;\n");
 
         for (Class klass : classes) {
             builder.append("import " + klass.getName() + ";\n");
