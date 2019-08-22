@@ -3,6 +3,7 @@ package net.haesleinhuepf.clij2;
 import ij.ImagePlus;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij2.utilities.CLIJ2Ops;
 
 /**
@@ -61,6 +62,14 @@ public class CLIJ2 {
 
     public <T> T convert(Object object, Class<T> klass) {
         return clij.convert(object, klass);
+    }
+
+    public ClearCLBuffer create(ClearCLBuffer buffer) {
+        return clij.create(buffer);
+    }
+
+    public ClearCLBuffer create(long[] dimensions, NativeTypeEnum typeEnum) {
+        return clij.create(dimensions, typeEnum);
     }
 
     /**
