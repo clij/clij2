@@ -4,6 +4,7 @@ package net.haesleinhuepf.clij.matrix;
 import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -39,7 +40,7 @@ public class MatrixEqual extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
             return false;
         }
 
-        ClearCLBuffer diffBuffer = clij.createCLBuffer(buffer1);
+        ClearCLBuffer diffBuffer = clij.createCLBuffer(buffer1.getDimensions(), NativeTypeEnum.Float);
         clij.op().addImagesWeighted(buffer1, buffer2, diffBuffer, 1f, -1f);
 
         double maxDifference = clij.op().maximumOfAllPixels(diffBuffer);

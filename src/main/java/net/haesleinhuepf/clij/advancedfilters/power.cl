@@ -11,7 +11,7 @@ __kernel void power_images_2d(DTYPE_IMAGE_OUT_2D dst, DTYPE_IMAGE_IN_2D src1,  D
   float b = READ_IMAGE_2D(src2, sampler, pos).x;
   float result = pow(a, b);
 
-  float out = sqrt(result);
+  float out = result;
   WRITE_IMAGE_2D(dst, pos, CONVERT_DTYPE_OUT(out));
 
 }
@@ -28,7 +28,7 @@ __kernel void power_images_3d(DTYPE_IMAGE_OUT_3D dst, DTYPE_IMAGE_IN_3D src1,  D
   float b = READ_IMAGE_3D(src2, sampler, pos).x;
   float result = pow(a, b);
 
-  float out = sqrt(result);
+  float out = result;
   WRITE_IMAGE_3D(dst, pos, CONVERT_DTYPE_OUT(out));
 
 }

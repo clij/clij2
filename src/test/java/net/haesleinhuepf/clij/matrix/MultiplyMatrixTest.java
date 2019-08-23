@@ -1,6 +1,8 @@
 package net.haesleinhuepf.clij.matrix;
 
+import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.test.TestUtilities;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImg;
@@ -39,7 +41,13 @@ public class MultiplyMatrixTest {
         ClearCLBuffer clC = clij2.push(c);
 
         clij2.op.multiplyMatrix(clA, clB, clTest);
-        clij2.op.matrixEqual(clTest, clC, 0f);
+        TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
+        assertTrue(clij2.op.matrixEqual(clTest, clC, 0f));
+
+        clA.close();
+        clB.close();
+        clC.close();
+        clTest.close();
     }
 
 }
