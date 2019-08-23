@@ -15,16 +15,16 @@ import java.util.HashMap;
  * 	        August 2019
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_equal")
-public class Equal extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_smallerOrEqual")
+public class SmallerOrEqual extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        boolean result = equal(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = smallerOrEqual(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         return result;
     }
 
-    public static boolean equal(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer src2, ClearCLBuffer dst) {
+    public static boolean smallerOrEqual(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer src2, ClearCLBuffer dst) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
@@ -33,7 +33,7 @@ public class Equal extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOp
         parameters.put("src2", src2);
         parameters.put("dst", dst);
 
-        return clij.execute(Equal.class, "comparison.cl", "equal_" + src1.getDimension() + "d", parameters);
+        return clij.execute(SmallerOrEqual.class, "comparison.cl", "smaller_or_equal_" + src1.getDimension() + "d", parameters);
     }
         
     
@@ -45,7 +45,7 @@ public class Equal extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOp
 
     @Override
     public String getDescription() {
-        return "Determines if two images A and B equal pixel wise.\n\nf(a, b) = 1 if a == b; 0 otherwise. ";
+        return "Determines if two images A and B smaller or equal pixel wise.\n\nf(a, b) = 1 if a <= b; 0 otherwise. ";
     }
     
     @Override
