@@ -65,8 +65,7 @@ public class Image2DToResultsTable extends AbstractCLIJPlugin implements CLIJMac
 
     @Override
     public String getDescription() {
-        return "Determines the number of all pixels in a given image which are not equal to 0. It will be stored in a new row of ImageJs\n" +
-                "Results table in the column 'Count_non_zero'.";
+        return "Converts an image into a table.";
     }
 
     @Override
