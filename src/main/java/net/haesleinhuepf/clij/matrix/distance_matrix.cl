@@ -21,6 +21,6 @@ __kernel void generate_distance_matrix(DTYPE_IMAGE_OUT_2D dst_matrix, DTYPE_IMAG
       }
       float out = sqrt(sum);
       int2 pos = (int2){get_global_id(0), j};
-      WRITE_IMAGE_2D(dst_matrix, pos, (DTYPE_OUT)out);
+      WRITE_IMAGE_2D(dst_matrix, pos, CONVERT_DTYPE_OUT(out));
   }
 }

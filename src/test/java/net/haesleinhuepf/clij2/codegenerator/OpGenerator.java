@@ -70,7 +70,10 @@ public class OpGenerator {
                 Laplace.class,
                 //Image2DToResultsTable.class,
                 WriteValuesToPositions.class,
-                GetSize.class
+                GetSize.class,
+                MultiplyMatrix.class,
+                MatrixEqual.class,
+                PowerImages.class
         };
 
 
