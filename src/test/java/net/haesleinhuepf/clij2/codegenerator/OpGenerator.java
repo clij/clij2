@@ -2,6 +2,7 @@ package net.haesleinhuepf.clij2.codegenerator;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.advancedfilters.*;
+import net.haesleinhuepf.clij.advancedmath.Equal;
 import net.haesleinhuepf.clij.advancedmath.Exponential;
 import net.haesleinhuepf.clij.advancedmath.Logarithm;
 import net.haesleinhuepf.clij.kernels.Kernels;
@@ -73,7 +74,8 @@ public class OpGenerator {
                 GetSize.class,
                 MultiplyMatrix.class,
                 MatrixEqual.class,
-                PowerImages.class
+                PowerImages.class,
+                Equal.class
         };
 
 
