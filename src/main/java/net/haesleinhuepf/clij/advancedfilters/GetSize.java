@@ -55,8 +55,8 @@ public class GetSize extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getDescription() {
-        return "Determines the number of all pixels in a given image which are not equal to 0. It will be stored in a new row of ImageJs\n" +
-                "Results table in the column 'Count_non_zero'.";
+        return "Reads out the size of an image [stack] and writes it to the" +
+                " results table in the columna 'Width', 'Height' and 'Depth'.";
     }
 
     @Override
