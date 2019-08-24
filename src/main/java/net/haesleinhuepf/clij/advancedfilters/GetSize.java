@@ -56,7 +56,7 @@ public class GetSize extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
     @Override
     public String getDescription() {
         return "Reads out the size of an image [stack] and writes it to the" +
-                " results table in the columna 'Width', 'Height' and 'Depth'.";
+                " results table in the columns 'Width', 'Height' and 'Depth'.";
     }
 
     @Override
