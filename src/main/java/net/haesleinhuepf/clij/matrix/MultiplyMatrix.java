@@ -32,9 +32,7 @@ public class MultiplyMatrix extends AbstractCLIJPlugin implements CLIJMacroPlugi
         parameters.put("src2", input2);
         parameters.put("dst_matrix", output);
 
-        long[] globalSizes = new long[]{input1.getWidth(),  1, 1};
-
-        return clij.execute(MultiplyMatrix.class, "matrix.cl", "multiply_matrix", globalSizes, parameters);
+        return clij.execute(MultiplyMatrix.class, "matrix.cl", "multiply_matrix", parameters);
     }
 
     @Override

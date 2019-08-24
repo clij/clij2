@@ -20,14 +20,14 @@ public class MultiplyMatrixTest {
     @Test
     public void test() {
         Img<UnsignedShortType> a = ArrayImgs.unsignedShorts(new short[]{
-                1, 2, 3,
-                4, 5, 6
-        }, new long[]{3, 2});
-        Img<UnsignedShortType> b = ArrayImgs.unsignedShorts(new short[]{
                 7, 8,
                 9, 10,
                 11, 12
         }, new long[]{2, 3});
+        Img<UnsignedShortType> b = ArrayImgs.unsignedShorts(new short[]{
+                1, 2, 3,
+                4, 5, 6
+        }, new long[]{3, 2});
         Img<UnsignedShortType> c = ArrayImgs.unsignedShorts(new short[]{
                 58, 64,
                 139, 154
@@ -37,7 +37,41 @@ public class MultiplyMatrixTest {
 
         ClearCLBuffer clA = clij2.push(a);
         ClearCLBuffer clB = clij2.push(b);
-        ClearCLBuffer clTest = clij2.create(clA);
+        ClearCLBuffer clTest = clij2.create(new long[]{2, 2}, clA.getNativeType());
+        ClearCLBuffer clC = clij2.push(c);
+
+        clij2.op.multiplyMatrix(clA, clB, clTest);
+        TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
+        assertTrue(clij2.op.matrixEqual(clTest, clC, 0f));
+
+        clA.close();
+        clB.close();
+        clC.close();
+        clTest.close();
+    }
+
+
+    @Test
+    public void test2() {
+        Img<UnsignedShortType> a = ArrayImgs.unsignedShorts(new short[]{
+                1, 2, 3
+        }, new long[]{3, 1});
+        Img<UnsignedShortType> b = ArrayImgs.unsignedShorts(new short[]{
+                1,
+                2,
+                3
+        }, new long[]{1, 3});
+        Img<UnsignedShortType> c = ArrayImgs.unsignedShorts(new short[]{
+                1, 2, 3,
+                2, 4, 6,
+                3, 6, 9
+        }, new long[]{3, 3});
+
+        CLIJ2 clij2 = CLIJ2.getInstance();
+
+        ClearCLBuffer clA = clij2.push(a);
+        ClearCLBuffer clB = clij2.push(b);
+        ClearCLBuffer clTest = clij2.create(new long[]{3, 3}, clA.getNativeType());
         ClearCLBuffer clC = clij2.push(c);
 
         clij2.op.multiplyMatrix(clA, clB, clTest);
