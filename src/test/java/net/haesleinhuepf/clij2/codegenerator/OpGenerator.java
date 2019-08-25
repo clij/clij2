@@ -3,6 +3,9 @@ package net.haesleinhuepf.clij2.codegenerator;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.advancedfilters.*;
 import net.haesleinhuepf.clij.advancedmath.*;
+import net.haesleinhuepf.clij.io.PreloadFromDisc;
+import net.haesleinhuepf.clij.io.ReadImageFromDisc;
+import net.haesleinhuepf.clij.io.ReadRawImageFromDisc;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPluginService;
@@ -80,7 +83,8 @@ public class OpGenerator {
                 SmallerOrEqual.class,
                 NotEqual.class,
                 ReadImageFromDisc.class,
-                ReadRawImageFromDisc.class
+                ReadRawImageFromDisc.class,
+                PreloadFromDisc.class
         };
 
 
