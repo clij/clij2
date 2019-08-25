@@ -78,7 +78,9 @@ public class OpGenerator {
                 Greater.class,
                 Smaller.class,
                 SmallerOrEqual.class,
-                NotEqual.class
+                NotEqual.class,
+                ReadImageFromDisc.class,
+                ReadRawImageFromDisc.class
         };
 
 
