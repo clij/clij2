@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clij.advancedfilters;
+package net.haesleinhuepf.clij.io;
 
 
 import ij.IJ;
