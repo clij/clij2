@@ -33,6 +33,8 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.sigmaToKernelSize;
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_gaussianBlur")
 public class GaussianBlur extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
+    private static final int MAX_GROUP_SIZE = 128;
+
     @Override
     public String getParameterHelpText() {
         return "Image source, Image destination, Number sigmaX, Number sigmaY, Number sigmaZ";
@@ -93,8 +95,8 @@ public class GaussianBlur extends AbstractCLIJPlugin implements CLIJMacroPlugin,
         long[] globalSize = new long[globalSizeBuffer.length];
         for (int i = 0; i < globalSize.length; i++) {
             //System.out.println("Was: " + globalSize[i]);
-            if (globalSizeBuffer[i] % 32 > 0) {
-                globalSize[i] = ((globalSizeBuffer[i] / 32) + 1) * 32;
+            if (globalSizeBuffer[i] % MAX_GROUP_SIZE > 0) {
+                globalSize[i] = ((globalSizeBuffer[i] / MAX_GROUP_SIZE) + 1) * MAX_GROUP_SIZE;
             } else {
                 globalSize[i] = globalSizeBuffer[i];
             }
@@ -114,7 +116,7 @@ public class GaussianBlur extends AbstractCLIJPlugin implements CLIJMacroPlugin,
             } else {
                 parameters.put("dst", temp2);
             }
-            long[] localSize = {32, 1, 1};
+            long[] localSize = {MAX_GROUP_SIZE, 1, 1};
             //System.out.print("dst h0 " + ((ClearCLBuffer)dst).getHeight());
             clij.execute(GaussianBlur.class, clFilename, kernelname, localSize, globalSize, parameters);
             //System.out.print("dst h1 " + ((ClearCLBuffer)dst).getHeight());
@@ -138,7 +140,7 @@ public class GaussianBlur extends AbstractCLIJPlugin implements CLIJMacroPlugin,
                 parameters.put("src", temp2);
                 parameters.put("dst", temp1);
             }
-            long[] localSize = {1, 32, 1};
+            long[] localSize = {1, MAX_GROUP_SIZE, 1};
             //System.out.print("dst h2 " + ((ClearCLBuffer)dst).getHeight() + " L " + Arrays.toString(localSize) +  " G " + Arrays.toString(globalSize));
             clij.execute(GaussianBlur.class, clFilename, kernelname, localSize, globalSize, parameters);
             //System.out.print("dst h3 " + ((ClearCLBuffer)dst).getHeight());
@@ -158,7 +160,7 @@ public class GaussianBlur extends AbstractCLIJPlugin implements CLIJMacroPlugin,
                 parameters.put("dim", 2);
                 parameters.put("src", temp1);
                 parameters.put("dst", dst);
-                long[] localSize = {32};
+                long[] localSize = {MAX_GROUP_SIZE};
                 clij.execute(GaussianBlur.class, clFilename, kernelname, localSize, globalSize, parameters);
             } else {
                 copyInternal(clij, temp1, dst,3, 3);

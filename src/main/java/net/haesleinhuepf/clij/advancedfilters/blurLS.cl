@@ -1,6 +1,6 @@
 // Adapted from Uwe Schmidt, https://github.com/ClearControl/FastFuse/blob/master/src/fastfuse/tasks/kernels/blur.cl
 //
-#define MAX_GROUP_SIZE 32
+#define MAX_GROUP_SIZE 128
 
 __constant sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
 
@@ -65,6 +65,7 @@ __kernel void gaussian_blur_sep_image2d
 
   const int startD = get_global_id(dim) - get_global_id(dim) % MAX_GROUP_SIZE;
 
+  /*
   if (local_id == 0) {
     if (dim == 0) {
       for (int i = 0; i < MAX_GROUP_SIZE; i ++) {
@@ -77,7 +78,9 @@ __kernel void gaussian_blur_sep_image2d
         local_input[i] = (float)READ_IMAGE_2D(src, sampler, pos).x;
       }
     }
-  }
+  }*/
+  local_input[local_id] = (float)READ_IMAGE_2D(src, sampler, coord).x;
+
   barrier(CLK_LOCAL_MEM_FENCE);
 
   // center
@@ -89,7 +92,7 @@ __kernel void gaussian_blur_sep_image2d
   for (int v = -c; v <= c; v++) {
     const float h = exp((v*v)/n);
     int test_v = coord.x * dir.x + coord.y * dir.y + v;
-    if (test_v < startD || test_v >= startD + MAX_GROUP_SIZE) {
+    if (test_v < startD || test_v >= startD + MAX_GROUP_SIZE || coord.x + v * dir.x >= dims[0] || coord.y + v * dir.y >= dims[1]) {
         res += h * (float)READ_IMAGE_2D(src,sampler,coord+v*dir).x;
     } else {
         res += h * local_input[test_v - startD];
