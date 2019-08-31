@@ -23,45 +23,45 @@ public class DrawBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getParameterHelpText() {
-        return "Image destination, Number x1, Number y1, Number z1, Number x2, Number y2, Number z2";
+        return "Image destination, Number x, Number y, Number z, Number width, Number height, Number depth";
     }
 
     @Override
     public boolean executeCL() {
         ClearCLBuffer input = (ClearCLBuffer)args[0];
-        Float x1 = asFloat(args[1]);
-        Float y1 = asFloat(args[2]);
-        Float z1 = asFloat(args[3]);
-        Float x2 = asFloat(args[4]);
-        Float y2 = asFloat(args[5]);
-        Float z2 = asFloat(args[6]);
+        Float x = asFloat(args[1]);
+        Float y = asFloat(args[2]);
+        Float z = asFloat(args[3]);
+        Float width = asFloat(args[4]);
+        Float height = asFloat(args[5]);
+        Float depth = asFloat(args[6]);
 
-        return drawBox(clij, input, x1, y1, z1, x2, y2, z2);
+        return drawBox(clij, input, x, y, z, width, height, depth);
     }
 
-    public static boolean drawBox(CLIJ clij, ClearCLBuffer output, Float x1, Float y1, Float z1, Float x2, Float y2, Float z2) {
+    public static boolean drawBox(CLIJ clij, ClearCLBuffer output, Float x, Float y, Float z, Float width, Float height, Float depth) {
         HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put("x1", x1);
-        parameters.put("y1", y1);
-        parameters.put("x2", x2);
-        parameters.put("y2", y2);
+        parameters.put("x1", x);
+        parameters.put("y1", y);
+        parameters.put("x2", x + width - 1);
+        parameters.put("y2", y + height - 1);
         if (output.getDimension() > 2) {
-            parameters.put("z1", z1);
-            parameters.put("z2", z2);
+            parameters.put("z1", z);
+            parameters.put("z2", z + depth - 1);
         }
         parameters.put("dst", output);
 
         return clij.execute(DrawBox.class, "drawbox.cl", "draw_box_" + output.getDimension() + "D", parameters);
     }
 
-    public static boolean drawBox(CLIJ clij, ClearCLBuffer output, Float x1, Float y1, Float x2, Float y2) {
-        return drawBox(clij, output, x1, y1, 0f, x2, y2, 0f);
+    public static boolean drawBox(CLIJ clij, ClearCLBuffer output, Float x, Float y, Float width, Float height) {
+        return drawBox(clij, output, x, y, 0f, width, height, 0f);
     }
 
 
         @Override
     public String getDescription() {
-        return "Draws a box between two points. All pixels other than in the box are untouched. Consider using clij.op.set(buffer, 0); in advance.";
+        return "Draws a box at a given start point with given size. All pixels other than in the box are untouched. Consider using clij.op.set(buffer, 0); in advance.";
     }
 
     @Override
