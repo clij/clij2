@@ -9,7 +9,7 @@ Download Fiji and activate the `clij` update site as described [here](https://cl
 Download [clij-advanced-filters_.jar](https://github.com/clij/clij-advanced-filters/releases/download/0.6.0-preprint_v2/clij-advanced-filters_-0.6.0.jar) and copy it to the `plugins` directory of your Fiji installation. Restart Fiji.
 
 ## CLIJ2 reference
-The current API reference of CLIJ2 is available [here](reference). Please note that both: The CLIJ2 gateway and the API are under heavy construction and can change at any point.
+The current API reference of CLIJ2 is available [here](https://clij.github.io/clij-advanced-filters/reference). Please note that both: The CLIJ2 gateway and the API are under heavy construction and can change at any point.
 
 ## Code examples
 Have a look in the [macros](https://github.com/clij/clij-advanced-filters/tree/master/src/main/macro) folder.

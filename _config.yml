@@ -1,0 +1,8 @@
+title: clij-advanced-filters
+logo: /images/clij_logo.png
+description: Incubator for CLIJ2 (experimental)
+show_downloads: false
+google_analytics:
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-redirect-from
