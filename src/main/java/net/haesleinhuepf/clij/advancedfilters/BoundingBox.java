@@ -29,7 +29,7 @@ public class BoundingBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();
         table.addValue("BoundingBoxX", boundingBox[0]);
-        table.addValue("BoundingBoxX", boundingBox[1]);
+        table.addValue("BoundingBoxY", boundingBox[1]);
         if (buffer1.getDimension() > 2) {
             table.addValue("BoundingBoxZ", boundingBox[2]);
             table.addValue("BoundingBoxWidth", boundingBox[3]);
@@ -73,7 +73,7 @@ public class BoundingBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
 
     @Override
     public String getParameterHelpText() {
-        return "Image source1, Image source2";
+        return "Image source";
     }
 
     @Override
