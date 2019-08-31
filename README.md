@@ -1,4 +1,4 @@
-# CLIJ advanced filters (under construction)
+# CLIJ advanced filters (experimental)
 This repository contains experimental / advanced filters based on [CLIJ](https://clij.github.io). 
 Methods which turn out to be useful will become part of CLIJ 2.0.
 
