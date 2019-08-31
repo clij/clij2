@@ -40,6 +40,9 @@ public class SorensenDiceJaccardIndexTest {
 
         double jaccardIndex = SorensenDiceJaccardIndex.jaccardIndex(clij, clBinary1, clBinary2);
         assertEquals(0.5, jaccardIndex, tolerance);
+
+        clBinary1.close();
+        clBinary2.close();
     }
 
 }

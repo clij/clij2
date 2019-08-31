@@ -39,6 +39,7 @@ public class NonzeroMinimumDiamondTest {
 
         input.close();
         output.close();
+        outputRef.close();
         flag.close();
     }
 }
