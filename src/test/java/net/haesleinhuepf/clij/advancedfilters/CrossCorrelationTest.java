@@ -64,7 +64,7 @@ public class CrossCorrelationTest {
     @Test
     public void testLocalShift() {
         new ImageJ();
-        ImagePlus imp = IJ.openImage("src/main/resources/blobs.tif");
+        ImagePlus imp = IJ.openImage("src/test/resources/blobs.tif");
         IJ.run(imp, "32-bit", "");
 
         ImagePlus vfXImp = NewImage.createFloatImage("vf", imp.getWidth(), imp.getHeight(), 1, NewImage.FILL_BLACK);
@@ -131,7 +131,7 @@ public class CrossCorrelationTest {
     public void testGlobalShift() {
         // https://www2.cscamm.umd.edu/programs/trb10/presentations/PIV.pdf
         new ImageJ();
-        ImagePlus imp = IJ.openImage("src/main/resources/blobs.tif");
+        ImagePlus imp = IJ.openImage("src/test/resources/blobs.tif");
         IJ.run(imp, "32-bit", "");
 
         CLIJ clij = CLIJ.getInstance();

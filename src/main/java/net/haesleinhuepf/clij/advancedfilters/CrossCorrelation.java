@@ -54,7 +54,7 @@ public class CrossCorrelation extends AbstractCLIJPlugin implements CLIJMacroPlu
         parameters.put("radius", radius);
         parameters.put("i", deltaPos);
         parameters.put("dimension", dimension);
-        return clij.execute(Kernels.class, "cross_correlation.cl", "cross_correlation_3d", parameters);
+        return clij.execute(CrossCorrelation.class, "cross_correlation.cl", "cross_correlation_3d", parameters);
     }
 
     public static boolean crossCorrelation(CLIJ clij, ClearCLImage src1, ClearCLImage meanSrc1, ClearCLImage src2, ClearCLImage meanSrc2, ClearCLImage dst, int radius, int deltaPos, int dimension) {
@@ -72,7 +72,7 @@ public class CrossCorrelation extends AbstractCLIJPlugin implements CLIJMacroPlu
         parameters.put("radius", radius);
         parameters.put("i", deltaPos);
         parameters.put("dimension", dimension);
-        return clij.execute(Kernels.class, "cross_correlation.cl", "cross_correlation_3d", parameters);
+        return clij.execute(CrossCorrelation.class, "cross_correlation.cl", "cross_correlation_3d", parameters);
     }
 
     @Override
