@@ -30,79 +30,6 @@ import java.lang.reflect.Parameter;
 public class OpGenerator {
     public static void main(String ... args) throws IOException {
 
-        Class[] classes = {
-                Kernels.class,
-                BinaryUnion.class,
-                BinaryIntersection.class,
-                ConnectedComponentsLabeling.class,
-                CountNonZeroPixels.class,
-                CrossCorrelation.class,
-                DifferenceOfGaussian2D.class,
-                DifferenceOfGaussian3D.class,
-                Extrema.class,
-                LocalExtremaBox.class,
-                LocalID.class,
-                MaskLabel.class,
-                MeanClosestSpotDistance.class,
-                MeanSquaredError.class,
-                MedianZProjection.class,
-                NonzeroMinimum3DDiamond.class,
-                Paste2D.class,
-                Paste3D.class,
-                Presign.class,
-                SorensenDiceJaccardIndex.class,
-                StandardDeviationZProjection.class,
-                StackToTiles.class,
-                SubtractBackground2D.class,
-                SubtractBackground3D.class,
-                TopHatBox.class,
-                TopHatSphere.class,
-                Exponential.class,
-                Logarithm.class,
-                GenerateDistanceMatrix.class,
-                ShortestDistances.class,
-                SpotsToPointList.class,
-                TransposeXY.class,
-                TransposeXZ.class,
-                TransposeYZ.class,
-                FastParticleImageVelocimetry.class,
-                ParticleImageVelocimetry.class,
-                ParticleImageVelocimetryTimelapse.class,
-                DeformableRegistration2D.class,
-                TranslationRegistration.class,
-                TranslationTimelapseRegistration.class,
-                SetWhereXequalsY.class,
-                Laplace.class,
-                //Image2DToResultsTable.class,
-                WriteValuesToPositions.class,
-                GetSize.class,
-                MultiplyMatrix.class,
-                MatrixEqual.class,
-                PowerImages.class,
-                Equal.class,
-                GreaterOrEqual.class,
-                Greater.class,
-                Smaller.class,
-                SmallerOrEqual.class,
-                NotEqual.class,
-                ReadImageFromDisc.class,
-                ReadRawImageFromDisc.class,
-                PreloadFromDisc.class,
-                EqualConstant.class,
-                GreaterOrEqualConstant.class,
-                GreaterConstant.class,
-                SmallerConstant.class,
-                SmallerOrEqualConstant.class,
-                NotEqualConstant.class,
-                DrawBox.class,
-                DrawLine.class,
-                DrawSphere.class,
-                ReplaceIntensity.class,
-                BoundingBox.class,
-                MinimumOfMaskedPixels.class,
-                MaximumOfMaskedPixels.class,
-                MeanOfMaskedPixels.class
-        };
 
 
         CLIJMacroPluginService service = new Context(CLIJMacroPluginService.class).getService(CLIJMacroPluginService.class);
@@ -116,7 +43,7 @@ public class OpGenerator {
         builder.append("import net.imglib2.realtransform.AffineTransform3D;\n");
         //builder.append("import ij.measure.ResultsTable;\n");
 
-        for (Class klass : classes) {
+        for (Class klass : CLIJ2Plugins.classes) {
             builder.append("import " + klass.getName() + ";\n");
         }
 
@@ -127,7 +54,8 @@ public class OpGenerator {
         builder.append("       this.clij = clij;\n");
         builder.append("   }\n");
 
-        for (Class klass : classes) {
+        int methodCount = 0;
+        for (Class klass : CLIJ2Plugins.classes) {
             builder.append("\n    // " + klass.getName() + "\n");
             builder.append("    //----------------------------------------------------\n");
             for (Method method : klass.getMethods()) {
@@ -165,10 +93,13 @@ public class OpGenerator {
                     builder.append(") {\n");
                     builder.append("        return " + klass.getSimpleName() + "." + methodName + "(" + parametersCall + ");\n");
                     builder.append("    }\n\n");
+
+                    methodCount++;
                 }
             }
         }
         builder.append("}\n");
+        builder.append("// " + methodCount + " methods generated.\n");
 
         File outputTarget = new File("src/main/java/net/haesleinhuepf/clij2/utilities/CLIJ2Ops.java");
 
@@ -178,7 +109,7 @@ public class OpGenerator {
 
     }
 
-    private static String typeToString(Class klass) {
+    static String typeToString(Class klass) {
         String result = "" + klass.getSimpleName();
         if (result.compareTo("[F") == 0) {
             return "float[]";
@@ -186,11 +117,7 @@ public class OpGenerator {
         return result;
     }
 
-    protected static String findDocumentation(CLIJMacroPluginService service, String methodName) {
-        if (methodName.endsWith("IJ")) {
-            return "This method is deprecated. Consider using " + methodName.replace("IJ", "Box") + " or " + methodName.replace("IJ", "Sphere") + " instead.";
-        }
-
+    static CLIJMacroPlugin findPlugin(CLIJMacroPluginService service, String methodName) {
         String[] potentialMethodNames = {
                 "CLIJ_" + methodName,
                 "CLIJ_" + methodName + "2D",
@@ -208,11 +135,24 @@ public class OpGenerator {
             name = findName(service, name);
             CLIJMacroPlugin plugin = service.getCLIJMacroPlugin(name);
             if (plugin != null) {
-                if (plugin instanceof OffersDocumentation) {
-                    return ((OffersDocumentation) plugin).getDescription();
-                } else {
-                    return plugin.getParameterHelpText();
-                }
+                return plugin;
+            }
+        }
+        return null;
+    }
+
+    static String findDocumentation(CLIJMacroPluginService service, String methodName) {
+        if (methodName.endsWith("IJ")) {
+            return "This method is deprecated. Consider using " + methodName.replace("IJ", "Box") + " or " + methodName.replace("IJ", "Sphere") + " instead.";
+        }
+
+        CLIJMacroPlugin plugin = findPlugin(service, methodName);
+
+        if (plugin != null) {
+            if (plugin instanceof OffersDocumentation) {
+                return ((OffersDocumentation) plugin).getDescription();
+            } else {
+                return plugin.getParameterHelpText();
             }
         }
 
