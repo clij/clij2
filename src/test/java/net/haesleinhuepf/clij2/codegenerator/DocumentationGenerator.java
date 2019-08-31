@@ -50,6 +50,7 @@ public class DocumentationGenerator {
                     String returnType = typeToString(method.getReturnType());
                     String parametersHeader = "";
                     String parametersCall = "";
+
                     for (Parameter parameter : method.getParameters()) {
                         if (parametersCall.length() == 0) { // first parameter
                             parametersCall = "clij";
@@ -63,26 +64,28 @@ public class DocumentationGenerator {
                         parametersCall = parametersCall + ", " + parameter.getName();
                     }
 
-                    CLIJMacroPlugin plugin = findPlugin(service, methodName);
+                    if (!parametersHeader.contains("ClearCLImage")) { // we document only  buffer methods for now
+                        CLIJMacroPlugin plugin = findPlugin(service, methodName);
 
-                    DocumentationItem item = new DocumentationItem();
+                        DocumentationItem item = new DocumentationItem();
 
-                    if (plugin != null) {
-                        item.parametersMacro = plugin.getParameterHelpText();
-                        if (plugin instanceof OffersDocumentation) {
-                            item.description = ((OffersDocumentation) plugin).getDescription();
+                        if (plugin != null) {
+                            item.parametersMacro = plugin.getParameterHelpText();
+                            if (plugin instanceof OffersDocumentation) {
+                                item.description = ((OffersDocumentation) plugin).getDescription();
+                            }
                         }
+
+                        //System.out.println(documentation);
+
+                        item.klass = klass;
+                        item.methodName = methodName;
+                        item.parametersJava = parametersHeader;
+
+                        methodMap.put(methodName + "_" + methodCount, item);
+
+                        methodCount++;
                     }
-
-                    //System.out.println(documentation);
-
-                    item.klass = klass;
-                    item.methodName = methodName;
-                    item.parametersJava = parametersHeader;
-
-                    methodMap.put(methodName + "_" + methodCount, item);
-
-                    methodCount++;
                 }
             }
         }
@@ -96,6 +99,18 @@ public class DocumentationGenerator {
         builder.append("This reference contains all methods currently available in CLIJ2.\n\n");
         builder.append("__Please note:__ CLIJ2 is under heavy construction. This list may change at any point.");
         builder.append("Methods marked with ' were available in CLIJ1.\n\n");
+
+
+        for (String sortedName : names) {
+            DocumentationItem item = methodMap.get(sortedName);
+            builder.append("* <a href=\"#" + item.methodName + "\">");
+            builder.append(item.methodName);
+            if (item.klass == Kernels.class) {
+                builder.append("'");
+            }
+            builder.append("</a>\n");
+
+        }
 
         for (String sortedName : names) {
             DocumentationItem item = methodMap.get(sortedName);
