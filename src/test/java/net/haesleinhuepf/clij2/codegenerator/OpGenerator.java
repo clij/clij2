@@ -11,6 +11,9 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPluginService;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij.matrix.*;
+import net.haesleinhuepf.clij.painting.DrawBox;
+import net.haesleinhuepf.clij.painting.DrawLine;
+import net.haesleinhuepf.clij.painting.DrawSphere;
 import net.haesleinhuepf.clij.piv.FastParticleImageVelocimetry;
 import net.haesleinhuepf.clij.piv.ParticleImageVelocimetry;
 import net.haesleinhuepf.clij.piv.ParticleImageVelocimetryTimelapse;
@@ -84,7 +87,17 @@ public class OpGenerator {
                 NotEqual.class,
                 ReadImageFromDisc.class,
                 ReadRawImageFromDisc.class,
-                PreloadFromDisc.class
+                PreloadFromDisc.class,
+                EqualConstant.class,
+                GreaterOrEqualConstant.class,
+                GreaterConstant.class,
+                SmallerConstant.class,
+                SmallerOrEqualConstant.class,
+                NotEqualConstant.class,
+                DrawBox.class,
+                DrawLine.class,
+                DrawSphere.class,
+                ReplaceIntensity.class
         };
 
 
