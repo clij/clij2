@@ -97,7 +97,11 @@ public class OpGenerator {
                 DrawBox.class,
                 DrawLine.class,
                 DrawSphere.class,
-                ReplaceIntensity.class
+                ReplaceIntensity.class,
+                BoundingBox.class,
+                MinimumOfMaskedPixels.class,
+                MaximumOfMaskedPixels.class,
+                MeanOfMaskedPixels.class
         };
 
 
