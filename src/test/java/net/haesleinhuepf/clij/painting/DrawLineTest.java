@@ -19,9 +19,10 @@ public class DrawLineTest {
         DrawLine.drawLine(CLIJ.getInstance(), image, 10f, 20f, 0f, 50f, 50f, 0f, 10f);
         //clij2.op.drawLine(image, 10f, 10f, 0f, 10f, 50f, 0f, 5f);
 
-        new ImageJ();
-        clij2.show(image, "image");
-        new WaitForUserDialog("helo").show();
+        //new ImageJ();
+        //clij2.show(image, "image");
+        //new WaitForUserDialog("helo").show();
+        image.close();
     }
     @Test
     public void test3d() {
@@ -31,9 +32,10 @@ public class DrawLineTest {
         DrawLine.drawLine(CLIJ.getInstance(), image, 10f, 20f, 0f, 50f, 50f, 70f, 10f);
         //clij2.op.drawLine(image, 10f, 10f, 0f, 10f, 50f, 0f, 5f);
 
-        new ImageJ();
-        clij2.show(image, "image");
-        new WaitForUserDialog("helo").show();
+        //new ImageJ();
+        //clij2.show(image, "image");
+        //new WaitForUserDialog("helo").show();
+        image.close();
     }
 
 }

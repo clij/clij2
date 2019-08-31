@@ -15,11 +15,12 @@ public class DrawSphereTest {
         ClearCLBuffer image = clij2.create(new long[]{100, 100}, NativeTypeEnum.Float);
 
         DrawSphere.drawSphere(CLIJ.getInstance(), image, 50f, 50f, 10f, 20f);
-        //clij2.op.drawLine(image, 10f, 10f, 0f, 10f, 50f, 0f, 5f);
 
-        new ImageJ();
-        clij2.show(image, "image");
-        new WaitForUserDialog("helo").show();
+        //new ImageJ();
+        //clij2.show(image, "image");
+        //new WaitForUserDialog("helo").show();
+
+        image.close();
     }
 
 }
