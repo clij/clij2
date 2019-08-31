@@ -139,9 +139,9 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
                 //System.out.println("replace " + key + " " + value);
 
                 if (flip) {
-                    replace(clij, input, output, key, value);
+                    ReplaceIntensity.replaceIntensity(clij, input, output, key, value);
                 } else {
-                    replace(clij, output, input, key, value);
+                    ReplaceIntensity.replaceIntensity(clij, output, input, key, value);
                 }
                 flip = !flip;
             }
@@ -151,18 +151,6 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         }
         return true;
     }
-
-    public static boolean replace(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Float in, Float out) {
-        HashMap<String, Object> parameters = new HashMap<>();
-
-        parameters.clear();
-        parameters.put("src", src);
-        parameters.put("dst", dst);
-        parameters.put("in", in);
-        parameters.put("out", out);
-        return clij.execute(ConnectedComponentsLabeling.class, "cca.cl", "replace", parameters);
-    }
-
 
     public static boolean replace(CLIJ clij, ClearCLBuffer src, ClearCLBuffer map, ClearCLBuffer dst) {
         HashMap<String, Object> parameters = new HashMap<>();
