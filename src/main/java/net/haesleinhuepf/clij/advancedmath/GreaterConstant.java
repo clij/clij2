@@ -24,13 +24,13 @@ public class GreaterConstant extends AbstractCLIJPlugin implements CLIJMacroPlug
         return result;
     }
 
-    public static boolean greaterConstant(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer dst, Float constant) {
+    public static boolean greaterConstant(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer dst, Float scalar) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
         parameters.clear();
         parameters.put("src1", src1);
-        parameters.put("constant", constant);
+        parameters.put("scalar", scalar);
         parameters.put("dst", dst);
 
         return clij.execute(GreaterConstant.class, "comparison_constants.cl", "greater_" + src1.getDimension() + "d", parameters);

@@ -24,13 +24,13 @@ public class SmallerOrEqualConstant extends AbstractCLIJPlugin implements CLIJMa
         return result;
     }
 
-    public static boolean smallerOrEqualConstant(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer dst, Float constant) {
+    public static boolean smallerOrEqualConstant(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer dst, Float scalar) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
         parameters.clear();
         parameters.put("src1", src1);
-        parameters.put("constant", constant);
+        parameters.put("scalar", scalar);
         parameters.put("dst", dst);
 
         return clij.execute(SmallerOrEqualConstant.class, "comparison_constants.cl", "smaller_or_equal_" + src1.getDimension() + "d", parameters);

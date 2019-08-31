@@ -24,13 +24,13 @@ public class EqualConstant extends AbstractCLIJPlugin implements CLIJMacroPlugin
         return result;
     }
 
-    public static boolean equalConstant(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer dst, Float constant) {
+    public static boolean equalConstant(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer dst, Float scalar) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
         parameters.clear();
         parameters.put("src1", src1);
-        parameters.put("constant", constant);
+        parameters.put("scalar", scalar);
         parameters.put("dst", dst);
 
         return clij.execute(EqualConstant.class, "comparison_constants.cl", "equal_" + src1.getDimension() + "d", parameters);
