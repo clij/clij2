@@ -7,7 +7,7 @@ import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij2.utilities.CLIJ2Ops;
 
 /**
- * The CLIJ2 gatewey
+ * The CLIJ2 gateway
  */
 public class CLIJ2 {
     private CLIJ clij;
