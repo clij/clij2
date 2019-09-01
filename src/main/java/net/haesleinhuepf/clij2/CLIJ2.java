@@ -68,6 +68,20 @@ public class CLIJ2 {
         return clij.create(buffer);
     }
 
+
+    public ClearCLBuffer create(long[] dimensions) {
+        return create(dimensions, NativeTypeEnum.Float);
+    }
+
+    public ClearCLBuffer create(double[] dblDimensions) {
+        long[] dimensions = new long[dblDimensions.length];
+        for (int i = 0; i < dimensions.length; i++) {
+            dimensions[i] = (long)dblDimensions[i];
+        }
+        return create(dimensions, NativeTypeEnum.Float);
+    }
+
+
     public ClearCLBuffer create(long[] dimensions, NativeTypeEnum typeEnum) {
         return clij.create(dimensions, typeEnum);
     }
