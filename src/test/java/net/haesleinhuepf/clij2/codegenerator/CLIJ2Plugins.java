@@ -90,7 +90,8 @@ public interface CLIJ2Plugins {
             MinimumOfMaskedPixels.class,
             MaximumOfMaskedPixels.class,
             MeanOfMaskedPixels.class,
-            LabelToMask.class
+            LabelToMask.class,
+            NClosestPoints.class
     };
 
 }
