@@ -70,7 +70,7 @@ public class Image2DToResultsTable extends AbstractCLIJPlugin implements CLIJMac
 
     @Override
     public String getAvailableForDimensions() {
-        return "2D, 3D";
+        return "2D";
     }
 
 }
