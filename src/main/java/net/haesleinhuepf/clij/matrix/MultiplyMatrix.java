@@ -45,7 +45,7 @@ public class MultiplyMatrix extends AbstractCLIJPlugin implements CLIJMacroPlugi
     {
         ClearCLBuffer input1 = (ClearCLBuffer) args[0];
         ClearCLBuffer input2 = (ClearCLBuffer) args[1];
-        return clij.createCLBuffer(new long[]{input1.getWidth(), input2.getHeight()}, NativeTypeEnum.Float);
+        return clij.createCLBuffer(new long[]{input2.getWidth(), input1.getHeight()}, NativeTypeEnum.Float);
     }
 
     @Override

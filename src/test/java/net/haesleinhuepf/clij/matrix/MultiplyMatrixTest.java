@@ -28,7 +28,16 @@ public class MultiplyMatrixTest {
                 1, 2, 3,
                 4, 5, 6
         }, new long[]{3, 2});
+
+        // a * b according to matlab
         Img<UnsignedShortType> c = ArrayImgs.unsignedShorts(new short[]{
+                39, 54, 69,
+                49, 68, 87,
+                59, 82, 105
+        }, new long[]{3, 3});
+
+        // b * a according to matlab
+        Img<UnsignedShortType> cInv = ArrayImgs.unsignedShorts(new short[]{
                 58, 64,
                 139, 154
         }, new long[]{2, 2});
@@ -37,12 +46,28 @@ public class MultiplyMatrixTest {
 
         ClearCLBuffer clA = clij2.push(a);
         ClearCLBuffer clB = clij2.push(b);
-        ClearCLBuffer clTest = clij2.create(new long[]{2, 2}, clA.getNativeType());
-        ClearCLBuffer clC = clij2.push(c);
 
+        // a * b using CLIJ
+        MultiplyMatrix mm = new MultiplyMatrix();
+        mm.setClij(CLIJ.getInstance());
+        mm.setArgs(new Object[]{clA, clB});
+        ClearCLBuffer clTest = mm.createOutputBufferFromSource(clA);
+        ClearCLBuffer clC = clij2.push(c);
         clij2.op.multiplyMatrix(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
         assertTrue(clij2.op.matrixEqual(clTest, clC, 0f));
+
+        // b * a using CLIJ
+        mm = new MultiplyMatrix();
+        mm.setClij(CLIJ.getInstance());
+        mm.setArgs(new Object[]{clB, clA});
+        clTest = mm.createOutputBufferFromSource(clA);
+        clC = clij2.push(cInv);
+        clij2.op.multiplyMatrix(clB, clA, clTest);
+        TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
+        assertTrue(clij2.op.matrixEqual(clTest, clC, 0f));
+
+
 
         clA.close();
         clB.close();
@@ -62,16 +87,17 @@ public class MultiplyMatrixTest {
                 3
         }, new long[]{1, 3});
         Img<UnsignedShortType> c = ArrayImgs.unsignedShorts(new short[]{
-                1, 2, 3,
-                2, 4, 6,
-                3, 6, 9
-        }, new long[]{3, 3});
+                14
+        }, new long[]{1, 1});
 
         CLIJ2 clij2 = CLIJ2.getInstance();
 
         ClearCLBuffer clA = clij2.push(a);
         ClearCLBuffer clB = clij2.push(b);
-        ClearCLBuffer clTest = clij2.create(new long[]{3, 3}, clA.getNativeType());
+        MultiplyMatrix mm = new MultiplyMatrix();
+        mm.setClij(CLIJ.getInstance());
+        mm.setArgs(new Object[]{clA, clB});
+        ClearCLBuffer clTest = mm.createOutputBufferFromSource(clA);
         ClearCLBuffer clC = clij2.push(c);
 
         clij2.op.multiplyMatrix(clA, clB, clTest);
@@ -84,4 +110,37 @@ public class MultiplyMatrixTest {
         clTest.close();
     }
 
+    @Test
+    public void test3() {
+        Img<UnsignedShortType> a = ArrayImgs.unsignedShorts(new short[]{
+                1, 2, 3
+        }, new long[]{3, 1});
+        Img<UnsignedShortType> b = ArrayImgs.unsignedShorts(new short[]{
+                1, 1,
+                2, 3,
+                4, 3
+        }, new long[]{2, 3});
+        Img<UnsignedShortType> c = ArrayImgs.unsignedShorts(new short[]{
+                17, 16
+        }, new long[]{2, 1});
+
+        CLIJ2 clij2 = CLIJ2.getInstance();
+
+        ClearCLBuffer clA = clij2.push(a);
+        ClearCLBuffer clB = clij2.push(b);
+        MultiplyMatrix mm = new MultiplyMatrix();
+        mm.setClij(CLIJ.getInstance());
+        mm.setArgs(new Object[]{clA, clB});
+        ClearCLBuffer clTest = mm.createOutputBufferFromSource(clA);
+        ClearCLBuffer clC = clij2.push(c);
+
+        clij2.op.multiplyMatrix(clA, clB, clTest);
+        TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
+        assertTrue(clij2.op.matrixEqual(clTest, clC, 0f));
+
+        clA.close();
+        clB.close();
+        clC.close();
+        clTest.close();
+    }
 }
