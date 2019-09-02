@@ -54,7 +54,7 @@ public class DrawLine extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLI
         parameters.put("radius", new Float(thickness / 2));
         parameters.put("dst", output);
 
-        System.out.println("Draw line from " + x1 + "/" + y1 + "/" + z1 + " to "  + x2 + "/" + y2 + "/" + z2);
+        //System.out.println("Draw line from " + x1 + "/" + y1 + "/" + z1 + " to "  + x2 + "/" + y2 + "/" + z2);
         return clij.execute(DrawLine.class, "drawline.cl", "draw_line_" +output.getDimension() + "D", parameters);
     }
 
