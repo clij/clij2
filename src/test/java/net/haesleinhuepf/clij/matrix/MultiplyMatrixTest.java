@@ -56,6 +56,7 @@ public class MultiplyMatrixTest {
         clij2.op.multiplyMatrix(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
         assertTrue(clij2.op.matrixEqual(clTest, clC, 0f));
+        clC.close();
 
         // b * a using CLIJ
         mm = new MultiplyMatrix();
