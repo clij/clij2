@@ -73,6 +73,7 @@ __Please note:__ CLIJ2 is under heavy construction. This list may change at any 
 * <a href="#fillHistogram">fillHistogram'</a>
 * <a href="#flip">flip'</a>
 * <a href="#flip">flip'</a>
+* <a href="#gaussJordan">gaussJordan</a>
 * <a href="#generateDistanceMatrix">generateDistanceMatrix</a>
 * <a href="#getSize">getSize</a>
 * <a href="#gradientX">gradientX'</a>
@@ -138,6 +139,7 @@ __Please note:__ CLIJ2 is under heavy construction. This list may change at any 
 * <a href="#multiplyMatrix">multiplyMatrix</a>
 * <a href="#multiplySliceBySliceWithScalars">multiplySliceBySliceWithScalars'</a>
 * <a href="#multiplyStackWithPlane">multiplyStackWithPlane'</a>
+* <a href="#nClosestPoints">nClosestPoints</a>
 * <a href="#nonzeroMinimum3DDiamond">nonzeroMinimum3DDiamond</a>
 * <a href="#nonzeroMinimumBox">nonzeroMinimumBox</a>
 * <a href="#notEqualConstant">notEqualConstant</a>
@@ -268,7 +270,7 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform2D arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
 
 <a name="affineTransform2D"></a>
 ## affineTransform2D'
@@ -293,7 +295,7 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform2D arg3
 
 <a name="affineTransform3D"></a>
 ## affineTransform3D'
@@ -485,7 +487,7 @@ Parameters (macro):
 Image input, Image destination, String method
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6
 
 <a name="automaticThreshold"></a>
 ## automaticThreshold'
@@ -499,7 +501,7 @@ Parameters (macro):
 Image input, Image destination, String method
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6
+ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3
 
 <a name="binaryAnd"></a>
 ## binaryAnd'
@@ -611,7 +613,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="blur"></a>
 ## blur'
@@ -624,7 +626,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="boundingBox"></a>
 ## boundingBox
@@ -758,7 +760,7 @@ Parameters (macro):
 Image source, Image destination, Number startX, Number startY, Number width, Number height
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="crop"></a>
 ## crop'
@@ -771,7 +773,7 @@ Parameters (macro):
 Image source, Image destination, Number startX, Number startY, Number width, Number height
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="crossCorrelation"></a>
 ## crossCorrelation
@@ -987,7 +989,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="downsample"></a>
 ## downsample'
@@ -999,7 +1001,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="drawBox"></a>
 ## drawBox
@@ -1200,6 +1202,28 @@ Image source, Image destination, Boolean flipX, Boolean flipY
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, Boolean arg3, Boolean arg4
+
+<a name="gaussJordan"></a>
+## gaussJordan
+
+Gauss Jordan elimination algorithm for solving linear equation systems. Ent the equation coefficients as an n*n sized image A and an n*1 sized image B:
+<pre>a(1,1)*x + a(2,1)*y + a(3,1)+z = b(1)
+a(2,1)*x + a(2,2)*y + a(3,2)+z = b(2)
+a(3,1)*x + a(3,2)*y + a(3,3)+z = b(3)
+</pre>
+The results will then be given in an n*1 image with values [x, y, z].
+
+Adapted from: 
+https://github.com/qbunia/rodinia/blob/master/opencl/gaussian/gaussianElim_kernels.cl
+L.G. Szafaryn, K. Skadron and J. Saucerman. "Experiences Accelerating MATLAB Systems
+//Biology Applications." in Workshop on Biomedicine in Computing (BiC) at the International
+//Symposium on Computer Architecture (ISCA), June 2009.
+
+Parameters (macro):
+Image A_matrix, Image B_result_vector, Image solution_destination
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
 
 <a name="generateDistanceMatrix"></a>
 ## generateDistanceMatrix
@@ -1693,7 +1717,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="meanSphere"></a>
 ## meanSphere'
@@ -1705,7 +1729,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="meanSquaredError"></a>
 ## meanSquaredError
@@ -2007,6 +2031,18 @@ Image sourceStack, Image sourcePlane, Image destination
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
+
+<a name="nClosestPoints"></a>
+## nClosestPoints
+
+Determine the n point indices with shortest distance for all points in a distance matrix.
+This corresponds to the n row indices with minimum values for each column of the distance matrix.
+
+Parameters (macro):
+Image distance_matrix, Image indexlist_destination, Number nClosestPointsTofind
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2
 
 <a name="nonzeroMinimum3DDiamond"></a>
 ## nonzeroMinimum3DDiamond
