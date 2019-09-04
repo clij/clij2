@@ -14,7 +14,7 @@ import org.scijava.plugin.Plugin;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_boundingBox")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_boundingBox")
 public class BoundingBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

@@ -36,20 +36,20 @@ Ext.CLIJ_pull(detected_spots);
 
 // get spot positions as pointlist
 pointlist = "pointlist";
-Ext.CLIJ_spotsToPointList(detected_spots, pointlist);
+Ext.CLIJx_spotsToPointList(detected_spots, pointlist);
 
-Ext.CLIJ_getSize(pointlist);
+Ext.CLIJx_getSize(pointlist);
 number_of_detected_spots = getResult("Width", nResults() - 1);
 IJ.log("number of spots: " + number_of_detected_spots);
 
 // determine distances between points
 distance_matrix = "distance_matrix";
-Ext.CLIJ_generateDistanceMatrix(pointlist, pointlist, distance_matrix);
+Ext.CLIJx_generateDistanceMatrix(pointlist, pointlist, distance_matrix);
 
 // determine n closest points
 n_closest_points = 5;
 closestPointsIndices = "closestPointsIndices";
-Ext.CLIJ_nClosestPoints(distance_matrix, closestPointsIndices, n_closest_points);
+Ext.CLIJx_nClosestPoints(distance_matrix, closestPointsIndices, n_closest_points);
 
 // empty results table
 run("Clear Results");
@@ -57,8 +57,8 @@ run("Clear Results");
 // we build a table with 2+n rows:
 // x and y of the points and n rows with indices to closes points. 
 // as every points is the closest to itself, row number 3 will always be 0, 1, 3, 4 ...
-Ext.CLIJ_image2DToResultsTable(pointlist);
-Ext.CLIJ_image2DToResultsTable(closestPointsIndices);
+Ext.CLIJx_image2DToResultsTable(pointlist);
+Ext.CLIJx_image2DToResultsTable(closestPointsIndices);
 
 mesh = "mesh";
 Ext.CLIJ_create2D(mesh, width, height, 32);
@@ -77,7 +77,7 @@ for (p = 0; p < number_of_detected_spots; p++) {
 		y2 = getResult("X" + pointIndex, 1);
 
 		thickness = 1;
-		Ext.CLIJ_drawLine(mesh, x1, y1, 0, x2, y2, 0, thickness);
+		Ext.CLIJx_drawLine(mesh, x1, y1, 0, x2, y2, 0, thickness);
 	}
 }
 

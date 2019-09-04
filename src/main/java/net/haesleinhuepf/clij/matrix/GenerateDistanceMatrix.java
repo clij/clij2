@@ -15,7 +15,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_generateDistanceMatrix")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_generateDistanceMatrix")
 public class GenerateDistanceMatrix extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

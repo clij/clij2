@@ -15,7 +15,7 @@ import java.util.HashMap;
  * 	        August 2019
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_greaterConstant")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_greaterConstant")
 public class GreaterConstant extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

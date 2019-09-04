@@ -15,7 +15,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  *         August 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_multiplyMatrix")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_multiplyMatrix")
 public class MultiplyMatrix extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

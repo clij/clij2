@@ -16,7 +16,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * June 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_standardDeviationZProjection")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_standardDeviationZProjection")
 public class StandardDeviationZProjection extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

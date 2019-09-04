@@ -20,7 +20,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * June 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_getSize")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_getSize")
 public class GetSize extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

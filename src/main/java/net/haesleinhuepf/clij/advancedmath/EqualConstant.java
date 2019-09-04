@@ -15,7 +15,7 @@ import java.util.HashMap;
  * 	        August 2019
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_equalConstant")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_equalConstant")
 public class EqualConstant extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

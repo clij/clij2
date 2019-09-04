@@ -20,7 +20,8 @@ run("Blobs (25K)");
 //open("C:/structure/data/blobs.gif");
 getDimensions(width, height, channels, slices, frames);
 input = getTitle();
-mask = "mask";
+
+mask = "mask";
 labelmap = "labelmap";
 binaryImage = "binaryImage";
 
@@ -34,16 +35,16 @@ Ext.CLIJ_push(input);
 // create a mask using a fixed threshold
 Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
 
-Ext.CLIJ_connectedComponentsLabeling(mask, labelmap);
+Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
 
 Ext.CLIJ_maximumOfAllPixels(labelmap);
 number_of_objects = getResult("Max", nResults() - 1);
 
 for (i = 0; i < number_of_objects; i++) {
 	// cut label map into individual masks
-	Ext.CLIJ_labelToMask(labelmap, binaryImage, i + 1); // 0 is background, 1 is the first label
+	Ext.CLIJx_labelToMask(labelmap, binaryImage, i + 1); // 0 is background, 1 is the first label
 	// put bounding boxes in the ROI manager
-	Ext.CLIJ_boundingBox(binaryImage);
+	Ext.CLIJx_boundingBox(binaryImage);
 	x = getResult("BoundingBoxX", nResults() - 1);
 	y = getResult("BoundingBoxY", nResults() - 1);
 	w = getResult("BoundingBoxWidth", nResults() - 1);

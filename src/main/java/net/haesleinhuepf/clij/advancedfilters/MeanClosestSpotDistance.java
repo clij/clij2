@@ -18,7 +18,7 @@ import org.scijava.plugin.Plugin;
  * Author: @haesleinhuepf
  * July 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_meanClosestSpotDistance")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_meanClosestSpotDistance")
 public class MeanClosestSpotDistance extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

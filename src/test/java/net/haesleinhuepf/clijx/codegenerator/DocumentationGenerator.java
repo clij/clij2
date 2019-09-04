@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clij2.codegenerator;
+package net.haesleinhuepf.clijx.codegenerator;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.kernels.Kernels;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import static net.haesleinhuepf.clij2.codegenerator.OpGenerator.*;
+import static net.haesleinhuepf.clijx.codegenerator.OpGenerator.*;
 
 public class DocumentationGenerator {
 
@@ -95,9 +95,9 @@ public class DocumentationGenerator {
         Collections.sort(names);
 
         StringBuilder builder = new StringBuilder();
-        builder.append("# CLIJ2 reference\n");
-        builder.append("This reference contains all methods currently available in CLIJ2.\n\n");
-        builder.append("__Please note:__ CLIJ2 is under heavy construction. This list may change at any point.");
+        builder.append("# CLIJx reference\n");
+        builder.append("This reference contains all methods currently available in CLIJx.\n\n");
+        builder.append("__Please note:__ CLIJx is under heavy construction. This list may change at any point.");
         builder.append("Methods marked with ' were available in CLIJ1.\n\n");
 
 

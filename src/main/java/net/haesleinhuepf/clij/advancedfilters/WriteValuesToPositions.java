@@ -18,7 +18,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * June 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_writeValuesToPositions")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_writeValuesToPositions")
 public class WriteValuesToPositions extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

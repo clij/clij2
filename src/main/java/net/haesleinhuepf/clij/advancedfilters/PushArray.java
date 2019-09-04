@@ -18,7 +18,7 @@ import java.nio.FloatBuffer;
  * Author: @haesleinhuepf
  *         September 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_pushArray")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_pushArray")
 public class PushArray extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

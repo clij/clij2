@@ -7,7 +7,7 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.modules.BinaryAnd;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_binaryIntersection")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_binaryIntersection")
 public class BinaryIntersection extends BinaryAnd {
     @Override
     public String getDescription() {

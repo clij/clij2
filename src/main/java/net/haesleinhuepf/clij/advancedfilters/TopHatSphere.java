@@ -9,7 +9,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_topHatSphere")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_topHatSphere")
 public class TopHatSphere extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

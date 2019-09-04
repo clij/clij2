@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clij2.utilities;
+package net.haesleinhuepf.clijx.utilities;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
@@ -18,13 +18,11 @@ import net.haesleinhuepf.clij.advancedfilters.LocalID;
 import net.haesleinhuepf.clij.advancedfilters.MaskLabel;
 import net.haesleinhuepf.clij.advancedfilters.MeanClosestSpotDistance;
 import net.haesleinhuepf.clij.advancedfilters.MeanSquaredError;
-import net.haesleinhuepf.clij.advancedfilters.MedianZProjection;
 import net.haesleinhuepf.clij.advancedfilters.NonzeroMinimum3DDiamond;
 import net.haesleinhuepf.clij.advancedfilters.Paste2D;
 import net.haesleinhuepf.clij.advancedfilters.Paste3D;
 import net.haesleinhuepf.clij.advancedfilters.Presign;
 import net.haesleinhuepf.clij.advancedfilters.SorensenDiceJaccardIndex;
-import net.haesleinhuepf.clij.advancedfilters.StandardDeviationZProjection;
 import net.haesleinhuepf.clij.advancedfilters.StackToTiles;
 import net.haesleinhuepf.clij.advancedfilters.SubtractBackground2D;
 import net.haesleinhuepf.clij.advancedfilters.SubtractBackground3D;
@@ -77,10 +75,10 @@ import net.haesleinhuepf.clij.advancedfilters.MeanOfMaskedPixels;
 import net.haesleinhuepf.clij.advancedfilters.LabelToMask;
 import net.haesleinhuepf.clij.matrix.NClosestPoints;
 import net.haesleinhuepf.clij.matrix.GaussJordan;
-// this is generated code. See src/test/java/net/haesleinhuepf/clij2/codegenerator for details
-public class CLIJ2Ops {
+// this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
+public class CLIJxOps {
    private CLIJ clij;
-   public CLIJ2Ops(CLIJ clij) {
+   public CLIJxOps(CLIJ clij) {
        this.clij = clij;
    }
 

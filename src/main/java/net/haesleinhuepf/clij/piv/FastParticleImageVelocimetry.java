@@ -15,7 +15,7 @@ import org.scijava.plugin.Plugin;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_fastParticleImageVelocimetry")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_fastParticleImageVelocimetry")
 public class FastParticleImageVelocimetry extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

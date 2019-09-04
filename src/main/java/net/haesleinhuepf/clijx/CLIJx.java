@@ -1,40 +1,40 @@
-package net.haesleinhuepf.clij2;
+package net.haesleinhuepf.clijx;
 
 import ij.ImagePlus;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
-import net.haesleinhuepf.clij2.utilities.CLIJ2Ops;
+import net.haesleinhuepf.clijx.utilities.CLIJxOps;
 
 /**
- * The CLIJ2 gateway
+ * The CLIJx gateway
  */
-public class CLIJ2 {
+public class CLIJx {
     private CLIJ clij;
-    private static CLIJ2 instance;
-    public final CLIJ2Ops op;
+    private static CLIJx instance;
+    public final CLIJxOps op;
 
     /**
      * Marking this as deprecated as it will very likely go away before release.
-     * Use CLIJ2.getInstance() instead.
+     * Use CLIJx.getInstance() instead.
      * @param clij
      */
     @Deprecated
-    public CLIJ2(CLIJ clij) {
+    public CLIJx(CLIJ clij) {
         this.clij = clij;
-        op = new CLIJ2Ops(clij);
+        op = new CLIJxOps(clij);
     }
 
-    public static CLIJ2 getInstance() {
+    public static CLIJx getInstance() {
         if (instance == null) {
-            instance = new CLIJ2(CLIJ.getInstance());
+            instance = new CLIJx(CLIJ.getInstance());
         }
         return instance;
     }
 
-    public static CLIJ2 getInstance(String id) {
+    public static CLIJx getInstance(String id) {
         if (instance == null) {
-            instance = new CLIJ2(CLIJ.getInstance(id));
+            instance = new CLIJx(CLIJ.getInstance(id));
         }
         return instance;
     }
@@ -91,7 +91,7 @@ public class CLIJ2 {
      * @return
      */
     @Deprecated
-    public CLIJ2Ops op() {
+    public CLIJxOps op() {
         return op;
     }
 }

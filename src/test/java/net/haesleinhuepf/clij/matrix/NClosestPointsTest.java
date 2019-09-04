@@ -4,13 +4,11 @@ import ij.ImageJ;
 import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
-import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clijx.CLIJx;
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgs;
 import net.imglib2.type.numeric.integer.UnsignedShortType;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class NClosestPointsTest {
     @Test
@@ -25,23 +23,23 @@ public class NClosestPointsTest {
                 11, 12, 13, 14, 15
         }, new long[]{5, 2});
 
-        CLIJ2 clij2 = CLIJ2.getInstance();
+        CLIJx CLIJx = CLIJx.getInstance();
 
-        ClearCLBuffer clPointsA = clij2.convert(pointsA, ClearCLBuffer.class);
-        ClearCLBuffer clPointsB = clij2.convert(pointsB, ClearCLBuffer.class);
+        ClearCLBuffer clPointsA = CLIJx.convert(pointsA, ClearCLBuffer.class);
+        ClearCLBuffer clPointsB = CLIJx.convert(pointsB, ClearCLBuffer.class);
 
-        ClearCLBuffer distanceMatrix = clij2.create(new long[]{clPointsA.getWidth(), clPointsB.getWidth()}, NativeTypeEnum.Float);
+        ClearCLBuffer distanceMatrix = CLIJx.create(new long[]{clPointsA.getWidth(), clPointsB.getWidth()}, NativeTypeEnum.Float);
 
-        clij2.op.generateDistanceMatrix(clPointsA, clPointsB, distanceMatrix);
+        CLIJx.op.generateDistanceMatrix(clPointsA, clPointsB, distanceMatrix);
 
         new ImageJ();
-        clij2.show(distanceMatrix, "dist");
+        CLIJx.show(distanceMatrix, "dist");
 
         int n = 3;
-        ClearCLBuffer nClosestPointIndices = clij2.create(new long[]{clPointsA.getWidth(), n}, NativeTypeEnum.Float);
-        clij2.op.nClosestPoints(distanceMatrix, nClosestPointIndices);
+        ClearCLBuffer nClosestPointIndices = CLIJx.create(new long[]{clPointsA.getWidth(), n}, NativeTypeEnum.Float);
+        CLIJx.op.nClosestPoints(distanceMatrix, nClosestPointIndices);
 
-        clij2.show(nClosestPointIndices, "closestPoints");
+        CLIJx.show(nClosestPointIndices, "closestPoints");
         new WaitForUserDialog("closestPoints").show();
 
 

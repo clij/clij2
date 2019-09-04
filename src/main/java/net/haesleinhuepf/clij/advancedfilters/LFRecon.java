@@ -17,7 +17,7 @@ import org.scijava.plugin.Plugin;
 import java.awt.geom.AffineTransform;
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_lfrecon")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_lfrecon")
 public class LFRecon extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

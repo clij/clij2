@@ -9,7 +9,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_presign")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_presign")
 public class Presign extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

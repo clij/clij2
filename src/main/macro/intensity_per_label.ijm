@@ -34,13 +34,13 @@ run("Close All");
 // create a mask using a fixed threshold
 Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
 
-Ext.CLIJ_connectedComponentsLabeling(mask, labelmap);
+Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
 
 Ext.CLIJ_maximumOfAllPixels(labelmap);
 numberOfObjects = getResult("Max", nResults() - 1);
 
 for (i = 0; i < numberOfObjects; i++) {
-	Ext.CLIJ_maskLabel(input, labelmap, singleLabel, i + 1);
+	Ext.CLIJx_maskLabel(input, labelmap, singleLabel, i + 1);
 	
 	Ext.CLIJ_sumOfAllPixels(singleLabel);
 	sum = getResult("Sum", nResults() - 1);
@@ -48,8 +48,8 @@ for (i = 0; i < numberOfObjects; i++) {
 	Ext.CLIJ_create2D("white", width, height, 8);
 	Ext.CLIJ_set("white", 1);
 	
-	Ext.CLIJ_maskLabel("white", labelmap, singleLabel, i + 1);
-	Ext.CLIJ_countNonZeroPixels(singleLabel);
+	Ext.CLIJx_maskLabel("white", labelmap, singleLabel, i + 1);
+	Ext.CLIJx_countNonZeroPixels(singleLabel);
 	count = getResult("CountNonZero", nResults() - 1);
 	
 	mean = sum / count;

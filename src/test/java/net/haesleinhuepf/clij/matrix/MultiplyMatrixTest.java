@@ -3,14 +3,9 @@ package net.haesleinhuepf.clij.matrix;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.test.TestUtilities;
-import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clijx.CLIJx;
 import net.imglib2.img.Img;
-import net.imglib2.img.array.ArrayImg;
 import net.imglib2.img.array.ArrayImgs;
-import net.imglib2.img.basictypeaccess.array.IntArray;
-import net.imglib2.type.numeric.IntegerType;
-import net.imglib2.type.numeric.integer.ByteType;
-import net.imglib2.type.numeric.integer.IntType;
 import net.imglib2.type.numeric.integer.UnsignedShortType;
 import org.junit.Test;
 
@@ -42,20 +37,20 @@ public class MultiplyMatrixTest {
                 139, 154
         }, new long[]{2, 2});
 
-        CLIJ2 clij2 = CLIJ2.getInstance();
+        CLIJx CLIJx = CLIJx.getInstance();
 
-        ClearCLBuffer clA = clij2.push(a);
-        ClearCLBuffer clB = clij2.push(b);
+        ClearCLBuffer clA = CLIJx.push(a);
+        ClearCLBuffer clB = CLIJx.push(b);
 
         // a * b using CLIJ
         MultiplyMatrix mm = new MultiplyMatrix();
         mm.setClij(CLIJ.getInstance());
         mm.setArgs(new Object[]{clA, clB});
         ClearCLBuffer clTest = mm.createOutputBufferFromSource(clA);
-        ClearCLBuffer clC = clij2.push(c);
-        clij2.op.multiplyMatrix(clA, clB, clTest);
+        ClearCLBuffer clC = CLIJx.push(c);
+        CLIJx.op.multiplyMatrix(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clij2.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(CLIJx.op.matrixEqual(clTest, clC, 0f));
         clC.close();
 
         // b * a using CLIJ
@@ -63,10 +58,10 @@ public class MultiplyMatrixTest {
         mm.setClij(CLIJ.getInstance());
         mm.setArgs(new Object[]{clB, clA});
         clTest = mm.createOutputBufferFromSource(clA);
-        clC = clij2.push(cInv);
-        clij2.op.multiplyMatrix(clB, clA, clTest);
+        clC = CLIJx.push(cInv);
+        CLIJx.op.multiplyMatrix(clB, clA, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clij2.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(CLIJx.op.matrixEqual(clTest, clC, 0f));
 
 
 
@@ -91,19 +86,19 @@ public class MultiplyMatrixTest {
                 14
         }, new long[]{1, 1});
 
-        CLIJ2 clij2 = CLIJ2.getInstance();
+        CLIJx CLIJx = CLIJx.getInstance();
 
-        ClearCLBuffer clA = clij2.push(a);
-        ClearCLBuffer clB = clij2.push(b);
+        ClearCLBuffer clA = CLIJx.push(a);
+        ClearCLBuffer clB = CLIJx.push(b);
         MultiplyMatrix mm = new MultiplyMatrix();
         mm.setClij(CLIJ.getInstance());
         mm.setArgs(new Object[]{clA, clB});
         ClearCLBuffer clTest = mm.createOutputBufferFromSource(clA);
-        ClearCLBuffer clC = clij2.push(c);
+        ClearCLBuffer clC = CLIJx.push(c);
 
-        clij2.op.multiplyMatrix(clA, clB, clTest);
+        CLIJx.op.multiplyMatrix(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clij2.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(CLIJx.op.matrixEqual(clTest, clC, 0f));
 
         clA.close();
         clB.close();
@@ -125,19 +120,19 @@ public class MultiplyMatrixTest {
                 17, 16
         }, new long[]{2, 1});
 
-        CLIJ2 clij2 = CLIJ2.getInstance();
+        CLIJx CLIJx = CLIJx.getInstance();
 
-        ClearCLBuffer clA = clij2.push(a);
-        ClearCLBuffer clB = clij2.push(b);
+        ClearCLBuffer clA = CLIJx.push(a);
+        ClearCLBuffer clB = CLIJx.push(b);
         MultiplyMatrix mm = new MultiplyMatrix();
         mm.setClij(CLIJ.getInstance());
         mm.setArgs(new Object[]{clA, clB});
         ClearCLBuffer clTest = mm.createOutputBufferFromSource(clA);
-        ClearCLBuffer clC = clij2.push(c);
+        ClearCLBuffer clC = CLIJx.push(c);
 
-        clij2.op.multiplyMatrix(clA, clB, clTest);
+        CLIJx.op.multiplyMatrix(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clij2.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(CLIJx.op.matrixEqual(clTest, clC, 0f));
 
         clA.close();
         clB.close();

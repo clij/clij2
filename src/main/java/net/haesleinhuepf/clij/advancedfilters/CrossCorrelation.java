@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_crossCorrelation")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_crossCorrelation")
 public class CrossCorrelation extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

@@ -11,7 +11,7 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_nonzeroMinimum3DDiamond")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_nonzeroMinimum3DDiamond")
 public class NonzeroMinimum3DDiamond extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

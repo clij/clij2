@@ -18,7 +18,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * 08 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_drawBox")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_drawBox")
 public class DrawBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

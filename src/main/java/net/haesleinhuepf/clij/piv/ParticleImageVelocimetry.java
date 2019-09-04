@@ -19,7 +19,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * June 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_particleImageVelocimetry")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_particleImageVelocimetry")
 public class ParticleImageVelocimetry extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

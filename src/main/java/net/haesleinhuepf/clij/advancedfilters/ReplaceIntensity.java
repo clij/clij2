@@ -11,7 +11,7 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_replaceIntensity")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_replaceIntensity")
 public class ReplaceIntensity extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

@@ -9,7 +9,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_differenceOfGaussian3D")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_differenceOfGaussian3D")
 public class DifferenceOfGaussian3D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

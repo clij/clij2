@@ -14,7 +14,8 @@ run("Blobs (25K)");
 
 getDimensions(width, height, channels, slices, frames);
 input = getTitle();
-mask = "mask";
+
+mask = "mask";
 labelmap = "labelmap";
 
 // Init GPU
@@ -31,8 +32,9 @@ run("Close All");
 Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
 
 time = getTime();
-Ext.CLIJ_connectedComponentsLabeling(mask, labelmap);
-print("CLIJ took" + (getTime() - time) + " msec"); 
+Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
+
+print("CLIJ took" + (getTime() - time) + " msec"); 
 // show result
 Ext.CLIJ_pull(labelmap);
 run("glasbey on dark");

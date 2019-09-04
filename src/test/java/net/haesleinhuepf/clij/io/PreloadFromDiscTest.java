@@ -1,11 +1,8 @@
 package net.haesleinhuepf.clij.io;
 
-import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class PreloadFromDiscTest {
 
@@ -17,7 +14,7 @@ public class PreloadFromDiscTest {
                 "src/test/resources/t1-head.tif"
         };
 
-        CLIJ2 clij = CLIJ2.getInstance();
+        CLIJx clij = CLIJx.getInstance();
         for (int j = 0; j < 2; j++) {
             for (int i = 0; i < filenames.length; i++) {
                 ClearCLBuffer buffer = null;
@@ -35,7 +32,7 @@ public class PreloadFromDiscTest {
                 "src/test/resources/blobs3.tif"
         };
 
-        CLIJ2 clij = CLIJ2.getInstance();
+        CLIJx clij = CLIJx.getInstance();
         for (int j = 0; j < 2; j++) {
             ClearCLBuffer buffer = null;
             for (int i = 0; i < filenames.length; i++) {

@@ -13,7 +13,7 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_readImageFromDisc")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_readImageFromDisc")
 public class ReadImageFromDisc extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     private static String lastLoadedFilename = "";

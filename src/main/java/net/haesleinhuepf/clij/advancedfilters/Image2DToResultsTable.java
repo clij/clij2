@@ -16,7 +16,7 @@ import org.scijava.plugin.Plugin;
  * Author: @haesleinhuepf
  * June 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_image2DToResultsTable")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_image2DToResultsTable")
 public class Image2DToResultsTable extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

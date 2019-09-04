@@ -41,7 +41,7 @@ for (i = 0; i < lengthOf(imageFilenames); i++) {
 	// pre-loading image data
 	currentFilename = imageFilenames[i];
 	nextFilename = imageFilenames[(i + 1) % lengthOf(imageFilenames)];
-	Ext.CLIJ_preloadFromDisc("original", currentFilename, nextFilename, "");
+	Ext.CLIJx_preloadFromDisc("original", currentFilename, nextFilename, "");
 	
 	// some heavy processing
 	Ext.CLIJ_blur3D("original", "processed", 15, 15, 15);

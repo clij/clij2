@@ -16,7 +16,7 @@ import org.scijava.plugin.Plugin;
  * June 2019
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_translationRegistration")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_translationRegistration")
 public class TranslationRegistration extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

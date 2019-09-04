@@ -3,7 +3,7 @@ package net.haesleinhuepf.clij.advancedfilters.splitstack;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_splitStackInto7")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_splitStackInto7")
 public class SplitStackInto7 extends AbstractSplitStack {
 
     @Override

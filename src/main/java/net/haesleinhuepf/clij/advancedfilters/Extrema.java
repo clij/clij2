@@ -11,7 +11,7 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_extrema")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_extrema")
 public class Extrema extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

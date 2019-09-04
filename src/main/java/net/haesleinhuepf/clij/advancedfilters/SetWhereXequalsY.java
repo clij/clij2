@@ -16,7 +16,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_setWhereXequalsY")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_setWhereXequalsY")
 public class SetWhereXequalsY extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

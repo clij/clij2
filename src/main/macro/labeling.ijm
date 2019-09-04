@@ -14,7 +14,8 @@ run("Blobs (25K)");
 //open("C:/structure/data/blobs.gif");
 getDimensions(width, height, channels, slices, frames);
 input = getTitle();
-mask = "mask";
+
+mask = "mask";
 labelmap = "labelmap";
 
 // Init GPU
@@ -30,7 +31,7 @@ run("Close All");
 // create a mask using a fixed threshold
 Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
 
-Ext.CLIJ_connectedComponentsLabeling(mask, labelmap);
+Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
 
 // show result
 Ext.CLIJ_pull(mask);

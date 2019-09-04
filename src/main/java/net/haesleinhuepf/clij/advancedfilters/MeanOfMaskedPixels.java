@@ -22,7 +22,7 @@ import java.util.HashMap;
  * 12 2018
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_meanOfMaskedPixels")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_meanOfMaskedPixels")
 public class MeanOfMaskedPixels extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

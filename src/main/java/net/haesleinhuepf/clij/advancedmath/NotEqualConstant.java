@@ -15,7 +15,7 @@ import java.util.HashMap;
  * 	        August 2019
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_notEqualConstant")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_notEqualConstant")
 public class NotEqualConstant extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

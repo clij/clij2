@@ -12,6 +12,7 @@
 from ij import IJ;
 from ij.gui import NewImage;
 from net.haesleinhuepf.clij import CLIJ;
+from net.haesleinhuepf.clijx import CLIJx;
 
 # load example image
 imp = IJ.openImage("c:/structure/code/clij-docs/src/main/resources/blobs.tif");
@@ -24,6 +25,8 @@ for x in range(100, 120):
         vfXImp.getProcessor().setf(x, y, 2);
 
 clij = CLIJ.getInstance();
+clijx = CLIJx.getInstance();
+
 
 # push images to GPU and create memory for vector field
 input = clij.push(imp);
@@ -40,7 +43,7 @@ clij.op().applyVectorfield(input, vf, vf, shifted);
 # analyse shift
 vfXAnalysed = clij.create(input);
 vfYAnalysed = clij.create(input);
-clij.op().particleImageVelocimetry2D(input, shifted, vfXAnalysed, vfYAnalysed, 5);
+clijx.op().particleImageVelocimetry2D(input, shifted, vfXAnalysed, vfYAnalysed, 5);
 
 # show analysed vector field
 clij.show(vfXAnalysed, "vfXAnalysed");

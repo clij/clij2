@@ -20,7 +20,7 @@ import java.util.HashMap;
  *         August 2019
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_preloadFromDisc")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_preloadFromDisc")
 public class PreloadFromDisc extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
     private static HashMap<String, ImagePreloader> loaderMap = new HashMap<String, ImagePreloader>();
 

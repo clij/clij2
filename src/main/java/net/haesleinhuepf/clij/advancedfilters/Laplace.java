@@ -11,7 +11,7 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_laplace")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_laplace")
 public class Laplace extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

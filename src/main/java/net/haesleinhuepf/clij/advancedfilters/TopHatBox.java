@@ -10,7 +10,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.imglib2.ops.parse.token.Int;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_topHatBox")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_topHatBox")
 public class TopHatBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

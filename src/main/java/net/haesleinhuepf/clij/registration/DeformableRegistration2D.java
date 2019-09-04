@@ -10,7 +10,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij.piv.ParticleImageVelocimetry;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_deformableRegistration2D")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_deformableRegistration2D")
 public class DeformableRegistration2D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

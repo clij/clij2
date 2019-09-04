@@ -20,7 +20,7 @@ import java.nio.channels.FileChannel;
  * Author: @haesleinhuepf
  * June 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_readRawImageFromDisc")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_readRawImageFromDisc")
 public class ReadRawImageFromDisc extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

@@ -3,7 +3,7 @@ package net.haesleinhuepf.clij.matrix;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.test.TestUtilities;
-import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clijx.CLIJx;
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgs;
 import net.imglib2.type.numeric.real.FloatType;
@@ -29,10 +29,10 @@ public class GaussJordanTest {
                 2.5f
         }, new long[]{1, 2});
 
-        CLIJ2 clij2 = CLIJ2.getInstance();
+        CLIJx CLIJx = CLIJx.getInstance();
 
-        ClearCLBuffer clA = clij2.push(a);
-        ClearCLBuffer clB = clij2.push(b);
+        ClearCLBuffer clA = CLIJx.push(a);
+        ClearCLBuffer clB = CLIJx.push(b);
 
         // a * b using CLIJ
         CLIJ clij = CLIJ.getInstance();
@@ -40,10 +40,10 @@ public class GaussJordanTest {
         gj.setClij(clij);
         gj.setArgs(new Object[]{clA, clB});
         ClearCLBuffer clTest = gj.createOutputBufferFromSource(clA);
-        ClearCLBuffer clC = clij2.push(c);
+        ClearCLBuffer clC = CLIJx.push(c);
         GaussJordan.gaussJordan(clij, clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clij2.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(CLIJx.op.matrixEqual(clTest, clC, 0f));
         clC.close();
     }
 

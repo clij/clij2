@@ -16,7 +16,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_paste3D")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_paste3D")
 public class Paste3D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

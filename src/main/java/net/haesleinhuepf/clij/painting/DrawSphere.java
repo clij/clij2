@@ -18,7 +18,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * 08 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_drawSphere")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_drawSphere")
 public class DrawSphere extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

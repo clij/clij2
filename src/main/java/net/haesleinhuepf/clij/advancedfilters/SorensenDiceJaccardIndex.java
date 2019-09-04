@@ -21,7 +21,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * July 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_sorensenDiceJaccardIndex")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_sorensenDiceJaccardIndex")
 public class SorensenDiceJaccardIndex extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

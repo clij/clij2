@@ -4,7 +4,7 @@ import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.matrix.MatrixEqual;
-import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clijx.CLIJx;
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgs;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
@@ -43,12 +43,12 @@ public class ResultsTableToImage2DTest {
     }
 
     private void test(Img a) {
-        CLIJ2 clij2 = CLIJ2.getInstance();
-        ClearCLBuffer buffer1 = clij2.push(a);
+        CLIJx CLIJx = CLIJx.getInstance();
+        ClearCLBuffer buffer1 = CLIJx.push(a);
 
         ResultsTable table = Image2DToResultsTable.image2DToResultsTable(CLIJ.getInstance(), buffer1, ResultsTable.getResultsTable());
 
-        ClearCLBuffer buffer2 = clij2.create(buffer1);
+        ClearCLBuffer buffer2 = CLIJx.create(buffer1);
         ResultsTableToImage2D.resultsTableToImage2D(CLIJ.getInstance(), buffer2, table);
 
         assertTrue(MatrixEqual.matrixEqual(CLIJ.getInstance(), buffer1, buffer2, 0f));

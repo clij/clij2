@@ -28,10 +28,10 @@ Ext.CLIJ_push(input);
 close();
 
 // median projection
-Ext.CLIJ_medianZProjection(input, median_projected);
+Ext.CLIJx_medianZProjection(input, median_projected);
 
 // standard deviation projection
-Ext.CLIJ_standardDeviationZProjection(input, stddev_projected);
+Ext.CLIJx_standardDeviationZProjection(input, stddev_projected);
 
 // Get results back from GPU
 Ext.CLIJ_pull(median_projected);

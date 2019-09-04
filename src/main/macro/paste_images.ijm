@@ -28,9 +28,9 @@ run("Close All");
 Ext.CLIJ_create2D("map", 4096, 4096, 8);
 
 // add images
-Ext.CLIJ_paste2D("logo", "map", 100, 100);
-//Ext.CLIJ_paste2D("logo", "map", 2000, 2000);
-Ext.CLIJ_paste2D("logo", "map", 500, 1000);
+Ext.CLIJx_paste2D("logo", "map", 100, 100);
+//Ext.CLIJx_paste2D("logo", "map", 2000, 2000);
+Ext.CLIJx_paste2D("logo", "map", 500, 1000);
 
 // show result
 Ext.CLIJ_pull("map");

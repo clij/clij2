@@ -19,7 +19,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * 08 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_drawLine")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_drawLine")
 public class DrawLine extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

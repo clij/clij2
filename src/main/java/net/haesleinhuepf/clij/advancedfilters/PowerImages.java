@@ -15,7 +15,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  *         August 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_powerImages")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_powerImages")
 public class PowerImages extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

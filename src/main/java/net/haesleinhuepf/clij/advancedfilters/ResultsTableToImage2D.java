@@ -12,7 +12,6 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import org.scijava.plugin.Plugin;
-import sun.rmi.server.UnicastServerRef;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -22,7 +21,7 @@ import java.nio.FloatBuffer;
  * Author: @haesleinhuepf
  *         September 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_resultsTableToImage2D")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_resultsTableToImage2D")
 public class ResultsTableToImage2D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

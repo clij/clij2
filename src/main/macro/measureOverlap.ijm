@@ -34,7 +34,7 @@ Ext.CLIJ_automaticThreshold(input, mask1, "Otsu");
 Ext.CLIJ_automaticThreshold(input, mask2, "MinError");
 
 // measure overlap
-Ext.CLIJ_sorensenDiceJaccardIndex(mask1, mask2);
+Ext.CLIJx_sorensenDiceJaccardIndex(mask1, mask2);
 jaccardIndex = getResult("Jaccard_Index", nResults() - 1);
 
 // cleanup GPU memory

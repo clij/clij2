@@ -14,7 +14,7 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_localID")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_localID")
 public class LocalID extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

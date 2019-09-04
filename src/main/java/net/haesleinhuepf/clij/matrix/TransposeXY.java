@@ -11,7 +11,7 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_transposeXY")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_transposeXY")
 public class TransposeXY extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

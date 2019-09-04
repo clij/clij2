@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clij2.codegenerator;
+package net.haesleinhuepf.clijx.codegenerator;
 
 import net.haesleinhuepf.clij.advancedfilters.*;
 import net.haesleinhuepf.clij.advancedmath.*;

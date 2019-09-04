@@ -24,7 +24,7 @@ import org.scijava.plugin.Plugin;
  * 
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_logarithm")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_logarithm")
 public class Logarithm extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

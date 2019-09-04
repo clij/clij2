@@ -20,7 +20,7 @@ import java.util.HashMap;
  * 12 2018
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_maximumOfMaskedPixels")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_maximumOfMaskedPixels")
 public class MaximumOfMaskedPixels extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

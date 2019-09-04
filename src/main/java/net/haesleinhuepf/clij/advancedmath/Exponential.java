@@ -24,7 +24,7 @@ import org.scijava.plugin.Plugin;
  * 
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_exponential")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_exponential")
 public class Exponential extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

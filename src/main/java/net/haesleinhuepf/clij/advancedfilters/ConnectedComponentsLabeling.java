@@ -31,7 +31,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.radiusToKernelSize;
  * Author: @haesleinhuepf
  * 06 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_connectedComponentsLabeling")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_connectedComponentsLabeling")
 public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
     public static int MAX_NUMBER_OF_INDICES_TO_REPLACE_INDIVIDUALLY = 10;
 

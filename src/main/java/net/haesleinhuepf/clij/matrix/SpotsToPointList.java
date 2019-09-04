@@ -15,7 +15,7 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_spotsToPointList")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_spotsToPointList")
 public class SpotsToPointList extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

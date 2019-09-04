@@ -16,7 +16,8 @@ open("C:/structure/data/blobs.tif");
 
 getDimensions(width, height, channels, slices, frames);
 input = getTitle();
-mask = "mask";
+
+mask = "mask";
 labelmap = "labelmap";
 
 // Init GPU
@@ -41,20 +42,20 @@ Ext.CLIJ_translate2D(detected, shiftDetected, 1, 0);
 Ext.CLIJ_pull(shiftDetected);
 
 pointlist1 = "pointlist1";
-Ext.CLIJ_spotsToPointList(detected, pointlist1);
+Ext.CLIJx_spotsToPointList(detected, pointlist1);
 Ext.CLIJ_pull(pointlist1);
 
 pointlist2 = "pointlist2";
-Ext.CLIJ_spotsToPointList(shiftDetected, pointlist2);
+Ext.CLIJx_spotsToPointList(shiftDetected, pointlist2);
 Ext.CLIJ_pull(pointlist2);
 
 distance_matrix = "distance_matrix";
-Ext.CLIJ_generateDistanceMatrix(pointlist1, pointlist2, distance_matrix);
+Ext.CLIJx_generateDistanceMatrix(pointlist1, pointlist2, distance_matrix);
 
 Ext.CLIJ_pull(distance_matrix);
 
 minimum_distances = "minimum_distances";
-Ext.CLIJ_shortestDistances(distance_matrix, minimum_distances);
+Ext.CLIJx_shortestDistances(distance_matrix, minimum_distances);
 
 Ext.CLIJ_meanOfAllPixels(minimum_distances);
 meanDistance = getResult("Mean", nResults() - 1);

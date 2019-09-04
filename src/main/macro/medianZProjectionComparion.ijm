@@ -16,7 +16,7 @@ run("32-bit");
 run("CLIJ Macro Extensions", "cl_device=");
 Ext.CLIJ_clear();
 Ext.CLIJ_push(getTitle());
-Ext.CLIJ_medianZProjection(getTitle, "CLIJ_medianZProjection_destination_t1-head.tif");
+Ext.CLIJx_medianZProjection(getTitle, "CLIJ_medianZProjection_destination_t1-head.tif");
 Ext.CLIJ_pull("CLIJ_medianZProjection_destination_t1-head.tif");
 Ext.CLIJ_clear();
 

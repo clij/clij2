@@ -3,7 +3,7 @@ package net.haesleinhuepf.clij.advancedfilters.tenengradfusion;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_tenengradFusionOf12")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_tenengradFusionOf12")
 public class TenengradFusionOf12 extends AbstractTenengradFusion {
 
     @Override

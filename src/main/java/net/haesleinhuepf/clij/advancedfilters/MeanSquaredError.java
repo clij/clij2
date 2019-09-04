@@ -13,7 +13,7 @@ import org.scijava.plugin.Plugin;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_meanSquaredError")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_meanSquaredError")
 public class MeanSquaredError extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

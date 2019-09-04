@@ -16,7 +16,7 @@ import java.util.HashMap;
  *         August 2019
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_labelToMask")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_labelToMask")
 public class LabelToMask extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
