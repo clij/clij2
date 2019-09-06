@@ -10,7 +10,7 @@ public class DrawBoxTest {
     @Test
     public void test() {
         CLIJx clijx = CLIJx.getInstance();
-        ClearCLBuffer image = CLIJx.create(new long[]{100, 100, 1}, NativeTypeEnum.Float);
+        ClearCLBuffer image = clijx.create(new long[]{100, 100, 1}, NativeTypeEnum.Float);
 
         DrawBox.drawBox(CLIJ.getInstance(), image, 10f, 10f, 0f, 20f, 50f, 0f);
         //clijx.op.drawLine(image, 10f, 10f, 0f, 10f, 50f, 0f, 5f);

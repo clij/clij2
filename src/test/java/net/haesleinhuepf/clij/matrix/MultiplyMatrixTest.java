@@ -86,7 +86,7 @@ public class MultiplyMatrixTest {
                 14
         }, new long[]{1, 1});
 
-        CLIJx CLIJx = CLIJx.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
 
         ClearCLBuffer clA = CLIJx.push(a);
         ClearCLBuffer clB = CLIJx.push(b);
