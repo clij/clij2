@@ -36,12 +36,12 @@ Ext.CLIJ_automaticThreshold(input, mask2, "MinError");
 // measure overlap
 Ext.CLIJx_sorensenDiceJaccardIndex(mask1, mask2);
 jaccardIndex = getResult("Jaccard_Index", nResults() - 1);
+diceIndex = getResult("Sorensen_Dice_coefficient", nResults() - 1);
 
 // cleanup GPU memory
 Ext.CLIJ_clear();
 
 // output result
-IJ.log("Overlap: " + (jaccardIndex*100) + "%");
-
-
+IJ.log("Overlap (Jaccard): " + (jaccardIndex*100) + "%");
+IJ.log("Overlap (Dice): " + (diceIndex*100) + "%");
 
