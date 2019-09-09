@@ -12,15 +12,15 @@ import static org.junit.Assert.*;
 public class BoundingBoxTest {
     @Test
     public void test2D() {
-        CLIJx CLIJx = CLIJx.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
 
-        ClearCLBuffer buffer = CLIJx.create(new long[]{100, 100}, NativeTypeEnum.Byte);
+        ClearCLBuffer buffer = clijx.create(new long[]{100, 100}, NativeTypeEnum.Byte);
 
-        CLIJx.op.set(buffer, 0f);
+        clijx.op.set(buffer, 0f);
 
-        CLIJx.op.drawBox(buffer, 10f, 10f, 20f, 20f);
+        clijx.op.drawBox(buffer, 10f, 10f, 20f, 20f);
 
-        double[] bb = CLIJx.op.boundingBox(buffer);
+        double[] bb = clijx.op.boundingBox(buffer);
         System.out.println("bb " + Arrays.toString(bb));
 
         double[] reference = {10, 10, 20, 20};
@@ -29,15 +29,15 @@ public class BoundingBoxTest {
 
     @Test
     public void test3D() {
-        CLIJx CLIJx = CLIJx.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
 
-        ClearCLBuffer buffer = CLIJx.create(new long[]{100, 100, 10}, NativeTypeEnum.Byte);
+        ClearCLBuffer buffer = clijx.create(new long[]{100, 100, 10}, NativeTypeEnum.Byte);
 
-        CLIJx.op.set(buffer, 0f);
+        clijx.op.set(buffer, 0f);
 
-        CLIJx.op.drawBox(buffer, 10f, 10f, 2f, 20f, 20f, 7f );
+        clijx.op.drawBox(buffer, 10f, 10f, 2f, 20f, 20f, 7f );
 
-        double[] bb = CLIJx.op.boundingBox(buffer);
+        double[] bb = clijx.op.boundingBox(buffer);
         System.out.println("bb " + Arrays.toString(bb));
 
         double[] reference = {10, 10, 2, 20, 20, 7};
