@@ -25,8 +25,8 @@ public class LabelToMask extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
         return result;
     }
 
-    public static boolean labelToMask(CLIJ clij, ClearCLBuffer label, ClearCLBuffer maskOutput, Float index) {
-        return EqualConstant.equalConstant(clij, label, maskOutput, index);
+    public static boolean labelToMask(CLIJ clij, ClearCLBuffer labelMap, ClearCLBuffer maskOutput, Float index) {
+        return EqualConstant.equalConstant(clij, labelMap, maskOutput, index);
     }
 
     @Override
