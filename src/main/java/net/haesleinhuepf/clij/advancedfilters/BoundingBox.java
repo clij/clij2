@@ -30,15 +30,10 @@ public class BoundingBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
         table.incrementCounter();
         table.addValue("BoundingBoxX", boundingBox[0]);
         table.addValue("BoundingBoxY", boundingBox[1]);
-        if (buffer1.getDimension() > 2) {
-            table.addValue("BoundingBoxZ", boundingBox[2]);
-            table.addValue("BoundingBoxWidth", boundingBox[3]);
-            table.addValue("BoundingBoxHeight", boundingBox[4]);
-            table.addValue("BoundingBoxDepth", boundingBox[5]);
-        } else {
-            table.addValue("BoundingBoxWidth", boundingBox[2]);
-            table.addValue("BoundingBoxHeight", boundingBox[3]);
-        }
+        table.addValue("BoundingBoxZ", boundingBox[2]);
+        table.addValue("BoundingBoxWidth", boundingBox[3]);
+        table.addValue("BoundingBoxHeight", boundingBox[4]);
+        table.addValue("BoundingBoxDepth", boundingBox[5]);
         table.show("Results");
         return true;
     }
@@ -66,7 +61,7 @@ public class BoundingBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
 
             result = new double[]{minX, minY, minZ, maxX - minX + 1, maxY - minY + 1, maxZ - minZ + 1};
         } else {
-            result = new double[]{minX, minY, maxX - minX + 1, maxY - minY + 1};
+            result = new double[]{minX, minY, 0, maxX - minX + 1, maxY - minY + 1, 0};
         }
         return  result;
     }
@@ -79,8 +74,8 @@ public class BoundingBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
     @Override
     public String getDescription() {
         return "Determines the bounding box of all non-zero pixels in a binary image. The positions will be stored in a new row of ImageJs\n" +
-                "Results table in the column 'BoundingBoxX', 'BoundingBoxY', 'BoundingBoxWidth' and 'BoundingBoxHeight' in case of 2D images. " +
-                "If you pass over a 3D image stack, also columns 'BoundingBoxZ' and 'BoundingBoxDepth' will be given.";
+                "Results table in the column 'BoundingBoxX', 'BoundingBoxY', 'BoundingBoxZ', 'BoundingBoxWidth', 'BoundingBoxHeight' 'BoundingBoxDepth'." +
+                "In case of 2D images Z and depth will be zero.";
     }
 
     @Override
