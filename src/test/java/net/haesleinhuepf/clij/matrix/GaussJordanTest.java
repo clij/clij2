@@ -29,10 +29,10 @@ public class GaussJordanTest {
                 2.5f
         }, new long[]{1, 2});
 
-        CLIJx CLIJx = CLIJx.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
 
-        ClearCLBuffer clA = CLIJx.push(a);
-        ClearCLBuffer clB = CLIJx.push(b);
+        ClearCLBuffer clA = clijx.push(a);
+        ClearCLBuffer clB = clijx.push(b);
 
         // a * b using CLIJ
         CLIJ clij = CLIJ.getInstance();
@@ -40,10 +40,10 @@ public class GaussJordanTest {
         gj.setClij(clij);
         gj.setArgs(new Object[]{clA, clB});
         ClearCLBuffer clTest = gj.createOutputBufferFromSource(clA);
-        ClearCLBuffer clC = CLIJx.push(c);
+        ClearCLBuffer clC = clijx.push(c);
         GaussJordan.gaussJordan(clij, clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(CLIJx.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(clijx.op.matrixEqual(clTest, clC, 0f));
         clC.close();
     }
 

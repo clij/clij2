@@ -23,23 +23,23 @@ public class NClosestPointsTest {
                 11, 12, 13, 14, 15
         }, new long[]{5, 2});
 
-        CLIJx CLIJx = CLIJx.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
 
-        ClearCLBuffer clPointsA = CLIJx.convert(pointsA, ClearCLBuffer.class);
-        ClearCLBuffer clPointsB = CLIJx.convert(pointsB, ClearCLBuffer.class);
+        ClearCLBuffer clPointsA = clijx.convert(pointsA, ClearCLBuffer.class);
+        ClearCLBuffer clPointsB = clijx.convert(pointsB, ClearCLBuffer.class);
 
-        ClearCLBuffer distanceMatrix = CLIJx.create(new long[]{clPointsA.getWidth(), clPointsB.getWidth()}, NativeTypeEnum.Float);
+        ClearCLBuffer distanceMatrix = clijx.create(new long[]{clPointsA.getWidth(), clPointsB.getWidth()}, NativeTypeEnum.Float);
 
-        CLIJx.op.generateDistanceMatrix(clPointsA, clPointsB, distanceMatrix);
+        clijx.op.generateDistanceMatrix(clPointsA, clPointsB, distanceMatrix);
 
         new ImageJ();
-        CLIJx.show(distanceMatrix, "dist");
+        clijx.show(distanceMatrix, "dist");
 
         int n = 3;
-        ClearCLBuffer nClosestPointIndices = CLIJx.create(new long[]{clPointsA.getWidth(), n}, NativeTypeEnum.Float);
-        CLIJx.op.nClosestPoints(distanceMatrix, nClosestPointIndices);
+        ClearCLBuffer nClosestPointIndices = clijx.create(new long[]{clPointsA.getWidth(), n}, NativeTypeEnum.Float);
+        clijx.op.nClosestPoints(distanceMatrix, nClosestPointIndices);
 
-        CLIJx.show(nClosestPointIndices, "closestPoints");
+        clijx.show(nClosestPointIndices, "closestPoints");
         new WaitForUserDialog("closestPoints").show();
 
 
