@@ -9,8 +9,8 @@ import org.junit.Test;
 public class DrawSphereTest {
     @Test
     public void test() {
-        CLIJx CLIJx = CLIJx.getInstance();
-        ClearCLBuffer image = CLIJx.create(new long[]{100, 100}, NativeTypeEnum.Float);
+        CLIJx clijx = CLIJx.getInstance();
+        ClearCLBuffer image = clijx.create(new long[]{100, 100}, NativeTypeEnum.Float);
 
         DrawSphere.drawSphere(CLIJ.getInstance(), image, 50f, 50f, 10f, 20f);
 

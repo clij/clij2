@@ -9,8 +9,8 @@ import org.junit.Test;
 public class DrawLineTest {
     @Test
     public void test2d() {
-        CLIJx CLIJx = CLIJx.getInstance();
-        ClearCLBuffer image = CLIJx.create(new long[]{100, 100}, NativeTypeEnum.Float);
+        CLIJx clijx = CLIJx.getInstance();
+        ClearCLBuffer image = clijx.create(new long[]{100, 100}, NativeTypeEnum.Float);
 
         DrawLine.drawLine(CLIJ.getInstance(), image, 10f, 20f, 0f, 50f, 50f, 0f, 10f);
         //clijx.op.drawLine(image, 10f, 10f, 0f, 10f, 50f, 0f, 5f);
@@ -22,8 +22,8 @@ public class DrawLineTest {
     }
     @Test
     public void test3d() {
-        CLIJx CLIJx = CLIJx.getInstance();
-        ClearCLBuffer image = CLIJx.create(new long[]{100, 100, 100}, NativeTypeEnum.Float);
+        CLIJx clijx = CLIJx.getInstance();
+        ClearCLBuffer image = clijx.create(new long[]{100, 100, 100}, NativeTypeEnum.Float);
 
         DrawLine.drawLine(CLIJ.getInstance(), image, 10f, 20f, 0f, 50f, 50f, 70f, 10f);
         //clijx.op.drawLine(image, 10f, 10f, 0f, 10f, 50f, 0f, 5f);
