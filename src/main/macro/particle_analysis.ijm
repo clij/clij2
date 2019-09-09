@@ -1,11 +1,12 @@
-// CLIJ example macro: labeling.ijm
+// CLIJ example macro: particle_analysis.ijm
 //
 // This macro shows how to apply an automatic 
-// threshold method and connected components labeling
-// to an image on the GPU
+// threshold method, apply connected components labeling
+// and measure properties of the resulting segmentations
+// in an image on the GPU
 //
 // Author: Robert Haase
-// June 2019
+//         September 2019 in Prague
 // ---------------------------------------------
 
 
@@ -36,17 +37,7 @@ Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
 
 Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
 
-Ext.CLIJ_maximumOfAllPixels(labelmap);
-numberOfObjects = getResult("Max", nResults() - 1);
-
-for (i = 0; i < numberOfObjects; i++) {
-	Ext.CLIJx_labelToMask(labelmap, singleLabelMask, i + 1);
-	
-	Ext.CLIJ_sumOfAllPixels(singleLabelMask);
-	num_of_pixels = getResult("Sum", nResults() - 1);
-	
-	IJ.log("Object " + i + ": area: " + num_of_pixels + " pixels");
-}
+Ext.CLIJx_statisticsOfMaskedPixels(input, labelmap);
 
 // show result
 Ext.CLIJ_pull(mask);
