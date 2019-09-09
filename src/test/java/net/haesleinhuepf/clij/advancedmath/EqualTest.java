@@ -27,16 +27,16 @@ public class EqualTest {
                 1, 0, 1
         }, new long[]{3, 2});
 
-        CLIJx CLIJx = CLIJx.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
 
-        ClearCLBuffer clA = CLIJx.push(a);
-        ClearCLBuffer clB = CLIJx.push(b);
-        ClearCLBuffer clTest = CLIJx.create(clA);
-        ClearCLBuffer clC = CLIJx.push(c);
+        ClearCLBuffer clA = clijx.push(a);
+        ClearCLBuffer clB = clijx.push(b);
+        ClearCLBuffer clTest = clijx.create(clA);
+        ClearCLBuffer clC = clijx.push(c);
 
-        CLIJx.op.equal(clA, clB, clTest);
+        clijx.op.equal(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(CLIJx.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(clijx.op.matrixEqual(clTest, clC, 0f));
 
         clA.close();
         clB.close();
