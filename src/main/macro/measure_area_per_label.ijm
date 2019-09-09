@@ -1,11 +1,12 @@
-// CLIJ example macro: labeling.ijm
+// CLIJ example macro: measure_area_per_label.ijm
 //
 // This macro shows how to apply an automatic 
 // threshold method and connected components labeling
-// to an image on the GPU
+// to an image on the GPU to measure size of objects 
+// in the image
 //
 // Author: Robert Haase
-// June 2019
+// September 2019
 // ---------------------------------------------
 
 
