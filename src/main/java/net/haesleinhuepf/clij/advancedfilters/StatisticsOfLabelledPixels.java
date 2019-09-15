@@ -49,7 +49,7 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJPlugin implements CL
 
         static final int NUMBER_OF_ENTRIES = 16;
 
-        private int value;
+        public final int value;
 
         STATISTICS_ENTRY(int value) {
             this.value = value;
@@ -136,8 +136,8 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJPlugin implements CL
 
             int x = 0;
             int y = 0;
-            for (int i = 0; i < pixels.length; i ++) {
-                int index = (int)labels[i];
+            for (int i = 0; i < pixels.length; i++) {
+                int index = (int) labels[i];
                 if (index > 0) {
 
                     int targetIndex = index - startLabelIndex;
@@ -163,7 +163,6 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJPlugin implements CL
                     if (z > statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_END_Z.value] || !initialized) {
                         statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_END_Z.value] = z;
                     }
-                    initializedFlags[targetIndex] = true;
 
                     if (value > statistics[targetIndex][STATISTICS_ENTRY.MAXIMUM_INTENSITY.value] || !initialized) {
                         statistics[targetIndex][STATISTICS_ENTRY.MAXIMUM_INTENSITY.value] = value;
@@ -173,6 +172,9 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJPlugin implements CL
                     }
                     statistics[targetIndex][STATISTICS_ENTRY.SUM_INTENSITY.value] += value;
                     statistics[targetIndex][STATISTICS_ENTRY.PIXEL_COUNT.value] += 1;
+
+
+                    initializedFlags[targetIndex] = true;
                 }
 
                 x++;
@@ -181,28 +183,36 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJPlugin implements CL
                     y++;
                 }
             }
+        }
 
-            for (int j = 0; j < statistics.length; j++) {
-                statistics[j][STATISTICS_ENTRY.MEAN_INTENSITY.value] =
-                        statistics[j][STATISTICS_ENTRY.SUM_INTENSITY.value] /
-                        statistics[j][STATISTICS_ENTRY.PIXEL_COUNT.value];
 
-                statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_WIDTH.value] =
-                        statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_END_X.value] -
-                                statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_X.value] + 1;
-                statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_HEIGHT.value] =
-                        statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_END_Y.value] -
-                                statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_Y.value] + 1;
-                statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_DEPTH.value] =
-                        statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_END_Z.value] -
-                                statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_Z.value] + 1;
+        for (int j = 0; j < statistics.length; j++) {
+            statistics[j][STATISTICS_ENTRY.MEAN_INTENSITY.value] =
+                    statistics[j][STATISTICS_ENTRY.SUM_INTENSITY.value] /
+                    statistics[j][STATISTICS_ENTRY.PIXEL_COUNT.value];
 
-                statistics[j][STATISTICS_ENTRY.IDENTIFIER.value] = j + startLabelIndex;
-            }
+            statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_WIDTH.value] =
+                    statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_END_X.value] -
+                            statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_X.value] + 1;
+            statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_HEIGHT.value] =
+                    statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_END_Y.value] -
+                            statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_Y.value] + 1;
+            statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_DEPTH.value] =
+                    statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_END_Z.value] -
+                            statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_Z.value] + 1;
 
-            x = 0;
-            y = 0;
-            double[] squaredDifferencesFromMean = new double[statistics.length];
+            statistics[j][STATISTICS_ENTRY.IDENTIFIER.value] = j + startLabelIndex;
+        }
+
+
+        double[] squaredDifferencesFromMean = new double[statistics.length];
+        for (int z = 0; z < imp.getNSlices(); z++) {
+            imp.setZ(z + 1);
+            lab.setZ(z + 1);
+
+            float[] pixels = (float[]) imp.getProcessor().getPixels();
+            float[] labels = (float[]) lab.getProcessor().getPixels();
+
             for (int i = 0; i < pixels.length; i ++) {
                 int index = (int) labels[i];
                 if (index > 0) {
@@ -212,20 +222,13 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJPlugin implements CL
 
                     squaredDifferencesFromMean[targetIndex] += Math.pow(value - statistics[targetIndex][STATISTICS_ENTRY.MEAN_INTENSITY.value], 2);
                 }
-
-                x++;
-                if (x > width) {
-                    x = 0;
-                    y++;
-                }
             }
+        }
 
-            for (int j = 0; j < statistics.length; j++) {
-                System.out.println("SD: " + squaredDifferencesFromMean[j]);
-                statistics[j][STATISTICS_ENTRY.STANDARD_DEVIATION_INTENSITY.value] =
-                        Math.sqrt(squaredDifferencesFromMean[j] /
-                                statistics[j][STATISTICS_ENTRY.PIXEL_COUNT.value]);
-            }
+        for (int j = 0; j < statistics.length; j++) {
+            statistics[j][STATISTICS_ENTRY.STANDARD_DEVIATION_INTENSITY.value] =
+                    Math.sqrt(squaredDifferencesFromMean[j] /
+                            statistics[j][STATISTICS_ENTRY.PIXEL_COUNT.value]);
         }
 
         if (inputImage != image) {
@@ -234,6 +237,7 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJPlugin implements CL
         if (inputLabelMap != labelMap) {
             labelMap.close();
         }
+
         return statistics;
     }
     /*
