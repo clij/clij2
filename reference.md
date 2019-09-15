@@ -1,7 +1,7 @@
-# CLIJ2 reference
-This reference contains all methods currently available in CLIJ2.
+# CLIJx reference
+This reference contains all methods currently available in CLIJx.
 
-__Please note:__ CLIJ2 is under heavy construction. This list may change at any point.Methods marked with ' were available in CLIJ1.
+__Please note:__ CLIJx is under heavy construction. This list may change at any point.Methods marked with ' were available in CLIJ1.
 
 * <a href="#absolute">absolute'</a>
 * <a href="#addImageAndScalar">addImageAndScalar'</a>
@@ -178,6 +178,11 @@ __Please note:__ CLIJ2 is under heavy construction. This list may change at any 
 * <a href="#splitStack">splitStack'</a>
 * <a href="#spotsToPointList">spotsToPointList</a>
 * <a href="#stackToTiles">stackToTiles</a>
+* <a href="#standardDeviationOfAllPixels">standardDeviationOfAllPixels</a>
+* <a href="#standardDeviationOfAllPixels">standardDeviationOfAllPixels</a>
+* <a href="#statisticsOfMaskedPixels">statisticsOfMaskedPixels</a>
+* <a href="#statisticsOfMaskedPixels">statisticsOfMaskedPixels</a>
+* <a href="#statisticsOfMaskedPixels">statisticsOfMaskedPixels</a>
 * <a href="#subtractBackground">subtractBackground</a>
 * <a href="#subtractBackground">subtractBackground</a>
 * <a href="#subtractImages">subtractImages'</a>
@@ -194,6 +199,8 @@ __Please note:__ CLIJ2 is under heavy construction. This list may change at any 
 * <a href="#transposeXY">transposeXY</a>
 * <a href="#transposeXZ">transposeXZ</a>
 * <a href="#transposeYZ">transposeYZ</a>
+* <a href="#varianceOfAllPixels">varianceOfAllPixels</a>
+* <a href="#varianceOfAllPixels">varianceOfAllPixels</a>
 * <a href="#writeValuesToPositions">writeValuesToPositions</a>
 <a name="absolute"></a>
 ## absolute'
@@ -487,7 +494,7 @@ Parameters (macro):
 Image input, Image destination, String method
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6
+ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3
 
 <a name="automaticThreshold"></a>
 ## automaticThreshold'
@@ -501,7 +508,7 @@ Parameters (macro):
 Image input, Image destination, String method
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6
 
 <a name="binaryAnd"></a>
 ## binaryAnd'
@@ -632,7 +639,7 @@ ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 ## boundingBox
 
 Determines the bounding box of all non-zero pixels in a binary image. The positions will be stored in a new row of ImageJs
-Results table in the column 'BoundingBoxX', 'BoundingBoxY', 'BoundingBoxWidth' and 'BoundingBoxHeight' in case of 2D images. If you pass over a 3D image stack, also columns 'BoundingBoxZ' and 'BoundingBoxDepth' will be given.
+Results table in the column 'BoundingBoxX', 'BoundingBoxY', 'BoundingBoxZ', 'BoundingBoxWidth', 'BoundingBoxHeight' 'BoundingBoxDepth'.In case of 2D images Z and depth will be zero.
 
 Parameters (macro):
 Image source
@@ -989,7 +996,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="downsample"></a>
 ## downsample'
@@ -1001,7 +1008,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="drawBox"></a>
 ## drawBox
@@ -1822,7 +1829,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="medianSphere"></a>
 ## medianSphere'
@@ -1836,7 +1843,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="minimumBox"></a>
 ## minimumBox'
@@ -1934,7 +1941,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="minimumSphere"></a>
 ## minimumSphere'
@@ -1946,7 +1953,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="minimumZProjection"></a>
 ## minimumZProjection'
@@ -2494,6 +2501,63 @@ Image source, Image destination, Number tiles_x, Number tiles_y
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
+<a name="standardDeviationOfAllPixels"></a>
+## standardDeviationOfAllPixels
+
+Determines the standard deviation of all pixels in an image. The value will be stored in a new row of ImageJs
+Results table in the column 'Standard_deviation'.
+
+Parameters (macro):
+Image source
+
+Parameters (Java):
+ClearCLBuffer arg1
+
+<a name="standardDeviationOfAllPixels"></a>
+## standardDeviationOfAllPixels
+
+Determines the standard deviation of all pixels in an image. The value will be stored in a new row of ImageJs
+Results table in the column 'Standard_deviation'.
+
+Parameters (macro):
+Image source
+
+Parameters (Java):
+ClearCLBuffer arg1, Float arg2
+
+<a name="statisticsOfMaskedPixels"></a>
+## statisticsOfMaskedPixels
+
+Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
+
+Parameters (macro):
+Image input, Image labelmap
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4
+
+<a name="statisticsOfMaskedPixels"></a>
+## statisticsOfMaskedPixels
+
+Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
+
+Parameters (macro):
+Image input, Image labelmap
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3
+
+<a name="statisticsOfMaskedPixels"></a>
+## statisticsOfMaskedPixels
+
+Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
+
+Parameters (macro):
+Image input, Image labelmap
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2
+
 <a name="subtractBackground"></a>
 ## subtractBackground
 
@@ -2679,6 +2743,30 @@ Image input, Image destination
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
+
+<a name="varianceOfAllPixels"></a>
+## varianceOfAllPixels
+
+Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs
+Results table in the column 'Variance'.
+
+Parameters (macro):
+Image source
+
+Parameters (Java):
+ClearCLBuffer arg1
+
+<a name="varianceOfAllPixels"></a>
+## varianceOfAllPixels
+
+Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs
+Results table in the column 'Variance'.
+
+Parameters (macro):
+Image source
+
+Parameters (Java):
+ClearCLBuffer arg1, Float arg2
 
 <a name="writeValuesToPositions"></a>
 ## writeValuesToPositions
