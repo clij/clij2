@@ -3,6 +3,7 @@ package net.haesleinhuepf.clij.advancedfilters;
 import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -50,13 +51,13 @@ public class VarianceOfAllPixels extends AbstractCLIJPlugin implements CLIJMacro
         ClearCLBuffer clReducedImage = buffer1;
         float sum = 0;
         if (buffer1.getDimension() == 3) {
-            clReducedImage = clij.createCLBuffer(new long[]{buffer1.getWidth(), buffer1.getHeight()}, buffer1.getNativeType());
+            clReducedImage = clij.createCLBuffer(new long[]{buffer1.getWidth(), buffer1.getHeight()}, NativeTypeEnum.Float);
 
             HashMap<String, Object> parameters = new HashMap<>();
             parameters.put("src", buffer1);
             parameters.put("dst", clReducedImage);
             parameters.put("mean_intensity", meanIntensity);
-            clij.execute(Kernels.class, "varianceProject.cl", "sum_variance_project_3d_2d", parameters);
+            clij.execute(VarianceOfMaskedPixels.class, "varianceProject.cl", "squared_sum_project_3d_2d", parameters);
 
 
             RandomAccessibleInterval rai = clij.convert(clReducedImage, RandomAccessibleInterval.class);

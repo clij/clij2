@@ -12,7 +12,7 @@ public class StandardDeviationOfAllPixelsTest {
     final double tolerance = 0.01;
 
     @Test
-    public void testVariance() {
+    public void testStdDev() {
         CLIJ clij = CLIJ.getInstance();
         ImagePlus imp = IJ.openImage("src/test/resources/blobs.tif");
 
