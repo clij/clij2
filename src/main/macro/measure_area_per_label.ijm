@@ -37,20 +37,26 @@ Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
 
 Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
 
+// determine how many objects were found
 Ext.CLIJ_maximumOfAllPixels(labelmap);
 numberOfObjects = getResult("Max", nResults() - 1);
 
+// go through all objects
 for (i = 0; i < numberOfObjects; i++) {
+	// get a mask for a single object
 	Ext.CLIJx_labelToMask(labelmap, singleLabelMask, i + 1);
-	
+
+	// all pixels in a binary image are 1, 
+	// thus the sum can be used to count them:
 	Ext.CLIJ_sumOfAllPixels(singleLabelMask);
 	num_of_pixels = getResult("Sum", nResults() - 1);
-	
-	IJ.log("Object " + i + ": area: " + num_of_pixels + " pixels");
+
+	// print out object number and size
+	IJ.log("Object " + (i + 1) + ": area: " + num_of_pixels + " pixels");
 }
 
-// show result
-Ext.CLIJ_pull(mask);
+// show resulting label map
+Ext.CLIJ_pull(labelmap);
 
 
 
