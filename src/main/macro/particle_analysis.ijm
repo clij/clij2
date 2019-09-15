@@ -37,10 +37,11 @@ Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
 
 Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
 
-Ext.CLIJx_statisticsOfMaskedPixels(input, labelmap);
+Ext.CLIJx_statisticsOfLabelledPixels(input, labelmap);
 
 // show result
 Ext.CLIJ_pull(mask);
+run("glasbey on dark");
 
 
 
