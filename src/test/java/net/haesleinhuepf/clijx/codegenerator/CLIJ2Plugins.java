@@ -93,7 +93,7 @@ public interface CLIJ2Plugins {
             LabelToMask.class,
             NClosestPoints.class,
             GaussJordan.class,
-            StatisticsOfMaskedPixels.class,
+            StatisticsOfLabelledPixels.class,
             VarianceOfAllPixels.class,
             StandardDeviationOfAllPixels.class
     };
