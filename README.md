@@ -1,4 +1,4 @@
-# CLIJx an incubator for CLIJ2
+# CLIJx is the incubator for CLIJ2
 This repository contains experimental / advanced filters based on [CLIJ](https://clij.github.io). 
 Methods which turn out to be useful will become part of CLIJ 2.0.
 
