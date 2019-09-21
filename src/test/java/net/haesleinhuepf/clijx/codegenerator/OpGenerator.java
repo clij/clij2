@@ -23,6 +23,7 @@ public class OpGenerator {
         builder.append("import net.haesleinhuepf.clij.CLIJ;\n");
         builder.append("import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;\n");
         builder.append("import net.haesleinhuepf.clij.clearcl.ClearCLImage;\n");
+        builder.append("import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;\n");
         builder.append("import net.imglib2.realtransform.AffineTransform2D;\n");
         builder.append("import net.imglib2.realtransform.AffineTransform3D;\n");
         //builder.append("import ij.measure.ResultsTable;\n");
