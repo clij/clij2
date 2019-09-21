@@ -213,7 +213,11 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         //whiteNb=Prefs.get("3D-OC-Options_whiteNb.boolean", true);
 
 //        if (showObj){OC.getObjMap(showNb, fontSize).show(); IJ.run("Fire");}
+
+        // 3D edge detection + dilation?
 //        if (showSurf){OC.getSurfPixMap(showNb, whiteNb, fontSize).show(); IJ.run("Fire");}
+
+        // filled 2D circles with diameter dotSize
 //        if (showCentro){OC.getCentroidMap(showNb, whiteNb, dotSize, fontSize).show(); IJ.run("Fire");}
 //        if (showCOM){OC.getCentreOfMassMap(showNb, whiteNb, dotSize, fontSize).show(); IJ.run("Fire");}
 //
@@ -277,6 +281,11 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
             flap.close();
             clij.show(flop, "filtered by size");
 
+        }
+
+        if (showObj) {
+            clij.show(flop, "Objects map of " + imp.getTitle());
+            IJ.run("Fire");
         }
 
         // statistics
