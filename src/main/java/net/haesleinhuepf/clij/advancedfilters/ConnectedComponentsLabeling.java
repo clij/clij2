@@ -3,6 +3,8 @@ package net.haesleinhuepf.clij.advancedfilters;
 import ij.ImagePlus;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.clearcl.util.ElapsedTime;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.kernels.Kernels;
@@ -10,13 +12,15 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
-import net.haesleinhuepf.clij.utilities.CLIJUtilities;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.CLIJUtilities;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.numeric.RealType;
 import net.imglib2.view.Views;
 import org.scijava.plugin.Plugin;
 
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.HashMap;
 
@@ -48,54 +52,97 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
 
     public static boolean connectedComponentsLabeling(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
 
-        ClearCLBuffer temp2 = clij.create(output);
+        CLIJx clijx = CLIJx.getInstance();
 
-        ClearCLBuffer flag = clij.create(new long[]{1,1,1}, output.getNativeType());
+        ClearCLImage temp1 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
+        ClearCLImage temp2 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
+        ClearCLBuffer temp3 = clij.create(output);
 
-        clij.op().set(flag, 0f);
+
+
+        ClearCLBuffer flag = clij.create(new long[]{1,1,1}, NativeTypeEnum.Byte);
+        ByteBuffer aByteBufferWithAZero = ByteBuffer.allocate(1);
+        aByteBufferWithAZero.put((byte)0);
+        flag.readFrom(aByteBufferWithAZero, true);
+
+        //clij.op().set(flag, 0f);
 
         ElapsedTime.measureForceOutput("set nonzeros to index", () -> {
             setNonZeroPixelsToPixelIndex(clij, input, output);
         });
+
+        clij.op().copy(output, temp1);
         //clij.show(output, "start");
         //if (true) return;
 
         ElapsedTime.measureForceOutput("iterative min", () -> {
-        int flagValue = 1;
-        int iterationCount = 0;
-        while (flagValue > 0) {
-            //clij.show(temp1, "temp1 before " + iterationCount);
+            int flagValue = 1;
+            int iterationCount = 0;
 
-            if (iterationCount % 2 == 0) {
-                //System.out.println("O>T");
-                NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clij, output, flag, temp2);
-                //nonzeroMinimumBox(clij, output, flag, temp2, 1, 1, 1);
-                //clij.show(temp2, "temp2 after a " + iterationCount);
-            } else {
-                //System.out.println("T>O");
-                NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clij, temp2, flag, output);
-                //nonzeroMinimumBox(clij, temp2, flag, output, 1, 1, 1);
-                //clij.show(output, "output after a " + iterationCount);
+            ClearCLKernel flipkernel = null;
+            ClearCLKernel flopkernel = null;
+
+            while (flagValue > 0) {
+                //clij.show(temp1, "temp1 before " + iterationCount);
+
+                if (iterationCount % 2 == 0) {
+                    //System.out.println("O>T");
+                    if (flipkernel == null) {
+                        flipkernel = NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clijx, temp1, flag, temp2, flipkernel);
+                    } else {
+                        ClearCLKernel finalFlipkernel = flipkernel;
+                        ElapsedTime.measureForceOutput("dimo", () -> {
+                            finalFlipkernel.run(true);
+                        });
+                    }
+                    //nonzeroMinimumBox(clij, output, flag, temp2, 1, 1, 1);
+                    //clij.show(temp2, "temp2 after a " + iterationCount);
+                } else {
+                    //System.out.println("T>O");
+                    if (flopkernel == null) {
+                        flopkernel = NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clijx, temp2, flag, temp1, flopkernel);
+                    } else {
+                        ClearCLKernel finalFlopkernel = flopkernel;
+                        ElapsedTime.measureForceOutput("dimo", () -> {
+                            finalFlopkernel.run(true);
+                        });
+                    }
+                    //nonzeroMinimumBox(clij, temp2, flag, output, 1, 1, 1);
+                    //clij.show(output, "output after a " + iterationCount);
+                }
+                //clij.show(temp1, "temp1 after b " + iterationCount);
+                //if (true) return;
+
+                ImagePlus flagImp = clij.pull(flag);
+                flagValue = flagImp.getProcessor().get(0,0);
+                //System.out.println("flag: " + flagValue);
+                ElapsedTime.measureForceOutput("SET 0", () -> {
+
+                    flag.readFrom(aByteBufferWithAZero, true);
+                    //clij.op().set(flag, 0f);
+                        });
+                iterationCount = iterationCount + 1;
+                //System.out.println(iterationCount);
             }
-            //clij.show(temp1, "temp1 after b " + iterationCount);
-            //if (true) return;
-
-            ImagePlus flagImp = clij.pull(flag);
-            flagValue = flagImp.getProcessor().get(0,0);
-            //System.out.println("flag: " + flagValue);
-            clij.op().set(flag, 0f);
-            iterationCount = iterationCount + 1;
-            //System.out.println(iterationCount);
-        }
-        if (iterationCount % 2 == 0) {
-            clij.op().copy(output, temp2);
-        }
+            if (iterationCount % 2 == 0) {
+                clij.op().copy(temp1, temp3);
+            } else {
+                clij.op().copy(temp2, temp3);
+            }
+            if (flipkernel != null) {
+                flipkernel.close();
+            }
+            if (flopkernel != null) {
+                flopkernel.close();
+            }
         });
 
         ElapsedTime.measureForceOutput("shift intensities", () -> {
-                    shiftIntensitiesToCloseGaps(clij, temp2, output);
+                    shiftIntensitiesToCloseGaps(clij, temp3, output);
                 });
+        temp1.close();
         temp2.close();
+        temp3.close();
         flag.close();
 
         //new WaitForUserDialog("hello").show();
