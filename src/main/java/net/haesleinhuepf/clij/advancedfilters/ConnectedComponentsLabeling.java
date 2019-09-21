@@ -132,7 +132,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         }
         final float[] allNewIndices = new float[maximum + 1];
 
-        HashMap<Float, Float> indexFlipMap = new HashMap<Float, Float>();
+        //HashMap<Float, Float> indexFlipMap = new HashMap<Float, Float>();
 
         float[] count = {1};
 
@@ -144,7 +144,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
                 int key = new Float(cursor.next().getRealFloat()).intValue();
                 if (key > 0 && allNewIndices[key] == 0) { // && !indexFlipMap.containsKey(key)) {
                     allNewIndices[key] = count[0];
-                    indexFlipMap.put(new Float(key), count[0]);
+                    //indexFlipMap.put(new Float(key), count[0]);
                     count[0] = count[0] + 1;
                 }
             }
