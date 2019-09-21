@@ -35,7 +35,7 @@ public class NonzeroMinimumDiamond extends AbstractCLIJPlugin implements CLIJMac
     }
 
 
-    public static boolean nonzeroMinimumDiamond(CLIJ clij, ClearCLBuffer src, ClearCLBuffer flag, ClearCLBuffer dst) {
+    public static boolean nonzeroMinimumDiamond(CLIJ clij, ClearCLImageInterface src, ClearCLImageInterface flag, ClearCLImageInterface dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("flag_dst", flag);

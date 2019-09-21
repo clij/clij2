@@ -68,26 +68,24 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         imp = WindowManager.getCurrentImage();
 
 
-
-
 //        int width=imp.getWidth();
 //        
 //        int height=imp.getHeight();
-        int nbSlices=imp.getStackSize();
+        int nbSlices = imp.getStackSize();
 //        int length=height*width*nbSlices;
 //        String title=imp.getTitle();
 //
-        min=Math.pow(2, imp.getBitDepth());
-        max=0;
+        min = Math.pow(2, imp.getBitDepth());
+        max = 0;
 //
-        for (int i=1; i<=nbSlices; i++){
+        for (int i = 1; i <= nbSlices; i++) {
             imp.setSlice(i);
-            ip=imp.getProcessor();
-            min=Math.min(min, imp.getStatistics().min);
-            max=Math.max(max, imp.getStatistics().max);
+            ip = imp.getProcessor();
+            min = Math.min(min, imp.getStatistics().min);
+            max = Math.max(max, imp.getStatistics().max);
         }
 
-        imp.setSlice(nbSlices/2);
+        imp.setSlice(nbSlices / 2);
         imp.resetDisplayRange();
         ip = imp.getProcessor();
         double thr = ip.getAutoThreshold();
@@ -96,13 +94,13 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
 
         int minSize = (int) Prefs.get("3D-OC_minSize.double", 10);
         int maxSize = imp.getWidth() * imp.getHeight() * nbSlices;
-        boolean excludeOnEdges=Prefs.get("3D-OC_excludeOnEdges.boolean", true);
+        boolean excludeOnEdges = Prefs.get("3D-OC_excludeOnEdges.boolean", true);
         boolean showObj = Prefs.get("3D-OC_showObj.boolean", true);
         boolean showSurf = Prefs.get("3D-OC_showSurf.boolean", true);
         boolean showCentro = Prefs.get("3D-OC_showCentro.boolean", true);
         boolean showCOM = Prefs.get("3D-OC_showCOM.boolean", true);
         boolean showStat = Prefs.get("3D-OC_showStat.boolean", true);
-        //showSummary=Prefs.get("3D-OC_summary.boolean", true);
+        boolean showSummary=Prefs.get("3D-OC_summary.boolean", true);
 
         //showMaskedImg=Prefs.get("3D-OC-Options_showMaskedImg.boolean", true);
         //closeImg=Prefs.get("3D-OC-Options_closeImg.boolean", false);
@@ -130,7 +128,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
 //            Prefs.set("3D-OC-Options_showMaskedImg.boolean", false);
 //        }
 
-        GenericDialog gd=new GenericDialog("3D Object Counter on GPU (experimental, CLIJ)");
+        GenericDialog gd = new GenericDialog("3D Object Counter on GPU (experimental, CLIJ)");
 
         ArrayList<String> deviceList = CLIJ.getAvailableDeviceNames();
         if (clij == null) {
@@ -144,14 +142,14 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         gd.addSlider("Slice", 1, nbSlices, nbSlices / 2);
 
         sliders = gd.getSliders();
-        ((Scrollbar)sliders.elementAt(0)).addAdjustmentListener(this);
-        ((Scrollbar)sliders.elementAt(1)).addAdjustmentListener(this);
+        ((Scrollbar) sliders.elementAt(0)).addAdjustmentListener(this);
+        ((Scrollbar) sliders.elementAt(1)).addAdjustmentListener(this);
         values = gd.getNumericFields();
-        ((TextField)values.elementAt(0)).addFocusListener(this);
-        ((TextField)values.elementAt(1)).addFocusListener(this);
+        ((TextField) values.elementAt(0)).addFocusListener(this);
+        ((TextField) values.elementAt(1)).addFocusListener(this);
 
         gd.addMessage("Size filter: ");
-        gd.addNumericField("Min.",minSize, 0);
+        gd.addNumericField("Min.", minSize, 0);
         gd.addNumericField("Max.", maxSize, 0);
         gd.addCheckbox("Exclude_objects_on_edges", excludeOnEdges);
         gd.addMessage("Maps to show: ");
@@ -168,7 +166,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
 
         gd.showDialog();
 
-        if (gd.wasCanceled()){
+        if (gd.wasCanceled()) {
             ip.resetThreshold();
             imp.updateAndDraw();
 
@@ -178,16 +176,16 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         String deviceName = gd.getNextChoice();
         clij = CLIJ.getInstance(deviceName);
 
-        thr=(int) gd.getNextNumber();
+        thr = (int) gd.getNextNumber();
         gd.getNextNumber();
-        minSize=(int) gd.getNextNumber();
-        maxSize=(int) gd.getNextNumber();
-        excludeOnEdges=gd.getNextBoolean();
-        showObj=gd.getNextBoolean();
+        minSize = (int) gd.getNextNumber();
+        maxSize = (int) gd.getNextNumber();
+        excludeOnEdges = gd.getNextBoolean();
+        showObj = gd.getNextBoolean();
         //showSurf=gd.getNextBoolean();
         //showCentro=gd.getNextBoolean();
         //showCOM=gd.getNextBoolean();
-        showStat=gd.getNextBoolean();
+        showStat = gd.getNextBoolean();
         //showSummary=gd.getNextBoolean();
 
         Prefs.set("3D-OC_minSize.double", minSize);
@@ -204,68 +202,50 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         imp.updateAndDraw();
 
 
-
-        //Counter3D OC=new Counter3D(imp, thr, minSize, maxSize, excludeOnEdges, redirect);
-
-        //dotSize=(int) Prefs.get("3D-OC-Options_dotSize.double", 5);
-        //fontSize=(int) Prefs.get("3D-OC-Options_fontSize.double", 10);
-        //showNb=Prefs.get("3D-OC-Options_showNb.boolean", true);
-        //whiteNb=Prefs.get("3D-OC-Options_whiteNb.boolean", true);
-
-//        if (showObj){OC.getObjMap(showNb, fontSize).show(); IJ.run("Fire");}
-
-        // 3D edge detection + dilation?
-//        if (showSurf){OC.getSurfPixMap(showNb, whiteNb, fontSize).show(); IJ.run("Fire");}
-
-        // filled 2D circles with diameter dotSize
-//        if (showCentro){OC.getCentroidMap(showNb, whiteNb, dotSize, fontSize).show(); IJ.run("Fire");}
-//        if (showCOM){OC.getCentreOfMassMap(showNb, whiteNb, dotSize, fontSize).show(); IJ.run("Fire");}
-//
-        boolean newRT=Prefs.get("3D-OC-Options_newRT.boolean", true);
-
-//
-//        if (showStat) OC.showStatistics(newRT);
-//
-//        if (showSummary) OC.showSummary();
-
         ClearCLBuffer buffer = clij.push(imp);
         ClearCLBuffer flip = clij.create(buffer.getDimensions(), NativeTypeEnum.Float);
         ClearCLBuffer flop = clij.create(flip);
 
         // thresholding
         clij.op().threshold(buffer, flip, new Float(thr));
-        clij.show(flip, "thresholded");
+        //clij.show(flip, "thresholded");
 
         // connected components labelling
         ConnectedComponentsLabeling.connectedComponentsLabeling(clij, flip, flop);
-        clij.show(flop, "cca");
+        //clij.show(flop, "cca");
+        System.out.println("cca done");
 
         // exclude on edges
         if (excludeOnEdges) {
             ExcludeLabelsOnEdges.excludeLabelsOnEdges(clij, flop, flip);
             clij.op().copy(flip, flop);
-            clij.show(flop, "excl");
+            //clij.show(flop, "excl");
         }
+        System.out.println("excl");
 
         // filter by size
+        System.out.println("minSize " + minSize);
+        System.out.println("maxSize " + maxSize);
+
+        int numberOfObjects = (int) clij.op().maximumOfAllPixels(flop);
+        System.out.println("numberOfObjects " + numberOfObjects);
+        ClearCLBuffer flap = clij.create(new long[]{numberOfObjects + 1, 1, 1}, NativeTypeEnum.Float);
+        clij.op().fillHistogram(flop, flap, 0f, new Float(numberOfObjects));
+
+
+        System.out.println("hist done");
+
+        float[] indexList = new float[numberOfObjects + 1];
+
+        flap.writeTo(FloatBuffer.wrap(indexList), true);
+
         if (minSize > 1 || maxSize < imp.getWidth() * imp.getHeight() * nbSlices) {
-            System.out.println("minSize " + minSize);
-            System.out.println("maxSize " + maxSize);
-
-            int numberOfObjects = (int) clij.op().maximumOfAllPixels(flop);
-            ClearCLBuffer flap = clij.create(new long[]{numberOfObjects + 1, 1, 1}, NativeTypeEnum.Float);
-            clij.op().fillHistogram(flop, flap, 0f, new Float(numberOfObjects));
-
-            float[] indexList = new float[numberOfObjects + 1];
-
-            flap.writeTo(FloatBuffer.wrap(indexList), true);
-
             int count = 1;
             indexList[0] = 0; // background stays background
             clij.show(flap, "hist");
             for (int i = 1; i < indexList.length; i++) {
 
-                if (indexList[i] >= minSize && indexList[i] <= maxSize ) {
+                if (indexList[i] >= minSize && indexList[i] <= maxSize) {
                     indexList[i] = count;
                     count++;
                 } else {
@@ -278,10 +258,45 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
 
             ConnectedComponentsLabeling.replace(clij, flop, flap, flip);
             clij.op().copy(flip, flop);
-            flap.close();
-            clij.show(flop, "filtered by size");
 
+            //clij.show(flop, "filtered by size");
+
+            // refill histogram
+            flap.close();
+            flap = clij.create(new long[]{count, 1, 1}, NativeTypeEnum.Float);
+            clij.op().fillHistogram(flop, flap, 1f, new Float(count));
         }
+
+        /*
+        Counter3D OC = new Counter3D(imp, (int)thr, minSize, maxSize, excludeOnEdges, false); // false -> redirect
+        OC.setObjects(
+                convertImagePlusToIntArray(clij.pull(flop)),
+                convertImagePlusToIntArray(clij.pull(flap))
+        );
+
+        int dotSize=(int) Prefs.get("3D-OC-Options_dotSize.double", 5);
+        int fontSize=(int) Prefs.get("3D-OC-Options_fontSize.double", 10);
+        boolean showNb=Prefs.get("3D-OC-Options_showNb.boolean", true);
+        boolean whiteNb=Prefs.get("3D-OC-Options_whiteNb.boolean", true);
+
+        if (showObj){OC.getObjMap(showNb, fontSize).show(); IJ.run("Fire");}
+
+        // 3D edge detection + dilation?
+        if (showSurf){OC.getSurfPixMap(showNb, whiteNb, fontSize).show(); IJ.run("Fire");}
+
+        // filled 2D circles with diameter dotSize
+        if (showCentro){OC.getCentroidMap(showNb, whiteNb, dotSize, fontSize).show(); IJ.run("Fire");}
+        if (showCOM){OC.getCentreOfMassMap(showNb, whiteNb, dotSize, fontSize).show(); IJ.run("Fire");}
+//
+        boolean newRT = Prefs.get("3D-OC-Options_newRT.boolean", true);
+
+//
+        if (showStat) OC.showStatistics(newRT);
+//
+        if (showSummary) OC.showSummary();
+        */
+
+        boolean newRT = Prefs.get("3D-OC-Options_newRT.boolean", true);
 
         if (showObj) {
             clij.show(flop, "Objects map of " + imp.getTitle());
@@ -291,16 +306,16 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         // statistics
         if (showStat) {
 
-            ResultsTable table = newRT?new ResultsTable():ResultsTable.getResultsTable();
+            ResultsTable table = newRT ? new ResultsTable() : ResultsTable.getResultsTable();
             if (!newRT) {
                 table.reset();
             }
             StatisticsOfLabelledPixels.statisticsOfLabelledPixels(clij, buffer, flop, table);
 
             if (showStat) {
-                if (newRT){
+                if (newRT) {
                     table.show("Statistics for " + imp.getTitle());
-                }else{
+                } else {
                     table.show("Results");
                 }
             }
@@ -310,6 +325,8 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         buffer.close();
         flip.close();
         flop.close();
+        flap.close();
+
     }
 
 
@@ -318,16 +335,16 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
     }
 
     public void focusLost(FocusEvent e) {
-        if (e.getSource().equals(values.elementAt(0))){
-            int val=(int) Tools.parseDouble(((TextField)values.elementAt(0)).getText());
-            val=(int) Math.min(max, Math.max(min, val));
-            ((TextField)values.elementAt(0)).setText(""+val);
+        if (e.getSource().equals(values.elementAt(0))) {
+            int val = (int) Tools.parseDouble(((TextField) values.elementAt(0)).getText());
+            val = (int) Math.min(max, Math.max(min, val));
+            ((TextField) values.elementAt(0)).setText("" + val);
         }
 
-        if (e.getSource().equals(values.elementAt(1))){
-            int val=(int) Tools.parseDouble(((TextField)values.elementAt(1)).getText());
-            val=(int) Math.min(max, Math.max(min, val));
-            ((TextField)values.elementAt(1)).setText(""+val);
+        if (e.getSource().equals(values.elementAt(1))) {
+            int val = (int) Tools.parseDouble(((TextField) values.elementAt(1)).getText());
+            val = (int) Math.min(max, Math.max(min, val));
+            ((TextField) values.elementAt(1)).setText("" + val);
         }
 
         updateImg();
@@ -336,10 +353,29 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
     public void focusGained(FocusEvent e) {
     }
 
-    private void updateImg(){
-        thr =((Scrollbar)sliders.elementAt(0)).getValue();
-        imp.setSlice(((Scrollbar)sliders.elementAt(1)).getValue());
+    private void updateImg() {
+        thr = ((Scrollbar) sliders.elementAt(0)).getValue();
+        imp.setSlice(((Scrollbar) sliders.elementAt(1)).getValue());
         imp.resetDisplayRange();
         ip.setThreshold(thr, max, ImageProcessor.RED_LUT);
+    }
+
+    private int[] convertImagePlusToIntArray(ImagePlus img) {
+        int nbSlices = img.getNSlices();
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        int[] imgArray = new int[nbSlices * width * height];
+        int index = 0;
+        for(int i = 1; i<=nbSlices;i++) {
+            img.setSlice(i);
+            for (int j = 0; j < height; j++) {
+                for (int k = 0; k < width; k++) {
+                    imgArray[index] = img.getProcessor().getPixel(k, j);
+                    index++;
+                }
+            }
+        }
+        return imgArray;
     }
 }
