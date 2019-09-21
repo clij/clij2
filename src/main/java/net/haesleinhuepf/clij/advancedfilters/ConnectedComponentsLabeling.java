@@ -6,7 +6,6 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
-import net.haesleinhuepf.clij.clearcl.util.ElapsedTime;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
@@ -39,13 +38,12 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.radiusToKernelSize;
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_connectedComponentsLabeling")
 public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
-    public static int MAX_NUMBER_OF_INDICES_TO_REPLACE_INDIVIDUALLY = 10;
 
     @Override
     public boolean executeCL() {
-            Object[] args = openCLBufferArgs();
-            ClearCLBuffer input = (ClearCLBuffer) args[0];
-            ClearCLBuffer output = (ClearCLBuffer) args[1];
+        Object[] args = openCLBufferArgs();
+        ClearCLBuffer input = (ClearCLBuffer) args[0];
+        ClearCLBuffer output = (ClearCLBuffer) args[1];
 
         boolean result = connectedComponentsLabeling(clij, input, output);
         releaseBuffers(args);
@@ -65,55 +63,49 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         aByteBufferWithAZero.put((byte)0);
         flag.readFrom(aByteBufferWithAZero, true);
 
-        ElapsedTime.measureForceOutput("set nonzeros to index", () -> {
-            setNonZeroPixelsToPixelIndex(clij, input, temp1);
-        });
+        setNonZeroPixelsToPixelIndex(clij, input, temp1);
 
         final int[] iterationCount = {0};
-        ElapsedTime.measureForceOutput("iterative min", () -> {
-            int flagValue = 1;
+        int flagValue = 1;
 
-            ClearCLKernel flipkernel = null;
-            ClearCLKernel flopkernel = null;
+        ClearCLKernel flipkernel = null;
+        ClearCLKernel flopkernel = null;
 
-            while (flagValue > 0) {
-                if (iterationCount[0] % 2 == 0) {
-                    if (flipkernel == null) {
-                        flipkernel = NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clijx, temp1, flag, temp2, flipkernel);
-                    } else {
-                        flipkernel.run(true);
-                    }
-                } else {
-                    if (flopkernel == null) {
-                        flopkernel = NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clijx, temp2, flag, temp1, flopkernel);
-                    } else {
-                        flopkernel.run(true);
-                    }
-                }
-
-                ImagePlus flagImp = clij.pull(flag);
-                flagValue = flagImp.getProcessor().get(0,0);
-                flag.readFrom(aByteBufferWithAZero, true);
-                iterationCount[0] = iterationCount[0] + 1;
-            }
-
+        while (flagValue > 0) {
             if (iterationCount[0] % 2 == 0) {
-                copyInternal(clij, temp1, temp3, temp1.getDimension(), temp3.getDimension());
+                if (flipkernel == null) {
+                    flipkernel = NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clijx, temp1, flag, temp2, flipkernel);
+                } else {
+                    flipkernel.run(true);
+                }
             } else {
-                copyInternal(clij, temp2, temp3, temp2.getDimension(), temp3.getDimension());
+                if (flopkernel == null) {
+                    flopkernel = NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clijx, temp2, flag, temp1, flopkernel);
+                } else {
+                    flopkernel.run(true);
+                }
             }
-            if (flipkernel != null) {
-                flipkernel.close();
-            }
-            if (flopkernel != null) {
-                flopkernel.close();
-            }
-        });
+
+            ImagePlus flagImp = clij.pull(flag);
+            flagValue = flagImp.getProcessor().get(0,0);
+            flag.readFrom(aByteBufferWithAZero, true);
+            iterationCount[0] = iterationCount[0] + 1;
+        }
+
+        if (iterationCount[0] % 2 == 0) {
+            copyInternal(clij, temp1, temp3, temp1.getDimension(), temp3.getDimension());
+        } else {
+            copyInternal(clij, temp2, temp3, temp2.getDimension(), temp3.getDimension());
+        }
+        if (flipkernel != null) {
+            flipkernel.close();
+        }
+        if (flopkernel != null) {
+            flopkernel.close();
+        }
 
 
-        ElapsedTime.measureForceOutput("shift intensities", () -> {
-            shiftIntensitiesToCloseGaps(clij, temp3, output);
-        });
+        shiftIntensitiesToCloseGaps(clij, temp3, output);
 
         temp1.close();
         temp2.close();
@@ -122,7 +114,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
 
         return true;
     }
-    
+
     public static boolean shiftIntensitiesToCloseGaps(CLIJ clij, ClearCLImageInterface input, ClearCLImageInterface output) {
         int maximum = 0;
         if (input instanceof ClearCLImage) {
@@ -132,51 +124,39 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         }
         final float[] allNewIndices = new float[maximum + 1];
 
-        //HashMap<Float, Float> indexFlipMap = new HashMap<Float, Float>();
+        float[] count = {0};
+        long number_of_pixels = (int) (input.getWidth() * input.getHeight() * input.getDepth());
+        if (number_of_pixels < Integer.MAX_VALUE && input.getNativeType() == NativeTypeEnum.Float) {
+            float[] slice = new float[(int) number_of_pixels];
+            FloatBuffer buffer = FloatBuffer.wrap(slice);
 
-        float[] count = {1};
-
-        ElapsedTime.measureForceOutput("checklabels", () -> {
-            long number_of_pixels = (int) (input.getWidth() * input.getHeight() * input.getDepth());
-            if (number_of_pixels < Integer.MAX_VALUE && input.getNativeType() == NativeTypeEnum.Float) {
-                float[] slice = new float[(int) number_of_pixels];
-                FloatBuffer buffer = FloatBuffer.wrap(slice);
-
-                input.writeTo(buffer, true);
-                for (int i = 0; i < slice.length; i++) {
-                    int key = (int) slice[i];
-                    if (key > 0 && allNewIndices[key] == 0) {
-                        allNewIndices[key] = count[0];
-                        count[0] = count[0] + 1;
-                    }
-                }
-            } else { // that's slower but more generic:
-                RandomAccessibleInterval rai = clij.convert(input, RandomAccessibleInterval.class);
-                Cursor<RealType> cursor = Views.iterable(rai).cursor();
-
-                while (cursor.hasNext()) {
-                    int key = new Float(cursor.next().getRealFloat()).intValue();
-                    if (key > 0 && allNewIndices[key] == 0) { // && !indexFlipMap.containsKey(key)) {
-                        allNewIndices[key] = count[0];
-                        //indexFlipMap.put(new Float(key), count[0]);
-                        count[0] = count[0] + 1;
-                    }
+            input.writeTo(buffer, true);
+            for (int i = 0; i < slice.length; i++) {
+                int key = (int) slice[i];
+                if (key > 0 && allNewIndices[key] == 0) {
+                    allNewIndices[key] = count[0];
+                    count[0] = count[0] + 1;
                 }
             }
-        });
-        System.out.println("max: " + count[0]);
+        } else { // that's slower but more generic:
+            RandomAccessibleInterval rai = clij.convert(input, RandomAccessibleInterval.class);
+            Cursor<RealType> cursor = Views.iterable(rai).cursor();
 
-        System.out.println("replaceAWholeMap");
+            while (cursor.hasNext()) {
+                int key = new Float(cursor.next().getRealFloat()).intValue();
+                if (key > 0 && allNewIndices[key] == 0) {
+                    allNewIndices[key] = count[0];
+                    count[0] = count[0] + 1;
+                }
+            }
+        }
 
-        ElapsedTime.measureForceOutput("replace", () -> {
-            ClearCLBuffer keyValueMap = clij.create(new long[]{allNewIndices.length, 1, 1}, NativeTypeEnum.Float);//clij.convert(indexFlipMap, ClearCLBuffer.class);
-            keyValueMap.readFrom(FloatBuffer.wrap(allNewIndices), true);
-            //clij.show(keyValueMap, "keyValueMap");
+        ClearCLBuffer keyValueMap = clij.create(new long[]{allNewIndices.length, 1, 1}, NativeTypeEnum.Float);
+        keyValueMap.readFrom(FloatBuffer.wrap(allNewIndices), true);
 
-            replace(clij, input, keyValueMap, output);
+        replace(clij, input, keyValueMap, output);
 
-            keyValueMap.close();
-        });
+        keyValueMap.close();
         return true;
     }
 
@@ -287,9 +267,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         if (!checkDimensions(srcNumberOfDimensions, dstNumberOfDimensions)) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (copy)");
         }
-        ElapsedTime.measureForceOutput("copy", () -> {
-            clij.execute(Kernels.class, "duplication.cl", "copy_" + srcNumberOfDimensions + "d", parameters);
-        });
+        clij.execute(Kernels.class, "duplication.cl", "copy_" + srcNumberOfDimensions + "d", parameters);
         return true;
     }
 
