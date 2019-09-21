@@ -52,8 +52,11 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
 
         CLIJx clijx = CLIJx.getInstance();
 
-        ClearCLImage temp1 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
-        ClearCLImage temp2 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
+        //ClearCLImage temp1 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
+        //ClearCLImage temp2 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
+
+        ClearCLBuffer temp1 = clij.create(output);
+        ClearCLBuffer temp2 = clij.create(output);
         ClearCLBuffer temp3 = clij.create(output);
 
         ClearCLBuffer flag = clij.create(new long[]{1,1,1}, NativeTypeEnum.Byte);
@@ -71,17 +74,21 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
 
         while (flagValue > 0) {
             if (iterationCount[0] % 2 == 0) {
-                if (flipkernel == null) {
+                NonzeroMinimumDiamond.nonzeroMinimumDiamond(clijx, temp1, flag, temp2, null).close();
+                /*if (flipkernel == null) {
                     flipkernel = NonzeroMinimumDiamond.nonzeroMinimumDiamond(clijx, temp1, flag, temp2, flipkernel);
                 } else {
                     flipkernel.run(true);
-                }
+                }*/
             } else {
+                NonzeroMinimumDiamond.nonzeroMinimumDiamond(clijx, temp2, flag, temp1, null).close();
+                /*
                 if (flopkernel == null) {
                     flopkernel = NonzeroMinimumDiamond.nonzeroMinimumDiamond(clijx, temp2, flag, temp1, flopkernel);
                 } else {
                     flopkernel.run(true);
-                }
+                }*/
+
             }
 
             ImagePlus flagImp = clij.pull(flag);
