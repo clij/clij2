@@ -63,10 +63,17 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJPlugin implements CL
         ClearCLBuffer inputImage = (ClearCLBuffer) args[0];
         ClearCLBuffer inputLabelMap = (ClearCLBuffer) args[1];
 
-        double[][] statistics = statisticsOfLabelledPixels(clij, inputImage, inputLabelMap);
-
         ResultsTable resultsTable = ResultsTable.getResultsTable();
 
+        statisticsOfLabelledPixels(clij, inputImage, inputLabelMap, resultsTable);
+
+        resultsTable.show("Results");
+        return true;
+    }
+
+    public static ResultsTable statisticsOfLabelledPixels(CLIJ clij, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, ResultsTable resultsTable) {
+
+        double[][] statistics = statisticsOfLabelledPixels(clij, inputImage, inputLabelMap);
 
         ArrayList<STATISTICS_ENTRY> entries = new ArrayList<STATISTICS_ENTRY>();
 
@@ -93,8 +100,8 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJPlugin implements CL
                 resultsTable.addValue(entry.toString(), statistics[line][entry.value]);
             }
         }
-        resultsTable.show("Results");
-        return true;
+
+        return resultsTable;
     }
 
     public static double[][] statisticsOfLabelledPixels(CLIJ clij, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap) {

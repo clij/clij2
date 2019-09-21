@@ -16,7 +16,6 @@ import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.CLIJUtilities;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
-import net.imglib2.img.display.imagej.ImageJFunctions;
 import net.imglib2.type.numeric.RealType;
 import net.imglib2.view.Views;
 import org.scijava.plugin.Plugin;
@@ -26,7 +25,6 @@ import java.nio.FloatBuffer;
 import java.util.HashMap;
 
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
-import static net.haesleinhuepf.clij.utilities.CLIJUtilities.radiusToKernelSize;
 
 /**
  * ConnectedComponentsLabeling
@@ -74,13 +72,13 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         while (flagValue > 0) {
             if (iterationCount[0] % 2 == 0) {
                 if (flipkernel == null) {
-                    flipkernel = NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clijx, temp1, flag, temp2, flipkernel);
+                    flipkernel = NonzeroMinimumDiamond.nonzeroMinimumDiamond(clijx, temp1, flag, temp2, flipkernel);
                 } else {
                     flipkernel.run(true);
                 }
             } else {
                 if (flopkernel == null) {
-                    flopkernel = NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clijx, temp2, flag, temp1, flopkernel);
+                    flopkernel = NonzeroMinimumDiamond.nonzeroMinimumDiamond(clijx, temp2, flag, temp1, flopkernel);
                 } else {
                     flopkernel.run(true);
                 }
@@ -124,7 +122,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         }
         final float[] allNewIndices = new float[maximum + 1];
 
-        float[] count = {0};
+        float[] count = {1};
         long number_of_pixels = (int) (input.getWidth() * input.getHeight() * input.getDepth());
         if (number_of_pixels < Integer.MAX_VALUE && input.getNativeType() == NativeTypeEnum.Float) {
             float[] slice = new float[(int) number_of_pixels];

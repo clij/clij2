@@ -19,13 +19,11 @@ import net.haesleinhuepf.clij.advancedfilters.LocalID;
 import net.haesleinhuepf.clij.advancedfilters.MaskLabel;
 import net.haesleinhuepf.clij.advancedfilters.MeanClosestSpotDistance;
 import net.haesleinhuepf.clij.advancedfilters.MeanSquaredError;
-import net.haesleinhuepf.clij.advancedfilters.MedianZProjection;
-import net.haesleinhuepf.clij.advancedfilters.NonzeroMinimum3DDiamond;
+import net.haesleinhuepf.clij.advancedfilters.NonzeroMinimumDiamond;
 import net.haesleinhuepf.clij.advancedfilters.Paste2D;
 import net.haesleinhuepf.clij.advancedfilters.Paste3D;
 import net.haesleinhuepf.clij.advancedfilters.Presign;
 import net.haesleinhuepf.clij.advancedfilters.SorensenDiceJaccardIndex;
-import net.haesleinhuepf.clij.advancedfilters.StandardDeviationZProjection;
 import net.haesleinhuepf.clij.advancedfilters.StackToTiles;
 import net.haesleinhuepf.clij.advancedfilters.SubtractBackground2D;
 import net.haesleinhuepf.clij.advancedfilters.SubtractBackground3D;
@@ -2521,13 +2519,13 @@ public class CLIJxOps {
     // net.haesleinhuepf.clij.advancedfilters.MedianZProjection
     //----------------------------------------------------
 
-    // net.haesleinhuepf.clij.advancedfilters.NonzeroMinimum3DDiamond
+    // net.haesleinhuepf.clij.advancedfilters.NonzeroMinimumDiamond
     //----------------------------------------------------
     /**
      * Apply a minimum-sphere filter to the input image. The radius is fixed to 1.
      */
-    public boolean nonzeroMinimum3DDiamond(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3) {
-        return NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clij, arg1, arg2, arg3);
+    public boolean nonzeroMinimumDiamond(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3) {
+        return NonzeroMinimumDiamond.nonzeroMinimumDiamond(clij, arg1, arg2, arg3);
     }
 
 
