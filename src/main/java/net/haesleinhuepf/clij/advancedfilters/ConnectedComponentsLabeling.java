@@ -122,7 +122,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
 
         return true;
     }
-
+    
     public static boolean shiftIntensitiesToCloseGaps(CLIJ clij, ClearCLImageInterface input, ClearCLImageInterface output) {
         int maximum = 0;
         if (input instanceof ClearCLImage) {
@@ -137,29 +137,46 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         float[] count = {1};
 
         ElapsedTime.measureForceOutput("checklabels", () -> {
-            RandomAccessibleInterval rai = clij.convert(input, RandomAccessibleInterval.class);
-            Cursor<RealType> cursor = Views.iterable(rai).cursor();
+            long number_of_pixels = (int) (input.getWidth() * input.getHeight() * input.getDepth());
+            if (number_of_pixels < Integer.MAX_VALUE && input.getNativeType() == NativeTypeEnum.Float) {
+                float[] slice = new float[(int) number_of_pixels];
+                FloatBuffer buffer = FloatBuffer.wrap(slice);
 
-            while (cursor.hasNext()) {
-                int key = new Float(cursor.next().getRealFloat()).intValue();
-                if (key > 0 && allNewIndices[key] == 0) { // && !indexFlipMap.containsKey(key)) {
-                    allNewIndices[key] = count[0];
-                    //indexFlipMap.put(new Float(key), count[0]);
-                    count[0] = count[0] + 1;
+                input.writeTo(buffer, true);
+                for (int i = 0; i < slice.length; i++) {
+                    int key = (int) slice[i];
+                    if (key > 0 && allNewIndices[key] == 0) {
+                        allNewIndices[key] = count[0];
+                        count[0] = count[0] + 1;
+                    }
+                }
+            } else { // that's slower but more generic:
+                RandomAccessibleInterval rai = clij.convert(input, RandomAccessibleInterval.class);
+                Cursor<RealType> cursor = Views.iterable(rai).cursor();
+
+                while (cursor.hasNext()) {
+                    int key = new Float(cursor.next().getRealFloat()).intValue();
+                    if (key > 0 && allNewIndices[key] == 0) { // && !indexFlipMap.containsKey(key)) {
+                        allNewIndices[key] = count[0];
+                        //indexFlipMap.put(new Float(key), count[0]);
+                        count[0] = count[0] + 1;
+                    }
                 }
             }
         });
         System.out.println("max: " + count[0]);
 
         System.out.println("replaceAWholeMap");
-        ClearCLBuffer keyValueMap = clij.create(new long[]{allNewIndices.length, 1, 1}, NativeTypeEnum.Float);//clij.convert(indexFlipMap, ClearCLBuffer.class);
-        keyValueMap.readFrom(FloatBuffer.wrap(allNewIndices), true);
-        //clij.show(keyValueMap, "keyValueMap");
 
-        replace(clij, input, keyValueMap, output);
+        ElapsedTime.measureForceOutput("replace", () -> {
+            ClearCLBuffer keyValueMap = clij.create(new long[]{allNewIndices.length, 1, 1}, NativeTypeEnum.Float);//clij.convert(indexFlipMap, ClearCLBuffer.class);
+            keyValueMap.readFrom(FloatBuffer.wrap(allNewIndices), true);
+            //clij.show(keyValueMap, "keyValueMap");
 
-        keyValueMap.close();
+            replace(clij, input, keyValueMap, output);
 
+            keyValueMap.close();
+        });
         return true;
     }
 
@@ -173,6 +190,8 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         return clij.execute(ConnectedComponentsLabeling.class, "cca.cl", "replace_by_map", parameters);
     }
 
+
+
     public static boolean setNonZeroPixelsToPixelIndex(CLIJ clij, ClearCLImageInterface src, ClearCLImageInterface dst) {
         HashMap<String, Object> parameters = new HashMap<>();
 
@@ -181,7 +200,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         parameters.put("dst", dst);
         return clij.execute(ConnectedComponentsLabeling.class, "cca.cl", "set_nonzero_pixels_to_pixelindex", parameters);
     }
-
+/*
     public static boolean nonzeroMinimumBox(CLIJ clij, ClearCLBuffer src, ClearCLBuffer flag, ClearCLBuffer dst, int radiusX, int radiusY, int radiusZ) {
         return executeSeparableKernel(clij, src, flag, dst, "cca.cl", "min_sep_image" + src.getDimension() + "d", radiusToKernelSize(radiusX), radiusToKernelSize(radiusY), radiusToKernelSize(radiusZ), radiusX, radiusY, radiusZ, src.getDimension());
     }
@@ -257,7 +276,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         temp.close();
 
         return true;
-    }
+    }*/
 
     private static boolean copyInternal(CLIJ clij, Object src, Object dst, long srcNumberOfDimensions, long dstNumberOfDimensions) {
         assertDifferent(src, dst);

@@ -107,7 +107,6 @@ __kernel void replace
   }
 }
 
-
 __kernel void replace_by_map
 (
   DTYPE_IMAGE_OUT_3D dst, DTYPE_IMAGE_IN_3D src,
@@ -123,8 +122,11 @@ __kernel void replace_by_map
   const int d = GET_IMAGE_DEPTH(src);
 
   int index = (int)(READ_IMAGE_3D(src,sampler,(int4)(i,j,k,0)).x);
-  int replacement = (int)(READ_IMAGE_3D(map,sampler,(int4)(index,0,0,0)).x);
+  int replacement = 0;
+  if (index > 0) {
+    replacement = (int)(READ_IMAGE_3D(map,sampler,(int4)(index,0,0,0)).x);
+  }
   WRITE_IMAGE_3D(dst, (int4)(i,j,k,0), (DTYPE_OUT)replacement);
-}
 
+}
 
