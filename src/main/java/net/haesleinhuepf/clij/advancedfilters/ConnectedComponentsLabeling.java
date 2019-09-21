@@ -5,6 +5,7 @@ import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.clearcl.util.ElapsedTime;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.kernels.Kernels;
@@ -16,6 +17,7 @@ import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.CLIJUtilities;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
+import net.imglib2.img.display.imagej.ImageJFunctions;
 import net.imglib2.type.numeric.RealType;
 import net.imglib2.view.Views;
 import org.scijava.plugin.Plugin;
@@ -68,16 +70,16 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         //clij.op().set(flag, 0f);
 
         ElapsedTime.measureForceOutput("set nonzeros to index", () -> {
-            setNonZeroPixelsToPixelIndex(clij, input, output);
+            setNonZeroPixelsToPixelIndex(clij, input, temp1);
         });
 
-        clij.op().copy(output, temp1);
+        //clij.op().copy(output, temp1);
         //clij.show(output, "start");
         //if (true) return;
 
+        final int[] iterationCount = {0};
         ElapsedTime.measureForceOutput("iterative min", () -> {
             int flagValue = 1;
-            int iterationCount = 0;
 
             ClearCLKernel flipkernel = null;
             ClearCLKernel flopkernel = null;
@@ -85,15 +87,15 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
             while (flagValue > 0) {
                 //clij.show(temp1, "temp1 before " + iterationCount);
 
-                if (iterationCount % 2 == 0) {
+                if (iterationCount[0] % 2 == 0) {
                     //System.out.println("O>T");
                     if (flipkernel == null) {
                         flipkernel = NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clijx, temp1, flag, temp2, flipkernel);
                     } else {
                         ClearCLKernel finalFlipkernel = flipkernel;
-                        ElapsedTime.measureForceOutput("dimo", () -> {
+                        //ElapsedTime.measureForceOutput("dimo", () -> {
                             finalFlipkernel.run(true);
-                        });
+                        //});
                     }
                     //nonzeroMinimumBox(clij, output, flag, temp2, 1, 1, 1);
                     //clij.show(temp2, "temp2 after a " + iterationCount);
@@ -103,9 +105,9 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
                         flopkernel = NonzeroMinimum3DDiamond.nonzeroMinimum3DDiamond(clijx, temp2, flag, temp1, flopkernel);
                     } else {
                         ClearCLKernel finalFlopkernel = flopkernel;
-                        ElapsedTime.measureForceOutput("dimo", () -> {
+                        //ElapsedTime.measureForceOutput("dimo", () -> {
                             finalFlopkernel.run(true);
-                        });
+                        //});
                     }
                     //nonzeroMinimumBox(clij, temp2, flag, output, 1, 1, 1);
                     //clij.show(output, "output after a " + iterationCount);
@@ -116,18 +118,19 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
                 ImagePlus flagImp = clij.pull(flag);
                 flagValue = flagImp.getProcessor().get(0,0);
                 //System.out.println("flag: " + flagValue);
-                ElapsedTime.measureForceOutput("SET 0", () -> {
+                //ElapsedTime.measureForceOutput("SET 0", () -> {
 
                     flag.readFrom(aByteBufferWithAZero, true);
                     //clij.op().set(flag, 0f);
-                        });
-                iterationCount = iterationCount + 1;
+                //        });
+                iterationCount[0] = iterationCount[0] + 1;
                 //System.out.println(iterationCount);
             }
-            if (iterationCount % 2 == 0) {
-                clij.op().copy(temp1, temp3);
+
+            if (iterationCount[0] % 2 == 0) {
+                copyInternal(clij, temp1, temp3, temp1.getDimension(), temp3.getDimension());
             } else {
-                clij.op().copy(temp2, temp3);
+                copyInternal(clij, temp2, temp3, temp2.getDimension(), temp3.getDimension());
             }
             if (flipkernel != null) {
                 flipkernel.close();
@@ -137,9 +140,11 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
             }
         });
 
+
         ElapsedTime.measureForceOutput("shift intensities", () -> {
-                    shiftIntensitiesToCloseGaps(clij, temp3, output);
-                });
+            shiftIntensitiesToCloseGaps(clij, temp3, output);
+        });
+
         temp1.close();
         temp2.close();
         temp3.close();
@@ -150,56 +155,46 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         return true;
     }
 
-    public static boolean shiftIntensitiesToCloseGaps(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
-        int maximum = (int)clij.op().maximumOfAllPixels(input);
-        float[] allNewIndices = new float[maximum + 1];
+    public static boolean shiftIntensitiesToCloseGaps(CLIJ clij, ClearCLImageInterface input, ClearCLImageInterface output) {
+        int maximum = 0;
+        if (input instanceof ClearCLImage) {
+            maximum = (int) clij.op().maximumOfAllPixels((ClearCLImage) input);
+        } else {
+            maximum = (int) clij.op().maximumOfAllPixels((ClearCLBuffer) input);
+        }
+        final float[] allNewIndices = new float[maximum + 1];
 
         HashMap<Float, Float> indexFlipMap = new HashMap<Float, Float>();
-        RandomAccessibleInterval rai = clij.pullRAI(input);
+        RandomAccessibleInterval rai = clij.convert(input, RandomAccessibleInterval.class);
+
         Cursor<RealType> cursor = Views.iterable(rai).cursor();
-        float count = 1;
-        while(cursor.hasNext()) {
+        float[] count = {1};
+
+        ElapsedTime.measureForceOutput("checklabels", () -> {
+        while (cursor.hasNext()) {
             int key = new Float(cursor.next().getRealFloat()).intValue();
             if (key > 0 && allNewIndices[key] == 0) { // && !indexFlipMap.containsKey(key)) {
-                allNewIndices[key] = count;
-                indexFlipMap.put(new Float(key), count);
-                count = count + 1;
+                allNewIndices[key] = count[0];
+                indexFlipMap.put(new Float(key), count[0]);
+                count[0] = count[0] + 1;
             }
         }
+        });
         System.out.println("max: " + count);
 
-        if (count > MAX_NUMBER_OF_INDICES_TO_REPLACE_INDIVIDUALLY) {
-            System.out.println("replaceAWholeMap");
-            ClearCLBuffer keyValueMap = clij.create(new long[]{allNewIndices.length, 1, 1}, NativeTypeEnum.Float);//clij.convert(indexFlipMap, ClearCLBuffer.class);
-            keyValueMap.readFrom(FloatBuffer.wrap(allNewIndices), true);
-            //clij.show(keyValueMap, "keyValueMap");
+        System.out.println("replaceAWholeMap");
+        ClearCLBuffer keyValueMap = clij.create(new long[]{allNewIndices.length, 1, 1}, NativeTypeEnum.Float);//clij.convert(indexFlipMap, ClearCLBuffer.class);
+        keyValueMap.readFrom(FloatBuffer.wrap(allNewIndices), true);
+        //clij.show(keyValueMap, "keyValueMap");
 
-            replace(clij, input, keyValueMap, output);
+        replace(clij, input, keyValueMap, output);
 
-            keyValueMap.close();
-        } else {
-            System.out.println("replace " + count + " indices individually.");
+        keyValueMap.close();
 
-            boolean flip = false;
-            for (Float key : indexFlipMap.keySet()) {
-                Float value = indexFlipMap.get(key);
-                //System.out.println("replace " + key + " " + value);
-
-                if (flip) {
-                    ReplaceIntensity.replaceIntensity(clij, input, output, key, value);
-                } else {
-                    ReplaceIntensity.replaceIntensity(clij, output, input, key, value);
-                }
-                flip = !flip;
-            }
-            if (flip) {
-                clij.op().copy(input, output);
-            }
-        }
         return true;
     }
 
-    public static boolean replace(CLIJ clij, ClearCLBuffer src, ClearCLBuffer map, ClearCLBuffer dst) {
+    public static boolean replace(CLIJ clij, ClearCLImageInterface src, ClearCLBuffer map, ClearCLImageInterface dst) {
         HashMap<String, Object> parameters = new HashMap<>();
 
         parameters.clear();
@@ -209,7 +204,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         return clij.execute(ConnectedComponentsLabeling.class, "cca.cl", "replace_by_map", parameters);
     }
 
-    public static boolean setNonZeroPixelsToPixelIndex(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
+    public static boolean setNonZeroPixelsToPixelIndex(CLIJ clij, ClearCLImageInterface src, ClearCLImageInterface dst) {
         HashMap<String, Object> parameters = new HashMap<>();
 
         parameters.clear();
@@ -304,7 +299,10 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         if (!checkDimensions(srcNumberOfDimensions, dstNumberOfDimensions)) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (copy)");
         }
-        return clij.execute(Kernels.class, "duplication.cl", "copy_" + srcNumberOfDimensions + "d", parameters);
+        ElapsedTime.measureForceOutput("copy", () -> {
+            clij.execute(Kernels.class, "duplication.cl", "copy_" + srcNumberOfDimensions + "d", parameters);
+        });
+        return true;
     }
 
 

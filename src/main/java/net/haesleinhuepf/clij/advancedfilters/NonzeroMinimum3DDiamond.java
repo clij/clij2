@@ -40,9 +40,9 @@ public class NonzeroMinimum3DDiamond extends AbstractCLIJPlugin implements CLIJM
         parameters.put("src", src);
         parameters.put("flag_dst", flag);
         parameters.put("dst", dst);
-        ElapsedTime.measureForceOutput("diamondmin", () -> {
+        //ElapsedTime.measureForceOutput("diamondmin", () -> {
             clij.execute(ConnectedComponentsLabeling.class, "diamondMorphology.cl", "minimalistic_nonzero_minimum_diamond_image3d", dst.getDimensions(), parameters);
-        });
+        //});
         return true;
     }
 
@@ -53,9 +53,9 @@ public class NonzeroMinimum3DDiamond extends AbstractCLIJPlugin implements CLIJM
         parameters.put("dst", dst);
 
         ClearCLKernel[] workaround = {kernel};
-        ElapsedTime.measureForceOutput("diamondmin", () -> {
+        //ElapsedTime.measureForceOutput("diamondmin", () -> {
             workaround[0] = clijx.executeSubsequently(ConnectedComponentsLabeling.class, "diamondMorphology_x.cl", "minimalistic_nonzero_minimum_diamond_image3d", dst.getDimensions(), dst.getDimensions(), parameters, workaround[0]);
-        });
+        //});
         return workaround[0];
     }
 
