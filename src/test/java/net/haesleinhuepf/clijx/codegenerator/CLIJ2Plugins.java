@@ -61,7 +61,7 @@ public interface CLIJ2Plugins {
             TranslationTimelapseRegistration.class,
             SetWhereXequalsY.class,
             Laplace.class,
-            //Image2DToResultsTable.class,
+            Image2DToResultsTable.class,
             WriteValuesToPositions.class,
             GetSize.class,
             MultiplyMatrix.class,
@@ -95,7 +95,11 @@ public interface CLIJ2Plugins {
             GaussJordan.class,
             StatisticsOfLabelledPixels.class,
             VarianceOfAllPixels.class,
-            StandardDeviationOfAllPixels.class
+            StandardDeviationOfAllPixels.class,
+            ExcludeLabelsOnEdges.class,
+            BinarySubtract.class,
+            BinaryEdgeDetection.class,
+            DistanceMap.class
     };
 
 }

@@ -31,7 +31,7 @@ public class CLIJx {
     @Deprecated
     public CLIJx(CLIJ clij) {
         this.clij = clij;
-        op = new CLIJxOps(clij);
+        op = new CLIJxOps(this);
         mCLKernelExecutor = new CLKernelExecutor(clij.getClearCLContext());
     }
 
@@ -132,5 +132,10 @@ public class CLIJx {
         });
 
         return result[0];
+    }
+
+    @Deprecated
+    public CLIJ getClij() {
+        return clij;
     }
 }

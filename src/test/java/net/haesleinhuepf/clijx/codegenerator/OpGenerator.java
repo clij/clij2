@@ -4,6 +4,7 @@ import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPluginService;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
 import org.scijava.Context;
 
 import java.io.*;
@@ -13,20 +14,19 @@ import java.lang.reflect.Parameter;
 
 public class OpGenerator {
     public static void main(String ... args) throws IOException {
-
-
-
         CLIJMacroPluginService service = new Context(CLIJMacroPluginService.class).getService(CLIJMacroPluginService.class);
 
         StringBuilder builder = new StringBuilder();
         builder.append("package net.haesleinhuepf.clijx.utilities;\n");
         builder.append("import net.haesleinhuepf.clij.CLIJ;\n");
+        builder.append("import net.haesleinhuepf.clijx.CLIJx;\n");
+        builder.append("import net.haesleinhuepf.clij.clearcl.ClearCLKernel;\n");
         builder.append("import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;\n");
         builder.append("import net.haesleinhuepf.clij.clearcl.ClearCLImage;\n");
         builder.append("import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;\n");
         builder.append("import net.imglib2.realtransform.AffineTransform2D;\n");
         builder.append("import net.imglib2.realtransform.AffineTransform3D;\n");
-        //builder.append("import ij.measure.ResultsTable;\n");
+        builder.append("import ij.measure.ResultsTable;\n");
 
         for (Class klass : CLIJ2Plugins.classes) {
             builder.append("import " + klass.getName() + ";\n");
@@ -35,9 +35,12 @@ public class OpGenerator {
         builder.append("// this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details\n");
         builder.append("public class CLIJxOps {\n");
         builder.append("   private CLIJ clij;\n");
-        builder.append("   public CLIJxOps(CLIJ clij) {\n");
-        builder.append("       this.clij = clij;\n");
-        builder.append("   }\n");
+        builder.append("   private CLIJx clijx;\n");
+        builder.append("   \n" +
+                "   public CLIJxOps(CLIJx clijx) {\n" +
+                "       this.clijx = clijx;\n" +
+                "       this.clij = clijx.getClij();\n" +
+                "   }\n");
 
         int methodCount = 0;
         for (Class klass : CLIJ2Plugins.classes) {
@@ -47,7 +50,9 @@ public class OpGenerator {
                 if (Modifier.isStatic(method.getModifiers()) &&
                         Modifier.isPublic(method.getModifiers()) &&
                         method.getParameterCount() > 0 &&
-                        method.getParameters()[0].getType() == CLIJ.class) {
+                        (method.getParameters()[0].getType() == CLIJ.class ||
+                         method.getParameters()[0].getType() == CLIJx.class
+                        )) {
 
                     String methodName = method.getName();
                     String returnType = typeToString(method.getReturnType());
@@ -55,7 +60,11 @@ public class OpGenerator {
                     String parametersCall = "";
                     for (Parameter parameter : method.getParameters()) {
                         if (parametersCall.length() == 0) { // first parameter
-                            parametersCall = "clij";
+                            if (method.getParameters()[0].getType() == CLIJ.class) {
+                                parametersCall = "clij";
+                            } else {
+                                parametersCall = "clijx";
+                            }
                             continue;
                         }
 
