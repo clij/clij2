@@ -10,11 +10,15 @@ import ij.plugin.PlugIn;
 import ij.process.ImageProcessor;
 import ij.util.Tools;
 import net.haesleinhuepf.clij.CLIJ;
+import net.haesleinhuepf.clij.advancedfilters.BinaryEdgeDetection;
 import net.haesleinhuepf.clij.advancedfilters.ConnectedComponentsLabeling;
 import net.haesleinhuepf.clij.advancedfilters.ExcludeLabelsOnEdges;
 import net.haesleinhuepf.clij.advancedfilters.StatisticsOfLabelledPixels;
+import net.haesleinhuepf.clij.advancedmath.GreaterOrEqual;
+import net.haesleinhuepf.clij.advancedmath.GreaterOrEqualConstant;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
+import net.haesleinhuepf.clijx.CLIJx;
 
 import java.awt.*;
 import java.awt.event.AdjustmentEvent;
@@ -154,7 +158,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         gd.addCheckbox("Exclude_objects_on_edges", excludeOnEdges);
         gd.addMessage("Maps to show: ");
         gd.addCheckbox("Objects", showObj);
-        //gd.addCheckbox("Surfaces", showSurf);
+        gd.addCheckbox("Surfaces", showSurf);
         //gd.addCheckbox("Centroids", showCentro);
         //gd.addCheckbox("Centres_of_masses", showCOM);
         gd.addMessage("Results tables to show: ");
@@ -182,7 +186,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         maxSize = (int) gd.getNextNumber();
         excludeOnEdges = gd.getNextBoolean();
         showObj = gd.getNextBoolean();
-        //showSurf=gd.getNextBoolean();
+        showSurf=gd.getNextBoolean();
         //showCentro=gd.getNextBoolean();
         //showCOM=gd.getNextBoolean();
         showStat = gd.getNextBoolean();
@@ -302,17 +306,23 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         if (showObj) {
             //clij.show(flop, );
             ImagePlus img = clij.pull(flop);
-            img.setTitle("clij Objects map of " + imp.getTitle() + " (experimental, clij)");
-            img.setCalibration(imp.getCalibration());
-            img.setDisplayRange(0, numberOfObjects);
+            img.setTitle("Objects map of " + imp.getTitle() + " (experimental, clij)");
+            show(img, 0, numberOfObjects);
 
-            img.show();
-            IJ.run(img,"Out [-]", "");
-            IJ.run(img,"Out [-]", "");
-            IJ.run(img,"Out [-]", "");
-            img.getWindow().setLocation(imp.getWindow().getX() + 50, imp.getWindow().getY() + 50);
+        }
 
-            IJ.run(img,"Fire", "");
+        if (showSurf) {
+            CLIJx clijx = CLIJx.getInstance();
+            clijx.op.greaterOrEqualConstant(flop, flip, 1f);
+            ClearCLBuffer temp1 = clij.create(flop);
+            clijx.op.binaryEdgeDetection(flip, temp1);
+            clijx.op.multiplyImages(flop, temp1, flip);
+
+            ImagePlus img = clijx.pull(flip);
+            img.setTitle("Surface map of " + imp.getTitle() + " (experimental, clij)");
+            show(img, 0, numberOfObjects);
+
+            temp1.close();
         }
 
         // statistics
@@ -339,6 +349,21 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         flop.close();
         flap.close();
 
+    }
+
+    private void show(ImagePlus img, int min, int max) {
+        img.setCalibration(imp.getCalibration());
+        img.setDisplayRange(min, max);
+
+        img.show();
+        while (img.getWindow().getWidth() > imp.getWindow().getWidth()) {
+            IJ.run(img, "Out [-]", "");
+        }
+        //IJ.run(img,"Out [-]", "");
+        //IJ.run(img,"Out [-]", "");
+        img.getWindow().setLocation(imp.getWindow().getX() + 50, imp.getWindow().getY() + 50);
+
+        IJ.run(img,"Fire", "");
     }
 
 

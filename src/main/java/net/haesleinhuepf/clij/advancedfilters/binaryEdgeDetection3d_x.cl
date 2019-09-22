@@ -9,7 +9,7 @@ __kernel void binary_edge_detection_diamond_image3d
   const int y = get_global_id(1);
   const int z = get_global_id(2);
 
-  const int4 pos = (int2){x,y,z,O};
+  const int4 pos = (int4){x,y,z,0};
 
   float valueToWrite = READ_src_IMAGE(src, sampler, pos).x;
   if (valueToWrite != 0) {
