@@ -5,6 +5,7 @@ import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPluginService;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
 import org.scijava.Context;
 
 import java.io.File;
@@ -42,7 +43,8 @@ public class DocumentationGenerator {
                 if (Modifier.isStatic(method.getModifiers()) &&
                         Modifier.isPublic(method.getModifiers()) &&
                         method.getParameterCount() > 0 &&
-                        method.getParameters()[0].getType() == CLIJ.class) {
+                        (method.getParameters()[0].getType() == CLIJ.class ||
+                         method.getParameters()[0].getType() == CLIJx.class)) {
 
 
 
@@ -64,7 +66,7 @@ public class DocumentationGenerator {
                         parametersCall = parametersCall + ", " + parameter.getName();
                     }
 
-                    if (!parametersHeader.contains("ClearCLImage")) { // we document only  buffer methods for now
+                    if (!parametersHeader.contains("ClearCLImage ")) { // we document only  buffer methods for now
                         CLIJMacroPlugin plugin = findPlugin(service, methodName);
 
                         DocumentationItem item = new DocumentationItem();

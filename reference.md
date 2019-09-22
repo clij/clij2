@@ -19,9 +19,11 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#automaticThreshold">automaticThreshold'</a>
 * <a href="#automaticThreshold">automaticThreshold'</a>
 * <a href="#binaryAnd">binaryAnd'</a>
+* <a href="#binaryEdgeDetection">binaryEdgeDetection</a>
 * <a href="#binaryIntersection">binaryIntersection</a>
 * <a href="#binaryNot">binaryNot'</a>
 * <a href="#binaryOr">binaryOr'</a>
+* <a href="#binarySubtract">binarySubtract</a>
 * <a href="#binaryUnion">binaryUnion</a>
 * <a href="#binaryXOr">binaryXOr'</a>
 * <a href="#blurSliceBySlice">blurSliceBySlice'</a>
@@ -53,6 +55,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#dilateBox">dilateBox'</a>
 * <a href="#dilateSphereSliceBySlice">dilateSphereSliceBySlice'</a>
 * <a href="#dilateSphere">dilateSphere'</a>
+* <a href="#distanceMap">distanceMap</a>
 * <a href="#divideImages">divideImages'</a>
 * <a href="#downsampleSliceBySliceHalfMedian">downsampleSliceBySliceHalfMedian'</a>
 * <a href="#downsample">downsample'</a>
@@ -68,6 +71,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#erodeBox">erodeBox'</a>
 * <a href="#erodeSphereSliceBySlice">erodeSphereSliceBySlice'</a>
 * <a href="#erodeSphere">erodeSphere'</a>
+* <a href="#excludeLabelsOnEdges">excludeLabelsOnEdges</a>
 * <a href="#exponential">exponential</a>
 * <a href="#extrema">extrema</a>
 * <a href="#fillHistogram">fillHistogram'</a>
@@ -84,12 +88,14 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#greaterOrEqual">greaterOrEqual</a>
 * <a href="#greater">greater</a>
 * <a href="#histogram">histogram'</a>
+* <a href="#image2DToResultsTable">image2DToResultsTable</a>
 * <a href="#invert">invert'</a>
 * <a href="#jaccardIndex">jaccardIndex</a>
 * <a href="#labelToMask">labelToMask</a>
 * <a href="#laplace">laplace</a>
 * <a href="#localExtremaBox">localExtremaBox</a>
 * <a href="#localID">localID</a>
+* <a href="#localPositiveMinimum">localPositiveMinimum</a>
 * <a href="#localThreshold">localThreshold'</a>
 * <a href="#logarithm">logarithm</a>
 * <a href="#maskLabel">maskLabel</a>
@@ -140,8 +146,8 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#multiplySliceBySliceWithScalars">multiplySliceBySliceWithScalars'</a>
 * <a href="#multiplyStackWithPlane">multiplyStackWithPlane'</a>
 * <a href="#nClosestPoints">nClosestPoints</a>
-* <a href="#nonzeroMinimum3DDiamond">nonzeroMinimum3DDiamond</a>
-* <a href="#nonzeroMinimumBox">nonzeroMinimumBox</a>
+* <a href="#nonzeroMinimumDiamond">nonzeroMinimumDiamond</a>
+* <a href="#nonzeroMinimumDiamond">nonzeroMinimumDiamond</a>
 * <a href="#notEqualConstant">notEqualConstant</a>
 * <a href="#notEqual">notEqual</a>
 * <a href="#particleImageVelocimetry2D">particleImageVelocimetry2D</a>
@@ -180,9 +186,10 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#stackToTiles">stackToTiles</a>
 * <a href="#standardDeviationOfAllPixels">standardDeviationOfAllPixels</a>
 * <a href="#standardDeviationOfAllPixels">standardDeviationOfAllPixels</a>
-* <a href="#statisticsOfMaskedPixels">statisticsOfMaskedPixels</a>
-* <a href="#statisticsOfMaskedPixels">statisticsOfMaskedPixels</a>
-* <a href="#statisticsOfMaskedPixels">statisticsOfMaskedPixels</a>
+* <a href="#statisticsOfLabelledPixels">statisticsOfLabelledPixels</a>
+* <a href="#statisticsOfLabelledPixels">statisticsOfLabelledPixels</a>
+* <a href="#statisticsOfLabelledPixels">statisticsOfLabelledPixels</a>
+* <a href="#statisticsOfLabelledPixels">statisticsOfLabelledPixels</a>
 * <a href="#subtractBackground">subtractBackground</a>
 * <a href="#subtractBackground">subtractBackground</a>
 * <a href="#subtractImages">subtractImages'</a>
@@ -277,7 +284,7 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform2D arg3
 
 <a name="affineTransform2D"></a>
 ## affineTransform2D'
@@ -302,7 +309,7 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform2D arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
 
 <a name="affineTransform3D"></a>
 ## affineTransform3D'
@@ -525,6 +532,17 @@ Image operand1, Image operand2, Image destination
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
 
+<a name="binaryEdgeDetection"></a>
+## binaryEdgeDetection
+
+Determines pixels/voxels which are on the surface of a binary objects and sets only them to 1 in the destination image.
+
+Parameters (macro):
+Image source, Image destination
+
+Parameters (Java):
+ClearCLImageInterface arg1, ClearCLImageInterface arg2
+
 <a name="binaryIntersection"></a>
 ## binaryIntersection
 
@@ -567,6 +585,17 @@ Image operand1, Image operand2, Image destination
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
+
+<a name="binarySubtract"></a>
+## binarySubtract
+
+Subtracts one binary image from another.
+
+Parameters (macro):
+Image minuend, Image subtrahend, Image destination
+
+Parameters (Java):
+ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3
 
 <a name="binaryUnion"></a>
 ## binaryUnion
@@ -620,7 +649,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="blur"></a>
 ## blur'
@@ -633,7 +662,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="boundingBox"></a>
 ## boundingBox
@@ -960,6 +989,17 @@ Image source, Image destination
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
 
+<a name="distanceMap"></a>
+## distanceMap
+
+Generates a distance map from a binary image.
+
+Parameters (macro):
+Image source, Image destination
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2
+
 <a name="divideImages"></a>
 ## divideImages'
 
@@ -996,7 +1036,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="downsample"></a>
 ## downsample'
@@ -1008,7 +1048,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="drawBox"></a>
 ## drawBox
@@ -1149,6 +1189,17 @@ The pixels in the input image with pixel value not equal to 0 will be interprete
 
 Parameters (macro):
 Image source, Image destination
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2
+
+<a name="excludeLabelsOnEdges"></a>
+## excludeLabelsOnEdges
+
+Removes all labels from a label map which touch the edges. Remaining label elements are renumbered afterwards.
+
+Parameters (macro):
+Image label_map_input, Image label_map_destination
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
@@ -1353,6 +1404,17 @@ Image source, Image destination, Number numberOfBins, Number minimumGreyValue, N
 Parameters (Java):
 ClearCLBuffer arg1, Float arg2, Float arg3, Integer arg4
 
+<a name="image2DToResultsTable"></a>
+## image2DToResultsTable
+
+Converts an image into a table.
+
+Parameters (macro):
+Image source
+
+Parameters (Java):
+ClearCLBuffer arg1, ResultsTable arg2
+
 <a name="invert"></a>
 ## invert'
 
@@ -1423,6 +1485,17 @@ Image input, Image destination
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
+
+<a name="localPositiveMinimum"></a>
+## localPositiveMinimum
+
+null
+
+Parameters (macro):
+null
+
+Parameters (Java):
+ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3
 
 <a name="localThreshold"></a>
 ## localThreshold'
@@ -1724,7 +1797,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="meanSphere"></a>
 ## meanSphere'
@@ -1736,7 +1809,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="meanSquaredError"></a>
 ## meanSquaredError
@@ -1773,7 +1846,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="medianBox"></a>
 ## medianBox'
@@ -1787,7 +1860,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="medianSliceBySliceBox"></a>
 ## medianSliceBySliceBox'
@@ -1941,7 +2014,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="minimumSphere"></a>
 ## minimumSphere'
@@ -1953,7 +2026,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="minimumZProjection"></a>
 ## minimumZProjection'
@@ -2051,19 +2124,8 @@ Image distance_matrix, Image indexlist_destination, Number nClosestPointsTofind
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
 
-<a name="nonzeroMinimum3DDiamond"></a>
-## nonzeroMinimum3DDiamond
-
-Apply a minimum-sphere filter to the input image. The radius is fixed to 1.
-
-Parameters (macro):
-Image input, Image destination
-
-Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
-
-<a name="nonzeroMinimumBox"></a>
-## nonzeroMinimumBox
+<a name="nonzeroMinimumDiamond"></a>
+## nonzeroMinimumDiamond
 
 null
 
@@ -2071,7 +2133,18 @@ Parameters (macro):
 null
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, int arg4, int arg5, int arg6
+ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3, ClearCLKernel arg4
+
+<a name="nonzeroMinimumDiamond"></a>
+## nonzeroMinimumDiamond
+
+null
+
+Parameters (macro):
+null
+
+Parameters (Java):
+ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3
 
 <a name="notEqualConstant"></a>
 ## notEqualConstant
@@ -2235,7 +2308,7 @@ Parameters (macro):
 Image destination, String filename, Number width, Number height, Number depth, Number bitsPerPixel
 
 Parameters (Java):
-ClearCLBuffer arg1, String arg2
+String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="readRawImageFromDisc"></a>
 ## readRawImageFromDisc
@@ -2246,7 +2319,7 @@ Parameters (macro):
 Image destination, String filename, Number width, Number height, Number depth, Number bitsPerPixel
 
 Parameters (Java):
-String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, String arg2
 
 <a name="replaceIntensity"></a>
 ## replaceIntensity
@@ -2257,7 +2330,7 @@ Parameters (macro):
 Image input, Image destination, Number oldValue, number newValue
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3, Float arg4
 
 <a name="replace"></a>
 ## replace
@@ -2268,7 +2341,7 @@ Parameters (macro):
 null
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
+ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3
 
 <a name="resliceBottom"></a>
 ## resliceBottom'
@@ -2353,7 +2426,7 @@ Parameters (macro):
 null
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2
+ClearCLImageInterface arg1, ClearCLImageInterface arg2
 
 <a name="setWhereXequalsY"></a>
 ## setWhereXequalsY
@@ -2391,7 +2464,7 @@ Parameters (macro):
 null
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2
+ClearCLImageInterface arg1, ClearCLImageInterface arg2
 
 <a name="shortestDistances"></a>
 ## shortestDistances
@@ -2525,19 +2598,8 @@ Image source
 Parameters (Java):
 ClearCLBuffer arg1, Float arg2
 
-<a name="statisticsOfMaskedPixels"></a>
-## statisticsOfMaskedPixels
-
-Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
-
-Parameters (macro):
-Image input, Image labelmap
-
-Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4
-
-<a name="statisticsOfMaskedPixels"></a>
-## statisticsOfMaskedPixels
+<a name="statisticsOfLabelledPixels"></a>
+## statisticsOfLabelledPixels
 
 Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
 
@@ -2547,8 +2609,30 @@ Image input, Image labelmap
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3
 
-<a name="statisticsOfMaskedPixels"></a>
-## statisticsOfMaskedPixels
+<a name="statisticsOfLabelledPixels"></a>
+## statisticsOfLabelledPixels
+
+Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
+
+Parameters (macro):
+Image input, Image labelmap
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2, ResultsTable arg3
+
+<a name="statisticsOfLabelledPixels"></a>
+## statisticsOfLabelledPixels
+
+Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
+
+Parameters (macro):
+Image input, Image labelmap
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4
+
+<a name="statisticsOfLabelledPixels"></a>
+## statisticsOfLabelledPixels
 
 Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
 
@@ -2687,7 +2771,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
 
 <a name="translationRegistration"></a>
 ## translationRegistration
@@ -2698,7 +2782,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
 
 <a name="translationTimelapseRegistration"></a>
 ## translationTimelapseRegistration
