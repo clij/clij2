@@ -34,7 +34,7 @@ public interface CLIJ2Plugins {
             MeanClosestSpotDistance.class,
             MeanSquaredError.class,
             MedianZProjection.class,
-            NonzeroMinimum3DDiamond.class,
+            NonzeroMinimumDiamond.class,
             Paste2D.class,
             Paste3D.class,
             Presign.class,

@@ -3,6 +3,7 @@ package net.haesleinhuepf.clij.advancedfilters;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -25,7 +26,7 @@ public class ReplaceIntensity extends AbstractCLIJPlugin implements CLIJMacroPlu
         return result;
     }
 
-    public static boolean replaceIntensity(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Float in, Float out) {
+    public static boolean replaceIntensity(CLIJ clij, ClearCLImageInterface src, ClearCLImageInterface dst, Float in, Float out) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.clear();
         parameters.put("src", src);
