@@ -128,7 +128,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
 //            Prefs.set("3D-OC-Options_showMaskedImg.boolean", false);
 //        }
 
-        GenericDialog gd = new GenericDialog("3D Object Counter on GPU (experimental, CLIJ)");
+        GenericDialog gd = new GenericDialog("3D Object Counter on GPU (experimental, clij)");
 
         ArrayList<String> deviceList = CLIJ.getAvailableDeviceNames();
         if (clij == null) {
@@ -242,7 +242,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         if (minSize > 1 || maxSize < imp.getWidth() * imp.getHeight() * nbSlices) {
             int count = 1;
             indexList[0] = 0; // background stays background
-            clij.show(flap, "hist");
+            //clij.show(flap, "hist");
             for (int i = 1; i < indexList.length; i++) {
 
                 if (indexList[i] >= minSize && indexList[i] <= maxSize) {
@@ -253,6 +253,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
                 }
             }
             System.out.println("Count: " + count);
+            numberOfObjects = count;
 
             flap.readFrom(FloatBuffer.wrap(indexList), true);
 
@@ -262,9 +263,9 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
             //clij.show(flop, "filtered by size");
 
             // refill histogram
-            flap.close();
-            flap = clij.create(new long[]{count, 1, 1}, NativeTypeEnum.Float);
-            clij.op().fillHistogram(flop, flap, 1f, new Float(count));
+            //flap.close();
+            //flap = clij.create(new long[]{count, 1, 1}, NativeTypeEnum.Float);
+            //clij.op().fillHistogram(flop, flap, 0f, new Float(count));
         }
 
         /*
@@ -299,8 +300,19 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         boolean newRT = Prefs.get("3D-OC-Options_newRT.boolean", true);
 
         if (showObj) {
-            clij.show(flop, "Objects map of " + imp.getTitle());
-            IJ.run("Fire");
+            //clij.show(flop, );
+            ImagePlus img = clij.pull(flop);
+            img.setTitle("clij Objects map of " + imp.getTitle() + " (experimental, clij)");
+            img.setCalibration(imp.getCalibration());
+            img.setDisplayRange(0, numberOfObjects);
+
+            img.show();
+            IJ.run(img,"Out [-]", "");
+            IJ.run(img,"Out [-]", "");
+            IJ.run(img,"Out [-]", "");
+            img.getWindow().setLocation(imp.getWindow().getX() + 50, imp.getWindow().getY() + 50);
+
+            IJ.run(img,"Fire", "");
         }
 
         // statistics
@@ -314,7 +326,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
 
             if (showStat) {
                 if (newRT) {
-                    table.show("Statistics for " + imp.getTitle());
+                    table.show("Statistics for " + imp.getTitle() + " (experimental, clij)");
                 } else {
                     table.show("Results");
                 }
