@@ -99,7 +99,8 @@ public interface CLIJ2Plugins {
             ExcludeLabelsOnEdges.class,
             BinarySubtract.class,
             BinaryEdgeDetection.class,
-            DistanceMap.class
+            DistanceMap.class,
+            PullAsROI.class
     };
 
 }
