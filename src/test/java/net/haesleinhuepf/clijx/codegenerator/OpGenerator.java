@@ -1,5 +1,6 @@
 package net.haesleinhuepf.clijx.codegenerator;
 
+import ij.gui.Roi;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPluginService;
@@ -27,6 +28,7 @@ public class OpGenerator {
         builder.append("import net.imglib2.realtransform.AffineTransform2D;\n");
         builder.append("import net.imglib2.realtransform.AffineTransform3D;\n");
         builder.append("import ij.measure.ResultsTable;\n");
+        builder.append("import ij.gui.Roi;\n");
 
         for (Class klass : CLIJ2Plugins.classes) {
             builder.append("import " + klass.getName() + ";\n");
