@@ -1,5 +1,6 @@
 package net.haesleinhuepf.clij.advancedfilters;
 
+import ij.ImageJ;
 import ij.ImagePlus;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
@@ -49,8 +50,9 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
     }
 
     public static boolean connectedComponentsLabeling(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
-
+        System.out.println("cca1");
         CLIJx clijx = CLIJx.getInstance();
+        System.out.println("cca2");
 
         //ClearCLImage temp1 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
         //ClearCLImage temp2 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
@@ -60,9 +62,12 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         ClearCLBuffer temp3 = clij.create(output);
 
         ClearCLBuffer flag = clij.create(new long[]{1,1,1}, NativeTypeEnum.Byte);
+
         ByteBuffer aByteBufferWithAZero = ByteBuffer.allocate(1);
         aByteBufferWithAZero.put((byte)0);
+
         flag.readFrom(aByteBufferWithAZero, true);
+        System.out.println("cca3");
 
         setNonZeroPixelsToPixelIndex(clij, input, temp1);
 
@@ -71,9 +76,20 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
 
         ClearCLKernel flipkernel = null;
         ClearCLKernel flopkernel = null;
+        System.out.println("cca4");
 
+        //new ImageJ();
         while (flagValue > 0) {
+            //System.out.println("cca qq " + clij.op().sumPixels(temp1));
+            //clij.show(temp1, "temp1");
+            //try {
+            //    Thread.sleep(2000);
+            //} catch (InterruptedException e) {
+            //    e.printStackTrace();
+            //}
+
             if (iterationCount[0] % 2 == 0) {
+                //NonzeroMinimumDiamond.nonzeroMinimumDiamond(clij, temp1, flag, temp2);
                 NonzeroMinimumDiamond.nonzeroMinimumDiamond(clijx, temp1, flag, temp2, null).close();
                 /*if (flipkernel == null) {
                     flipkernel = NonzeroMinimumDiamond.nonzeroMinimumDiamond(clijx, temp1, flag, temp2, flipkernel);
@@ -81,6 +97,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
                     flipkernel.run(true);
                 }*/
             } else {
+                //NonzeroMinimumDiamond.nonzeroMinimumDiamond(clij, temp2, flag, temp1);
                 NonzeroMinimumDiamond.nonzeroMinimumDiamond(clijx, temp2, flag, temp1, null).close();
                 /*
                 if (flopkernel == null) {
@@ -93,9 +110,15 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
 
             ImagePlus flagImp = clij.pull(flag);
             flagValue = flagImp.getProcessor().get(0,0);
+
+            //flag.writeTo(aByteBufferWithAZero, true);
+            //flagValue = aByteBufferWithAZero.get(0);
+            //aByteBufferWithAZero.put((byte)0);
             flag.readFrom(aByteBufferWithAZero, true);
             iterationCount[0] = iterationCount[0] + 1;
         }
+        System.out.println("cca5");
+
 
         if (iterationCount[0] % 2 == 0) {
             copyInternal(clij, temp1, temp3, temp1.getDimension(), temp3.getDimension());
@@ -109,8 +132,10 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
             flopkernel.close();
         }
 
+        System.out.println("cca6");
 
         shiftIntensitiesToCloseGaps(clij, temp3, output);
+        System.out.println("cca7");
 
         temp1.close();
         temp2.close();
