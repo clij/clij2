@@ -31,7 +31,10 @@ public class LocalExtremaBox extends AbstractCLIJPlugin implements CLIJMacroPlug
         clij.op().minimumBox(input, temp1, radiusX, radiusY, radiusZ);
         clij.op().maximumBox(input, temp2, radiusX, radiusY, radiusZ);
 
-        return Extrema.extrema(clij, temp1, temp2, destination);
+        boolean result = Extrema.extrema(clij, temp1, temp2, destination);
+        temp1.close();
+        temp2.close();
+        return result;
     }
 
     @Override
