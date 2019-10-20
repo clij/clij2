@@ -22,29 +22,31 @@ DTYPE_IMAGE_OUT_2D dst_indexlist) {
     pos.y = y;
     float distance = READ_IMAGE_2D(src_distancematrix, sampler, pos).x;
 
-    distances[initialized_values] = distance;
-    indices[initialized_values] = y;
-
-    // sort by insert
-    for (int i = initialized_values; i > 0; i--) {
-        if (distances[i] < distances[i - 1]) {
-          int tempIndex = indices[i];
-          indices[i] = indices[i - 1];
-          indices[i - 1] = tempIndex;
-
-          float tempDistance = distances[i];
-          distances[i] = distances[i - 1];
-          distances[i - 1] = tempDistance;
-        }
-    }
     if (initialized_values < n) {
       initialized_values++;
+      distances[initialized_values - 1] = distance;
+      indices[initialized_values - 1] = y;
+    }
+    // sort by insert
+    for (int i = initialized_values - 1; i >= 0; i--) {
+        if (distance > distances[i]) {
+            break;
+        }
+        if (distance < distances[i] && (i == 0 || distance >= distances[i - 1])) {
+           for (int j = initialized_values - 1; j > i; j--) {
+                indices[j] = indices[j - 1];
+                distances[j] = distances[j - 1];
+           }
+           distances[i] = distance;
+           indices[i] = y;
+           break;
+        }
     }
   }
 
   for (int i = 0; i < initialized_values; i++) {
     pos.y = i;
 
-    WRITE_IMAGE_2D(dst_indexlist, pos, (DTYPE_OUT)(indices[i]));
+    WRITE_IMAGE_2D(dst_indexlist, pos, CONVERT_DTYPE_OUT(indices[i]));
   }
 }
