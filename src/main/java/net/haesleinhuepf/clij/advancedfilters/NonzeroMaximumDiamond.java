@@ -5,7 +5,6 @@ import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
-import net.haesleinhuepf.clij.clearcl.util.ElapsedTime;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -15,8 +14,8 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_nonzeroMinimumDiamond")
-public class NonzeroMinimumDiamond extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_nonzeroMaximumDiamond")
+public class NonzeroMaximumDiamond extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -29,24 +28,24 @@ public class NonzeroMinimumDiamond extends AbstractCLIJPlugin implements CLIJMac
         ClearCLBuffer output = (ClearCLBuffer) (args[1]);
 
         ClearCLBuffer flag = clij.create(new long[]{1,1,1}, output.getNativeType());
-        boolean result = nonzeroMinimumDiamond(clij, input, flag, output);
+        boolean result = nonzeroMaximumDiamond(clij, input, flag, output);
         flag.close();
         return result;
     }
 
 
-    public static boolean nonzeroMinimumDiamond(CLIJ clij, ClearCLImageInterface src, ClearCLImageInterface flag, ClearCLImageInterface dst) {
+    public static boolean nonzeroMaximumDiamond(CLIJ clij, ClearCLImageInterface src, ClearCLImageInterface flag, ClearCLImageInterface dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("flag_dst", flag);
         parameters.put("dst", dst);
         //ElapsedTime.measureForceOutput("diamondmin", () -> {
-            clij.execute(NonzeroMinimumDiamond.class, "diamondMorphology" + dst.getDimension() +  "d.cl", "minimalistic_nonzero_minimum_diamond_image" + dst.getDimension() +  "d", dst.getDimensions(), parameters);
+            clij.execute(NonzeroMaximumDiamond.class, "diamondMorphology" + dst.getDimension() +  "d.cl", "minimalistic_nonzero_maximum_diamond_image" + dst.getDimension() +  "d", dst.getDimensions(), parameters);
         //});
         return true;
     }
 
-    public static ClearCLKernel nonzeroMinimumDiamond(CLIJx clijx, ClearCLImageInterface src, ClearCLBuffer flag, ClearCLImageInterface dst, ClearCLKernel kernel) {
+    public static ClearCLKernel nonzeroMaximumDiamond(CLIJx clijx, ClearCLImageInterface src, ClearCLBuffer flag, ClearCLImageInterface dst, ClearCLKernel kernel) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("flag_dst", flag);
@@ -54,14 +53,14 @@ public class NonzeroMinimumDiamond extends AbstractCLIJPlugin implements CLIJMac
 
         ClearCLKernel[] workaround = {kernel};
         //ElapsedTime.measureForceOutput("diamondmin", () -> {
-            workaround[0] = clijx.executeSubsequently(NonzeroMinimumDiamond.class, "diamondMorphology" + dst.getDimension() + "d_x.cl", "minimalistic_nonzero_minimum_diamond_image" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters, workaround[0]);
+            workaround[0] = clijx.executeSubsequently(NonzeroMaximumDiamond.class, "diamondMorphology" + dst.getDimension() + "d_x.cl", "minimalistic_nonzero_maximum_diamond_image" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters, workaround[0]);
         //});
         return workaround[0];
     }
 
     @Override
     public String getDescription() {
-        return "Apply a minimum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.";
+        return "Apply a maximum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.";
     }
 
     @Override
