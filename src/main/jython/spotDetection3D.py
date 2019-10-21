@@ -16,9 +16,13 @@ from net.haesleinhuepf.clijx import CLIJx;
 IJ.run("Close All");
 
 # load/create example images
-imp = IJ.openImage("C:/structure/data/Nantes_000646.tif");
+# imp = IJ.openImage("C:/structure/data/Nantes_000646.tif");
+# imp = IJ.openImage("C:/structure/data/Riga_000512.tif");
+imp = IJ.openImage("C:/structure/data/Pau_001130.tif");
+
+
 IJ.run(imp, "32-bit", "");
-#IJ.run(imp, "Rotate 90 Degrees Right", "");
+IJ.run(imp, "Rotate 90 Degrees Right", "");
 imp.show();
 
 # Init GPU
@@ -52,33 +56,55 @@ number_of_spots = clijx.op().sumPixels(detected_spots);
 pointlist = clijx.create([number_of_spots, 3]);
 clijx.op().spotsToPointList(detected_spots, pointlist);
 
-# determine distance between spots
-distance_matrix = clijx.create([number_of_spots, number_of_spots]);
-clijx.op().generateDistanceMatrix(pointlist, pointlist, distance_matrix);
+###########################################################################
+tempSpots1 = clijx.create(detected_spots);
+tempSpots2 = clijx.create(detected_spots);
+flag = clijx.create([1, 1, 1]);
+
+clijx.op().connectedComponentsLabeling(detected_spots, tempSpots1);
+for j in range(0, 20):
+	print("helllo " + str(j));
+	clijx.op().onlyzeroOverwriteMaximumDiamond(tempSpots1, flag, tempSpots2);
+	clijx.op().onlyzeroOverwriteMaximumDiamond(tempSpots2, flag, tempSpots1);
+
+clijx.show(tempSpots1, "tempSpots1");
+
+# determine which labels touch
+touch_matrix = clijx.create([number_of_spots+1, number_of_spots+1]);
+clijx.op().generateTouchMatrix(tempSpots1, touch_matrix);
+
+clijx.show(touch_matrix, "touch_matrix");
+
+tempSpots1.close();
+tempSpots2.close();
 
 # find n closes spots for every spot
-n_closest_points = 6;
-closestPointsIndices = clijx.create([number_of_spots, n_closest_points]);
-clijx.op().nClosestPoints(distance_matrix, closestPointsIndices);
+#n_closest_points = 6;
+#closestPointsIndices = clijx.create([number_of_spots, n_closest_points]);
+#clijx.op().nClosestPoints(distance_matrix, closestPointsIndices);
 
 # build and visualise mesh
 pointCoodinates = clijx.pull(pointlist).getProcessor();
-pointIndices = clijx.pull(closestPointsIndices).getProcessor();
+touchFlags = clijx.pull(touch_matrix).getProcessor();
 
 mesh = clijx.create(inputImage);
-for p in range(0, pointIndices.getWidth()):
+for p in range(0, pointCoodinates.getWidth()):
 	x1 = pointCoodinates.getf(p, 0);
 	y1 = pointCoodinates.getf(p, 1);
 	z1 = pointCoodinates.getf(p, 2);
 
-	for q in range(1, n_closest_points):
-		pointIndex = int(pointIndices.getf(p, q));
-		x2 = pointCoodinates.getf(pointIndex, 0);
-		y2 = pointCoodinates.getf(pointIndex, 1);
-		z2 = pointCoodinates.getf(pointIndex, 2);
+	for q in range(p, pointCoodinates.getWidth()):
+		touching = int(touchFlags.getf(p+1, q+1));
+		if (touching > 0):
+			x2 = pointCoodinates.getf(q, 0);
+			y2 = pointCoodinates.getf(q, 1);
+			z2 = pointCoodinates.getf(q, 2);
+	
+			thickness = 1;
+			clijx.op().drawLine(mesh, x1, y1, z1, x2, y2, z2, thickness);
 
-		thickness = 1;
-		clijx.op().drawLine(mesh, x1, y1, z1, x2, y2, z2, thickness);
+###########################################################################
+
 
 # make spots bigger for visualisation
 temp = clijx.create(detected_spots);
@@ -101,8 +127,8 @@ inputImage.close();
 blurred.close();
 detected_spots.close();
 pointlist.close();
-distance_matrix.close();
-closestPointsIndices.close();
+touch_matrix.close();
+#closestPointsIndices.close();
 mesh.close();
 thresholded.close();
 masked.close();

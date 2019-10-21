@@ -102,7 +102,8 @@ public interface CLIJ2Plugins {
             DistanceMap.class,
             PullAsROI.class,
             NonzeroMaximumDiamond.class,
-            OnlyzeroOverwriteMaximumDiamond.class
+            OnlyzeroOverwriteMaximumDiamond.class,
+            GenerateTouchMatrix.class
 
     };
 

@@ -92,7 +92,7 @@ __kernel void minimalistic_nonzero_maximum_diamond_image3d
   }
 }
 
-__kernel void onlyzero_overwrite_maximum_diamond_image2d
+__kernel void onlyzero_overwrite_maximum_diamond_image3d
 (
   DTYPE_IMAGE_OUT_3D dst, DTYPE_IMAGE_OUT_3D flag_dst, DTYPE_IMAGE_IN_3D src
 )

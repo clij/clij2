@@ -24,7 +24,8 @@ from ij.io import FileInfo
 # init
 initialized = False;
 
-for i in range(1000, 1400, 25):
+#for i in range(1000, 1400, 25):
+for i in range(500, 1000, 25):
 	IJ.run("Close All");
 	
 	fi = FileInfo();
@@ -33,8 +34,12 @@ for i in range(1000, 1400, 25):
 	fi.height = 1024;
 	fi.nImages = 1000;
 	fi.intelByteOrder = True;
-	imp = Raw.open("\\\\fileserver\\myersspimdata\\IMAGING\\archive_data_good\\2019-07-16-13-30-14-91-Pau_Tribolium_nGFP_pole_\\stacks\\C0opticsprefused\\00" + str(i) + ".raw", fi);
-	imp.setRoi(129, 173, 715, 690);
+	
+	imp = Raw.open("C:/structure/data/2019-07-24-16-01-00-07-Nantes_Tribolium_nGFP_pole/stacks/C0opticsprefused/000" + str(i) + ".raw", fi);
+	imp.setRoi(113, 119, 723, 696);
+
+	#imp = Raw.open("\\\\fileserver\\myersspimdata\\IMAGING\\archive_data_good\\2019-07-16-13-30-14-91-Pau_Tribolium_nGFP_pole_\\stacks\\C0opticsprefused\\00" + str(i) + ".raw", fi);
+	#imp.setRoi(129, 173, 715, 690);
 	imp = imp.crop("stack");
 	
 	IJ.run(imp, "32-bit", "");
@@ -61,7 +66,11 @@ for i in range(1000, 1400, 25):
 	
 		mesh = clijx.create(inputImage);
 		temp = clijx.create(detected_spots);
-
+		
+		tempSpots1 = clijx.create(detected_spots);
+		tempSpots2 = clijx.create(detected_spots);
+		flag = clijx.create([1, 1, 1]);
+		
 		
 	# background / noise removal
 	clijx.op().differenceOfGaussian(inputImage, blurred, 3, 3, 0, 15, 15, 0);
@@ -82,32 +91,50 @@ for i in range(1000, 1400, 25):
 	pointlist = clijx.create([number_of_spots, 3]);
 	clijx.op().spotsToPointList(detected_spots, pointlist);
 	
-	# determine distance between spots
-	distance_matrix = clijx.create([number_of_spots, number_of_spots]);
-	clijx.op().generateDistanceMatrix(pointlist, pointlist, distance_matrix);
+	###########################################################################
+	
+	clijx.op().connectedComponentsLabeling(detected_spots, tempSpots1);
+	for j in range(0, 20):
+		#print("helllo " + str(j));
+		clijx.op().onlyzeroOverwriteMaximumDiamond(tempSpots1, flag, tempSpots2);
+		clijx.op().onlyzeroOverwriteMaximumDiamond(tempSpots2, flag, tempSpots1);
+	
+	clijx.show(tempSpots1, "tempSpots1");
+	
+	# determine which labels touch
+	touch_matrix = clijx.create([number_of_spots+1, number_of_spots+1]);
+	clijx.op().generateTouchMatrix(tempSpots1, touch_matrix);
+	
+	clijx.show(touch_matrix, "touch_matrix");
+	
 	
 	# find n closes spots for every spot
-	n_closest_points = 6;
-	closestPointsIndices = clijx.create([number_of_spots, n_closest_points]);
-	clijx.op().nClosestPoints(distance_matrix, closestPointsIndices);
+	#n_closest_points = 6;
+	#closestPointsIndices = clijx.create([number_of_spots, n_closest_points]);
+	#clijx.op().nClosestPoints(distance_matrix, closestPointsIndices);
 	
 	# build and visualise mesh
 	pointCoodinates = clijx.pull(pointlist).getProcessor();
-	pointIndices = clijx.pull(closestPointsIndices).getProcessor();
+	touchFlags = clijx.pull(touch_matrix).getProcessor();
 	
-	for p in range(0, pointIndices.getWidth()):
+	mesh = clijx.create(inputImage);
+	for p in range(0, pointCoodinates.getWidth()):
 		x1 = pointCoodinates.getf(p, 0);
 		y1 = pointCoodinates.getf(p, 1);
 		z1 = pointCoodinates.getf(p, 2);
 	
-		for q in range(1, n_closest_points):
-			pointIndex = int(pointIndices.getf(p, q));
-			x2 = pointCoodinates.getf(pointIndex, 0);
-			y2 = pointCoodinates.getf(pointIndex, 1);
-			z2 = pointCoodinates.getf(pointIndex, 2);
+		for q in range(p, pointCoodinates.getWidth()):
+			touching = int(touchFlags.getf(p+1, q+1));
+			if (touching > 0):
+				x2 = pointCoodinates.getf(q, 0);
+				y2 = pointCoodinates.getf(q, 1);
+				z2 = pointCoodinates.getf(q, 2);
+		
+				thickness = 1.5;
+				clijx.op().drawLine(mesh, x1, y1, z1, x2, y2, z2, thickness);
 	
-			thickness = 1;
-			clijx.op().drawLine(mesh, x1, y1, z1, x2, y2, z2, thickness);
+	###########################################################################
+
 	
 	# make spots bigger for visualisation
 	clijx.op().dilateBox(detected_spots, temp);
@@ -122,8 +149,8 @@ for i in range(1000, 1400, 25):
 	
 	# intermediate cleanup
 	pointlist.close();
-	distance_matrix.close();
-	closestPointsIndices.close();
+	touch_matrix.close();
+	#closestPointsIndices.close();
 	
 	# show results
 	clijx.show(maximumInput, "maximumInput");
@@ -190,7 +217,7 @@ for i in range(1000, 1400, 25):
 	IJ.saveAs(imp, "Tiff", "C:/structure/temp/temp2/00" + str(i) + ".tif");
 
 	inputImage.close();
-
+	#break;
 
 
 blurred.close();
@@ -200,6 +227,10 @@ thresholded.close();
 masked.close();
 temp.close();
 
+tempSpots1.close();
+tempSpots2.close();
+
+flag.close();
 
 maximumInput.close();
 maximumBackgroundSubtracted.close();
