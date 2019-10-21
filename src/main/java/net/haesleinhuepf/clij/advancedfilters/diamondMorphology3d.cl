@@ -45,3 +45,95 @@ __kernel void minimalistic_nonzero_minimum_diamond_image3d
       WRITE_IMAGE_3D (dst, pos, CONVERT_DTYPE_OUT(foundMinimum));
   }
 }
+
+__kernel void minimalistic_nonzero_maximum_diamond_image3d
+(
+  DTYPE_IMAGE_OUT_3D dst, DTYPE_IMAGE_OUT_3D flag_dst, DTYPE_IMAGE_IN_3D src
+)
+{
+  const int x = get_global_id(0);
+  const int y = get_global_id(1);
+  const int z = get_global_id(2);
+
+  const int4 pos = (int4){x,y,z,0};
+
+  float foundMaximum = READ_IMAGE_3D(src, sampler, pos).x;
+  if (foundMaximum != 0) {
+      float originalValue = foundMaximum;
+      float value = READ_IMAGE_3D(src, sampler, (pos + (int4){1, 0, 0, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+      value = READ_IMAGE_3D(src, sampler, (pos + (int4){-1, 0, 0, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+      value = READ_IMAGE_3D(src, sampler, (pos + (int4){0, 1, 0, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+      value = READ_IMAGE_3D(src, sampler, (pos + (int4){0, -1, 0, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+      value = READ_IMAGE_3D(src, sampler, (pos + (int4){0, 0, 1, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+      value = READ_IMAGE_3D(src, sampler, (pos + (int4){0, 0, -1, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+
+      if (foundMaximum != originalValue) {
+        WRITE_IMAGE_3D(flag_dst,(int4)(0,0,0,0),1);
+      }
+      WRITE_IMAGE_3D (dst, pos, CONVERT_DTYPE_OUT(foundMaximum));
+  }
+}
+
+__kernel void onlyzero_overwrite_maximum_diamond_image3d
+(
+  DTYPE_IMAGE_OUT_3D dst, DTYPE_IMAGE_OUT_3D flag_dst, DTYPE_IMAGE_IN_3D src
+)
+{
+  const int x = get_global_id(0);
+  const int y = get_global_id(1);
+  const int z = get_global_id(2);
+
+  const int4 pos = (int4){x,y,z,0};
+
+  float foundMaximum = READ_IMAGE_3D(src, sampler, pos).x;
+  if (foundMaximum == 0) {
+      float originalValue = foundMaximum;
+      float value = READ_IMAGE_3D(src, sampler, (pos + (int4){1, 0, 0, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+      value = READ_IMAGE_3D(src, sampler, (pos + (int4){-1, 0, 0, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+      value = READ_IMAGE_3D(src, sampler, (pos + (int4){0, 1, 0, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+      value = READ_IMAGE_3D(src, sampler, (pos + (int4){0, -1, 0, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+      value = READ_IMAGE_3D(src, sampler, (pos + (int4){0, 0, 1, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+      value = READ_IMAGE_3D(src, sampler, (pos + (int4){0, 0, -1, 0})).x;
+      if ( value > foundMaximum && value > 0) {
+        foundMaximum = value;
+      }
+
+      if (foundMaximum != originalValue) {
+        WRITE_IMAGE_3D(flag_dst,(int4)(0,0,0,0),1);
+      }
+  }
+  WRITE_IMAGE_3D (dst, pos, CONVERT_DTYPE_OUT(foundMaximum));
+}

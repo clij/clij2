@@ -100,7 +100,11 @@ public interface CLIJ2Plugins {
             BinarySubtract.class,
             BinaryEdgeDetection.class,
             DistanceMap.class,
-            PullAsROI.class
+            PullAsROI.class,
+            NonzeroMaximumDiamond.class,
+            OnlyzeroOverwriteMaximumDiamond.class,
+            GenerateTouchMatrix.class
+
     };
 
 }
