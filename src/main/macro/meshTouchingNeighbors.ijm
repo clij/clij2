@@ -75,7 +75,7 @@ Ext.CLIJ_create2D(mesh, width, height, 32);
 Ext.CLIJ_set(mesh, 0);
 
 print("points: " + number_of_detected_spots);
-for (p = 16; p < 17; p++) {
+for (p = 0; p < number_of_detected_spots; p++) {
 	x1 = getResult("X" + (p), 0);
 	y1 = getResult("X" + (p), 1);
 
@@ -94,9 +94,6 @@ for (p = 16; p < 17; p++) {
 		}
 	}
 }
-
-
-
 
 
 // Get results back from GPU
