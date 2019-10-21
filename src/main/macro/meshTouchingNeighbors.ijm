@@ -27,9 +27,11 @@ run("Close All");
 
 // Blur in GPU
 Ext.CLIJ_blur3D(input, blurred, 5, 5, 1);
+Ext.CLIJ_pull(blurred);
 
 detected_spots = "detected_spots";
 Ext.CLIJ_detectMaximaBox(blurred, detected_spots, 3);
+Ext.CLIJ_pull(detected_spots);
 
 // get spot positions as pointlist
 pointlist = "pointlist";
@@ -40,14 +42,15 @@ number_of_detected_spots = getResult("Width", nResults() - 1);
 IJ.log("number of spots: " + number_of_detected_spots);
 
 labelled_spots = "labelled_spots";
-Ext.CLIJx_connectedComponentsLabeling(detected_spots, labelled_spots);
+//Ext.CLIJ_copy(detected_spots, labelled_spots);
+//Ext.CLIJ_set(labelled_spots, 0);
 
-flag = "flag";
-Ext.CLIJ_create3D(flag, 1, 1, 1, 32);
+Ext.CLIJx_connectedComponentsLabeling(detected_spots, labelled_spots);
+Ext.CLIJ_pull(labelled_spots);
 
 temp = "temp";
 for (i = 0; i < 20; i++) {
-	print("hll wrld");
+	//print("hll wrld");
 	Ext.CLIJx_onlyzeroOverwriteMaximumDiamond(labelled_spots, temp);
 	Ext.CLIJx_onlyzeroOverwriteMaximumDiamond(temp, labelled_spots);
 	//Ext.CLIJ_maximum2DSphere(labelled_spots, temp, 1, 1);
@@ -56,6 +59,7 @@ for (i = 0; i < 20; i++) {
 
 touch_matrix = "touch_matrix";
 Ext.CLIJx_generateTouchMatrix(labelled_spots, touch_matrix);
+Ext.CLIJ_pull(labelled_spots);
 
 // empty results table
 run("Clear Results");
@@ -64,24 +68,26 @@ run("Clear Results");
 // x and y of the points and n rows with indices to closes points. 
 // as every points is the closest to itself, row number 3 will always be 0, 1, 3, 4 ...
 Ext.CLIJx_image2DToResultsTable(pointlist);
-Ext.CLIJx_image2DToResultsTable(closestPointsIndices);
+Ext.CLIJx_image2DToResultsTable(touch_matrix);
 
 mesh = "mesh";
 Ext.CLIJ_create2D(mesh, width, height, 32);
 Ext.CLIJ_set(mesh, 0);
 
-for (p = 0; p < number_of_detected_spots; p++) {
-	x1 = getResult("X" + p, 0);
-	y1 = getResult("X" + p, 1);
+print("points: " + number_of_detected_spots);
+for (p = 16; p < 17; p++) {
+	x1 = getResult("X" + (p), 0);
+	y1 = getResult("X" + (p), 1);
 
     // we start at 1 (and not at 0) because we 
     // don't want to draw line from the point
     // to itself
-	for (q = 1; q < p; q++) {
-		touching = getResult("X" + p, 2 + q);
-		if (touching) {
-			x2 = getResult("X" + q, 0);
-			y2 = getResult("X" + q, 1);
+	for (q = p; q < number_of_detected_spots; q++) {
+		touching = getResult("X" + (p+1), 3 + q);
+		if (touching > 0) {
+		    //print("hhh");
+			x2 = getResult("X" + (q), 0);
+			y2 = getResult("X" + (q), 1);
 	
 			thickness = 1;
 			Ext.CLIJx_drawLine(mesh, x1, y1, 0, x2, y2, 0, thickness);
@@ -97,8 +103,12 @@ for (p = 0; p < number_of_detected_spots; p++) {
 Ext.CLIJ_pull(labelled_spots);
 Ext.CLIJ_pull(touch_matrix);
 
+Ext.CLIJ_pull(mesh);
+
+
 // Cleanup by the end
 Ext.CLIJ_clear();
+Ext.CLIJ_reportMemory();
 
 
 

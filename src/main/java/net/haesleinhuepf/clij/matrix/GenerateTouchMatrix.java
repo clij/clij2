@@ -27,6 +27,9 @@ public class GenerateTouchMatrix extends AbstractCLIJPlugin implements CLIJMacro
     }
 
     public static boolean generateTouchMatrix(CLIJ clij, ClearCLBuffer src_label_map, ClearCLBuffer dst_distance_matrix) {
+
+        clij.op().set(dst_distance_matrix, 0f);
+
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src_label_map", src_label_map);
         parameters.put("dst_matrix", dst_distance_matrix);
@@ -45,7 +48,8 @@ public class GenerateTouchMatrix extends AbstractCLIJPlugin implements CLIJMacro
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input)
     {
         double maxValue = clij.op().maximumOfAllPixels(input) + 1;
-        return clij.createCLBuffer(new long[]{(long)maxValue, (long)maxValue}, NativeTypeEnum.Float);
+        ClearCLBuffer output = clij.createCLBuffer(new long[]{(long)maxValue, (long)maxValue}, NativeTypeEnum.Float);
+        return output;
     }
 
     @Override
