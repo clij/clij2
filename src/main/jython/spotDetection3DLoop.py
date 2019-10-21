@@ -117,7 +117,7 @@ for i in range(500, 1000, 25):
 	pointCoodinates = clijx.pull(pointlist).getProcessor();
 	touchFlags = clijx.pull(touch_matrix).getProcessor();
 	
-	mesh = clijx.create(inputImage);
+	#mesh = clijx.create(inputImage);
 	for p in range(0, pointCoodinates.getWidth()):
 		x1 = pointCoodinates.getf(p, 0);
 		y1 = pointCoodinates.getf(p, 1);
