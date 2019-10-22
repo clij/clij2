@@ -24,8 +24,8 @@ from ij.io import FileInfo
 # init
 initialized = False;
 
-#for i in range(1000, 1400, 25):
-for i in range(500, 1000, 25):
+for i in range(1000, 1400, 1):
+#for i in range(500, 1000, 25):
 	IJ.run("Close All");
 	
 	fi = FileInfo();
@@ -35,11 +35,11 @@ for i in range(500, 1000, 25):
 	fi.nImages = 1000;
 	fi.intelByteOrder = True;
 	
-	imp = Raw.open("C:/structure/data/2019-07-24-16-01-00-07-Nantes_Tribolium_nGFP_pole/stacks/C0opticsprefused/000" + str(i) + ".raw", fi);
-	imp.setRoi(113, 119, 723, 696);
+	#imp = Raw.open("C:/structure/data/2019-07-24-16-01-00-07-Nantes_Tribolium_nGFP_pole/stacks/C0opticsprefused/000" + str(i) + ".raw", fi);
+	#imp.setRoi(113, 119, 723, 696);
 
-	#imp = Raw.open("\\\\fileserver\\myersspimdata\\IMAGING\\archive_data_good\\2019-07-16-13-30-14-91-Pau_Tribolium_nGFP_pole_\\stacks\\C0opticsprefused\\00" + str(i) + ".raw", fi);
-	#imp.setRoi(129, 173, 715, 690);
+	imp = Raw.open("\\\\fileserver\\myersspimdata\\IMAGING\\archive_data_good\\2019-07-16-13-30-14-91-Pau_Tribolium_nGFP_pole_\\stacks\\C0opticsprefused\\00" + str(i) + ".raw", fi);
+	imp.setRoi(129, 173, 715, 690);
 	imp = imp.crop("stack");
 	
 	IJ.run(imp, "32-bit", "");
@@ -70,6 +70,8 @@ for i in range(500, 1000, 25):
 		tempSpots1 = clijx.create(detected_spots);
 		tempSpots2 = clijx.create(detected_spots);
 		flag = clijx.create([1, 1, 1]);
+
+		initialized = True;
 		
 		
 	# background / noise removal
@@ -118,6 +120,7 @@ for i in range(500, 1000, 25):
 	touchFlags = clijx.pull(touch_matrix).getProcessor();
 	
 	#mesh = clijx.create(inputImage);
+	clijx.op().set(mesh, 0);
 	for p in range(0, pointCoodinates.getWidth()):
 		x1 = pointCoodinates.getf(p, 0);
 		y1 = pointCoodinates.getf(p, 1);
