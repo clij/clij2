@@ -100,11 +100,6 @@ import net.haesleinhuepf.clij.advancedfilters.DetectLabelEdges;
 public abstract class CLIJxOps {
    protected CLIJ clij;
    protected CLIJx clijx;
-   
-   public CLIJxOps(CLIJx clijx) {
-       this.clijx = clijx;
-       this.clij = clijx.getClij();
-   }
 
     // net.haesleinhuepf.clij.kernels.Kernels
     //----------------------------------------------------

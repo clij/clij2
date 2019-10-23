@@ -38,11 +38,7 @@ public class OpGenerator {
         builder.append("public abstract class CLIJxOps {\n");
         builder.append("   protected CLIJ clij;\n");
         builder.append("   protected CLIJx clijx;\n");
-        builder.append("   \n" +
-                "   public CLIJxOps(CLIJx clijx) {\n" +
-                "       this.clijx = clijx;\n" +
-                "       this.clij = clijx.getClij();\n" +
-                "   }\n");
+        builder.append("   \n");
 
         int methodCount = 0;
         for (Class klass : CLIJ2Plugins.classes) {
