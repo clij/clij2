@@ -4,6 +4,7 @@ import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.*;
 import net.haesleinhuepf.clij.clearcl.enums.ImageChannelDataType;
 import net.haesleinhuepf.clij.clearcl.exceptions.OpenCLException;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.clearcl.util.ElapsedTime;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 
@@ -42,17 +43,19 @@ public class CLKernelExecutor {
 
     public static void getOpenCLDefines(Map<String, Object> defines, String key, ImageChannelDataType imageChannelDataType, int dimension) {
 
+        String sizeParameters = "long image_size_" + key + "_width, long image_size_" + key + "_height, long image_size_" + key + "_depth, ";
+
         if (key.contains("dst") || key.contains("destination") || key.contains("output")) {
             if (dimension == 3) {
-                defines.put("IMAGE_" + key + "_TYPE", "__write_only image3d_t");
+                defines.put("IMAGE_" + key + "_TYPE", sizeParameters + "__write_only image3d_t");
             } else if (dimension == 2) {
-                defines.put("IMAGE_" + key + "_TYPE", "__write_only image2d_t");
+                defines.put("IMAGE_" + key + "_TYPE", sizeParameters + "__write_only image2d_t");
             }
         } else {
             if (dimension == 3) {
-                defines.put("IMAGE_" + key + "_TYPE", "__read_only image3d_t");
+                defines.put("IMAGE_" + key + "_TYPE", sizeParameters + "__read_only image3d_t");
             } else if (dimension == 2) {
-                defines.put("IMAGE_" + key + "_TYPE", "__read_only image2d_t");
+                defines.put("IMAGE_" + key + "_TYPE", sizeParameters + "__read_only image2d_t");
             }
         }
 
@@ -88,11 +91,13 @@ public class CLKernelExecutor {
         String typeName = nativeTypeToOpenCLTypeName(nativeTypeEnum);
         String typeId = nativeTypeToOpenCLTypeShortName(nativeTypeEnum);
 
+        String sizeParameters = "long image_size_" + key + "_width, long image_size_" + key + "_height, long image_size_" + key + "_depth, ";
+
         String sat = "_sat"; //typeName.compareTo("float")==0?"":"_sat";
 
         defines.put("IMAGE_" + key + "_PIXEL_TYPE", typeName);
         defines.put("CONVERT_" + key + "_PIXEL_TYPE", "clij_convert_" + typeName + sat);
-        defines.put("IMAGE_" + key + "_TYPE", "__global " + typeName + "*");
+        defines.put("IMAGE_" + key + "_TYPE", sizeParameters + "__global " + typeName + "*");
 
         if (dimension == 2) {
             defines.put("READ_" + key + "_IMAGE(a,b,c)", "read_buffer2d" + typeId + "(GET_IMAGE_WIDTH(a),GET_IMAGE_HEIGHT(a),GET_IMAGE_DEPTH(a),a,b,c)");
@@ -164,45 +169,45 @@ public class CLKernelExecutor {
             for (String key : parameterMap.keySet()) {
                 if (parameterMap.get(key) instanceof ClearCLImage) {
                     ClearCLImage image = (ClearCLImage) parameterMap.get(key);
-                    openCLDefines.put("IMAGE_SIZE_" + key + "_WIDTH", image.getWidth());
-                    openCLDefines.put("IMAGE_SIZE_" + key + "_HEIGHT", image.getHeight());
-                    openCLDefines.put("IMAGE_SIZE_" + key + "_DEPTH", image.getDepth());
-
+//                    openCLDefines.put("IMAGE_SIZE_" + key + "_WIDTH", image.getWidth());
+//                    openCLDefines.put("IMAGE_SIZE_" + key + "_HEIGHT", image.getHeight());
+//                    openCLDefines.put("IMAGE_SIZE_" + key + "_DEPTH", image.getDepth());
+//
                     getOpenCLDefines(openCLDefines, key, image.getChannelDataType(), (int) image.getDimension());
                 } else if (parameterMap.get(key) instanceof ClearCLBuffer) {
                     ClearCLBuffer image = (ClearCLBuffer) parameterMap.get(key);
-                    openCLDefines.put("IMAGE_SIZE_" + key + "_WIDTH", image.getWidth());
-                    openCLDefines.put("IMAGE_SIZE_" + key + "_HEIGHT", image.getHeight());
-                    openCLDefines.put("IMAGE_SIZE_" + key + "_DEPTH", image.getDepth());
-
+//                    openCLDefines.put("IMAGE_SIZE_" + key + "_WIDTH", image.getWidth());
+//                    openCLDefines.put("IMAGE_SIZE_" + key + "_HEIGHT", image.getHeight());
+//                    openCLDefines.put("IMAGE_SIZE_" + key + "_DEPTH", image.getDepth());
+//
                     getOpenCLDefines(openCLDefines, key, image.getNativeType(), (int) image.getDimension());
                 }
                 definedParameterKeys.add(key);
             }
 
             // add undefined parameters to define list
-            ArrayList<String> variableNames = getImageVariablesFromSource();
-            for (String variableName : variableNames) {
+//            ArrayList<String> variableNames = getImageVariablesFromSource();
+//            for (String variableName : variableNames) {
+//
+//                boolean existsAlready = false;
+//                for (String key : definedParameterKeys) {
+//                    if (key.compareTo(variableName) == 0) {
+//                        existsAlready = true;
+//                        break;
+//                    }
+//                }
+//                if (!existsAlready) {
+//                    //openCLDefines.put("IMAGE_SIZE_" + variableName + "_WIDTH", 0);
+//                    //openCLDefines.put("IMAGE_SIZE_" + variableName + "_HEIGHT", 0);
+//                    //openCLDefines.put("IMAGE_SIZE_" + variableName + "_DEPTH", 0);
+//                }
+//            }
 
-                boolean existsAlready = false;
-                for (String key : definedParameterKeys) {
-                    if (key.compareTo(variableName) == 0) {
-                        existsAlready = true;
-                        break;
-                    }
-                }
-                if (!existsAlready) {
-                    openCLDefines.put("IMAGE_SIZE_" + variableName + "_WIDTH", 0);
-                    openCLDefines.put("IMAGE_SIZE_" + variableName + "_HEIGHT", 0);
-                    openCLDefines.put("IMAGE_SIZE_" + variableName + "_DEPTH", 0);
-                }
-            }
+            openCLDefines.put("GET_IMAGE_WIDTH(image_key)", "image_size_ ## image_key ## _width");
+            openCLDefines.put("GET_IMAGE_HEIGHT(image_key)", "image_size_ ## image_key ## _height");
+            openCLDefines.put("GET_IMAGE_DEPTH(image_key)", "image_size_ ## image_key ## _depth");
 
-            openCLDefines.put("GET_IMAGE_WIDTH(image_key)", "IMAGE_SIZE_ ## image_key ## _WIDTH");
-            openCLDefines.put("GET_IMAGE_HEIGHT(image_key)", "IMAGE_SIZE_ ## image_key ## _HEIGHT");
-            openCLDefines.put("GET_IMAGE_DEPTH(image_key)", "IMAGE_SIZE_ ## image_key ## _DEPTH");
-
-
+            System.out.println("Hello world " + CLIJ.debug);
             if (CLIJ.debug) {
                 for (String key : openCLDefines.keySet()) {
                     System.out.println(key + " = " + openCLDefines.get(key));
@@ -233,7 +238,13 @@ public class CLKernelExecutor {
             }*/
             if (parameterMap != null) {
                 for (String key : parameterMap.keySet()) {
-                    kernel.setArgument(key, parameterMap.get(key));
+                    Object obj = parameterMap.get(key);
+                    kernel.setArgument(key, obj);
+                    if (obj instanceof ClearCLImageInterface) {
+                        kernel.setArgument("image_size_" + key + "_width", ((ClearCLImageInterface) obj).getWidth());
+                        kernel.setArgument("image_size_" + key + "_height", ((ClearCLImageInterface) obj).getHeight());
+                        kernel.setArgument("image_size_" + key + "_depth", ((ClearCLImageInterface) obj).getDepth());
+                    }
                 }
             }
             if (CLIJ.debug) {
