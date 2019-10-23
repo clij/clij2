@@ -103,6 +103,7 @@ public interface CLIJ2Plugins {
             PullAsROI.class,
             NonzeroMaximumDiamond.class,
             OnlyzeroOverwriteMaximumDiamond.class,
+            OnlyzeroOverwriteMaximumBox.class,
             GenerateTouchMatrix.class
 
     };
