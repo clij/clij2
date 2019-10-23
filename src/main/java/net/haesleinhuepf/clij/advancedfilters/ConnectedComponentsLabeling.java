@@ -66,6 +66,9 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
 
         setNonZeroPixelsToPixelIndex(clij, input, temp1);
 
+        clij.op().set(temp2, 0f);
+
+
         final int[] iterationCount = {0};
         int flagValue = 1;
 
