@@ -12,7 +12,8 @@ from ij import IJ;
 from net.haesleinhuepf.clij import CLIJ;
 from net.haesleinhuepf.clijx import CLIJx;
 from ij.io import FileInfo
-from ij.plugin import Raw
+
+from ij.plugin import Raw
 
 # load/create example images
 # imp = IJ.openImage("C:/structure/data/Nantes_000646.tif");
@@ -24,8 +25,8 @@ from ij.io import FileInfo
 # init
 initialized = False;
 
-for i in range(1000, 1300, 4):
-#for i in range(500, 1000, 25):
+#for i in range(1000, 1400, 25):
+for i in range(818, 1000, 1):
 	IJ.run("Close All");
 	
 	fi = FileInfo();
@@ -35,17 +36,18 @@ for i in range(1000, 1300, 4):
 	fi.nImages = 1000;
 	fi.intelByteOrder = True;
 	
-	#imp = Raw.open("C:/structure/data/2019-07-24-16-01-00-07-Nantes_Tribolium_nGFP_pole/stacks/C0opticsprefused/000" + str(i) + ".raw", fi);
-	#imp.setRoi(113, 119, 723, 696);
+	imp = Raw.open("C:/structure/data/2019-07-24-16-01-00-07-Nantes_Tribolium_nGFP_pole/stacks/C0opticsprefused/000" + str(i) + ".raw", fi);
+	imp.setRoi(113, 119, 723, 696);
 
-	imp = Raw.open("\\\\fileserver\\myersspimdata\\IMAGING\\archive_data_good\\2019-07-16-13-30-14-91-Pau_Tribolium_nGFP_pole_\\stacks\\C0opticsprefused\\00" + str(i) + ".raw", fi);
-	imp.setRoi(129, 173, 715, 690);
+	#imp = Raw.open("\\\\fileserver\\myersspimdata\\IMAGING\\archive_data_good\\2019-07-16-13-30-14-91-Pau_Tribolium_nGFP_pole_\\stacks\\C0opticsprefused\\00" + str(i) + ".raw", fi);
+	#imp.setRoi(129, 173, 715, 690);
 	imp = imp.crop("stack");
 	
 	IJ.run(imp, "32-bit", "");
 	IJ.run(imp, "Rotate 90 Degrees Right", "");
 	imp.show();
-	
+	
+
 	# Init GPU
 	clijx = CLIJx.getInstance();
 	
@@ -70,7 +72,6 @@ for i in range(1000, 1300, 4):
 		tempSpots1 = clijx.create(detected_spots);
 		tempSpots2 = clijx.create(detected_spots);
 		flag = clijx.create([1, 1, 1]);
-
 		initialized = True;
 		
 		
@@ -80,8 +81,6 @@ for i in range(1000, 1300, 4):
 	
 	# spot detection
 	clijx.op().detectMaximaBox(blurred, detected_spots, 5);
-
-	clijx.show(blurred, "blurred");
 	
 	# remove spots in background
 	clijx.op().automaticThreshold(blurred, thresholded, "Otsu");
@@ -98,7 +97,7 @@ for i in range(1000, 1300, 4):
 	###########################################################################
 	
 	clijx.op().connectedComponentsLabeling(detected_spots, tempSpots1);
-	for j in range(0, 40):
+	for j in range(0, 20):
 		#print("helllo " + str(j));
 		clijx.op().onlyzeroOverwriteMaximumDiamond(tempSpots1, flag, tempSpots2);
 		clijx.op().onlyzeroOverwriteMaximumDiamond(tempSpots2, flag, tempSpots1);
@@ -107,11 +106,7 @@ for i in range(1000, 1300, 4):
 	
 	# determine which labels touch
 	touch_matrix = clijx.create([number_of_spots+1, number_of_spots+1]);
-	
-	clijx.op().automaticThreshold(inputImage, thresholded, "Otsu");
-	clijx.op().mask(tempSpots1, thresholded, tempSpots2);	
-	
-	clijx.op().generateTouchMatrix(tempSpots2, touch_matrix);
+	clijx.op().generateTouchMatrix(tempSpots1, touch_matrix);
 	
 	clijx.show(touch_matrix, "touch_matrix");
 	
