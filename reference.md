@@ -79,6 +79,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#flip">flip'</a>
 * <a href="#gaussJordan">gaussJordan</a>
 * <a href="#generateDistanceMatrix">generateDistanceMatrix</a>
+* <a href="#generateTouchMatrix">generateTouchMatrix</a>
 * <a href="#getSize">getSize</a>
 * <a href="#gradientX">gradientX'</a>
 * <a href="#gradientY">gradientY'</a>
@@ -146,10 +147,14 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#multiplySliceBySliceWithScalars">multiplySliceBySliceWithScalars'</a>
 * <a href="#multiplyStackWithPlane">multiplyStackWithPlane'</a>
 * <a href="#nClosestPoints">nClosestPoints</a>
+* <a href="#nonzeroMaximumDiamond">nonzeroMaximumDiamond</a>
+* <a href="#nonzeroMaximumDiamond">nonzeroMaximumDiamond</a>
 * <a href="#nonzeroMinimumDiamond">nonzeroMinimumDiamond</a>
 * <a href="#nonzeroMinimumDiamond">nonzeroMinimumDiamond</a>
 * <a href="#notEqualConstant">notEqualConstant</a>
 * <a href="#notEqual">notEqual</a>
+* <a href="#onlyzeroOverwriteMaximumBox">onlyzeroOverwriteMaximumBox</a>
+* <a href="#onlyzeroOverwriteMaximumDiamond">onlyzeroOverwriteMaximumDiamond</a>
 * <a href="#particleImageVelocimetry2D">particleImageVelocimetry2D</a>
 * <a href="#particleImageVelocimetryTimelapse">particleImageVelocimetryTimelapse</a>
 * <a href="#particleImageVelocimetry">particleImageVelocimetry</a>
@@ -502,7 +507,7 @@ Parameters (macro):
 Image input, Image destination, String method
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6
+ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3
 
 <a name="automaticThreshold"></a>
 ## automaticThreshold'
@@ -516,7 +521,7 @@ Parameters (macro):
 Image input, Image destination, String method
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6
 
 <a name="binaryAnd"></a>
 ## binaryAnd'
@@ -543,6 +548,12 @@ Image source, Image destination
 
 Parameters (Java):
 ClearCLImageInterface arg1, ClearCLImageInterface arg2
+
+
+
+### Example scripts
+* [outline.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/outline.ijm)
+
 
 <a name="binaryIntersection"></a>
 ## binaryIntersection
@@ -650,7 +661,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="blur"></a>
 ## blur'
@@ -663,7 +674,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="boundingBox"></a>
 ## boundingBox
@@ -676,6 +687,12 @@ Image source
 
 Parameters (Java):
 ClearCLBuffer arg1
+
+
+
+### Example scripts
+* [boundingBoxes.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/boundingBoxes.ijm)
+
 
 <a name="centerOfMass"></a>
 ## centerOfMass'
@@ -699,6 +716,21 @@ Image binary_input, Image labeling_destination
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
+
+
+
+### Example scripts
+* [boundingBoxes.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/boundingBoxes.ijm)
+* [excludeLabelsOnEdges.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/excludeLabelsOnEdges.ijm)
+* [intensity_per_label.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/intensity_per_label.ijm)
+* [labeling.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/labeling.ijm)
+* [labeling_benchmarking.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/labeling_benchmarking.ijm)
+* [measure_area_per_label.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/measure_area_per_label.ijm)
+* [measure_statistics.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/measure_statistics.ijm)
+* [meshTouchingNeighbors.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/meshTouchingNeighbors.ijm)
+* [particle_analysis.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/particle_analysis.ijm)
+* [pullLabelsToROIManager.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/pullLabelsToROIManager.ijm)
+
 
 <a name="convertToImageJBinary"></a>
 ## convertToImageJBinary'
@@ -775,6 +807,12 @@ Image source
 Parameters (Java):
 ClearCLBuffer arg1
 
+
+
+### Example scripts
+* [intensity_per_label.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/intensity_per_label.ijm)
+
+
 <a name="countNonZeroVoxelsLocally"></a>
 ## countNonZeroVoxelsLocally'
 
@@ -797,7 +835,7 @@ Parameters (macro):
 Image source, Image destination, Number startX, Number startY, Number width, Number height
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="crop"></a>
 ## crop'
@@ -810,7 +848,7 @@ Parameters (macro):
 Image source, Image destination, Number startX, Number startY, Number width, Number height
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="crossCorrelation"></a>
 ## crossCorrelation
@@ -1001,6 +1039,12 @@ Image source, Image destination
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
 
+
+
+### Example scripts
+* [distanceMap.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/distanceMap.ijm)
+
+
 <a name="divideImages"></a>
 ## divideImages'
 
@@ -1037,7 +1081,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="downsample"></a>
 ## downsample'
@@ -1049,7 +1093,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="drawBox"></a>
 ## drawBox
@@ -1083,6 +1127,14 @@ Image destination, Number x1, Number y1, Number z1, Number x2, Number y2, Number
 
 Parameters (Java):
 ClearCLBuffer arg1, Float arg2, Float arg3, Float arg4, Float arg5, Float arg6, Float arg7, Float arg8
+
+
+
+### Example scripts
+* [drawLine.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/drawLine.ijm)
+* [meshTouchingNeighbors.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/meshTouchingNeighbors.ijm)
+* [mesh_closest_points.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/mesh_closest_points.ijm)
+
 
 <a name="drawSphere"></a>
 ## drawSphere
@@ -1205,6 +1257,13 @@ Image label_map_input, Image label_map_destination
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
 
+
+
+### Example scripts
+* [excludeLabelsOnEdges.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/excludeLabelsOnEdges.ijm)
+* [pullLabelsToROIManager.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/pullLabelsToROIManager.ijm)
+
+
 <a name="exponential"></a>
 ## exponential
 
@@ -1295,6 +1354,30 @@ Image coordinate_list1, Image coordinate_list2, Image distance_matrix_destinatio
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
 
+
+
+### Example scripts
+* [mesh_closest_points.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/mesh_closest_points.ijm)
+* [spot_distance_measurement.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/spot_distance_measurement.ijm)
+
+
+<a name="generateTouchMatrix"></a>
+## generateTouchMatrix
+
+Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where all pixels are set to 0 exept those where labels are touching.Only half of the matrix is filled (with x < y). For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.
+
+Parameters (macro):
+Image label_map, Image touch_matrix_destination
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2
+
+
+
+### Example scripts
+* [meshTouchingNeighbors.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/meshTouchingNeighbors.ijm)
+
+
 <a name="getSize"></a>
 ## getSize
 
@@ -1305,6 +1388,14 @@ Image source
 
 Parameters (Java):
 ClearCLBuffer arg1
+
+
+
+### Example scripts
+* [getsize.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/getsize.ijm)
+* [meshTouchingNeighbors.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/meshTouchingNeighbors.ijm)
+* [mesh_closest_points.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/mesh_closest_points.ijm)
+
 
 <a name="gradientX"></a>
 ## gradientX'
@@ -1416,6 +1507,14 @@ Image source
 Parameters (Java):
 ClearCLBuffer arg1, ResultsTable arg2
 
+
+
+### Example scripts
+* [matrix_multiply.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/matrix_multiply.ijm)
+* [meshTouchingNeighbors.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/meshTouchingNeighbors.ijm)
+* [mesh_closest_points.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/mesh_closest_points.ijm)
+
+
 <a name="invert"></a>
 ## invert'
 
@@ -1453,6 +1552,13 @@ Image label_map_source, Image mask_destination, Number label_index
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3
+
+
+
+### Example scripts
+* [boundingBoxes.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/boundingBoxes.ijm)
+* [measure_area_per_label.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/measure_area_per_label.ijm)
+
 
 <a name="laplace"></a>
 ## laplace
@@ -1539,6 +1645,12 @@ Image source, Image label_map, Image destination, Number label_index
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, Float arg4
 
+
+
+### Example scripts
+* [intensity_per_label.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/intensity_per_label.ijm)
+
+
 <a name="maskStackWithPlane"></a>
 ## maskStackWithPlane'
 
@@ -1568,6 +1680,12 @@ Image source, Image mask, Image destination
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
+
+
+
+### Example scripts
+* [intensity_per_label.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/intensity_per_label.ijm)
+
 
 <a name="matrixEqual"></a>
 ## matrixEqual
@@ -1677,7 +1795,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="maximumSphere"></a>
 ## maximumSphere'
@@ -1689,7 +1807,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="maximumXYZProjection"></a>
 ## maximumXYZProjection'
@@ -1798,7 +1916,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="meanSphere"></a>
 ## meanSphere'
@@ -1810,7 +1928,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="meanSquaredError"></a>
 ## meanSquaredError
@@ -1903,7 +2021,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="medianSphere"></a>
 ## medianSphere'
@@ -1917,7 +2035,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="minimumBox"></a>
 ## minimumBox'
@@ -2088,6 +2206,12 @@ Image matrix1, Image matrix2, Image matrix_destination
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
 
+
+
+### Example scripts
+* [matrix_multiply.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/matrix_multiply.ijm)
+
+
 <a name="multiplySliceBySliceWithScalars"></a>
 ## multiplySliceBySliceWithScalars'
 
@@ -2125,13 +2249,41 @@ Image distance_matrix, Image indexlist_destination, Number nClosestPointsTofind
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
 
+
+
+### Example scripts
+* [mesh_closest_points.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/mesh_closest_points.ijm)
+
+
+<a name="nonzeroMaximumDiamond"></a>
+## nonzeroMaximumDiamond
+
+Apply a maximum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
+
+Parameters (macro):
+Image input, Image destination
+
+Parameters (Java):
+ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3, ClearCLKernel arg4
+
+<a name="nonzeroMaximumDiamond"></a>
+## nonzeroMaximumDiamond
+
+Apply a maximum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
+
+Parameters (macro):
+Image input, Image destination
+
+Parameters (Java):
+ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3
+
 <a name="nonzeroMinimumDiamond"></a>
 ## nonzeroMinimumDiamond
 
-null
+Apply a minimum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
 
 Parameters (macro):
-null
+Image input, Image destination
 
 Parameters (Java):
 ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3, ClearCLKernel arg4
@@ -2139,10 +2291,10 @@ ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3, Clea
 <a name="nonzeroMinimumDiamond"></a>
 ## nonzeroMinimumDiamond
 
-null
+Apply a minimum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
 
 Parameters (macro):
-null
+Image input, Image destination
 
 Parameters (Java):
 ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3
@@ -2172,6 +2324,34 @@ Image source1, Image source2, Image destination
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
+
+<a name="onlyzeroOverwriteMaximumBox"></a>
+## onlyzeroOverwriteMaximumBox
+
+null
+
+Parameters (macro):
+null
+
+Parameters (Java):
+ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3
+
+<a name="onlyzeroOverwriteMaximumDiamond"></a>
+## onlyzeroOverwriteMaximumDiamond
+
+TODO
+
+Parameters (macro):
+Image input, Image destination
+
+Parameters (Java):
+ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3
+
+
+
+### Example scripts
+* [meshTouchingNeighbors.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/meshTouchingNeighbors.ijm)
+
 
 <a name="particleImageVelocimetry2D"></a>
 ## particleImageVelocimetry2D
@@ -2219,6 +2399,13 @@ Image source, Image destination, Number destinationX, Number destinationY
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
+
+
+### Example scripts
+* [make_super_blobs.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/make_super_blobs.ijm)
+* [paste_images.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/paste_images.ijm)
+
+
 <a name="paste"></a>
 ## paste
 
@@ -2229,6 +2416,13 @@ Image source, Image destination, Number destinationX, Number destinationY
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+
+
+
+### Example scripts
+* [make_super_blobs.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/make_super_blobs.ijm)
+* [paste_images.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/paste_images.ijm)
+
 
 <a name="powerImages"></a>
 ## powerImages
@@ -2267,6 +2461,12 @@ Image destination, String filename, String nextFilename, String loaderId
 Parameters (Java):
 ClearCLBuffer arg1, String arg2, String arg3, String arg4
 
+
+
+### Example scripts
+* [preloading.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/preloading.ijm)
+
+
 <a name="presign"></a>
 ## presign
 
@@ -2288,6 +2488,12 @@ Image binary_input
 
 Parameters (Java):
 ClearCLBuffer arg1
+
+
+
+### Example scripts
+* [pullAsROI.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/pullAsROI.ijm)
+
 
 <a name="radialProjection"></a>
 ## radialProjection'
@@ -2320,7 +2526,7 @@ Parameters (macro):
 Image destination, String filename, Number width, Number height, Number depth, Number bitsPerPixel
 
 Parameters (Java):
-String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, String arg2
 
 <a name="readRawImageFromDisc"></a>
 ## readRawImageFromDisc
@@ -2331,7 +2537,7 @@ Parameters (macro):
 Image destination, String filename, Number width, Number height, Number depth, Number bitsPerPixel
 
 Parameters (Java):
-ClearCLBuffer arg1, String arg2
+String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="replaceIntensity"></a>
 ## replaceIntensity
@@ -2489,6 +2695,12 @@ Image distance_matrix, Image destination_minimum_distances
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
 
+
+
+### Example scripts
+* [spot_distance_measurement.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/spot_distance_measurement.ijm)
+
+
 <a name="smallerConstant"></a>
 ## smallerConstant
 
@@ -2575,6 +2787,14 @@ Image input_spots, Image destination_pointlist
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
 
+
+
+### Example scripts
+* [meshTouchingNeighbors.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/meshTouchingNeighbors.ijm)
+* [mesh_closest_points.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/mesh_closest_points.ijm)
+* [spot_distance_measurement.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/spot_distance_measurement.ijm)
+
+
 <a name="stackToTiles"></a>
 ## stackToTiles
 
@@ -2621,6 +2841,13 @@ Image input, Image labelmap
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3
 
+
+
+### Example scripts
+* [measure_statistics.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/measure_statistics.ijm)
+* [particle_analysis.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/particle_analysis.ijm)
+
+
 <a name="statisticsOfLabelledPixels"></a>
 ## statisticsOfLabelledPixels
 
@@ -2631,6 +2858,13 @@ Image input, Image labelmap
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ResultsTable arg3
+
+
+
+### Example scripts
+* [measure_statistics.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/measure_statistics.ijm)
+* [particle_analysis.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/particle_analysis.ijm)
+
 
 <a name="statisticsOfLabelledPixels"></a>
 ## statisticsOfLabelledPixels
@@ -2643,6 +2877,13 @@ Image input, Image labelmap
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4
 
+
+
+### Example scripts
+* [measure_statistics.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/measure_statistics.ijm)
+* [particle_analysis.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/particle_analysis.ijm)
+
+
 <a name="statisticsOfLabelledPixels"></a>
 ## statisticsOfLabelledPixels
 
@@ -2653,6 +2894,13 @@ Image input, Image labelmap
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2
+
+
+
+### Example scripts
+* [measure_statistics.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/measure_statistics.ijm)
+* [particle_analysis.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/particle_analysis.ijm)
+
 
 <a name="subtractBackground"></a>
 ## subtractBackground
@@ -2783,7 +3031,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
 
 <a name="translationRegistration"></a>
 ## translationRegistration
@@ -2794,7 +3042,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
 
 <a name="translationTimelapseRegistration"></a>
 ## translationTimelapseRegistration

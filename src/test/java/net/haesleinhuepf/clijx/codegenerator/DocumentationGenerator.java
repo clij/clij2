@@ -8,9 +8,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.CLIJx;
 import org.scijava.Context;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
@@ -131,6 +129,10 @@ public class DocumentationGenerator {
             builder.append(item.parametersJava);
             builder.append("\n\n");
 
+            String linkToExamples = searchForExampleScripts("CLIJx_" + item.methodName, "src/main/macro/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/");
+            if(linkToExamples.length() > 0) {
+                builder.append("\n\n### Example scripts\n" + linkToExamples + "\n\n");
+            }
         }
 
         File outputTarget = new File("reference.md");
@@ -139,4 +141,49 @@ public class DocumentationGenerator {
             writer.write(builder.toString());
             writer.close();
     }
+
+    protected static String searchForExampleScripts(String searchFor, String searchinFolder, String baseLink) {
+        StringBuilder result = new StringBuilder();
+        for (File file : new File(searchinFolder).listFiles()) {
+            if (!file.isDirectory()) {
+                String content = readFile(file.getAbsolutePath());
+                if (content.contains(searchFor)) {
+                    result.append("* [" + file.getName() + "](" + baseLink + file.getName() + ")\n");
+                }
+            }
+        }
+        return result.toString();
+    }
+
+    public static String readFile(String filename) {
+        System.out.println("Reading " + filename);
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(filename));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            br.close();
+            return sb.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 }
