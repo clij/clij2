@@ -64,6 +64,14 @@ public class DocumentationGenerator {
                         parametersCall = parametersCall + ", " + parameter.getName();
                     }
 
+                    String[] variableNames = guessParameterNames(service, methodName, parametersHeader.split(","));
+                    if (variableNames.length > 0) {
+                        for (int i = 0; i < variableNames.length; i++) {
+                            parametersCall = parametersCall.replace("arg" + (i + 1), variableNames[i]);
+                            parametersHeader = parametersHeader.replace("arg" + (i + 1), variableNames[i]);
+                        }
+                    }
+
                     if (!parametersHeader.contains("ClearCLImage ")) { // we document only  buffer methods for now
                         CLIJMacroPlugin plugin = findPlugin(service, methodName);
 

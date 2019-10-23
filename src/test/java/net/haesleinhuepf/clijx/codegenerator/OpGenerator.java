@@ -84,6 +84,14 @@ public class OpGenerator {
                         }
                     }
 
+                    String[] variableNames = guessParameterNames(service, methodName, parametersHeader.split(","));
+                    if (variableNames.length > 0) {
+                        for (int i = 0; i < variableNames.length; i++) {
+                            parametersCall = parametersCall.replace("arg" + (i + 1), variableNames[i]);
+                            parametersHeader = parametersHeader.replace("arg" + (i + 1), variableNames[i]);
+                        }
+                    }
+
                     String documentation = findDocumentation(service, methodName);
                     //System.out.println(documentation);
 
@@ -110,6 +118,31 @@ public class OpGenerator {
         writer.write(builder.toString());
         writer.close();
 
+    }
+
+    public static String[] guessParameterNames(CLIJMacroPluginService service, String methodName, String[] parametersHeader) {
+        CLIJMacroPlugin plugin = findPlugin(service, methodName);
+        if (plugin != null) {
+            String[] parameters = plugin.getParameterHelpText().split(",");
+            if (parameters.length != parametersHeader.length) {
+                return new String[0];
+            }
+            String[] parameterNames = new String[parametersHeader.length];
+            for (int i = 0; i < parameters.length; i++) {
+                String typeA = parameters[i].trim().split(" ")[0];
+                String typeB = parametersHeader[i].trim().split(" ")[0];
+
+                if (((typeA.compareTo("String") == 0 || typeA.compareTo("Image") == 0) && (typeB.compareTo("ClearCLBuffer") == 0 || typeB.compareTo("ClearCLImage") == 0)) ||
+                        ((typeA.compareTo("Number") == 0) && (typeB.compareTo("double") == 0))) {
+                    parameterNames[i] = parameters[i].trim().split(" ")[1];
+                } else {
+                    return new String[0];
+                }
+
+            }
+            return parameterNames;
+        }
+        return new String[0];
     }
 
     static String typeToString(Class klass) {
