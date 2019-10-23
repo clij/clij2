@@ -351,7 +351,7 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3
 
 <a name="affineTransform3D"></a>
 ## affineTransform3D'
@@ -386,12 +386,12 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
 
 <a name="affineTransform"></a>
 ## affineTransform'
 
-CLIJ affineTransform is deprecated. Use affineTransform2D or affineTransform3D instead.
+CLIJ affineTransform is <b>deprecated</b>. Use affineTransform2D or affineTransform3D instead.
 
 Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.
 
@@ -428,7 +428,7 @@ ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
 <a name="affineTransform"></a>
 ## affineTransform'
 
-CLIJ affineTransform is deprecated. Use affineTransform2D or affineTransform3D instead.
+CLIJ affineTransform is <b>deprecated</b>. Use affineTransform2D or affineTransform3D instead.
 
 Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.
 
@@ -662,7 +662,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="blur"></a>
 ## blur'
@@ -675,7 +675,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="boundingBox"></a>
 ## boundingBox
@@ -1928,7 +1928,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="meanSphere"></a>
 ## meanSphere'
@@ -1940,7 +1940,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="meanSquaredError"></a>
 ## meanSquaredError
@@ -2033,7 +2033,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="medianSphere"></a>
 ## medianSphere'
@@ -2047,7 +2047,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="minimumBox"></a>
 ## minimumBox'
@@ -2145,7 +2145,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="minimumSphere"></a>
 ## minimumSphere'
@@ -2157,7 +2157,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="minimumZProjection"></a>
 ## minimumZProjection'
@@ -2538,7 +2538,7 @@ Parameters (macro):
 Image destination, String filename, Number width, Number height, Number depth, Number bitsPerPixel
 
 Parameters (Java):
-ClearCLBuffer arg1, String arg2
+String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="readRawImageFromDisc"></a>
 ## readRawImageFromDisc
@@ -2549,7 +2549,7 @@ Parameters (macro):
 Image destination, String filename, Number width, Number height, Number depth, Number bitsPerPixel
 
 Parameters (Java):
-String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, String arg2
 
 <a name="replaceIntensity"></a>
 ## replaceIntensity
@@ -3043,7 +3043,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
+ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination
 
 <a name="translationRegistration"></a>
 ## translationRegistration
@@ -3054,7 +3054,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination
+ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
 
 <a name="translationTimelapseRegistration"></a>
 ## translationTimelapseRegistration
