@@ -35,9 +35,9 @@ public class OpGenerator {
         }
 
         builder.append("// this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details\n");
-        builder.append("public class CLIJxOps {\n");
-        builder.append("   private CLIJ clij;\n");
-        builder.append("   private CLIJx clijx;\n");
+        builder.append("public abstract class CLIJxOps {\n");
+        builder.append("   protected CLIJ clij;\n");
+        builder.append("   protected CLIJx clijx;\n");
         builder.append("   \n" +
                 "   public CLIJxOps(CLIJx clijx) {\n" +
                 "       this.clijx = clijx;\n" +

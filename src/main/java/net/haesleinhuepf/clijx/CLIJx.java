@@ -16,9 +16,10 @@ import java.util.HashMap;
 /**
  * The CLIJx gateway
  */
-public class CLIJx {
-    private CLIJ clij;
+public class CLIJx extends CLIJxOps{
     private static CLIJx instance;
+
+    @Deprecated // use clijx instead of clijx.op
     public final CLIJxOps op;
 
     private final CLKernelExecutor mCLKernelExecutor;
@@ -31,7 +32,8 @@ public class CLIJx {
     @Deprecated
     public CLIJx(CLIJ clij) {
         this.clij = clij;
-        op = new CLIJxOps(this);
+        this.clijx = this;
+        op = this; //new CLIJxOps(this);
         mCLKernelExecutor = new CLKernelExecutor(clij.getClearCLContext());
     }
 
@@ -98,11 +100,7 @@ public class CLIJx {
         return clij.create(dimensions, typeEnum);
     }
 
-    /**
-     * use op without brackets instead.
-     * @return
-     */
-    @Deprecated
+    @Deprecated // use clijx instead of clijx.op()
     public CLIJxOps op() {
         return op;
     }
