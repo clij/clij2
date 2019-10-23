@@ -81,6 +81,7 @@ public class DocumentationGenerator {
                             item.parametersMacro = plugin.getParameterHelpText();
                             if (plugin instanceof OffersDocumentation) {
                                 item.description = ((OffersDocumentation) plugin).getDescription();
+                                item.description = item.description.replace("deprecated", "<b>deprecated</b>");
                             }
                         }
 
@@ -148,6 +149,59 @@ public class DocumentationGenerator {
         FileWriter writer = new FileWriter(outputTarget);
             writer.write(builder.toString());
             writer.close();
+
+        // auto-completion list
+        buildAutoCompletion(names, methodMap);
+    }
+
+    private static void buildAutoCompletion(ArrayList<String> names, HashMap<String, DocumentationItem> methodMap) {
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("package net.haesleinhuepf.clij.jython;\n");
+        builder.append("import org.fife.ui.autocomplete.BasicCompletion;\n");
+        builder.append("import net.haesleinhuepf.clij.jython.ScriptingAutoCompleteProvider;\n");
+        builder.append("import java.util.ArrayList;");
+
+        builder.append("// this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details\n");
+        builder.append("class CLIJxAutoComplete {\n");
+        builder.append("   \n");
+        builder.append("   public static ArrayList<BasicCompletion> getCompletions(final ScriptingAutoCompleteProvider provider) {\n");
+
+        builder.append("       ArrayList<BasicCompletion> list = new ArrayList<BasicCompletion>();\n");
+        builder.append("       String headline;\n");
+        builder.append("       String description;\n");
+
+        int methodCount = 0;
+        for (String name : names) {
+            DocumentationItem item = methodMap.get(name);
+
+            String htmlDescription = item.description;
+            if (htmlDescription != null) {
+                htmlDescription = htmlDescription.replace("\n", "<br>");
+                htmlDescription = htmlDescription.replace("\"", "&quot;");
+                htmlDescription = htmlDescription + "<br><br>Parameters:<br>" + item.parametersJava;
+            }
+            builder.append("       headline = \"clijx." + item.methodName + "(" + item.parametersJava + ")\";\n");
+            builder.append("       description = \"<b>" + item.methodName + "</b><br><br>" + htmlDescription + "\";\n");
+            builder.append("       list.add(new BasicCompletion(provider, headline, null, description));\n");
+
+            methodCount++;
+        }
+
+        builder.append("        return list;\n");
+        builder.append("    }\n");
+        builder.append("}\n");
+        builder.append("// " + methodCount + " methods generated.\n");
+
+        File outputTarget = new File("src/main/java/net/haesleinhuepf/clij/jython/CLIJxAutoComplete.java");
+
+        try {
+            FileWriter writer = new FileWriter(outputTarget);
+            writer.write(builder.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected static String searchForExampleScripts(String searchFor, String searchinFolder, String baseLink) {
