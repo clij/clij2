@@ -1,5 +1,6 @@
 package net.haesleinhuepf.clijx;
 
+import ij.IJ;
 import ij.ImagePlus;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
@@ -100,13 +101,18 @@ public class CLIJx extends CLIJxOps{
         return clij.create(dimensions, typeEnum);
     }
 
+    private static boolean notifiedDeprecated = false;
     @Deprecated // use clijx instead of clijx.op()
     public CLIJxOps op() {
+        if (!notifiedDeprecated) {
+            IJ.log("Warning: clijx.op().anyMethod() and clijx.op.anyMethod() are deprecated. Use clijx.anyMethod() instead.");
+            notifiedDeprecated = true;
+        }
         return op;
     }
 
-    public void execute(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters) {
-        ClearCLKernel kernel = executeSubsequently(anchorClass, pProgramFilename, pKernelname,  dimensions, globalsizes, parameters, null);
+    public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters) {
+        ClearCLKernel kernel = executeSubsequently(anchorClass, programFilename, kernelname,  dimensions, globalsizes, parameters, null);
         kernel.close();
     }
 
