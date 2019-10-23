@@ -16,7 +16,7 @@ __kernel void onlyzero_overwrite_maximum_box_image3d
     for (int x = -1; x <= 1; x++) {
       for (int y = -1; y <= 1; y++) {
         for (int z = -1; z <= 1; z++) {
-          value = READ_IMAGE_3D(src, sampler, (pos + (int4){x, y, z, 0})).x;
+          float value = READ_IMAGE_3D(src, sampler, (pos + (int4){x, y, z, 0})).x;
           if (value > foundMaximum) {
             foundMaximum = value;
           }
