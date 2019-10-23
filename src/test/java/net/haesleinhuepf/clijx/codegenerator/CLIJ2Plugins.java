@@ -104,7 +104,8 @@ public interface CLIJ2Plugins {
             NonzeroMaximumDiamond.class,
             OnlyzeroOverwriteMaximumDiamond.class,
             OnlyzeroOverwriteMaximumBox.class,
-            GenerateTouchMatrix.class
+            GenerateTouchMatrix.class,
+            DetectLabelEdges.class
 
     };
 

@@ -43,6 +43,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#crop">crop'</a>
 * <a href="#crossCorrelation">crossCorrelation</a>
 * <a href="#deformableRegistration2D">deformableRegistration2D</a>
+* <a href="#detectLabelEdges">detectLabelEdges</a>
 * <a href="#detectMaximaBox">detectMaximaBox'</a>
 * <a href="#detectMaximaSliceBySliceBox">detectMaximaSliceBySliceBox'</a>
 * <a href="#detectMinimaBox">detectMinimaBox'</a>
@@ -290,7 +291,7 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform2D arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
 
 <a name="affineTransform2D"></a>
 ## affineTransform2D'
@@ -315,7 +316,7 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform2D arg3
 
 <a name="affineTransform3D"></a>
 ## affineTransform3D'
@@ -460,17 +461,6 @@ Image source, Image destination, String transform
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3
-
-<a name="applyVectorfield"></a>
-## applyVectorfield'
-
-Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
-
-Parameters (macro):
-Image source, Image vectorX, Image vectorY, Image destination
-
-Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5
 
 <a name="applyVectorfield"></a>
 ## applyVectorfield'
@@ -482,6 +472,17 @@ Image source, Image vectorX, Image vectorY, Image destination
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4
+
+<a name="applyVectorfield"></a>
+## applyVectorfield'
+
+Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
+
+Parameters (macro):
+Image source, Image vectorX, Image vectorY, Image destination
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5
 
 <a name="argMaximumZProjection"></a>
 ## argMaximumZProjection'
@@ -871,6 +872,17 @@ Image input1, Image input2, Image destination, Number maxDeltaX, Number maxDelta
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, int arg4, int arg5
+
+<a name="detectLabelEdges"></a>
+## detectLabelEdges
+
+Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where all pixels are set to 0 exept those where labels are touching.Only half of the matrix is filled (with x < y). For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.
+
+Parameters (macro):
+Image label_map, Image touch_matrix_destination
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2
 
 <a name="detectMaximaBox"></a>
 ## detectMaximaBox'
@@ -1795,7 +1807,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="maximumSphere"></a>
 ## maximumSphere'
@@ -1807,7 +1819,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="maximumXYZProjection"></a>
 ## maximumXYZProjection'
@@ -1916,7 +1928,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="meanSphere"></a>
 ## meanSphere'
@@ -1928,7 +1940,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="meanSquaredError"></a>
 ## meanSquaredError
@@ -1965,7 +1977,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="medianBox"></a>
 ## medianBox'
@@ -1979,7 +1991,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="medianSliceBySliceBox"></a>
 ## medianSliceBySliceBox'
@@ -2021,7 +2033,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="medianSphere"></a>
 ## medianSphere'
@@ -2035,7 +2047,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="minimumBox"></a>
 ## minimumBox'
@@ -2133,7 +2145,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="minimumSphere"></a>
 ## minimumSphere'
@@ -2145,7 +2157,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="minimumZProjection"></a>
 ## minimumZProjection'
@@ -2526,7 +2538,7 @@ Parameters (macro):
 Image destination, String filename, Number width, Number height, Number depth, Number bitsPerPixel
 
 Parameters (Java):
-ClearCLBuffer arg1, String arg2
+String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="readRawImageFromDisc"></a>
 ## readRawImageFromDisc
@@ -2537,7 +2549,7 @@ Parameters (macro):
 Image destination, String filename, Number width, Number height, Number depth, Number bitsPerPixel
 
 Parameters (Java):
-String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, String arg2
 
 <a name="replaceIntensity"></a>
 ## replaceIntensity
@@ -3031,7 +3043,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
 
 <a name="translationRegistration"></a>
 ## translationRegistration
@@ -3042,7 +3054,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
 
 <a name="translationTimelapseRegistration"></a>
 ## translationTimelapseRegistration
