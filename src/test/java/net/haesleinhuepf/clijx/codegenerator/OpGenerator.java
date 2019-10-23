@@ -69,8 +69,19 @@ public class OpGenerator {
                         if (parametersHeader.length() > 0) {
                             parametersHeader = parametersHeader + ", ";
                         }
-                        parametersHeader = parametersHeader + parameter.getType().getSimpleName() + " " + parameter.getName();
-                        parametersCall = parametersCall + ", " + parameter.getName();
+                        if (parameter.getType() == Float.class) {
+                            parametersHeader = parametersHeader + "double " + parameter.getName();
+                            parametersCall = parametersCall + ", new Double (" + parameter.getName() + ").floatValue()";
+                        } else if (parameter.getType() == Integer.class){
+                            parametersHeader = parametersHeader + "double " + parameter.getName();
+                            parametersCall = parametersCall + ", new Double (" + parameter.getName() + ").intValue()";
+                        } else if (parameter.getType() == Boolean.class){
+                            parametersHeader = parametersHeader + "boolean " + parameter.getName();
+                            parametersCall = parametersCall + ", " + parameter.getName();
+                        } else {
+                            parametersHeader = parametersHeader + parameter.getType().getSimpleName() + " " + parameter.getName();
+                            parametersCall = parametersCall + ", " + parameter.getName();
+                        }
                     }
 
                     String documentation = findDocumentation(service, methodName);
