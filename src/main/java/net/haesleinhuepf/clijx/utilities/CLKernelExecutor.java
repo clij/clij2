@@ -207,7 +207,6 @@ public class CLKernelExecutor {
             openCLDefines.put("GET_IMAGE_HEIGHT(image_key)", "image_size_ ## image_key ## _height");
             openCLDefines.put("GET_IMAGE_DEPTH(image_key)", "image_size_ ## image_key ## _depth");
 
-            System.out.println("Hello world " + CLIJ.debug);
             if (CLIJ.debug) {
                 for (String key : openCLDefines.keySet()) {
                     System.out.println(key + " = " + openCLDefines.get(key));
