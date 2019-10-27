@@ -10,6 +10,10 @@ import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.utilities.TypeFixer;
 import net.haesleinhuepf.clijx.utilities.CLIJxOps;
 import net.haesleinhuepf.clijx.utilities.CLKernelExecutor;
+import net.imglib2.Cursor;
+import net.imglib2.RandomAccessibleInterval;
+import net.imglib2.type.numeric.RealType;
+import net.imglib2.view.Views;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -68,6 +72,21 @@ public class CLIJx extends CLIJxOps{
 
     public ImagePlus pull(Object object) {
         return clij.convert(object, ImagePlus.class);
+    }
+
+    public RandomAccessibleInterval pullRAI(Object object) {
+        return clij.convert(object, RandomAccessibleInterval.class);
+    }
+
+    public void pullToRAI(Object object, RandomAccessibleInterval target) {
+        RandomAccessibleInterval rai = pullRAI(object);
+
+        Cursor<RealType> cursor = Views.iterable(rai).cursor();
+        Cursor<RealType> target_cursor = Views.iterable(target).cursor();
+
+        while(cursor.hasNext() && target_cursor.hasNext()) {
+            target_cursor.next().set(cursor.next());
+        }
     }
 
     public void show(Object object, String title) {
