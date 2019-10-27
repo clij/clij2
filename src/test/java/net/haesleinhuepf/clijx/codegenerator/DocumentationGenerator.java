@@ -181,9 +181,17 @@ public class DocumentationGenerator {
                 htmlDescription = htmlDescription.replace("\"", "&quot;");
                 htmlDescription = htmlDescription + "<br><br>Parameters:<br>" + item.parametersJava;
             }
+
             builder.append("       headline = \"clijx." + item.methodName + "(" + item.parametersJava + ")\";\n");
             builder.append("       description = \"<b>" + item.methodName + "</b><br><br>" + htmlDescription + "\";\n");
             builder.append("       list.add(new BasicCompletion(provider, headline, null, description));\n");
+
+            String pythonizedMethodName = pythonizeName(item.methodName);
+            if (pythonizedMethodName.compareTo(item.methodName) != 0) {
+                builder.append("       headline = \"clijx." + pythonizedMethodName + "(" + item.parametersJava + ")\";\n");
+                builder.append("       description = \"<b>" + pythonizedMethodName + "</b><br><br>" + htmlDescription + "\";\n");
+                builder.append("       list.add(new BasicCompletion(provider, headline, null, description));\n");
+            }
 
             methodCount++;
         }

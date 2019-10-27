@@ -105,6 +105,19 @@ public class OpGenerator {
                     builder.append("        return " + klass.getSimpleName() + "." + methodName + "(" + parametersCall + ");\n");
                     builder.append("    }\n\n");
 
+                    String pythonizedMethodName = pythonizeName(methodName);
+                    if (pythonizedMethodName.compareTo(methodName) != 0) {
+                        builder.append("    /**\n");
+                        builder.append("     * " + documentation.replace("\n", "\n     * ").replace(methodName, pythonizedMethodName) + "\n");
+                        builder.append("     */\n");
+
+                        builder.append("    public " + returnType + " " + pythonizedMethodName + "(");
+                        builder.append(parametersHeader);
+                        builder.append(") {\n");
+                        builder.append("        return " + klass.getSimpleName() + "." + methodName + "(" + parametersCall + ");\n");
+                        builder.append("    }\n\n");
+                    }
+
                     methodCount++;
                 }
             }
@@ -118,6 +131,19 @@ public class OpGenerator {
         writer.write(builder.toString());
         writer.close();
 
+    }
+
+    public static String pythonizeName(String methodName) {
+        StringBuilder pytonization = new StringBuilder();
+        for (int pos = 0; pos < methodName.length(); pos++) {
+            String character = methodName.substring(pos, pos+1);
+            if (character.compareTo(character.toUpperCase()) == 0) {
+                pytonization.append("_" + character.toLowerCase());
+            } else {
+                pytonization.append(character.toLowerCase());
+            }
+        }
+        return pytonization.toString();
     }
 
     public static String[] guessParameterNames(CLIJMacroPluginService service, String methodName, String[] parametersHeader) {
