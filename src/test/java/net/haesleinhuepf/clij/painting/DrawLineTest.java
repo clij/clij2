@@ -12,7 +12,7 @@ public class DrawLineTest {
         CLIJx clijx = CLIJx.getInstance();
         ClearCLBuffer image = clijx.create(new long[]{100, 100}, NativeTypeEnum.Float);
 
-        DrawLine.drawLine(CLIJ.getInstance(), image, 10f, 20f, 0f, 50f, 50f, 0f, 10f);
+        DrawLine.drawLine(clijx, image, 10f, 20f, 0f, 50f, 50f, 0f, 10f);
         //clijx.op.drawLine(image, 10f, 10f, 0f, 10f, 50f, 0f, 5f);
 
         //new ImageJ();
@@ -25,7 +25,7 @@ public class DrawLineTest {
         CLIJx clijx = CLIJx.getInstance();
         ClearCLBuffer image = clijx.create(new long[]{100, 100, 100}, NativeTypeEnum.Float);
 
-        DrawLine.drawLine(CLIJ.getInstance(), image, 10f, 20f, 0f, 50f, 50f, 70f, 10f);
+        DrawLine.drawLine(clijx, image, 10f, 20f, 0f, 50f, 50f, 70f, 10f);
         //clijx.op.drawLine(image, 10f, 10f, 0f, 10f, 50f, 0f, 5f);
 
         //new ImageJ();

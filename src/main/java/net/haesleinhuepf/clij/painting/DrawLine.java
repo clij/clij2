@@ -1,12 +1,13 @@
 package net.haesleinhuepf.clij.painting;
 
 import net.haesleinhuepf.clij.CLIJ;
-import net.haesleinhuepf.clij.advancedfilters.Extrema;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ import java.util.HashMap;
  * 08 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_drawLine")
-public class DrawLine extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class DrawLine extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -38,10 +39,13 @@ public class DrawLine extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLI
         Float z2 = asFloat(args[6]);
         Float thickness = asFloat(args[7]);
 
-        return drawLine(clij, input, x1, y1, z1, x2, y2, z2, thickness);
+        return drawLine(getCLIJx(), input, x1, y1, z1, x2, y2, z2, thickness);
     }
 
-    public static boolean drawLine(CLIJ clij, ClearCLBuffer output, Float x1, Float y1, Float z1, Float x2, Float y2, Float z2, Float thickness) {
+    public static boolean drawLine(CLIJx clijx, ClearCLBuffer output, Float x1, Float y1, Float z1, Float x2, Float y2, Float z2, Float thickness) {
+
+        long[] globalSizes;
+
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("x1", x1);
         parameters.put("y1", y1);
@@ -50,12 +54,24 @@ public class DrawLine extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLI
         if (output.getDimension() > 2) {
             parameters.put("z1", z1);
             parameters.put("z2", z2);
+            globalSizes = new long[]{
+                    (long)(Math.abs(x1 - x2) + 1 + thickness),
+                    (long)(Math.abs(y1 - y2) + 1 + thickness),
+                    (long)(Math.abs(z1 - z2) + 1 + thickness)
+            };
+        } else {
+            globalSizes = new long[]{
+                    (long)(Math.abs(x1 - x2) + 1 + thickness),
+                    (long)(Math.abs(y1 - y2) + 1 + thickness)
+            };
         }
         parameters.put("radius", new Float(thickness / 2));
         parameters.put("dst", output);
 
+
         //System.out.println("Draw line from " + x1 + "/" + y1 + "/" + z1 + " to "  + x2 + "/" + y2 + "/" + z2);
-        return clij.execute(DrawLine.class, "drawline.cl", "draw_line_" +output.getDimension() + "D", parameters);
+        clijx.execute(DrawLine.class, "drawline_" +output.getDimension() + "d_x.cl", "draw_line_" +output.getDimension() + "D", globalSizes, globalSizes, parameters);
+        return true;
     }
 
     @Override
