@@ -47,11 +47,11 @@ class CLIJxAutoComplete {
        headline = "clijx.argMaximumZProjection(ClearCLBuffer source, ClearCLBuffer destination_max, ClearCLBuffer destination_arg_max)";
        description = "<b>argMaximumZProjection</b><br><br>Determines the maximum projection of an image stack along Z.<br>Furthermore, another 2D image is generated with pixels containing the z-index where the maximum was found (zero based).<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination_max, ClearCLBuffer destination_arg_max";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6)";
-       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6";
-       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3)";
        description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6)";
+       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.binaryAnd(ClearCLBuffer operand1, ClearCLBuffer operand2, ClearCLBuffer destination)";
        description = "<b>binaryAnd</b><br><br>Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of<br>pixels x and y with the binary AND operator &.<br>All pixel values except 0 in the input images are interpreted as 1.<br><br><pre>f(x, y) = x & y</pre><br><br>Parameters:<br>ClearCLBuffer operand1, ClearCLBuffer operand2, ClearCLBuffer destination";
@@ -374,11 +374,11 @@ class CLIJxAutoComplete {
        headline = "clijx.meanZProjection(ClearCLBuffer source, ClearCLBuffer destination)";
        description = "<b>meanZProjection</b><br><br>Determines the mean average projection of an image along Z.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.medianBox(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
-       description = "<b>medianBox</b><br><br>Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by <br>its half-width and half-height (radius).<br><br>For technical reasons, the area of the rectangle must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
-       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.medianBox(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
        description = "<b>medianBox</b><br><br>Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by <br>its half-width and half-height (radius).<br><br>For technical reasons, the area of the rectangle must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.medianBox(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
+       description = "<b>medianBox</b><br><br>Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by <br>its half-width and half-height (radius).<br><br>For technical reasons, the area of the rectangle must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.medianSliceBySliceBox(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
        description = "<b>medianSliceBySliceBox</b><br><br>Computes the local median of a pixels rectangular neighborhood. This is done slice-by-slice in a 3D <br>image stack. The rectangle is specified by its half-width and half-height (radius).<br><br>For technical reasons, the area of the rectangle must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
@@ -386,11 +386,11 @@ class CLIJxAutoComplete {
        headline = "clijx.medianSliceBySliceSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
        description = "<b>medianSliceBySliceSphere</b><br><br>Computes the local median of a pixels ellipsoidal neighborhood. This is done slice-by-slice in a 3D <br>image stack. The ellipses size is specified by its half-width and half-height (radius).<br><br>For technical reasons, the area of the ellipse must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.medianSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
-       description = "<b>medianSphere</b><br><br>Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by <br>its half-width and half-height (radius).<br><br>For technical reasons, the area of the rectangle must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
-       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.medianSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
        description = "<b>medianSphere</b><br><br>Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by <br>its half-width and half-height (radius).<br><br>For technical reasons, the area of the rectangle must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.medianSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
+       description = "<b>medianSphere</b><br><br>Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by <br>its half-width and half-height (radius).<br><br>For technical reasons, the area of the rectangle must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.minimumBox(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, int arg5)";
        description = "<b>minimumBox</b><br><br>Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by <br>its half-width and half-height (radius).<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, int arg5";
@@ -413,11 +413,11 @@ class CLIJxAutoComplete {
        headline = "clijx.minimumSliceBySliceSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
        description = "<b>minimumSliceBySliceSphere</b><br><br>Computes the local minimum of a pixels ellipsoidal 2D neighborhood in an image stack <br>slice by slice. The ellipses size is specified by its half-width and half-height (radius).<br><br>This filter is applied slice by slice in 2D.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.minimumSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
-       description = "<b>minimumSphere</b><br><br>Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by <br>its half-width and half-height (radius).<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
-       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.minimumSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
        description = "<b>minimumSphere</b><br><br>Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by <br>its half-width and half-height (radius).<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.minimumSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
+       description = "<b>minimumSphere</b><br><br>Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by <br>its half-width and half-height (radius).<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.minimumZProjection(ClearCLBuffer source, ClearCLBuffer destination_sum)";
        description = "<b>minimumZProjection</b><br><br>Determines the minimum projection of an image along Z.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination_sum";
@@ -503,11 +503,11 @@ class CLIJxAutoComplete {
        headline = "clijx.readImageFromDisc(String arg1)";
        description = "<b>readImageFromDisc</b><br><br>Read an image from disc.<br><br>Parameters:<br>String arg1";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.readRawImageFromDisc(String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5)";
-       description = "<b>readRawImageFromDisc</b><br><br>Reads a raw file from disc and pushes it immediately to the GPU.<br><br>Parameters:<br>String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5";
-       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.readRawImageFromDisc(ClearCLBuffer arg1, String arg2)";
        description = "<b>readRawImageFromDisc</b><br><br>Reads a raw file from disc and pushes it immediately to the GPU.<br><br>Parameters:<br>ClearCLBuffer arg1, String arg2";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.readRawImageFromDisc(String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5)";
+       description = "<b>readRawImageFromDisc</b><br><br>Reads a raw file from disc and pushes it immediately to the GPU.<br><br>Parameters:<br>String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.replaceIntensity(ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3, Float arg4)";
        description = "<b>replaceIntensity</b><br><br>Replaces a specific intensity in an image with a given new value.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3, Float arg4";
@@ -590,6 +590,9 @@ class CLIJxAutoComplete {
        headline = "clijx.statisticsOfLabelledPixels(ClearCLBuffer input, ClearCLBuffer labelmap)";
        description = "<b>statisticsOfLabelledPixels</b><br><br>Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer labelmap";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.stopWatch(String arg1)";
+       description = "<b>stopWatch</b><br><br>Measures time and outputs delay to last call.<br><br>Parameters:<br>String arg1";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.subtractBackground(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4)";
        description = "<b>subtractBackground</b><br><br>Applies Gaussian blur to the input image and subtracts the result from the original image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -620,11 +623,11 @@ class CLIJxAutoComplete {
        headline = "clijx.topHatSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
        description = "<b>topHatSphere</b><br><br>Apply a top-hat filter to the input image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.translationRegistration(ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination)";
-       description = "<b>translationRegistration</b><br><br>Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.<br><br>Parameters:<br>ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination";
-       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.translationRegistration(ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3)";
        description = "<b>translationRegistration</b><br><br>Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.translationRegistration(ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination)";
+       description = "<b>translationRegistration</b><br><br>Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.<br><br>Parameters:<br>ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.translationTimelapseRegistration(ClearCLBuffer input, ClearCLBuffer output)";
        description = "<b>translationTimelapseRegistration</b><br><br>Applies 2D translation registration to every pair of t, t+1 slices of a 2D+t image stack.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer output";
@@ -650,4 +653,4 @@ class CLIJxAutoComplete {
         return list;
     }
 }
-// 213 methods generated.
+// 214 methods generated.
