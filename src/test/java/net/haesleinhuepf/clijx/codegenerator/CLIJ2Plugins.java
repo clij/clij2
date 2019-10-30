@@ -10,6 +10,7 @@ import net.haesleinhuepf.clij.matrix.*;
 import net.haesleinhuepf.clij.painting.DrawBox;
 import net.haesleinhuepf.clij.painting.DrawLine;
 import net.haesleinhuepf.clij.painting.DrawSphere;
+import net.haesleinhuepf.clij.painting.DrawTwoValueLine;
 import net.haesleinhuepf.clij.piv.FastParticleImageVelocimetry;
 import net.haesleinhuepf.clij.piv.ParticleImageVelocimetry;
 import net.haesleinhuepf.clij.piv.ParticleImageVelocimetryTimelapse;
@@ -106,7 +107,12 @@ public interface CLIJ2Plugins {
             OnlyzeroOverwriteMaximumBox.class,
             GenerateTouchMatrix.class,
             DetectLabelEdges.class,
-            StopWatch.class
+            StopWatch.class,
+            CountTouchingNeighbors.class,
+            ReplaceIntensities.class,
+            DrawTwoValueLine.class,
+            AverageDistanceOfNClosestPoints.class,
+            SaveAsTIF.class
 
     };
 

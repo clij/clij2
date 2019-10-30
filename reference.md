@@ -18,6 +18,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#argMaximumZProjection">argMaximumZProjection'</a>
 * <a href="#automaticThreshold">automaticThreshold'</a>
 * <a href="#automaticThreshold">automaticThreshold'</a>
+* <a href="#averageDistanceOfClosestPoints">averageDistanceOfClosestPoints</a>
 * <a href="#binaryAnd">binaryAnd'</a>
 * <a href="#binaryEdgeDetection">binaryEdgeDetection</a>
 * <a href="#binaryIntersection">binaryIntersection</a>
@@ -39,6 +40,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#countNonZeroPixelsLocally">countNonZeroPixelsLocally'</a>
 * <a href="#countNonZeroPixels">countNonZeroPixels</a>
 * <a href="#countNonZeroVoxelsLocally">countNonZeroVoxelsLocally'</a>
+* <a href="#countTouchingNeighbors">countTouchingNeighbors</a>
 * <a href="#crop">crop'</a>
 * <a href="#crop">crop'</a>
 * <a href="#crossCorrelation">crossCorrelation</a>
@@ -66,6 +68,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#drawLine">drawLine</a>
 * <a href="#drawSphere">drawSphere</a>
 * <a href="#drawSphere">drawSphere</a>
+* <a href="#drawTwoValueLine">drawTwoValueLine</a>
 * <a href="#equalConstant">equalConstant</a>
 * <a href="#equal">equal</a>
 * <a href="#erodeBoxSliceBySlice">erodeBoxSliceBySlice'</a>
@@ -170,14 +173,15 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#readImageFromDisc">readImageFromDisc</a>
 * <a href="#readRawImageFromDisc">readRawImageFromDisc</a>
 * <a href="#readRawImageFromDisc">readRawImageFromDisc</a>
+* <a href="#replaceIntensities">replaceIntensities</a>
 * <a href="#replaceIntensity">replaceIntensity</a>
-* <a href="#replace">replace</a>
 * <a href="#resliceBottom">resliceBottom'</a>
 * <a href="#resliceLeft">resliceLeft'</a>
 * <a href="#resliceRight">resliceRight'</a>
 * <a href="#resliceTop">resliceTop'</a>
 * <a href="#rotateLeft">rotateLeft'</a>
 * <a href="#rotateRight">rotateRight'</a>
+* <a href="#saveAsTIF">saveAsTIF</a>
 * <a href="#setNonZeroPixelsToPixelIndex">setNonZeroPixelsToPixelIndex</a>
 * <a href="#setWhereXequalsY">setWhereXequalsY</a>
 * <a href="#set">set'</a>
@@ -292,7 +296,7 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform2D arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
 
 <a name="affineTransform2D"></a>
 ## affineTransform2D'
@@ -317,6 +321,41 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform2D arg3
+
+<a name="affineTransform3D"></a>
+## affineTransform3D'
+
+Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.
+
+Supported transforms:
+* center: translate the coordinate origin to the center of the image
+* -center: translate the coordinate origin back to the initial origin
+* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
+* rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees
+* rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees
+* rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
+* scale=[factor]: isotropic scaling according to given zoom factor
+* scaleX=[factor]: scaling along X-axis according to given zoom factor
+* scaleY=[factor]: scaling along Y-axis according to given zoom factor
+* scaleZ=[factor]: scaling along Z-axis according to given zoom factor
+* shearXY=[factor]: shearing along X-axis in XY plane according to given factor
+* shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor
+* shearYX=[factor]: shearing along Y-axis in XY plane according to given factor
+* shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor
+* shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor
+* shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor
+* translateX=[distance]: translate along X-axis by distance given in pixels
+* translateY=[distance]: translate along X-axis by distance given in pixels
+* translateZ=[distance]: translate along X-axis by distance given in pixels
+
+Example transform:
+transform = "center scale=2 rotate=45 -center";
+
+Parameters (macro):
+Image source, Image destination, String transform
+
+Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
 
 <a name="affineTransform3D"></a>
@@ -353,41 +392,6 @@ Image source, Image destination, String transform
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3
-
-<a name="affineTransform3D"></a>
-## affineTransform3D'
-
-Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.
-
-Supported transforms:
-* center: translate the coordinate origin to the center of the image
-* -center: translate the coordinate origin back to the initial origin
-* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
-* rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees
-* rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees
-* rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
-* scale=[factor]: isotropic scaling according to given zoom factor
-* scaleX=[factor]: scaling along X-axis according to given zoom factor
-* scaleY=[factor]: scaling along Y-axis according to given zoom factor
-* scaleZ=[factor]: scaling along Z-axis according to given zoom factor
-* shearXY=[factor]: shearing along X-axis in XY plane according to given factor
-* shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor
-* shearYX=[factor]: shearing along Y-axis in XY plane according to given factor
-* shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor
-* shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor
-* shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor
-* translateX=[distance]: translate along X-axis by distance given in pixels
-* translateY=[distance]: translate along X-axis by distance given in pixels
-* translateZ=[distance]: translate along X-axis by distance given in pixels
-
-Example transform:
-transform = "center scale=2 rotate=45 -center";
-
-Parameters (macro):
-Image source, Image destination, String transform
-
-Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
 
 <a name="affineTransform"></a>
 ## affineTransform'
@@ -462,17 +466,6 @@ Image source, Image destination, String transform
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3
-
-<a name="applyVectorfield"></a>
-## applyVectorfield'
-
-Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
-
-Parameters (macro):
-Image source, Image vectorX, Image vectorY, Image destination
-
-Parameters (Java):
-ClearCLBuffer source, ClearCLBuffer vectorX, ClearCLBuffer vectorY, ClearCLBuffer destination
 
 <a name="applyVectorfield"></a>
 ## applyVectorfield'
@@ -484,6 +477,17 @@ Image source, Image vectorX, Image vectorY, Image destination
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5
+
+<a name="applyVectorfield"></a>
+## applyVectorfield'
+
+Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
+
+Parameters (macro):
+Image source, Image vectorX, Image vectorY, Image destination
+
+Parameters (Java):
+ClearCLBuffer source, ClearCLBuffer vectorX, ClearCLBuffer vectorY, ClearCLBuffer destination
 
 <a name="argMaximumZProjection"></a>
 ## argMaximumZProjection'
@@ -524,6 +528,18 @@ Image input, Image destination, String method
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6
+
+<a name="averageDistanceOfClosestPoints"></a>
+## averageDistanceOfClosestPoints
+
+Determine the n point indices with shortest distance for all points in a distance matrix.
+This corresponds to the n row indices with minimum values for each column of the distance matrix.
+
+Parameters (macro):
+Image distance_matrix, Image indexlist_destination, Number nClosestPointsTofind
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3
 
 <a name="binaryAnd"></a>
 ## binaryAnd'
@@ -663,7 +679,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="blur"></a>
 ## blur'
@@ -676,7 +692,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="boundingBox"></a>
 ## boundingBox
@@ -825,6 +841,17 @@ null
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+
+<a name="countTouchingNeighbors"></a>
+## countTouchingNeighbors
+
+Takes a touching-neighbors-matrix as input and delivers a vector with number of touching neighbors per label as a vector.
+
+Parameters (macro):
+Image touch_matrix, Image touching_neighbors_count_destination
+
+Parameters (Java):
+ClearCLBuffer touch_matrix, ClearCLBuffer touching_neighbors_count_destination
 
 <a name="crop"></a>
 ## crop'
@@ -1094,7 +1121,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="downsample"></a>
 ## downsample'
@@ -1106,7 +1133,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="drawBox"></a>
 ## drawBox
@@ -1170,6 +1197,17 @@ Image destination, Number x, Number y, Number z, Number radius_x, Number radius_
 
 Parameters (Java):
 ClearCLBuffer arg1, Float arg2, Float arg3, Float arg4, Float arg5, Float arg6, Float arg7
+
+<a name="drawTwoValueLine"></a>
+## drawTwoValueLine
+
+Draws a line between two points with a given thickness. Pixels close to point 1 are set to value1. Pixels closer to point 2 are set to value2 All pixels other than on the line are untouched. Consider using clij.set(buffer, 0); in advance.
+
+Parameters (macro):
+Image destination, Number x1, Number y1, Number z1, Number x2, Number y2, Number z2, Number thickness, Number value1, Number value2
+
+Parameters (Java):
+ClearCLBuffer arg1, Float arg2, Float arg3, Float arg4, Float arg5, Float arg6, Float arg7, Float arg8, Float arg9, Float arg10
 
 <a name="equalConstant"></a>
 ## equalConstant
@@ -1978,7 +2016,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="medianBox"></a>
 ## medianBox'
@@ -1992,7 +2030,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="medianSliceBySliceBox"></a>
 ## medianSliceBySliceBox'
@@ -2034,7 +2072,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="medianSphere"></a>
 ## medianSphere'
@@ -2048,7 +2086,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="minimumBox"></a>
 ## minimumBox'
@@ -2146,7 +2184,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="minimumSphere"></a>
 ## minimumSphere'
@@ -2158,7 +2196,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="minimumZProjection"></a>
 ## minimumZProjection'
@@ -2552,6 +2590,17 @@ Image destination, String filename, Number width, Number height, Number depth, N
 Parameters (Java):
 String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5
 
+<a name="replaceIntensities"></a>
+## replaceIntensities
+
+Replaces specific intensities specified in a vector image with given new values specified in a vector image.
+
+Parameters (macro):
+Image input, Image new_values_vector, Image destination
+
+Parameters (Java):
+ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3
+
 <a name="replaceIntensity"></a>
 ## replaceIntensity
 
@@ -2562,17 +2611,6 @@ Image input, Image destination, Number oldValue, number newValue
 
 Parameters (Java):
 ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3, Float arg4
-
-<a name="replace"></a>
-## replace
-
-null
-
-Parameters (macro):
-null
-
-Parameters (Java):
-ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3
 
 <a name="resliceBottom"></a>
 ## resliceBottom'
@@ -2647,6 +2685,17 @@ Image source, Image destination
 
 Parameters (Java):
 ClearCLBuffer source, ClearCLBuffer destination
+
+<a name="saveAsTIF"></a>
+## saveAsTIF
+
+Pulls an image from the GPU memory and saves it as TIF to disc.
+
+Parameters (macro):
+Image input, String filename
+
+Parameters (Java):
+ClearCLBuffer arg1, String arg2
 
 <a name="setNonZeroPixelsToPixelIndex"></a>
 ## setNonZeroPixelsToPixelIndex
