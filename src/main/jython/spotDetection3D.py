@@ -16,9 +16,9 @@ from net.haesleinhuepf.clijx import CLIJx;
 IJ.run("Close All");
 
 # load/create example images
-# imp = IJ.openImage("C:/structure/data/Nantes_000646.tif");
+imp = IJ.openImage("C:/structure/data/Nantes_000646.tif");
 # imp = IJ.openImage("C:/structure/data/Riga_000512.tif");
-imp = IJ.openImage("C:/structure/data/Pau_001130.tif");
+# imp = IJ.openImage("C:/structure/data/Pau_001130.tif");
 
 
 IJ.run(imp, "32-bit", "");
@@ -27,6 +27,7 @@ imp.show();
 
 # Init GPU
 clijx = CLIJx.getInstance();
+clijx.stopWatch("");
 
 # push data to GPU
 inputImage = clijx.push(imp);
@@ -36,25 +37,30 @@ blurred = clijx.create(inputImage);
 thresholded = clijx.create(inputImage);
 detected_spots = clijx.create(inputImage);
 masked = clijx.create(inputImage);
+clijx.stopWatch("alloc");
 
 # background / noise removal
 clijx.op().differenceOfGaussian(inputImage, blurred, 3, 3, 0, 15, 15, 0);
+clijx.stopWatch("dog");
 #clijx.show(blurred, "blurred");
 
 # spot detection
 clijx.op().detectMaximaBox(blurred, detected_spots, 5);
-
+clijx.stopWatch("detect");
 # remove spots in background
 clijx.op().automaticThreshold(blurred, thresholded, "Otsu");
+clijx.stopWatch("threshold");
 #clijx.show(thresholded, "thresholded");
 clijx.op().mask(detected_spots, thresholded, masked);
 clijx.op().copy(masked, detected_spots);
 #clijx.show(detected_spots, "spots");
+clijx.stopWatch("spots");
 
 # convert spots image to spot list
 number_of_spots = clijx.op().sumPixels(detected_spots);
 pointlist = clijx.create([number_of_spots, 3]);
 clijx.op().spotsToPointList(detected_spots, pointlist);
+clijx.stopWatch("pointlist");
 
 ###########################################################################
 tempSpots1 = clijx.create(detected_spots);
@@ -62,16 +68,20 @@ tempSpots2 = clijx.create(detected_spots);
 flag = clijx.create([1, 1, 1]);
 
 clijx.op().connectedComponentsLabeling(detected_spots, tempSpots1);
+clijx.stopWatch("cca");
+
 for j in range(0, 20):
-	print("helllo " + str(j));
+	#print("helllo " + str(j));
 	clijx.op().onlyzeroOverwriteMaximumDiamond(tempSpots1, flag, tempSpots2);
-	clijx.op().onlyzeroOverwriteMaximumDiamond(tempSpots2, flag, tempSpots1);
+	clijx.op().onlyzeroOverwriteMaximumBox(tempSpots2, flag, tempSpots1);
+clijx.stopWatch("cells");
 
 clijx.show(tempSpots1, "tempSpots1");
 
 # determine which labels touch
 touch_matrix = clijx.create([number_of_spots+1, number_of_spots+1]);
 clijx.op().generateTouchMatrix(tempSpots1, touch_matrix);
+clijx.stopWatch("touch matrix");
 
 clijx.show(touch_matrix, "touch_matrix");
 
@@ -88,6 +98,8 @@ pointCoodinates = clijx.pull(pointlist).getProcessor();
 touchFlags = clijx.pull(touch_matrix).getProcessor();
 
 mesh = clijx.create(inputImage);
+clijx.stopWatch("points");
+
 for p in range(0, pointCoodinates.getWidth()):
 	x1 = pointCoodinates.getf(p, 0);
 	y1 = pointCoodinates.getf(p, 1);
@@ -104,13 +116,16 @@ for p in range(0, pointCoodinates.getWidth()):
 			clijx.op().drawLine(mesh, x1, y1, z1, x2, y2, z2, thickness);
 
 ###########################################################################
+clijx.stopWatch("mesh");
+
+clijx.show(mesh, "mesh");
+clijx.stopWatch("show mesh");
 
 
 # make spots bigger for visualisation
 temp = clijx.create(detected_spots);
 clijx.op().dilateBox(detected_spots, temp);
 clijx.op().dilateSphere(temp, detected_spots);
-#clijx.show(detected_spots, "e spots");
 
 # generate maximum projections of all results
 maximumInput = clijx.create([inputImage.getWidth(), inputImage.getHeight()]);
@@ -122,6 +137,9 @@ clijx.op().maximumZProjection(blurred, maximumBackgroundSubtracted);
 clijx.op().maximumZProjection(detected_spots, maximumSpots);
 clijx.op().maximumZProjection(mesh, maximumMesh);
 
+clijx.stopWatch("maxproj");
+
+
 # intermediate cleanup
 inputImage.close();
 blurred.close();
@@ -132,6 +150,9 @@ touch_matrix.close();
 mesh.close();
 thresholded.close();
 masked.close();
+
+clijx.stopWatch("cleanup1");
+
 
 # show results
 clijx.show(maximumInput, "maximumInput");
