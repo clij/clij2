@@ -8,6 +8,7 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 
+import net.haesleinhuepf.clijx.CLIJx;
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
@@ -74,7 +75,8 @@ public class ExcludeLabelsOnEdges extends AbstractCLIJPlugin implements CLIJMacr
 
         label_index_map.readFrom(FloatBuffer.wrap(label_indices), true);
 
-        ConnectedComponentsLabeling.replace(clij, label_map_in, label_index_map, label_map_out);
+        CLIJx clijx = CLIJx.getInstance();
+        ReplaceIntensities.replaceIntensities(clijx, label_map_in, label_index_map, label_map_out);
 
         return true;
     }

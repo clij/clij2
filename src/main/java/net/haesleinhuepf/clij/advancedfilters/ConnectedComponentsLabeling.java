@@ -13,7 +13,7 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.utilities.CLIJUtilities;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.numeric.RealType;
@@ -35,7 +35,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  * 06 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_connectedComponentsLabeling")
-public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class ConnectedComponentsLabeling extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
@@ -43,30 +43,27 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         ClearCLBuffer input = (ClearCLBuffer) args[0];
         ClearCLBuffer output = (ClearCLBuffer) args[1];
 
-        boolean result = connectedComponentsLabeling(clij, input, output);
+        boolean result = connectedComponentsLabeling(getCLIJx(), input, output);
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean connectedComponentsLabeling(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
-
-        CLIJx clijx = CLIJx.getInstance();
-
+    public static boolean connectedComponentsLabeling(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output) {
         //ClearCLImage temp1 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
         //ClearCLImage temp2 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
 
-        ClearCLBuffer temp1 = clij.create(output);
-        ClearCLBuffer temp2 = clij.create(output);
-        ClearCLBuffer temp3 = clij.create(output);
+        ClearCLBuffer temp1 = clijx.create(output);
+        ClearCLBuffer temp2 = clijx.create(output);
+        ClearCLBuffer temp3 = clijx.create(output);
 
-        ClearCLBuffer flag = clij.create(new long[]{1,1,1}, NativeTypeEnum.Byte);
+        ClearCLBuffer flag = clijx.create(new long[]{1,1,1}, NativeTypeEnum.Byte);
         ByteBuffer aByteBufferWithAZero = ByteBuffer.allocate(1);
         aByteBufferWithAZero.put((byte)0);
         flag.readFrom(aByteBufferWithAZero, true);
 
-        setNonZeroPixelsToPixelIndex(clij, input, temp1);
+        setNonZeroPixelsToPixelIndex(clijx.getClij(), input, temp1);
 
-        clij.op().set(temp2, 0f);
+        clijx.set(temp2, 0f);
 
 
         final int[] iterationCount = {0};
@@ -94,16 +91,16 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
 
             }
 
-            ImagePlus flagImp = clij.pull(flag);
+            ImagePlus flagImp = clijx.pull(flag);
             flagValue = flagImp.getProcessor().get(0,0);
             flag.readFrom(aByteBufferWithAZero, true);
             iterationCount[0] = iterationCount[0] + 1;
         }
 
         if (iterationCount[0] % 2 == 0) {
-            copyInternal(clij, temp1, temp3, temp1.getDimension(), temp3.getDimension());
+            copyInternal(clijx.getClij(), temp1, temp3, temp1.getDimension(), temp3.getDimension());
         } else {
-            copyInternal(clij, temp2, temp3, temp2.getDimension(), temp3.getDimension());
+            copyInternal(clijx.getClij(), temp2, temp3, temp2.getDimension(), temp3.getDimension());
         }
         if (flipkernel != null) {
             flipkernel.close();
@@ -113,7 +110,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         }
 
 
-        shiftIntensitiesToCloseGaps(clij, temp3, output);
+        shiftIntensitiesToCloseGaps(clijx, temp3, output);
 
         temp1.close();
         temp2.close();
@@ -123,12 +120,12 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
         return true;
     }
 
-    public static boolean shiftIntensitiesToCloseGaps(CLIJ clij, ClearCLImageInterface input, ClearCLImageInterface output) {
+    public static boolean shiftIntensitiesToCloseGaps(CLIJx clijx, ClearCLImageInterface input, ClearCLImageInterface output) {
         int maximum = 0;
         if (input instanceof ClearCLImage) {
-            maximum = (int) clij.op().maximumOfAllPixels((ClearCLImage) input);
+            maximum = (int) clijx.maximumOfAllPixels((ClearCLImage) input);
         } else {
-            maximum = (int) clij.op().maximumOfAllPixels((ClearCLBuffer) input);
+            maximum = (int) clijx.maximumOfAllPixels((ClearCLBuffer) input);
         }
         final float[] allNewIndices = new float[maximum + 1];
 
@@ -147,7 +144,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
                 }
             }
         } else { // that's slower but more generic:
-            RandomAccessibleInterval rai = clij.convert(input, RandomAccessibleInterval.class);
+            RandomAccessibleInterval rai = clijx.convert(input, RandomAccessibleInterval.class);
             Cursor<RealType> cursor = Views.iterable(rai).cursor();
 
             while (cursor.hasNext()) {
@@ -159,26 +156,14 @@ public class ConnectedComponentsLabeling extends AbstractCLIJPlugin implements C
             }
         }
 
-        ClearCLBuffer keyValueMap = clij.create(new long[]{allNewIndices.length, 1, 1}, NativeTypeEnum.Float);
+        ClearCLBuffer keyValueMap = clijx.create(new long[]{allNewIndices.length, 1, 1}, NativeTypeEnum.Float);
         keyValueMap.readFrom(FloatBuffer.wrap(allNewIndices), true);
 
-        replace(clij, input, keyValueMap, output);
+        ReplaceIntensities.replaceIntensities(clijx, input, keyValueMap, output);
 
         keyValueMap.close();
         return true;
     }
-
-    public static boolean replace(CLIJ clij, ClearCLImageInterface src, ClearCLBuffer map, ClearCLImageInterface dst) {
-        HashMap<String, Object> parameters = new HashMap<>();
-
-        parameters.clear();
-        parameters.put("src", src);
-        parameters.put("dst", dst);
-        parameters.put("map", map);
-        return clij.execute(ConnectedComponentsLabeling.class, "cca.cl", "replace_by_map", parameters);
-    }
-
-
 
     public static boolean setNonZeroPixelsToPixelIndex(CLIJ clij, ClearCLImageInterface src, ClearCLImageInterface dst) {
         HashMap<String, Object> parameters = new HashMap<>();

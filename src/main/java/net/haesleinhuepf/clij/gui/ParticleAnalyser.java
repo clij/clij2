@@ -10,10 +10,7 @@ import ij.plugin.PlugIn;
 import ij.process.ImageProcessor;
 import ij.util.Tools;
 import net.haesleinhuepf.clij.CLIJ;
-import net.haesleinhuepf.clij.advancedfilters.BinaryEdgeDetection;
-import net.haesleinhuepf.clij.advancedfilters.ConnectedComponentsLabeling;
-import net.haesleinhuepf.clij.advancedfilters.ExcludeLabelsOnEdges;
-import net.haesleinhuepf.clij.advancedfilters.StatisticsOfLabelledPixels;
+import net.haesleinhuepf.clij.advancedfilters.*;
 import net.haesleinhuepf.clij.advancedmath.GreaterOrEqual;
 import net.haesleinhuepf.clij.advancedmath.GreaterOrEqualConstant;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
@@ -65,7 +62,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
     private double max;
     private ImageProcessor ip;
 
-    CLIJ clij = null;
+    CLIJx clijx = null;
 
     @Override
     public void run(String arg) {
@@ -135,12 +132,12 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         GenericDialog gd = new GenericDialog("3D Object Counter on GPU (experimental, clij)");
 
         ArrayList<String> deviceList = CLIJ.getAvailableDeviceNames();
-        if (clij == null) {
-            clij = CLIJ.getInstance();
+        if (clijx == null) {
+            clijx = CLIJx.getInstance();
         }
         String[] deviceArray = new String[deviceList.size()];
         deviceList.toArray(deviceArray);
-        gd.addChoice("CL_Device", deviceArray, clij.getClearCLContext().getDevice().getName());
+        gd.addChoice("CL_Device", deviceArray, clijx.getClij().getClearCLContext().getDevice().getName());
 
         gd.addSlider("Threshold", min, max, thr);
         gd.addSlider("Slice", 1, nbSlices, nbSlices / 2);
@@ -178,7 +175,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         }
 
         String deviceName = gd.getNextChoice();
-        clij = CLIJ.getInstance(deviceName);
+        clijx = CLIJx.getInstance(deviceName);
 
         thr = (int) gd.getNextNumber();
         gd.getNextNumber();
@@ -206,23 +203,23 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         imp.updateAndDraw();
 
 
-        ClearCLBuffer buffer = clij.push(imp);
-        ClearCLBuffer flip = clij.create(buffer.getDimensions(), NativeTypeEnum.Float);
-        ClearCLBuffer flop = clij.create(flip);
+        ClearCLBuffer buffer = clijx.push(imp);
+        ClearCLBuffer flip = clijx.create(buffer.getDimensions(), NativeTypeEnum.Float);
+        ClearCLBuffer flop = clijx.create(flip);
 
         // thresholding
-        clij.op().threshold(buffer, flip, new Float(thr));
+        clijx.threshold(buffer, flip, new Float(thr));
         //clij.show(flip, "thresholded");
 
         // connected components labelling
-        ConnectedComponentsLabeling.connectedComponentsLabeling(clij, flip, flop);
+        ConnectedComponentsLabeling.connectedComponentsLabeling(clijx, flip, flop);
         //clij.show(flop, "cca");
         System.out.println("cca done");
 
         // exclude on edges
         if (excludeOnEdges) {
-            ExcludeLabelsOnEdges.excludeLabelsOnEdges(clij, flop, flip);
-            clij.op().copy(flip, flop);
+            ExcludeLabelsOnEdges.excludeLabelsOnEdges(clijx.getClij(), flop, flip);
+            clijx.copy(flip, flop);
             //clij.show(flop, "excl");
         }
         System.out.println("excl");
@@ -231,10 +228,10 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
         System.out.println("minSize " + minSize);
         System.out.println("maxSize " + maxSize);
 
-        int numberOfObjects = (int) clij.op().maximumOfAllPixels(flop);
+        int numberOfObjects = (int) clijx.maximumOfAllPixels(flop);
         System.out.println("numberOfObjects " + numberOfObjects);
-        ClearCLBuffer flap = clij.create(new long[]{numberOfObjects + 1, 1, 1}, NativeTypeEnum.Float);
-        clij.op().fillHistogram(flop, flap, 0f, new Float(numberOfObjects));
+        ClearCLBuffer flap = clijx.create(new long[]{numberOfObjects + 1, 1, 1}, NativeTypeEnum.Float);
+        clijx.fillHistogram(flop, flap, 0f, new Float(numberOfObjects));
 
 
         System.out.println("hist done");
@@ -261,8 +258,8 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
 
             flap.readFrom(FloatBuffer.wrap(indexList), true);
 
-            ConnectedComponentsLabeling.replace(clij, flop, flap, flip);
-            clij.op().copy(flip, flop);
+            ReplaceIntensities.replaceIntensities(clijx, flop, flap, flip);
+            clijx.copy(flip, flop);
 
             //clij.show(flop, "filtered by size");
 
@@ -305,18 +302,17 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
 
         if (showObj) {
             //clij.show(flop, );
-            ImagePlus img = clij.pull(flop);
+            ImagePlus img = clijx.pull(flop);
             img.setTitle("Objects map of " + imp.getTitle() + " (experimental, clij)");
             show(img, 0, numberOfObjects);
 
         }
 
         if (showSurf) {
-            CLIJx clijx = CLIJx.getInstance();
-            clijx.op.greaterOrEqualConstant(flop, flip, 1f);
-            ClearCLBuffer temp1 = clij.create(flop);
-            clijx.op.binaryEdgeDetection(flip, temp1);
-            clijx.op.multiplyImages(flop, temp1, flip);
+            clijx.greaterOrEqualConstant(flop, flip, 1f);
+            ClearCLBuffer temp1 = clijx.create(flop);
+            clijx.binaryEdgeDetection(flip, temp1);
+            clijx.multiplyImages(flop, temp1, flip);
 
             ImagePlus img = clijx.pull(flip);
             img.setTitle("Surface map of " + imp.getTitle() + " (experimental, clij)");
@@ -332,7 +328,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
             if (!newRT) {
                 table.reset();
             }
-            StatisticsOfLabelledPixels.statisticsOfLabelledPixels(clij, buffer, flop, table);
+            StatisticsOfLabelledPixels.statisticsOfLabelledPixels(clijx.getClij(), buffer, flop, table);
 
             if (showStat) {
                 if (newRT) {

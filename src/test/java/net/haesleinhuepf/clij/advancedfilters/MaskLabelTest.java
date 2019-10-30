@@ -8,6 +8,7 @@ import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
+import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
 
 import static net.haesleinhuepf.clij.advancedfilters.ConnectedComponentsLabeling.connectedComponentsLabeling;
@@ -34,14 +35,15 @@ public class MaskLabelTest {
 
         imp.show();
 
-        CLIJ clij = CLIJ.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
+        CLIJ clij = clijx.getClij();
 
         ClearCLBuffer input = clij.push(imp);
 
         ClearCLBuffer labelmap = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
         ClearCLBuffer singleLabel = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
 
-        connectedComponentsLabeling(clij, input, labelmap);
+        connectedComponentsLabeling(clijx, input, labelmap);
         maskLabel(clij, input, labelmap, singleLabel, 2f);
 
 
@@ -68,14 +70,15 @@ public class MaskLabelTest {
 
         imp.show();
 
-        CLIJ clij = CLIJ.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
+        CLIJ clij = clijx.getClij();
 
         ClearCLBuffer input = clij.push(imp);
 
         ClearCLBuffer labelmap = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
         ClearCLBuffer singleLabel = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
 
-        connectedComponentsLabeling(clij, input, labelmap);
+        connectedComponentsLabeling(clijx, input, labelmap);
         //CLIJ.debug = true;
         System.out.println(input);
         System.out.println(labelmap);

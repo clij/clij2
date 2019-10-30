@@ -8,9 +8,9 @@ __kernel void draw_line_3D   (IMAGE_dst_TYPE dst,
                                    float radius
                      )
 {
-  const int x = min(x1, x2) + get_global_id(0);
-  const int y = min(y1, y2) + get_global_id(1);
-  const int z = min(z1, z2) + get_global_id(2);
+  const float x = min(x1, x2) - radius + get_global_id(0);
+  const float y = min(y1, y2) - radius + get_global_id(1);
+  const float z = min(z1, z2) - radius + get_global_id(2);
 
   if (!((x >= x1 - radius && x <= x2 + radius) || (x >= x2 - radius && x <= x1 + radius))) {
     return;

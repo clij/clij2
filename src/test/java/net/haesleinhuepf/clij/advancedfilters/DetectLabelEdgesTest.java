@@ -22,8 +22,9 @@ public class DetectLabelEdgesTest {
 
         CLIJ.debug = true;
 
-        CLIJ clij = CLIJ.getInstance();
+
         CLIJx clijx = CLIJx.getInstance();
+        CLIJ clij = clijx.getClij();
 
         ClearCLBuffer input = clij.push(imp);
         ClearCLBuffer temp = clij.create(input.getDimensions(), NativeTypeEnum.Float);
@@ -32,7 +33,7 @@ public class DetectLabelEdgesTest {
         clij.op().threshold(input, temp, 7f);
         clij.show(temp, "thresholded");
 
-        connectedComponentsLabeling(clij, temp, output);
+        connectedComponentsLabeling(clijx, temp, output);
 
         DetectLabelEdges.detectLabelEdges(clijx, output, temp);
 

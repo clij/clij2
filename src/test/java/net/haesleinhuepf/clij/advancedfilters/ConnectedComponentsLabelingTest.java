@@ -8,6 +8,7 @@ import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
+import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
 
 import static net.haesleinhuepf.clij.advancedfilters.ConnectedComponentsLabeling.connectedComponentsLabeling;
@@ -35,12 +36,14 @@ public class ConnectedComponentsLabelingTest {
 
         imp.show();
 
-        CLIJ clij = CLIJ.getInstance();
+
+        CLIJx clijx = CLIJx.getInstance();
+        CLIJ clij = clijx.getClij();
 
         ClearCLBuffer input = clij.push(imp);
         ClearCLBuffer output = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
 
-        connectedComponentsLabeling(clij, input, output);
+        connectedComponentsLabeling(clijx, input, output);
 
         assertEquals(clij.op().maximumOfAllPixels(output), 2.0, 0.1);
         //clij.show(output, "result");
@@ -66,7 +69,8 @@ public class ConnectedComponentsLabelingTest {
 
         imp.show();
 
-        CLIJ clij = CLIJ.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
+        CLIJ clij = clijx.getClij();
 
         ClearCLBuffer input = clij.push(imp);
         ClearCLBuffer thresholded = clij.create(input.getDimensions(), NativeTypeEnum.Float);
@@ -74,7 +78,7 @@ public class ConnectedComponentsLabelingTest {
 
         clij.op().threshold(input, thresholded, 127f);
         clij.show(thresholded, "thresholded");
-        connectedComponentsLabeling(clij, thresholded, output);
+        connectedComponentsLabeling(clijx, thresholded, output);
 
         assertEquals(64.0, clij.op().maximumOfAllPixels(output), 0.1);
         //clij.show(output, "result");
@@ -93,7 +97,9 @@ public class ConnectedComponentsLabelingTest {
         ImagePlus imp = IJ.openImage("src/test/resources/miniBlobs.tif");
         imp.show();
 
-        CLIJ clij = CLIJ.getInstance();
+
+        CLIJx clijx = CLIJx.getInstance();
+        CLIJ clij = clijx.getClij();
 
         ClearCLBuffer input = clij.push(imp);
         ClearCLBuffer thresholded = clij.create(input.getDimensions(), NativeTypeEnum.Float);
@@ -101,7 +107,7 @@ public class ConnectedComponentsLabelingTest {
 
         clij.op().threshold(input, thresholded, 7f);
         clij.show(thresholded, "thresholded");
-        connectedComponentsLabeling(clij, thresholded, output);
+        connectedComponentsLabeling(clijx, thresholded, output);
 
         clij.show(output, "result");
 
@@ -119,7 +125,8 @@ public class ConnectedComponentsLabelingTest {
         ImagePlus imp = IJ.openImage("src/test/resources/miniBlobs.tif");
         imp.show();
 
-        CLIJ clij = CLIJ.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
+        CLIJ clij = clijx.getClij();
 
         ClearCLBuffer miniBlobs = clij.push(imp);
         ClearCLBuffer input = clij.create(new long[]{miniBlobs.getWidth() * 5, miniBlobs.getHeight() * 5, miniBlobs.getDepth() * 5}, miniBlobs.getNativeType());
@@ -137,7 +144,7 @@ public class ConnectedComponentsLabelingTest {
 
         clij.op().threshold(input, thresholded, 7f);
         clij.show(thresholded, "thresholded");
-        connectedComponentsLabeling(clij, thresholded, output);
+        connectedComponentsLabeling(clijx, thresholded, output);
 
         clij.show(output, "result");
 

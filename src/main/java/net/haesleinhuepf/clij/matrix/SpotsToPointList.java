@@ -11,6 +11,7 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -33,7 +34,10 @@ public class SpotsToPointList extends AbstractCLIJPlugin implements CLIJMacroPlu
 
     public static boolean spotsToPointList(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
         ClearCLBuffer temp1 = clij.create(input.getDimensions(), NativeTypeEnum.Float);
-        ConnectedComponentsLabeling.connectedComponentsLabeling(clij, input, temp1);
+
+
+        CLIJx clijx = CLIJx.getInstance();
+        ConnectedComponentsLabeling.connectedComponentsLabeling(clijx, input, temp1);
         //clij.show(temp1, "cca");
 
         HashMap<String, Object> parameters = new HashMap<String, Object>();

@@ -7,6 +7,7 @@ import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
+import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
 
 import static net.haesleinhuepf.clij.advancedfilters.ConnectedComponentsLabeling.connectedComponentsLabeling;
@@ -18,7 +19,9 @@ public class ExcludeLabelsOnEdgesTest {
     public void test() {
         ImagePlus imp = IJ.openImage("src/test/resources/blobs.tif");
 
-        CLIJ clij = CLIJ.getInstance();
+
+        CLIJx clijx = CLIJx.getInstance();
+        CLIJ clij = clijx.getClij();
 
         ClearCLBuffer input = clij.push(imp);
         ClearCLBuffer thresholded = clij.create(input.getDimensions(), NativeTypeEnum.Float);
@@ -27,7 +30,7 @@ public class ExcludeLabelsOnEdgesTest {
 
         clij.op().threshold(input, thresholded, 127f);
         clij.show(thresholded, "thresholded");
-        connectedComponentsLabeling(clij, thresholded, connectedComponents);
+        connectedComponentsLabeling(clijx, thresholded, connectedComponents);
 
         ExcludeLabelsOnEdges.excludeLabelsOnEdges(clij, connectedComponents, withoutEdges);
 
