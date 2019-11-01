@@ -513,7 +513,7 @@ Parameters (macro):
 Image input, Image destination, String method
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6
 
 <a name="automaticThreshold"></a>
 ## automaticThreshold'
@@ -527,7 +527,7 @@ Parameters (macro):
 Image input, Image destination, String method
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6
+ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3
 
 <a name="averageDistanceOfClosestPoints"></a>
 ## averageDistanceOfClosestPoints
@@ -681,6 +681,12 @@ Image source, Image destination, Number sigmaX, Number sigmaY
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
+
+
+### Example scripts
+* [benchmarkingGaussianBlurs.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/benchmarkingGaussianBlurs.ijm)
+
+
 <a name="blur"></a>
 ## blur'
 
@@ -693,6 +699,12 @@ Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+
+
+
+### Example scripts
+* [benchmarkingGaussianBlurs.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/benchmarkingGaussianBlurs.ijm)
+
 
 <a name="boundingBox"></a>
 ## boundingBox
@@ -864,7 +876,7 @@ Parameters (macro):
 Image source, Image destination, Number startX, Number startY, Number width, Number height
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="crop"></a>
 ## crop'
@@ -877,7 +889,7 @@ Parameters (macro):
 Image source, Image destination, Number startX, Number startY, Number width, Number height
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="crossCorrelation"></a>
 ## crossCorrelation
@@ -1121,7 +1133,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="downsample"></a>
 ## downsample'
@@ -1133,7 +1145,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="drawBox"></a>
 ## drawBox
@@ -1908,7 +1920,7 @@ Parameters (macro):
 null
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2
+ClearCLBuffer arg1, ClearCLBuffer arg2, Boolean arg3
 
 <a name="meanClosestSpotDistances"></a>
 ## meanClosestSpotDistances
@@ -1919,7 +1931,7 @@ Parameters (macro):
 null
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Boolean arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2
 
 <a name="meanIJ"></a>
 ## meanIJ'
@@ -2016,7 +2028,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="medianBox"></a>
 ## medianBox'
@@ -2030,7 +2042,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="medianSliceBySliceBox"></a>
 ## medianSliceBySliceBox'
@@ -2072,7 +2084,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="medianSphere"></a>
 ## medianSphere'
@@ -2086,7 +2098,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="minimumBox"></a>
 ## minimumBox'
@@ -2184,7 +2196,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="minimumSphere"></a>
 ## minimumSphere'
@@ -2196,7 +2208,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="minimumZProjection"></a>
 ## minimumZProjection'
@@ -2878,7 +2890,7 @@ Parameters (macro):
 Image source
 
 Parameters (Java):
-ClearCLBuffer source
+ClearCLBuffer arg1, Float arg2
 
 <a name="standardDeviationOfAllPixels"></a>
 ## standardDeviationOfAllPixels
@@ -2890,7 +2902,7 @@ Parameters (macro):
 Image source
 
 Parameters (Java):
-ClearCLBuffer arg1, Float arg2
+ClearCLBuffer source
 
 <a name="statisticsOfLabelledPixels"></a>
 ## statisticsOfLabelledPixels
@@ -2901,7 +2913,7 @@ Parameters (macro):
 Image input, Image labelmap
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4
 
 
 
@@ -2937,7 +2949,7 @@ Parameters (macro):
 Image input, Image labelmap
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4
+ClearCLBuffer input, ClearCLBuffer labelmap
 
 
 
@@ -2955,7 +2967,7 @@ Parameters (macro):
 Image input, Image labelmap
 
 Parameters (Java):
-ClearCLBuffer input, ClearCLBuffer labelmap
+ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3
 
 
 
@@ -3171,7 +3183,7 @@ Parameters (macro):
 Image source
 
 Parameters (Java):
-ClearCLBuffer source
+ClearCLBuffer arg1, Float arg2
 
 <a name="varianceOfAllPixels"></a>
 ## varianceOfAllPixels
@@ -3183,7 +3195,7 @@ Parameters (macro):
 Image source
 
 Parameters (Java):
-ClearCLBuffer arg1, Float arg2
+ClearCLBuffer source
 
 <a name="writeValuesToPositions"></a>
 ## writeValuesToPositions
