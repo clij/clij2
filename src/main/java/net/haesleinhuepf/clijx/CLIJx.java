@@ -4,7 +4,9 @@ import ij.IJ;
 import ij.ImagePlus;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
+import net.haesleinhuepf.clij.clearcl.enums.ImageChannelDataType;
 import net.haesleinhuepf.clij.clearcl.util.ElapsedTime;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.utilities.TypeFixer;
@@ -117,6 +119,10 @@ public class CLIJx extends CLIJxOps{
 
 
     public ClearCLBuffer create(long[] dimensions, NativeTypeEnum typeEnum) {
+        return clij.create(dimensions, typeEnum);
+    }
+
+    public ClearCLImage create(long[] dimensions, ImageChannelDataType typeEnum) {
         return clij.create(dimensions, typeEnum);
     }
 

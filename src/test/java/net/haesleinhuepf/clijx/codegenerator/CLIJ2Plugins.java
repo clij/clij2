@@ -113,8 +113,9 @@ public interface CLIJ2Plugins {
             ReplaceIntensities.class,
             DrawTwoValueLine.class,
             AverageDistanceOfNClosestPoints.class,
-            SaveAsTIF.class
-
+            SaveAsTIF.class,
+            ConnectedComponentsLabelingInplace.class,
+            AutomaticThresholdInplace.class
     };
 
 }

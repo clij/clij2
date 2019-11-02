@@ -251,7 +251,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJxPlugin implements 
         return true;
     }*/
 
-    private static boolean copyInternal(CLIJ clij, Object src, Object dst, long srcNumberOfDimensions, long dstNumberOfDimensions) {
+    static boolean copyInternal(CLIJ clij, Object src, Object dst, long srcNumberOfDimensions, long dstNumberOfDimensions) {
         assertDifferent(src, dst);
 
         HashMap<String, Object> parameters = new HashMap<>();
