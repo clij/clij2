@@ -10,100 +10,98 @@ import net.imglib2.realtransform.AffineTransform3D;
 import ij.measure.ResultsTable;
 import ij.gui.Roi;
 import net.haesleinhuepf.clij.kernels.Kernels;
-import net.haesleinhuepf.clij.advancedfilters.BinaryUnion;
-import net.haesleinhuepf.clij.advancedfilters.BinaryIntersection;
-import net.haesleinhuepf.clij.advancedfilters.ConnectedComponentsLabeling;
-import net.haesleinhuepf.clij.advancedfilters.CountNonZeroPixels;
-import net.haesleinhuepf.clij.advancedfilters.CrossCorrelation;
-import net.haesleinhuepf.clij.advancedfilters.DifferenceOfGaussian2D;
-import net.haesleinhuepf.clij.advancedfilters.DifferenceOfGaussian3D;
-import net.haesleinhuepf.clij.advancedfilters.Extrema;
-import net.haesleinhuepf.clij.advancedfilters.LocalExtremaBox;
-import net.haesleinhuepf.clij.advancedfilters.LocalID;
-import net.haesleinhuepf.clij.advancedfilters.MaskLabel;
-import net.haesleinhuepf.clij.advancedfilters.MeanClosestSpotDistance;
-import net.haesleinhuepf.clij.advancedfilters.MeanSquaredError;
-import net.haesleinhuepf.clij.advancedfilters.MedianZProjection;
-import net.haesleinhuepf.clij.advancedfilters.NonzeroMinimumDiamond;
-import net.haesleinhuepf.clij.advancedfilters.Paste2D;
-import net.haesleinhuepf.clij.advancedfilters.Paste3D;
-import net.haesleinhuepf.clij.advancedfilters.Presign;
-import net.haesleinhuepf.clij.advancedfilters.SorensenDiceJaccardIndex;
-import net.haesleinhuepf.clij.advancedfilters.StandardDeviationZProjection;
-import net.haesleinhuepf.clij.advancedfilters.StackToTiles;
-import net.haesleinhuepf.clij.advancedfilters.SubtractBackground2D;
-import net.haesleinhuepf.clij.advancedfilters.SubtractBackground3D;
-import net.haesleinhuepf.clij.advancedfilters.TopHatBox;
-import net.haesleinhuepf.clij.advancedfilters.TopHatSphere;
-import net.haesleinhuepf.clij.advancedmath.Exponential;
-import net.haesleinhuepf.clij.advancedmath.Logarithm;
-import net.haesleinhuepf.clij.matrix.GenerateDistanceMatrix;
-import net.haesleinhuepf.clij.matrix.ShortestDistances;
-import net.haesleinhuepf.clij.matrix.SpotsToPointList;
-import net.haesleinhuepf.clij.matrix.TransposeXY;
-import net.haesleinhuepf.clij.matrix.TransposeXZ;
-import net.haesleinhuepf.clij.matrix.TransposeYZ;
-import net.haesleinhuepf.clij.piv.FastParticleImageVelocimetry;
-import net.haesleinhuepf.clij.piv.ParticleImageVelocimetry;
-import net.haesleinhuepf.clij.piv.ParticleImageVelocimetryTimelapse;
-import net.haesleinhuepf.clij.registration.DeformableRegistration2D;
-import net.haesleinhuepf.clij.registration.TranslationRegistration;
-import net.haesleinhuepf.clij.registration.TranslationTimelapseRegistration;
-import net.haesleinhuepf.clij.advancedfilters.SetWhereXequalsY;
-import net.haesleinhuepf.clij.advancedfilters.Laplace;
-import net.haesleinhuepf.clij.advancedfilters.Image2DToResultsTable;
-import net.haesleinhuepf.clij.advancedfilters.WriteValuesToPositions;
-import net.haesleinhuepf.clij.advancedfilters.GetSize;
-import net.haesleinhuepf.clij.matrix.MultiplyMatrix;
-import net.haesleinhuepf.clij.matrix.MatrixEqual;
-import net.haesleinhuepf.clij.advancedfilters.PowerImages;
-import net.haesleinhuepf.clij.advancedmath.Equal;
-import net.haesleinhuepf.clij.advancedmath.GreaterOrEqual;
-import net.haesleinhuepf.clij.advancedmath.Greater;
-import net.haesleinhuepf.clij.advancedmath.Smaller;
-import net.haesleinhuepf.clij.advancedmath.SmallerOrEqual;
-import net.haesleinhuepf.clij.advancedmath.NotEqual;
-import net.haesleinhuepf.clij.io.ReadImageFromDisc;
-import net.haesleinhuepf.clij.io.ReadRawImageFromDisc;
-import net.haesleinhuepf.clij.io.PreloadFromDisc;
-import net.haesleinhuepf.clij.advancedmath.EqualConstant;
-import net.haesleinhuepf.clij.advancedmath.GreaterOrEqualConstant;
-import net.haesleinhuepf.clij.advancedmath.GreaterConstant;
-import net.haesleinhuepf.clij.advancedmath.SmallerConstant;
-import net.haesleinhuepf.clij.advancedmath.SmallerOrEqualConstant;
-import net.haesleinhuepf.clij.advancedmath.NotEqualConstant;
-import net.haesleinhuepf.clij.painting.DrawBox;
-import net.haesleinhuepf.clij.painting.DrawLine;
-import net.haesleinhuepf.clij.painting.DrawSphere;
-import net.haesleinhuepf.clij.advancedfilters.ReplaceIntensity;
-import net.haesleinhuepf.clij.advancedfilters.BoundingBox;
-import net.haesleinhuepf.clij.advancedfilters.MinimumOfMaskedPixels;
-import net.haesleinhuepf.clij.advancedfilters.MaximumOfMaskedPixels;
-import net.haesleinhuepf.clij.advancedfilters.MeanOfMaskedPixels;
-import net.haesleinhuepf.clij.advancedfilters.LabelToMask;
-import net.haesleinhuepf.clij.matrix.NClosestPoints;
-import net.haesleinhuepf.clij.matrix.GaussJordan;
-import net.haesleinhuepf.clij.advancedfilters.StatisticsOfLabelledPixels;
-import net.haesleinhuepf.clij.advancedfilters.VarianceOfAllPixels;
-import net.haesleinhuepf.clij.advancedfilters.StandardDeviationOfAllPixels;
-import net.haesleinhuepf.clij.advancedfilters.ExcludeLabelsOnEdges;
-import net.haesleinhuepf.clij.advancedfilters.BinarySubtract;
-import net.haesleinhuepf.clij.advancedfilters.BinaryEdgeDetection;
-import net.haesleinhuepf.clij.advancedfilters.DistanceMap;
-import net.haesleinhuepf.clij.advancedfilters.PullAsROI;
-import net.haesleinhuepf.clij.advancedfilters.NonzeroMaximumDiamond;
-import net.haesleinhuepf.clij.advancedfilters.OnlyzeroOverwriteMaximumDiamond;
-import net.haesleinhuepf.clij.advancedfilters.OnlyzeroOverwriteMaximumBox;
-import net.haesleinhuepf.clij.matrix.GenerateTouchMatrix;
-import net.haesleinhuepf.clij.advancedfilters.DetectLabelEdges;
-import net.haesleinhuepf.clij.advancedfilters.StopWatch;
-import net.haesleinhuepf.clij.matrix.CountTouchingNeighbors;
-import net.haesleinhuepf.clij.advancedfilters.ReplaceIntensities;
-import net.haesleinhuepf.clij.painting.DrawTwoValueLine;
-import net.haesleinhuepf.clij.matrix.AverageDistanceOfNClosestPoints;
-import net.haesleinhuepf.clij.advancedfilters.SaveAsTIF;
-import net.haesleinhuepf.clij.advancedfilters.ConnectedComponentsLabelingInplace;
-import net.haesleinhuepf.clij.advancedfilters.AutomaticThresholdInplace;
+import net.haesleinhuepf.clijx.advancedfilters.BinaryUnion;
+import net.haesleinhuepf.clijx.advancedfilters.BinaryIntersection;
+import net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabeling;
+import net.haesleinhuepf.clijx.advancedfilters.CountNonZeroPixels;
+import net.haesleinhuepf.clijx.advancedfilters.CrossCorrelation;
+import net.haesleinhuepf.clijx.advancedfilters.DifferenceOfGaussian2D;
+import net.haesleinhuepf.clijx.advancedfilters.DifferenceOfGaussian3D;
+import net.haesleinhuepf.clijx.advancedfilters.Extrema;
+import net.haesleinhuepf.clijx.advancedfilters.LocalExtremaBox;
+import net.haesleinhuepf.clijx.advancedfilters.LocalID;
+import net.haesleinhuepf.clijx.advancedfilters.MaskLabel;
+import net.haesleinhuepf.clijx.advancedfilters.MeanClosestSpotDistance;
+import net.haesleinhuepf.clijx.advancedfilters.MeanSquaredError;
+import net.haesleinhuepf.clijx.advancedfilters.NonzeroMinimumDiamond;
+import net.haesleinhuepf.clijx.advancedfilters.Paste2D;
+import net.haesleinhuepf.clijx.advancedfilters.Paste3D;
+import net.haesleinhuepf.clijx.advancedfilters.Presign;
+import net.haesleinhuepf.clijx.advancedfilters.SorensenDiceJaccardIndex;
+import net.haesleinhuepf.clijx.advancedfilters.StackToTiles;
+import net.haesleinhuepf.clijx.advancedfilters.SubtractBackground2D;
+import net.haesleinhuepf.clijx.advancedfilters.SubtractBackground3D;
+import net.haesleinhuepf.clijx.advancedfilters.TopHatBox;
+import net.haesleinhuepf.clijx.advancedfilters.TopHatSphere;
+import net.haesleinhuepf.clijx.advancedmath.Exponential;
+import net.haesleinhuepf.clijx.advancedmath.Logarithm;
+import net.haesleinhuepf.clijx.matrix.GenerateDistanceMatrix;
+import net.haesleinhuepf.clijx.matrix.ShortestDistances;
+import net.haesleinhuepf.clijx.matrix.SpotsToPointList;
+import net.haesleinhuepf.clijx.matrix.TransposeXY;
+import net.haesleinhuepf.clijx.matrix.TransposeXZ;
+import net.haesleinhuepf.clijx.matrix.TransposeYZ;
+import net.haesleinhuepf.clijx.piv.FastParticleImageVelocimetry;
+import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetry;
+import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
+import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
+import net.haesleinhuepf.clijx.registration.TranslationRegistration;
+import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
+import net.haesleinhuepf.clijx.advancedfilters.SetWhereXequalsY;
+import net.haesleinhuepf.clijx.advancedfilters.Laplace;
+import net.haesleinhuepf.clijx.advancedfilters.Image2DToResultsTable;
+import net.haesleinhuepf.clijx.advancedfilters.WriteValuesToPositions;
+import net.haesleinhuepf.clijx.advancedfilters.GetSize;
+import net.haesleinhuepf.clijx.matrix.MultiplyMatrix;
+import net.haesleinhuepf.clijx.matrix.MatrixEqual;
+import net.haesleinhuepf.clijx.advancedfilters.PowerImages;
+import net.haesleinhuepf.clijx.advancedmath.Equal;
+import net.haesleinhuepf.clijx.advancedmath.GreaterOrEqual;
+import net.haesleinhuepf.clijx.advancedmath.Greater;
+import net.haesleinhuepf.clijx.advancedmath.Smaller;
+import net.haesleinhuepf.clijx.advancedmath.SmallerOrEqual;
+import net.haesleinhuepf.clijx.advancedmath.NotEqual;
+import net.haesleinhuepf.clijx.io.ReadImageFromDisc;
+import net.haesleinhuepf.clijx.io.ReadRawImageFromDisc;
+import net.haesleinhuepf.clijx.io.PreloadFromDisc;
+import net.haesleinhuepf.clijx.advancedmath.EqualConstant;
+import net.haesleinhuepf.clijx.advancedmath.GreaterOrEqualConstant;
+import net.haesleinhuepf.clijx.advancedmath.GreaterConstant;
+import net.haesleinhuepf.clijx.advancedmath.SmallerConstant;
+import net.haesleinhuepf.clijx.advancedmath.SmallerOrEqualConstant;
+import net.haesleinhuepf.clijx.advancedmath.NotEqualConstant;
+import net.haesleinhuepf.clijx.painting.DrawBox;
+import net.haesleinhuepf.clijx.painting.DrawLine;
+import net.haesleinhuepf.clijx.painting.DrawSphere;
+import net.haesleinhuepf.clijx.advancedfilters.ReplaceIntensity;
+import net.haesleinhuepf.clijx.advancedfilters.BoundingBox;
+import net.haesleinhuepf.clijx.advancedfilters.MinimumOfMaskedPixels;
+import net.haesleinhuepf.clijx.advancedfilters.MaximumOfMaskedPixels;
+import net.haesleinhuepf.clijx.advancedfilters.MeanOfMaskedPixels;
+import net.haesleinhuepf.clijx.advancedfilters.LabelToMask;
+import net.haesleinhuepf.clijx.matrix.NClosestPoints;
+import net.haesleinhuepf.clijx.matrix.GaussJordan;
+import net.haesleinhuepf.clijx.advancedfilters.StatisticsOfLabelledPixels;
+import net.haesleinhuepf.clijx.advancedfilters.VarianceOfAllPixels;
+import net.haesleinhuepf.clijx.advancedfilters.StandardDeviationOfAllPixels;
+import net.haesleinhuepf.clijx.advancedfilters.ExcludeLabelsOnEdges;
+import net.haesleinhuepf.clijx.advancedfilters.BinarySubtract;
+import net.haesleinhuepf.clijx.advancedfilters.BinaryEdgeDetection;
+import net.haesleinhuepf.clijx.advancedfilters.DistanceMap;
+import net.haesleinhuepf.clijx.advancedfilters.PullAsROI;
+import net.haesleinhuepf.clijx.advancedfilters.NonzeroMaximumDiamond;
+import net.haesleinhuepf.clijx.advancedfilters.OnlyzeroOverwriteMaximumDiamond;
+import net.haesleinhuepf.clijx.advancedfilters.OnlyzeroOverwriteMaximumBox;
+import net.haesleinhuepf.clijx.matrix.GenerateTouchMatrix;
+import net.haesleinhuepf.clijx.advancedfilters.DetectLabelEdges;
+import net.haesleinhuepf.clijx.advancedfilters.StopWatch;
+import net.haesleinhuepf.clijx.matrix.CountTouchingNeighbors;
+import net.haesleinhuepf.clijx.advancedfilters.ReplaceIntensities;
+import net.haesleinhuepf.clijx.painting.DrawTwoValueLine;
+import net.haesleinhuepf.clijx.matrix.AverageDistanceOfNClosestPoints;
+import net.haesleinhuepf.clijx.advancedfilters.SaveAsTIF;
+import net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabelingInplace;
+
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract class CLIJxOps {
    protected CLIJ clij;
@@ -2364,7 +2362,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.BinaryUnion
+    // net.haesleinhuepf.clijx.advancedfilters.BinaryUnion
     //----------------------------------------------------
     /**
      * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
@@ -2376,7 +2374,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.BinaryIntersection
+    // net.haesleinhuepf.clijx.advancedfilters.BinaryIntersection
     //----------------------------------------------------
     /**
      * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
@@ -2390,7 +2388,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.ConnectedComponentsLabeling
+    // net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabeling
     //----------------------------------------------------
     /**
      * 
@@ -2414,7 +2412,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.CountNonZeroPixels
+    // net.haesleinhuepf.clijx.advancedfilters.CountNonZeroPixels
     //----------------------------------------------------
     /**
      * Determines the number of all pixels in a given image which are not equal to 0. It will be stored in a new row of ImageJs
@@ -2425,7 +2423,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.CrossCorrelation
+    // net.haesleinhuepf.clijx.advancedfilters.CrossCorrelation
     //----------------------------------------------------
     /**
      * 
@@ -2442,7 +2440,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.DifferenceOfGaussian2D
+    // net.haesleinhuepf.clijx.advancedfilters.DifferenceOfGaussian2D
     //----------------------------------------------------
     /**
      * Applies Gaussian blur to the input image twice resulting in two images which are then subtracted from each other.
@@ -2452,7 +2450,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.DifferenceOfGaussian3D
+    // net.haesleinhuepf.clijx.advancedfilters.DifferenceOfGaussian3D
     //----------------------------------------------------
     /**
      * Applies Gaussian blur to the input image twice resulting in two images which are then subtracted from each other.
@@ -2462,7 +2460,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.Extrema
+    // net.haesleinhuepf.clijx.advancedfilters.Extrema
     //----------------------------------------------------
     /**
      * Returns an image with pixel values most distant from 0: f(x, y) = x if abs(x) > abs(y), y else.
@@ -2472,7 +2470,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.LocalExtremaBox
+    // net.haesleinhuepf.clijx.advancedfilters.LocalExtremaBox
     //----------------------------------------------------
     /**
      * Applies a local minimum and maximum filter. Afterwards, the value is returned which is more far from zero.
@@ -2482,7 +2480,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.LocalID
+    // net.haesleinhuepf.clijx.advancedfilters.LocalID
     //----------------------------------------------------
     /**
      * local id
@@ -2492,7 +2490,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.MaskLabel
+    // net.haesleinhuepf.clijx.advancedfilters.MaskLabel
     //----------------------------------------------------
     /**
      * Computes a masked image by applying a label mask to an image. All pixel values x of image X will be copied
@@ -2505,7 +2503,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.MeanClosestSpotDistance
+    // net.haesleinhuepf.clijx.advancedfilters.MeanClosestSpotDistance
     //----------------------------------------------------
     /**
      * 
@@ -2522,7 +2520,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.MeanSquaredError
+    // net.haesleinhuepf.clijx.advancedfilters.MeanSquaredError
     //----------------------------------------------------
     /**
      * Determines the mean squared error (MSE) between two images. The MSE will be stored in a new row of ImageJs
@@ -2533,10 +2531,10 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.MedianZProjection
+    // net.haesleinhuepf.clijx.advancedfilters.MedianZProjection
     //----------------------------------------------------
 
-    // net.haesleinhuepf.clij.advancedfilters.NonzeroMinimumDiamond
+    // net.haesleinhuepf.clijx.advancedfilters.NonzeroMinimumDiamond
     //----------------------------------------------------
     /**
      * Apply a minimum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
@@ -2553,7 +2551,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.Paste2D
+    // net.haesleinhuepf.clijx.advancedfilters.Paste2D
     //----------------------------------------------------
     /**
      * Pastes an image into another image at a given position.
@@ -2570,7 +2568,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.Paste3D
+    // net.haesleinhuepf.clijx.advancedfilters.Paste3D
     //----------------------------------------------------
     /**
      * Pastes an image into another image at a given position.
@@ -2587,7 +2585,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.Presign
+    // net.haesleinhuepf.clijx.advancedfilters.Presign
     //----------------------------------------------------
     /**
      * Determines the extrema of pixel values: f(x) = x / abs(x).
@@ -2597,7 +2595,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.SorensenDiceJaccardIndex
+    // net.haesleinhuepf.clijx.advancedfilters.SorensenDiceJaccardIndex
     //----------------------------------------------------
     /**
      * 
@@ -2614,10 +2612,10 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.StandardDeviationZProjection
+    // net.haesleinhuepf.clijx.advancedfilters.StandardDeviationZProjection
     //----------------------------------------------------
 
-    // net.haesleinhuepf.clij.advancedfilters.StackToTiles
+    // net.haesleinhuepf.clijx.advancedfilters.StackToTiles
     //----------------------------------------------------
     /**
      * Stack to tiles.
@@ -2634,7 +2632,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.SubtractBackground2D
+    // net.haesleinhuepf.clijx.advancedfilters.SubtractBackground2D
     //----------------------------------------------------
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
@@ -2644,7 +2642,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.SubtractBackground3D
+    // net.haesleinhuepf.clijx.advancedfilters.SubtractBackground3D
     //----------------------------------------------------
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
@@ -2654,7 +2652,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.TopHatBox
+    // net.haesleinhuepf.clijx.advancedfilters.TopHatBox
     //----------------------------------------------------
     /**
      * Apply a top-hat filter to the input image.
@@ -2664,7 +2662,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.TopHatSphere
+    // net.haesleinhuepf.clijx.advancedfilters.TopHatSphere
     //----------------------------------------------------
     /**
      * Apply a top-hat filter to the input image.
@@ -2674,7 +2672,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.Exponential
+    // net.haesleinhuepf.clijx.advancedmath.Exponential
     //----------------------------------------------------
     /**
      * Computes base exponential of all pixels values.
@@ -2695,7 +2693,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.Logarithm
+    // net.haesleinhuepf.clijx.advancedmath.Logarithm
     //----------------------------------------------------
     /**
      * Computes baseE logarithm of all pixels values.
@@ -2716,7 +2714,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.GenerateDistanceMatrix
+    // net.haesleinhuepf.clijx.matrix.GenerateDistanceMatrix
     //----------------------------------------------------
     /**
      * Takes two images containing coordinates and builds up a matrix containing distance between the points. Convention: image width represents number of points, height represents dimensionality (2D, 3D, ... 10D). The result image has width the first input image and height equals to the width of the second input image.
@@ -2726,7 +2724,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.ShortestDistances
+    // net.haesleinhuepf.clijx.matrix.ShortestDistances
     //----------------------------------------------------
     /**
      * Determine the shortest distance from a distance matrix. This corresponds to the minimum in a matrix for each individial column.
@@ -2736,7 +2734,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.SpotsToPointList
+    // net.haesleinhuepf.clijx.matrix.SpotsToPointList
     //----------------------------------------------------
     /**
      * Transforms a spots image as resulting from maxim detection in an image where every column cotains d 
@@ -2747,7 +2745,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.TransposeXY
+    // net.haesleinhuepf.clijx.matrix.TransposeXY
     //----------------------------------------------------
     /**
      * Transpose X and Y in an image.
@@ -2757,7 +2755,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.TransposeXZ
+    // net.haesleinhuepf.clijx.matrix.TransposeXZ
     //----------------------------------------------------
     /**
      * Transpose X and Z in an image.
@@ -2767,7 +2765,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.TransposeYZ
+    // net.haesleinhuepf.clijx.matrix.TransposeYZ
     //----------------------------------------------------
     /**
      * Transpose Y and Z in an image.
@@ -2777,7 +2775,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.piv.FastParticleImageVelocimetry
+    // net.haesleinhuepf.clijx.piv.FastParticleImageVelocimetry
     //----------------------------------------------------
     /**
      * 
@@ -2794,7 +2792,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.piv.ParticleImageVelocimetry
+    // net.haesleinhuepf.clijx.piv.ParticleImageVelocimetry
     //----------------------------------------------------
     /**
      * For every pixel in source image 1, determine the pixel with the most similar intensity in 
@@ -2806,7 +2804,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.piv.ParticleImageVelocimetryTimelapse
+    // net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse
     //----------------------------------------------------
     /**
      * Run particle image velocimetry on a 2D+t timelapse.
@@ -2816,7 +2814,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.registration.DeformableRegistration2D
+    // net.haesleinhuepf.clijx.registration.DeformableRegistration2D
     //----------------------------------------------------
     /**
      * Applies particle image velocimetry to two images and registers them afterwards by warping input image 2 with a smoothed vector field.
@@ -2826,7 +2824,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.registration.TranslationRegistration
+    // net.haesleinhuepf.clijx.registration.TranslationRegistration
     //----------------------------------------------------
     /**
      * Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.
@@ -2843,7 +2841,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.registration.TranslationTimelapseRegistration
+    // net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration
     //----------------------------------------------------
     /**
      * Applies 2D translation registration to every pair of t, t+1 slices of a 2D+t image stack.
@@ -2853,7 +2851,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.SetWhereXequalsY
+    // net.haesleinhuepf.clijx.advancedfilters.SetWhereXequalsY
     //----------------------------------------------------
     /**
      * Sets all pixel values a of a given image A to a constant value v in case its coordinates x == y. Otherwise the pixel is not overwritten.
@@ -2876,7 +2874,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.Laplace
+    // net.haesleinhuepf.clijx.advancedfilters.Laplace
     //----------------------------------------------------
     /**
      * Apply the Laplace operator (Diamond neighborhood) to an image.
@@ -2886,7 +2884,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.Image2DToResultsTable
+    // net.haesleinhuepf.clijx.advancedfilters.Image2DToResultsTable
     //----------------------------------------------------
     /**
      * Converts an image into a table.
@@ -2903,7 +2901,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.WriteValuesToPositions
+    // net.haesleinhuepf.clijx.advancedfilters.WriteValuesToPositions
     //----------------------------------------------------
     /**
      * Takes an image with three/four rows (2D: height = 3; 3D: height = 4): x, y [, z] and v and target image. The value v will be written at position x/y[/z] in the target image.
@@ -2913,7 +2911,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.GetSize
+    // net.haesleinhuepf.clijx.advancedfilters.GetSize
     //----------------------------------------------------
     /**
      * Reads out the size of an image [stack] and writes it to the results table in the columns 'Width', 'Height' and 'Depth'.
@@ -2923,7 +2921,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.MultiplyMatrix
+    // net.haesleinhuepf.clijx.matrix.MultiplyMatrix
     //----------------------------------------------------
     /**
      * Multiplies two matrices with each other.
@@ -2933,7 +2931,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.MatrixEqual
+    // net.haesleinhuepf.clijx.matrix.MatrixEqual
     //----------------------------------------------------
     /**
      * Checks if all elements of a matrix are different by less than or equal to a given tolerance.
@@ -2944,7 +2942,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.PowerImages
+    // net.haesleinhuepf.clijx.advancedfilters.PowerImages
     //----------------------------------------------------
     /**
      * Calculates x to the power of y pixel wise of two images X and Y.
@@ -2954,7 +2952,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.Equal
+    // net.haesleinhuepf.clijx.advancedmath.Equal
     //----------------------------------------------------
     /**
      * Determines if two images A and B equal pixel wise.
@@ -2966,7 +2964,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.GreaterOrEqual
+    // net.haesleinhuepf.clijx.advancedmath.GreaterOrEqual
     //----------------------------------------------------
     /**
      * Determines if two images A and B greater or equal pixel wise.
@@ -2978,7 +2976,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.Greater
+    // net.haesleinhuepf.clijx.advancedmath.Greater
     //----------------------------------------------------
     /**
      * Determines if two images A and B greater pixel wise.
@@ -2990,7 +2988,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.Smaller
+    // net.haesleinhuepf.clijx.advancedmath.Smaller
     //----------------------------------------------------
     /**
      * Determines if two images A and B smaller pixel wise.
@@ -3002,7 +3000,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.SmallerOrEqual
+    // net.haesleinhuepf.clijx.advancedmath.SmallerOrEqual
     //----------------------------------------------------
     /**
      * Determines if two images A and B smaller or equal pixel wise.
@@ -3014,7 +3012,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.NotEqual
+    // net.haesleinhuepf.clijx.advancedmath.NotEqual
     //----------------------------------------------------
     /**
      * Determines if two images A and B equal pixel wise.
@@ -3026,7 +3024,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.io.ReadImageFromDisc
+    // net.haesleinhuepf.clijx.io.ReadImageFromDisc
     //----------------------------------------------------
     /**
      * Read an image from disc.
@@ -3036,7 +3034,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.io.ReadRawImageFromDisc
+    // net.haesleinhuepf.clijx.io.ReadRawImageFromDisc
     //----------------------------------------------------
     /**
      * Reads a raw file from disc and pushes it immediately to the GPU.
@@ -3053,7 +3051,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.io.PreloadFromDisc
+    // net.haesleinhuepf.clijx.io.PreloadFromDisc
     //----------------------------------------------------
     /**
      * This plugin takes two image filenames and loads them into RAM. The first image is returned immediately, the second image is loaded in the background and  will be returned when the plugin is called again.
@@ -3065,7 +3063,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.EqualConstant
+    // net.haesleinhuepf.clijx.advancedmath.EqualConstant
     //----------------------------------------------------
     /**
      * Determines if an image A and a constant b are equal.
@@ -3077,7 +3075,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.GreaterOrEqualConstant
+    // net.haesleinhuepf.clijx.advancedmath.GreaterOrEqualConstant
     //----------------------------------------------------
     /**
      * Determines if two images A and B greater or equal pixel wise.
@@ -3089,7 +3087,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.GreaterConstant
+    // net.haesleinhuepf.clijx.advancedmath.GreaterConstant
     //----------------------------------------------------
     /**
      * Determines if two images A and B greater pixel wise.
@@ -3101,7 +3099,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.SmallerConstant
+    // net.haesleinhuepf.clijx.advancedmath.SmallerConstant
     //----------------------------------------------------
     /**
      * Determines if two images A and B smaller pixel wise.
@@ -3113,7 +3111,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.SmallerOrEqualConstant
+    // net.haesleinhuepf.clijx.advancedmath.SmallerOrEqualConstant
     //----------------------------------------------------
     /**
      * Determines if two images A and B smaller or equal pixel wise.
@@ -3125,7 +3123,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedmath.NotEqualConstant
+    // net.haesleinhuepf.clijx.advancedmath.NotEqualConstant
     //----------------------------------------------------
     /**
      * Determines if two images A and B equal pixel wise.
@@ -3137,7 +3135,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.painting.DrawBox
+    // net.haesleinhuepf.clijx.painting.DrawBox
     //----------------------------------------------------
     /**
      * Draws a box at a given start point with given size. All pixels other than in the box are untouched. Consider using clij.op.set(buffer, 0); in advance.
@@ -3154,7 +3152,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.painting.DrawLine
+    // net.haesleinhuepf.clijx.painting.DrawLine
     //----------------------------------------------------
     /**
      * Draws a line between two points with a given thickness. All pixels other than on the line are untouched. Consider using clij.op.set(buffer, 0); in advance.
@@ -3164,7 +3162,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.painting.DrawSphere
+    // net.haesleinhuepf.clijx.painting.DrawSphere
     //----------------------------------------------------
     /**
      * Draws a sphere around a given point with given radii in x, y and z (if 3D). All pixels other than in the sphere are untouched. Consider using clij.op.set(buffer, 0); in advance.
@@ -3181,7 +3179,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.ReplaceIntensity
+    // net.haesleinhuepf.clijx.advancedfilters.ReplaceIntensity
     //----------------------------------------------------
     /**
      * Replaces a specific intensity in an image with a given new value.
@@ -3191,7 +3189,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.BoundingBox
+    // net.haesleinhuepf.clijx.advancedfilters.BoundingBox
     //----------------------------------------------------
     /**
      * Determines the bounding box of all non-zero pixels in a binary image. The positions will be stored in a new row of ImageJs
@@ -3202,7 +3200,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.MinimumOfMaskedPixels
+    // net.haesleinhuepf.clijx.advancedfilters.MinimumOfMaskedPixels
     //----------------------------------------------------
     /**
      * Determines the minimum intensity in an image, but only in pixels which have non-zero values in another mask image.
@@ -3212,7 +3210,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.MaximumOfMaskedPixels
+    // net.haesleinhuepf.clijx.advancedfilters.MaximumOfMaskedPixels
     //----------------------------------------------------
     /**
      * Determines the maximum intensity in an image, but only in pixels which have non-zero values in another mask image.
@@ -3222,7 +3220,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.MeanOfMaskedPixels
+    // net.haesleinhuepf.clijx.advancedfilters.MeanOfMaskedPixels
     //----------------------------------------------------
     /**
      * Determines the mean intensity in an image, but only in pixels which have non-zero values in another binary mask image.
@@ -3232,7 +3230,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.LabelToMask
+    // net.haesleinhuepf.clijx.advancedfilters.LabelToMask
     //----------------------------------------------------
     /**
      * Masks a single label in a label map: Sets all pixels in the target image to 1, where the given label index was present in the label map.
@@ -3242,7 +3240,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.NClosestPoints
+    // net.haesleinhuepf.clijx.matrix.NClosestPoints
     //----------------------------------------------------
     /**
      * Determine the n point indices with shortest distance for all points in a distance matrix.
@@ -3253,7 +3251,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.GaussJordan
+    // net.haesleinhuepf.clijx.matrix.GaussJordan
     //----------------------------------------------------
     /**
      * Gauss Jordan elimination algorithm for solving linear equation systems. Ent the equation coefficients as an n*n sized image A and an n*1 sized image B:
@@ -3274,7 +3272,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.StatisticsOfLabelledPixels
+    // net.haesleinhuepf.clijx.advancedfilters.StatisticsOfLabelledPixels
     //----------------------------------------------------
     /**
      * Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
@@ -3305,7 +3303,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.VarianceOfAllPixels
+    // net.haesleinhuepf.clijx.advancedfilters.VarianceOfAllPixels
     //----------------------------------------------------
     /**
      * Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs
@@ -3324,7 +3322,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.StandardDeviationOfAllPixels
+    // net.haesleinhuepf.clijx.advancedfilters.StandardDeviationOfAllPixels
     //----------------------------------------------------
     /**
      * Determines the standard deviation of all pixels in an image. The value will be stored in a new row of ImageJs
@@ -3343,7 +3341,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.ExcludeLabelsOnEdges
+    // net.haesleinhuepf.clijx.advancedfilters.ExcludeLabelsOnEdges
     //----------------------------------------------------
     /**
      * Removes all labels from a label map which touch the edges. Remaining label elements are renumbered afterwards.
@@ -3353,7 +3351,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.BinarySubtract
+    // net.haesleinhuepf.clijx.advancedfilters.BinarySubtract
     //----------------------------------------------------
     /**
      * Subtracts one binary image from another.
@@ -3363,7 +3361,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.BinaryEdgeDetection
+    // net.haesleinhuepf.clijx.advancedfilters.BinaryEdgeDetection
     //----------------------------------------------------
     /**
      * Determines pixels/voxels which are on the surface of a binary objects and sets only them to 1 in the destination image.
@@ -3373,7 +3371,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.DistanceMap
+    // net.haesleinhuepf.clijx.advancedfilters.DistanceMap
     //----------------------------------------------------
     /**
      * 
@@ -3390,7 +3388,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.PullAsROI
+    // net.haesleinhuepf.clijx.advancedfilters.PullAsROI
     //----------------------------------------------------
     /**
      * Pulls a binary image from the GPU memory and puts it on the currently active ImageJ window.
@@ -3400,7 +3398,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.NonzeroMaximumDiamond
+    // net.haesleinhuepf.clijx.advancedfilters.NonzeroMaximumDiamond
     //----------------------------------------------------
     /**
      * Apply a maximum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
@@ -3417,7 +3415,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.OnlyzeroOverwriteMaximumDiamond
+    // net.haesleinhuepf.clijx.advancedfilters.OnlyzeroOverwriteMaximumDiamond
     //----------------------------------------------------
     /**
      * TODO
@@ -3427,7 +3425,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.OnlyzeroOverwriteMaximumBox
+    // net.haesleinhuepf.clijx.advancedfilters.OnlyzeroOverwriteMaximumBox
     //----------------------------------------------------
     /**
      * 
@@ -3437,7 +3435,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.GenerateTouchMatrix
+    // net.haesleinhuepf.clijx.matrix.GenerateTouchMatrix
     //----------------------------------------------------
     /**
      * Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where all pixels are set to 0 exept those where labels are touching.Only half of the matrix is filled (with x < y). For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.
@@ -3447,7 +3445,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.DetectLabelEdges
+    // net.haesleinhuepf.clijx.advancedfilters.DetectLabelEdges
     //----------------------------------------------------
     /**
      * Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where all pixels are set to 0 exept those where labels are touching.Only half of the matrix is filled (with x < y). For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.
@@ -3457,7 +3455,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.StopWatch
+    // net.haesleinhuepf.clijx.advancedfilters.StopWatch
     //----------------------------------------------------
     /**
      * Measures time and outputs delay to last call.
@@ -3467,7 +3465,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.CountTouchingNeighbors
+    // net.haesleinhuepf.clijx.matrix.CountTouchingNeighbors
     //----------------------------------------------------
     /**
      * Takes a touching-neighbors-matrix as input and delivers a vector with number of touching neighbors per label as a vector.
@@ -3477,7 +3475,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.ReplaceIntensities
+    // net.haesleinhuepf.clijx.advancedfilters.ReplaceIntensities
     //----------------------------------------------------
     /**
      * Replaces specific intensities specified in a vector image with given new values specified in a vector image.
@@ -3487,7 +3485,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.painting.DrawTwoValueLine
+    // net.haesleinhuepf.clijx.painting.DrawTwoValueLine
     //----------------------------------------------------
     /**
      * Draws a line between two points with a given thickness. Pixels close to point 1 are set to value1. Pixels closer to point 2 are set to value2 All pixels other than on the line are untouched. Consider using clij.set(buffer, 0); in advance.
@@ -3497,7 +3495,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.matrix.AverageDistanceOfNClosestPoints
+    // net.haesleinhuepf.clijx.matrix.AverageDistanceOfNClosestPoints
     //----------------------------------------------------
     /**
      * Determine the n point indices with shortest distance for all points in a distance matrix.
@@ -3508,7 +3506,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.SaveAsTIF
+    // net.haesleinhuepf.clijx.advancedfilters.SaveAsTIF
     //----------------------------------------------------
     /**
      * Pulls an image from the GPU memory and saves it as TIF to disc.
@@ -3518,7 +3516,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.ConnectedComponentsLabelingInplace
+    // net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabelingInplace
     //----------------------------------------------------
     /**
      * Performs connected components analysis to a binary image and generates a label map.
@@ -3528,7 +3526,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clij.advancedfilters.AutomaticThresholdInplace
+    // net.haesleinhuepf.clijx.advancedfilters.AutomaticThresholdInplace
     //----------------------------------------------------
 }
 // 345 methods generated.

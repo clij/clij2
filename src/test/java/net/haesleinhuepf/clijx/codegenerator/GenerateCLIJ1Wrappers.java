@@ -93,7 +93,7 @@ public class GenerateCLIJ1Wrappers {
         String klassName = "CLIJ1" + methodName.substring(0,1).toUpperCase() + methodName.substring(1);
 
         StringBuilder builder = new StringBuilder();
-        builder.append("package net.haesleinhuepf.clij.clij1wrappers;\n");
+        builder.append("package net.haesleinhuepf.clijx.clij1wrappers;\n");
         builder.append("import net.haesleinhuepf.clij.CLIJ;\n");
         builder.append("import net.haesleinhuepf.clij.clearcl.ClearCLKernel;\n");
         builder.append("import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;\n");

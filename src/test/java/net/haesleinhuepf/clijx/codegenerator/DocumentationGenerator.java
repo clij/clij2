@@ -157,9 +157,9 @@ public class DocumentationGenerator {
     private static void buildAutoCompletion(ArrayList<String> names, HashMap<String, DocumentationItem> methodMap) {
 
         StringBuilder builder = new StringBuilder();
-        builder.append("package net.haesleinhuepf.clij.jython;\n");
+        builder.append("package net.haesleinhuepf.clijx.jython;\n");
         builder.append("import org.fife.ui.autocomplete.BasicCompletion;\n");
-        builder.append("import net.haesleinhuepf.clij.jython.ScriptingAutoCompleteProvider;\n");
+        builder.append("import net.haesleinhuepf.clijx.jython.ScriptingAutoCompleteProvider;\n");
         builder.append("import java.util.ArrayList;");
 
         builder.append("// this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details\n");

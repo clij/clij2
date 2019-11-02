@@ -1,23 +1,22 @@
 package net.haesleinhuepf.clijx.codegenerator;
 
-import net.haesleinhuepf.clij.advancedfilters.*;
-import net.haesleinhuepf.clij.advancedmath.*;
-import net.haesleinhuepf.clij.clij1wrappers.*;
-import net.haesleinhuepf.clij.io.PreloadFromDisc;
-import net.haesleinhuepf.clij.io.ReadImageFromDisc;
-import net.haesleinhuepf.clij.io.ReadRawImageFromDisc;
+import net.haesleinhuepf.clijx.advancedfilters.*;
+import net.haesleinhuepf.clijx.advancedmath.*;
+import net.haesleinhuepf.clijx.io.PreloadFromDisc;
+import net.haesleinhuepf.clijx.io.ReadImageFromDisc;
+import net.haesleinhuepf.clijx.io.ReadRawImageFromDisc;
 import net.haesleinhuepf.clij.kernels.Kernels;
-import net.haesleinhuepf.clij.matrix.*;
-import net.haesleinhuepf.clij.painting.DrawBox;
-import net.haesleinhuepf.clij.painting.DrawLine;
-import net.haesleinhuepf.clij.painting.DrawSphere;
-import net.haesleinhuepf.clij.painting.DrawTwoValueLine;
-import net.haesleinhuepf.clij.piv.FastParticleImageVelocimetry;
-import net.haesleinhuepf.clij.piv.ParticleImageVelocimetry;
-import net.haesleinhuepf.clij.piv.ParticleImageVelocimetryTimelapse;
-import net.haesleinhuepf.clij.registration.DeformableRegistration2D;
-import net.haesleinhuepf.clij.registration.TranslationRegistration;
-import net.haesleinhuepf.clij.registration.TranslationTimelapseRegistration;
+import net.haesleinhuepf.clijx.matrix.*;
+import net.haesleinhuepf.clijx.painting.DrawBox;
+import net.haesleinhuepf.clijx.painting.DrawLine;
+import net.haesleinhuepf.clijx.painting.DrawSphere;
+import net.haesleinhuepf.clijx.painting.DrawTwoValueLine;
+import net.haesleinhuepf.clijx.piv.FastParticleImageVelocimetry;
+import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetry;
+import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
+import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
+import net.haesleinhuepf.clijx.registration.TranslationRegistration;
+import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
 
 public interface CLIJ2Plugins {
     public Class[] classes = {
