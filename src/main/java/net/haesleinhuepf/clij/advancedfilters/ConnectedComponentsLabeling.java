@@ -52,9 +52,9 @@ public class ConnectedComponentsLabeling extends AbstractCLIJxPlugin implements 
         //ClearCLImage temp1 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
         //ClearCLImage temp2 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
 
-        ClearCLBuffer temp1 = clijx.create(output);
-        ClearCLBuffer temp2 = clijx.create(output);
-        ClearCLBuffer temp3 = clijx.create(output);
+        ClearCLBuffer temp1 = clijx.create(output.getDimensions());
+        ClearCLBuffer temp2 = clijx.create(output.getDimensions());
+        ClearCLBuffer temp3 = clijx.create(output.getDimensions());
 
         ClearCLBuffer flag = clijx.create(new long[]{1,1,1}, NativeTypeEnum.Byte);
         ByteBuffer aByteBufferWithAZero = ByteBuffer.allocate(1);
