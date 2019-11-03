@@ -75,7 +75,7 @@ public class DistanceMap extends AbstractCLIJxPlugin implements CLIJMacroPlugin,
         parameters.put("dst", dst);
         parameters.put("flag_dst", flag_dst);
 
-        clijx.execute(DistanceMap.class, "localPositiveMinimum" + dst.getDimension() + "d_x.cl", "local_positive_minimum_diamond_image" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(DistanceMap.class, "distancemap_localPositiveMinimum" + dst.getDimension() + "d_x.cl", "distancemap_local_positive_minimum_box_" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters);
 
         return true;
     }
