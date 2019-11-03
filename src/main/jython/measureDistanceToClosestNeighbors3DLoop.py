@@ -169,30 +169,33 @@ for i in range(1265, 1299, 1):
 	distance_matrix.close();
 	
 	# build and visualise mesh
-	pointCoodinates = clijx.pull(pointlist).getProcessor();
-	touchFlags = clijx.pull(touch_matrix).getProcessor();
+	# pointCoodinates = clijx.pull(pointlist).getProcessor();
+	# touchFlags = clijx.pull(touch_matrix).getProcessor();
 	
 	mesh = clijx.create(inputImage);
 	clijx.stopWatch("points");
 	
 	#clijx.set(neighbor_count_map, 0);
 	
-	for p in range(0, pointCoodinates.getWidth()):
-		x1 = pointCoodinates.getf(p, 0);
-		y1 = pointCoodinates.getf(p, 1);
-		z1 = pointCoodinates.getf(p, 2);
+	#for p in range(0, pointCoodinates.getWidth()):
+	#	x1 = pointCoodinates.getf(p, 0);
+	#	y1 = pointCoodinates.getf(p, 1);
+	#	z1 = pointCoodinates.getf(p, 2);
+	#
+	#	for q in range(p, pointCoodinates.getWidth()):
+	#		touching = int(touchFlags.getf(p+1, q+1));
+	#		if (touching > 0):
+	#			x2 = pointCoodinates.getf(q, 0);
+	#			y2 = pointCoodinates.getf(q, 1);
+	#			z2 = pointCoodinates.getf(q, 2);
+	#	
+	#			thickness = 1;
+	#			clijx.op().drawLine(mesh, x1, y1, z1, x2, y2, z2, thickness);
+	#			#clijx.drawTwoValueLine(neighbor_count_map, x1, y1, z1, x2, y2, z2, 10, p, q);
+	clijx.show(touch_matrix, "touch_matrix");
+	clijx.getSize(pointlist);
 	
-		for q in range(p, pointCoodinates.getWidth()):
-			touching = int(touchFlags.getf(p+1, q+1));
-			if (touching > 0):
-				x2 = pointCoodinates.getf(q, 0);
-				y2 = pointCoodinates.getf(q, 1);
-				z2 = pointCoodinates.getf(q, 2);
-		
-				thickness = 1;
-				clijx.op().drawLine(mesh, x1, y1, z1, x2, y2, z2, thickness);
-				#clijx.drawTwoValueLine(neighbor_count_map, x1, y1, z1, x2, y2, z2, 10, p, q);
-	
+	clijx.touchMatrixToMesh(pointlist, touch_matrix, mesh);
 	###########################################################################
 	clijx.stopWatch("mesh");
 
@@ -326,5 +329,5 @@ for i in range(1265, 1299, 1):
 	finalVis = clijx.push(IJ.getImage());
 	clijx.saveAsTIF(finalVis, outputFolder + "_finalVis/" + filename + ".tif")
 	finalVis.close();
-	#break
+	break
 pushedImage.close();

@@ -193,7 +193,7 @@ public class DocumentationGenerator {
         builder.append("}\n");
         builder.append("// " + methodCount + " methods generated.\n");
 
-        File outputTarget = new File("src/main/java/net/haesleinhuepf/clij/jython/CLIJxAutoComplete.java");
+        File outputTarget = new File("src/main/java/net/haesleinhuepf/clijx/jython/CLIJxAutoComplete.java");
 
         try {
             FileWriter writer = new FileWriter(outputTarget);

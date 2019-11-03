@@ -114,6 +114,7 @@ public interface CLIJ2Plugins {
             AverageDistanceOfNClosestPoints.class,
             SaveAsTIF.class,
             ConnectedComponentsLabelingInplace.class,
+            TouchMatrixToMesh.class,
             AutomaticThresholdInplace.class
     };
 
