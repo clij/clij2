@@ -20,7 +20,7 @@ __kernel void watershed_local_maximum_2d
   float bestlabel = currentlabel;
   float bestdistance = currentdistance;
 
-  if (currentdistance > 0) {
+  if (currentdistance > 0 && currentlabel < 1) {
       for (int ax = -1; ax <= 1; ax++) {
         for (int ay = -1; ay <= 1; ay++) {
           float distance = READ_src_distancemap_IMAGE(src_distancemap, sampler, (pos + (int2){ax, ay})).x;

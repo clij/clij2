@@ -31,31 +31,43 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
 
     public static boolean watershed(CLIJx clijx, ClearCLBuffer thresholded, ClearCLBuffer output) {
         ClearCLBuffer distanceMap = clijx.create(thresholded);
-        ClearCLBuffer distanceMap2 = clijx.create(thresholded);
-        ClearCLBuffer localMaxima = clijx.create(thresholded);
-        ClearCLBuffer labelMap = clijx.create(thresholded);
-        ClearCLBuffer labelMap2 = clijx.create(thresholded);
-
         clijx.distanceMap(thresholded, distanceMap);
 
-        clijx.show(distanceMap, "distanceMap");
+        ClearCLBuffer localMaxima = clijx.create(thresholded);
+        ClearCLBuffer localMaxima2 = clijx.create(thresholded);
+        detectMaximaRegionBox(clijx.getClij(), distanceMap, localMaxima);
+        eliminateWrongMaxima(clijx, localMaxima, distanceMap, localMaxima2);
+        localMaxima.close();
 
-        Watershed.detectMaximaRegionBox(clijx.getClij(), distanceMap, localMaxima);
-        ConnectedComponentsLabeling.connectedComponentsLabeling(clijx, localMaxima, labelMap);
+        ClearCLBuffer labelMap = clijx.create(thresholded);
+        ConnectedComponentsLabeling.connectedComponentsLabeling(clijx, localMaxima2, labelMap);
+        localMaxima2.close();
+
+        ClearCLBuffer labelMap2 = clijx.create(thresholded);
+        ClearCLBuffer distanceMap2 = clijx.create(thresholded);
         Watershed.dilateLabelsUntilNoChange(clijx, distanceMap, labelMap, distanceMap2, labelMap2);
+        distanceMap2.close();
+        labelMap.close();
+        distanceMap.close();
 
-        clijx.show(localMaxima, "localMaxima");
-        clijx.show(labelMap2, "labelMap2");
-
-        clijx.clear();
-        System.out.println(clijx.reportMemory());
-
+        binarizeLabelmap(clijx, labelMap2, output);
+        labelMap2.close();
+        // shiftIntensitiesToCloseGaps(clijx, temp3, output);
+        
         new WaitForUserDialog("wait").show();
 
         return true;
     }
 
-    public static boolean detectMaximaRegionBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
+    private static boolean binarizeLabelmap(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output) {
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src_labelmap", input);
+        parameters.put("dst_binary", output);
+        clijx.execute(Watershed.class, "watershed_binarize_labelmap_" + output.getDimension() + "d_x.cl", "watershed_binarize_labelmap_" + output.getDimension() + "d", output.getDimensions(), output.getDimensions(), parameters);
+        return true;
+    }
+
+    private static boolean detectMaximaRegionBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", input);
         parameters.put("dst", output);
@@ -73,8 +85,68 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         return clijx.executeSubsequently(Watershed.class, "watershed_local_maximum_" + labelMapOut.getDimension() + "d_x.cl", "watershed_local_maximum_" + labelMapOut.getDimension() + "d", labelMapOut.getDimensions(), labelMapOut.getDimensions(), parameters, kernel);
     }
 
+    private static ClearCLKernel eliminateWrongMaxima(CLIJx clijx, ClearCLBuffer maximaIn, ClearCLBuffer distanceMapIn, ClearCLBuffer flag, ClearCLBuffer maximaOut, ClearCLKernel kernel) {
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src_distancemap", distanceMapIn);
+        parameters.put("src_maxima", maximaIn);
+        parameters.put("dst_maxima", maximaOut);
+        parameters.put("flag_dst", flag);
+        return clijx.executeSubsequently(Watershed.class, "watershed_eliminate_wrong_maxima_" + maximaOut.getDimension() + "d_x.cl", "watershed_eliminate_wrong_maxima_" + maximaOut.getDimension() + "d", maximaOut.getDimensions(), maximaOut.getDimensions(), parameters, kernel);
+    }
 
-    public static boolean dilateLabelsUntilNoChange(CLIJx clijx, ClearCLBuffer distanceMapIn, ClearCLBuffer labelMapIn, ClearCLBuffer distanceMapOut, ClearCLBuffer labelMapOut) {
+    private static boolean eliminateWrongMaxima(CLIJx clijx, ClearCLBuffer maximaIn, ClearCLBuffer distanceMapIn, ClearCLBuffer maximaOut) {
+        ClearCLBuffer flag = clijx.create(new long[]{1,1,1}, NativeTypeEnum.Byte);
+        ByteBuffer aByteBufferWithAZero = ByteBuffer.allocate(1);
+        aByteBufferWithAZero.put((byte)0);
+        flag.readFrom(aByteBufferWithAZero, true);
+
+        clijx.set(maximaOut, 0f);
+
+        final int[] iterationCount = {0};
+        int flagValue = 1;
+
+        ClearCLKernel flipkernel = null;
+        ClearCLKernel flopkernel = null;
+
+        while (flagValue > 0) {
+            if (iterationCount[0] % 2 == 0) {
+                if (flipkernel == null) {
+                    flipkernel = eliminateWrongMaxima(clijx, maximaIn, distanceMapIn, flag, maximaOut, flipkernel);
+                } else {
+                    flipkernel.run(true);
+                }
+                clijx.saveAsTIF(maximaOut, "c:/structure/temp/max/" + iterationCount[0] + ".tif");
+            } else {
+                if (flopkernel == null) {
+                    flopkernel = eliminateWrongMaxima(clijx, maximaOut, distanceMapIn, flag, maximaIn, flopkernel);
+                } else {
+                    flopkernel.run(true);
+                }
+                clijx.saveAsTIF(maximaIn, "c:/structure/temp/max/" + iterationCount[0] + ".tif");
+            }
+
+            ImagePlus flagImp = clijx.pull(flag);
+            flagValue = flagImp.getProcessor().get(0,0);
+            flag.readFrom(aByteBufferWithAZero, true);
+            iterationCount[0] = iterationCount[0] + 1;
+            System.out.println("cyclingf " + iterationCount[0]);
+        }
+
+        if (iterationCount[0] % 2 == 0) {
+            ConnectedComponentsLabeling.copyInternal(clijx.getClij(), maximaIn, maximaOut, maximaOut.getDimension(), maximaOut.getDimension());
+        }
+        if (flipkernel != null) {
+            flipkernel.close();
+        }
+        if (flopkernel != null) {
+            flopkernel.close();
+        }
+        flag.close();
+
+        return true;
+    }
+
+    private static boolean dilateLabelsUntilNoChange(CLIJx clijx, ClearCLBuffer distanceMapIn, ClearCLBuffer labelMapIn, ClearCLBuffer distanceMapOut, ClearCLBuffer labelMapOut) {
 
         ClearCLBuffer flag = clijx.create(new long[]{1,1,1}, NativeTypeEnum.Byte);
         ByteBuffer aByteBufferWithAZero = ByteBuffer.allocate(1);
@@ -116,6 +188,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
             iterationCount[0] = iterationCount[0] + 1;
             System.out.println("cycling " + iterationCount[0]);
         }
+        flag.close();
 
         if (iterationCount[0] % 2 == 0) {
             ConnectedComponentsLabeling.copyInternal(clijx.getClij(), labelMapIn, labelMapOut, labelMapOut.getDimension(), labelMapOut.getDimension());
