@@ -7,6 +7,7 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.clearcl.enums.ImageChannelDataType;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.clearcl.util.ElapsedTime;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.utilities.TypeFixer;
@@ -18,6 +19,7 @@ import net.imglib2.type.numeric.RealType;
 import net.imglib2.view.Views;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -69,7 +71,9 @@ public class CLIJx extends CLIJxOps{
     }
 
     public ClearCLBuffer push(Object object) {
-        return clij.convert(object, ClearCLBuffer.class);
+        ClearCLBuffer buffer = clij.convert(object, ClearCLBuffer.class);
+        registerReference(buffer);
+        return buffer;
     }
 
     public ImagePlus pull(Object object) {
@@ -101,12 +105,16 @@ public class CLIJx extends CLIJxOps{
     }
 
     public ClearCLBuffer create(ClearCLBuffer buffer) {
-        return clij.create(buffer);
+        ClearCLBuffer result = clij.create(buffer);
+        registerReference(result);
+        return result;
     }
 
 
     public ClearCLBuffer create(long[] dimensions) {
-        return create(dimensions, NativeTypeEnum.Float);
+        ClearCLBuffer buffer = create(dimensions, NativeTypeEnum.Float);
+        registerReference(buffer);
+        return buffer;
     }
 
     public ClearCLBuffer create(double[] dblDimensions) {
@@ -119,11 +127,15 @@ public class CLIJx extends CLIJxOps{
 
 
     public ClearCLBuffer create(long[] dimensions, NativeTypeEnum typeEnum) {
-        return clij.create(dimensions, typeEnum);
+        ClearCLBuffer buffer = clij.create(dimensions, typeEnum);
+        registerReference(buffer);
+        return buffer;
     }
 
     public ClearCLImage create(long[] dimensions, ImageChannelDataType typeEnum) {
-        return clij.create(dimensions, typeEnum);
+        ClearCLImage image = clij.create(dimensions, typeEnum);
+        registerReference(image);
+        return image;
     }
 
     private static boolean notifiedDeprecated = false;
@@ -167,4 +179,80 @@ public class CLIJx extends CLIJxOps{
     public CLIJ getClij() {
         return clij;
     }
+
+    private boolean keepReferences = false;
+    public void setKeepReferences(boolean keepReferences) {
+        this.keepReferences = keepReferences;
+    }
+
+    ArrayList<ClearCLImageInterface> references = new ArrayList<>();
+    private void registerReference(ClearCLImageInterface image) {
+        if (keepReferences) {
+            references.add(image);
+        }
+    }
+
+    public void release(ClearCLImageInterface image) {
+        references.remove(image);
+        if (image instanceof ClearCLImage) {
+            ((ClearCLImage) image).close();
+        } else if (image instanceof ClearCLBuffer) {
+            ((ClearCLBuffer) image).close();
+        }
+    }
+
+    public void clear() {
+        for (ClearCLImageInterface image : references) {
+            if (image instanceof ClearCLImage) {
+                ((ClearCLImage) image).close();
+            } else if (image instanceof ClearCLBuffer) {
+                ((ClearCLBuffer) image).close();
+            }
+        }
+        references.clear();
+    }
+
+    public String reportMemory() {
+        StringBuilder stringBuilder = new StringBuilder();
+        long bytesSum = 0;
+        stringBuilder.append("GPU contains " + (references.size() )+ " images.\n");
+        boolean wasClosedAlready = false;
+        for (ClearCLImageInterface buffer : references) {
+            String star = "";
+            if (buffer instanceof ClearCLImage && ((ClearCLImage) buffer).getPeerPointer() == null) {
+                star = "*";
+                wasClosedAlready = true;
+            } else if (buffer instanceof ClearCLBuffer && ((ClearCLBuffer) buffer).getPeerPointer() == null) {
+                star = "*";
+                wasClosedAlready = true;
+            }
+
+            stringBuilder.append("- " + buffer.getClass().getSimpleName() + star + "[" + buffer.toString() + "] " + humanReadableBytes(buffer.getSizeInBytes()) + "\n");
+            bytesSum = bytesSum + buffer.getSizeInBytes();
+        }
+        stringBuilder.append("= " + humanReadableBytes(bytesSum) +"\n");
+        if (wasClosedAlready) {
+            stringBuilder.append("  * Some images/buffers were closed already.\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    private String humanReadableBytes(double bytesSum) {
+        if (bytesSum > 1024) {
+            bytesSum = bytesSum / 1024;
+            if (bytesSum > 1024) {
+                bytesSum = bytesSum / 1024;
+                if (bytesSum > 1024) {
+                    bytesSum = bytesSum / 1024;
+                    return (Math.round(bytesSum * 10.0) / 10.0 + " Gb");
+                } else {
+                    return (Math.round(bytesSum * 10.0) / 10.0 + " Mb");
+                }
+            } else {
+                return (Math.round(bytesSum * 10.0) / 10.0 + " kb");
+            }
+        }
+        return Math.round(bytesSum * 10.0) / 10.0 + " b";
+    }
+
 }

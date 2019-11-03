@@ -7,6 +7,7 @@ import ij.macro.Interpreter;
 import ij.process.ImageProcessor;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.utilities.CLIJOps;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
@@ -60,7 +61,12 @@ public class ScriptingAutoCompleteProvider extends DefaultCompletionProvider
         addCompletion(makeListEntry(this, "clijx.pull(Object objectOnGPU)", null, "<b>pull</b><br>Pulls an image out of GPU memory and return an ImagePlus."));
         addCompletion(makeListEntry(this, "clijx.execute(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters)", null, "<b>execute</b><br>Executes an OpenCL kernel. TODO: Write details."));
         addCompletion(makeListEntry(this, "clijx.show(Object object, String title)", null, "<b>show</b><br>Pulls an image from GPU memory and shows it in a window with the given title."));
-        addCompletion(makeListEntry(this, "clijx.getOpenCLVersion()", null, "<b>getOpenCLVersion</b>Returns the supported OpenCL version of the selected device."));
+        addCompletion(makeListEntry(this, "clijx.getOpenCLVersion()", null, "<b>getOpenCLVersion</b><br>Returns the supported OpenCL version of the selected device."));
+
+        addCompletion(makeListEntry(this, "clijx.setKeepReferences(boolean keep)", null, "<b>setKeepReferences</b><br>If references to images and buffer as kept (default: false), memory management using the clear() and release() methods allow keeping track of which images are stored on the GPU and closing them all."));
+        addCompletion(makeListEntry(this, "clijx.release(ClearCLImageInterface image_or_buffer)", null, "<b>release</b><br>Releases a given image or buffer.\n\nNote: You need to call clijx.setKeepReferences(true); to activate this functionality."));
+        addCompletion(makeListEntry(this, "clijx.clear()", null, "<b>clear</b><br>Releases all images and buffers currently stored on the GPU. \n\nNote: You need to call clijx.setKeepReferences(true); to activate this functionality."));
+        addCompletion(makeListEntry(this, "clijx.reportMemory()", null, "<b>reportMemory</b><br>Returns a report as string listing which images and buffers are currently stored in the GPU.\n\nNote: You need to call clijx.setKeepReferences(true); to activate this functionality."));
 
         for (BasicCompletion basicCompletion : CLIJxAutoComplete.getCompletions(this)) {
             addCompletion(basicCompletion);

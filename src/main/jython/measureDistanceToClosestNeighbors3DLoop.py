@@ -21,10 +21,12 @@ foldername = "C:/structure/data/2019-10-28-17-22-59-23-Finsterwalde_Tribolium_nG
 outputFolder = "C:/structure/temp/";
 
 # Init GPU
-clijx = CLIJx.getInstance();
+clijx = CLIJx.getInstance("1070");
+clijx.setKeepReferences(True);
+clijx.clear();
 
 pushedImage = clijx.create([512, 1024, 67], NativeTypeEnum.UnsignedShort);
-for i in range(1265, 1299, 1):
+for i in range(1000, 1299, 1):
 	IJ.run("Close All");	
 	clijx.stopWatch("");
 
@@ -42,7 +44,7 @@ for i in range(1265, 1299, 1):
 	# break;
 
 	
-	clijx.readRawImageFromDisc(pushedImage, foldername + filename)
+	clijx.readRawImageFromDisc(pushedImage, foldername + filename);
 	
 	# IJ.run(imp, "32-bit", "");
 	# IJ.run(imp, "Rotate 90 Degrees Right", "");
@@ -74,8 +76,8 @@ for i in range(1265, 1299, 1):
 	clijx.stopWatch("alloc");
 	
 	# background / noise removal
-	clijx.differenceOfGaussian(inputImage, masked, 3, 3, 0, 15, 15, 0);
-	clijx.absolute(masked, blurred);
+	clijx.differenceOfGaussian(inputImage, blurred, 3, 3, 0, 15, 15, 0);
+	clijx.absoluteInplace(blurred);
 	
 	# clijx.op().blur(inputImage, blurred, 3, 3, 0);
 	
@@ -91,6 +93,9 @@ for i in range(1265, 1299, 1):
 	#clijx.show(thresholded, "thresholded");
 	clijx.op().mask(detected_spots, thresholded, masked);
 	clijx.op().copy(masked, detected_spots);
+	thresholded.close();
+	masked.close();
+
 	#clijx.show(detected_spots, "spots");
 	clijx.stopWatch("spots");
 	
@@ -113,6 +118,7 @@ for i in range(1265, 1299, 1):
 		clijx.op().onlyzeroOverwriteMaximumDiamond(tempSpots1, flag, tempSpots2);
 		clijx.op().onlyzeroOverwriteMaximumBox(tempSpots2, flag, tempSpots1);
 	clijx.stopWatch("cells");
+	flag.close();
 	
 	tempSpots3 = clijx.create(detected_spots);
 	clijx.op().threshold(tempSpots1, tempSpots2, 1);
@@ -210,6 +216,7 @@ for i in range(1265, 1299, 1):
 	temp = clijx.create(detected_spots);
 	clijx.op().dilateBox(detected_spots, temp);
 	clijx.op().dilateSphere(temp, detected_spots);
+	temp.close();
 	
 	# generate maximum projections of all results
 	maximumInput = clijx.create([inputImage.getWidth(), inputImage.getHeight()]);
@@ -241,8 +248,6 @@ for i in range(1265, 1299, 1):
 	touch_matrix.close();
 	#closestPointsIndices.close();
 	mesh.close();
-	thresholded.close();
-	masked.close();
 	tempSpots1.close();
 	tempSpots2.close();
 	neighbor_count_map.close();
@@ -331,3 +336,6 @@ for i in range(1265, 1299, 1):
 	finalVis.close();
 	break
 pushedImage.close();
+
+IJ.log(clijx.reportMemory());
+
