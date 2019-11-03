@@ -24,7 +24,7 @@ outputFolder = "C:/structure/temp/";
 clijx = CLIJx.getInstance();
 
 pushedImage = clijx.create([512, 1024, 67], NativeTypeEnum.UnsignedShort);
-for i in range(800, 1200, 100):
+for i in range(1265, 1299, 1):
 	IJ.run("Close All");	
 	clijx.stopWatch("");
 
@@ -49,15 +49,22 @@ for i in range(800, 1200, 100):
 	# imp.show();
 	
 	
-	factorX = 0.52 * 1.5;
-	factorY = 0.52 * 1.5;
+	factorX = 0.347 * 2 * 1.5;
+	factorY = 0.347 * 2 * 1.5;
 	factorZ = 3 * 1.5;
 	
 	# push data to GPU
 	# pushedImage = clijx.push(imp);
-	inputImage = clijx.create([pushedImage.getWidth() * factorX, pushedImage.getHeight() * factorY, pushedImage.getDepth() * factorZ]);
+	downsampledImage = clijx.create([pushedImage.getWidth() * factorX, pushedImage.getHeight() * factorY, pushedImage.getDepth() * factorZ]);
+
+	clijx.downsample(pushedImage, downsampledImage, factorX, factorY, factorZ);
+
+	inputImage = clijx.create([pushedImage.getHeight() * factorY, pushedImage.getWidth() * factorX, pushedImage.getDepth() * factorZ]);
+	clijx.rotateRight( downsampledImage, inputImage);
+
+	downsampledImage.close();
+	#clijx.saveAsTIF( inputImage,                outputFolder + "_input/" + filename + ".tif");
 	
-	clijx.downsample(pushedImage, inputImage, factorX, factorY, factorZ);
 	
 	# blur a bit and detect maxima
 	blurred = clijx.create(inputImage);
@@ -141,6 +148,9 @@ for i in range(800, 1200, 100):
 	
 	neighbor_count_map = clijx.create(detected_spots);
 	clijx.replaceIntensities( tempSpots1, neighbor_count_vector, neighbor_count_map );
+
+	#clijx.saveAsTIF( neighbor_count_map,                outputFolder + "_neigh/" + filename + ".tif");
+	
 	
 	#clijx.show(neighbor_count_map, "neighbor_count_map");
 	#clijx.show(neighbor_count_vector, "neighbor_count_vector");
@@ -156,6 +166,7 @@ for i in range(800, 1200, 100):
 	#n_closest_points = 6;
 	#closestPointsIndices = clijx.create([number_of_spots, n_closest_points]);
 	#clijx.op().nClosestPoints(distance_matrix, closestPointsIndices);
+	distance_matrix.close();
 	
 	# build and visualise mesh
 	pointCoodinates = clijx.pull(pointlist).getProcessor();
@@ -184,6 +195,9 @@ for i in range(800, 1200, 100):
 	
 	###########################################################################
 	clijx.stopWatch("mesh");
+
+	#clijx.saveAsTIF( mesh,                outputFolder + "_mesh/" + filename + ".tif");
+
 	
 	#clijx.show(mesh, "mesh");
 	clijx.stopWatch("show mesh");
@@ -206,11 +220,12 @@ for i in range(800, 1200, 100):
 	clijx.op().maximumZProjection(mesh, maximumMesh);
 	clijx.op().meanZProjection(neighbor_count_map, maximumNeighborCount);
 
-	clijx.saveAsTIF( maximumInput,                outputFolder + "inputMax/" + filename + ".tif");
-	clijx.saveAsTIF( maximumBackgroundSubtracted, outputFolder + "bgsubMax/" + filename + ".tif");
-	clijx.saveAsTIF( maximumSpots,                outputFolder + "spotsMax/" + filename + ".tif");
-	clijx.saveAsTIF( maximumMesh,                 outputFolder + "meshMax/" + filename + ".tif");
-	clijx.saveAsTIF( maximumNeighborCount,        outputFolder + "neighMax/" + filename + ".tif");
+
+	clijx.saveAsTIF( maximumInput,                outputFolder + "_inputMax/" + filename + ".tif");
+	clijx.saveAsTIF( maximumBackgroundSubtracted, outputFolder + "_bgsubMax/" + filename + ".tif");
+	clijx.saveAsTIF( maximumSpots,                outputFolder + "_spotsMax/" + filename + ".tif");
+	clijx.saveAsTIF( maximumMesh,                 outputFolder + "_meshMax/" + filename + ".tif");
+	clijx.saveAsTIF( maximumNeighborCount,        outputFolder + "_neighMax/" + filename + ".tif");
 	
 	clijx.stopWatch("maxproj");
 	
@@ -273,8 +288,8 @@ for i in range(800, 1200, 100):
 	clijx.show(temp, "shift3");
 	clijx.op().multiplyImages(maximumMesh, shift4, temp);
 	clijx.show(temp, "shift4");
-	# clijx.op().multiplyImages(maximumNeighborCount, shift5, temp);
-	maximumNeighborCount.copyTo(temp, True);
+	clijx.op().multiplyImages(maximumNeighborCount, shift5, temp);
+	# maximumNeighborCount.copyTo(temp, True);
 	clijx.show(temp, "shift5");
 	
 	IJ.run(imp, "Merge Channels...", "c1=shift1 c2=shift2 c3=shift3 c4=shift4 c5=shift5 create keep ignore");
@@ -306,9 +321,10 @@ for i in range(800, 1200, 100):
 	shift2.close();
 	shift3.close();
 	shift4.close();
+	shift5.close();
 
 	finalVis = clijx.push(IJ.getImage());
-	clijx.saveAsTIF(finalVis, outputFolder + "finalVis/" + filename + ".tif")
+	clijx.saveAsTIF(finalVis, outputFolder + "_finalVis/" + filename + ".tif")
 	finalVis.close();
-	break;
+	#break
 pushedImage.close();
