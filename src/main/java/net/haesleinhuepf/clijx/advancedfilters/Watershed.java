@@ -53,8 +53,6 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         binarizeLabelmap(clijx, labelMap2, output);
         labelMap2.close();
         // shiftIntensitiesToCloseGaps(clijx, temp3, output);
-        
-        new WaitForUserDialog("wait").show();
 
         return true;
     }
@@ -129,7 +127,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
             flagValue = flagImp.getProcessor().get(0,0);
             flag.readFrom(aByteBufferWithAZero, true);
             iterationCount[0] = iterationCount[0] + 1;
-            System.out.println("cyclingf " + iterationCount[0]);
+            //System.out.println("cyclingf " + iterationCount[0]);
         }
 
         if (iterationCount[0] % 2 == 0) {
@@ -186,7 +184,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
             flagValue = flagImp.getProcessor().get(0,0);
             flag.readFrom(aByteBufferWithAZero, true);
             iterationCount[0] = iterationCount[0] + 1;
-            System.out.println("cycling " + iterationCount[0]);
+            //System.out.println("cycling " + iterationCount[0]);
         }
         flag.close();
 

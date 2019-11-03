@@ -20,7 +20,7 @@ __kernel void watershed_detect_maxima_region_box_3d(
                for(int z = -radius; z < radius + 1; z++)
                {
                   if (x != y || y != 0) {
-                    const int2 localPos = pos + (int4){ x, y, z, 0};
+                    const int4 localPos = pos + (int4){ x, y, z, 0};
 
                     float value = READ_IMAGE_3D(src, sampler, localPos).x;
                     if (value - centerValue > 0) {
