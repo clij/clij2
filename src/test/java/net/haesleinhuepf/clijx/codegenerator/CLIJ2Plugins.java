@@ -115,7 +115,9 @@ public interface CLIJ2Plugins {
             SaveAsTIF.class,
             ConnectedComponentsLabelingInplace.class,
             TouchMatrixToMesh.class,
-            AutomaticThresholdInplace.class
+            AutomaticThresholdInplace.class,
+            DifferenceOfGaussianInplace3D.class,
+            AbsoluteInplace.class
     };
 
 }
