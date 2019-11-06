@@ -1,5 +1,6 @@
-Copyright 2019 Robert Haase, Max Planck Institute for Molecular Cell Biology 
-and Genetics, Dresden
+Copyright 2019 Robert Haase, Deborah Schmidt, Uwe Schmidt, Martin Weigert, Peter Haub, Fabrice P. Cordelières
+Max Planck Institute for Molecular Cell Biology
+and Genetics Dresden, University of Virginia
 
 Redistribution and use in source and binary forms, with or without 
 modification, are permitted provided that the following conditions are met:
