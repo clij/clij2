@@ -3,6 +3,7 @@ This reference contains all methods currently available in CLIJx.
 
 __Please note:__ CLIJx is under heavy construction. This list may change at any point.Methods marked with ' were available in CLIJ1.
 
+* <a href="#absoluteInplace">absoluteInplace</a>
 * <a href="#absolute">absolute'</a>
 * <a href="#addImageAndScalar">addImageAndScalar'</a>
 * <a href="#addImagesWeighted">addImagesWeighted'</a>
@@ -53,6 +54,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#detectMinimaSliceBySliceBox">detectMinimaSliceBySliceBox'</a>
 * <a href="#detectOptimaSliceBySlice">detectOptimaSliceBySlice'</a>
 * <a href="#detectOptima">detectOptima'</a>
+* <a href="#differenceOfGaussianInplace3D">differenceOfGaussianInplace3D</a>
 * <a href="#differenceOfGaussian">differenceOfGaussian</a>
 * <a href="#differenceOfGaussian">differenceOfGaussian</a>
 * <a href="#dilateBoxSliceBySlice">dilateBoxSliceBySlice'</a>
@@ -223,6 +225,19 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#varianceOfAllPixels">varianceOfAllPixels</a>
 * <a href="#varianceOfAllPixels">varianceOfAllPixels</a>
 * <a href="#writeValuesToPositions">writeValuesToPositions</a>
+<a name="absoluteInplace"></a>
+## absoluteInplace
+
+Computes the absolute value of every individual pixel x in a given image.
+
+<pre>f(x) = |x| </pre>
+
+Parameters (macro):
+Image source, Image destination
+
+Parameters (Java):
+ClearCLBuffer arg1
+
 <a name="absolute"></a>
 ## absolute'
 
@@ -478,7 +493,7 @@ Parameters (macro):
 Image source, Image vectorX, Image vectorY, Image destination
 
 Parameters (Java):
-ClearCLBuffer source, ClearCLBuffer vectorX, ClearCLBuffer vectorY, ClearCLBuffer destination
+ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5
 
 <a name="applyVectorfield"></a>
 ## applyVectorfield'
@@ -489,7 +504,7 @@ Parameters (macro):
 Image source, Image vectorX, Image vectorY, Image destination
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5
+ClearCLBuffer source, ClearCLBuffer vectorX, ClearCLBuffer vectorY, ClearCLBuffer destination
 
 <a name="argMaximumZProjection"></a>
 ## argMaximumZProjection'
@@ -681,7 +696,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 
 
@@ -700,7 +715,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 
 
@@ -1009,6 +1024,19 @@ null
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Boolean arg4
 
+<a name="differenceOfGaussianInplace3D"></a>
+## differenceOfGaussianInplace3D
+
+Applies Gaussian blur to the input image twice resulting in two images which are then subtracted from each other.
+
+It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
+
+Parameters (macro):
+Image input_and_destination, Number sigma1x, Number sigma1y, Number sigma1z, Number sigma2x, Number sigma2y, Number sigma2z
+
+Parameters (Java):
+ClearCLBuffer arg1, Float arg2, Float arg3, Float arg4, Float arg5, Float arg6, Float arg7
+
 <a name="differenceOfGaussian"></a>
 ## differenceOfGaussian
 
@@ -1146,7 +1174,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="downsample"></a>
 ## downsample'
@@ -1158,7 +1186,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="drawBox"></a>
 ## drawBox
@@ -1871,7 +1899,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="maximumSphere"></a>
 ## maximumSphere'
@@ -1883,7 +1911,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="maximumXYZProjection"></a>
 ## maximumXYZProjection'
@@ -1992,7 +2020,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="meanSphere"></a>
 ## meanSphere'
@@ -2004,7 +2032,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="meanSquaredError"></a>
 ## meanSquaredError
@@ -2041,7 +2069,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="medianBox"></a>
 ## medianBox'
@@ -2055,7 +2083,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="medianSliceBySliceBox"></a>
 ## medianSliceBySliceBox'
@@ -2602,7 +2630,7 @@ Parameters (macro):
 Image destination, String filename, Number width, Number height, Number depth, Number bitsPerPixel
 
 Parameters (Java):
-String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, String arg2
 
 <a name="readRawImageFromDisc"></a>
 ## readRawImageFromDisc
@@ -2613,7 +2641,7 @@ Parameters (macro):
 Image destination, String filename, Number width, Number height, Number depth, Number bitsPerPixel
 
 Parameters (Java):
-ClearCLBuffer arg1, String arg2
+String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="replaceIntensities"></a>
 ## replaceIntensities
@@ -3140,7 +3168,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination
+ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
 
 <a name="translationRegistration"></a>
 ## translationRegistration
@@ -3151,7 +3179,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
+ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination
 
 <a name="translationTimelapseRegistration"></a>
 ## translationTimelapseRegistration
