@@ -127,7 +127,7 @@ public class ScriptingAutoCompleteProvider extends DefaultCompletionProvider
     }
 
     protected boolean isValidChar(char ch) {
-        return Character.isLetterOrDigit(ch) || ch == '_' || ch == '.' || ch == '"' || ch == '(' || ch == '2';
+        return Character.isLetterOrDigit(ch) || ch == '_' || ch == '.' || ch == '2';
     }
 
 
