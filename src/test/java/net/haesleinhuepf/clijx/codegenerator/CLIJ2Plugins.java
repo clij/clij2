@@ -117,7 +117,8 @@ public interface CLIJ2Plugins {
             TouchMatrixToMesh.class,
             AutomaticThresholdInplace.class,
             DifferenceOfGaussianInplace3D.class,
-            AbsoluteInplace.class
+            AbsoluteInplace.class,
+            Resample.class
     };
 
 }
