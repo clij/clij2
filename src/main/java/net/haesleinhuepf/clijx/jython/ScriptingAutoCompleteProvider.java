@@ -209,12 +209,14 @@ public class ScriptingAutoCompleteProvider extends DefaultCompletionProvider
             String trimmedline = line.trim();
             String lcaseline = trimmedline.toLowerCase();
             if (lcaseline.startsWith("function ") || lcaseline.startsWith("def ")) {
-                String command = trimmedline.substring(8).trim().replace("{", "");
+                int len = 8;
+                if (lcaseline.startsWith("def ")) {
+                    len = 4;
+                }
+                String command = trimmedline.substring(len).trim().replace("{", "");
                 String lcasecommand = command.toLowerCase();
                 if (lcasecommand.contains(lcaseinput)) {
                     String description = findDescription(textArray, linecount, "User defined function " + command + "\n as specified in line " + (linecount + 1));
-
-
                     completions.add(new BasicCompletion(this, command, null, description));
                 }
             }
