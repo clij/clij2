@@ -62,6 +62,7 @@ public class BoundingBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
         } else {
             result = new double[]{minX, minY, 0, maxX - minX + 1, maxY - minY + 1, 0};
         }
+        temp1.close();
         return  result;
     }
 
