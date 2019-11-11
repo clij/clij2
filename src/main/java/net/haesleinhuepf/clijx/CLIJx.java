@@ -224,10 +224,11 @@ public class CLIJx extends CLIJxOps{
             } else if (buffer instanceof ClearCLBuffer && ((ClearCLBuffer) buffer).getPeerPointer() == null) {
                 star = "*";
                 wasClosedAlready = true;
+            } else {
+                bytesSum = bytesSum + buffer.getSizeInBytes();
             }
 
-            stringBuilder.append("- " + buffer.getClass().getSimpleName() + star + "[" + buffer.toString() + "] " + humanReadableBytes(buffer.getSizeInBytes()) + "\n");
-            bytesSum = bytesSum + buffer.getSizeInBytes();
+            stringBuilder.append("- " + buffer.getName() + star + " " + humanReadableBytes(buffer.getSizeInBytes()) + " [" + buffer.toString() + "] " + humanReadableBytes(buffer.getSizeInBytes()) + "\n");
         }
         stringBuilder.append("= " + humanReadableBytes(bytesSum) +"\n");
         if (wasClosedAlready) {
