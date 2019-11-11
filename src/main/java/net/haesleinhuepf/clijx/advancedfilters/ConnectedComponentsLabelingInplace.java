@@ -103,10 +103,10 @@ public class ConnectedComponentsLabelingInplace extends AbstractCLIJxPlugin impl
 
         shiftIntensitiesToCloseGaps(clijx, temp3, output);
 
-        temp1.close();
-        temp2.close();
-        temp3.close();
-        flag.close();
+        clijx.release(temp1);
+        clijx.release(temp2);
+        clijx.release(temp3);
+        clijx.release(flag);
 
         return true;
     }
