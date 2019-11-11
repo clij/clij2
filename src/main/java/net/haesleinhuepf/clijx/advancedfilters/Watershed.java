@@ -37,21 +37,21 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         ClearCLBuffer localMaxima2 = clijx.create(thresholded);
         detectMaximaRegionBox(clijx.getClij(), distanceMap, localMaxima);
         eliminateWrongMaxima(clijx, localMaxima, distanceMap, localMaxima2);
-        localMaxima.close();
+        clijx.release(localMaxima);
 
         ClearCLBuffer labelMap = clijx.create(thresholded);
         ConnectedComponentsLabeling.connectedComponentsLabeling(clijx, localMaxima2, labelMap);
-        localMaxima2.close();
+        clijx.release(localMaxima2);
 
         ClearCLBuffer labelMap2 = clijx.create(thresholded);
         ClearCLBuffer distanceMap2 = clijx.create(thresholded);
         Watershed.dilateLabelsUntilNoChange(clijx, distanceMap, labelMap, distanceMap2, labelMap2);
-        distanceMap2.close();
-        labelMap.close();
-        distanceMap.close();
+        clijx.release(distanceMap2);
+        clijx.release(labelMap);
+        clijx.release(distanceMap);
 
         binarizeLabelmap(clijx, labelMap2, output);
-        labelMap2.close();
+        clijx.release(labelMap2);
         // shiftIntensitiesToCloseGaps(clijx, temp3, output);
 
         return true;
