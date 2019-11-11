@@ -118,7 +118,8 @@ public interface CLIJ2Plugins {
             AutomaticThresholdInplace.class,
             DifferenceOfGaussianInplace3D.class,
             AbsoluteInplace.class,
-            Resample.class
+            Resample.class,
+            EqualizeMeanIntensitiesOfSlices.class
     };
 
 }
