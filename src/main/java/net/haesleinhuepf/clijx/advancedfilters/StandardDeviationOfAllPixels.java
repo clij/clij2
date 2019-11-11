@@ -18,18 +18,18 @@ public class StandardDeviationOfAllPixels extends AbstractCLIJPlugin implements 
 
     @Override
     public boolean executeCL() {
-        double variance = 0;
+        double stdDev = 0;
 
         Object[] args = openCLBufferArgs();
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
 
-        variance = standardDeviationOfAllPixels(clij, buffer1);
+        stdDev = standardDeviationOfAllPixels(clij, buffer1);
         releaseBuffers(args);
 
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();
-        table.addValue("Variance", variance);
+        table.addValue("StandardDeviation", stdDev);
         table.show("Results");
         return true;
     }
