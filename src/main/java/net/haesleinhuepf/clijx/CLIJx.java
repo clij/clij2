@@ -113,7 +113,6 @@ public class CLIJx extends CLIJxOps{
 
     public ClearCLBuffer create(long[] dimensions) {
         ClearCLBuffer buffer = create(dimensions, NativeTypeEnum.Float);
-        registerReference(buffer);
         return buffer;
     }
 
