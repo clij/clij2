@@ -10,6 +10,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
+import java.lang.Math;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_sobel")
 public class Sobel extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
@@ -33,7 +34,7 @@ public class Sobel extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOp
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
-        return clij.execute(ConnectedComponentsLabeling.class, "sobel" + src.getDimension() + "d.cl", "sobel_image" + src.getDimension() + "d", dst.getDimensions(), parameters);
+        return clij.execute(Sobel.class, "sobel" + src.getDimension() + "d.cl", "sobel_image" + src.getDimension() + "d", dst.getDimensions(), parameters);
     }
 
 
