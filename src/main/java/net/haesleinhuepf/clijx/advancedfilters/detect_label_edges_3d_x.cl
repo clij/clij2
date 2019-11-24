@@ -25,6 +25,21 @@ __kernel void detect_label_edges_diamond_3d
       value = READ_src_label_map_IMAGE(src_label_map, sampler, (pos + (int4){0, 0, -1, 0})).x;
       if ( value != center ) {
         valueToWrite = 1;
+      } else {
+        value = READ_src_label_map_IMAGE(src_label_map, sampler, (pos + (int4){1, 0, 0, 0})).x;
+        if ( value != center ) {
+          valueToWrite = 1;
+        } else {
+          value = READ_src_label_map_IMAGE(src_label_map, sampler, (pos + (int4){0, 1, 0, 0})).x;
+          if ( value != center ) {
+            valueToWrite = 1;
+          } else {
+            value = READ_src_label_map_IMAGE(src_label_map, sampler, (pos + (int4){0, 0, 1, 0})).x;
+            if ( value != center ) {
+              valueToWrite = 1;
+            }
+          }
+        }
       }
     }
   }

@@ -19,6 +19,16 @@ __kernel void detect_label_edges_diamond_2d
     value = READ_src_label_map_IMAGE(src_label_map, sampler, (pos + (int2){0, -1})).x;
     if ( value != center ) {
       valueToWrite = 1;
+    } else {
+      value = READ_src_label_map_IMAGE(src_label_map, sampler, (pos + (int2){1, 0})).x;
+      if ( value != center ) {
+        valueToWrite = 1;
+      } else {
+        value = READ_src_label_map_IMAGE(src_label_map, sampler, (pos + (int2){0, 1})).x;
+        if ( value != center ) {
+          valueToWrite = 1;
+        }
+      }
     }
   }
 
