@@ -9,6 +9,7 @@ import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.clearcl.enums.ImageChannelDataType;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.clearcl.util.ElapsedTime;
+import net.haesleinhuepf.clij.converters.implementations.ClearCLBufferToImagePlusConverter;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.utilities.TypeFixer;
 import net.haesleinhuepf.clijx.utilities.CLIJxOps;
@@ -72,6 +73,18 @@ public class CLIJx extends CLIJxOps{
 
     public ClearCLBuffer push(Object object) {
         ClearCLBuffer buffer = clij.convert(object, ClearCLBuffer.class);
+        registerReference(buffer);
+        return buffer;
+    }
+
+    public ClearCLBuffer pushCurrentZStack(ImagePlus imp) {
+        ClearCLBuffer buffer = clij.pushCurrentZStack(imp);
+        registerReference(buffer);
+        return buffer;
+    }
+
+    public ClearCLBuffer pushCurrentSlice(ImagePlus imp) {
+        ClearCLBuffer buffer = clij.pushCurrentSlice(imp);
         registerReference(buffer);
         return buffer;
     }
@@ -179,7 +192,13 @@ public class CLIJx extends CLIJxOps{
         return clij;
     }
 
-    private boolean keepReferences = false;
+    private boolean keepReferences = true;
+
+    /**
+     * This method is for debugging purposes only
+     * @param keepReferences
+     */
+    @Deprecated
     public void setKeepReferences(boolean keepReferences) {
         this.keepReferences = keepReferences;
     }
@@ -188,6 +207,14 @@ public class CLIJx extends CLIJxOps{
     private void registerReference(ClearCLImageInterface image) {
         if (keepReferences) {
             references.add(image);
+            for (int i = references.size() - 1; i >= 0; i--) {
+                ClearCLImageInterface buffer = references.get(i);
+                if (buffer instanceof ClearCLImage && ((ClearCLImage) buffer).getPeerPointer() == null) {
+                    references.remove(i);
+                } else if (buffer instanceof ClearCLBuffer && ((ClearCLBuffer) buffer).getPeerPointer() == null) {
+                    references.remove(i);
+                }
+            }
         }
     }
 
@@ -254,5 +281,19 @@ public class CLIJx extends CLIJxOps{
         }
         return Math.round(bytesSum * 10.0) / 10.0 + " b";
     }
+
+    public void close() {
+        clear();
+
+        if (this == instance) {
+            instance = null;
+        }
+
+        clij.close();
+    }
+
+    public final NativeTypeEnum Float = NativeTypeEnum.Float;
+    public final NativeTypeEnum UnsignedShort = NativeTypeEnum.UnsignedShort;
+    public final NativeTypeEnum UnsignedByte = NativeTypeEnum.UnsignedByte;
 
 }
