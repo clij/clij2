@@ -119,7 +119,8 @@ public interface CLIJ2Plugins {
             DifferenceOfGaussianInplace3D.class,
             AbsoluteInplace.class,
             Resample.class,
-            EqualizeMeanIntensitiesOfSlices.class
+            EqualizeMeanIntensitiesOfSlices.class,
+            ResliceRadial.class
     };
 
 }

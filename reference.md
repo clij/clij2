@@ -74,6 +74,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#drawTwoValueLine">drawTwoValueLine</a>
 * <a href="#equalConstant">equalConstant</a>
 * <a href="#equal">equal</a>
+* <a href="#equalizeMeanIntensitiesOfSlices">equalizeMeanIntensitiesOfSlices</a>
 * <a href="#erodeBoxSliceBySlice">erodeBoxSliceBySlice'</a>
 * <a href="#erodeBox">erodeBox'</a>
 * <a href="#erodeSphereSliceBySlice">erodeSphereSliceBySlice'</a>
@@ -97,7 +98,6 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#greater">greater</a>
 * <a href="#histogram">histogram'</a>
 * <a href="#image2DToResultsTable">image2DToResultsTable</a>
-* <a href="#intensityNormalisationInZSimpleRatio">intensityNormalisationInZSimpleRatio</a>
 * <a href="#invert">invert'</a>
 * <a href="#jaccardIndex">jaccardIndex</a>
 * <a href="#labelToMask">labelToMask</a>
@@ -182,6 +182,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#resample">resample</a>
 * <a href="#resliceBottom">resliceBottom'</a>
 * <a href="#resliceLeft">resliceLeft'</a>
+* <a href="#resliceRadial">resliceRadial</a>
 * <a href="#resliceRight">resliceRight'</a>
 * <a href="#resliceTop">resliceTop'</a>
 * <a href="#rotateLeft">rotateLeft'</a>
@@ -375,7 +376,7 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
 
 <a name="affineTransform3D"></a>
 ## affineTransform3D'
@@ -410,7 +411,7 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3
 
 <a name="affineTransform"></a>
 ## affineTransform'
@@ -495,7 +496,7 @@ Parameters (macro):
 Image source, Image vectorX, Image vectorY, Image destination
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5
+ClearCLBuffer source, ClearCLBuffer vectorX, ClearCLBuffer vectorY, ClearCLBuffer destination
 
 <a name="applyVectorfield"></a>
 ## applyVectorfield'
@@ -506,7 +507,7 @@ Parameters (macro):
 Image source, Image vectorX, Image vectorY, Image destination
 
 Parameters (Java):
-ClearCLBuffer source, ClearCLBuffer vectorX, ClearCLBuffer vectorY, ClearCLBuffer destination
+ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5
 
 <a name="argMaximumZProjection"></a>
 ## argMaximumZProjection'
@@ -532,7 +533,7 @@ Parameters (macro):
 Image input, Image destination, String method
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6
+ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3
 
 <a name="automaticThreshold"></a>
 ## automaticThreshold'
@@ -546,7 +547,7 @@ Parameters (macro):
 Image input, Image destination, String method
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6
 
 <a name="averageDistanceOfClosestPoints"></a>
 ## averageDistanceOfClosestPoints
@@ -698,7 +699,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 
 
@@ -717,7 +718,7 @@ Parameters (macro):
 Image source, Image destination, Number sigmaX, Number sigmaY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 
 
@@ -906,7 +907,7 @@ Parameters (macro):
 Image source, Image destination, Number startX, Number startY, Number width, Number height
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="crop"></a>
 ## crop'
@@ -919,7 +920,7 @@ Parameters (macro):
 Image source, Image destination, Number startX, Number startY, Number width, Number height
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="crossCorrelation"></a>
 ## crossCorrelation
@@ -1176,7 +1177,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
 
 <a name="downsample"></a>
 ## downsample'
@@ -1188,7 +1189,7 @@ Parameters (macro):
 Image source, Image destination, Number factorX, Number factorY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5
 
 <a name="drawBox"></a>
 ## drawBox
@@ -1290,6 +1291,18 @@ Image source1, Image source2, Image destination
 
 Parameters (Java):
 ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination
+
+<a name="equalizeMeanIntensitiesOfSlices"></a>
+## equalizeMeanIntensitiesOfSlices
+
+Determines correction factors for each slice so that the average intensity in all slices can be made the same and applies the factors.
+This functionality is similar to the 'Simple Ratio Bleaching Correction' in Fiji.
+
+Parameters (macro):
+Image input, Image destination, Number referenceSlice
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3
 
 <a name="erodeBoxSliceBySlice"></a>
 ## erodeBoxSliceBySlice'
@@ -1622,18 +1635,6 @@ ClearCLBuffer arg1, ResultsTable arg2
 * [mesh_closest_points.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/mesh_closest_points.ijm)
 
 
-<a name="intensityNormalisationInZSimpleRatio"></a>
-## intensityNormalisationInZSimpleRatio
-
-Determines correction factors for each slice so that the average intensity in all slices can be made the same and applies the factors.
-This functionality is similar to the 'Simple Ratio Bleaching Correction' in Fiji.
-
-Parameters (macro):
-Image input, Image destination, Number referenceSlice
-
-Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3
-
 <a name="invert"></a>
 ## invert'
 
@@ -1914,7 +1915,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="maximumSphere"></a>
 ## maximumSphere'
@@ -1926,7 +1927,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="maximumXYZProjection"></a>
 ## maximumXYZProjection'
@@ -2035,7 +2036,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="meanSphere"></a>
 ## meanSphere'
@@ -2047,7 +2048,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="meanSquaredError"></a>
 ## meanSquaredError
@@ -2140,7 +2141,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="medianSphere"></a>
 ## medianSphere'
@@ -2154,7 +2155,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="minimumBox"></a>
 ## minimumBox'
@@ -2714,6 +2715,18 @@ Image source, Image destination
 
 Parameters (Java):
 ClearCLBuffer source, ClearCLBuffer destination
+
+<a name="resliceRadial"></a>
+## resliceRadial
+
+Computes a radial projection of an image stack. Starting point for the line is the center in any 
+X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
+
+Parameters (macro):
+Image source, Image destination, Number numberOfAngles, Number angleStepSize
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3
 
 <a name="resliceRight"></a>
 ## resliceRight'
