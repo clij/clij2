@@ -10,6 +10,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 
 import java.util.HashMap;
 
+import net.haesleinhuepf.clijx.utilities.HasAuthor;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -25,7 +26,7 @@ import org.scijava.plugin.Plugin;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_logarithm")
-public class Logarithm extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class Logarithm extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor {
 
     @Override
     public boolean executeCL() {
@@ -70,5 +71,10 @@ public class Logarithm extends AbstractCLIJPlugin implements CLIJMacroPlugin, CL
     @Override
     public String getAvailableForDimensions() {
         return "2D, 3D";
+    }
+
+    @Override
+    public String getAuthorName() {
+        return "Peter Haub";
     }
 }

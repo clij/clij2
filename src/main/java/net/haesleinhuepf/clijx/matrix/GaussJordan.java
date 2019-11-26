@@ -8,13 +8,15 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij.test.TestUtilities;
+import net.haesleinhuepf.clijx.utilities.HasAuthor;
+import net.haesleinhuepf.clijx.utilities.HasLicense;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_gaussJordan")
-public class GaussJordan extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class GaussJordan extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
 
     @Override
     public String getParameterHelpText() {
@@ -107,5 +109,53 @@ public class GaussJordan extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
     @Override
     public String getAvailableForDimensions() {
         return "2D";
+    }
+
+    @Override
+    public String getAuthorName() {
+        return "Robert Haase with code from (Shuai Che: sc5nf@cs.virginia.edu\n" +
+                "and Kevin Skadron: skadron@cs.virginia.edu)";
+    }
+
+    @Override
+    public String getLicense() {
+        return "/LICENSE TERMS\n" +
+                "//\n" +
+                "//Copyright (c)2008-2011 University of Virginia\n" +
+                "//All rights reserved.\n" +
+                "//\n" +
+                "//Redistribution and use in source and binary forms, with or without modification, are permitted without royalty fees or other restrictions, provided that the following conditions are met:\n" +
+                "//\n" +
+                "//* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n" +
+                "//* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n" +
+                "//* Neither the name of the University of Virginia, the Dept. of Computer Science, nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n" +
+                "//\n" +
+                "//THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE UNIVERSITY OF VIRGINIA OR THE SOFTWARE AUTHORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n" +
+                "//\n" +
+                "//If you use this software or a modified version of it, please cite the most relevant among the following papers:\n" +
+                "//\n" +
+                "//- M. A. Goodrum, M. J. Trotter, A. Aksel, S. T. Acton, and K. Skadron. Parallelization of Particle Filter Algorithms. In Proceedings\n" +
+                "//of the 3rd Workshop on Emerging Applications and Many-core Architecture (EAMA), in conjunction with the IEEE/ACM International\n" +
+                "//Symposium on Computer Architecture (ISCA), June 2010.\n" +
+                "//\n" +
+                "//- S. Che, M. Boyer, J. Meng, D. Tarjan, J. W. Sheaffer, Sang-Ha Lee and K. Skadron.\n" +
+                "//\"Rodinia: A Benchmark Suite for Heterogeneous Computing\". IEEE International Symposium\n" +
+                "//on Workload Characterization, Oct 2009.\n" +
+                "//\n" +
+                "//- J. Meng and K. Skadron. \"Performance Modeling and Automatic Ghost Zone Optimization\n" +
+                "//for Iterative Stencil Loops on GPUs.\" In Proceedings of the 23rd Annual ACM International\n" +
+                "//Conference on Supercomputing (ICS), June 2009.\n" +
+                "//\n" +
+                "//- L.G. Szafaryn, K. Skadron and J. Saucerman. \"Experiences Accelerating MATLAB Systems\n" +
+                "//Biology Applications.\" in Workshop on Biomedicine in Computing (BiC) at the International\n" +
+                "//Symposium on Computer Architecture (ISCA), June 2009.\n" +
+                "//\n" +
+                "//- M. Boyer, D. Tarjan, S. T. Acton, and K. Skadron. \"Accelerating Leukocyte Tracking using CUDA:\n" +
+                "//A Case Study in Leveraging Manycore Coprocessors.\" In Proceedings of the International Parallel\n" +
+                "//and Distributed Processing Symposium (IPDPS), May 2009.\n" +
+                "//\n" +
+                "//- S. Che, M. Boyer, J. Meng, D. Tarjan, J. W. Sheaffer, and K. Skadron. \"A Performance\n" +
+                "//Study of General Purpose Applications on Graphics Processors using CUDA\" Journal of\n" +
+                "//Parallel and Distributed Computing, Elsevier, June 2008.";
     }
 }

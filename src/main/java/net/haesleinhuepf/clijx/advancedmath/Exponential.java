@@ -10,6 +10,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 
 import java.util.HashMap;
 
+import net.haesleinhuepf.clijx.utilities.HasAuthor;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -25,7 +26,7 @@ import org.scijava.plugin.Plugin;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_exponential")
-public class Exponential extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class Exponential extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor {
 
     @Override
     public boolean executeCL() {
@@ -82,5 +83,10 @@ public class Exponential extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
     @Override
     public String getAvailableForDimensions() {
         return "2D, 3D";
+    }
+
+    @Override
+    public String getAuthorName() {
+        return "Peter Haub";
     }
 }
