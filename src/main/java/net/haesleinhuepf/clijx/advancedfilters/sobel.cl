@@ -54,13 +54,10 @@ __kernel void sobel_3d
 
   const int4 pos = (int4){x,y,z,0};
 
-  /*3d arrays to populate with kernels for x,y,z direction*/
   int gy[3][3][3],gx[3][3][3],gz[3][3][3];
-
-  /*smoothing perpendicular to derivative direction with triangle filter: h(-1)=1, h(0)=2, h(1)=1 */
+  
   int hx[3]={1,2,1},hy[3]={1,2,1},hz[3]={1,2,1};
 
-  /*simple central difference in derivative direction: h'(-1)=1, h'(0)=0, h'(1)=-1 */
   int hpx[3]={1,0,-1},hpy[3]={1,0,-1},hpz[3]={1,0,-1};
 
   float sum_x,sum_y,sum_z;
