@@ -19,7 +19,7 @@ import java.util.HashMap;
  * Author: @ruthhwj, @haesleinhuepf
  *         November 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_sobel")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_sobel")
 public class Sobel extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor {
 
     @Override
