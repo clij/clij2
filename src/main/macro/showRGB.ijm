@@ -33,6 +33,7 @@ for (i = -10; i < 10; i += 1) {
 	Ext.CLIJ_translate2D(original, image2, 0, i);
 	
 	Ext.CLIJx_showRGB(original, image1, image2, "hello RGB");
+	Ext.CLIJx_showGrey(image2, "hello grey");
 
 	wait(500);
 }

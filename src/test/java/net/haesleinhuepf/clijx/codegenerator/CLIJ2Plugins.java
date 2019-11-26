@@ -122,7 +122,8 @@ public interface CLIJ2Plugins {
             EqualizeMeanIntensitiesOfSlices.class,
             Watershed.class,
             ResliceRadial.class,
-            ShowRGB.class
+            ShowRGB.class,
+            ShowGrey.class
     };
 
 }

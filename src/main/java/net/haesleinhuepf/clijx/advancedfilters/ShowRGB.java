@@ -67,12 +67,11 @@ public class ShowRGB extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
         if (resultImp == null) {
             resultImp = tempImp;
             resultImp.setTitle(name);
+            resultImp.show();
         } else {
             resultImp.setProcessor(tempImp.getProcessor());
-            resultImp.show();
             resultImp.updateAndDraw();
         }
-        resultImp.show();
         return true;
     }
 

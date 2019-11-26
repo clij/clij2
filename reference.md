@@ -193,6 +193,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="#set">set'</a>
 * <a href="#shiftIntensitiesToCloseGaps">shiftIntensitiesToCloseGaps</a>
 * <a href="#shortestDistances">shortestDistances</a>
+* <a href="#showGrey">showGrey</a>
 * <a href="#showRGB">showRGB</a>
 * <a href="#smallerConstant">smallerConstant</a>
 * <a href="#smallerOrEqualConstant">smallerOrEqualConstant</a>
@@ -378,7 +379,7 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
 
 <a name="affineTransform3D"></a>
 ## affineTransform3D'
@@ -413,43 +414,6 @@ Parameters (macro):
 Image source, Image destination, String transform
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
-
-<a name="affineTransform"></a>
-## affineTransform'
-
-CLIJ affineTransform is <b>deprecated</b>. Use affineTransform2D or affineTransform3D instead.
-
-Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.
-
-Supported transforms:
-* center: translate the coordinate origin to the center of the image
-* -center: translate the coordinate origin back to the initial origin
-* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
-* rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees
-* rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees
-* rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
-* scale=[factor]: isotropic scaling according to given zoom factor
-* scaleX=[factor]: scaling along X-axis according to given zoom factor
-* scaleY=[factor]: scaling along Y-axis according to given zoom factor
-* scaleZ=[factor]: scaling along Z-axis according to given zoom factor
-* shearXY=[factor]: shearing along X-axis in XY plane according to given factor
-* shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor
-* shearYX=[factor]: shearing along Y-axis in XY plane according to given factor
-* shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor
-* shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor
-* shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor
-* translateX=[distance]: translate along X-axis by distance given in pixels
-* translateY=[distance]: translate along X-axis by distance given in pixels
-* translateZ=[distance]: translate along X-axis by distance given in pixels
-
-Example transform:
-transform = "center scale=2 rotate=45 -center";
-
-Parameters (macro):
-Image source, Image destination, String transform
-
-Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3
 
 <a name="affineTransform"></a>
@@ -488,6 +452,43 @@ Image source, Image destination, String transform
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3
+
+<a name="affineTransform"></a>
+## affineTransform'
+
+CLIJ affineTransform is <b>deprecated</b>. Use affineTransform2D or affineTransform3D instead.
+
+Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.
+
+Supported transforms:
+* center: translate the coordinate origin to the center of the image
+* -center: translate the coordinate origin back to the initial origin
+* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
+* rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees
+* rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees
+* rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
+* scale=[factor]: isotropic scaling according to given zoom factor
+* scaleX=[factor]: scaling along X-axis according to given zoom factor
+* scaleY=[factor]: scaling along Y-axis according to given zoom factor
+* scaleZ=[factor]: scaling along Z-axis according to given zoom factor
+* shearXY=[factor]: shearing along X-axis in XY plane according to given factor
+* shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor
+* shearYX=[factor]: shearing along Y-axis in XY plane according to given factor
+* shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor
+* shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor
+* shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor
+* translateX=[distance]: translate along X-axis by distance given in pixels
+* translateY=[distance]: translate along X-axis by distance given in pixels
+* translateZ=[distance]: translate along X-axis by distance given in pixels
+
+Example transform:
+transform = "center scale=2 rotate=45 -center";
+
+Parameters (macro):
+Image source, Image destination, String transform
+
+Parameters (Java):
+ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3
 
 <a name="applyVectorfield"></a>
 ## applyVectorfield'
@@ -1979,7 +1980,7 @@ Parameters (macro):
 null
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2
+ClearCLBuffer arg1, ClearCLBuffer arg2, Boolean arg3
 
 <a name="meanClosestSpotDistances"></a>
 ## meanClosestSpotDistances
@@ -1990,7 +1991,7 @@ Parameters (macro):
 null
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Boolean arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2
 
 <a name="meanIJ"></a>
 ## meanIJ'
@@ -2038,7 +2039,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="meanSphere"></a>
 ## meanSphere'
@@ -2050,7 +2051,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="meanSquaredError"></a>
 ## meanSquaredError
@@ -2143,7 +2144,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
 
 <a name="medianSphere"></a>
 ## medianSphere'
@@ -2157,7 +2158,7 @@ Parameters (macro):
 Image source, Image destination, Number radiusX, Number radiusY
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5
 
 <a name="minimumBox"></a>
 ## minimumBox'
@@ -2857,6 +2858,17 @@ ClearCLBuffer distance_matrix, ClearCLBuffer destination_minimum_distances
 * [spot_distance_measurement.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/spot_distance_measurement.ijm)
 
 
+<a name="showGrey"></a>
+## showGrey
+
+Visualises a single 2D image.
+
+Parameters (macro):
+Image input, String title
+
+Parameters (Java):
+ClearCLBuffer arg1, String arg2
+
 <a name="showRGB"></a>
 ## showRGB
 
@@ -2867,6 +2879,12 @@ Image red, Image green, Image blue, String title
 
 Parameters (Java):
 ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, String arg4
+
+
+
+### Example scripts
+* [showRGB.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/showRGB.ijm)
+
 
 <a name="smallerConstant"></a>
 ## smallerConstant
@@ -2983,7 +3001,7 @@ Parameters (macro):
 Image source
 
 Parameters (Java):
-ClearCLBuffer source
+ClearCLBuffer arg1, Float arg2
 
 <a name="standardDeviationOfAllPixels"></a>
 ## standardDeviationOfAllPixels
@@ -2995,7 +3013,7 @@ Parameters (macro):
 Image source
 
 Parameters (Java):
-ClearCLBuffer arg1, Float arg2
+ClearCLBuffer source
 
 <a name="statisticsOfLabelledPixels"></a>
 ## statisticsOfLabelledPixels
@@ -3006,7 +3024,7 @@ Parameters (macro):
 Image input, Image labelmap
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3
+ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4
 
 
 
@@ -3060,7 +3078,7 @@ Parameters (macro):
 Image input, Image labelmap
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4
+ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3
 
 
 
@@ -3220,7 +3238,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination
+ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
 
 <a name="translationRegistration"></a>
 ## translationRegistration
@@ -3231,7 +3249,7 @@ Parameters (macro):
 Image input1, Image input2, Image destination
 
 Parameters (Java):
-ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3
+ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination
 
 <a name="translationTimelapseRegistration"></a>
 ## translationTimelapseRegistration
@@ -3287,7 +3305,7 @@ Parameters (macro):
 Image source
 
 Parameters (Java):
-ClearCLBuffer source
+ClearCLBuffer arg1, Float arg2
 
 <a name="varianceOfAllPixels"></a>
 ## varianceOfAllPixels
@@ -3299,7 +3317,7 @@ Parameters (macro):
 Image source
 
 Parameters (Java):
-ClearCLBuffer arg1, Float arg2
+ClearCLBuffer source
 
 <a name="watershed"></a>
 ## watershed
