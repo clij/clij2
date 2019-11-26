@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clij.customconvolutionplugin;
+package net.haesleinhuepf.clijx.advancedfilters;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.CLIJ;
@@ -6,6 +6,7 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.utilities.HasAuthor;
 import org.scijava.plugin.Plugin;
 import java.lang.Math;
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
@@ -15,11 +16,11 @@ import java.util.HashMap;
 /**
  *
  *
- * Author: @haesleinhuepf
- * 12 2018
+ * Author: @ruthhwj, @haesleinhuepf
+ *         November 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_convolve")
-public class Sobel extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_sobel")
+public class Sobel extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor {
 
     @Override
     public boolean executeCL() {
@@ -29,7 +30,7 @@ public class Sobel extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOp
         return result;
     }
 
-    static boolean convolveWithSobel(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
+    public static boolean convolveWithSobel(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
@@ -56,8 +57,7 @@ public class Sobel extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOp
     }
 
     @Override
-    public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
-        return super.createOutputBufferFromSource((ClearCLBuffer)args[0]);
+    public String getAuthorName() {
+        return "Ruth Whelan-Jeans";
     }
-
 }

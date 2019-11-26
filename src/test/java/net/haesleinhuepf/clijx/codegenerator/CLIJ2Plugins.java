@@ -123,7 +123,8 @@ public interface CLIJ2Plugins {
             Watershed.class,
             ResliceRadial.class,
             ShowRGB.class,
-            ShowGrey.class
+            ShowGrey.class,
+            net.haesleinhuepf.clij.customconvolutionplugin.Sobel.class
     };
 
 }
