@@ -120,7 +120,9 @@ public interface CLIJ2Plugins {
             AbsoluteInplace.class,
             Resample.class,
             EqualizeMeanIntensitiesOfSlices.class,
-            ResliceRadial.class
+            Watershed.class,
+            ResliceRadial.class,
+            ShowRGB.class
     };
 
 }
