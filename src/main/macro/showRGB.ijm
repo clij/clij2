@@ -1,9 +1,10 @@
-// CLIJ example macro: addImages.ijm
+// CLIJ example macro: showRG.ijm
 //
-// This macro shows how add images of different bit-type
+// This macro shows how to visualise images as RGB
+// 
 //
 // Author: Robert Haase
-// January 2019
+//         November 2019
 // ---------------------------------------------
 
 original = "original";
