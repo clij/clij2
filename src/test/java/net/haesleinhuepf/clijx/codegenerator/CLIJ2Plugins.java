@@ -124,7 +124,9 @@ public interface CLIJ2Plugins {
             ResliceRadial.class,
             ShowRGB.class,
             ShowGrey.class,
-            net.haesleinhuepf.clij.customconvolutionplugin.Sobel.class
+            Sobel.class,
+            Absolute.class
     };
 
+    public String blockList = ";Kernels.absolute;";
 }

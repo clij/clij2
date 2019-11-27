@@ -123,6 +123,12 @@ public class CLIJx extends CLIJxOps{
         return result;
     }
 
+    public ClearCLImage create(ClearCLImage image) {
+        ClearCLImage result = clij.create(image);
+        registerReference(result);
+        return result;
+    }
+
 
     public ClearCLBuffer create(long[] dimensions) {
         ClearCLBuffer buffer = create(dimensions, NativeTypeEnum.Float);

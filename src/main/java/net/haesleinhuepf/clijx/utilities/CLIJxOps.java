@@ -3571,7 +3571,7 @@ public abstract class CLIJxOps {
      * <pre>f(x) = |x| </pre>
      */
     public boolean absoluteInplace(ClearCLBuffer arg1) {
-        return AbsoluteInplace.absoluteInplace(clij, arg1);
+        return AbsoluteInplace.absoluteInplace(clijx, arg1);
     }
 
 

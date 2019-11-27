@@ -26,4 +26,13 @@ public class CLIJUtilities extends net.haesleinhuepf.clij.utilities.CLIJUtilitie
         }
         return null;
     }
+
+    public static boolean checkDimensions(long... numberOfDimensions) {
+        for (int i = 0; i < numberOfDimensions.length - 1; i++) {
+            if (!(numberOfDimensions[i] == numberOfDimensions[i + 1])) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

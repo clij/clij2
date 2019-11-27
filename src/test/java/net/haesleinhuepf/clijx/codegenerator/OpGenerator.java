@@ -50,7 +50,7 @@ public class OpGenerator {
                         method.getParameterCount() > 0 &&
                         (method.getParameters()[0].getType() == CLIJ.class ||
                          method.getParameters()[0].getType() == CLIJx.class
-                        )) {
+                        ) && blockListOk(klass, method)) {
 
                     String methodName = method.getName();
                     String returnType = typeToString(method.getReturnType());
@@ -118,6 +118,15 @@ public class OpGenerator {
         writer.write(builder.toString());
         writer.close();
 
+    }
+
+    static boolean blockListOk(Class klass, Method method) {
+        String searchString = klass.getSimpleName() + "." + method.getName();
+        if (CLIJ2Plugins.blockList.contains(";" + searchString + ";")) {
+            System.out.println("BLOCKING " + searchString);
+            return false;
+        }
+        return true;
     }
 
     public static String[] guessParameterNames(CLIJMacroPluginService service, String methodName, String[] parametersHeader) {

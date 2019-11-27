@@ -24,6 +24,7 @@ import java.nio.FloatBuffer;
 import java.util.HashMap;
 
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
+import static net.haesleinhuepf.clijx.utilities.CLIJUtilities.checkDimensions;
 
 /**
  * ConnectedComponentsLabeling
@@ -260,16 +261,6 @@ public class ConnectedComponentsLabeling extends AbstractCLIJxPlugin implements 
             throw new IllegalArgumentException("Error: number of dimensions don't match! (copy)");
         }
         clij.execute(Kernels.class, "duplication.cl", "copy_" + srcNumberOfDimensions + "d", parameters);
-        return true;
-    }
-
-
-    private static boolean checkDimensions(long... numberOfDimensions) {
-        for (int i = 0; i < numberOfDimensions.length - 1; i++) {
-            if (!(numberOfDimensions[i] == numberOfDimensions[i + 1])) {
-                return false;
-            }
-        }
         return true;
     }
 

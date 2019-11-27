@@ -8,6 +8,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -16,18 +18,19 @@ import org.scijava.plugin.Plugin;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_absoluteInplace")
-public class AbsoluteInplace extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class AbsoluteInplace extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        return absoluteInplace(clij, (ClearCLBuffer) args[0]);
+        return absoluteInplace(getCLIJx(), (ClearCLBuffer) args[0]);
     }
 
-    public static boolean absoluteInplace(CLIJ clij, ClearCLBuffer input_output) {
-        ClearCLBuffer buffer = clij.create(input_output);
-        clij.op().copy(input_output, buffer);
-        boolean result = Kernels.absolute(clij, buffer, input_output);
-        buffer.close();
+    public static boolean absoluteInplace(CLIJx clijx, ClearCLBuffer input_output) {
+        ClearCLBuffer buffer = clijx.create(input_output);
+        clijx.copy(input_output, buffer);
+
+        boolean result = Absolute.absolute(clijx, buffer, input_output);
+        clijx.release(buffer);
         return result;
     }
 
