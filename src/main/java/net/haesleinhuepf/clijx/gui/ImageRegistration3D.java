@@ -13,8 +13,7 @@ import net.imglib2.realtransform.AffineTransform3D;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 /**
  * ImageRegistration3D
@@ -89,6 +88,21 @@ public class ImageRegistration3D implements PlugIn {
         //# initialize state
         ClearCLBuffer input1 = null;
         ClearCLBuffer input2 = null;
+        ClearCLBuffer temp1 = null;
+        ClearCLBuffer temp2 = null;
+        ClearCLBuffer dog1 = null;
+        ClearCLBuffer dog2 = null;
+        ClearCLBuffer transformed = null;
+        ClearCLBuffer transformedX = null;
+        ClearCLBuffer transformedY = null;
+
+        ClearCLBuffer maxXProjection1 = null;
+        ClearCLBuffer maxXProjection2 = null;
+        ClearCLBuffer maxYProjection1 = null;
+        ClearCLBuffer maxYProjection2 = null;
+        ClearCLBuffer maxZProjection1 = null;
+        ClearCLBuffer maxZProjection2 = null;
+
         int formerT1 = -1;
         int formerT2 = -1;
 
@@ -148,28 +162,28 @@ public class ImageRegistration3D implements PlugIn {
                         (long) (imp1.getWidth() * scale1X),
                         (long) (imp1.getHeight() * scale1Y),
                         (long) (imp1.getNSlices() * scale1Z)}, clijx.Float);
+
+                input2 = clijx.create(new long[]{
+                        (long) (imp2.getWidth() * scale2X),
+                        (long) (imp2.getHeight() * scale2Y),
+                        (long) (imp2.getNSlices() * scale2Z)}, clijx.Float);
+
+                temp1 = clijx.create(input1);
+                temp2 = clijx.create(input2);
+                dog1 = clijx.create(input1);
+                dog2 = clijx.create(input2);
+                transformed = clijx.create(input1);
+                transformedX = clijx.create(new long[]{input1.getHeight(), input1.getDepth(), input1.getWidth()}, input1.getNativeType());
+                transformedY = clijx.create(new long[]{input1.getWidth(), input1.getDepth(), input1.getHeight()}, input1.getNativeType());
+
+
+                maxXProjection1 = clijx.create(new long[]{transformedX.getWidth(), transformedX.getHeight()}, input1.getNativeType());
+                maxXProjection2 = clijx.create(new long[]{transformedX.getWidth(), transformedX.getHeight()}, input2.getNativeType());
+                maxYProjection1 = clijx.create(new long[]{transformedY.getWidth(), transformedY.getHeight()}, input1.getNativeType());
+                maxYProjection2 = clijx.create(new long[]{transformedY.getWidth(), transformedY.getHeight()}, input2.getNativeType());
+                maxZProjection1 = clijx.create(new long[]{transformed.getWidth(), transformed.getHeight()}, input1.getNativeType());
+                maxZProjection2 = clijx.create(new long[]{transformed.getWidth(), transformed.getHeight()}, input2.getNativeType());
             }
-            input2 = clijx.create(new long[]{
-                    (long) (imp2.getWidth() * scale2X),
-                    (long) (imp2.getHeight() * scale2Y),
-                    (long) (imp2.getNSlices() * scale2Z)}, clijx.Float);
-
-            ClearCLBuffer temp1 = clijx.create(input1);
-            ClearCLBuffer temp2 = clijx.create(input2);
-            ClearCLBuffer dog1 = clijx.create(input1);
-            ClearCLBuffer dog2 = clijx.create(input2);
-            ClearCLBuffer transformed = clijx.create(input1);
-            ClearCLBuffer transformedX = clijx.create(new long[]{input1.getHeight(), input1.getDepth(), input1.getWidth()}, input1.getNativeType());
-            ClearCLBuffer transformedY = clijx.create(new long[]{input1.getWidth(), input1.getDepth(), input1.getHeight()}, input1.getNativeType());
-
-
-            ClearCLBuffer maxXProjection1 = clijx.create(new long[]{transformedX.getWidth(), transformedX.getHeight()}, input1.getNativeType());
-            ClearCLBuffer maxXProjection2 = clijx.create(new long[]{transformedX.getWidth(), transformedX.getHeight()}, input2.getNativeType());
-            ClearCLBuffer maxYProjection1 = clijx.create(new long[]{transformedY.getWidth(), transformedY.getHeight()}, input1.getNativeType());
-            ClearCLBuffer maxYProjection2 = clijx.create(new long[]{transformedY.getWidth(), transformedY.getHeight()}, input2.getNativeType());
-            ClearCLBuffer maxZProjection1 = clijx.create(new long[]{transformed.getWidth(), transformed.getHeight()}, input1.getNativeType());
-            ClearCLBuffer maxZProjection2 = clijx.create(new long[]{transformed.getWidth(), transformed.getHeight()}, input2.getNativeType());
-
             //# read current values from dialog
             boolean doNoiseAndBackgroundRemoval = doNoiseAndBackgroundRemovalCheckbox.getState();
             float sigma1 = (float) (0.1 * sigma1Slider.getValue());
@@ -365,17 +379,13 @@ public class ImageRegistration3D implements PlugIn {
     }
 
     private void initInteraction() {
+        IJ.setTool("hand");
         //ImagePlus impX = WindowManager.getImage("fused X");
         ImagePlus impZ = WindowManager.getImage("fused Z");
 
         final int[] parameters = new int[2];
 
-        impZ.getWindow().getCanvas().addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
+        impZ.getWindow().getCanvas().addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 parameters[0] = e.getX();
@@ -385,19 +395,30 @@ public class ImageRegistration3D implements PlugIn {
             @Override
             public void mouseReleased(MouseEvent e) {
                 int deltaX = e.getX() - parameters[0];
-                int deltaY = e.getX() - parameters[1];
+                int deltaY = e.getY() - parameters[1];
+                
                 registrationTranslationXSlider.setValue(registrationTranslationXSlider.getValue() + deltaX);
                 registrationTranslationYSlider.setValue(registrationTranslationYSlider.getValue() + deltaY);
             }
-
+        });
+        while(impZ.getWindow().getCanvas().getKeyListeners().length > 0) {
+            impZ.getWindow().getCanvas().removeKeyListener(impZ.getWindow().getCanvas().getKeyListeners()[0]);
+        }
+        impZ.getWindow().getCanvas().addKeyListener(new KeyAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    registrationTranslationYSlider.setValue(registrationTranslationYSlider.getValue() - 1);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    registrationTranslationYSlider.setValue(registrationTranslationYSlider.getValue() + 1);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    registrationTranslationXSlider.setValue(registrationTranslationXSlider.getValue() - 1);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    registrationTranslationXSlider.setValue(registrationTranslationXSlider.getValue() + 1);
+                }
             }
         });
 
