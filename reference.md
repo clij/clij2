@@ -8,6 +8,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 <a href="#A">\[A\]</a>,<a href="#B">\[B\]</a>,<a href="#C">\[C\]</a>,<a href="#D">\[D\]</a>,<a href="#E">\[E\]</a>,<a href="#F">\[F\]</a>,<a href="#G">\[G\]</a>,<a href="#H">\[H\]</a>,<a href="#I">\[I\]</a>,<a href="#J">\[J\]</a>, K,<a href="#L">\[L\]</a>,<a href="#M">\[M\]</a>,<a href="#N">\[N\]</a>,<a href="#O">\[O\]</a>,<a href="#P">\[P\]</a>, Q,<a href="#R">\[R\]</a>,<a href="#S">\[S\]</a>,<a href="#T">\[T\]</a>, U,<a href="#V">\[V\]</a>,<a href="#W">\[W\]</a>, X, Y, Z
 
 <a name="A"></a>
+
 ## A
 * <a href="https://clij.github.io/clij-advanced-filters/reference_absoluteInplace">absoluteInplace</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_absolute">absolute</a>
@@ -22,6 +23,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_automaticThreshold">automaticThreshold'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_averageDistanceOfClosestPoints">averageDistanceOfClosestPoints</a>
 <a name="B"></a>
+
 ## B
 * <a href="https://clij.github.io/clij-advanced-filters/reference_binaryAnd">binaryAnd'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_binaryEdgeDetection">binaryEdgeDetection</a>
@@ -35,6 +37,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_blur">blur'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_boundingBox">boundingBox</a>
 <a name="C"></a>
+
 ## C
 * <a href="https://clij.github.io/clij-advanced-filters/reference_centerOfMass">centerOfMass'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_connectedComponentsLabelingInplace">connectedComponentsLabelingInplace</a>
@@ -51,6 +54,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_crop">crop'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_crossCorrelation">crossCorrelation</a>
 <a name="D"></a>
+
 ## D
 * <a href="https://clij.github.io/clij-advanced-filters/reference_deformableRegistration2D">deformableRegistration2D</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_detectLabelEdges">detectLabelEdges</a>
@@ -75,6 +79,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_drawSphere">drawSphere</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_drawTwoValueLine">drawTwoValueLine</a>
 <a name="E"></a>
+
 ## E
 * <a href="https://clij.github.io/clij-advanced-filters/reference_equalConstant">equalConstant</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_equal">equal</a>
@@ -87,10 +92,12 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_exponential">exponential</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_extrema">extrema</a>
 <a name="F"></a>
+
 ## F
 * <a href="https://clij.github.io/clij-advanced-filters/reference_fillHistogram">fillHistogram'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_flip">flip'</a>
 <a name="G"></a>
+
 ## G
 * <a href="https://clij.github.io/clij-advanced-filters/reference_gaussJordan">gaussJordan</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_generateDistanceMatrix">generateDistanceMatrix</a>
@@ -104,16 +111,20 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_greaterOrEqual">greaterOrEqual</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_greater">greater</a>
 <a name="H"></a>
+
 ## H
 * <a href="https://clij.github.io/clij-advanced-filters/reference_histogram">histogram'</a>
 <a name="I"></a>
+
 ## I
 * <a href="https://clij.github.io/clij-advanced-filters/reference_image2DToResultsTable">image2DToResultsTable</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_invert">invert'</a>
 <a name="J"></a>
+
 ## J
 * <a href="https://clij.github.io/clij-advanced-filters/reference_jaccardIndex">jaccardIndex</a>
 <a name="L"></a>
+
 ## L
 * <a href="https://clij.github.io/clij-advanced-filters/reference_labelToMask">labelToMask</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_laplace">laplace</a>
@@ -123,6 +134,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_localThreshold">localThreshold'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_logarithm">logarithm</a>
 <a name="M"></a>
+
 ## M
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maskLabel">maskLabel</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maskStackWithPlane">maskStackWithPlane'</a>
@@ -166,6 +178,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_multiplySliceBySliceWithScalars">multiplySliceBySliceWithScalars'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_multiplyStackWithPlane">multiplyStackWithPlane'</a>
 <a name="N"></a>
+
 ## N
 * <a href="https://clij.github.io/clij-advanced-filters/reference_nClosestPoints">nClosestPoints</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_nonzeroMaximumDiamond">nonzeroMaximumDiamond</a>
@@ -173,10 +186,12 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_notEqualConstant">notEqualConstant</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_notEqual">notEqual</a>
 <a name="O"></a>
+
 ## O
 * <a href="https://clij.github.io/clij-advanced-filters/reference_onlyzeroOverwriteMaximumBox">onlyzeroOverwriteMaximumBox</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_onlyzeroOverwriteMaximumDiamond">onlyzeroOverwriteMaximumDiamond</a>
 <a name="P"></a>
+
 ## P
 * <a href="https://clij.github.io/clij-advanced-filters/reference_particleImageVelocimetry2D">particleImageVelocimetry2D</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_particleImageVelocimetryTimelapse">particleImageVelocimetryTimelapse</a>
@@ -188,6 +203,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_presign">presign</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_pullAsROI">pullAsROI</a>
 <a name="R"></a>
+
 ## R
 * <a href="https://clij.github.io/clij-advanced-filters/reference_radialProjection">radialProjection'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_readImageFromDisc">readImageFromDisc</a>
@@ -203,6 +219,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_rotateLeft">rotateLeft'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_rotateRight">rotateRight'</a>
 <a name="S"></a>
+
 ## S
 * <a href="https://clij.github.io/clij-advanced-filters/reference_saveAsTIF">saveAsTIF</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_setNonZeroPixelsToPixelIndex">setNonZeroPixelsToPixelIndex</a>
@@ -230,6 +247,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_sumPixels">sumPixels'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_sumZProjection">sumZProjection'</a>
 <a name="T"></a>
+
 ## T
 * <a href="https://clij.github.io/clij-advanced-filters/reference_threshold">threshold'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_topHatBox">topHatBox</a>
@@ -241,9 +259,11 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_transposeXZ">transposeXZ</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_transposeYZ">transposeYZ</a>
 <a name="V"></a>
+
 ## V
 * <a href="https://clij.github.io/clij-advanced-filters/reference_varianceOfAllPixels">varianceOfAllPixels</a>
 <a name="W"></a>
+
 ## W
 * <a href="https://clij.github.io/clij-advanced-filters/reference_watershed">watershed</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_writeValuesToPositions">writeValuesToPositions</a>
