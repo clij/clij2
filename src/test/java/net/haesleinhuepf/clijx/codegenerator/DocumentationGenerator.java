@@ -281,7 +281,7 @@ public class DocumentationGenerator {
             if (sortedName.substring(0,1).toUpperCase().compareTo(firstChar.trim()) != 0) {
                 firstChar = sortedName.substring(0,1).toUpperCase();
                 builder.append("<a name=\"" + firstChar + "\"></a>\n");
-                builder.append("## " + firstChar + "\n");
+                builder.append("\n## " + firstChar + "\n");
 
                 listOfChars = listOfChars.replace(" " + firstChar, "<a href=\"#" + firstChar + "\">\\[" + firstChar + "\\]</a>");
             }
