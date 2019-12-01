@@ -304,12 +304,10 @@ public class CLIJx extends CLIJxOps{
 
     public CLIJx __enter__() {
         clear();
-        System.out.println("__enter__");
         return this;
     }
 
     public void __exit__(Object... args) {
         clear();
-        System.out.println("__exit__");
     }
 }
