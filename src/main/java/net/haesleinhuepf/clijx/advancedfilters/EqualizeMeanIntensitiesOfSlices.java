@@ -38,7 +38,8 @@ public class EqualizeMeanIntensitiesOfSlices extends AbstractCLIJPlugin implemen
 
     @Override
     public String getDescription() {
-        return "Determines correction factors for each slice so that the average intensity in all slices can be made the same and applies the factors.\n" +
+        return "Determines correction factors for each z-slice so that the average intensity in all slices can be made " +
+                "the same and multiplies these factors with the slices.\n" +
                 "This functionality is similar to the 'Simple Ratio Bleaching Correction' in Fiji.";
     }
 

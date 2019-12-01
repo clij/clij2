@@ -23,13 +23,11 @@ import net.haesleinhuepf.clijx.advancedfilters.LocalID;
 import net.haesleinhuepf.clijx.advancedfilters.MaskLabel;
 import net.haesleinhuepf.clijx.advancedfilters.MeanClosestSpotDistance;
 import net.haesleinhuepf.clijx.advancedfilters.MeanSquaredError;
-import net.haesleinhuepf.clijx.advancedfilters.MedianZProjection;
 import net.haesleinhuepf.clijx.advancedfilters.NonzeroMinimumDiamond;
 import net.haesleinhuepf.clijx.advancedfilters.Paste2D;
 import net.haesleinhuepf.clijx.advancedfilters.Paste3D;
 import net.haesleinhuepf.clijx.advancedfilters.Presign;
 import net.haesleinhuepf.clijx.advancedfilters.SorensenDiceJaccardIndex;
-import net.haesleinhuepf.clijx.advancedfilters.StandardDeviationZProjection;
 import net.haesleinhuepf.clijx.advancedfilters.StackToTiles;
 import net.haesleinhuepf.clijx.advancedfilters.SubtractBackground2D;
 import net.haesleinhuepf.clijx.advancedfilters.SubtractBackground3D;
@@ -50,7 +48,7 @@ import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
 import net.haesleinhuepf.clijx.registration.TranslationRegistration;
 import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
 import net.haesleinhuepf.clijx.advancedfilters.SetWhereXequalsY;
-import net.haesleinhuepf.clijx.advancedfilters.Laplace;
+import net.haesleinhuepf.clijx.advancedfilters.LaplaceSphere;
 import net.haesleinhuepf.clijx.advancedfilters.Image2DToResultsTable;
 import net.haesleinhuepf.clijx.advancedfilters.WriteValuesToPositions;
 import net.haesleinhuepf.clijx.advancedfilters.GetSize;
@@ -104,7 +102,6 @@ import net.haesleinhuepf.clijx.matrix.AverageDistanceOfNClosestPoints;
 import net.haesleinhuepf.clijx.advancedfilters.SaveAsTIF;
 import net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabelingInplace;
 import net.haesleinhuepf.clijx.matrix.TouchMatrixToMesh;
-import net.haesleinhuepf.clijx.advancedfilters.AutomaticThresholdInplace;
 import net.haesleinhuepf.clijx.advancedfilters.DifferenceOfGaussianInplace3D;
 import net.haesleinhuepf.clijx.advancedfilters.AbsoluteInplace;
 import net.haesleinhuepf.clijx.advancedfilters.Resample;
@@ -2886,13 +2883,13 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Laplace
+    // net.haesleinhuepf.clijx.advancedfilters.LaplaceSphere
     //----------------------------------------------------
     /**
-     * Apply the Laplace operator (Diamond neighborhood) to an image.
+     * Apply the LaplaceSphere operator (Diamond neighborhood) to an image.
      */
     public boolean laplace(ClearCLBuffer input, ClearCLBuffer destination) {
-        return Laplace.laplace(clij, input, destination);
+        return LaplaceSphere.laplaceSphere(clij, input, destination);
     }
 
 

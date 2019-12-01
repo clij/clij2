@@ -127,7 +127,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 
 ## L
 * <a href="https://clij.github.io/clij-advanced-filters/reference_labelToMask">labelToMask</a>
-* <a href="https://clij.github.io/clij-advanced-filters/reference_laplace">laplace</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_laplaceSphere">laplaceSphere</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_localExtremaBox">localExtremaBox</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_localID">localID</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_localPositiveMinimum">localPositiveMinimum</a>

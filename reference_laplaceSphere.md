@@ -1,12 +1,11 @@
-## varianceOfAllPixels
+## laplaceSphere
 ![Image](images/mini_clijx_logo.png)
 
-Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs
-Results table in the column 'Variance'.
+Applies the Laplace operator (Diamond neighborhood) to an image.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_varianceOfAllPixels(Image source);
+Ext.CLIJx_laplaceSphere(Image input, Image destination);
 ```
 
 
@@ -18,21 +17,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-float arg2 = 1.0;
+ClearCLBuffer input = clijx.push(inputImagePlus);
+destination = clij.create(input);
 ```
 
 ```
 // Execute operation on GPU
-double resultVarianceOfAllPixels = clijx.varianceOfAllPixels(clij, arg1, arg2);
+clijx.laplaceSphere(clij, input, destination);
 ```
 
 ```
 //show result
-System.out.println(resultVarianceOfAllPixels);
+destinationImagePlus = clij.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-arg1.close();
+input.close();
+destination.close();
 ```
 
 

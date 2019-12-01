@@ -47,7 +47,7 @@ public class BinaryEdgeDetection extends AbstractCLIJxPlugin implements CLIJMacr
 
     @Override
     public String getDescription() {
-        return "Determines pixels/voxels which are on the surface of a binary objects and sets only them to 1 in the destination image.";
+        return "Determines pixels/voxels which are on the surface of a binary objects and sets only them to 1 in the destination image. All other pixels are set to 0.";
     }
 
     @Override

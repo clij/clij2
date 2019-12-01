@@ -42,7 +42,7 @@ public class TransposeXZ extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
 
     @Override
     public String getDescription() {
-        return "Transpose X and Z in an image.";
+        return "Transpose X and Z axes of an image.";
     }
 
     @Override

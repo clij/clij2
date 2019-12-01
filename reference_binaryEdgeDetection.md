@@ -1,7 +1,7 @@
 ## binaryEdgeDetection
 ![Image](images/mini_clijx_logo.png)
 
-Determines pixels/voxels which are on the surface of a binary objects and sets only them to 1 in the destination image.
+Determines pixels/voxels which are on the surface of a binary objects and sets only them to 1 in the destination image. All other pixels are set to 0.
 
 ### Usage in ImageJ macro
 ```

@@ -1,6 +1,8 @@
 ## logarithm
 ![Image](images/mini_clijx_logo.png)
 
+By Peter Haub
+
 Computes baseE logarithm of all pixels values.
 
 f(x) = logarithm(x)

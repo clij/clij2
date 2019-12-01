@@ -1,7 +1,7 @@
 ## labelToMask
 ![Image](images/mini_clijx_logo.png)
 
-Masks a single label in a label map: Sets all pixels in the target image to 1, where the given label index was present in the label map.
+Masks a single label in a label map: Sets all pixels in the target image to 1, where the given label index was present in the label map. Other pixels are set to 0.
 
 ### Usage in ImageJ macro
 ```

@@ -43,7 +43,8 @@ public class DifferenceOfGaussian2D extends AbstractCLIJPlugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Applies Gaussian blur to the input image twice resulting in two images which are then subtracted from each other.";
+        return "Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.\n\n" +
+                "It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.";
     }
 
     @Override

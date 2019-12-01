@@ -43,7 +43,7 @@ public class TopHatSphere extends AbstractCLIJPlugin implements CLIJMacroPlugin,
 
     @Override
     public String getDescription() {
-        return "Apply a top-hat filter to the input image.";
+        return "Applies a top-hat filter for background subtraction to the input image.";
     }
 
     @Override

@@ -1,6 +1,8 @@
 ## exponential
 ![Image](images/mini_clijx_logo.png)
 
+By Peter Haub
+
 Computes base exponential of all pixels values.
 
 f(x) = exp(x)

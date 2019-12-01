@@ -6,6 +6,8 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPluginService;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.HasAuthor;
+import net.haesleinhuepf.clijx.utilities.HasLicense;
 import org.scijava.Context;
 
 import java.io.*;
@@ -31,6 +33,8 @@ public class DocumentationGenerator {
         String parametersJava;
         String parametersMacro;
         String description;
+        String author;
+        String license;
     }
 
     public static void main(String ... args) throws IOException {
@@ -90,6 +94,12 @@ public class DocumentationGenerator {
                                 item.description = ((OffersDocumentation) plugin).getDescription();
                                 item.description = item.description.replace("deprecated", "<b>deprecated</b>");
                             }
+                            if (plugin instanceof HasAuthor) {
+                                item.author = ((HasAuthor) plugin).getAuthorName();
+                            }
+                            if (plugin instanceof HasLicense) {
+                                item.license = ((HasLicense) plugin).getLicense();
+                            }
                         }
 
                         //System.out.println(documentation);
@@ -135,6 +145,9 @@ public class DocumentationGenerator {
                 builder.append("![Image](images/mini_clijx_logo.png)");
             }
             builder.append("\n\n");
+            if (item.author != null && item.author.length() > 0) {
+                builder.append("By " + item.author + "\n\n");
+            }
             builder.append(item.description);
             builder.append("\n\n");
             builder.append("### Usage in ImageJ macro\n");
@@ -170,6 +183,12 @@ public class DocumentationGenerator {
             if(linkToExamples.length() > 0) {
                 builder.append("\n\n### Example scripts\n" + linkToExamples + "\n\n");
             }
+
+            if (item.license != null && item.license.length() > 0) {
+                builder.append("\n\n### License terms\n");
+                builder.append(item.license.replace("\n", "  \n") + "\n\n");
+            }
+
 
             builder.append("[Back to CLIJ documentation](https://clij.github.io/)\n" +
                     "\n" +

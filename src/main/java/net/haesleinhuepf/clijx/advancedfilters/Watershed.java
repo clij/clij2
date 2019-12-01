@@ -210,8 +210,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
 
     @Override
     public String getDescription() {
-        return "Detects local maxima regions. Pixels in the resulting image are set to 1 if\n" +
-                "there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.";
+        return "Apply a binary watershed to a binary image and introduces black pixels between objects.";
     }
 
     @Override

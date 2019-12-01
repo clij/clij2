@@ -1,7 +1,7 @@
 ## distanceMap
 ![Image](images/mini_clijx_logo.png)
 
-Generates a distance map from a binary image.
+Generates a distance map from a binary image. Pixels with non-zero value in the binary image are set to a number representing the distance to the closest zero-value pixel.
 
 ### Usage in ImageJ macro
 ```

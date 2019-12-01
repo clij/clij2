@@ -18,12 +18,13 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+float arg2 = 1.0;
 ```
 
 ```
 // Execute operation on GPU
-double resultStandardDeviationOfAllPixels = clijx.standardDeviationOfAllPixels(clij, source);
+double resultStandardDeviationOfAllPixels = clijx.standardDeviationOfAllPixels(clij, arg1, arg2);
 ```
 
 ```
@@ -31,7 +32,7 @@ double resultStandardDeviationOfAllPixels = clijx.standardDeviationOfAllPixels(c
 System.out.println(resultStandardDeviationOfAllPixels);
 
 // cleanup memory on GPU
-source.close();
+arg1.close();
 ```
 
 

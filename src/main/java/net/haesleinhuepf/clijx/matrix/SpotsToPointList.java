@@ -60,8 +60,8 @@ public class SpotsToPointList extends AbstractCLIJPlugin implements CLIJMacroPlu
 
     @Override
     public String getDescription() {
-        return "Transforms a spots image as resulting from maxim detection in an image where every column cotains d \n" +
-                "pixels (with d = dimensionality of the original image) with the coordinates of the maxima.";
+        return "Transforms a spots image as resulting from maximum/minimum detection in an image where every column cotains d \n" +
+                "pixels (with d = dimensionality of the original image) with the coordinates of the maxima/minima.";
     }
 
     @Override

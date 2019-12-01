@@ -76,7 +76,10 @@ public class CrossCorrelation extends AbstractCLIJPlugin implements CLIJMacroPlu
 
     @Override
     public String getDescription() {
-        return "";
+        return "Performs cross correlation analysis between two images. The second image is shifted by deltaPos in " +
+                "the given dimension. The cross correlation coefficient is calculated " +
+                "for each pixel in a range around the given pixel with given radius in the given dimension. Together with the " +
+                "original images it is recommended to hand over mean filtered images using the same radius.  ";
     }
 
     @Override

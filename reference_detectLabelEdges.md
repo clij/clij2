@@ -1,7 +1,7 @@
 ## detectLabelEdges
 ![Image](images/mini_clijx_logo.png)
 
-Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where all pixels are set to 0 exept those where labels are touching.Only half of the matrix is filled (with x < y). For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.
+Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.
 
 ### Usage in ImageJ macro
 ```

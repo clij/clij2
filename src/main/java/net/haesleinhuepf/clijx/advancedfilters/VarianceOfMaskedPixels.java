@@ -81,7 +81,7 @@ public class VarianceOfMaskedPixels extends AbstractCLIJPlugin implements CLIJMa
     @Override
     public String getDescription() {
         return "Determines the variance in an image, but only in pixels which have non-zero values in another" +
-                " binary mask image.";
+                " binary mask image. The result is put in the results table as new column named 'Masked_variance'.";
     }
 
     @Override
