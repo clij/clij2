@@ -24,12 +24,12 @@ public class LaplaceBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, C
         ClearCLBuffer input = (ClearCLBuffer) (args[0]);
         ClearCLBuffer output = (ClearCLBuffer) (args[1]);
 
-        boolean result = laplaceSphere(clij, input, output);
+        boolean result = laplaceBox(clij, input, output);
         return result;
     }
 
 
-    public static boolean laplaceSphere(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
+    public static boolean laplaceBox(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
