@@ -61,7 +61,7 @@ public interface CLIJ2Plugins {
             TranslationRegistration.class,
             TranslationTimelapseRegistration.class,
             SetWhereXequalsY.class,
-            Laplace.class,
+            LaplaceSphere.class,
             Image2DToResultsTable.class,
             WriteValuesToPositions.class,
             GetSize.class,
@@ -125,7 +125,10 @@ public interface CLIJ2Plugins {
             ShowRGB.class,
             ShowGrey.class,
             Sobel.class,
-            Absolute.class
+            Absolute.class,
+            LaplaceBox.class,
+            BottomHatBox.class,
+            BottomHatSphere.class
     };
 
     public String blockList = ";Kernels.absolute;";
