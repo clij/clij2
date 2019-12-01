@@ -8,13 +8,13 @@
 	<parent>
 		<groupId>net.haesleinhuepf</groupId>
 		<artifactId>clij-parent-pom</artifactId>
-		<version>1.4.2</version>
+		<version>1.4.3</version>
 		<relativePath />
 	</parent>
 
 	<groupId>net.haesleinhuepf</groupId>
 	<artifactId>clij-advanced-filters_</artifactId>
-	<version>0.12.5</version>
+	<version>0.14.0</version>
 
 	<name>clij-advanced-filters_</name>
 	<description>clij-advanced-filters</description>
