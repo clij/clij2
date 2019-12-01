@@ -25,12 +25,12 @@ public class Sobel extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOp
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = convolveWithSobel(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        boolean result = sobel(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean convolveWithSobel(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
+    public static boolean sobel(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
