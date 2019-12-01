@@ -40,7 +40,6 @@ arg2.close();
 
 ### Example scripts
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/"><img src="images/language_java.png" height="20"/></a> [BackgroundSubtractionandThresholdingDemo.java](https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/BackgroundSubtractionandThresholdingDemo.java)  
-<a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [meanFilter.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/meanFilter.m)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

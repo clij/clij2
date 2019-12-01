@@ -1,11 +1,11 @@
-## binaryEdgeDetection
+## closingBox
 ![Image](images/mini_clijx_logo.png)
 
-Determines pixels/voxels which are on the surface of a binary objects and sets only them to 1 in the destination image. All other pixels are set to 0.
+Apply a binary closing to the input image by calling n dilations and n erosions subsequenntly.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_binaryEdgeDetection(Image source, Image destination);
+Ext.CLIJx_closingBox(Image input, Image destination, Number number_of_dilations_and_erosions);
 ```
 
 
@@ -19,11 +19,12 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+int arg3 = 10;
 ```
 
 ```
 // Execute operation on GPU
-clijx.binaryEdgeDetection(clij, arg1, arg2);
+clijx.closingBox(clij, arg1, arg2, arg3);
 ```
 
 ```
@@ -33,12 +34,6 @@ clijx.binaryEdgeDetection(clij, arg1, arg2);
 arg1.close();
 arg2.close();
 ```
-
-
-
-
-### Example scripts
-<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [outline.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/outline.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

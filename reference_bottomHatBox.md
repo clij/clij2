@@ -1,11 +1,11 @@
-## binaryEdgeDetection
+## bottomHatBox
 ![Image](images/mini_clijx_logo.png)
 
-Determines pixels/voxels which are on the surface of a binary objects and sets only them to 1 in the destination image. All other pixels are set to 0.
+Apply a bottom-hat filter for background subtraction to the input image.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_binaryEdgeDetection(Image source, Image destination);
+Ext.CLIJx_bottomHatBox(Image input, Image destination, Number radiusX, Number radiusY, Number radiusZ);
 ```
 
 
@@ -19,11 +19,14 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+int arg3 = 10;
+int arg4 = 20;
+int arg5 = 30;
 ```
 
 ```
 // Execute operation on GPU
-clijx.binaryEdgeDetection(clij, arg1, arg2);
+clijx.bottomHatBox(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```
@@ -33,12 +36,6 @@ clijx.binaryEdgeDetection(clij, arg1, arg2);
 arg1.close();
 arg2.close();
 ```
-
-
-
-
-### Example scripts
-<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [outline.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/outline.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

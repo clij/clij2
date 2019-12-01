@@ -128,7 +128,11 @@ public interface CLIJ2Plugins {
             Absolute.class,
             LaplaceBox.class,
             BottomHatBox.class,
-            BottomHatSphere.class
+            BottomHatSphere.class,
+            ClosingBox.class,
+            ClosingDiamond.class,
+            OpeningBox.class,
+            OpeningDiamond.class
     };
 
     public String blockList = ";Kernels.absolute;";

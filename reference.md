@@ -35,15 +35,18 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_binaryXOr">binaryXOr'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_blurSliceBySlice">blurSliceBySlice'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_blur">blur'</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_bottomHatBox">bottomHatBox</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_bottomHatSphere">bottomHatSphere</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_boundingBox">boundingBox</a>
 <a name="C"></a>
 
 ## C
 * <a href="https://clij.github.io/clij-advanced-filters/reference_centerOfMass">centerOfMass'</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_closingBox">closingBox</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_closingDiamond">closingDiamond</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_connectedComponentsLabelingInplace">connectedComponentsLabelingInplace</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_connectedComponentsLabeling">connectedComponentsLabeling</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_convertToImageJBinary">convertToImageJBinary'</a>
-* <a href="https://clij.github.io/clij-advanced-filters/reference_convolveWithSobel">convolveWithSobel</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_copySlice">copySlice'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_copy">copy'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_countNonZeroPixelsLocallySliceBySlice">countNonZeroPixelsLocallySliceBySlice'</a>
@@ -127,6 +130,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 
 ## L
 * <a href="https://clij.github.io/clij-advanced-filters/reference_labelToMask">labelToMask</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_laplaceBox">laplaceBox</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_laplaceSphere">laplaceSphere</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_localExtremaBox">localExtremaBox</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_localID">localID</a>
@@ -190,6 +194,8 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 ## O
 * <a href="https://clij.github.io/clij-advanced-filters/reference_onlyzeroOverwriteMaximumBox">onlyzeroOverwriteMaximumBox</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_onlyzeroOverwriteMaximumDiamond">onlyzeroOverwriteMaximumDiamond</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_openingBox">openingBox</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_openingDiamond">openingDiamond</a>
 <a name="P"></a>
 
 ## P
@@ -233,6 +239,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_smallerOrEqualConstant">smallerOrEqualConstant</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_smallerOrEqual">smallerOrEqual</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_smaller">smaller</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_sobel">sobel</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_sorensenDiceCoefficient">sorensenDiceCoefficient</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_splitStack">splitStack'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_spotsToPointList">spotsToPointList</a>

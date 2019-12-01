@@ -43,7 +43,6 @@ arg2.close();
 ### Example scripts
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [flip.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/flip.ijm)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [countNeighbors3D.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/countNeighbors3D.py)  
-<a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [flipImage.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/flipImage.m)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

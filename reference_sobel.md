@@ -1,11 +1,13 @@
-## watershed
+## sobel
 ![Image](images/mini_clijx_logo.png)
 
-Apply a binary watershed to a binary image and introduces black pixels between objects.
+By Ruth Whelan-Jeans
+
+Convolve the image with the Sobel kernel.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_watershed(Image source, Image destination);
+Ext.CLIJx_sobel(Image source, Image destination);
 ```
 
 
@@ -23,7 +25,7 @@ destination = clij.create(source);
 
 ```
 // Execute operation on GPU
-clijx.watershed(clij, source, destination);
+clijx.sobel(clij, source, destination);
 ```
 
 ```
@@ -35,12 +37,6 @@ destinationImagePlus.show();
 source.close();
 destination.close();
 ```
-
-
-
-
-### Example scripts
-<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [watershed.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/watershed.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

@@ -1,11 +1,11 @@
-## meanClosestSpotDistances
+## laplaceBox
 ![Image](images/mini_clijx_logo.png)
 
-null
+Applies the Laplace operator (Box neighborhood) to an image.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_meanClosestSpotDistances(null);
+Ext.CLIJx_laplaceBox(Image input, Image destination);
 ```
 
 
@@ -17,22 +17,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer input = clijx.push(inputImagePlus);
+destination = clij.create(input);
 ```
 
 ```
 // Execute operation on GPU
-double resultMeanClosestSpotDistances = clijx.meanClosestSpotDistances(clij, arg1, arg2);
+clijx.laplaceBox(clij, input, destination);
 ```
 
 ```
 //show result
-System.out.println(resultMeanClosestSpotDistances);
+destinationImagePlus = clij.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-arg1.close();
-arg2.close();
+input.close();
+destination.close();
 ```
 
 

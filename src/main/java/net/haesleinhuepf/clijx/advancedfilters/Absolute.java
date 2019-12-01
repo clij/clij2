@@ -2,6 +2,7 @@ package net.haesleinhuepf.clijx.advancedfilters;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -32,7 +33,7 @@ public class Absolute extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CL
         return result;
     }
 
-    public static boolean absolute(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst) {
+    public static boolean absolute(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst) {
         assertDifferent(src, dst);
 
         HashMap<String, Object> parameters = new HashMap<>();

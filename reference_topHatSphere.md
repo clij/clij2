@@ -1,7 +1,7 @@
 ## topHatSphere
 ![Image](images/mini_clijx_logo.png)
 
-Apply a top-hat filter to the input image.
+Applies a top-hat filter for background subtraction to the input image.
 
 ### Usage in ImageJ macro
 ```

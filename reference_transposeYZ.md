@@ -1,7 +1,7 @@
 ## transposeYZ
 ![Image](images/mini_clijx_logo.png)
 
-Transpose Y and Z in an image.
+Transpose Y and Z axes of an image.
 
 ### Usage in ImageJ macro
 ```
