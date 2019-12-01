@@ -57,7 +57,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         return true;
     }
 
-    private static boolean binarizeLabelmap(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output) {
+    static boolean binarizeLabelmap(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src_labelmap", input);
         parameters.put("dst_binary", output);
@@ -65,7 +65,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         return true;
     }
 
-    private static boolean detectMaximaRegionBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
+    static boolean detectMaximaRegionBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", input);
         parameters.put("dst", output);
@@ -73,7 +73,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         return true;
     }
 
-    private static ClearCLKernel dilateLabelsUntilNoChange(CLIJx clijx, ClearCLBuffer distanceMapIn, ClearCLBuffer labelMapIn, ClearCLBuffer flag, ClearCLBuffer distanceMapOut, ClearCLBuffer labelMapOut, ClearCLKernel kernel) {
+    static ClearCLKernel dilateLabelsUntilNoChange(CLIJx clijx, ClearCLBuffer distanceMapIn, ClearCLBuffer labelMapIn, ClearCLBuffer flag, ClearCLBuffer distanceMapOut, ClearCLBuffer labelMapOut, ClearCLKernel kernel) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src_labelmap", labelMapIn);
         parameters.put("src_distancemap", distanceMapIn);
@@ -83,7 +83,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         return clijx.executeSubsequently(Watershed.class, "watershed_local_maximum_" + labelMapOut.getDimension() + "d_x.cl", "watershed_local_maximum_" + labelMapOut.getDimension() + "d", labelMapOut.getDimensions(), labelMapOut.getDimensions(), parameters, kernel);
     }
 
-    private static ClearCLKernel eliminateWrongMaxima(CLIJx clijx, ClearCLBuffer maximaIn, ClearCLBuffer distanceMapIn, ClearCLBuffer flag, ClearCLBuffer maximaOut, ClearCLKernel kernel) {
+    static ClearCLKernel eliminateWrongMaxima(CLIJx clijx, ClearCLBuffer maximaIn, ClearCLBuffer distanceMapIn, ClearCLBuffer flag, ClearCLBuffer maximaOut, ClearCLKernel kernel) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src_distancemap", distanceMapIn);
         parameters.put("src_maxima", maximaIn);
@@ -92,7 +92,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         return clijx.executeSubsequently(Watershed.class, "watershed_eliminate_wrong_maxima_" + maximaOut.getDimension() + "d_x.cl", "watershed_eliminate_wrong_maxima_" + maximaOut.getDimension() + "d", maximaOut.getDimensions(), maximaOut.getDimensions(), parameters, kernel);
     }
 
-    private static boolean eliminateWrongMaxima(CLIJx clijx, ClearCLBuffer maximaIn, ClearCLBuffer distanceMapIn, ClearCLBuffer maximaOut) {
+    static boolean eliminateWrongMaxima(CLIJx clijx, ClearCLBuffer maximaIn, ClearCLBuffer distanceMapIn, ClearCLBuffer maximaOut) {
         ClearCLBuffer flag = clijx.create(new long[]{1,1,1}, NativeTypeEnum.Byte);
         ByteBuffer aByteBufferWithAZero = ByteBuffer.allocate(1);
         aByteBufferWithAZero.put((byte)0);
@@ -113,14 +113,14 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
                 } else {
                     flipkernel.run(true);
                 }
-                clijx.saveAsTIF(maximaOut, "c:/structure/temp/max/" + iterationCount[0] + ".tif");
+                //clijx.saveAsTIF(maximaOut, "c:/structure/temp/max/" + iterationCount[0] + ".tif");
             } else {
                 if (flopkernel == null) {
                     flopkernel = eliminateWrongMaxima(clijx, maximaOut, distanceMapIn, flag, maximaIn, flopkernel);
                 } else {
                     flopkernel.run(true);
                 }
-                clijx.saveAsTIF(maximaIn, "c:/structure/temp/max/" + iterationCount[0] + ".tif");
+                //clijx.saveAsTIF(maximaIn, "c:/structure/temp/max/" + iterationCount[0] + ".tif");
             }
 
             ImagePlus flagImp = clijx.pull(flag);
@@ -144,7 +144,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         return true;
     }
 
-    private static boolean dilateLabelsUntilNoChange(CLIJx clijx, ClearCLBuffer distanceMapIn, ClearCLBuffer labelMapIn, ClearCLBuffer distanceMapOut, ClearCLBuffer labelMapOut) {
+    static boolean dilateLabelsUntilNoChange(CLIJx clijx, ClearCLBuffer distanceMapIn, ClearCLBuffer labelMapIn, ClearCLBuffer distanceMapOut, ClearCLBuffer labelMapOut) {
 
         ClearCLBuffer flag = clijx.create(new long[]{1,1,1}, NativeTypeEnum.Byte);
         ByteBuffer aByteBufferWithAZero = ByteBuffer.allocate(1);
@@ -168,16 +168,16 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
                 } else {
                     flipkernel.run(true);
                 }
-                clijx.saveAsTIF(distanceMapOut, "c:/structure/temp/dst/" + iterationCount[0] + ".tif");
-                clijx.saveAsTIF(labelMapOut, "c:/structure/temp/lab/" + iterationCount[0] + ".tif");
+                //clijx.saveAsTIF(distanceMapOut, "c:/structure/temp/dst/" + iterationCount[0] + ".tif");
+                //clijx.saveAsTIF(labelMapOut, "c:/structure/temp/lab/" + iterationCount[0] + ".tif");
             } else {
                 if (flopkernel == null) {
                     flopkernel = dilateLabelsUntilNoChange(clijx, distanceMapOut, labelMapOut, flag, distanceMapIn, labelMapIn, flopkernel);
                 } else {
                     flopkernel.run(true);
                 }
-                clijx.saveAsTIF(distanceMapIn, "c:/structure/temp/dst/" + iterationCount[0] + ".tif");
-                clijx.saveAsTIF(labelMapOut, "c:/structure/temp/lab/" + iterationCount[0] + ".tif");
+                //clijx.saveAsTIF(distanceMapIn, "c:/structure/temp/dst/" + iterationCount[0] + ".tif");
+                //clijx.saveAsTIF(labelMapOut, "c:/structure/temp/lab/" + iterationCount[0] + ".tif");
             }
 
             ImagePlus flagImp = clijx.pull(flag);
@@ -205,7 +205,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination";
+        return "Image binary_source, Image destination";
     }
 
     @Override
