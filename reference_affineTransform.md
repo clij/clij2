@@ -45,9 +45,6 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-import net.imglib2.realtransform.AffineTransform3D;
-at = new AffineTransform3D();
-at.translate(4, 0, 0);
 ```
 
 ```

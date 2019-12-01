@@ -22,14 +22,11 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-float arg4 = 1.0;
-float arg5 = 2.0;
-int arg6 = 10;
 ```
 
 ```
 // Execute operation on GPU
-clijx.automaticThreshold(clij, arg1, arg2, arg3, arg4, arg5, arg6);
+clijx.automaticThreshold(clij, arg1, arg2, arg3);
 ```
 
 ```

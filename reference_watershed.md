@@ -5,7 +5,7 @@ Apply a binary watershed to a binary image and introduces black pixels between o
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_watershed(Image source, Image destination);
+Ext.CLIJx_watershed(Image binary_source, Image destination);
 ```
 
 
@@ -17,13 +17,13 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination = clij.create(source);
+ClearCLBuffer binary_source = clijx.push(binary_sourceImagePlus);
+destination = clij.create(binary_source);
 ```
 
 ```
 // Execute operation on GPU
-clijx.watershed(clij, source, destination);
+clijx.watershed(clij, binary_source, destination);
 ```
 
 ```
@@ -32,7 +32,7 @@ destinationImagePlus = clij.pull(destination);
 destinationImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
+binary_source.close();
 destination.close();
 ```
 
