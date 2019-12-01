@@ -302,4 +302,13 @@ public class CLIJx extends CLIJxOps{
     public final NativeTypeEnum UnsignedShort = NativeTypeEnum.UnsignedShort;
     public final NativeTypeEnum UnsignedByte = NativeTypeEnum.UnsignedByte;
 
+    public void __enter__() {
+        clear();
+        System.out.println("__enter__");
+    }
+
+    public void __exit__(Object... args) {
+        clear();
+        System.out.println("__exit__");
+    }
 }
