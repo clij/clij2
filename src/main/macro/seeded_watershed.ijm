@@ -1,0 +1,13 @@
+run("Blobs (25K)");
+run("CLIJ Macro Extensions", "cl_device=[Intel(R) Iris(R) Plus Graphics]");
+Ext.CLIJ_push("blobs.gif");
+Ext.CLIJ_automaticThreshold("blobs.gif", "CLIJ_automaticThreshold_destination_blobs.gif", "Otsu");
+Ext.CLIJ_pull("CLIJ_automaticThreshold_destination_blobs.gif");
+selectWindow("blobs.gif");
+Ext.CLIJ_blur2D("blobs.gif", "CLIJ_blur2D_destination_blobs.gif", 10.0, 10.0);
+Ext.CLIJ_pull("CLIJ_blur2D_destination_blobs.gif");
+Ext.CLIJ_detectMaximaBox("CLIJ_blur2D_destination_blobs.gif", "CLIJ_detectMaximaBox_destination_CLIJ_blur2D_destination_blobs.gif", 2.0);
+Ext.CLIJ_pull("CLIJ_detectMaximaBox_destination_CLIJ_blur2D_destination_blobs.gif");
+run("Measure");
+//run("Brightness/Contrast...");
+run("Enhance Contrast", "saturated=0.35");
