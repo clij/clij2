@@ -11,8 +11,8 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_laplace")
-public class Laplace extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_laplaceBox")
+public class LaplaceBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -24,22 +24,22 @@ public class Laplace extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
         ClearCLBuffer input = (ClearCLBuffer) (args[0]);
         ClearCLBuffer output = (ClearCLBuffer) (args[1]);
 
-        boolean result = laplace(clij, input, output);
+        boolean result = laplaceSphere(clij, input, output);
         return result;
     }
 
 
-    public static boolean laplace(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
+    public static boolean laplaceSphere(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
-        return clij.execute(ConnectedComponentsLabeling.class, "laplace" + src.getDimension() + "d.cl", "laplace_diamond_image" + src.getDimension() + "d", dst.getDimensions(), parameters);
+        return clij.execute(ConnectedComponentsLabeling.class, "laplace" + src.getDimension() + "d.cl", "laplace_box_image" + src.getDimension() + "d", dst.getDimensions(), parameters);
     }
 
 
     @Override
     public String getDescription() {
-        return "Apply the Laplace operator (Diamond neighborhood) to an image.";
+        return "Applies the Laplace operator (Box neighborhood) to an image.";
     }
 
     @Override
