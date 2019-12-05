@@ -10,6 +10,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.utilities.CLIJUtilities;
 import org.scijava.plugin.Plugin;
 
+import java.nio.FloatBuffer;
 import java.util.HashMap;
 
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
@@ -20,18 +21,26 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  * <p>
  * <p>
  * Author: @haesleinhuepf
- * 12 2018
+ *         December 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_resliceRadial")
 public class ResliceRadial extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        boolean result = resliceRadial(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[3]));
+        boolean result = resliceRadial(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[3]), asFloat(args[4]), asFloat(args[5]), asFloat(args[6]), asFloat(args[7]), asFloat(args[8]));
         return result;
     }
 
     public static boolean resliceRadial(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Float deltaAngle) {
+        return resliceRadial(clij, src, dst, deltaAngle, 0.0f, src.getWidth() / 2.0f, src.getHeight() / 2.0f,  1.0f, 1.0f);
+    }
+
+    public static boolean resliceRadial(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Float deltaAngle, Float centerX, Float centerY) {
+        return resliceRadial(clij, src, dst, deltaAngle, 0.0f, centerX, centerY, 1.0f, 1.0f);
+    }
+
+    public static boolean resliceRadial(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Float deltaAngle, Float startAngleDegrees, Float centerX, Float centerY, Float scaleFactorX, Float scaleFactorY) {
         assertDifferent(src, dst);
 
         ClearCLImage image = clij.create(src.getDimensions(), CLIJUtilities.nativeToChannelType(src.getNativeType()));
@@ -41,6 +50,11 @@ public class ResliceRadial extends AbstractCLIJPlugin implements CLIJMacroPlugin
         parameters.put("src", image);
         parameters.put("dst", dst);
         parameters.put("deltaAngle", deltaAngle);
+        parameters.put("centerX", centerX);
+        parameters.put("centerY", centerY);
+        parameters.put("startAngleDegrees", startAngleDegrees);
+        parameters.put("scaleX", scaleFactorX);
+        parameters.put("scaleY", scaleFactorY);
 
         boolean success = clij.execute(ResliceRadial.class, "resliceRadial_interpolate.cl", "radialProjection3d", parameters);
 
@@ -50,7 +64,7 @@ public class ResliceRadial extends AbstractCLIJPlugin implements CLIJMacroPlugin
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number numberOfAngles, Number angleStepSize";
+        return "Image source, Image destination, Number numberOfAngles, Number angleStepSize, Number startAngleDegrees, Number centerX, Number centerY, Number scaleFactorX, Number scaleFactorY";
     }
 
     @Override
@@ -65,8 +79,9 @@ public class ResliceRadial extends AbstractCLIJPlugin implements CLIJMacroPlugin
 
     @Override
     public String getDescription() {
-        return "Computes a radial projection of an image stack. Starting point for the line is the center in any \n" +
-                "X/Y-plane of a given input image stack. " +
+        return "Computes a radial projection of an image stack. Starting point for the line is the given point in any \n" +
+                "X/Y-plane of a given input image stack. Furthermore, radius of the resulting projection must be given " +
+                "and scaling factors in X and Y in case pixels are not isotropic." +
                 "This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.";
     }
 
