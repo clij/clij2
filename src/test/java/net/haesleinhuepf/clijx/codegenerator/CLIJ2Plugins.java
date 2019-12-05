@@ -132,7 +132,9 @@ public interface CLIJ2Plugins {
             ClosingBox.class,
             ClosingDiamond.class,
             OpeningBox.class,
-            OpeningDiamond.class
+            OpeningDiamond.class,
+            MaximumXProjection.class,
+            MaximumYProjection.class
     };
 
     public String blockList = ";Kernels.absolute;";
