@@ -22,11 +22,14 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+float arg4 = 1.0;
+float arg5 = 2.0;
+int arg6 = 10;
 ```
 
 ```
 // Execute operation on GPU
-clijx.automaticThreshold(clij, arg1, arg2, arg3);
+clijx.automaticThreshold(clij, arg1, arg2, arg3, arg4, arg5, arg6);
 ```
 
 ```
@@ -72,6 +75,12 @@ arg2.close();
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/"><img src="images/language_java.png" height="20"/></a> [CreateObjectOutlinesDemo.java](https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/CreateObjectOutlinesDemo.java)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/javascript/"><img src="images/language_javascript.png" height="20"/></a> [automaticThreshold.js](https://github.com/clij/clij-docs/blob/master/src/main/javascript/automaticThreshold.js)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/beanshell/"><img src="images/language_beanshell.png" height="20"/></a> [automaticThreshold.bsh](https://github.com/clij/clij-docs/blob/master/src/main/beanshell/automaticThreshold.bsh)  
+<a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [automaticThreshold.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/automaticThreshold.m)  
+<a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [outline.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/outline.m)  
+<a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [segmentation.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/segmentation.m)  
+<a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [spotDetection3D.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/spotDetection3D.m)  
+<a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [statistics.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/statistics.m)  
+<a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [thresholding.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/thresholding.m)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

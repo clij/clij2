@@ -1,11 +1,11 @@
-## readRawImageFromDisc
+## maximumXProjection
 ![Image](images/mini_clijx_logo.png)
 
-Reads a raw file from disc and pushes it immediately to the GPU.
+Determines the maximum projection of an image along X.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_readRawImageFromDisc(Image destination, String filename, Number width, Number height, Number depth, Number bitsPerPixel);
+Ext.CLIJx_maximumXProjection(Image source, Image destination_max);
 ```
 
 
@@ -17,19 +17,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer source = clijx.push(sourceImagePlus);
+destination_max = clij.create(source);
 ```
 
 ```
 // Execute operation on GPU
-clijx.readRawImageFromDisc(clij, arg1, arg2);
+clijx.maximumXProjection(clij, source, destination_max);
 ```
 
 ```
 //show result
+destination_maxImagePlus = clij.pull(destination_max);
+destination_maxImagePlus.show();
 
 // cleanup memory on GPU
-arg1.close();
+source.close();
+destination_max.close();
 ```
 
 

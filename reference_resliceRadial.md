@@ -21,11 +21,16 @@ CLIJx clijx = CLIJx.getInstance();
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 float arg3 = 1.0;
+float arg4 = 2.0;
+float arg5 = 3.0;
+float arg6 = 4.0;
+float arg7 = 5.0;
+float arg8 = 6.0;
 ```
 
 ```
 // Execute operation on GPU
-clijx.resliceRadial(clij, arg1, arg2, arg3);
+clijx.resliceRadial(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 ```
 
 ```
@@ -40,6 +45,7 @@ arg2.close();
 
 
 ### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [halfCylinderProjection.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/halfCylinderProjection.py)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [interactiveCylinderProjection.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/interactiveCylinderProjection.py)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [interactiveSphereProjection.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/interactiveSphereProjection.py)  
 

@@ -47,6 +47,7 @@ arg2.close();
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [allocateBigImages.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/allocateBigImages.ijm)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [crop.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/crop.ijm)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [crop.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/crop.py)  
+<a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [crop.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/crop.m)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

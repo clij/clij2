@@ -152,7 +152,9 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maximumOfMaskedPixels">maximumOfMaskedPixels</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maximumSliceBySliceSphere">maximumSliceBySliceSphere'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maximumSphere">maximumSphere'</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_maximumXProjection">maximumXProjection</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maximumXYZProjection">maximumXYZProjection'</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_maximumYProjection">maximumYProjection</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maximumZProjection">maximumZProjection'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_meanBox">meanBox'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_meanClosestSpotDistances">meanClosestSpotDistances</a>
