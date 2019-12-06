@@ -134,7 +134,8 @@ public interface CLIJ2Plugins {
             OpeningBox.class,
             OpeningDiamond.class,
             MaximumXProjection.class,
-            MaximumYProjection.class
+            MaximumYProjection.class,
+            ProjectMaximumZBounded.class
     };
 
     public String blockList = ";Kernels.absolute;";
