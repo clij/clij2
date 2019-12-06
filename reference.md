@@ -209,6 +209,9 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_power">power'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_preloadFromDisc">preloadFromDisc</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_presign">presign</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_projectMaximumZBounded">projectMaximumZBounded</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_projectMeanZBounded">projectMeanZBounded</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_projectMinimumZBounded">projectMinimumZBounded</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_pullAsROI">pullAsROI</a>
 <a name="R"></a>
 

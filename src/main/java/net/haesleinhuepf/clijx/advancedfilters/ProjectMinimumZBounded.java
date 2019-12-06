@@ -16,30 +16,30 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  * Author: @haesleinhuepf
  * December 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_projectMaximumZBounded")
-public class ProjectMaximumZBounded extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_projectMinimumZBounded")
+public class ProjectMinimumZBounded extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = projectMaximumZBounded(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
+        boolean result = projectMinimumZBounded(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean projectMaximumZBounded(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst_max, Integer min_z, Integer max_z) {
-        assertDifferent(src, dst_max);
+    public static boolean projectMinimumZBounded(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst_min, Integer min_z, Integer max_z) {
+        assertDifferent(src, dst_min);
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
-        parameters.put("dst_max", dst_max);
+        parameters.put("dst_min", dst_min);
         parameters.put("min_z", min_z);
         parameters.put("max_z", max_z);
-        return clij.execute(ProjectMaximumZBounded.class, "project_maximum_z_bounded.cl", "project_maximum_z_bounded", parameters);
+        return clij.execute(ProjectMinimumZBounded.class, "project_minimum_z_bounded.cl", "project_minimum_z_bounded", parameters);
     }
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination_max, Number min_z, Number max_z";
+        return "Image source, Image destination_min, Number min_z, Number max_z";
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ProjectMaximumZBounded extends AbstractCLIJPlugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Determines the maximum projection of an image along Z within a given z range.";
+        return "Determines the minimum projection of an image along Z within a given z range.";
     }
 
     @Override

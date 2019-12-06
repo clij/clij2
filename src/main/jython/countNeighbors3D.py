@@ -19,15 +19,15 @@ IJ.run("Close All");
 # imp = IJ.openImage("C:/structure/data/Nantes_000646.tif");
 # imp = IJ.openImage("C:/structure/data/Riga_000512.tif");
 # imp = IJ.openImage("C:/structure/data/Pau_001130.tif");
-imp = IJ.openImage("C:/structure/data/Finsterwalde_001250.tif");
-
+# imp = IJ.openImage("C:/structure/data/Finsterwalde_001250.tif");
+imp = IJ.openImage("C:/structure/data/2018-05-23-16-18-13-89-Florence_multisample/processed/tif/000450.raw.tif");
 
 IJ.run(imp, "32-bit", "");
-# IJ.run(imp, "Rotate 90 Degrees Right", "");
+IJ.run(imp, "Rotate 90 Degrees Right", "");
 imp.show();
 
 # Init GPU
-clijx = CLIJx.getInstance();
+clijx = CLIJx.getInstance("1070");
 clijx.stopWatch("");
 
 # push data to GPU
@@ -41,8 +41,8 @@ masked = clijx.create(inputImage);
 clijx.stopWatch("alloc");
 
 # background / noise removal
-# clijx.op().differenceOfGaussian(inputImage, blurred, 3, 3, 0, 15, 15, 0);
-clijx.op().blur(inputImage, blurred, 3, 3, 0);
+clijx.op().differenceOfGaussian(inputImage, blurred, 3, 3, 0, 15, 15, 0);
+# clijx.op().blur(inputImage, blurred, 3, 3, 0);
 
 clijx.stopWatch("dog");
 #clijx.show(blurred, "blurred");

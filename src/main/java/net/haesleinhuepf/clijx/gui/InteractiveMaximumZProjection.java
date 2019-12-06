@@ -4,12 +4,15 @@ import ij.IJ;
 import ij.ImageListener;
 import ij.ImagePlus;
 import ij.WindowManager;
+import ij.gui.GenericDialog;
 import ij.measure.Calibration;
 import ij.plugin.filter.PlugInFilter;
 import ij.process.ImageProcessor;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.imglib2.realtransform.AffineTransform3D;
+import sun.net.www.content.text.Generic;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -46,6 +49,8 @@ public class InteractiveMaximumZProjection implements PlugInFilter, ImageListene
     float scale1Y = 1.0f;
     float scale1Z = 1.0f;
 
+    String projection = "Max";
+
     @Override
     public int setup(String arg, ImagePlus imp) {
         return PlugInFilter.DOES_ALL;
@@ -58,10 +63,20 @@ public class InteractiveMaximumZProjection implements PlugInFilter, ImageListene
             return;
         }
 
+        GenericDialog gd = new GenericDialog("Interactive Z Projection");
+        gd.addNumericField("Zoom (the smaller, the faster)", zoom, 2);
+        gd.addChoice("Projection", new String[]{"Max", "Min", "Mean"}, projection);
+        gd.showDialog();
+        if (gd.wasCanceled()) {
+            return;
+        }
+        zoom = gd.getNextNumber();
+        projection = gd.getNextChoice();
+
         Calibration calib = imp.getCalibration();
-        scale1X = (float) (calib.pixelWidth / calib.pixelDepth * zoom);
-        scale1Y = (float) (calib.pixelHeight / calib.pixelDepth * zoom);
-        scale1Z = (float) (1.0 * zoom);
+        scale1X = (float) (calib.pixelWidth * zoom);
+        scale1Y = (float) (calib.pixelHeight * zoom);
+        scale1Z = (float) (calib.pixelDepth * zoom);
 
         clijx = CLIJx.getInstance();
         my_source = imp;
@@ -71,7 +86,7 @@ public class InteractiveMaximumZProjection implements PlugInFilter, ImageListene
                 (long) (myBuffer.getWidth() * scale1X),
                 (long) (myBuffer.getHeight() * scale1Y),
                 (long) (myBuffer.getDepth() * scale1Z)}, myBuffer.getNativeType());
-        myMaxProjection = clijx.create(new long[]{transformed.getWidth(), transformed.getHeight()}, myBuffer.getNativeType());
+        myMaxProjection = clijx.create(new long[]{transformed.getWidth(), transformed.getHeight()}, transformed.getNativeType());
         refresh();
         ImagePlus.addImageListener(this);
     }
@@ -87,17 +102,24 @@ public class InteractiveMaximumZProjection implements PlugInFilter, ImageListene
 
                 if (old_angleX != angleX || old_angleY != angleY) {
                     AffineTransform3D at = new AffineTransform3D();
-                    at.translate(-transformed.getWidth() / 2, -transformed.getHeight() / 2, 0);
                     at.scale(scale1X, scale1Y, scale1Z);
+                    at.translate(-transformed.getWidth() / 2, -transformed.getHeight() / 2, 0);
                     at.rotate(0, angleX / 180.0 * Math.PI);
                     at.rotate(1, angleY / 180.0 * Math.PI);
                     at.translate(transformed.getWidth() / 2, transformed.getHeight() / 2, 0);
 
                     //# Execute operation on GPU
                     clijx.affineTransform3D(myBuffer, transformed, at);
+
                 }
 
-                clijx.projectMaximumZBounded(transformed, myMaxProjection, min_z, max_z);
+                if (projection.compareTo("Max") == 0) {
+                    clijx.projectMaximumZBounded(transformed, myMaxProjection, min_z, max_z);
+                } else if (projection.compareTo("Min") == 0) {
+                    clijx.projectMinimumZBounded(transformed, myMaxProjection, min_z, max_z);
+                } else if (projection.compareTo("Mean") == 0) {
+                    clijx.projectMeanZBounded(transformed, myMaxProjection, min_z, max_z);
+                }
                 clijx.showGrey(myMaxProjection, window_title);
 
                 if (my_display == null) {
@@ -128,9 +150,10 @@ public class InteractiveMaximumZProjection implements PlugInFilter, ImageListene
                             mouseStartY = e.getY();
                         }
                     });
+                }
 
-
-
+                if (projection.compareTo("Mean") != 0) {
+                    my_display.setDisplayRange(my_source.getDisplayRangeMin(), my_source.getDisplayRangeMax());
                 }
                 old_max_z = max_z;
                 old_angleY = angleY;
