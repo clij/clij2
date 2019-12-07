@@ -76,7 +76,7 @@ public class ExcludeLabelsOnEdges extends AbstractCLIJPlugin implements CLIJMacr
         label_index_map.readFrom(FloatBuffer.wrap(label_indices), true);
 
         CLIJx clijx = CLIJx.getInstance();
-        ReplaceIntensities.replaceIntensities(clijx, label_map_in, label_index_map, label_map_out);
+        clijx.replaceIntensities(label_map_in, label_index_map, label_map_out);
 
         return true;
     }
