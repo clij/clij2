@@ -23,11 +23,12 @@ ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 int arg3 = 10;
 int arg4 = 20;
+int arg5 = 30;
 ```
 
 ```
 // Execute operation on GPU
-clijx.crop(clij, arg1, arg2, arg3, arg4);
+clijx.crop(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```

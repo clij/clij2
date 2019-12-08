@@ -1,11 +1,15 @@
 ## jaccardIndex
 ![Image](images/mini_clijx_logo.png)
 
-null
+Determines the overlap of two binary images using the Jaccard index.
+A value of 0 suggests no overlap, 1 means perfect overlap.
+The resulting Jaccard index is saved to the results table in the 'Jaccard_Index' column.
+Note that the Sorensen-Dice coefficient can be calculated from the Jaccard index j using this formula:
+<pre>s = f(j) = 2 j / (j + 1)</pre>
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_jaccardIndex(null);
+Ext.CLIJx_jaccardIndex(Image source1, Image source2);
 ```
 
 
@@ -17,13 +21,13 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer source1 = clijx.push(source1ImagePlus);
+ClearCLBuffer source2 = clijx.push(source2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double resultJaccardIndex = clijx.jaccardIndex(clij, arg1, arg2);
+double resultJaccardIndex = clijx.jaccardIndex(clij, source1, source2);
 ```
 
 ```
@@ -31,9 +35,15 @@ double resultJaccardIndex = clijx.jaccardIndex(clij, arg1, arg2);
 System.out.println(resultJaccardIndex);
 
 // cleanup memory on GPU
-arg1.close();
-arg2.close();
+source1.close();
+source2.close();
 ```
+
+
+
+
+### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [jaccardIndex.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/jaccardIndex.py)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)
