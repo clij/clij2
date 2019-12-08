@@ -53,7 +53,7 @@ public class DrawSphere extends AbstractCLIJPlugin implements CLIJMacroPlugin, C
         if(output.getDimension() > 2) {
             parameters.put("cz", z);
             parameters.put("rz", rz);
-            parameters.put("rzsq", Math.pow(rz, 2));
+            parameters.put("rzsq", new Float(Math.pow(rz, 2)));
         }
         parameters.put("dst", output);
 
