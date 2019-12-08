@@ -38,7 +38,7 @@ public class SorensenDiceJaccardIndexTest {
         ClearCLBuffer clBinary1 = clij.push(binary1);
         ClearCLBuffer clBinary2 = clij.push(binary2);
 
-        double jaccardIndex = SorensenDiceJaccardIndex.jaccardIndex(clij, clBinary1, clBinary2);
+        double jaccardIndex = JaccardIndex.jaccardIndex(clij, clBinary1, clBinary2);
         assertEquals(0.5, jaccardIndex, tolerance);
 
         clBinary1.close();
