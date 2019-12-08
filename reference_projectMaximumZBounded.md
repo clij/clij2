@@ -1,12 +1,11 @@
-## meanSphere
-![Image](images/mini_clij1_logo.png)
+## projectMaximumZBounded
+![Image](images/mini_clijx_logo.png)
 
-Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
-its half-width and half-height (radius).
+Determines the maximum projection of an image along Z within a given z range.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_meanSphere(Image source, Image destination, Number radiusX, Number radiusY);
+Ext.CLIJx_projectMaximumZBounded(Image source, Image destination_max, Number min_z, Number max_z);
 ```
 
 
@@ -22,12 +21,11 @@ ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 int arg3 = 10;
 int arg4 = 20;
-int arg5 = 30;
 ```
 
 ```
 // Execute operation on GPU
-clijx.meanSphere(clij, arg1, arg2, arg3, arg4, arg5);
+clijx.projectMaximumZBounded(clij, arg1, arg2, arg3, arg4);
 ```
 
 ```

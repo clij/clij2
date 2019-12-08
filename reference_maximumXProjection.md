@@ -37,12 +37,6 @@ destination_max.close();
 ```
 
 
-
-
-### Example scripts
-<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [halfCylinderProjection.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/halfCylinderProjection.py)  
-
-
 [Back to CLIJ documentation](https://clij.github.io/)
 
 [Imprint](https://clij.github.io/imprint)
