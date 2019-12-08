@@ -14,7 +14,7 @@ import org.scijava.plugin.Plugin;
  * Author: @haesleinhuepf
  * July 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_sorensenDiceCoeffcient")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_sorensenDiceCoefficient")
 public class SorensenDiceCoefficent extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
