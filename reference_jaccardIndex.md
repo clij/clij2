@@ -43,6 +43,7 @@ source2.close();
 
 
 ### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [measureOverlap.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/measureOverlap.ijm)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [jaccardIndex.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/jaccardIndex.py)  
 
 
