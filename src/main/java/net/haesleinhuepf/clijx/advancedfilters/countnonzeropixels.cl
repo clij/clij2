@@ -10,9 +10,11 @@ __kernel void count_non_zero_project_3d_2d(
   DTYPE_OUT count = 0;
   for(int z = 0; z < GET_IMAGE_IN_DEPTH(src); z++)
   {
-    if (fabs(((float) READ_IMAGE_3D(src,sampler,(int4)(x,y,z,0)).x)) > tolerance) {
+    int4 pos = (int4){x,y,z,0};
+    float value = READ_IMAGE_3D(src,sampler,pos).x;
+    if (value > tolerance || value < -tolerance) {
         count = count + 1;
     }
   }
-  WRITE_IMAGE_2D(dst,(int2)(x,y),count);
+  WRITE_IMAGE_2D(dst,(int2)(x,y), count);
 }
