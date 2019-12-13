@@ -17,10 +17,12 @@ import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
 import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
 import net.haesleinhuepf.clijx.registration.TranslationRegistration;
 import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
+import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
 
 public interface CLIJ2Plugins {
     public Class[] classes = {
             Kernels.class,
+            CLIJxAPIConsistencyWorkaround.class,
             BinaryUnion.class,
             BinaryIntersection.class,
             ConnectedComponentsLabeling.class,
@@ -138,7 +140,9 @@ public interface CLIJ2Plugins {
             MaximumYProjection.class,
             ProjectMaximumZBounded.class,
             ProjectMinimumZBounded.class,
-            ProjectMeanZBounded.class
+            ProjectMeanZBounded.class,
+            NonzeroMaximumBox.class,
+            NonzeroMinimumBox.class
     };
 
     public String blockList = ";Kernels.absolute;";

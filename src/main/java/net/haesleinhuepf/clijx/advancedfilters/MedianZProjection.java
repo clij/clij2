@@ -30,15 +30,15 @@ public class MedianZProjection extends AbstractCLIJPlugin implements CLIJMacroPl
         }
     }
 
-    public boolean medianZProjection(CLIJ clij, ClearCLImage input, ClearCLImage output) {
+    public static boolean medianZProjection(CLIJ clij, ClearCLImage input, ClearCLImage output) {
         return medianZProjection_internal(clij, input, output);
     }
 
-    public boolean medianZProjection(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
+    public static boolean medianZProjection(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
         return medianZProjection_internal(clij, input, output);
     }
 
-    private boolean medianZProjection_internal(CLIJ clij, Object input, Object output) {
+    private static boolean medianZProjection_internal(CLIJ clij, Object input, Object output) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", input);

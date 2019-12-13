@@ -30,15 +30,15 @@ public class StandardDeviationZProjection extends AbstractCLIJPlugin implements 
         }
     }
 
-    public boolean standardDeviationZProjection(CLIJ clij, ClearCLImage input, ClearCLImage output) {
+    public static boolean standardDeviationZProjection(CLIJ clij, ClearCLImage input, ClearCLImage output) {
         return standardDeviationZProjection_internal(clij, input, output);
     }
 
-    public boolean standardDeviationZProjection(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
+    public static boolean standardDeviationZProjection(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
         return standardDeviationZProjection_internal(clij, input, output);
     }
 
-    private boolean standardDeviationZProjection_internal(CLIJ clij, Object input, Object output) {
+    private static boolean standardDeviationZProjection_internal(CLIJ clij, Object input, Object output) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", input);

@@ -123,7 +123,7 @@ public class OpGenerator {
     static boolean blockListOk(Class klass, Method method) {
         String searchString = klass.getSimpleName() + "." + method.getName();
         if (CLIJ2Plugins.blockList.contains(";" + searchString + ";")) {
-            System.out.println("BLOCKING " + searchString);
+            //System.out.println("BLOCKING " + searchString);
             return false;
         }
         return true;
