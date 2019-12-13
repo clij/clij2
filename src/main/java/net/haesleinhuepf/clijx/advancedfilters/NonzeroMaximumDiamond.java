@@ -33,6 +33,11 @@ public class NonzeroMaximumDiamond extends AbstractCLIJPlugin implements CLIJMac
         return result;
     }
 
+    public static boolean nonzeroMaximumDiamond(CLIJx clijx, ClearCLImageInterface src, ClearCLBuffer flag, ClearCLImageInterface dst) {
+        ClearCLKernel kernel = nonzeroMaximumDiamond(clijx, src, flag, dst, null);
+        kernel.close();
+        return true;
+    }
 
     public static boolean nonzeroMaximumDiamond(CLIJ clij, ClearCLImageInterface src, ClearCLImageInterface flag, ClearCLImageInterface dst) {
         HashMap<String, Object> parameters = new HashMap<>();

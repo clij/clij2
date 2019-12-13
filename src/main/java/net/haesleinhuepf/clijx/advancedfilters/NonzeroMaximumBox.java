@@ -32,6 +32,12 @@ public class NonzeroMaximumBox extends AbstractCLIJxPlugin implements CLIJMacroP
         return true;
     }
 
+    public static boolean nonzeroMaximumBox(CLIJx clijx, ClearCLImageInterface src, ClearCLBuffer flag, ClearCLImageInterface dst) {
+        ClearCLKernel kernel = nonzeroMaximumBox(clijx, src, flag, dst, null);
+        kernel.close();
+        return true;
+    }
+
     public static ClearCLKernel nonzeroMaximumBox(CLIJx clijx, ClearCLImageInterface src, ClearCLBuffer flag, ClearCLImageInterface dst, ClearCLKernel kernel) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);

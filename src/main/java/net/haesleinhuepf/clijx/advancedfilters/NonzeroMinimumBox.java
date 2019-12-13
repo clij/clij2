@@ -32,6 +32,13 @@ public class NonzeroMinimumBox extends AbstractCLIJxPlugin implements CLIJMacroP
         return true;
     }
 
+    public static boolean nonzeroMinimumBox(CLIJx clijx, ClearCLImageInterface src, ClearCLBuffer flag, ClearCLImageInterface dst) {
+        ClearCLKernel kernel = nonzeroMinimumBox(clijx, src, flag, dst, null);
+        kernel.close();
+        return true;
+    }
+
+
     public static ClearCLKernel nonzeroMinimumBox(CLIJx clijx, ClearCLImageInterface src, ClearCLBuffer flag, ClearCLImageInterface dst, ClearCLKernel kernel) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);

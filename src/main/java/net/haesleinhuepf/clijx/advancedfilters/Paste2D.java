@@ -26,6 +26,10 @@ public class Paste2D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
         return result;
     }
 
+    public static boolean paste2D(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Integer destination_x, Integer destination_y) {
+        return paste(clij, src, dst, destination_x, destination_y);
+    }
+
     public static boolean paste(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Integer destination_x, Integer destination_y) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);

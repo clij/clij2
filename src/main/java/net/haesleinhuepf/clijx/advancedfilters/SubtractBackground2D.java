@@ -9,6 +9,8 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import org.scijava.plugin.Plugin;
 
+import java.nio.FloatBuffer;
+
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_subtractBackground2D")
 public class SubtractBackground2D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
@@ -23,6 +25,10 @@ public class SubtractBackground2D extends AbstractCLIJPlugin implements CLIJMacr
         boolean result = subtractBackground(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asFloat(args[2]), asFloat(args[3]));
         releaseBuffers(args);
         return result;
+    }
+
+    public static boolean subtractBackground2D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float sigmaX, Float sigmaY) {
+        return subtractBackground(clij, input, output, sigmaX, sigmaY);
     }
 
     public static boolean subtractBackground(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float sigmaX, Float sigmaY) {

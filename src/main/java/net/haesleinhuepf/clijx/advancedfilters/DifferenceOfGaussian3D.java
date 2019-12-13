@@ -26,6 +26,10 @@ public class DifferenceOfGaussian3D extends AbstractCLIJPlugin implements CLIJMa
         return result;
     }
 
+    public static boolean differenceOfGaussian3D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float sigma1x, Float sigma1y, Float sigma1z, Float sigma2x, Float sigma2y, Float sigma2z) {
+        return differenceOfGaussian(clij, input, output,sigma1x,sigma1y,sigma1z,sigma2x,sigma2y,sigma2z);
+    }
+
     public static boolean differenceOfGaussian(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float sigma1x, Float sigma1y, Float sigma1z, Float sigma2x, Float sigma2y, Float sigma2z) {
 
         ClearCLBuffer temp1 = clij.create(input);
