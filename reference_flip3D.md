@@ -1,11 +1,11 @@
-## nonzeroMinimumDiamond
+## flip3D
 ![Image](images/mini_clijx_logo.png)
 
-Apply a minimum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
+Flips an image in X, Y and/or Z direction depending on boolean flags.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_nonzeroMinimumDiamond(Image input, Image destination);
+Ext.CLIJx_flip3D(Image source, Image destination, Boolean flipX, Boolean flipY, Boolean flipZ);
 ```
 
 
@@ -19,12 +19,14 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
+boolean arg3 = true;
+boolean arg4 = false;
+boolean arg5 = false;
 ```
 
 ```
 // Execute operation on GPU
-clijx.nonzeroMinimumDiamond(clij, arg1, arg2, arg3);
+clijx.flip3D(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```
@@ -33,8 +35,13 @@ clijx.nonzeroMinimumDiamond(clij, arg1, arg2, arg3);
 // cleanup memory on GPU
 arg1.close();
 arg2.close();
-arg3.close();
 ```
+
+
+
+
+### Example scripts
+<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [flip.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/flip.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

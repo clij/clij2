@@ -1,11 +1,11 @@
-## nonzeroMinimumDiamond
+## scale
 ![Image](images/mini_clijx_logo.png)
 
-Apply a minimum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
+DEPRECATED: CLIJ scale() is <b>deprecated</b>. Use scale2D or scale3D instead!
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_nonzeroMinimumDiamond(Image input, Image destination);
+Ext.CLIJx_scale(Image source, Image destination, Number scaling_factor, Boolean scale_to_center);
 ```
 
 
@@ -19,12 +19,13 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
+float arg3 = 1.0;
+float arg4 = 2.0;
 ```
 
 ```
 // Execute operation on GPU
-clijx.nonzeroMinimumDiamond(clij, arg1, arg2, arg3);
+clijx.scale(clij, arg1, arg2, arg3, arg4);
 ```
 
 ```
@@ -33,8 +34,13 @@ clijx.nonzeroMinimumDiamond(clij, arg1, arg2, arg3);
 // cleanup memory on GPU
 arg1.close();
 arg2.close();
-arg3.close();
 ```
+
+
+
+
+### Example scripts
+<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [scaleFree.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/scaleFree.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

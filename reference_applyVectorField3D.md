@@ -1,11 +1,11 @@
-## nonzeroMinimumDiamond
+## applyVectorField3D
 ![Image](images/mini_clijx_logo.png)
 
-Apply a minimum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
+Image source, Image vectorX, Image vectorY, Image vectorZ, Image destination
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_nonzeroMinimumDiamond(Image input, Image destination);
+Ext.CLIJx_applyVectorField3D(Deforms an image stack according to distances provided in the given vector image stacks. It is recommended to use 32-bit image stacks for input, output and vector image stacks. );
 ```
 
 
@@ -20,11 +20,13 @@ CLIJx clijx = CLIJx.getInstance();
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
+ClearCLBuffer arg4 = clijx.push(arg4ImagePlus);
+ClearCLBuffer arg5 = clijx.push(arg5ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.nonzeroMinimumDiamond(clij, arg1, arg2, arg3);
+clijx.applyVectorField3D(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```
@@ -34,6 +36,8 @@ clijx.nonzeroMinimumDiamond(clij, arg1, arg2, arg3);
 arg1.close();
 arg2.close();
 arg3.close();
+arg4.close();
+arg5.close();
 ```
 
 

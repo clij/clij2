@@ -1,12 +1,11 @@
-## minimumSphere
-![Image](images/mini_clij1_logo.png)
+## countNonZeroVoxels3DSphere
+![Image](images/mini_clijx_logo.png)
 
-Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
-its half-width and half-height (radius).
+Counts non-zero voxels in a sphere around every voxel.Put the number in the result image.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_minimumSphere(Image source, Image destination, Number radiusX, Number radiusY);
+Ext.CLIJx_countNonZeroVoxels3DSphere(Image source, Image destination, Number radiusX, Number radiusY, Number radiusZ);
 ```
 
 
@@ -27,7 +26,7 @@ int arg5 = 30;
 
 ```
 // Execute operation on GPU
-clijx.minimumSphere(clij, arg1, arg2, arg3, arg4, arg5);
+clijx.countNonZeroVoxels3DSphere(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```

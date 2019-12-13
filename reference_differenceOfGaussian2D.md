@@ -1,11 +1,13 @@
-## nonzeroMinimumDiamond
+## differenceOfGaussian2D
 ![Image](images/mini_clijx_logo.png)
 
-Apply a minimum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
+Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
+
+It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_nonzeroMinimumDiamond(Image input, Image destination);
+Ext.CLIJx_differenceOfGaussian2D(Image input, Image destination, Number sigma1x, Number sigma1y, Number sigma2x, Number sigma2y);
 ```
 
 
@@ -19,12 +21,15 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
+float arg3 = 1.0;
+float arg4 = 2.0;
+float arg5 = 3.0;
+float arg6 = 4.0;
 ```
 
 ```
 // Execute operation on GPU
-clijx.nonzeroMinimumDiamond(clij, arg1, arg2, arg3);
+clijx.differenceOfGaussian2D(clij, arg1, arg2, arg3, arg4, arg5, arg6);
 ```
 
 ```
@@ -33,7 +38,6 @@ clijx.nonzeroMinimumDiamond(clij, arg1, arg2, arg3);
 // cleanup memory on GPU
 arg1.close();
 arg2.close();
-arg3.close();
 ```
 
 

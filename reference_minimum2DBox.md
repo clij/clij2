@@ -1,12 +1,12 @@
-## minimumSphere
-![Image](images/mini_clij1_logo.png)
+## minimum2DBox
+![Image](images/mini_clijx_logo.png)
 
 Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
 its half-width and half-height (radius).
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_minimumSphere(Image source, Image destination, Number radiusX, Number radiusY);
+Ext.CLIJx_minimum2DBox(Image source, Image destination, Number radiusX, Number radiusY);
 ```
 
 
@@ -22,12 +22,11 @@ ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 int arg3 = 10;
 int arg4 = 20;
-int arg5 = 30;
 ```
 
 ```
 // Execute operation on GPU
-clijx.minimumSphere(clij, arg1, arg2, arg3, arg4, arg5);
+clijx.minimum2DBox(clij, arg1, arg2, arg3, arg4);
 ```
 
 ```

@@ -1,11 +1,11 @@
-## applyVectorfield
-![Image](images/mini_clij1_logo.png)
+## applyVectorField2D
+![Image](images/mini_clijx_logo.png)
 
 Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_applyVectorfield(Image source, Image vectorX, Image vectorY, Image destination);
+Ext.CLIJx_applyVectorField2D(Image source, Image vectorX, Image vectorY, Image destination);
 ```
 
 
@@ -25,7 +25,7 @@ destination = clij.create(source);
 
 ```
 // Execute operation on GPU
-clijx.applyVectorfield(clij, source, vectorX, vectorY, destination);
+clijx.applyVectorField2D(clij, source, vectorX, vectorY, destination);
 ```
 
 ```
@@ -44,8 +44,9 @@ destination.close();
 
 
 ### Example scripts
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [applyVectorField.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/applyVectorField.py)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/"><img src="images/language_java.png" height="20"/></a> [ApplyVectorFieldDemo.java](https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/ApplyVectorFieldDemo.java)  
+<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [applyVectorField.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/applyVectorField.ijm)  
+<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [warpCat.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/warpCat.ijm)  
+<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [warpCat_RGB.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/warpCat_RGB.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

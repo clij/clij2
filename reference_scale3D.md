@@ -1,12 +1,11 @@
-## minimumSphere
-![Image](images/mini_clij1_logo.png)
+## scale3D
+![Image](images/mini_clijx_logo.png)
 
-Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
-its half-width and half-height (radius).
+Scales an image with a given factor.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_minimumSphere(Image source, Image destination, Number radiusX, Number radiusY);
+Ext.CLIJx_scale3D(Image source, Image destination, Number scaling_factor, Boolean scale_to_center);
 ```
 
 
@@ -20,14 +19,14 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-int arg3 = 10;
-int arg4 = 20;
-int arg5 = 30;
+float arg3 = 1.0;
+float arg4 = 2.0;
+float arg5 = 3.0;
 ```
 
 ```
 // Execute operation on GPU
-clijx.minimumSphere(clij, arg1, arg2, arg3, arg4, arg5);
+clijx.scale3D(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```

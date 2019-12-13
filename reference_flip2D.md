@@ -1,12 +1,11 @@
-## minimumSphere
-![Image](images/mini_clij1_logo.png)
+## flip2D
+![Image](images/mini_clijx_logo.png)
 
-Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
-its half-width and half-height (radius).
+Flips an image in X and/or Y direction depending on boolean flags.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_minimumSphere(Image source, Image destination, Number radiusX, Number radiusY);
+Ext.CLIJx_flip2D(Image source, Image destination, Boolean flipX, Boolean flipY);
 ```
 
 
@@ -20,14 +19,13 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-int arg3 = 10;
-int arg4 = 20;
-int arg5 = 30;
+boolean arg3 = true;
+boolean arg4 = false;
 ```
 
 ```
 // Execute operation on GPU
-clijx.minimumSphere(clij, arg1, arg2, arg3, arg4, arg5);
+clijx.flip2D(clij, arg1, arg2, arg3, arg4);
 ```
 
 ```

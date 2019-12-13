@@ -1,12 +1,11 @@
-## minimumSphere
-![Image](images/mini_clij1_logo.png)
+## paste3D
+![Image](images/mini_clijx_logo.png)
 
-Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
-its half-width and half-height (radius).
+Pastes an image into another image at a given position.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_minimumSphere(Image source, Image destination, Number radiusX, Number radiusY);
+Ext.CLIJx_paste3D(Image source, Image destination, Number destinationX, Number destinationY, Number destinationZ);
 ```
 
 
@@ -27,7 +26,7 @@ int arg5 = 30;
 
 ```
 // Execute operation on GPU
-clijx.minimumSphere(clij, arg1, arg2, arg3, arg4, arg5);
+clijx.paste3D(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```

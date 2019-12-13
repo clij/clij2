@@ -22,14 +22,11 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-float arg4 = 1.0;
-float arg5 = 2.0;
-int arg6 = 10;
 ```
 
 ```
 // Execute operation on GPU
-clijx.automaticThreshold(clij, arg1, arg2, arg3, arg4, arg5, arg6);
+clijx.automaticThreshold(clij, arg1, arg2, arg3);
 ```
 
 ```
@@ -66,7 +63,6 @@ arg2.close();
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/groovy/"><img src="images/language_groovy.png" height="20"/></a> [automaticThreshold.groovy](https://github.com/clij/clij-docs/blob/master/src/main/groovy/automaticThreshold.groovy)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [automaticThreshold.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/automaticThreshold.py)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [statistics.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/statistics.py)  
-<a href="https://github.com/clij/clijpy/blob/master/python/"><img src="images/language_python.png" height="20"/></a> [benchmark_clijx_pull.ipynb](https://github.com/clij/clijpy/blob/master/python/benchmark_clijx_pull.ipynb)  
 <a href="https://github.com/clij/clijpy/blob/master/python/"><img src="images/language_python.png" height="20"/></a> [clijpy_demo.ipynb](https://github.com/clij/clijpy/blob/master/python/clijpy_demo.ipynb)  
 <a href="https://github.com/clij/clijpy/blob/master/python/"><img src="images/language_python.png" height="20"/></a> [spot_detection.py](https://github.com/clij/clijpy/blob/master/python/spot_detection.py)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/"><img src="images/language_java.png" height="20"/></a> [AutoThresholdDemo.java](https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/AutoThresholdDemo.java)  

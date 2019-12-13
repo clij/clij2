@@ -1,12 +1,14 @@
-## minimumSphere
-![Image](images/mini_clij1_logo.png)
+## median3DBox
+![Image](images/mini_clijx_logo.png)
 
-Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
-its half-width and half-height (radius).
+Computes the local median of a pixels cuboid neighborhood. The cuboid size is specified by 
+its half-width, half-height and half-depth (radius).
+
+For technical reasons, the volume of the cuboid must contain less than 1000 voxels.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_minimumSphere(Image source, Image destination, Number radiusX, Number radiusY);
+Ext.CLIJx_median3DBox(Image source, Image destination, Number radiusX, Number radiusY, Number radiusZ);
 ```
 
 
@@ -27,7 +29,7 @@ int arg5 = 30;
 
 ```
 // Execute operation on GPU
-clijx.minimumSphere(clij, arg1, arg2, arg3, arg4, arg5);
+clijx.median3DBox(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```

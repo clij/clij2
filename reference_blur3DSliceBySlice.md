@@ -1,12 +1,13 @@
-## minimumSphere
-![Image](images/mini_clij1_logo.png)
+## blur3DSliceBySlice
+![Image](images/mini_clijx_logo.png)
 
-Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
-its half-width and half-height (radius).
+Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+
+The Gaussian blur is applied slice by slice in 2D.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_minimumSphere(Image source, Image destination, Number radiusX, Number radiusY);
+Ext.CLIJx_blur3DSliceBySlice(Image source, Image destination, Number sigmaX, Number sigmaY);
 ```
 
 
@@ -20,14 +21,13 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-int arg3 = 10;
-int arg4 = 20;
-int arg5 = 30;
+float arg3 = 1.0;
+float arg4 = 2.0;
 ```
 
 ```
 // Execute operation on GPU
-clijx.minimumSphere(clij, arg1, arg2, arg3, arg4, arg5);
+clijx.blur3DSliceBySlice(clij, arg1, arg2, arg3, arg4);
 ```
 
 ```
