@@ -86,6 +86,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_dilateSphereSliceBySlice">dilateSphereSliceBySlice'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_dilateSphere">dilateSphere'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_distanceMap">distanceMap</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_distanceMatrixToMesh">distanceMatrixToMesh</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_divideImages">divideImages'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_downsample2D">downsample2D</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_downsample3D">downsample3D</a>
@@ -184,6 +185,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_meanClosestSpotDistances">meanClosestSpotDistances</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_meanIJ">meanIJ'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_meanOfMaskedPixels">meanOfMaskedPixels</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_meanOfPixelsAboveThreshold">meanOfPixelsAboveThreshold</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_meanSliceBySliceSphere">meanSliceBySliceSphere'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_meanSphere">meanSphere'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_meanSquaredError">meanSquaredError</a>
@@ -233,6 +235,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_onlyzeroOverwriteMaximumDiamond">onlyzeroOverwriteMaximumDiamond</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_openingBox">openingBox</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_openingDiamond">openingDiamond</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_organiseWindows">organiseWindows</a>
 <a name="P"></a>
 
 ## P
@@ -248,6 +251,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_presign">presign</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_projectMaximumZBounded">projectMaximumZBounded</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_projectMeanZBounded">projectMeanZBounded</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_projectMinimumThresholdedZBounded">projectMinimumThresholdedZBounded</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_projectMinimumZBounded">projectMinimumZBounded</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_pullAsROI">pullAsROI</a>
 <a name="R"></a>

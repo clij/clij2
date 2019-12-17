@@ -2,6 +2,7 @@ package net.haesleinhuepf.clijx.codegenerator;
 
 import net.haesleinhuepf.clijx.advancedfilters.*;
 import net.haesleinhuepf.clijx.advancedmath.*;
+import net.haesleinhuepf.clijx.gui.OrganiseWindows;
 import net.haesleinhuepf.clijx.io.PreloadFromDisc;
 import net.haesleinhuepf.clijx.io.ReadImageFromDisc;
 import net.haesleinhuepf.clijx.io.ReadRawImageFromDisc;
@@ -142,7 +143,11 @@ public interface CLIJ2Plugins {
             ProjectMinimumZBounded.class,
             ProjectMeanZBounded.class,
             NonzeroMaximumBox.class,
-            NonzeroMinimumBox.class
+            NonzeroMinimumBox.class,
+            ProjectMinimumThresholdedZBounded.class,
+            MeanOfPixelsAboveThreshold.class,
+            OrganiseWindows.class,
+            DistanceMatrixToMesh.class
     };
 
     public String blockList = ";Kernels.absolute;";

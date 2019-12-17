@@ -1,12 +1,11 @@
-## meanSphere
-![Image](images/mini_clij1_logo.png)
+## meanOfPixelsAboveThreshold
+![Image](images/mini_clijx_logo.png)
 
-Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
-its half-width and half-height (radius).
+Determines the mean intensity in an image, but only in pixels which are above a given threshold.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_meanSphere(Image source, Image destination, Number radiusX, Number radiusY);
+Ext.CLIJx_meanOfPixelsAboveThreshold(Image source, Number threshold);
 ```
 
 
@@ -19,23 +18,20 @@ CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-int arg3 = 10;
-int arg4 = 20;
-int arg5 = 30;
+float arg2 = 1.0;
 ```
 
 ```
 // Execute operation on GPU
-clijx.meanSphere(clij, arg1, arg2, arg3, arg4, arg5);
+double resultMeanOfPixelsAboveThreshold = clijx.meanOfPixelsAboveThreshold(clij, arg1, arg2);
 ```
 
 ```
 //show result
+System.out.println(resultMeanOfPixelsAboveThreshold);
 
 // cleanup memory on GPU
 arg1.close();
-arg2.close();
 ```
 
 
