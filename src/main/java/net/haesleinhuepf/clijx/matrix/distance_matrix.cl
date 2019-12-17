@@ -17,10 +17,10 @@ __kernel void generate_distance_matrix(DTYPE_IMAGE_OUT_2D dst_matrix, DTYPE_IMAG
       float sum = 0;
       for (int i = 0; i < n_dimensions; i ++) {
           int2 pos = (int2){j, i};
-          sum = sum + pow(positions[i] - READ_IMAGE_2D(src_point_list2, sampler, pos).x, 2);
+          sum = sum + pow(positions[i] - (float)READ_IMAGE_2D(src_point_list2, sampler, pos).x, (float)2);
       }
       float out = sqrt(sum);
-      int2 pos = (int2){get_global_id(0), j};
+      int2 pos = (int2){get_global_id(0)+1, j+1};
       WRITE_IMAGE_2D(dst_matrix, pos, CONVERT_DTYPE_OUT(out));
   }
 }
