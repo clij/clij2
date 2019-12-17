@@ -44,7 +44,7 @@ public class Absolute extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CL
             throw new IllegalArgumentException("Error: number of dimensions don't match! (addImageAndScalar)");
         }
 
-        clijx.execute(Kernels.class, "absolute_" + src.getDimension() + "d_x.cl", "absolute_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(Absolute.class, "absolute_" + src.getDimension() + "d_x.cl", "absolute_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 
