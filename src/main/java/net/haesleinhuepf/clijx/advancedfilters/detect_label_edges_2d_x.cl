@@ -32,6 +32,6 @@ __kernel void detect_label_edges_diamond_2d
     }
   }
 
-  WRITE_dst_IMAGE (dst_edge_image, pos, CONVERT_dst_edge_image_PIXEL_TYPE(valueToWrite));
+  WRITE_dst_edge_image_IMAGE (dst_edge_image, pos, CONVERT_dst_edge_image_PIXEL_TYPE(valueToWrite));
 }
 
