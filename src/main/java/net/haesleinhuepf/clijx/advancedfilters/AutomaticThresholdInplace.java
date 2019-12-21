@@ -1,6 +1,7 @@
 package net.haesleinhuepf.clijx.advancedfilters;
 
 import ij.process.AutoThresholder;
+import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
@@ -25,9 +26,15 @@ public class AutomaticThresholdInplace extends AbstractCLIJPlugin implements CLI
         ClearCLBuffer dst = (ClearCLBuffer) (args[0]);
         String userSelectedMethod = (String)args[1];
 
-        ClearCLBuffer buffer = clij.create(dst);
-        clij.op().copy(dst, buffer);
-        Kernels.automaticThreshold(clij, buffer, dst, userSelectedMethod);
+        automaticThresholdInplace(clij, dst, userSelectedMethod);
+
+        return true;
+    }
+
+    public static boolean automaticThresholdInplace(CLIJ clij, ClearCLBuffer src_dst, String userSelectedMethod) {
+        ClearCLBuffer buffer = clij.create(src_dst);
+        clij.op().copy(src_dst, buffer);
+        Kernels.automaticThreshold(clij, buffer, src_dst, userSelectedMethod);
         buffer.close();
         return true;
     }
