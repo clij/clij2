@@ -1,12 +1,11 @@
-## minimum3DSphere
+## minimumOctagon
 ![Image](images/mini_clijx_logo.png)
 
-Computes the local minimum of a pixels spherical neighborhood. The spheres size is specified by 
-its half-width, half-height and half-depth (radius).
+Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter result very similar to minimum sphere. Approximately:radius = iterations - 2
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_minimum3DSphere(Image source, Image destination, Number radiusX, Number radiusY, Number radiusZ);
+Ext.CLIJx_minimumOctagon(Image input, Image destination, Number iterations);
 ```
 
 
@@ -21,13 +20,11 @@ CLIJx clijx = CLIJx.getInstance();
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 int arg3 = 10;
-int arg4 = 20;
-int arg5 = 30;
 ```
 
 ```
 // Execute operation on GPU
-clijx.minimum3DSphere(clij, arg1, arg2, arg3, arg4, arg5);
+clijx.minimumOctagon(clij, arg1, arg2, arg3);
 ```
 
 ```
@@ -44,7 +41,6 @@ arg2.close();
 ### Example scripts
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [iterative_minimum.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/iterative_minimum.ijm)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [minimumOctagon.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/minimumOctagon.ijm)  
-<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [oddEven.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/oddEven.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

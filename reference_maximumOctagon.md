@@ -1,12 +1,11 @@
-## meanSphere
-![Image](images/mini_clij1_logo.png)
+## maximumOctagon
+![Image](images/mini_clijx_logo.png)
 
-Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
-its half-width and half-height (radius).
+Applies a maximum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter result very similar to minimum sphere. Approximately:radius = iterations - 2
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_meanSphere(Image source, Image destination, Number radiusX, Number radiusY);
+Ext.CLIJx_maximumOctagon(Image input, Image destination, Number iterations);
 ```
 
 
@@ -21,12 +20,11 @@ CLIJx clijx = CLIJx.getInstance();
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 int arg3 = 10;
-int arg4 = 20;
 ```
 
 ```
 // Execute operation on GPU
-clijx.meanSphere(clij, arg1, arg2, arg3, arg4);
+clijx.maximumOctagon(clij, arg1, arg2, arg3);
 ```
 
 ```

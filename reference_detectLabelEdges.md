@@ -5,7 +5,7 @@ Takes a labelmap and returns an image where all pixels on label edges are set to
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_detectLabelEdges(Image label_map, Image touch_matrix_destination);
+Ext.CLIJx_detectLabelEdges(Image label_map, Image edge_image_destination);
 ```
 
 
@@ -18,22 +18,22 @@ CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
 ClearCLBuffer label_map = clijx.push(label_mapImagePlus);
-touch_matrix_destination = clij.create(label_map);
+edge_image_destination = clij.create(label_map);
 ```
 
 ```
 // Execute operation on GPU
-clijx.detectLabelEdges(clij, label_map, touch_matrix_destination);
+clijx.detectLabelEdges(clij, label_map, edge_image_destination);
 ```
 
 ```
 //show result
-touch_matrix_destinationImagePlus = clij.pull(touch_matrix_destination);
-touch_matrix_destinationImagePlus.show();
+edge_image_destinationImagePlus = clij.pull(edge_image_destination);
+edge_image_destinationImagePlus.show();
 
 // cleanup memory on GPU
 label_map.close();
-touch_matrix_destination.close();
+edge_image_destination.close();
 ```
 
 

@@ -147,8 +147,20 @@ public interface CLIJ2Plugins {
             ProjectMinimumThresholdedZBounded.class,
             MeanOfPixelsAboveThreshold.class,
             OrganiseWindows.class,
-            DistanceMatrixToMesh.class
+            DistanceMatrixToMesh.class,
+            PointIndexListToMesh.class,
+            MinimumOctagon.class,
+            MaximumOctagon.class,
+            TopHatOctagon.class,
+            AddImages.class,
+            AddImagesWeighted.class,
+            SubtractImages.class
     };
 
-    public String blockList = ";Kernels.absolute;";
+    public String blockList = ";" +
+            "Kernels.absolute;" +
+            "Kernels.addImagesWeighted;" +
+            "Kernels.addImages;" +
+            "Kernels.subtractImages;" +
+            "Kernels.subtract;";
 }

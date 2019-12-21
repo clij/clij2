@@ -1,5 +1,5 @@
 ## addImagesWeighted
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b.
 
@@ -7,7 +7,7 @@ Calculates the sum of pairs of pixels x and y from images X and Y weighted with 
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_addImagesWeighted(Image summand1, Image summand2, Image destination, Number factor1, Number factor2);
+Ext.CLIJx_addImagesWeighted(Image summand1, Image summand2, Image destination, Number factor1, Number factor2);
 ```
 
 
@@ -44,6 +44,8 @@ arg3.close();
 
 
 ### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [addImages.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/addImages.ijm)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [addImages3D.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/addImages3D.ijm)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [addImages.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/addImages.ijm)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [backgroundSubtraction.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/backgroundSubtraction.ijm)  
 

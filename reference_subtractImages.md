@@ -1,5 +1,5 @@
 ## subtractImages
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Subtracts one image X from another image Y pixel wise.
 
@@ -7,7 +7,7 @@ Subtracts one image X from another image Y pixel wise.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_subtractImages(Image subtrahend, Image minuend, Image destination);
+Ext.CLIJx_subtractImages(Image subtrahend, Image minuend, Image destination);
 ```
 
 
@@ -19,25 +19,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer subtrahend = clijx.push(subtrahendImagePlus);
-ClearCLBuffer minuend = clijx.push(minuendImagePlus);
-destination = clij.create(subtrahend);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.subtractImages(clij, subtrahend, minuend, destination);
+clijx.subtractImages(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-subtrahend.close();
-minuend.close();
-destination.close();
+arg1.close();
+arg2.close();
+arg3.close();
 ```
 
 

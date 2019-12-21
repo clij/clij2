@@ -17,20 +17,20 @@ class CLIJxAutoComplete {
        headline = "clijx.addImageAndScalar(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3)";
        description = "<b>addImageAndScalar</b><br><br>Adds a scalar value s to all pixels x of a given image X.<br><br><pre>f(x, s) = x + s</pre><br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.addImagesWeighted(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, Float arg4, Float arg5)";
-       description = "<b>addImagesWeighted</b><br><br>Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b.<br><br><pre>f(x, y, a, b) = x * a + y * b</pre><br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, Float arg4, Float arg5";
+       headline = "clijx.addImagesWeighted(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, Float arg4, Float arg5)";
+       description = "<b>addImagesWeighted</b><br><br>Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b.<br><br><pre>f(x, y, a, b) = x * a + y * b</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, Float arg4, Float arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.addImages(ClearCLBuffer summand1, ClearCLBuffer summand2, ClearCLBuffer destination)";
-       description = "<b>addImages</b><br><br>Calculates the sum of pairs of pixels x and y of two images X and Y.<br><br><pre>f(x, y) = x + y</pre><br><br>Parameters:<br>ClearCLBuffer summand1, ClearCLBuffer summand2, ClearCLBuffer destination";
+       headline = "clijx.addImages(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
+       description = "<b>addImages</b><br><br>Calculates the sum of pairs of pixels x and y of two images X and Y.<br><br><pre>f(x, y) = x + y</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.affineTransform2D(ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform2D arg3)";
        description = "<b>affineTransform2D</b><br><br>Applies an affine transform to a 2D image. Individual transforms must be separated by spaces.<br><br>Supported transforms:<br>* center: translate the coordinate origin to the center of the image<br>* -center: translate the coordinate origin back to the initial origin<br>* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* scale=[factor]: isotropic scaling according to given zoom factor<br>* scaleX=[factor]: scaling along X-axis according to given zoom factor<br>* scaleY=[factor]: scaling along Y-axis according to given zoom factor<br>* shearXY=[factor]: shearing along X-axis in XY plane according to given factor<br>* translateX=[distance]: translate along X-axis by distance given in pixels<br>* translateY=[distance]: translate along X-axis by distance given in pixels<br><br>Example transform:<br>transform = &quot;center scale=2 rotate=45 -center&quot;;<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform2D arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.affineTransform3D(ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3)";
-       description = "<b>affineTransform3D</b><br><br>Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.<br><br>Supported transforms:<br>* center: translate the coordinate origin to the center of the image<br>* -center: translate the coordinate origin back to the initial origin<br>* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees<br>* rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees<br>* rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* scale=[factor]: isotropic scaling according to given zoom factor<br>* scaleX=[factor]: scaling along X-axis according to given zoom factor<br>* scaleY=[factor]: scaling along Y-axis according to given zoom factor<br>* scaleZ=[factor]: scaling along Z-axis according to given zoom factor<br>* shearXY=[factor]: shearing along X-axis in XY plane according to given factor<br>* shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor<br>* shearYX=[factor]: shearing along Y-axis in XY plane according to given factor<br>* shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor<br>* shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor<br>* shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor<br>* translateX=[distance]: translate along X-axis by distance given in pixels<br>* translateY=[distance]: translate along X-axis by distance given in pixels<br>* translateZ=[distance]: translate along X-axis by distance given in pixels<br><br>Example transform:<br>transform = &quot;center scale=2 rotate=45 -center&quot;;<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3";
+       headline = "clijx.affineTransform3D(ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3)";
+       description = "<b>affineTransform3D</b><br><br>Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.<br><br>Supported transforms:<br>* center: translate the coordinate origin to the center of the image<br>* -center: translate the coordinate origin back to the initial origin<br>* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees<br>* rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees<br>* rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* scale=[factor]: isotropic scaling according to given zoom factor<br>* scaleX=[factor]: scaling along X-axis according to given zoom factor<br>* scaleY=[factor]: scaling along Y-axis according to given zoom factor<br>* scaleZ=[factor]: scaling along Z-axis according to given zoom factor<br>* shearXY=[factor]: shearing along X-axis in XY plane according to given factor<br>* shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor<br>* shearYX=[factor]: shearing along Y-axis in XY plane according to given factor<br>* shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor<br>* shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor<br>* shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor<br>* translateX=[distance]: translate along X-axis by distance given in pixels<br>* translateY=[distance]: translate along X-axis by distance given in pixels<br>* translateZ=[distance]: translate along X-axis by distance given in pixels<br><br>Example transform:<br>transform = &quot;center scale=2 rotate=45 -center&quot;;<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.affineTransform(ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3)";
-       description = "<b>affineTransform</b><br><br>CLIJ affineTransform is <b>deprecated</b>. Use affineTransform2D or affineTransform3D instead.<br><br>Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.<br><br>Supported transforms:<br>* center: translate the coordinate origin to the center of the image<br>* -center: translate the coordinate origin back to the initial origin<br>* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees<br>* rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees<br>* rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* scale=[factor]: isotropic scaling according to given zoom factor<br>* scaleX=[factor]: scaling along X-axis according to given zoom factor<br>* scaleY=[factor]: scaling along Y-axis according to given zoom factor<br>* scaleZ=[factor]: scaling along Z-axis according to given zoom factor<br>* shearXY=[factor]: shearing along X-axis in XY plane according to given factor<br>* shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor<br>* shearYX=[factor]: shearing along Y-axis in XY plane according to given factor<br>* shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor<br>* shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor<br>* shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor<br>* translateX=[distance]: translate along X-axis by distance given in pixels<br>* translateY=[distance]: translate along X-axis by distance given in pixels<br>* translateZ=[distance]: translate along X-axis by distance given in pixels<br><br>Example transform:<br>transform = &quot;center scale=2 rotate=45 -center&quot;;<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3";
+       headline = "clijx.affineTransform(ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3)";
+       description = "<b>affineTransform</b><br><br>CLIJ affineTransform is <b>deprecated</b>. Use affineTransform2D or affineTransform3D instead.<br><br>Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.<br><br>Supported transforms:<br>* center: translate the coordinate origin to the center of the image<br>* -center: translate the coordinate origin back to the initial origin<br>* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees<br>* rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees<br>* rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* scale=[factor]: isotropic scaling according to given zoom factor<br>* scaleX=[factor]: scaling along X-axis according to given zoom factor<br>* scaleY=[factor]: scaling along Y-axis according to given zoom factor<br>* scaleZ=[factor]: scaling along Z-axis according to given zoom factor<br>* shearXY=[factor]: shearing along X-axis in XY plane according to given factor<br>* shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor<br>* shearYX=[factor]: shearing along Y-axis in XY plane according to given factor<br>* shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor<br>* shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor<br>* shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor<br>* translateX=[distance]: translate along X-axis by distance given in pixels<br>* translateY=[distance]: translate along X-axis by distance given in pixels<br>* translateZ=[distance]: translate along X-axis by distance given in pixels<br><br>Example transform:<br>transform = &quot;center scale=2 rotate=45 -center&quot;;<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, AffineTransform3D arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.applyVectorField2D(ClearCLBuffer source, ClearCLBuffer vectorX, ClearCLBuffer vectorY, ClearCLBuffer destination)";
        description = "<b>applyVectorField2D</b><br><br>Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. <br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer vectorX, ClearCLBuffer vectorY, ClearCLBuffer destination";
@@ -43,6 +43,9 @@ class CLIJxAutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.argMaximumZProjection(ClearCLBuffer source, ClearCLBuffer destination_max, ClearCLBuffer destination_arg_max)";
        description = "<b>argMaximumZProjection</b><br><br>Determines the maximum projection of an image stack along Z.<br>Furthermore, another 2D image is generated with pixels containing the z-index where the maximum was found (zero based).<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination_max, ClearCLBuffer destination_arg_max";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.automaticThresholdInplace(ClearCLBuffer arg1, String arg2)";
+       description = "<b>automaticThresholdInplace</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, String arg2";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6)";
        description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6";
@@ -86,8 +89,8 @@ class CLIJxAutoComplete {
        headline = "clijx.blurSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, float arg5, float arg6)";
        description = "<b>blurSliceBySlice</b><br><br>Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.<br><br>The Gaussian blur is applied slice by slice in 2D.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, float arg5, float arg6";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.blur(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5)";
-       description = "<b>blur</b><br><br>Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.<br><br>The implementation is done separable. In case a sigma equals zero, the direction is not blurred.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5";
+       headline = "clijx.blur(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4)";
+       description = "<b>blur</b><br><br>Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.<br><br>The implementation is done separable. In case a sigma equals zero, the direction is not blurred.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.bottomHatBox(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
        description = "<b>bottomHatBox</b><br><br>Apply a bottom-hat filter for background subtraction to the input image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
@@ -152,8 +155,8 @@ class CLIJxAutoComplete {
        headline = "clijx.crop3D(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5, Integer arg6, Integer arg7, Integer arg8)";
        description = "<b>crop3D</b><br><br>Crops a given sub-stack out of a given image stack.<br><br>Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5, Integer arg6, Integer arg7, Integer arg8";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.crop(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
-       description = "<b>crop</b><br><br>Crops a given rectangle out of a given image.<br><br>Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
+       headline = "clijx.crop(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
+       description = "<b>crop</b><br><br>Crops a given rectangle out of a given image.<br><br>Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.crossCorrelation(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5, int arg6, int arg7, int arg8)";
        description = "<b>crossCorrelation</b><br><br>Performs cross correlation analysis between two images. The second image is shifted by deltaPos in the given dimension. The cross correlation coefficient is calculated for each pixel in a range around the given pixel with given radius in the given dimension. Together with the original images it is recommended to hand over mean filtered images using the same radius.  <br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5, int arg6, int arg7, int arg8";
@@ -161,8 +164,8 @@ class CLIJxAutoComplete {
        headline = "clijx.deformableRegistration2D(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, int arg4, int arg5)";
        description = "<b>deformableRegistration2D</b><br><br>Applies particle image velocimetry to two images and registers them afterwards by warping input image 2 with a smoothed vector field.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, int arg4, int arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.detectLabelEdges(ClearCLBuffer label_map, ClearCLBuffer touch_matrix_destination)";
-       description = "<b>detectLabelEdges</b><br><br>Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.<br><br>Parameters:<br>ClearCLBuffer label_map, ClearCLBuffer touch_matrix_destination";
+       headline = "clijx.detectLabelEdges(ClearCLBuffer label_map, ClearCLBuffer edge_image_destination)";
+       description = "<b>detectLabelEdges</b><br><br>Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.<br><br>Parameters:<br>ClearCLBuffer label_map, ClearCLBuffer edge_image_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.detectMaximaBox(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3)";
        description = "<b>detectMaximaBox</b><br><br>Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if<br>there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3";
@@ -386,6 +389,9 @@ class CLIJxAutoComplete {
        headline = "clijx.maximumImages(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination)";
        description = "<b>maximumImages</b><br><br>Computes the maximum of a pair of pixel values x, y from two given images X and Y.<br><br><pre>f(x, y) = max(x, y)</pre><br><br>Parameters:<br>ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.maximumOctagon(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3)";
+       description = "<b>maximumOctagon</b><br><br>Applies a maximum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter result very similar to minimum sphere. Approximately:radius = iterations - 2<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.maximumOfAllPixels(ClearCLBuffer source)";
        description = "<b>maximumOfAllPixels</b><br><br>Determines the maximum of all pixels in a given image. It will be stored in a new row of ImageJs<br>Results table in the column 'Max'.<br><br>Parameters:<br>ClearCLBuffer source";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -425,7 +431,7 @@ class CLIJxAutoComplete {
        headline = "clijx.meanBox(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, int arg5)";
        description = "<b>meanBox</b><br><br>Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by <br>its half-width and half-height (radius).<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, int arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.meanClosestSpotDistances(ClearCLBuffer arg1, ClearCLBuffer arg2)";
+       headline = "clijx.meanClosestSpotDistances(ClearCLBuffer arg1, ClearCLBuffer arg2, Boolean arg3)";
        description = "<b>meanClosestSpotDistances</b><br><br>null";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.meanIJ(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3)";
@@ -440,8 +446,8 @@ class CLIJxAutoComplete {
        headline = "clijx.meanSliceBySliceSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
        description = "<b>meanSliceBySliceSphere</b><br><br>Computes the local mean average of a pixels ellipsoidal 2D neighborhood in an image stack <br>slice by slice. The ellipses size is specified by its half-width and half-height (radius).<br><br>This filter is applied slice by slice in 2D.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.meanSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
-       description = "<b>meanSphere</b><br><br>Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by <br>its half-width and half-height (radius).<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
+       headline = "clijx.meanSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
+       description = "<b>meanSphere</b><br><br>Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by <br>its half-width and half-height (radius).<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.meanSquaredError(ClearCLBuffer source1, ClearCLBuffer source2)";
        description = "<b>meanSquaredError</b><br><br>Determines the mean squared error (MSE) between two images. The MSE will be stored in a new row of ImageJs<br>Results table in the column 'MSE'.<br><br>Parameters:<br>ClearCLBuffer source1, ClearCLBuffer source2";
@@ -470,8 +476,8 @@ class CLIJxAutoComplete {
        headline = "clijx.medianSliceBySliceSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
        description = "<b>medianSliceBySliceSphere</b><br><br>Computes the local median of a pixels ellipsoidal neighborhood. This is done slice-by-slice in a 3D <br>image stack. The ellipses size is specified by its half-width and half-height (radius).<br><br>For technical reasons, the area of the ellipse must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.medianSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
-       description = "<b>medianSphere</b><br><br>Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by <br>its half-width and half-height (radius).<br><br>For technical reasons, the area of the rectangle must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
+       headline = "clijx.medianSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
+       description = "<b>medianSphere</b><br><br>Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by <br>its half-width and half-height (radius).<br><br>For technical reasons, the area of the rectangle must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.medianZProjection(ClearCLBuffer source, ClearCLBuffer destination)";
        description = "<b>medianZProjection</b><br><br>Determines the median projection of an image along Z.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination";
@@ -499,6 +505,9 @@ class CLIJxAutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.minimumImages(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination)";
        description = "<b>minimumImages</b><br><br>Computes the minimum of a pair of pixel values x, y from two given images X and Y.<br><br><pre>f(x, y) = min(x, y)</pre><br><br>Parameters:<br>ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.minimumOctagon(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3)";
+       description = "<b>minimumOctagon</b><br><br>Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter result very similar to minimum sphere. Approximately:radius = iterations - 2<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.minimumOfAllPixels(ClearCLBuffer source)";
        description = "<b>minimumOfAllPixels</b><br><br>Determines the minimum of all pixels in a given image. It will be stored in a new row of ImageJs<br>Results table in the column 'Min'.<br><br>Parameters:<br>ClearCLBuffer source";
@@ -539,14 +548,14 @@ class CLIJxAutoComplete {
        headline = "clijx.nonzeroMaximumBox(ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3, ClearCLKernel arg4)";
        description = "<b>nonzeroMaximumBox</b><br><br>Apply a maximum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3, ClearCLKernel arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.nonzeroMaximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
-       description = "<b>nonzeroMaximumDiamond</b><br><br>Apply a maximum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
+       headline = "clijx.nonzeroMaximumDiamond(ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3, ClearCLKernel arg4)";
+       description = "<b>nonzeroMaximumDiamond</b><br><br>Apply a maximum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3, ClearCLKernel arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.nonzeroMinimumBox(ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3, ClearCLKernel arg4)";
        description = "<b>nonzeroMinimumBox</b><br><br>null";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.nonzeroMinimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
-       description = "<b>nonzeroMinimumDiamond</b><br><br>Apply a minimum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
+       headline = "clijx.nonzeroMinimumDiamond(ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3, ClearCLKernel arg4)";
+       description = "<b>nonzeroMinimumDiamond</b><br><br>Apply a minimum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLImageInterface arg3, ClearCLKernel arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.notEqualConstant(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3)";
        description = "<b>notEqualConstant</b><br><br>Determines if two images A and B equal pixel wise.<br><br>f(a, b) = 1 if a != b; 0 otherwise. <br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3";
@@ -586,6 +595,9 @@ class CLIJxAutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.paste(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
        description = "<b>paste</b><br><br>Pastes an image into another image at a given position.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.pointIndexListToMesh(ClearCLBuffer pointlist, ClearCLBuffer indexList, ClearCLBuffer Mesh)";
+       description = "<b>pointIndexListToMesh</b><br><br>Meshes all points in a given point list which are indiced in a corresponding index list. TODO: Explain better<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer indexList, ClearCLBuffer Mesh";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.powerImages(ClearCLBuffer input, ClearCLBuffer exponent, ClearCLBuffer destination)";
        description = "<b>powerImages</b><br><br>Calculates x to the power of y pixel wise of two images X and Y.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer exponent, ClearCLBuffer destination";
@@ -719,14 +731,14 @@ class CLIJxAutoComplete {
        headline = "clijx.stackToTiles(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4)";
        description = "<b>stackToTiles</b><br><br>Stack to tiles.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.standardDeviationOfAllPixels(ClearCLBuffer source)";
-       description = "<b>standardDeviationOfAllPixels</b><br><br>Determines the standard deviation of all pixels in an image. The value will be stored in a new row of ImageJs<br>Results table in the column 'Standard_deviation'.<br><br>Parameters:<br>ClearCLBuffer source";
+       headline = "clijx.standardDeviationOfAllPixels(ClearCLBuffer arg1, Float arg2)";
+       description = "<b>standardDeviationOfAllPixels</b><br><br>Determines the standard deviation of all pixels in an image. The value will be stored in a new row of ImageJs<br>Results table in the column 'Standard_deviation'.<br><br>Parameters:<br>ClearCLBuffer arg1, Float arg2";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.standardDeviationZProjection(ClearCLBuffer source, ClearCLBuffer destination)";
        description = "<b>standardDeviationZProjection</b><br><br>Determines the standard deviation projection of an image along Z.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.statisticsOfLabelledPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3)";
-       description = "<b>statisticsOfLabelledPixels</b><br><br>Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3";
+       headline = "clijx.statisticsOfLabelledPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4)";
+       description = "<b>statisticsOfLabelledPixels</b><br><br>Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.stopWatch(String arg1)";
        description = "<b>stopWatch</b><br><br>Measures time and outputs delay to last call.<br><br>Parameters:<br>String arg1";
@@ -740,11 +752,11 @@ class CLIJxAutoComplete {
        headline = "clijx.subtractBackground(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4)";
        description = "<b>subtractBackground</b><br><br>Applies Gaussian blur to the input image and subtracts the result from the original image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.subtractImages(ClearCLBuffer subtrahend, ClearCLBuffer minuend, ClearCLBuffer destination)";
-       description = "<b>subtractImages</b><br><br>Subtracts one image X from another image Y pixel wise.<br><br><pre>f(x, y) = x - y</pre><br><br>Parameters:<br>ClearCLBuffer subtrahend, ClearCLBuffer minuend, ClearCLBuffer destination";
+       headline = "clijx.subtractImages(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
+       description = "<b>subtractImages</b><br><br>Subtracts one image X from another image Y pixel wise.<br><br><pre>f(x, y) = x - y</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.subtract(ClearCLBuffer subtrahend, ClearCLBuffer minuend, ClearCLBuffer destination)";
-       description = "<b>subtract</b><br><br>Subtracts one image X from another image Y pixel wise.<br><br><pre>f(x, y) = x - y</pre><br><br>Parameters:<br>ClearCLBuffer subtrahend, ClearCLBuffer minuend, ClearCLBuffer destination";
+       headline = "clijx.subtract(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
+       description = "<b>subtract</b><br><br>Subtracts one image X from another image Y pixel wise.<br><br><pre>f(x, y) = x - y</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.sumPixelsSliceBySlice(ClearCLBuffer arg1)";
        description = "<b>sumPixelsSliceBySlice</b><br><br>null";
@@ -760,6 +772,9 @@ class CLIJxAutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.topHatBox(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
        description = "<b>topHatBox</b><br><br>Applies a top-hat filter for background subtraction to the input image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.topHatOctagon(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3)";
+       description = "<b>topHatOctagon</b><br><br>Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations - 2 makes the filter result very similar to minimum sphere.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.topHatSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
        description = "<b>topHatSphere</b><br><br>Applies a top-hat filter for background subtraction to the input image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
@@ -788,8 +803,8 @@ class CLIJxAutoComplete {
        headline = "clijx.transposeYZ(ClearCLBuffer input, ClearCLBuffer destination)";
        description = "<b>transposeYZ</b><br><br>Transpose Y and Z axes of an image.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.varianceOfAllPixels(ClearCLBuffer source)";
-       description = "<b>varianceOfAllPixels</b><br><br>Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs<br>Results table in the column 'Variance'.<br><br>Parameters:<br>ClearCLBuffer source";
+       headline = "clijx.varianceOfAllPixels(ClearCLBuffer arg1, Float arg2)";
+       description = "<b>varianceOfAllPixels</b><br><br>Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs<br>Results table in the column 'Variance'.<br><br>Parameters:<br>ClearCLBuffer arg1, Float arg2";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.watershed(ClearCLBuffer binary_source, ClearCLBuffer destination)";
        description = "<b>watershed</b><br><br>Apply a binary watershed to a binary image and introduces black pixels between objects.<br><br>Parameters:<br>ClearCLBuffer binary_source, ClearCLBuffer destination";
@@ -800,4 +815,4 @@ class CLIJxAutoComplete {
         return list;
     }
 }
-// 263 methods generated.
+// 268 methods generated.

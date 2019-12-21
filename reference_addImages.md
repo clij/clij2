@@ -1,5 +1,5 @@
 ## addImages
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Calculates the sum of pairs of pixels x and y of two images X and Y.
 
@@ -7,7 +7,7 @@ Calculates the sum of pairs of pixels x and y of two images X and Y.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_addImages(Image summand1, Image summand2, Image destination);
+Ext.CLIJx_addImages(Image summand1, Image summand2, Image destination);
 ```
 
 
@@ -19,31 +19,31 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer summand1 = clijx.push(summand1ImagePlus);
-ClearCLBuffer summand2 = clijx.push(summand2ImagePlus);
-destination = clij.create(summand1);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.addImages(clij, summand1, summand2, destination);
+clijx.addImages(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-summand1.close();
-summand2.close();
-destination.close();
+arg1.close();
+arg2.close();
+arg3.close();
 ```
 
 
 
 
 ### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [addImages.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/addImages.ijm)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [addImages3D.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/addImages3D.ijm)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [addImages.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/addImages.ijm)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [backgroundSubtraction.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/backgroundSubtraction.ijm)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [addImages.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/addImages.py)  

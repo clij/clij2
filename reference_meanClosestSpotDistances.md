@@ -19,11 +19,12 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+boolean arg3 = true;
 ```
 
 ```
 // Execute operation on GPU
-double resultMeanClosestSpotDistances = clijx.meanClosestSpotDistances(clij, arg1, arg2);
+double[] resultMeanClosestSpotDistances = clijx.meanClosestSpotDistances(clij, arg1, arg2, arg3);
 ```
 
 ```

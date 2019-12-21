@@ -1,12 +1,11 @@
-## varianceOfAllPixels
+## topHatOctagon
 ![Image](images/mini_clijx_logo.png)
 
-Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs
-Results table in the column 'Variance'.
+Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations - 2 makes the filter result very similar to minimum sphere.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_varianceOfAllPixels(Image source);
+Ext.CLIJx_topHatOctagon(Image input, Image destination, Number iterations);
 ```
 
 
@@ -19,20 +18,21 @@ CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-float arg2 = 1.0;
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+int arg3 = 10;
 ```
 
 ```
 // Execute operation on GPU
-double resultVarianceOfAllPixels = clijx.varianceOfAllPixels(clij, arg1, arg2);
+clijx.topHatOctagon(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-System.out.println(resultVarianceOfAllPixels);
 
 // cleanup memory on GPU
 arg1.close();
+arg2.close();
 ```
 
 

@@ -13,8 +13,8 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_absoluteInplace">absoluteInplace</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_absolute">absolute</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_addImageAndScalar">addImageAndScalar'</a>
-* <a href="https://clij.github.io/clij-advanced-filters/reference_addImagesWeighted">addImagesWeighted'</a>
-* <a href="https://clij.github.io/clij-advanced-filters/reference_addImages">addImages'</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_addImagesWeighted">addImagesWeighted</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_addImages">addImages</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_affineTransform2D">affineTransform2D'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_affineTransform3D">affineTransform3D'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_affineTransform">affineTransform'</a>
@@ -22,6 +22,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_applyVectorField3D">applyVectorField3D</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_applyVectorfield">applyVectorfield'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_argMaximumZProjection">argMaximumZProjection'</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_automaticThresholdInplace">automaticThresholdInplace</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_automaticThreshold">automaticThreshold'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_averageDistanceOfClosestPoints">averageDistanceOfClosestPoints</a>
 <a name="B"></a>
@@ -169,6 +170,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maximumIJ">maximumIJ'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maximumImageAndScalar">maximumImageAndScalar'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maximumImages">maximumImages'</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_maximumOctagon">maximumOctagon</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maximumOfAllPixels">maximumOfAllPixels'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maximumOfMaskedPixels">maximumOfMaskedPixels</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_maximumSliceBySliceSphere">maximumSliceBySliceSphere'</a>
@@ -207,6 +209,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_minimumIJ">minimumIJ'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_minimumImageAndScalar">minimumImageAndScalar'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_minimumImages">minimumImages'</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_minimumOctagon">minimumOctagon</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_minimumOfAllPixels">minimumOfAllPixels'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_minimumOfMaskedPixels">minimumOfMaskedPixels</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_minimumSliceBySliceSphere">minimumSliceBySliceSphere'</a>
@@ -245,6 +248,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_paste2D">paste2D</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_paste3D">paste3D</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_paste">paste</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_pointIndexListToMesh">pointIndexListToMesh</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_powerImages">powerImages</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_power">power'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_preloadFromDisc">preloadFromDisc</a>
@@ -302,8 +306,8 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_subtractBackground2D">subtractBackground2D</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_subtractBackground3D">subtractBackground3D</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_subtractBackground">subtractBackground</a>
-* <a href="https://clij.github.io/clij-advanced-filters/reference_subtractImages">subtractImages'</a>
-* <a href="https://clij.github.io/clij-advanced-filters/reference_subtract">subtract'</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_subtractImages">subtractImages</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_subtract">subtract</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_sumPixelsSliceBySlice">sumPixelsSliceBySlice'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_sumPixels">sumPixels'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_sumZProjection">sumZProjection'</a>
@@ -312,6 +316,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 ## T
 * <a href="https://clij.github.io/clij-advanced-filters/reference_threshold">threshold'</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_topHatBox">topHatBox</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_topHatOctagon">topHatOctagon</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_topHatSphere">topHatSphere</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_touchMatrixToMesh">touchMatrixToMesh</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_translate2D">translate2D</a>
