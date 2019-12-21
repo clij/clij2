@@ -56,6 +56,8 @@ public class IterativeMean extends AbstractCLIJxPlugin implements CLIJMacroPlugi
         if (flopKernel != null) {
             flopKernel.close();
         }
+        flip.close();
+        flop.close();
 
         return true;
     }
