@@ -296,10 +296,10 @@ public class ImageRegistration3D implements PlugIn {
                 if (doNoiseAndBackgroundRemoval) {
                     clijx.blur(input1, temp1, sigma1, sigma1);
                     clijx.blur(input1, temp2, sigma2, sigma2);
-                    clijx.subtract(temp1, temp2, dog1);
+                    clijx.subtractImages(temp1, temp2, dog1);
                     clijx.blur(input2, temp1, sigma1, sigma1);
                     clijx.blur(input2, temp2, sigma2, sigma2);
-                    clijx.subtract(temp1, temp2, dog2);
+                    clijx.subtractImages(temp1, temp2, dog2);
                 } else {
                     clijx.copy(input1, dog1);
                     clijx.copy(input2, dog2);
