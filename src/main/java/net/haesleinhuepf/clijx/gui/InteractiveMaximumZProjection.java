@@ -9,10 +9,9 @@ import ij.measure.Calibration;
 import ij.plugin.filter.PlugInFilter;
 import ij.process.ImageProcessor;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.imglib2.realtransform.AffineTransform3D;
-import sun.net.www.content.text.Generic;
+
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

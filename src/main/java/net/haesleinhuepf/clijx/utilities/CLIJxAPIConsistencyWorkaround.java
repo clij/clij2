@@ -1,14 +1,12 @@
 package net.haesleinhuepf.clijx.utilities;
 
-import com.sun.org.apache.regexp.internal.RE;
 import ij.IJ;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCL;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.modules.*;
-import net.haesleinhuepf.clijx.CLIJx;
-import net.imglib2.ops.parse.token.Int;
+
 
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.radiusToKernelSize;
 
