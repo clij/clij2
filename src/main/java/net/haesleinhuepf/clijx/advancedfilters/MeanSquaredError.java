@@ -3,6 +3,7 @@ package net.haesleinhuepf.clijx.advancedfilters;
 import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -35,8 +36,8 @@ public class MeanSquaredError extends AbstractCLIJPlugin implements CLIJMacroPlu
     }
 
     public static double meanSquaredError(CLIJ clij, ClearCLBuffer buffer1, ClearCLBuffer buffer2) {
-        ClearCLBuffer difference = clij.create(buffer1);
-        ClearCLBuffer squared = clij.create(buffer1);
+        ClearCLBuffer difference = clij.create(buffer1.getDimensions(), NativeTypeEnum.Float);
+        ClearCLBuffer squared = clij.create(buffer1.getDimensions(), NativeTypeEnum.Float);
 
         clij.op().subtractImages(buffer1, buffer2, difference);
 
