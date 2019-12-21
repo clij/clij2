@@ -2,6 +2,7 @@ package net.haesleinhuepf.clijx.advancedfilters;
 
 import ij.ImagePlus;
 import net.haesleinhuepf.clij.CLIJ;
+import net.haesleinhuepf.clij.clearcl.ClearCL;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
@@ -121,47 +122,90 @@ public class ConnectedComponentsLabeling extends AbstractCLIJxPlugin implements 
     }
 
     public static boolean shiftIntensitiesToCloseGaps(CLIJx clijx, ClearCLImageInterface input, ClearCLImageInterface output) {
-        int maximum = 0;
-        if (input instanceof ClearCLImage) {
-            maximum = (int) clijx.maximumOfAllPixels((ClearCLImage) input);
-        } else {
-            maximum = (int) clijx.maximumOfAllPixels((ClearCLBuffer) input);
-        }
-        final float[] allNewIndices = new float[maximum + 1];
+        long timeStamp = System.currentTimeMillis();
 
-        float[] count = {1};
+        //clijx.stopWatch("block A0");
+        int maximum = 0;
+//        if (input instanceof ClearCLImage) {
+//            maximum = (int) clijx.maximumOfAllPixels((ClearCLImage) input);
+//        } else {
+//            maximum = (int) clijx.maximumOfAllPixels((ClearCLBuffer) input);
+//        }
+//        final float[] allNewIndices = new float[maximum + 1];
+        HashMap<Integer, Integer> intensitiesToReplaceMap = new HashMap<>();
+
+        int count = 1;
+        //long number_of_pixels_per_plane = (int) (input.getWidth() * input.getHeight());
         long number_of_pixels = (int) (input.getWidth() * input.getHeight() * input.getDepth());
         if (number_of_pixels < Integer.MAX_VALUE && input.getNativeType() == NativeTypeEnum.Float) {
+            //clijx.stopWatch("block A1");
             float[] slice = new float[(int) number_of_pixels];
+            //clijx.stopWatch("block A2");
             FloatBuffer buffer = FloatBuffer.wrap(slice);
-
+            //clijx.stopWatch("block A3");
             input.writeTo(buffer, true);
+            //clijx.stopWatch("block A4");
             for (int i = 0; i < slice.length; i++) {
                 int key = (int) slice[i];
-                if (key > 0 && allNewIndices[key] == 0) {
-                    allNewIndices[key] = count[0];
-                    count[0] = count[0] + 1;
+                if (key > 0) { // && allNewIndices[key] == 0) {
+                    if (!intensitiesToReplaceMap.containsKey(key)) {
+                        intensitiesToReplaceMap.put(key, count);
+                        //allNewIndices[key] = count;
+                        count = count + 1;
+                    }
+                    if (maximum < key) {
+                        maximum = key;
+                    }
                 }
+//                if (key > 0 && allNewIndices[key] == 0) {
+//                    allNewIndices[key] = count;
+//                    count = count + 1;
+//                }
             }
+            //clijx.stopWatch("block A5");
+
         } else { // that's slower but more generic:
+            //clijx.stopWatch("block B");
             RandomAccessibleInterval rai = clijx.convert(input, RandomAccessibleInterval.class);
             Cursor<RealType> cursor = Views.iterable(rai).cursor();
 
             while (cursor.hasNext()) {
                 int key = new Float(cursor.next().getRealFloat()).intValue();
-                if (key > 0 && allNewIndices[key] == 0) {
-                    allNewIndices[key] = count[0];
-                    count[0] = count[0] + 1;
+                if (key > 0) { // && allNewIndices[key] == 0) {
+                    if (!intensitiesToReplaceMap.containsKey(key)) {
+                        intensitiesToReplaceMap.put(key, count);
+                        //allNewIndices[key] = count;
+                        count = count + 1;
+                    }
+                    if (maximum < key) {
+                        maximum = key;
+                    }
                 }
+//                if (key > 0 && allNewIndices[key] == 0) {
+//                    allNewIndices[key] = count;
+//                    count = count + 1;
+//                }
             }
         }
 
+        float[] allNewIndices = new float[maximum + 1];
+        for (Integer key : intensitiesToReplaceMap.keySet()) {
+            allNewIndices[key] = intensitiesToReplaceMap.get(key);
+        }
+        //clijx.copy((ClearCLBuffer) input, (ClearCLBuffer)output);
+
+        //clijx.stopWatch("after copy");
         ClearCLBuffer keyValueMap = clijx.create(new long[]{allNewIndices.length, 1, 1}, NativeTypeEnum.Float);
+        //clijx.stopWatch("another map");
         keyValueMap.readFrom(FloatBuffer.wrap(allNewIndices), true);
+        //clijx.stopWatch("another copy " + allNewIndices.length);
 
         ReplaceIntensities.replaceIntensities(clijx, input, keyValueMap, output);
+        //clijx.stopWatch("after replacing");
 
-        keyValueMap.close();
+        //keyValueMap.close();
+
+        System.out.println("CCA shift intensities took " + (System.currentTimeMillis() - timeStamp));
         return true;
     }
 

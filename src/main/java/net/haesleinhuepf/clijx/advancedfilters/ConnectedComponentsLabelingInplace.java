@@ -100,7 +100,7 @@ public class ConnectedComponentsLabelingInplace extends AbstractCLIJxPlugin impl
             flopkernel.close();
         }
 
-
+        clijx.stopWatch("before shift intensities");
         shiftIntensitiesToCloseGaps(clijx, temp3, output);
 
         clijx.release(temp1);
