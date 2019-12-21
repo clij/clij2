@@ -20,6 +20,6 @@ __kernel void iterative_mean_box_2d
   sum = sum + READ_src_IMAGE(src, sampler, (pos + (int2){1, 1})).x;
   sum = sum + READ_src_IMAGE(src, sampler, (pos + (int2){-1, 1})).x;
 
-  WRITE_dst_IMAGE (dst_edge_image, pos, CONVERT_dst_edge_image_PIXEL_TYPE(sum / 9.0));
+  WRITE_dst_IMAGE (dst, pos, CONVERT_dst_PIXEL_TYPE(sum / 9.0));
 }
 
