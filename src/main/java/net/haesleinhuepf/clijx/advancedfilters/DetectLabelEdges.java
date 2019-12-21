@@ -33,15 +33,7 @@ public class DetectLabelEdges extends AbstractCLIJxPlugin implements CLIJMacroPl
 
     @Override
     public String getParameterHelpText() {
-        return "Image label_map, Image touch_matrix_destination";
-    }
-
-    @Override
-    public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input)
-    {
-        double maxValue = clij.op().maximumOfAllPixels(input) + 1;
-        ClearCLBuffer output = clij.createCLBuffer(new long[]{(long)maxValue, (long)maxValue}, NativeTypeEnum.Float);
-        return output;
+        return "Image label_map, Image edge_image_destination";
     }
 
     @Override
