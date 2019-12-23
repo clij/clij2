@@ -154,7 +154,8 @@ public interface CLIJ2Plugins {
             TopHatOctagon.class,
             AddImages.class,
             AddImagesWeighted.class,
-            SubtractImages.class
+            SubtractImages.class,
+            ShowGlasbeyOnGrey.class
     };
 
     public String blockList = ";" +
