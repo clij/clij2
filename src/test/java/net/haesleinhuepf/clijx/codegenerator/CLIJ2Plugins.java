@@ -19,6 +19,8 @@ import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
 import net.haesleinhuepf.clijx.registration.TranslationRegistration;
 import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
 import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
+import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
+import net.haesleinhuepf.clijx.weka.TrainWekaModel;
 
 public interface CLIJ2Plugins {
     public Class[] classes = {
@@ -155,7 +157,9 @@ public interface CLIJ2Plugins {
             AddImages.class,
             AddImagesWeighted.class,
             SubtractImages.class,
-            ShowGlasbeyOnGrey.class
+            ShowGlasbeyOnGrey.class,
+            ApplyWekaModel.class,
+            TrainWekaModel.class
     };
 
     public String blockList = ";" +
