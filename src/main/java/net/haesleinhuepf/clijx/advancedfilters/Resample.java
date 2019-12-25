@@ -31,7 +31,7 @@ public class Resample extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLI
         return result;
     }
 
-    public static boolean resample(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, float factorX, float factorY, float factorZ, boolean linearInterpolation) {
+    public static boolean resample(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY, Float factorZ, boolean linearInterpolation) {
         AffineTransform3D at = new AffineTransform3D();
         at.set(factorX, 0, 0, 0,
                 0, factorY, 0, 0,
