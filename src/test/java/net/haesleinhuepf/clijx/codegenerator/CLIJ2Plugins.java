@@ -163,7 +163,8 @@ public interface CLIJ2Plugins {
             AffineTransform2D.class,
             AffineTransform3D.class,
             ApplyVectorField2D.class,
-            ApplyVectorField3D.class
+            ApplyVectorField3D.class,
+            ArgMaximumZProjection.class
     };
 
     public String blockList = ";" +
@@ -176,5 +177,6 @@ public interface CLIJ2Plugins {
             "Kernels.affineTransform2D;" +
             "Kernels.affineTransform3D;" +
             "Kernels.threshold;" +
-            "Kernels.applyVectorfield";
+            "Kernels.applyVectorfield;" +
+            "Kernels.argMaximumZProjection;";
 }
