@@ -6,6 +6,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,15 +18,15 @@ import java.util.HashMap;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_smallerOrEqual")
-public class SmallerOrEqual extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class SmallerOrEqual extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        boolean result = smallerOrEqual(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = smallerOrEqual(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         return result;
     }
 
-    public static boolean smallerOrEqual(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer src2, ClearCLBuffer dst) {
+    public static boolean smallerOrEqual(CLIJx clijx, ClearCLBuffer src1, ClearCLBuffer src2, ClearCLBuffer dst) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
@@ -33,10 +35,9 @@ public class SmallerOrEqual extends AbstractCLIJPlugin implements CLIJMacroPlugi
         parameters.put("src2", src2);
         parameters.put("dst", dst);
 
-        return clij.execute(SmallerOrEqual.class, "comparison.cl", "smaller_or_equal_" + src1.getDimension() + "d", parameters);
+        clijx.execute(SmallerOrEqual.class, "smaller_or_equal_" + src1.getDimension() + "d_x.cl", "smaller_or_equal_" + src1.getDimension() + "d", src1.getDimensions(), src1.getDimensions(), parameters);
+        return true;
     }
-        
-    
     
     @Override
     public String getParameterHelpText() {

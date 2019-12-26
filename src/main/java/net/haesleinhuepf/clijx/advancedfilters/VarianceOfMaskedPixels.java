@@ -8,6 +8,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.numeric.RealType;
@@ -22,11 +24,11 @@ import java.util.HashMap;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_varianceOfMaskedPixels")
-public class VarianceOfMaskedPixels extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class VarianceOfMaskedPixels extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        double minVal = varianceOfMaskedPixels(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        double minVal = varianceOfMaskedPixels(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();
@@ -35,42 +37,42 @@ public class VarianceOfMaskedPixels extends AbstractCLIJPlugin implements CLIJMa
         return true;
     }
 
-    public static double varianceOfMaskedPixels(CLIJ clij, ClearCLBuffer buffer1, ClearCLBuffer mask) {
-        double meanIntensity = MeanOfMaskedPixels.meanOfMaskedPixels(clij, buffer1, mask);
-        return varianceOfMaskedPixels(clij, buffer1, mask, new Float(meanIntensity));
+    public static double varianceOfMaskedPixels(CLIJx clijx, ClearCLBuffer buffer1, ClearCLBuffer mask) {
+        double meanIntensity = MeanOfMaskedPixels.meanOfMaskedPixels(clijx, buffer1, mask);
+        return varianceOfMaskedPixels(clijx, buffer1, mask, new Float(meanIntensity));
     }
 
-    public static double varianceOfMaskedPixels(CLIJ clij, ClearCLBuffer buffer1, ClearCLBuffer mask, Float meanIntensity) {
+    public static double varianceOfMaskedPixels(CLIJx clijx, ClearCLBuffer buffer1, ClearCLBuffer mask, Float meanIntensity) {
         ClearCLBuffer clReducedImage = buffer1;
         float sum = 0;
         if (buffer1.getDimension() == 3) {
-            clReducedImage = clij.createCLBuffer(new long[]{buffer1.getWidth(), buffer1.getHeight()}, NativeTypeEnum.Float);
+            clReducedImage = clijx.create(new long[]{buffer1.getWidth(), buffer1.getHeight()}, NativeTypeEnum.Float);
 
             HashMap<String, Object> parameters = new HashMap<>();
             parameters.put("src", buffer1);
             parameters.put("src_mask", mask);
             parameters.put("dst", clReducedImage);
             parameters.put("mean_intensity", meanIntensity);
-            clij.execute(VarianceOfMaskedPixels.class, "varianceProject.cl", "masked_squared_sum_project_3d_2d", parameters);
+            clijx.execute(VarianceOfMaskedPixels.class, "variance_projection_3d_2d_x.cl", "masked_squared_sum_project_3d_2d", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
         } else {
-            clReducedImage = clij.createCLBuffer(new long[]{buffer1.getWidth(), buffer1.getHeight()}, NativeTypeEnum.Float);
+            clReducedImage = clijx.create(new long[]{buffer1.getWidth(), buffer1.getHeight()}, NativeTypeEnum.Float);
 
             HashMap<String, Object> parameters = new HashMap<>();
             parameters.put("src", buffer1);
             parameters.put("src_mask", mask);
             parameters.put("dst", clReducedImage);
             parameters.put("mean_intensity", meanIntensity);
-            clij.execute(VarianceOfMaskedPixels.class, "variance2d.cl", "masked_squared_sum_2d_2d", parameters);
+            clijx.execute(VarianceOfMaskedPixels.class, "variance_2d_x.cl", "masked_squared_sum_2d_2d", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
         }
 
-        RandomAccessibleInterval rai = clij.convert(clReducedImage, RandomAccessibleInterval.class);
+        RandomAccessibleInterval rai = clijx.convert(clReducedImage, RandomAccessibleInterval.class);
         Cursor cursor = Views.iterable(rai).cursor();
         while (cursor.hasNext()) {
             sum += ((RealType) cursor.next()).getRealFloat();
         }
 
         clReducedImage.close();
-        return sum / clij.op().sumPixels(mask);
+        return sum / clijx.sumPixels(mask);
     }
 
     @Override

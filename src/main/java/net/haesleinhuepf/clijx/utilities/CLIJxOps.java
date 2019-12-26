@@ -2485,14 +2485,14 @@ public abstract class CLIJxOps {
      * Determines the median projection of an image along Z.
      */
     public boolean medianZProjection(ClearCLBuffer source, ClearCLBuffer destination) {
-        return MedianZProjection.medianZProjection(clij, source, destination);
+        return MedianZProjection.medianZProjection(clijx, source, destination);
     }
 
     /**
      * Determines the median projection of an image along Z.
      */
     public boolean medianZProjection(ClearCLImage source, ClearCLImage destination) {
-        return MedianZProjection.medianZProjection(clij, source, destination);
+        return MedianZProjection.medianZProjection(clijx, source, destination);
     }
 
 
@@ -2702,7 +2702,7 @@ public abstract class CLIJxOps {
      * f(x) = exp(x)
      */
     public boolean exponential(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Exponential.exponential(clij, source, destination);
+        return Exponential.exponential(clijx, source, destination);
     }
 
     /**
@@ -2711,7 +2711,7 @@ public abstract class CLIJxOps {
      * f(x) = exp(x)
      */
     public boolean exponential(ClearCLImage source, ClearCLImage destination) {
-        return Exponential.exponential(clij, source, destination);
+        return Exponential.exponential(clijx, source, destination);
     }
 
 
@@ -2723,7 +2723,7 @@ public abstract class CLIJxOps {
      * f(x) = logarithm(x)
      */
     public boolean logarithm(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Logarithm.logarithm(clij, source, destination);
+        return Logarithm.logarithm(clijx, source, destination);
     }
 
     /**
@@ -2732,7 +2732,7 @@ public abstract class CLIJxOps {
      * f(x) = logarithm(x)
      */
     public boolean logarithm(ClearCLImage source, ClearCLImage destination) {
-        return Logarithm.logarithm(clij, source, destination);
+        return Logarithm.logarithm(clijx, source, destination);
     }
 
 
@@ -2982,7 +2982,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a == b; 0 otherwise. 
      */
     public boolean equal(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
-        return Equal.equal(clij, source1, source2, destination);
+        return Equal.equal(clijx, source1, source2, destination);
     }
 
 
@@ -2994,7 +2994,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a >= b; 0 otherwise. 
      */
     public boolean greaterOrEqual(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
-        return GreaterOrEqual.greaterOrEqual(clij, source1, source2, destination);
+        return GreaterOrEqual.greaterOrEqual(clijx, source1, source2, destination);
     }
 
 
@@ -3006,7 +3006,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a > b; 0 otherwise. 
      */
     public boolean greater(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
-        return Greater.greater(clij, source1, source2, destination);
+        return Greater.greater(clijx, source1, source2, destination);
     }
 
 
@@ -3018,7 +3018,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a < b; 0 otherwise. 
      */
     public boolean smaller(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
-        return Smaller.smaller(clij, source1, source2, destination);
+        return Smaller.smaller(clijx, source1, source2, destination);
     }
 
 
@@ -3030,7 +3030,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a <= b; 0 otherwise. 
      */
     public boolean smallerOrEqual(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
-        return SmallerOrEqual.smallerOrEqual(clij, source1, source2, destination);
+        return SmallerOrEqual.smallerOrEqual(clijx, source1, source2, destination);
     }
 
 
@@ -3042,7 +3042,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a != b; 0 otherwise. 
      */
     public boolean notEqual(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
-        return NotEqual.notEqual(clij, source1, source2, destination);
+        return NotEqual.notEqual(clijx, source1, source2, destination);
     }
 
 
@@ -3093,7 +3093,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a == b; 0 otherwise. 
      */
     public boolean equalConstant(ClearCLBuffer source, ClearCLBuffer destination, double constant) {
-        return EqualConstant.equalConstant(clij, source, destination, new Double (constant).floatValue());
+        return EqualConstant.equalConstant(clijx, source, destination, new Double (constant).floatValue());
     }
 
 
@@ -3105,7 +3105,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a >= b; 0 otherwise. 
      */
     public boolean greaterOrEqualConstant(ClearCLBuffer source, ClearCLBuffer destination, double constant) {
-        return GreaterOrEqualConstant.greaterOrEqualConstant(clij, source, destination, new Double (constant).floatValue());
+        return GreaterOrEqualConstant.greaterOrEqualConstant(clijx, source, destination, new Double (constant).floatValue());
     }
 
 
@@ -3117,7 +3117,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a > b; 0 otherwise. 
      */
     public boolean greaterConstant(ClearCLBuffer source, ClearCLBuffer destination, double constant) {
-        return GreaterConstant.greaterConstant(clij, source, destination, new Double (constant).floatValue());
+        return GreaterConstant.greaterConstant(clijx, source, destination, new Double (constant).floatValue());
     }
 
 
@@ -3129,7 +3129,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a < b; 0 otherwise. 
      */
     public boolean smallerConstant(ClearCLBuffer source, ClearCLBuffer destination, double constant) {
-        return SmallerConstant.smallerConstant(clij, source, destination, new Double (constant).floatValue());
+        return SmallerConstant.smallerConstant(clijx, source, destination, new Double (constant).floatValue());
     }
 
 
@@ -3141,7 +3141,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a <= b; 0 otherwise. 
      */
     public boolean smallerOrEqualConstant(ClearCLBuffer source, ClearCLBuffer destination, double constant) {
-        return SmallerOrEqualConstant.smallerOrEqualConstant(clij, source, destination, new Double (constant).floatValue());
+        return SmallerOrEqualConstant.smallerOrEqualConstant(clijx, source, destination, new Double (constant).floatValue());
     }
 
 
@@ -3153,7 +3153,7 @@ public abstract class CLIJxOps {
      * f(a, b) = 1 if a != b; 0 otherwise. 
      */
     public boolean notEqualConstant(ClearCLBuffer source, ClearCLBuffer destination, double constant) {
-        return NotEqualConstant.notEqualConstant(clij, source, destination, new Double (constant).floatValue());
+        return NotEqualConstant.notEqualConstant(clijx, source, destination, new Double (constant).floatValue());
     }
 
 
@@ -3248,7 +3248,7 @@ public abstract class CLIJxOps {
      * Determines the mean intensity in an image, but only in pixels which have non-zero values in another binary mask image.
      */
     public double meanOfMaskedPixels(ClearCLBuffer source, ClearCLBuffer mask) {
-        return MeanOfMaskedPixels.meanOfMaskedPixels(clij, source, mask);
+        return MeanOfMaskedPixels.meanOfMaskedPixels(clijx, source, mask);
     }
 
 
@@ -3258,7 +3258,7 @@ public abstract class CLIJxOps {
      * Masks a single label in a label map: Sets all pixels in the target image to 1, where the given label index was present in the label map. Other pixels are set to 0.
      */
     public boolean labelToMask(ClearCLBuffer label_map_source, ClearCLBuffer mask_destination, double label_index) {
-        return LabelToMask.labelToMask(clij, label_map_source, mask_destination, new Double (label_index).floatValue());
+        return LabelToMask.labelToMask(clijx, label_map_source, mask_destination, new Double (label_index).floatValue());
     }
 
 
@@ -3332,7 +3332,7 @@ public abstract class CLIJxOps {
      * Results table in the column 'Variance'.
      */
     public double varianceOfAllPixels(ClearCLBuffer source) {
-        return VarianceOfAllPixels.varianceOfAllPixels(clij, source);
+        return VarianceOfAllPixels.varianceOfAllPixels(clijx, source);
     }
 
     /**
@@ -3340,7 +3340,7 @@ public abstract class CLIJxOps {
      * Results table in the column 'Variance'.
      */
     public double varianceOfAllPixels(ClearCLBuffer arg1, double arg2) {
-        return VarianceOfAllPixels.varianceOfAllPixels(clij, arg1, new Double (arg2).floatValue());
+        return VarianceOfAllPixels.varianceOfAllPixels(clijx, arg1, new Double (arg2).floatValue());
     }
 
 
@@ -3351,7 +3351,7 @@ public abstract class CLIJxOps {
      * Results table in the column 'Standard_deviation'.
      */
     public double standardDeviationOfAllPixels(ClearCLBuffer source) {
-        return StandardDeviationOfAllPixels.standardDeviationOfAllPixels(clij, source);
+        return StandardDeviationOfAllPixels.standardDeviationOfAllPixels(clijx, source);
     }
 
     /**
@@ -3359,7 +3359,7 @@ public abstract class CLIJxOps {
      * Results table in the column 'Standard_deviation'.
      */
     public double standardDeviationOfAllPixels(ClearCLBuffer arg1, double arg2) {
-        return StandardDeviationOfAllPixels.standardDeviationOfAllPixels(clij, arg1, new Double (arg2).floatValue());
+        return StandardDeviationOfAllPixels.standardDeviationOfAllPixels(clijx, arg1, new Double (arg2).floatValue());
     }
 
 
@@ -3416,7 +3416,7 @@ public abstract class CLIJxOps {
      * Pulls a binary image from the GPU memory and puts it on the currently active ImageJ window.
      */
     public Roi pullAsROI(ClearCLBuffer binary_input) {
-        return PullAsROI.pullAsROI(clij, binary_input);
+        return PullAsROI.pullAsROI(clijx, binary_input);
     }
 
 
@@ -3877,7 +3877,7 @@ public abstract class CLIJxOps {
      * Determines the mean intensity in an image, but only in pixels which are above a given threshold.
      */
     public double meanOfPixelsAboveThreshold(ClearCLBuffer source, double threshold) {
-        return MeanOfPixelsAboveThreshold.meanOfPixelsAboveThreshold(clij, source, new Double (threshold).floatValue());
+        return MeanOfPixelsAboveThreshold.meanOfPixelsAboveThreshold(clijx, source, new Double (threshold).floatValue());
     }
 
 

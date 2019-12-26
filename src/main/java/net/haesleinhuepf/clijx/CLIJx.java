@@ -314,4 +314,8 @@ public class CLIJx extends CLIJxOps{
     public boolean hasImageSupport() {
         return clij.hasImageSupport();
     }
+
+    public ImagePlus pullBinary(ClearCLBuffer input) {
+        return clij.pullBinary(input);
+    }
 }

@@ -3,6 +3,7 @@ package net.haesleinhuepf.clijx.advancedmath;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -10,6 +11,8 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 
 import java.util.HashMap;
 
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import net.haesleinhuepf.clijx.utilities.HasAuthor;
 import org.scijava.plugin.Plugin;
 
@@ -26,35 +29,21 @@ import org.scijava.plugin.Plugin;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_logarithm")
-public class Logarithm extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor {
+public class Logarithm extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor {
 
     @Override
     public boolean executeCL() {
-        if (containsCLImageArguments()) {
-            return logarithm(clij, (ClearCLImage)( args[0]), (ClearCLImage)(args[1]));
-        } else {
-            Object[] args = openCLBufferArgs();
-            boolean result = logarithm(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
-            releaseBuffers(args);
-            return result;
-        }
+        boolean result = logarithm(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return result;
     }
 
-    
-    public static boolean logarithm(CLIJ clij, ClearCLImage src, ClearCLImage dst) {
-        HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put("src", src);
-        parameters.put("dst", dst);
-        
-        return clij.execute(Logarithm.class, "advmath.cl", "log_" + src.getDimension() + "d", parameters);
-    }
-
-    public static boolean logarithm(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst) {
+    public static boolean logarithm(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
 
-        return clij.execute(Logarithm.class, "advmath.cl", "log_" + src.getDimension() + "d", parameters);
+        clijx.execute(Logarithm.class, "logarithm_" + src.getDimension() + "d_x.cl", "logarithm_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        return true;
     }
      
     
@@ -65,7 +54,7 @@ public class Logarithm extends AbstractCLIJPlugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getDescription() {
-        return "Computes baseE logarithm of all pixels values.\n\nf(x) = logarithm(x)";
+        return "Computes base e logarithm of all pixels values.\n\nf(x) = log(x)";
     }
 
     @Override
@@ -75,6 +64,6 @@ public class Logarithm extends AbstractCLIJPlugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getAuthorName() {
-        return "Peter Haub";
+        return "Peter Haub, Robert Haase";
     }
 }

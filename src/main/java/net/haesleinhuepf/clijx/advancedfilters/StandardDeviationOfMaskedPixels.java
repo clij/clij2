@@ -7,6 +7,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -14,7 +16,7 @@ import org.scijava.plugin.Plugin;
  *         September 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_standardDeviationOfMaskedPixels")
-public class StandardDeviationOfMaskedPixels extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class StandardDeviationOfMaskedPixels extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
@@ -24,7 +26,7 @@ public class StandardDeviationOfMaskedPixels extends AbstractCLIJPlugin implemen
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
         ClearCLBuffer mask = (ClearCLBuffer)( args[1]);
 
-        variance = standardDeviationOfMaskedPixels(clij, buffer1, mask);
+        variance = standardDeviationOfMaskedPixels(getCLIJx(), buffer1, mask);
         releaseBuffers(args);
 
 
@@ -35,13 +37,13 @@ public class StandardDeviationOfMaskedPixels extends AbstractCLIJPlugin implemen
         return true;
     }
 
-    public static double standardDeviationOfMaskedPixels(CLIJ clij, ClearCLBuffer buffer1, ClearCLBuffer mask) {
-        double meanIntensity = MeanOfMaskedPixels.meanOfMaskedPixels(clij, buffer1, mask);
-        return standardDeviationOfMaskedPixels(clij, buffer1, mask, new Float(meanIntensity));
+    public static double standardDeviationOfMaskedPixels(CLIJx clijx, ClearCLBuffer buffer1, ClearCLBuffer mask) {
+        double meanIntensity = MeanOfMaskedPixels.meanOfMaskedPixels(clijx, buffer1, mask);
+        return standardDeviationOfMaskedPixels(clijx, buffer1, mask, new Float(meanIntensity));
     }
 
-    public static double standardDeviationOfMaskedPixels(CLIJ clij, ClearCLBuffer buffer1, ClearCLBuffer mask, Float meanIntensity) {
-        return Math.sqrt(VarianceOfMaskedPixels.varianceOfMaskedPixels(clij, buffer1, mask, meanIntensity));
+    public static double standardDeviationOfMaskedPixels(CLIJx clijx, ClearCLBuffer buffer1, ClearCLBuffer mask, Float meanIntensity) {
+        return Math.sqrt(VarianceOfMaskedPixels.varianceOfMaskedPixels(clijx, buffer1, mask, meanIntensity));
     }
 
     @Override

@@ -1,12 +1,14 @@
 package net.haesleinhuepf.clijx.advancedfilters;
 
 import net.haesleinhuepf.clij.CLIJ;
+import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.advancedmath.EqualConstant;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -15,16 +17,16 @@ import org.scijava.plugin.Plugin;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_labelToMask")
-public class LabelToMask extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class LabelToMask extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        boolean result = labelToMask(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        boolean result = labelToMask(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
         return result;
     }
 
-    public static boolean labelToMask(CLIJ clij, ClearCLBuffer labelMap, ClearCLBuffer maskOutput, Float index) {
-        return EqualConstant.equalConstant(clij, labelMap, maskOutput, index);
+    public static boolean labelToMask(CLIJx clijx, ClearCLBuffer labelMap, ClearCLBuffer maskOutput, Float index) {
+        return EqualConstant.equalConstant(clijx, labelMap, maskOutput, index);
     }
 
     @Override

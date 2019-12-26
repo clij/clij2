@@ -34,9 +34,9 @@ public class SmallerOrEqualTest {
         ClearCLBuffer clTest = clijx.create(clA);
         ClearCLBuffer clC = clijx.push(c);
 
-        clijx.op.smallerOrEqual(clA, clB, clTest);
+        clijx.smallerOrEqual(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clijx.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(clijx.matrixEqual(clTest, clC, 0f));
 
         clA.close();
         clB.close();

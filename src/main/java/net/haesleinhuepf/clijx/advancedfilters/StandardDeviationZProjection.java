@@ -3,6 +3,7 @@ package net.haesleinhuepf.clijx.advancedfilters;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -20,31 +21,16 @@ public class StandardDeviationZProjection extends AbstractCLIJPlugin implements 
 
     @Override
     public boolean executeCL() {
-        if (containsCLImageArguments()) {
-            return standardDeviationZProjection(clij, (ClearCLImage)( args[0]), (ClearCLImage)(args[1]));
-        } else {
-            Object[] args = openCLBufferArgs();
-            boolean result = standardDeviationZProjection(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
-            releaseBuffers(args);
-            return result;
-        }
+        boolean result = standardDeviationZProjection(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return result;
     }
 
-    public static boolean standardDeviationZProjection(CLIJ clij, ClearCLImage input, ClearCLImage output) {
-        return standardDeviationZProjection_internal(clij, input, output);
-    }
-
-    public static boolean standardDeviationZProjection(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
-        return standardDeviationZProjection_internal(clij, input, output);
-    }
-
-    private static boolean standardDeviationZProjection_internal(CLIJ clij, Object input, Object output) {
-
+    public static boolean standardDeviationZProjection(CLIJ clij, ClearCLImageInterface input, ClearCLImageInterface output) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", input);
         parameters.put("dst", output);
 
-        return clij.execute(StandardDeviationZProjection.class, "projections.cl", "stddev_project_3d_2d", parameters);
+        return clij.execute(StandardDeviationZProjection.class, "standard_deviation_z_projection_3d_2d_x.cl", "standard_deviation_z_projection_3d_2d", parameters);
     }
 
     @Override
@@ -60,7 +46,7 @@ public class StandardDeviationZProjection extends AbstractCLIJPlugin implements 
 
     @Override
     public String getDescription() {
-        return "Determines the standard deviation projection of an image along Z.";
+        return "Determines the standard deviation projection of an image stack along Z.";
     }
 
     @Override

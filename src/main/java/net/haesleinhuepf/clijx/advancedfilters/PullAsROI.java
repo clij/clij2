@@ -11,10 +11,12 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_pullAsROI")
-public class PullAsROI extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class PullAsROI extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -23,18 +25,17 @@ public class PullAsROI extends AbstractCLIJPlugin implements CLIJMacroPlugin, CL
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        Roi result = pullAsROI(clij, (ClearCLBuffer) (args[0]));
+        Roi result = pullAsROI(getCLIJx(), (ClearCLBuffer) (args[0]));
         ImagePlus imp = IJ.getImage();
         if (imp != null) {
             imp.setRoi(result);
         }
-        releaseBuffers(args);
+
         return true;
     }
 
-    public static Roi pullAsROI(CLIJ clij, ClearCLBuffer input) {
-        ImagePlus imp = clij.pullBinary(input);
+    public static Roi pullAsROI(CLIJx clijx, ClearCLBuffer input) {
+        ImagePlus imp = clijx.pullBinary(input);
         ImageProcessor ip = imp.getProcessor();
         ip.setThreshold(127, 256, ImageProcessor.NO_LUT_UPDATE);
         IJ.runPlugIn(imp, "ij.plugin.filter.ThresholdToSelection", "");

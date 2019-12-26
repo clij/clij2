@@ -2,12 +2,14 @@ package net.haesleinhuepf.clijx.advancedfilters;
 
 import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
+import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.advancedmath.EqualConstant;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -16,11 +18,11 @@ import org.scijava.plugin.Plugin;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_meanOfMaskedPixels")
-public class MeanOfMaskedPixels extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class MeanOfMaskedPixels extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        double minVal = meanOfMaskedPixels(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        double minVal = meanOfMaskedPixels(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();
@@ -29,16 +31,16 @@ public class MeanOfMaskedPixels extends AbstractCLIJPlugin implements CLIJMacroP
         return true;
     }
 
-    public static double meanOfMaskedPixels(CLIJ clij, ClearCLBuffer clImage, ClearCLBuffer mask) {
-        ClearCLBuffer tempBinary = clij.create(clImage);
+    public static double meanOfMaskedPixels(CLIJx clijx, ClearCLBuffer clImage, ClearCLBuffer mask) {
+        ClearCLBuffer tempBinary = clijx.create(clImage);
         // todo: if we can be sure that the mask has really only 0 and 1 pixel values, we can skip this first step:
-        ClearCLBuffer tempMultiplied = clij.create(clImage);
-        EqualConstant.equalConstant(clij, mask, tempBinary, 1f);
-        clij.op().mask(clImage, tempBinary, tempMultiplied);
-        double sum = clij.op().sumPixels(tempMultiplied);
-        double count = clij.op().sumPixels(tempBinary);
-        tempBinary.close();
-        tempMultiplied.close();
+        ClearCLBuffer tempMultiplied = clijx.create(clImage);
+        EqualConstant.equalConstant(clijx, mask, tempBinary, 1f);
+        clijx.mask(clImage, tempBinary, tempMultiplied);
+        double sum = clijx.sumPixels(tempMultiplied);
+        double count = clijx.sumPixels(tempBinary);
+        clijx.release(tempBinary);
+        clijx.release(tempMultiplied);
         return sum / count;
     }
 

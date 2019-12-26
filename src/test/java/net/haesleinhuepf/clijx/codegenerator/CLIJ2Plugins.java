@@ -172,5 +172,6 @@ public interface CLIJ2Plugins {
             "Kernels.subtract;" +
             "Kernels.affineTransform;" +
             "Kernels.affineTransform2D;" +
-            "Kernels.affineTransform3D;";
+            "Kernels.affineTransform3D;" +
+            "Kernels.threshold;";
 }

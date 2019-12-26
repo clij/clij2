@@ -34,9 +34,9 @@ public class NotEqualTest {
         ClearCLBuffer clTest = clijx.create(clA);
         ClearCLBuffer clC = clijx.push(c);
 
-        clijx.op.equal(clA, clB, clTest);
+        clijx.equal(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clijx.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(clijx.matrixEqual(clTest, clC, 0f));
 
         clA.close();
         clB.close();

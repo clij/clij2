@@ -7,6 +7,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -14,18 +16,15 @@ import org.scijava.plugin.Plugin;
  *         September 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_standardDeviationOfAllPixels")
-public class StandardDeviationOfAllPixels extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class StandardDeviationOfAllPixels extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
         double stdDev = 0;
 
-        Object[] args = openCLBufferArgs();
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
 
-        stdDev = standardDeviationOfAllPixels(clij, buffer1);
-        releaseBuffers(args);
-
+        stdDev = standardDeviationOfAllPixels(getCLIJx(), buffer1);
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();
@@ -34,13 +33,13 @@ public class StandardDeviationOfAllPixels extends AbstractCLIJPlugin implements 
         return true;
     }
 
-    public static double standardDeviationOfAllPixels(CLIJ clij, ClearCLBuffer buffer1) {
-        double meanIntensity = clij.op().sumPixels(buffer1) / (buffer1.getWidth() * buffer1.getHeight() * buffer1.getDepth());
-        return standardDeviationOfAllPixels(clij, buffer1, new Float(meanIntensity));
+    public static double standardDeviationOfAllPixels(CLIJx clijx, ClearCLBuffer buffer1) {
+        double meanIntensity = clijx.sumPixels(buffer1) / (buffer1.getWidth() * buffer1.getHeight() * buffer1.getDepth());
+        return standardDeviationOfAllPixels(clijx, buffer1, new Float(meanIntensity));
     }
 
-    public static double standardDeviationOfAllPixels(CLIJ clij, ClearCLBuffer buffer1, Float meanIntensity) {
-        return Math.sqrt(VarianceOfAllPixels.varianceOfAllPixels(clij, buffer1, meanIntensity));
+    public static double standardDeviationOfAllPixels(CLIJx clijx, ClearCLBuffer buffer1, Float meanIntensity) {
+        return Math.sqrt(VarianceOfAllPixels.varianceOfAllPixels(clijx, buffer1, meanIntensity));
     }
 
     @Override

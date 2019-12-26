@@ -3,10 +3,13 @@ package net.haesleinhuepf.clijx.advancedfilters;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,35 +19,21 @@ import java.util.HashMap;
  * June 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_medianZProjection")
-public class MedianZProjection extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class MedianZProjection extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        if (containsCLImageArguments()) {
-            return medianZProjection(clij, (ClearCLImage)( args[0]), (ClearCLImage)(args[1]));
-        } else {
-            Object[] args = openCLBufferArgs();
-            boolean result = medianZProjection(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
-            releaseBuffers(args);
-            return result;
-        }
+        boolean result = medianZProjection(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return result;
     }
 
-    public static boolean medianZProjection(CLIJ clij, ClearCLImage input, ClearCLImage output) {
-        return medianZProjection_internal(clij, input, output);
-    }
-
-    public static boolean medianZProjection(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
-        return medianZProjection_internal(clij, input, output);
-    }
-
-    private static boolean medianZProjection_internal(CLIJ clij, Object input, Object output) {
-
+    public static boolean medianZProjection(CLIJx clijx, ClearCLImageInterface input, ClearCLImageInterface output) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", input);
         parameters.put("dst", output);
 
-        return clij.execute(MedianZProjection.class, "projections.cl", "median_project_3d_2d", parameters);
+        clijx.execute(MedianZProjection.class, "median_z_projection_3d_2d_x.cl", "median_project_3d_2d", output.getDimensions(), output.getDimensions(), parameters);
+        return true;
     }
 
     @Override
@@ -60,7 +49,7 @@ public class MedianZProjection extends AbstractCLIJPlugin implements CLIJMacroPl
 
     @Override
     public String getDescription() {
-        return "Determines the median projection of an image along Z.";
+        return "Determines the median projection of an image stack along Z.";
     }
 
     @Override

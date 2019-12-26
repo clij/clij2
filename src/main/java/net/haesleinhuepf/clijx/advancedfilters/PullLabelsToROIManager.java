@@ -3,16 +3,18 @@ package net.haesleinhuepf.clijx.advancedfilters;
 
 import ij.gui.Roi;
 import ij.plugin.frame.RoiManager;
+import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.advancedmath.EqualConstant;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_pullLabelsToROIManager")
-public class PullLabelsToROIManager extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class PullLabelsToROIManager extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -21,23 +23,20 @@ public class PullLabelsToROIManager extends AbstractCLIJPlugin implements CLIJMa
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-
+        CLIJx clijx = getCLIJx();
         RoiManager rm = RoiManager.getInstance();
         if (rm == null) {
             rm = new RoiManager();
         }
         ClearCLBuffer labelMap = (ClearCLBuffer) args[0];
-        ClearCLBuffer binary = clij.create(labelMap);
-        int numberOfLabels = (int) clij.op().maximumOfAllPixels(labelMap);
+        ClearCLBuffer binary = clijx.create(labelMap);
+        int numberOfLabels = (int) clijx.maximumOfAllPixels(labelMap);
         for (int i = 1; i < numberOfLabels; i++) {
-            EqualConstant.equalConstant(clij, labelMap, binary, new Float(i));
-            Roi roi = PullAsROI.pullAsROI(clij, binary);
+            EqualConstant.equalConstant(clijx, labelMap, binary, new Float(i));
+            Roi roi = PullAsROI.pullAsROI(clijx, binary);
             rm.addRoi(roi);
         }
-        binary.close();
-
-        releaseBuffers(args);
+        clijx.release(binary);
         return true;
     }
 

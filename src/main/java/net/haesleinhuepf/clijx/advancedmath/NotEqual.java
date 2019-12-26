@@ -2,10 +2,13 @@ package net.haesleinhuepf.clijx.advancedmath;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,15 +19,15 @@ import java.util.HashMap;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_notEqual")
-public class NotEqual extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class NotEqual extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        boolean result = notEqual(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = notEqual(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         return result;
     }
 
-    public static boolean notEqual(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer src2, ClearCLBuffer dst) {
+    public static boolean notEqual(CLIJx clijx, ClearCLImageInterface src1, ClearCLImageInterface src2, ClearCLBuffer dst) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
@@ -33,7 +36,9 @@ public class NotEqual extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLI
         parameters.put("src2", src2);
         parameters.put("dst", dst);
 
-        return clij.execute(NotEqual.class, "comparison.cl", "not_equal_" + src1.getDimension() + "d", parameters);
+
+        clijx.execute(NotEqual.class, "not_equal_" + src1.getDimension() + "d_x.cl", "not_equal_" + src1.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        return true;
     }
         
     

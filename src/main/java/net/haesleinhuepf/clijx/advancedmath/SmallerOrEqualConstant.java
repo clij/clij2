@@ -6,6 +6,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,15 +18,15 @@ import java.util.HashMap;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_smallerOrEqualConstant")
-public class SmallerOrEqualConstant extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class SmallerOrEqualConstant extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        boolean result = smallerOrEqualConstant(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        boolean result = smallerOrEqualConstant(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
         return result;
     }
 
-    public static boolean smallerOrEqualConstant(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer dst, Float scalar) {
+    public static boolean smallerOrEqualConstant(CLIJx clijx, ClearCLBuffer src1, ClearCLBuffer dst, Float scalar) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
@@ -33,10 +35,9 @@ public class SmallerOrEqualConstant extends AbstractCLIJPlugin implements CLIJMa
         parameters.put("scalar", scalar);
         parameters.put("dst", dst);
 
-        return clij.execute(SmallerOrEqualConstant.class, "comparison_constants.cl", "smaller_or_equal_" + src1.getDimension() + "d", parameters);
+        clijx.execute(SmallerOrEqualConstant.class, "smaller_or_equal_constant_" + src1.getDimension() + "d_x.cl", "smaller_or_equal_constant_" + src1.getDimension() + "d", src1.getDimensions(), src1.getDimensions(), parameters);
+        return true;
     }
-        
-    
     
     @Override
     public String getParameterHelpText() {

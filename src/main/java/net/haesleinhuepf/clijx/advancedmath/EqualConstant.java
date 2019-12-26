@@ -2,10 +2,13 @@ package net.haesleinhuepf.clijx.advancedmath;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,15 +19,15 @@ import java.util.HashMap;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_equalConstant")
-public class EqualConstant extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class EqualConstant extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        boolean result = equalConstant(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        boolean result = equalConstant(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
         return result;
     }
 
-    public static boolean equalConstant(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer dst, Float scalar) {
+    public static boolean equalConstant(CLIJx clijx, ClearCLImageInterface src1, ClearCLImageInterface dst, Float scalar) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
@@ -33,10 +36,9 @@ public class EqualConstant extends AbstractCLIJPlugin implements CLIJMacroPlugin
         parameters.put("scalar", scalar);
         parameters.put("dst", dst);
 
-        return clij.execute(EqualConstant.class, "comparison_constants.cl", "equal_" + src1.getDimension() + "d", parameters);
+        clijx.execute(EqualConstant.class, "equal_constant_" + src1.getDimension() + "_x.cl", "equal_constant_" + src1.getDimension() + "d", src1.getDimensions(), src1.getDimensions(), parameters);
+        return true;
     }
-        
-    
     
     @Override
     public String getParameterHelpText() {

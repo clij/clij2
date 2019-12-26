@@ -8,10 +8,11 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_pullToROIManager")
-public class PullToROIManager extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class PullToROIManager extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -20,8 +21,7 @@ public class PullToROIManager extends AbstractCLIJPlugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        Roi result = PullAsROI.pullAsROI(clij, (ClearCLBuffer) (args[0]));
+        Roi result = PullAsROI.pullAsROI(getCLIJx(), (ClearCLBuffer) (args[0]));
 
         RoiManager rm = RoiManager.getInstance();
         if (rm == null) {
@@ -29,7 +29,6 @@ public class PullToROIManager extends AbstractCLIJPlugin implements CLIJMacroPlu
         }
         rm.addRoi(result);
 
-        releaseBuffers(args);
         return true;
     }
 

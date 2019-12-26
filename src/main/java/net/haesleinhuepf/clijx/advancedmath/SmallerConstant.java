@@ -6,6 +6,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,15 +18,15 @@ import java.util.HashMap;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_smallerConstant")
-public class SmallerConstant extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class SmallerConstant extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        boolean result = smallerConstant(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        boolean result = smallerConstant(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
         return result;
     }
 
-    public static boolean smallerConstant(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer dst, Float scalar) {
+    public static boolean smallerConstant(CLIJx clijx, ClearCLBuffer src1, ClearCLBuffer dst, Float scalar) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
@@ -33,7 +35,8 @@ public class SmallerConstant extends AbstractCLIJPlugin implements CLIJMacroPlug
         parameters.put("scalar", scalar);
         parameters.put("dst", dst);
 
-        return clij.execute(SmallerConstant.class, "comparison_constants.cl", "smaller_" + src1.getDimension() + "d", parameters);
+        clijx.execute(SmallerConstant.class, "smaller_constant_" + src1.getDimension() + "d_x.cl", "smaller_constant_" + src1.getDimension() + "d", src1.getDimensions(), src1.getDimensions(), parameters);
+        return true;
     }
         
     
