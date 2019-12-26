@@ -69,9 +69,9 @@ public class ApplyVectorField2D extends AbstractCLIJxPlugin implements CLIJMacro
         parameters.put("vectorY", vectorY);
 
         if (src instanceof ClearCLBuffer) {
-            clijx.execute(Kernels.class, "apply_vectorfield_2d_interpolate_x.cl", "apply_vectorfield_2d_interpolate", src.getDimensions(), src.getDimensions(), parameters);
+            clijx.execute(ApplyVectorField2D.class, "apply_vectorfield_2d_interpolate_x.cl", "apply_vectorfield_2d_interpolate", src.getDimensions(), src.getDimensions(), parameters);
         } else {
-            clijx.execute(Kernels.class, "apply_vectorfield_2d_x.cl", "apply_vectorfield_2d", src.getDimensions(), src.getDimensions(), parameters);
+            clijx.execute(ApplyVectorField2D.class, "apply_vectorfield_2d_x.cl", "apply_vectorfield_2d", src.getDimensions(), src.getDimensions(), parameters);
         }
         return true;
     }

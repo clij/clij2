@@ -74,9 +74,9 @@ public class ApplyVectorField3D extends AbstractCLIJxPlugin implements CLIJMacro
         parameters.put("vectorZ", vectorZ);
 
         if (src instanceof ClearCLBuffer) {
-            clijx.execute(Kernels.class, "apply_vectorfield_3d_interpolate_x.cl", "apply_vectorfield_3d_interpolate", src.getDimensions(), src.getDimensions(), parameters);
+            clijx.execute(ApplyVectorField3D.class, "apply_vectorfield_3d_interpolate_x.cl", "apply_vectorfield_3d_interpolate", src.getDimensions(), src.getDimensions(), parameters);
         } else {
-            clijx.execute(Kernels.class, "apply_vectorfield_3d_x.cl", "apply_vectorfield_3d", src.getDimensions(), src.getDimensions(), parameters);
+            clijx.execute(ApplyVectorField3D.class, "apply_vectorfield_3d_x.cl", "apply_vectorfield_3d", src.getDimensions(), src.getDimensions(), parameters);
         }
         return true;
     }
