@@ -5,6 +5,7 @@ import ij.ImagePlus;
 import ij.gui.Roi;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.painting.DrawBox;
 import org.junit.Test;
 
@@ -15,22 +16,24 @@ public class MeanOfMaskedPixelsTest {
 
     @Test
     public void testMean() {
-        CLIJ clij = CLIJ.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
         ImagePlus imp = IJ.openImage("src/test/resources/blobs.tif");
 
-        ClearCLBuffer input = clij.push(imp);
-        ClearCLBuffer mask = clij.create(input);
-        clij.op().set(mask, 0f);
+        ClearCLBuffer input = clijx.push(imp);
+        ClearCLBuffer mask = clijx.create(input);
+        clijx.set(mask, 0f);
 
-        DrawBox.drawBox(clij, mask, 10f, 10f, 20f, 20f);
+        DrawBox.drawBox(clijx.getClij(), mask, 10f, 10f, 20f, 20f);
 
-        double mean = MeanOfMaskedPixels.meanOfMaskedPixels(clij, input, mask);
+        double mean = MeanOfMaskedPixels.meanOfMaskedPixels(clijx, input, mask);
 
         imp.setRoi(new Roi(10,10, 20, 20));
         double meanRef = imp.getStatistics().mean;
 
         System.out.println("mean: " + mean);
         System.out.println("meanRef: " + meanRef);
+
+        clijx.clear();
 
         assertEquals(mean, meanRef, tolerance);
     }

@@ -1,5 +1,6 @@
 package net.haesleinhuepf.clijx.advmath;
 
+import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.advancedmath.Exponential;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
@@ -17,8 +18,7 @@ public class ExponentialTest {
     // @Ignore // because Test failed on Intel(R) UHD Graphics 630
     @Test
     public void exp() {
-        //CLIJ clij = CLIJ.getInstance();    	
-        CLIJ clij = CLIJ.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
         
         ImagePlus testImp2D1 = TestUtilities.getRandomImage(100, 100, 1, 32, 1, 5);
 
@@ -27,12 +27,12 @@ public class ExponentialTest {
         IJ.run(expIJ, "Exp", "");
         
         // do operation with ClearCL
-        ClearCLImage src = clij.convert(testImp2D1, ClearCLImage.class);
-        ClearCLImage dst = clij.createCLImage(src);
+        ClearCLImage src = clijx.convert(testImp2D1, ClearCLImage.class);
+        ClearCLImage dst = clijx.create(src);
 
-        Exponential.exponential(clij, src, dst);
+        Exponential.exponential(clijx, src, dst);
 
-        ImagePlus expCL = clij.convert(dst, ImagePlus.class);
+        ImagePlus expCL = clijx.convert(dst, ImagePlus.class);
 
         assertTrue(TestUtilities.compareImages(expIJ, expCL, tolerance));
 
@@ -40,15 +40,14 @@ public class ExponentialTest {
         dst.close();
 
         IJ.exit();
-        clij.close();
+        clijx.clear();
 
     }
 
     // @Ignore // because Test failed on Intel(R) UHD Graphics 630
     @Test
     public void exp_Buffers() {
-        //CLIJ clij = CLIJ.getInstance();
-        CLIJ clij = CLIJ.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
         
         ImagePlus testImp2D1 = TestUtilities.getRandomImage(100, 100, 1, 32, 1, 5);
 
@@ -57,12 +56,12 @@ public class ExponentialTest {
         IJ.run(expIJ, "Exp", "");
 
         // do operation with ClearCL
-        ClearCLBuffer src = clij.convert(testImp2D1, ClearCLBuffer.class);
-        ClearCLBuffer dst = clij.createCLBuffer(src);
+        ClearCLBuffer src = clijx.convert(testImp2D1, ClearCLBuffer.class);
+        ClearCLBuffer dst = clijx.create(src);
 
-        Exponential.exponential(clij, src, dst);
+        Exponential.exponential(clijx, src, dst);
 
-        ImagePlus expCL = clij.convert(dst, ImagePlus.class);
+        ImagePlus expCL = clijx.convert(dst, ImagePlus.class);
 
         assertTrue(TestUtilities.compareImages(expIJ, expCL, tolerance));
 
@@ -70,7 +69,7 @@ public class ExponentialTest {
         dst.close();
 
         IJ.exit();
-        clij.close();
+        clijx.clear();
     }
 
 }
