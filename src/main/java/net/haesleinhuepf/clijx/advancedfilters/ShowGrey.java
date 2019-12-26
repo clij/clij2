@@ -14,6 +14,8 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import org.scijava.plugin.Plugin;
 
+import javax.swing.*;
+
 /**
  * Author: @haesleinhuepf
  *         November 2019
@@ -29,19 +31,21 @@ public class ShowGrey extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLI
     }
 
     public static boolean showGrey(CLIJ clij, ClearCLBuffer input, String name) {
-        ImagePlus imp = clij.pull(input);
-        IJ.run(imp, "Enhance Contrast", "saturated=0.35");
+        final ImagePlus imp = clij.pull(input);
+        SwingUtilities.invokeLater(() -> {
+            IJ.run(imp, "Enhance Contrast", "saturated=0.35");
 
-        ImagePlus resultImp = WindowManager.getImage(name);
-        if (resultImp == null) {
-            resultImp = imp;
-            resultImp.setTitle(name);
+            ImagePlus resultImp = WindowManager.getImage(name);
+            if (resultImp == null) {
+                resultImp = imp;
+                resultImp.setTitle(name);
+                resultImp.show();
+            } else {
+                resultImp.setProcessor(imp.getProcessor());
+                resultImp.updateAndDraw();
+            }
             resultImp.show();
-        } else {
-            resultImp.setProcessor(imp.getProcessor());
-            resultImp.updateAndDraw();
-        }
-        resultImp.show();
+        });
         return true;
     }
 
