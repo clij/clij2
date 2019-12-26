@@ -310,4 +310,8 @@ public class CLIJx extends CLIJxOps{
     public void __exit__(Object... args) {
         clear();
     }
+
+    public boolean hasImageSupport() {
+        return clij.hasImageSupport();
+    }
 }

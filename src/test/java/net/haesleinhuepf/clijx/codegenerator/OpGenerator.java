@@ -25,8 +25,6 @@ public class OpGenerator {
         builder.append("import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;\n");
         builder.append("import net.haesleinhuepf.clij.clearcl.ClearCLImage;\n");
         builder.append("import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;\n");
-        builder.append("import net.imglib2.realtransform.AffineTransform2D;\n");
-        builder.append("import net.imglib2.realtransform.AffineTransform3D;\n");
         builder.append("import ij.measure.ResultsTable;\n");
         builder.append("import ij.gui.Roi;\n");
 
@@ -77,6 +75,12 @@ public class OpGenerator {
                             parametersCall = parametersCall + ", new Double (" + parameter.getName() + ").intValue()";
                         } else if (parameter.getType() == Boolean.class){
                             parametersHeader = parametersHeader + "boolean " + parameter.getName();
+                            parametersCall = parametersCall + ", " + parameter.getName();
+                        } else if (
+                                parameter.getType() == net.imglib2.realtransform.AffineTransform2D.class ||
+                                parameter.getType() == net.imglib2.realtransform.AffineTransform3D.class
+                        ) {
+                            parametersHeader = parametersHeader + parameter.getType().getName() + " " + parameter.getName();
                             parametersCall = parametersCall + ", " + parameter.getName();
                         } else {
                             parametersHeader = parametersHeader + parameter.getType().getSimpleName() + " " + parameter.getName();

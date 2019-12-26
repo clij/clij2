@@ -159,7 +159,9 @@ public interface CLIJ2Plugins {
             SubtractImages.class,
             ShowGlasbeyOnGrey.class,
             ApplyWekaModel.class,
-            TrainWekaModel.class
+            TrainWekaModel.class,
+            AffineTransform2D.class,
+            AffineTransform3D.class
     };
 
     public String blockList = ";" +
@@ -167,5 +169,8 @@ public interface CLIJ2Plugins {
             "Kernels.addImagesWeighted;" +
             "Kernels.addImages;" +
             "Kernels.subtractImages;" +
-            "Kernels.subtract;";
+            "Kernels.subtract;" +
+            "Kernels.affineTransform;" +
+            "Kernels.affineTransform2D;" +
+            "Kernels.affineTransform3D;";
 }
