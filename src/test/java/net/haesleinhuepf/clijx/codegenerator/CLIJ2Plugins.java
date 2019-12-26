@@ -161,7 +161,9 @@ public interface CLIJ2Plugins {
             ApplyWekaModel.class,
             TrainWekaModel.class,
             AffineTransform2D.class,
-            AffineTransform3D.class
+            AffineTransform3D.class,
+            ApplyVectorField2D.class,
+            ApplyVectorField3D.class
     };
 
     public String blockList = ";" +
@@ -173,5 +175,6 @@ public interface CLIJ2Plugins {
             "Kernels.affineTransform;" +
             "Kernels.affineTransform2D;" +
             "Kernels.affineTransform3D;" +
-            "Kernels.threshold;";
+            "Kernels.threshold;" +
+            "Kernels.applyVectorfield";
 }
