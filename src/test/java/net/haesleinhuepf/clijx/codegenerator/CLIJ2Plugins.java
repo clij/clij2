@@ -247,7 +247,8 @@ public interface CLIJ2Plugins {
             Minimum3DSphere.class,
             Minimum2DBox.class,
             Minimum3DBox.class,
-            MinimumSliceBySliceSphere.class
+            MinimumSliceBySliceSphere.class,
+            MultiplyImages.class
     };
 
     public String blockList = ";" +
@@ -328,7 +329,10 @@ public interface CLIJ2Plugins {
             "Kernels.minimumBox;" +
             "Kernels.maximumSliceBySliceSphere;" +
             "Kernels.maximumSphere;" +
-            "Kernels.maximumBox;";
+            "Kernels.maximumBox;" +
+            "Kernels.minimumIJ;" +
+            "Kernels.maximumIJ;" +
+            "Kernels.multiplyImages;";
 
 
             ;
