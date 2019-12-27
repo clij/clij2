@@ -237,7 +237,17 @@ public interface CLIJ2Plugins {
             Median3DBox.class,
             Median3DSphere.class,
             MedianSliceBySliceBox.class,
-            MedianSliceBySliceSphere.class
+            MedianSliceBySliceSphere.class,
+            Maximum2DSphere.class,
+            Maximum3DSphere.class,
+            Maximum2DBox.class,
+            Maximum3DBox.class,
+            MaximumSliceBySliceSphere.class,
+            Minimum2DSphere.class,
+            Minimum3DSphere.class,
+            Minimum2DBox.class,
+            Minimum3DBox.class,
+            MinimumSliceBySliceSphere.class
     };
 
     public String blockList = ";" +
@@ -312,5 +322,14 @@ public interface CLIJ2Plugins {
             "Kernels.medianBox;" +
             "Kernels.medianSphere;" +
             "Kernels.medianSliceBySliceSphere;" +
-            "Kernels.medianSliceBySliceBox;";
+            "Kernels.medianSliceBySliceBox;" +
+            "Kernels.minimumSliceBySliceSphere;" +
+            "Kernels.minimumSphere;" +
+            "Kernels.minimumBox;" +
+            "Kernels.maximumSliceBySliceSphere;" +
+            "Kernels.maximumSphere;" +
+            "Kernels.maximumBox;";
+
+
+            ;
 }

@@ -20,32 +20,6 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.radiusToKernelSize;
  */
 public class CLIJxAPIConsistencyWorkaround {
 
-    public static boolean minimum3DBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ ) {
-        return Kernels.minimumBox(clij, input, output, radiusX, radiusY, radiusZ);
-    }
-    public static boolean minimum3DSphere(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ ) {
-        return Kernels.minimumSphere(clij, input, output, radiusX, radiusY, radiusZ);
-    }
-    public static boolean minimum2DBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY) {
-        return Kernels.minimumBox(clij, input, output, radiusX, radiusY, 0);
-    }
-    public static boolean minimum2DSphere(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY ) {
-        return Kernels.minimumSphere(clij, input, output, radiusX, radiusY, 0);
-    }
-
-    public static boolean maximum3DBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ ) {
-        return Kernels.maximumBox(clij, input, output, radiusX, radiusY, radiusZ);
-    }
-    public static boolean maximum3DSphere(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ ) {
-        return Kernels.maximumSphere(clij, input, output, radiusX, radiusY, radiusZ);
-    }
-    public static boolean maximum2DBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY) {
-        return Kernels.maximumBox(clij, input, output, radiusX, radiusY, 0);
-    }
-    public static boolean maximum2DSphere(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY ) {
-        return Kernels.maximumSphere(clij, input, output, radiusX, radiusY, 0);
-    }
-
     public static boolean rotate3D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float angleX, Float angleY, Float angleZ, Boolean rotateAroundCenter) {
         Rotate3D rotate3D = new Rotate3D();
         rotate3D.setClij(clij);
