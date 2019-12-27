@@ -163,6 +163,8 @@ public class CLKernelExecutor {
             }
 
             Map<String, Object> openCLDefines = new HashMap();
+            openCLDefines.put("MAX_ARRAY_SIZE", MAX_ARRAY_SIZE); // needed for median. Median is limited to a given array length to be sorted
+
 
             // deal with image width/height/depth for all images and buffers
             ArrayList<String> definedParameterKeys = new ArrayList<String>();

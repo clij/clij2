@@ -22,6 +22,10 @@ import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
 import net.haesleinhuepf.clijx.advancedfilters.Downsample2D;
 import net.haesleinhuepf.clijx.advancedfilters.Downsample3D;
 import net.haesleinhuepf.clijx.advancedfilters.DownsampleSliceBySliceHalfMedian;
+import net.haesleinhuepf.clijx.advancedfilters.GradientX;
+import net.haesleinhuepf.clijx.advancedfilters.GradientY;
+import net.haesleinhuepf.clijx.advancedfilters.GradientZ;
+import net.haesleinhuepf.clijx.advancedfilters.LocalThreshold;
 import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
@@ -216,9 +220,25 @@ public interface CLIJ2Plugins {
             Invert.class,
             Downsample2D.class,
             Downsample3D.class,
-            DownsampleSliceBySliceHalfMedian.class
-
-};
+            DownsampleSliceBySliceHalfMedian.class,
+            LocalThreshold.class,
+            GradientX.class,
+            GradientY.class,
+            GradientZ.class,
+            MultiplyImageAndCoordinate.class,
+            Mean2DBox.class,
+            Mean2DSphere.class,
+            Mean3DBox.class,
+            Mean3DSphere.class,
+            MeanSliceBySliceSphere.class,
+            MeanOfAllPixels.class,
+            Median2DBox.class,
+            Median2DSphere.class,
+            Median3DBox.class,
+            Median3DSphere.class,
+            MedianSliceBySliceBox.class,
+            MedianSliceBySliceSphere.class
+    };
 
     public String blockList = ";" +
             "BinaryIntersection.binaryAnd;" +
@@ -279,5 +299,18 @@ public interface CLIJ2Plugins {
             "Kernels.centerOfMass;" +
             "Kernels.invert;" +
             "Kernels.downsample;" +
-            "Kernels.downsampleSliceBySliceHalfMedian;";
+            "Kernels.downsampleSliceBySliceHalfMedian;" +
+            "Kernels.localThreshold;" +
+            "Kernels.gradientX;" +
+            "Kernels.gradientY;" +
+            "Kernels.gradientZ;" +
+            "Kernels.multiplyImageAndCoordinate;" +
+            "Kernels.meanSliceBySliceSphere;" +
+            "Kernels.meanBox;" +
+            "Kernels.meanSphere;" +
+            "Kernels.meanIJ;" +
+            "Kernels.medianBox;" +
+            "Kernels.medianSphere;" +
+            "Kernels.medianSliceBySliceSphere;" +
+            "Kernels.medianSliceBySliceBox;";
 }

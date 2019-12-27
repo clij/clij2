@@ -46,54 +46,6 @@ public class CLIJxAPIConsistencyWorkaround {
         return Kernels.maximumSphere(clij, input, output, radiusX, radiusY, 0);
     }
 
-    public static boolean mean3DSphere(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ ) {
-        int kernelSizeX = radiusToKernelSize(radiusX);
-        int kernelSizeY = radiusToKernelSize(radiusY);
-        int kernelSizeZ = radiusToKernelSize(radiusZ);
-        return Kernels.meanSphere(clij, input, output, kernelSizeX, kernelSizeY, kernelSizeZ);
-    }
-    public static boolean mean3DBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ ) {
-        return Kernels.meanBox(clij, input, output, radiusX, radiusY, radiusZ);
-    }
-
-
-    public static boolean mean2DSphere(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY) {
-        int kernelSizeX = radiusToKernelSize(radiusX);
-        int kernelSizeY = radiusToKernelSize(radiusY);
-        return Kernels.meanSphere(clij, input, output, kernelSizeX, kernelSizeY);
-    }
-    public static boolean mean2DBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY) {
-        return Kernels.meanBox(clij, input, output, radiusX, radiusY, 0);
-    }
-
-
-    public static boolean median2DSphere(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY){
-        int kernelSizeX = radiusToKernelSize(radiusX);
-        int kernelSizeY = radiusToKernelSize(radiusY);
-        return Kernels.medianSphere(clij, input, output, kernelSizeX, kernelSizeY);
-    }
-
-    public static boolean median2DBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY) {
-        int kernelSizeX = radiusToKernelSize(radiusX);
-        int kernelSizeY = radiusToKernelSize(radiusY);
-        return Kernels.medianBox(clij, input, output, kernelSizeX, kernelSizeY);
-    }
-
-
-    public static boolean median3DSphere(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ){
-        int kernelSizeX = radiusToKernelSize(radiusX);
-        int kernelSizeY = radiusToKernelSize(radiusY);
-        int kernelSizeZ = radiusToKernelSize(radiusZ);
-        return Kernels.medianSphere(clij, input, output, kernelSizeX, kernelSizeY, kernelSizeZ);
-    }
-
-    public static boolean median3DBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ) {
-        int kernelSizeX = radiusToKernelSize(radiusX);
-        int kernelSizeY = radiusToKernelSize(radiusY);
-        int kernelSizeZ = radiusToKernelSize(radiusZ);
-        return Kernels.medianBox(clij, input, output, kernelSizeX, kernelSizeY, kernelSizeZ);
-    }
-
     public static boolean rotate3D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float angleX, Float angleY, Float angleZ, Boolean rotateAroundCenter) {
         Rotate3D rotate3D = new Rotate3D();
         rotate3D.setClij(clij);
