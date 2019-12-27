@@ -30,7 +30,7 @@ public class TransposeXZ extends AbstractCLIJxPlugin implements CLIJMacroPlugin,
         HashMap<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("src", input);
         parameters.put("dst", output);
-        clijx.execute(TransposeXY.class, "transpose_xz_3d_x.cl", "transpose_xz_3d", output.getDimensions(), output.getDimensions(), parameters);
+        clijx.execute(TransposeXY.class, "transpose_xz_" + input.getDimension() + "d_x.cl", "transpose_xz_" + input.getDimension() + "d", input.getDimensions(), input.getDimensions(), parameters);
         return true;
     }
 
