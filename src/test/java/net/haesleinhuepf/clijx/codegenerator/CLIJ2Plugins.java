@@ -19,6 +19,9 @@ import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
 import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
 import net.haesleinhuepf.clijx.registration.TranslationRegistration;
 import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
+import net.haesleinhuepf.clijx.advancedfilters.Downsample2D;
+import net.haesleinhuepf.clijx.advancedfilters.Downsample3D;
+import net.haesleinhuepf.clijx.advancedfilters.DownsampleSliceBySliceHalfMedian;
 import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
@@ -210,7 +213,10 @@ public interface CLIJ2Plugins {
             SumZProjection.class,
             SumOfAllPixels.class,
             CenterOfMass.class,
-            Invert.class
+            Invert.class,
+            Downsample2D.class,
+            Downsample3D.class,
+            DownsampleSliceBySliceHalfMedian.class
 
 };
 
@@ -271,5 +277,7 @@ public interface CLIJ2Plugins {
             "Kernels.sumPixels;" +
             "Kernels.sumZProjection;" +
             "Kernels.centerOfMass;" +
-            "Kernels.invert;";
+            "Kernels.invert;" +
+            "Kernels.downsample;" +
+            "Kernels.downsampleSliceBySliceHalfMedian;";
 }
