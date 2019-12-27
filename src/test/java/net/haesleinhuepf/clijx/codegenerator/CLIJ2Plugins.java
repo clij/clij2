@@ -184,7 +184,8 @@ public interface CLIJ2Plugins {
             Copy.class,
             CopySlice.class,
             Crop2D.class,
-            Crop3D.class
+            Crop3D.class,
+            Set.class
     };
 
     public String blockList = ";" +
@@ -217,5 +218,6 @@ public interface CLIJ2Plugins {
             "Kernels.dilateSphereSliceBySlice;" +
             "Kernels.copy;" +
             "Kernels.crop;" +
-            "Kernels.copySlice;";
+            "Kernels.copySlice;" +
+            "Kernels.set;";
 }
