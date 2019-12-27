@@ -163,6 +163,10 @@ import net.haesleinhuepf.clijx.advancedfilters.DilateSphere;
 import net.haesleinhuepf.clijx.advancedfilters.DilateBox;
 import net.haesleinhuepf.clijx.advancedfilters.DilateSphereSliceBySlice;
 import net.haesleinhuepf.clijx.advancedfilters.DilateBoxSliceBySlice;
+import net.haesleinhuepf.clijx.advancedfilters.Copy;
+import net.haesleinhuepf.clijx.advancedfilters.CopySlice;
+import net.haesleinhuepf.clijx.advancedfilters.Crop2D;
+import net.haesleinhuepf.clijx.advancedfilters.Crop3D;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract class CLIJxOps {
    protected CLIJ clij;
@@ -171,42 +175,6 @@ public abstract class CLIJxOps {
 
     // net.haesleinhuepf.clij.kernels.Kernels
     //----------------------------------------------------
-    /**
-     * Copies an image.
-     * 
-     * <pre>f(x) = x</pre>
-     */
-    public boolean copy(ClearCLImage source, ClearCLBuffer destination) {
-        return Kernels.copy(clij, source, destination);
-    }
-
-    /**
-     * Copies an image.
-     * 
-     * <pre>f(x) = x</pre>
-     */
-    public boolean copy(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Kernels.copy(clij, source, destination);
-    }
-
-    /**
-     * Copies an image.
-     * 
-     * <pre>f(x) = x</pre>
-     */
-    public boolean copy(ClearCLImage source, ClearCLImage destination) {
-        return Kernels.copy(clij, source, destination);
-    }
-
-    /**
-     * Copies an image.
-     * 
-     * <pre>f(x) = x</pre>
-     */
-    public boolean copy(ClearCLBuffer source, ClearCLImage destination) {
-        return Kernels.copy(clij, source, destination);
-    }
-
     /**
      * Sets all pixel values x of a given image X to a constant value v.
      * 
@@ -258,7 +226,7 @@ public abstract class CLIJxOps {
      * are flipped. This operation is similar to ImageJs 'Reslice [/]' method but offers less flexibility 
      * such as interpolation.
      */
-    public boolean rotateLeft(ClearCLImage source, ClearCLImage destination) {
+    public boolean rotateLeft(ClearCLBuffer source, ClearCLBuffer destination) {
         return Kernels.rotateLeft(clij, source, destination);
     }
 
@@ -267,17 +235,8 @@ public abstract class CLIJxOps {
      * are flipped. This operation is similar to ImageJs 'Reslice [/]' method but offers less flexibility 
      * such as interpolation.
      */
-    public boolean rotateLeft(ClearCLBuffer source, ClearCLBuffer destination) {
+    public boolean rotateLeft(ClearCLImage source, ClearCLImage destination) {
         return Kernels.rotateLeft(clij, source, destination);
-    }
-
-    /**
-     * Rotates a given input image by 90 degrees clockwise. For that, X and Y axis of an image stack
-     * are flipped. This operation is similar to ImageJs 'Reslice [/]' method but offers less flexibility 
-     * such as interpolation.
-     */
-    public boolean rotateRight(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Kernels.rotateRight(clij, source, destination);
     }
 
     /**
@@ -290,14 +249,12 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Computes a masked image by applying a mask to an image. All pixel values x of image X will be copied
-     * to the destination image in case pixel value m at the same position in the mask image is not equal to 
-     * zero.
-     * 
-     * <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>
+     * Rotates a given input image by 90 degrees clockwise. For that, X and Y axis of an image stack
+     * are flipped. This operation is similar to ImageJs 'Reslice [/]' method but offers less flexibility 
+     * such as interpolation.
      */
-    public boolean mask(ClearCLImage source, ClearCLImage mask, ClearCLImage destination) {
-        return Kernels.mask(clij, source, mask, destination);
+    public boolean rotateRight(ClearCLBuffer source, ClearCLBuffer destination) {
+        return Kernels.rotateRight(clij, source, destination);
     }
 
     /**
@@ -312,46 +269,38 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Determines the histogram of a given image.
+     * Computes a masked image by applying a mask to an image. All pixel values x of image X will be copied
+     * to the destination image in case pixel value m at the same position in the mask image is not equal to 
+     * zero.
+     * 
+     * <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>
      */
-    public float[] histogram(ClearCLBuffer arg1, double arg2, double arg3, double arg4) {
-        return Kernels.histogram(clij, arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).intValue());
+    public boolean mask(ClearCLImage source, ClearCLImage mask, ClearCLImage destination) {
+        return Kernels.mask(clij, source, mask, destination);
     }
 
     /**
-     * Crops a given rectangle out of a given image.
+     * Computes the negative value of all pixels in a given image. It is recommended to convert images to 
+     * 32-bit float before applying this operation.
      * 
-     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
+     * <pre>f(x) = - x</pre>
+     * 
+     * For binary images, use binaryNot.
      */
-    public boolean crop(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Kernels.crop(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    public boolean invert(ClearCLBuffer source, ClearCLBuffer destination) {
+        return Kernels.invert(clij, source, destination);
     }
 
     /**
-     * Crops a given rectangle out of a given image.
+     * Computes the negative value of all pixels in a given image. It is recommended to convert images to 
+     * 32-bit float before applying this operation.
      * 
-     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
-     */
-    public boolean crop(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return Kernels.crop(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
-    }
-
-    /**
-     * Crops a given rectangle out of a given image.
+     * <pre>f(x) = - x</pre>
      * 
-     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
+     * For binary images, use binaryNot.
      */
-    public boolean crop(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4) {
-        return Kernels.crop(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
-    }
-
-    /**
-     * Crops a given rectangle out of a given image.
-     * 
-     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
-     */
-    public boolean crop(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.crop(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    public boolean invert(ClearCLImage source, ClearCLImage destination) {
+        return Kernels.invert(clij, source, destination);
     }
 
     /**
@@ -373,41 +322,58 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Computes the negative value of all pixels in a given image. It is recommended to convert images to 
-     * 32-bit float before applying this operation.
+     * Adds a scalar value s to all pixels x of a given image X.
      * 
-     * <pre>f(x) = - x</pre>
-     * 
-     * For binary images, use binaryNot.
+     * <pre>f(x, s) = x + s</pre>
      */
-    public boolean invert(ClearCLImage source, ClearCLImage destination) {
-        return Kernels.invert(clij, source, destination);
+    public boolean addImageAndScalar(ClearCLBuffer source, ClearCLBuffer destination, double scalar) {
+        return Kernels.addImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
     }
 
     /**
-     * Computes the negative value of all pixels in a given image. It is recommended to convert images to 
-     * 32-bit float before applying this operation.
+     * Adds a scalar value s to all pixels x of a given image X.
      * 
-     * <pre>f(x) = - x</pre>
-     * 
-     * For binary images, use binaryNot.
+     * <pre>f(x, s) = x + s</pre>
      */
-    public boolean invert(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Kernels.invert(clij, source, destination);
+    public boolean addImageAndScalar(ClearCLImage source, ClearCLImage destination, double scalar) {
+        return Kernels.addImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
     }
 
     /**
      * 
      */
-    public boolean countNonZeroVoxelsLocally(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.countNonZeroVoxelsLocally(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    public boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptimaSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
     }
 
     /**
      * 
      */
-    public boolean countNonZeroVoxelsLocally(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Kernels.countNonZeroVoxelsLocally(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    public boolean detectOptimaSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptimaSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+    /**
+     * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
+     * 
+     * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
+     */
+    public boolean differenceOfGaussian(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.differenceOfGaussian(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
+
+    /**
+     * 
+     */
+    public boolean countNonZeroPixelsLocally(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        return Kernels.countNonZeroPixelsLocally(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    }
+
+    /**
+     * 
+     */
+    public boolean countNonZeroPixelsLocally(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4) {
+        return Kernels.countNonZeroPixelsLocally(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
     }
 
     /**
@@ -429,104 +395,31 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Adds a scalar value s to all pixels x of a given image X.
      * 
-     * <pre>f(x, s) = x + s</pre>
      */
-    public boolean addImageAndScalar(ClearCLImage source, ClearCLImage destination, double scalar) {
-        return Kernels.addImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
-    }
-
-    /**
-     * Adds a scalar value s to all pixels x of a given image X.
-     * 
-     * <pre>f(x, s) = x + s</pre>
-     */
-    public boolean addImageAndScalar(ClearCLBuffer source, ClearCLBuffer destination, double scalar) {
-        return Kernels.addImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
-    }
-
-    /**
-     * Computes a masked image by applying a 2D mask to an image stack. All pixel values x of image X will be copied
-     * to the destination image in case pixel value m at the same spatial position in the mask image is not equal to 
-     * zero.
-     * 
-     * <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>
-     */
-    public boolean maskStackWithPlane(ClearCLImage source, ClearCLImage mask, ClearCLImage destination) {
-        return Kernels.maskStackWithPlane(clij, source, mask, destination);
-    }
-
-    /**
-     * Computes a masked image by applying a 2D mask to an image stack. All pixel values x of image X will be copied
-     * to the destination image in case pixel value m at the same spatial position in the mask image is not equal to 
-     * zero.
-     * 
-     * <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>
-     */
-    public boolean maskStackWithPlane(ClearCLBuffer source, ClearCLBuffer mask, ClearCLBuffer destination) {
-        return Kernels.maskStackWithPlane(clij, source, mask, destination);
-    }
-
-    /**
-     * Computes the local maximum of a pixels ellipsoidal 2D neighborhood in an image stack 
-     * slice by slice. The ellipses size is specified by its half-width and half-height (radius).
-     * 
-     * This filter is applied slice by slice in 2D.
-     */
-    public boolean maximumSliceBySliceSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return Kernels.maximumSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
-     * Computes the local maximum of a pixels ellipsoidal 2D neighborhood in an image stack 
-     * slice by slice. The ellipses size is specified by its half-width and half-height (radius).
-     * 
-     * This filter is applied slice by slice in 2D.
-     */
-    public boolean maximumSliceBySliceSphere(ClearCLImage source, ClearCLImage destination, double radiusX, double radiusY) {
-        return Kernels.maximumSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
-     * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
-     * 
-     * <pre>f(x, s) = max(x, s)</pre>
-     */
-    public boolean maximumImageAndScalar(ClearCLBuffer source, ClearCLBuffer destination, double scalar) {
-        return Kernels.maximumImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
-    }
-
-    /**
-     * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
-     * 
-     * <pre>f(x, s) = max(x, s)</pre>
-     */
-    public boolean maximumImageAndScalar(ClearCLImage source, ClearCLImage destination, double scalar) {
-        return Kernels.maximumImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
+    public boolean countNonZeroVoxelsLocally(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.countNonZeroVoxelsLocally(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
     /**
      * 
      */
-    public boolean countNonZeroPixelsLocally(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4) {
-        return Kernels.countNonZeroPixelsLocally(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    public boolean countNonZeroVoxelsLocally(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return Kernels.countNonZeroVoxelsLocally(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
     /**
      * 
      */
-    public boolean countNonZeroPixelsLocally(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return Kernels.countNonZeroPixelsLocally(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    public boolean convertToImageJBinary(ClearCLBuffer arg1, ClearCLBuffer arg2) {
+        return Kernels.convertToImageJBinary(clij, arg1, arg2);
     }
 
     /**
-     * Detects local maxima in a given square neighborhood of an input image stack. The input image stack is 
-     * processed slice by slice. Pixels in the resulting image are set to 1 if there is no other pixel in a 
-     * given radius which has a higher intensity, and to 0 otherwise.
+     * 
      */
-    public boolean detectMaximaSliceBySliceBox(ClearCLBuffer source, ClearCLBuffer destination, double radius) {
-        return Kernels.detectMaximaSliceBySliceBox(clij, source, destination, new Double (radius).intValue());
+    public boolean convertToImageJBinary(ClearCLImage arg1, ClearCLImage arg2) {
+        return Kernels.convertToImageJBinary(clij, arg1, arg2);
     }
 
     /**
@@ -539,42 +432,12 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * 
-     */
-    public boolean differenceOfGaussianSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.differenceOfGaussianSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
-     * 
-     * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
-     */
-    public boolean differenceOfGaussian(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.differenceOfGaussian(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * 
-     */
-    public boolean convertToImageJBinary(ClearCLImage arg1, ClearCLImage arg2) {
-        return Kernels.convertToImageJBinary(clij, arg1, arg2);
-    }
-
-    /**
-     * 
-     */
-    public boolean convertToImageJBinary(ClearCLBuffer arg1, ClearCLBuffer arg2) {
-        return Kernels.convertToImageJBinary(clij, arg1, arg2);
-    }
-
-    /**
-     * Detects local minima in a given square neighborhood of an input image stack. The input image stack is 
+     * Detects local maxima in a given square neighborhood of an input image stack. The input image stack is 
      * processed slice by slice. Pixels in the resulting image are set to 1 if there is no other pixel in a 
-     * given radius which has a lower intensity, and to 0 otherwise.
+     * given radius which has a higher intensity, and to 0 otherwise.
      */
-    public boolean detectMinimaSliceBySliceBox(ClearCLBuffer source, ClearCLBuffer destination, double radius) {
-        return Kernels.detectMinimaSliceBySliceBox(clij, source, destination, new Double (radius).intValue());
+    public boolean detectMaximaSliceBySliceBox(ClearCLBuffer source, ClearCLBuffer destination, double radius) {
+        return Kernels.detectMaximaSliceBySliceBox(clij, source, destination, new Double (radius).intValue());
     }
 
     /**
@@ -587,17 +450,19 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * 
+     * Detects local minima in a given square neighborhood of an input image stack. The input image stack is 
+     * processed slice by slice. Pixels in the resulting image are set to 1 if there is no other pixel in a 
+     * given radius which has a lower intensity, and to 0 otherwise.
      */
-    public boolean detectOptimaSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptimaSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
+    public boolean detectMinimaSliceBySliceBox(ClearCLBuffer source, ClearCLBuffer destination, double radius) {
+        return Kernels.detectMinimaSliceBySliceBox(clij, source, destination, new Double (radius).intValue());
     }
 
     /**
      * 
      */
-    public boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptimaSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
+    public boolean differenceOfGaussianSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.differenceOfGaussianSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
@@ -621,53 +486,21 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Multiplies all pairs of pixel values x and y from an image stack X and a 2D image Y. x and y are at 
-     * the same spatial position within a plane.
+     * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
      * 
-     * <pre>f(x, y) = x * y</pre>
+     * <pre>f(x, s) = min(x, s)</pre>
      */
-    public boolean multiplyStackWithPlane(ClearCLImage sourceStack, ClearCLImage sourcePlane, ClearCLImage destination) {
-        return Kernels.multiplyStackWithPlane(clij, sourceStack, sourcePlane, destination);
+    public boolean minimumImageAndScalar(ClearCLImage source, ClearCLImage destination, double scalar) {
+        return Kernels.minimumImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
     }
 
     /**
-     * Multiplies all pairs of pixel values x and y from an image stack X and a 2D image Y. x and y are at 
-     * the same spatial position within a plane.
+     * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
      * 
-     * <pre>f(x, y) = x * y</pre>
+     * <pre>f(x, s) = min(x, s)</pre>
      */
-    public boolean multiplyStackWithPlane(ClearCLBuffer sourceStack, ClearCLBuffer sourcePlane, ClearCLBuffer destination) {
-        return Kernels.multiplyStackWithPlane(clij, sourceStack, sourcePlane, destination);
-    }
-
-    /**
-     * Computes the local median of a pixels ellipsoidal neighborhood. This is done slice-by-slice in a 3D 
-     * image stack. The ellipses size is specified by its half-width and half-height (radius).
-     * 
-     * For technical reasons, the area of the ellipse must have less than 1000 pixels.
-     */
-    public boolean medianSliceBySliceSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return Kernels.medianSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
-     * Computes the local median of a pixels ellipsoidal neighborhood. This is done slice-by-slice in a 3D 
-     * image stack. The ellipses size is specified by its half-width and half-height (radius).
-     * 
-     * For technical reasons, the area of the ellipse must have less than 1000 pixels.
-     */
-    public boolean medianSliceBySliceSphere(ClearCLImage source, ClearCLImage destination, double radiusX, double radiusY) {
-        return Kernels.medianSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
-     * Computes the local mean average of a pixels ellipsoidal 2D neighborhood in an image stack 
-     * slice by slice. The ellipses size is specified by its half-width and half-height (radius).
-     * 
-     * This filter is applied slice by slice in 2D.
-     */
-    public boolean meanSliceBySliceSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return Kernels.meanSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    public boolean minimumImageAndScalar(ClearCLBuffer source, ClearCLBuffer destination, double scalar) {
+        return Kernels.minimumImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
     }
 
     /**
@@ -681,49 +514,13 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Multiplies all pixels value x in a given image X with a constant scalar s.
+     * Computes the local mean average of a pixels ellipsoidal 2D neighborhood in an image stack 
+     * slice by slice. The ellipses size is specified by its half-width and half-height (radius).
      * 
-     * <pre>f(x, s) = x * s</pre>
+     * This filter is applied slice by slice in 2D.
      */
-    public boolean multiplyImageAndScalar(ClearCLBuffer source, ClearCLBuffer destination, double scalar) {
-        return Kernels.multiplyImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
-    }
-
-    /**
-     * Multiplies all pixels value x in a given image X with a constant scalar s.
-     * 
-     * <pre>f(x, s) = x * s</pre>
-     */
-    public boolean multiplyImageAndScalar(ClearCLImage source, ClearCLImage destination, double scalar) {
-        return Kernels.multiplyImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
-    }
-
-    /**
-     * 
-     */
-    public boolean tenengradWeightsSliceBySlice(ClearCLImage arg1, ClearCLImage arg2) {
-        return Kernels.tenengradWeightsSliceBySlice(clij, arg1, arg2);
-    }
-
-    /**
-     * 
-     */
-    public boolean multiplySliceBySliceWithScalars(ClearCLImage arg1, ClearCLImage arg2, float[] arg3) {
-        return Kernels.multiplySliceBySliceWithScalars(clij, arg1, arg2, arg3);
-    }
-
-    /**
-     * 
-     */
-    public boolean multiplySliceBySliceWithScalars(ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3) {
-        return Kernels.multiplySliceBySliceWithScalars(clij, arg1, arg2, arg3);
-    }
-
-    /**
-     * Determines the maximum projection of an image along Z.
-     */
-    public boolean maximumZProjection(ClearCLBuffer source, ClearCLBuffer destination_max) {
-        return Kernels.maximumZProjection(clij, source, destination_max);
+    public boolean meanSliceBySliceSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return Kernels.meanSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
     }
 
     /**
@@ -734,19 +531,10 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Determines the minimum of all pixels in a given image. It will be stored in a new row of ImageJs
-     * Results table in the column 'Min'.
+     * Determines the maximum projection of an image along Z.
      */
-    public double minimumOfAllPixels(ClearCLBuffer source) {
-        return Kernels.minimumOfAllPixels(clij, source);
-    }
-
-    /**
-     * Determines the minimum of all pixels in a given image. It will be stored in a new row of ImageJs
-     * Results table in the column 'Min'.
-     */
-    public double minimumOfAllPixels(ClearCLImage source) {
-        return Kernels.minimumOfAllPixels(clij, source);
+    public boolean maximumZProjection(ClearCLBuffer source, ClearCLBuffer destination_max) {
+        return Kernels.maximumZProjection(clij, source, destination_max);
     }
 
     /**
@@ -777,7 +565,7 @@ public abstract class CLIJxOps {
      * Z = 2
      * 
      */
-    public boolean maximumXYZProjection(ClearCLImage source, ClearCLImage destination_max, double dimensionX, double dimensionY, double projectedDimension) {
+    public boolean maximumXYZProjection(ClearCLBuffer source, ClearCLBuffer destination_max, double dimensionX, double dimensionY, double projectedDimension) {
         return Kernels.maximumXYZProjection(clij, source, destination_max, new Double (dimensionX).intValue(), new Double (dimensionY).intValue(), new Double (projectedDimension).intValue());
     }
 
@@ -789,7 +577,7 @@ public abstract class CLIJxOps {
      * Z = 2
      * 
      */
-    public boolean maximumXYZProjection(ClearCLBuffer source, ClearCLBuffer destination_max, double dimensionX, double dimensionY, double projectedDimension) {
+    public boolean maximumXYZProjection(ClearCLImage source, ClearCLImage destination_max, double dimensionX, double dimensionY, double projectedDimension) {
         return Kernels.maximumXYZProjection(clij, source, destination_max, new Double (dimensionX).intValue(), new Double (dimensionY).intValue(), new Double (projectedDimension).intValue());
     }
 
@@ -808,6 +596,40 @@ public abstract class CLIJxOps {
     }
 
     /**
+     * Determines the minimum of all pixels in a given image. It will be stored in a new row of ImageJs
+     * Results table in the column 'Min'.
+     */
+    public double minimumOfAllPixels(ClearCLBuffer source) {
+        return Kernels.minimumOfAllPixels(clij, source);
+    }
+
+    /**
+     * Determines the minimum of all pixels in a given image. It will be stored in a new row of ImageJs
+     * Results table in the column 'Min'.
+     */
+    public double minimumOfAllPixels(ClearCLImage source) {
+        return Kernels.minimumOfAllPixels(clij, source);
+    }
+
+    /**
+     * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
+     * 
+     * <pre>f(x, s) = max(x, s)</pre>
+     */
+    public boolean maximumImageAndScalar(ClearCLImage source, ClearCLImage destination, double scalar) {
+        return Kernels.maximumImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
+    }
+
+    /**
+     * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
+     * 
+     * <pre>f(x, s) = max(x, s)</pre>
+     */
+    public boolean maximumImageAndScalar(ClearCLBuffer source, ClearCLBuffer destination, double scalar) {
+        return Kernels.maximumImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
+    }
+
+    /**
      * 
      */
     public boolean multiplyImageAndCoordinate(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
@@ -819,6 +641,40 @@ public abstract class CLIJxOps {
      */
     public boolean multiplyImageAndCoordinate(ClearCLImage arg1, ClearCLImage arg2, double arg3) {
         return Kernels.multiplyImageAndCoordinate(clij, arg1, arg2, new Double (arg3).intValue());
+    }
+
+    /**
+     * 
+     */
+    public boolean multiplySliceBySliceWithScalars(ClearCLImage arg1, ClearCLImage arg2, float[] arg3) {
+        return Kernels.multiplySliceBySliceWithScalars(clij, arg1, arg2, arg3);
+    }
+
+    /**
+     * 
+     */
+    public boolean multiplySliceBySliceWithScalars(ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3) {
+        return Kernels.multiplySliceBySliceWithScalars(clij, arg1, arg2, arg3);
+    }
+
+    /**
+     * Multiplies all pairs of pixel values x and y from an image stack X and a 2D image Y. x and y are at 
+     * the same spatial position within a plane.
+     * 
+     * <pre>f(x, y) = x * y</pre>
+     */
+    public boolean multiplyStackWithPlane(ClearCLBuffer sourceStack, ClearCLBuffer sourcePlane, ClearCLBuffer destination) {
+        return Kernels.multiplyStackWithPlane(clij, sourceStack, sourcePlane, destination);
+    }
+
+    /**
+     * Multiplies all pairs of pixel values x and y from an image stack X and a 2D image Y. x and y are at 
+     * the same spatial position within a plane.
+     * 
+     * <pre>f(x, y) = x * y</pre>
+     */
+    public boolean multiplyStackWithPlane(ClearCLImage sourceStack, ClearCLImage sourcePlane, ClearCLImage destination) {
+        return Kernels.multiplyStackWithPlane(clij, sourceStack, sourcePlane, destination);
     }
 
     /**
@@ -838,21 +694,50 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
+     * Computes the local maximum of a pixels ellipsoidal 2D neighborhood in an image stack 
+     * slice by slice. The ellipses size is specified by its half-width and half-height (radius).
      * 
-     * <pre>f(x, s) = min(x, s)</pre>
+     * This filter is applied slice by slice in 2D.
      */
-    public boolean minimumImageAndScalar(ClearCLImage source, ClearCLImage destination, double scalar) {
-        return Kernels.minimumImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
+    public boolean maximumSliceBySliceSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return Kernels.maximumSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
     }
 
     /**
-     * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
+     * Computes the local maximum of a pixels ellipsoidal 2D neighborhood in an image stack 
+     * slice by slice. The ellipses size is specified by its half-width and half-height (radius).
      * 
-     * <pre>f(x, s) = min(x, s)</pre>
+     * This filter is applied slice by slice in 2D.
      */
-    public boolean minimumImageAndScalar(ClearCLBuffer source, ClearCLBuffer destination, double scalar) {
-        return Kernels.minimumImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
+    public boolean maximumSliceBySliceSphere(ClearCLImage source, ClearCLImage destination, double radiusX, double radiusY) {
+        return Kernels.maximumSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * Computes the local median of a pixels ellipsoidal neighborhood. This is done slice-by-slice in a 3D 
+     * image stack. The ellipses size is specified by its half-width and half-height (radius).
+     * 
+     * For technical reasons, the area of the ellipse must have less than 1000 pixels.
+     */
+    public boolean medianSliceBySliceSphere(ClearCLImage source, ClearCLImage destination, double radiusX, double radiusY) {
+        return Kernels.medianSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * Computes the local median of a pixels ellipsoidal neighborhood. This is done slice-by-slice in a 3D 
+     * image stack. The ellipses size is specified by its half-width and half-height (radius).
+     * 
+     * For technical reasons, the area of the ellipse must have less than 1000 pixels.
+     */
+    public boolean medianSliceBySliceSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return Kernels.medianSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * 
+     */
+    public boolean tenengradWeightsSliceBySlice(ClearCLImage arg1, ClearCLImage arg2) {
+        return Kernels.tenengradWeightsSliceBySlice(clij, arg1, arg2);
     }
 
     /**
@@ -870,81 +755,64 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * This method has two purposes: 
-     * It copies a 2D image to a given slice z position in a 3D image stack or 
-     * It copies a given slice at position z in an image stack to a 2D image.
+     * Multiplies all pixels value x in a given image X with a constant scalar s.
      * 
-     * The first case is only available via ImageJ macro. If you are using it, it is recommended that the 
-     * target 3D image already pre-exists in GPU memory before calling this method. Otherwise, CLIJ create 
-     * the image stack with z planes.
+     * <pre>f(x, s) = x * s</pre>
      */
-    public boolean copySlice(ClearCLBuffer source, ClearCLBuffer destination, double sliceIndex) {
-        return Kernels.copySlice(clij, source, destination, new Double (sliceIndex).intValue());
+    public boolean multiplyImageAndScalar(ClearCLBuffer source, ClearCLBuffer destination, double scalar) {
+        return Kernels.multiplyImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
     }
 
     /**
-     * This method has two purposes: 
-     * It copies a 2D image to a given slice z position in a 3D image stack or 
-     * It copies a given slice at position z in an image stack to a 2D image.
+     * Multiplies all pixels value x in a given image X with a constant scalar s.
      * 
-     * The first case is only available via ImageJ macro. If you are using it, it is recommended that the 
-     * target 3D image already pre-exists in GPU memory before calling this method. Otherwise, CLIJ create 
-     * the image stack with z planes.
+     * <pre>f(x, s) = x * s</pre>
      */
-    public boolean copySlice(ClearCLImage source, ClearCLImage destination, double sliceIndex) {
-        return Kernels.copySlice(clij, source, destination, new Double (sliceIndex).intValue());
+    public boolean multiplyImageAndScalar(ClearCLImage source, ClearCLImage destination, double scalar) {
+        return Kernels.multiplyImageAndScalar(clij, source, destination, new Double (scalar).floatValue());
     }
 
     /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+     * Computes a masked image by applying a 2D mask to an image stack. All pixel values x of image X will be copied
+     * to the destination image in case pixel value m at the same spatial position in the mask image is not equal to 
+     * zero.
      * 
-     * The Gaussian blur is applied slice by slice in 2D.
+     * <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>
      */
-    public boolean blurSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5, double arg6) {
-        return Kernels.blurSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+    public boolean maskStackWithPlane(ClearCLBuffer source, ClearCLBuffer mask, ClearCLBuffer destination) {
+        return Kernels.maskStackWithPlane(clij, source, mask, destination);
     }
 
     /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+     * Computes a masked image by applying a 2D mask to an image stack. All pixel values x of image X will be copied
+     * to the destination image in case pixel value m at the same spatial position in the mask image is not equal to 
+     * zero.
      * 
-     * The Gaussian blur is applied slice by slice in 2D.
+     * <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>
      */
-    public boolean blurSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, float arg5, float arg6) {
-        return Kernels.blurSliceBySlice(clij, arg1, arg2, arg3, arg4, arg5, arg6);
+    public boolean maskStackWithPlane(ClearCLImage source, ClearCLImage mask, ClearCLImage destination) {
+        return Kernels.maskStackWithPlane(clij, source, mask, destination);
     }
 
     /**
-     * Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
-     * there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
+     * Determines the histogram of a given image.
      */
-    public boolean detectMaximaBox(ClearCLImage source, ClearCLImage destination, double radius) {
-        return Kernels.detectMaximaBox(clij, source, destination, new Double (radius).intValue());
+    public float[] histogram(ClearCLBuffer arg1, double arg2, double arg3, double arg4) {
+        return Kernels.histogram(clij, arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).intValue());
     }
 
     /**
-     * Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
-     * there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
-     */
-    public boolean detectMaximaBox(ClearCLBuffer source, ClearCLBuffer destination, double radius) {
-        return Kernels.detectMaximaBox(clij, source, destination, new Double (radius).intValue());
-    }
-
-    /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
      * 
-     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
-    public boolean blur(ClearCLImage source, ClearCLBuffer destination, double sigmaX, double sigmaY) {
-        return Kernels.blur(clij, source, destination, new Double (sigmaX).floatValue(), new Double (sigmaY).floatValue());
+    public boolean countNonZeroPixelsLocallySliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4) {
+        return Kernels.countNonZeroPixelsLocallySliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
     }
 
     /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
      * 
-     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
-    public boolean blur(ClearCLBuffer source, ClearCLBuffer destination, double sigmaX, double sigmaY) {
-        return Kernels.blur(clij, source, destination, new Double (sigmaX).floatValue(), new Double (sigmaY).floatValue());
+    public boolean countNonZeroPixelsLocallySliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        return Kernels.countNonZeroPixelsLocallySliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
     }
 
     /**
@@ -961,8 +829,8 @@ public abstract class CLIJxOps {
      * 
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
-    public boolean blur(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Kernels.blur(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    public boolean blur(ClearCLImage source, ClearCLBuffer destination, double sigmaX, double sigmaY) {
+        return Kernels.blur(clij, source, destination, new Double (sigmaX).floatValue(), new Double (sigmaY).floatValue());
     }
 
     /**
@@ -984,93 +852,21 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Determines the center of mass of an image or image stack and writes the result in the results table
-     * in the columns MassX, MassY and MassZ.
-     */
-    public double[] centerOfMass(ClearCLImage source) {
-        return Kernels.centerOfMass(clij, source);
-    }
-
-    /**
-     * Determines the center of mass of an image or image stack and writes the result in the results table
-     * in the columns MassX, MassY and MassZ.
-     */
-    public double[] centerOfMass(ClearCLBuffer source) {
-        return Kernels.centerOfMass(clij, source);
-    }
-
-    /**
+     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
      * 
+     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
-    public boolean detectOptima(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptima(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
+    public boolean blur(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return Kernels.blur(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
+     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
      * 
+     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
-    public boolean detectOptima(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptima(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
-    }
-
-    /**
-     * Divides two images X and Y by each other pixel wise.
-     * 
-     * <pre>f(x, y) = x / y</pre>
-     */
-    public boolean divideImages(ClearCLBuffer divident, ClearCLBuffer divisor, ClearCLBuffer destination) {
-        return Kernels.divideImages(clij, divident, divisor, destination);
-    }
-
-    /**
-     * Divides two images X and Y by each other pixel wise.
-     * 
-     * <pre>f(x, y) = x / y</pre>
-     */
-    public boolean divideImages(ClearCLImage divident, ClearCLImage divisor, ClearCLImage destination) {
-        return Kernels.divideImages(clij, divident, divisor, destination);
-    }
-
-    /**
-     * Detects local minima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
-     * there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
-     */
-    public boolean detectMinimaBox(ClearCLImage source, ClearCLImage destination, double radius) {
-        return Kernels.detectMinimaBox(clij, source, destination, new Double (radius).intValue());
-    }
-
-    /**
-     * Detects local minima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
-     * there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
-     */
-    public boolean detectMinimaBox(ClearCLBuffer source, ClearCLBuffer destination, double radius) {
-        return Kernels.detectMinimaBox(clij, source, destination, new Double (radius).intValue());
-    }
-
-    /**
-     * Computes the minimum of a pair of pixel values x, y from two given images X and Y.
-     * 
-     * <pre>f(x, y) = min(x, y)</pre>
-     */
-    public boolean minimumImages(ClearCLImage source1, ClearCLImage source2, ClearCLImage destination) {
-        return Kernels.minimumImages(clij, source1, source2, destination);
-    }
-
-    /**
-     * Computes the minimum of a pair of pixel values x, y from two given images X and Y.
-     * 
-     * <pre>f(x, y) = min(x, y)</pre>
-     */
-    public boolean minimumImages(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
-        return Kernels.minimumImages(clij, source1, source2, destination);
-    }
-
-    /**
-     * Computes the gradient of gray values along Z. Assuming a, b and c are three adjacent
-     *  pixels in Z direction. In the target image will be saved as: <pre>b' = c - a;</pre>
-     */
-    public boolean gradientZ(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Kernels.gradientZ(clij, source, destination);
+    public boolean blur(ClearCLBuffer source, ClearCLBuffer destination, double sigmaX, double sigmaY) {
+        return Kernels.blur(clij, source, destination, new Double (sigmaX).floatValue(), new Double (sigmaY).floatValue());
     }
 
     /**
@@ -1082,67 +878,11 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
+     * Computes the gradient of gray values along Z. Assuming a, b and c are three adjacent
+     *  pixels in Z direction. In the target image will be saved as: <pre>b' = c - a;</pre>
      */
-    public boolean maximumBox(ClearCLImage arg1, ClearCLImage arg2, int arg3, int arg4, int arg5) {
-        return Kernels.maximumBox(clij, arg1, arg2, arg3, arg4, arg5);
-    }
-
-    /**
-     * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean maximumBox(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, int arg5) {
-        return Kernels.maximumBox(clij, arg1, arg2, arg3, arg4, arg5);
-    }
-
-    /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
-     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
-     */
-    public boolean downsample(ClearCLImage source, ClearCLImage destination, double factorX, double factorY) {
-        return Kernels.downsample(clij, source, destination, new Double (factorX).floatValue(), new Double (factorY).floatValue());
-    }
-
-    /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
-     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
-     */
-    public boolean downsample(ClearCLBuffer source, ClearCLBuffer destination, double factorX, double factorY) {
-        return Kernels.downsample(clij, source, destination, new Double (factorX).floatValue(), new Double (factorY).floatValue());
-    }
-
-    /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
-     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
-     */
-    public boolean downsample(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.downsample(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
-     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
-     */
-    public boolean downsample(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Kernels.downsample(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * Flippes Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method but
-     * offers less flexibility such as interpolation.
-     */
-    public boolean resliceTop(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Kernels.resliceTop(clij, source, destination);
-    }
-
-    /**
-     * Flippes Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method but
-     * offers less flexibility such as interpolation.
-     */
-    public boolean resliceTop(ClearCLImage source, ClearCLImage destination) {
-        return Kernels.resliceTop(clij, source, destination);
+    public boolean gradientZ(ClearCLBuffer source, ClearCLBuffer destination) {
+        return Kernels.gradientZ(clij, source, destination);
     }
 
     /**
@@ -1178,6 +918,164 @@ public abstract class CLIJxOps {
     }
 
     /**
+     * Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
+     * there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
+     */
+    public boolean detectMaximaBox(ClearCLBuffer source, ClearCLBuffer destination, double radius) {
+        return Kernels.detectMaximaBox(clij, source, destination, new Double (radius).intValue());
+    }
+
+    /**
+     * Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
+     * there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
+     */
+    public boolean detectMaximaBox(ClearCLImage source, ClearCLImage destination, double radius) {
+        return Kernels.detectMaximaBox(clij, source, destination, new Double (radius).intValue());
+    }
+
+    /**
+     * Divides two images X and Y by each other pixel wise.
+     * 
+     * <pre>f(x, y) = x / y</pre>
+     */
+    public boolean divideImages(ClearCLImage divident, ClearCLImage divisor, ClearCLImage destination) {
+        return Kernels.divideImages(clij, divident, divisor, destination);
+    }
+
+    /**
+     * Divides two images X and Y by each other pixel wise.
+     * 
+     * <pre>f(x, y) = x / y</pre>
+     */
+    public boolean divideImages(ClearCLBuffer divident, ClearCLBuffer divisor, ClearCLBuffer destination) {
+        return Kernels.divideImages(clij, divident, divisor, destination);
+    }
+
+    /**
+     * Computes the gradient of gray values along X. Assuming a, b and c are three adjacent
+     *  pixels in X direction. In the target image will be saved as: <pre>b' = c - a;</pre>
+     */
+    public boolean gradientX(ClearCLImage source, ClearCLImage destination) {
+        return Kernels.gradientX(clij, source, destination);
+    }
+
+    /**
+     * Computes the gradient of gray values along X. Assuming a, b and c are three adjacent
+     *  pixels in X direction. In the target image will be saved as: <pre>b' = c - a;</pre>
+     */
+    public boolean gradientX(ClearCLBuffer source, ClearCLBuffer destination) {
+        return Kernels.gradientX(clij, source, destination);
+    }
+
+    /**
+     * 
+     */
+    public boolean detectOptima(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptima(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+    /**
+     * 
+     */
+    public boolean detectOptima(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptima(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+    /**
+     * This method is deprecated. Consider using maximumBox or maximumSphere instead.
+     */
+    public boolean maximumIJ(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        return Kernels.maximumIJ(clij, arg1, arg2, new Double (arg3).intValue());
+    }
+
+    /**
+     * This method is deprecated. Consider using maximumBox or maximumSphere instead.
+     */
+    public boolean maximumIJ(ClearCLImage arg1, ClearCLImage arg2, double arg3) {
+        return Kernels.maximumIJ(clij, arg1, arg2, new Double (arg3).intValue());
+    }
+
+    /**
+     * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean maximumBox(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, int arg5) {
+        return Kernels.maximumBox(clij, arg1, arg2, arg3, arg4, arg5);
+    }
+
+    /**
+     * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean maximumBox(ClearCLImage arg1, ClearCLImage arg2, int arg3, int arg4, int arg5) {
+        return Kernels.maximumBox(clij, arg1, arg2, arg3, arg4, arg5);
+    }
+
+    /**
+     * Detects local minima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
+     * there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
+     */
+    public boolean detectMinimaBox(ClearCLBuffer source, ClearCLBuffer destination, double radius) {
+        return Kernels.detectMinimaBox(clij, source, destination, new Double (radius).intValue());
+    }
+
+    /**
+     * Detects local minima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
+     * there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
+     */
+    public boolean detectMinimaBox(ClearCLImage source, ClearCLImage destination, double radius) {
+        return Kernels.detectMinimaBox(clij, source, destination, new Double (radius).intValue());
+    }
+
+    /**
+     * Computes the minimum of a pair of pixel values x, y from two given images X and Y.
+     * 
+     * <pre>f(x, y) = min(x, y)</pre>
+     */
+    public boolean minimumImages(ClearCLImage source1, ClearCLImage source2, ClearCLImage destination) {
+        return Kernels.minimumImages(clij, source1, source2, destination);
+    }
+
+    /**
+     * Computes the minimum of a pair of pixel values x, y from two given images X and Y.
+     * 
+     * <pre>f(x, y) = min(x, y)</pre>
+     */
+    public boolean minimumImages(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
+        return Kernels.minimumImages(clij, source1, source2, destination);
+    }
+
+    /**
+     * Determines the mean average projection of an image along Z.
+     */
+    public boolean meanZProjection(ClearCLBuffer source, ClearCLBuffer destination) {
+        return Kernels.meanZProjection(clij, source, destination);
+    }
+
+    /**
+     * Determines the mean average projection of an image along Z.
+     */
+    public boolean meanZProjection(ClearCLImage source, ClearCLImage destination) {
+        return Kernels.meanZProjection(clij, source, destination);
+    }
+
+    /**
+     * Determines the center of mass of an image or image stack and writes the result in the results table
+     * in the columns MassX, MassY and MassZ.
+     */
+    public double[] centerOfMass(ClearCLImage source) {
+        return Kernels.centerOfMass(clij, source);
+    }
+
+    /**
+     * Determines the center of mass of an image or image stack and writes the result in the results table
+     * in the columns MassX, MassY and MassZ.
+     */
+    public double[] centerOfMass(ClearCLBuffer source) {
+        return Kernels.centerOfMass(clij, source);
+    }
+
+    /**
      * This method is deprecated. Consider using meanBox or meanSphere instead.
      */
     public boolean meanIJ(ClearCLImage arg1, ClearCLImage arg2, double arg3) {
@@ -1189,6 +1087,86 @@ public abstract class CLIJxOps {
      */
     public boolean meanIJ(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
         return Kernels.meanIJ(clij, arg1, arg2, new Double (arg3).intValue());
+    }
+
+    /**
+     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+     * 
+     * The Gaussian blur is applied slice by slice in 2D.
+     */
+    public boolean blurSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5, double arg6) {
+        return Kernels.blurSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+    }
+
+    /**
+     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+     * 
+     * The Gaussian blur is applied slice by slice in 2D.
+     */
+    public boolean blurSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, float arg5, float arg6) {
+        return Kernels.blurSliceBySlice(clij, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    /**
+     * Computes the gradient of gray values along Y. Assuming a, b and c are three adjacent
+     *  pixels in Y direction. In the target image will be saved as: <pre>b' = c - a;</pre>
+     */
+    public boolean gradientY(ClearCLImage source, ClearCLImage destination) {
+        return Kernels.gradientY(clij, source, destination);
+    }
+
+    /**
+     * Computes the gradient of gray values along Y. Assuming a, b and c are three adjacent
+     *  pixels in Y direction. In the target image will be saved as: <pre>b' = c - a;</pre>
+     */
+    public boolean gradientY(ClearCLBuffer source, ClearCLBuffer destination) {
+        return Kernels.gradientY(clij, source, destination);
+    }
+
+    /**
+     * Computes a binary image with pixel values 0 and 1 depending on if a pixel value x in image X 
+     * was above of equal to the pixel value m in mask image M.
+     * 
+     * <pre>f(x) = (1 if (x >=  m)); (0 otherwise)</pre>
+     */
+    public boolean localThreshold(ClearCLImage source, ClearCLImage localThreshold, ClearCLImage destination) {
+        return Kernels.localThreshold(clij, source, localThreshold, destination);
+    }
+
+    /**
+     * Computes a binary image with pixel values 0 and 1 depending on if a pixel value x in image X 
+     * was above of equal to the pixel value m in mask image M.
+     * 
+     * <pre>f(x) = (1 if (x >=  m)); (0 otherwise)</pre>
+     */
+    public boolean localThreshold(ClearCLBuffer source, ClearCLBuffer localThreshold, ClearCLBuffer destination) {
+        return Kernels.localThreshold(clij, source, localThreshold, destination);
+    }
+
+    /**
+     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean meanBox(ClearCLImage arg1, ClearCLImage arg2, int arg3, int arg4, int arg5) {
+        return Kernels.meanBox(clij, arg1, arg2, arg3, arg4, arg5);
+    }
+
+    /**
+     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean meanBox(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, int arg5) {
+        return Kernels.meanBox(clij, arg1, arg2, arg3, arg4, arg5);
+    }
+
+    /**
+     * Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by 
+     * its half-width and half-height (radius).
+     * 
+     * For technical reasons, the area of the rectangle must have less than 1000 pixels.
+     */
+    public boolean medianSphere(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.medianSphere(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
     /**
@@ -1227,8 +1205,18 @@ public abstract class CLIJxOps {
      * 
      * For technical reasons, the area of the rectangle must have less than 1000 pixels.
      */
-    public boolean medianSphere(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.medianSphere(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    public boolean medianBox(ClearCLImage source, ClearCLImage destination, double radiusX, double radiusY) {
+        return Kernels.medianBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by 
+     * its half-width and half-height (radius).
+     * 
+     * For technical reasons, the area of the rectangle must have less than 1000 pixels.
+     */
+    public boolean medianBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return Kernels.medianBox(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
     /**
@@ -1252,23 +1240,35 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by 
+     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
      * its half-width and half-height (radius).
-     * 
-     * For technical reasons, the area of the rectangle must have less than 1000 pixels.
      */
-    public boolean medianBox(ClearCLImage source, ClearCLImage destination, double radiusX, double radiusY) {
-        return Kernels.medianBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    public boolean minimumSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return Kernels.minimumSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
     }
 
     /**
-     * Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by 
+     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
      * its half-width and half-height (radius).
-     * 
-     * For technical reasons, the area of the rectangle must have less than 1000 pixels.
      */
-    public boolean medianBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Kernels.medianBox(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    public boolean minimumSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return Kernels.minimumSphere(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    }
+
+    /**
+     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean minimumSphere(ClearCLImage source, ClearCLImage destination, double radiusX, double radiusY) {
+        return Kernels.minimumSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean minimumSphere(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.minimumSphere(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
     /**
@@ -1285,208 +1285,6 @@ public abstract class CLIJxOps {
      */
     public boolean minimumBox(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, int arg5) {
         return Kernels.minimumBox(clij, arg1, arg2, arg3, arg4, arg5);
-    }
-
-    /**
-     * Flippes Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method but
-     * offers less flexibility such as interpolation.
-     */
-    public boolean resliceBottom(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Kernels.resliceBottom(clij, source, destination);
-    }
-
-    /**
-     * Flippes Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method but
-     * offers less flexibility such as interpolation.
-     */
-    public boolean resliceBottom(ClearCLImage source, ClearCLImage destination) {
-        return Kernels.resliceBottom(clij, source, destination);
-    }
-
-    /**
-     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean meanBox(ClearCLImage arg1, ClearCLImage arg2, int arg3, int arg4, int arg5) {
-        return Kernels.meanBox(clij, arg1, arg2, arg3, arg4, arg5);
-    }
-
-    /**
-     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean meanBox(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4, int arg5) {
-        return Kernels.meanBox(clij, arg1, arg2, arg3, arg4, arg5);
-    }
-
-    /**
-     * Flippes X, Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method 
-     *  but offers less flexibility such as interpolation.
-     */
-    public boolean resliceLeft(ClearCLImage source, ClearCLImage destination) {
-        return Kernels.resliceLeft(clij, source, destination);
-    }
-
-    /**
-     * Flippes X, Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method 
-     *  but offers less flexibility such as interpolation.
-     */
-    public boolean resliceLeft(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Kernels.resliceLeft(clij, source, destination);
-    }
-
-    /**
-     * Flippes X, Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method 
-     *  but offers less flexibility such as interpolation.
-     */
-    public boolean resliceRight(ClearCLImage source, ClearCLImage destination) {
-        return Kernels.resliceRight(clij, source, destination);
-    }
-
-    /**
-     * Flippes X, Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method 
-     *  but offers less flexibility such as interpolation.
-     */
-    public boolean resliceRight(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Kernels.resliceRight(clij, source, destination);
-    }
-
-    /**
-     * Computes the gradient of gray values along X. Assuming a, b and c are three adjacent
-     *  pixels in X direction. In the target image will be saved as: <pre>b' = c - a;</pre>
-     */
-    public boolean gradientX(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Kernels.gradientX(clij, source, destination);
-    }
-
-    /**
-     * Computes the gradient of gray values along X. Assuming a, b and c are three adjacent
-     *  pixels in X direction. In the target image will be saved as: <pre>b' = c - a;</pre>
-     */
-    public boolean gradientX(ClearCLImage source, ClearCLImage destination) {
-        return Kernels.gradientX(clij, source, destination);
-    }
-
-    /**
-     * Computes the gradient of gray values along Y. Assuming a, b and c are three adjacent
-     *  pixels in Y direction. In the target image will be saved as: <pre>b' = c - a;</pre>
-     */
-    public boolean gradientY(ClearCLImage source, ClearCLImage destination) {
-        return Kernels.gradientY(clij, source, destination);
-    }
-
-    /**
-     * Computes the gradient of gray values along Y. Assuming a, b and c are three adjacent
-     *  pixels in Y direction. In the target image will be saved as: <pre>b' = c - a;</pre>
-     */
-    public boolean gradientY(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Kernels.gradientY(clij, source, destination);
-    }
-
-    /**
-     * This method is deprecated. Consider using maximumBox or maximumSphere instead.
-     */
-    public boolean maximumIJ(ClearCLImage arg1, ClearCLImage arg2, double arg3) {
-        return Kernels.maximumIJ(clij, arg1, arg2, new Double (arg3).intValue());
-    }
-
-    /**
-     * This method is deprecated. Consider using maximumBox or maximumSphere instead.
-     */
-    public boolean maximumIJ(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return Kernels.maximumIJ(clij, arg1, arg2, new Double (arg3).intValue());
-    }
-
-    /**
-     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean meanSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return Kernels.meanSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
-     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean meanSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Kernels.meanSphere(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
-    }
-
-    /**
-     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean meanSphere(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.meanSphere(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
-    }
-
-    /**
-     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean meanSphere(ClearCLImage source, ClearCLImage destination, double radiusX, double radiusY) {
-        return Kernels.meanSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
-     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean minimumSphere(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.minimumSphere(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
-    }
-
-    /**
-     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean minimumSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return Kernels.minimumSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
-     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean minimumSphere(ClearCLImage source, ClearCLImage destination, double radiusX, double radiusY) {
-        return Kernels.minimumSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
-     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean minimumSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Kernels.minimumSphere(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
-    }
-
-    /**
-     * 
-     */
-    public boolean radialProjection(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return Kernels.radialProjection(clij, arg1, arg2, new Double (arg3).floatValue());
-    }
-
-    /**
-     * 
-     */
-    public boolean radialProjection(ClearCLImage arg1, ClearCLImage arg2, double arg3) {
-        return Kernels.radialProjection(clij, arg1, arg2, new Double (arg3).floatValue());
-    }
-
-    /**
-     * 
-     */
-    public boolean splitStack(ClearCLBuffer arg1, ClearCLBuffer[] arg2) {
-        return Kernels.splitStack(clij, arg1, arg2);
-    }
-
-    /**
-     * 
-     */
-    public boolean splitStack(ClearCLImage arg1, ClearCLImage[] arg2) {
-        return Kernels.splitStack(clij, arg1, arg2);
     }
 
     /**
@@ -1508,37 +1306,67 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Computes a binary image with pixel values 0 and 1 depending on if a pixel value x in image X 
-     * was above of equal to the pixel value m in mask image M.
-     * 
-     * <pre>f(x) = (1 if (x >=  m)); (0 otherwise)</pre>
+     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
+     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
      */
-    public boolean localThreshold(ClearCLImage source, ClearCLImage localThreshold, ClearCLImage destination) {
-        return Kernels.localThreshold(clij, source, localThreshold, destination);
+    public boolean downsample(ClearCLImage source, ClearCLImage destination, double factorX, double factorY) {
+        return Kernels.downsample(clij, source, destination, new Double (factorX).floatValue(), new Double (factorY).floatValue());
     }
 
     /**
-     * Computes a binary image with pixel values 0 and 1 depending on if a pixel value x in image X 
-     * was above of equal to the pixel value m in mask image M.
-     * 
-     * <pre>f(x) = (1 if (x >=  m)); (0 otherwise)</pre>
+     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
+     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
      */
-    public boolean localThreshold(ClearCLBuffer source, ClearCLBuffer localThreshold, ClearCLBuffer destination) {
-        return Kernels.localThreshold(clij, source, localThreshold, destination);
+    public boolean downsample(ClearCLBuffer source, ClearCLBuffer destination, double factorX, double factorY) {
+        return Kernels.downsample(clij, source, destination, new Double (factorX).floatValue(), new Double (factorY).floatValue());
     }
 
     /**
-     * Determines the mean average projection of an image along Z.
+     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
+     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
      */
-    public boolean meanZProjection(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Kernels.meanZProjection(clij, source, destination);
+    public boolean downsample(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return Kernels.downsample(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
-     * Determines the mean average projection of an image along Z.
+     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
+     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
      */
-    public boolean meanZProjection(ClearCLImage source, ClearCLImage destination) {
-        return Kernels.meanZProjection(clij, source, destination);
+    public boolean downsample(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.downsample(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
+
+    /**
+     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean meanSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return Kernels.meanSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean meanSphere(ClearCLImage source, ClearCLImage destination, double radiusX, double radiusY) {
+        return Kernels.meanSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean meanSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return Kernels.meanSphere(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    }
+
+    /**
+     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean meanSphere(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.meanSphere(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
     /**
@@ -1574,17 +1402,41 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * 
+     * Flippes X, Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method 
+     *  but offers less flexibility such as interpolation.
      */
-    public boolean tenengradFusion(ClearCLImage arg1, float[] arg2, float arg3, ClearCLImage[] arg4) {
-        return Kernels.tenengradFusion(clij, arg1, arg2, arg3, arg4);
+    public boolean resliceLeft(ClearCLImage source, ClearCLImage destination) {
+        return Kernels.resliceLeft(clij, source, destination);
+    }
+
+    /**
+     * Flippes X, Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method 
+     *  but offers less flexibility such as interpolation.
+     */
+    public boolean resliceLeft(ClearCLBuffer source, ClearCLBuffer destination) {
+        return Kernels.resliceLeft(clij, source, destination);
     }
 
     /**
      * 
      */
-    public boolean tenengradFusion(ClearCLImage arg1, float[] arg2, ClearCLImage[] arg3) {
-        return Kernels.tenengradFusion(clij, arg1, arg2, arg3);
+    public boolean splitStack(ClearCLImage arg1, ClearCLImage[] arg2) {
+        return Kernels.splitStack(clij, arg1, arg2);
+    }
+
+    /**
+     * 
+     */
+    public boolean splitStack(ClearCLBuffer arg1, ClearCLBuffer[] arg2) {
+        return Kernels.splitStack(clij, arg1, arg2);
+    }
+
+    /**
+     * Determines the sum of all pixels in a given image. It will be stored in a new row of ImageJs
+     * Results table in the column 'Sum'.
+     */
+    public double sumPixels(ClearCLImage source) {
+        return Kernels.sumPixels(clij, source);
     }
 
     /**
@@ -1596,11 +1448,35 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Determines the sum of all pixels in a given image. It will be stored in a new row of ImageJs
-     * Results table in the column 'Sum'.
+     * Flippes X, Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method 
+     *  but offers less flexibility such as interpolation.
      */
-    public double sumPixels(ClearCLImage source) {
-        return Kernels.sumPixels(clij, source);
+    public boolean resliceRight(ClearCLImage source, ClearCLImage destination) {
+        return Kernels.resliceRight(clij, source, destination);
+    }
+
+    /**
+     * Flippes X, Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method 
+     *  but offers less flexibility such as interpolation.
+     */
+    public boolean resliceRight(ClearCLBuffer source, ClearCLBuffer destination) {
+        return Kernels.resliceRight(clij, source, destination);
+    }
+
+    /**
+     * Flippes Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method but
+     * offers less flexibility such as interpolation.
+     */
+    public boolean resliceBottom(ClearCLImage source, ClearCLImage destination) {
+        return Kernels.resliceBottom(clij, source, destination);
+    }
+
+    /**
+     * Flippes Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method but
+     * offers less flexibility such as interpolation.
+     */
+    public boolean resliceBottom(ClearCLBuffer source, ClearCLBuffer destination) {
+        return Kernels.resliceBottom(clij, source, destination);
     }
 
     /**
@@ -1618,17 +1494,47 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * 
+     * Flippes Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method but
+     * offers less flexibility such as interpolation.
      */
-    public boolean countNonZeroPixelsLocallySliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4) {
-        return Kernels.countNonZeroPixelsLocallySliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    public boolean resliceTop(ClearCLBuffer source, ClearCLBuffer destination) {
+        return Kernels.resliceTop(clij, source, destination);
+    }
+
+    /**
+     * Flippes Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method but
+     * offers less flexibility such as interpolation.
+     */
+    public boolean resliceTop(ClearCLImage source, ClearCLImage destination) {
+        return Kernels.resliceTop(clij, source, destination);
     }
 
     /**
      * 
      */
-    public boolean countNonZeroPixelsLocallySliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return Kernels.countNonZeroPixelsLocallySliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    public boolean radialProjection(ClearCLImage arg1, ClearCLImage arg2, double arg3) {
+        return Kernels.radialProjection(clij, arg1, arg2, new Double (arg3).floatValue());
+    }
+
+    /**
+     * 
+     */
+    public boolean radialProjection(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        return Kernels.radialProjection(clij, arg1, arg2, new Double (arg3).floatValue());
+    }
+
+    /**
+     * 
+     */
+    public boolean tenengradFusion(ClearCLImage arg1, float[] arg2, float arg3, ClearCLImage[] arg4) {
+        return Kernels.tenengradFusion(clij, arg1, arg2, arg3, arg4);
+    }
+
+    /**
+     * 
+     */
+    public boolean tenengradFusion(ClearCLImage arg1, float[] arg2, ClearCLImage[] arg3) {
+        return Kernels.tenengradFusion(clij, arg1, arg2, arg3);
     }
 
 
@@ -1637,15 +1543,29 @@ public abstract class CLIJxOps {
     /**
      * DEPRECATED: CLIJ scale() is deprecated. Use scale2D or scale3D instead!
      */
-    public boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return CLIJxAPIConsistencyWorkaround.scale(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    public boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        return CLIJxAPIConsistencyWorkaround.scale(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
 
     /**
      * DEPRECATED: CLIJ scale() is deprecated. Use scale2D or scale3D instead!
      */
-    public boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return CLIJxAPIConsistencyWorkaround.scale(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+    public boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return CLIJxAPIConsistencyWorkaround.scale(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
+
+    /**
+     * Counts non-zero voxels in a sphere around every voxel.Put the number in the result image.
+     */
+    public boolean countNonZeroVoxels3DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
+        return CLIJxAPIConsistencyWorkaround.countNonZeroVoxels3DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
+    }
+
+    /**
+     * Image source, Image vectorX, Image vectorY, Image vectorZ, Image destination
+     */
+    public boolean applyVectorField3D(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5) {
+        return CLIJxAPIConsistencyWorkaround.applyVectorField3D(clij, arg1, arg2, arg3, arg4, arg5);
     }
 
     /**
@@ -1653,6 +1573,13 @@ public abstract class CLIJxOps {
      */
     public boolean applyVectorField2D(ClearCLBuffer source, ClearCLBuffer vectorX, ClearCLBuffer vectorY, ClearCLBuffer destination) {
         return CLIJxAPIConsistencyWorkaround.applyVectorField2D(clij, source, vectorX, vectorY, destination);
+    }
+
+    /**
+     * Counts non-zero pixels in a sphere around every pixel.Put the number in the result image.
+     */
+    public boolean countNonZeroPixels2DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return CLIJxAPIConsistencyWorkaround.countNonZeroPixels2DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
     }
 
     /**
@@ -1665,50 +1592,40 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Image source, Image vectorX, Image vectorY, Image vectorZ, Image destination
+     * Counts non-zero pixels in a sphere around every pixel slice by slice in a stack and puts the resulting number in the destination image stack.
      */
-    public boolean applyVectorField3D(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5) {
-        return CLIJxAPIConsistencyWorkaround.applyVectorField3D(clij, arg1, arg2, arg3, arg4, arg5);
+    public boolean countNonZeroPixelsSliceBySliceSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return CLIJxAPIConsistencyWorkaround.countNonZeroPixelsSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
     }
 
     /**
-     * Counts non-zero voxels in a sphere around every voxel.Put the number in the result image.
+     * Scales an image with a given factor.
      */
-    public boolean countNonZeroVoxels3DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
-        return CLIJxAPIConsistencyWorkaround.countNonZeroVoxels3DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
+    public boolean scale3D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return CLIJxAPIConsistencyWorkaround.scale3D(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
-     * Counts non-zero pixels in a sphere around every pixel.Put the number in the result image.
+     * Flips an image in X and/or Y direction depending on boolean flags.
      */
-    public boolean countNonZeroPixels2DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return CLIJxAPIConsistencyWorkaround.countNonZeroPixels2DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    public boolean flip2D(ClearCLBuffer arg1, ClearCLBuffer arg2, boolean arg3, boolean arg4) {
+        return CLIJxAPIConsistencyWorkaround.flip2D(clij, arg1, arg2, arg3, arg4);
     }
 
     /**
-     * Computes the local maximum of a pixels cube neighborhood. The cubes size is specified by 
+     * Computes the local maximum of a pixels spherical neighborhood. The spheres size is specified by 
      * its half-width, half-height and half-depth (radius).
      */
-    public boolean maximum3DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
-        return CLIJxAPIConsistencyWorkaround.maximum3DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
+    public boolean maximum3DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
+        return CLIJxAPIConsistencyWorkaround.maximum3DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
     }
 
     /**
-     * Computes the local mean average of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
-     * its half-width and half-height (radius).
+     * Computes the local mean average of a pixels cube neighborhood. The cubes size is specified by 
+     * its half-width, half-height and half-depth (radius).
      */
-    public boolean mean2DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return CLIJxAPIConsistencyWorkaround.mean2DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
-     * Computes the local median of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
-     * its half-width and half-height (radius).
-     * 
-     * For technical reasons, the area of the ellipse must have less than 1000 pixels.
-     */
-    public boolean median2DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return CLIJxAPIConsistencyWorkaround.median2DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    public boolean mean3DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
+        return CLIJxAPIConsistencyWorkaround.mean3DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
     }
 
     /**
@@ -1722,31 +1639,69 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by 
-     * its half-width and half-height (radius).
+     * Computes the Gaussian blurred image of an image given two sigma values in X, Y and Z. Thus, the filterkernel can have non-isotropic shape.
      * 
-     * For technical reasons, the area of the rectangle must have less than 1000 pixels.
+     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
-    public boolean median2DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return CLIJxAPIConsistencyWorkaround.median2DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    public boolean blur3D(ClearCLBuffer source, ClearCLBuffer destination, double sigmaX, double sigmaY, double sigmaZ) {
+        return CLIJxAPIConsistencyWorkaround.blur3D(clij, source, destination, new Double (sigmaX).floatValue(), new Double (sigmaY).floatValue(), new Double (sigmaZ).floatValue());
     }
 
     /**
-     * Computes the local mean average of a pixels cube neighborhood. The cubes size is specified by 
+     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+     * 
+     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
+     */
+    public boolean blur2D(ClearCLBuffer source, ClearCLBuffer destination, double sigmaX, double sigmaY) {
+        return CLIJxAPIConsistencyWorkaround.blur2D(clij, source, destination, new Double (sigmaX).floatValue(), new Double (sigmaY).floatValue());
+    }
+
+    /**
+     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean minimum2DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return CLIJxAPIConsistencyWorkaround.minimum2DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * Computes the local mean average of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean mean2DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return CLIJxAPIConsistencyWorkaround.mean2DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * Computes the local maximum of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean maximum2DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return CLIJxAPIConsistencyWorkaround.maximum2DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * its half-width and half-height (radius).
+     */
+    public boolean maximum2DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return CLIJxAPIConsistencyWorkaround.maximum2DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
+     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
+     */
+    public boolean downsample3D(ClearCLBuffer source, ClearCLBuffer destination, double factorX, double factorY, double factorZ) {
+        return CLIJxAPIConsistencyWorkaround.downsample3D(clij, source, destination, new Double (factorX).floatValue(), new Double (factorY).floatValue(), new Double (factorZ).floatValue());
+    }
+
+    /**
+     * Computes the local minimum of a pixels spherical neighborhood. The spheres size is specified by 
      * its half-width, half-height and half-depth (radius).
      */
-    public boolean mean3DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
-        return CLIJxAPIConsistencyWorkaround.mean3DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
-    }
-
-    /**
-     * Rotates an image in plane. All angles are entered in degrees. If the image is not rotated around 
-     * the center, it is rotated around the coordinate origin.
-     * 
-     * It is recommended to apply the rotation to an isotropic image.
-     */
-    public boolean rotate2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, boolean arg5) {
-        return CLIJxAPIConsistencyWorkaround.rotate2D(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), arg5);
+    public boolean minimum3DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
+        return CLIJxAPIConsistencyWorkaround.minimum3DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
     }
 
     /**
@@ -1759,35 +1714,66 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Computes the local minimum of a pixels spherical neighborhood. The spheres size is specified by 
-     * its half-width, half-height and half-depth (radius).
+     * Flips an image in X, Y and/or Z direction depending on boolean flags.
      */
-    public boolean minimum3DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
-        return CLIJxAPIConsistencyWorkaround.minimum3DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
+    public boolean flip3D(ClearCLBuffer arg1, ClearCLBuffer arg2, boolean arg3, boolean arg4, boolean arg5) {
+        return CLIJxAPIConsistencyWorkaround.flip3D(clij, arg1, arg2, arg3, arg4, arg5);
     }
 
     /**
-     * Computes the local maximum of a pixels spherical neighborhood. The spheres size is specified by 
-     * its half-width, half-height and half-depth (radius).
+     * Scales an image with a given factor.
      */
-    public boolean maximum3DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
-        return CLIJxAPIConsistencyWorkaround.maximum3DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
+    public boolean scale2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        return CLIJxAPIConsistencyWorkaround.scale2D(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
 
     /**
-     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local maximum of a pixels cube neighborhood. The cubes size is specified by 
+     * its half-width, half-height and half-depth (radius).
+     */
+    public boolean maximum3DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
+        return CLIJxAPIConsistencyWorkaround.maximum3DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
+    }
+
+    /**
+     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
      * its half-width and half-height (radius).
      */
-    public boolean minimum2DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return CLIJxAPIConsistencyWorkaround.minimum2DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    public boolean mean2DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return CLIJxAPIConsistencyWorkaround.mean2DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
     }
 
     /**
-     * Computes the local mean average of a pixels spherical neighborhood. The spheres size is specified by 
-     * its half-width, half-height and half-depth (radius).
+     * Crops a given sub-stack out of a given image stack.
+     * 
+     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
      */
-    public boolean mean3DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
-        return CLIJxAPIConsistencyWorkaround.mean3DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
+    public boolean crop3D(ClearCLBuffer source, ClearCLBuffer destination, double startX, double startY, double startZ, double width, double height, double depth) {
+        return CLIJxAPIConsistencyWorkaround.crop3D(clij, source, destination, new Double (startX).intValue(), new Double (startY).intValue(), new Double (startZ).intValue(), new Double (width).intValue(), new Double (height).intValue(), new Double (depth).intValue());
+    }
+
+    /**
+     * Translate an image stack in X, Y and Z.
+     */
+    public boolean translate3D(ClearCLBuffer source, ClearCLBuffer destination, double translateX, double translateY, double translateZ) {
+        return CLIJxAPIConsistencyWorkaround.translate3D(clij, source, destination, new Double (translateX).floatValue(), new Double (translateY).floatValue(), new Double (translateZ).floatValue());
+    }
+
+    /**
+     * Translate an image stack in X and Y.
+     */
+    public boolean translate2D(ClearCLBuffer source, ClearCLBuffer destination, double translateX, double translateY) {
+        return CLIJxAPIConsistencyWorkaround.translate2D(clij, source, destination, new Double (translateX).floatValue(), new Double (translateY).floatValue());
+    }
+
+    /**
+     * Computes the local median of a pixels cuboid neighborhood. The cuboid size is specified by 
+     * its half-width, half-height and half-depth (radius).
+     * 
+     * For technical reasons, the volume of the cuboid must contain less than 1000 voxels.
+     */
+    public boolean median3DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
+        return CLIJxAPIConsistencyWorkaround.median3DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
     }
 
     /**
@@ -1807,22 +1793,6 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Computes the local maximum of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean maximum2DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return CLIJxAPIConsistencyWorkaround.maximum2DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
-     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
-     * its half-width and half-height (radius).
-     */
-    public boolean mean2DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return CLIJxAPIConsistencyWorkaround.mean2DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
      * Computes the local median of a pixels spherical neighborhood. The spheres size is specified by 
      * its half-width, half-height and half-depth (radius).
      * 
@@ -1833,98 +1803,23 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local median of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
      * its half-width and half-height (radius).
-     */
-    public boolean maximum2DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return CLIJxAPIConsistencyWorkaround.maximum2DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
-    }
-
-    /**
-     * Computes the local median of a pixels cuboid neighborhood. The cuboid size is specified by 
-     * its half-width, half-height and half-depth (radius).
      * 
-     * For technical reasons, the volume of the cuboid must contain less than 1000 voxels.
+     * For technical reasons, the area of the ellipse must have less than 1000 pixels.
      */
-    public boolean median3DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
-        return CLIJxAPIConsistencyWorkaround.median3DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
+    public boolean median2DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return CLIJxAPIConsistencyWorkaround.median2DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
     }
 
     /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+     * Rotates an image in plane. All angles are entered in degrees. If the image is not rotated around 
+     * the center, it is rotated around the coordinate origin.
      * 
-     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
+     * It is recommended to apply the rotation to an isotropic image.
      */
-    public boolean blur2D(ClearCLBuffer source, ClearCLBuffer destination, double sigmaX, double sigmaY) {
-        return CLIJxAPIConsistencyWorkaround.blur2D(clij, source, destination, new Double (sigmaX).floatValue(), new Double (sigmaY).floatValue());
-    }
-
-    /**
-     * Flips an image in X, Y and/or Z direction depending on boolean flags.
-     */
-    public boolean flip3D(ClearCLBuffer arg1, ClearCLBuffer arg2, boolean arg3, boolean arg4, boolean arg5) {
-        return CLIJxAPIConsistencyWorkaround.flip3D(clij, arg1, arg2, arg3, arg4, arg5);
-    }
-
-    /**
-     * Translate an image stack in X and Y.
-     */
-    public boolean translate2D(ClearCLBuffer source, ClearCLBuffer destination, double translateX, double translateY) {
-        return CLIJxAPIConsistencyWorkaround.translate2D(clij, source, destination, new Double (translateX).floatValue(), new Double (translateY).floatValue());
-    }
-
-    /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
-     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
-     */
-    public boolean downsample3D(ClearCLBuffer source, ClearCLBuffer destination, double factorX, double factorY, double factorZ) {
-        return CLIJxAPIConsistencyWorkaround.downsample3D(clij, source, destination, new Double (factorX).floatValue(), new Double (factorY).floatValue(), new Double (factorZ).floatValue());
-    }
-
-    /**
-     * Scales an image with a given factor.
-     */
-    public boolean scale2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return CLIJxAPIConsistencyWorkaround.scale2D(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
-    }
-
-    /**
-     * Flips an image in X and/or Y direction depending on boolean flags.
-     */
-    public boolean flip2D(ClearCLBuffer arg1, ClearCLBuffer arg2, boolean arg3, boolean arg4) {
-        return CLIJxAPIConsistencyWorkaround.flip2D(clij, arg1, arg2, arg3, arg4);
-    }
-
-    /**
-     * Translate an image stack in X, Y and Z.
-     */
-    public boolean translate3D(ClearCLBuffer source, ClearCLBuffer destination, double translateX, double translateY, double translateZ) {
-        return CLIJxAPIConsistencyWorkaround.translate3D(clij, source, destination, new Double (translateX).floatValue(), new Double (translateY).floatValue(), new Double (translateZ).floatValue());
-    }
-
-    /**
-     * Scales an image with a given factor.
-     */
-    public boolean scale3D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return CLIJxAPIConsistencyWorkaround.scale3D(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X, Y and Z. Thus, the filterkernel can have non-isotropic shape.
-     * 
-     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
-     */
-    public boolean blur3D(ClearCLBuffer source, ClearCLBuffer destination, double sigmaX, double sigmaY, double sigmaZ) {
-        return CLIJxAPIConsistencyWorkaround.blur3D(clij, source, destination, new Double (sigmaX).floatValue(), new Double (sigmaY).floatValue(), new Double (sigmaZ).floatValue());
-    }
-
-    /**
-     * Crops a given sub-stack out of a given image stack.
-     * 
-     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
-     */
-    public boolean crop3D(ClearCLBuffer source, ClearCLBuffer destination, double startX, double startY, double startZ, double width, double height, double depth) {
-        return CLIJxAPIConsistencyWorkaround.crop3D(clij, source, destination, new Double (startX).intValue(), new Double (startY).intValue(), new Double (startZ).intValue(), new Double (width).intValue(), new Double (height).intValue(), new Double (depth).intValue());
+    public boolean rotate2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, boolean arg5) {
+        return CLIJxAPIConsistencyWorkaround.rotate2D(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), arg5);
     }
 
     /**
@@ -1936,10 +1831,21 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Counts non-zero pixels in a sphere around every pixel slice by slice in a stack and puts the resulting number in the destination image stack.
+     * Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by 
+     * its half-width and half-height (radius).
+     * 
+     * For technical reasons, the area of the rectangle must have less than 1000 pixels.
      */
-    public boolean countNonZeroPixelsSliceBySliceSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
-        return CLIJxAPIConsistencyWorkaround.countNonZeroPixelsSliceBySliceSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    public boolean median2DBox(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY) {
+        return CLIJxAPIConsistencyWorkaround.median2DBox(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue());
+    }
+
+    /**
+     * Computes the local mean average of a pixels spherical neighborhood. The spheres size is specified by 
+     * its half-width, half-height and half-depth (radius).
+     */
+    public boolean mean3DSphere(ClearCLBuffer source, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
+        return CLIJxAPIConsistencyWorkaround.mean3DSphere(clij, source, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
     }
 
 
@@ -1972,10 +1878,10 @@ public abstract class CLIJxOps {
     // net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabeling
     //----------------------------------------------------
     /**
-     * 
+     * Performs connected components analysis to a binary image and generates a label map.
      */
-    public boolean setNonZeroPixelsToPixelIndex(ClearCLImageInterface arg1, ClearCLImageInterface arg2) {
-        return ConnectedComponentsLabeling.setNonZeroPixelsToPixelIndex(clij, arg1, arg2);
+    public boolean connectedComponentsLabeling(ClearCLBuffer binary_input, ClearCLBuffer labeling_destination) {
+        return ConnectedComponentsLabeling.connectedComponentsLabeling(clijx, binary_input, labeling_destination);
     }
 
     /**
@@ -1986,10 +1892,10 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Performs connected components analysis to a binary image and generates a label map.
+     * 
      */
-    public boolean connectedComponentsLabeling(ClearCLBuffer binary_input, ClearCLBuffer labeling_destination) {
-        return ConnectedComponentsLabeling.connectedComponentsLabeling(clijx, binary_input, labeling_destination);
+    public boolean setNonZeroPixelsToPixelIndex(ClearCLImageInterface arg1, ClearCLImageInterface arg2) {
+        return ConnectedComponentsLabeling.setNonZeroPixelsToPixelIndex(clij, arg1, arg2);
     }
 
 
@@ -2173,6 +2079,13 @@ public abstract class CLIJxOps {
     /**
      * Pastes an image into another image at a given position.
      */
+    public boolean paste2D(ClearCLBuffer source, ClearCLBuffer destination, double destinationX, double destinationY) {
+        return Paste2D.paste2D(clij, source, destination, new Double (destinationX).intValue(), new Double (destinationY).intValue());
+    }
+
+    /**
+     * Pastes an image into another image at a given position.
+     */
     public boolean paste(ClearCLImage source, ClearCLImage destination, double destinationX, double destinationY) {
         return Paste2D.paste(clij, source, destination, new Double (destinationX).intValue(), new Double (destinationY).intValue());
     }
@@ -2182,13 +2095,6 @@ public abstract class CLIJxOps {
      */
     public boolean paste(ClearCLBuffer source, ClearCLBuffer destination, double destinationX, double destinationY) {
         return Paste2D.paste(clij, source, destination, new Double (destinationX).intValue(), new Double (destinationY).intValue());
-    }
-
-    /**
-     * Pastes an image into another image at a given position.
-     */
-    public boolean paste2D(ClearCLBuffer source, ClearCLBuffer destination, double destinationX, double destinationY) {
-        return Paste2D.paste2D(clij, source, destination, new Double (destinationX).intValue(), new Double (destinationY).intValue());
     }
 
 
@@ -3275,16 +3181,16 @@ public abstract class CLIJxOps {
      * Computes a radial projection of an image stack. Starting point for the line is the center in any 
      * X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
      */
-    public boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return ResliceRadial.resliceRadial(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    public boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        return ResliceRadial.resliceRadial(clij, arg1, arg2, new Double (arg3).floatValue());
     }
 
     /**
      * Computes a radial projection of an image stack. Starting point for the line is the center in any 
      * X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
      */
-    public boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return ResliceRadial.resliceRadial(clij, arg1, arg2, new Double (arg3).floatValue());
+    public boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return ResliceRadial.resliceRadial(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
 
@@ -3913,32 +3819,32 @@ public abstract class CLIJxOps {
     /**
      * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
      */
-    public boolean applyVectorfield(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLImageInterface arg4) {
-        return ApplyVectorField2D.applyVectorfield(clijx, arg1, arg2, arg3, arg4);
+    public boolean applyVectorfield2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLImageInterface arg4) {
+        return ApplyVectorField2D.applyVectorfield2D(clijx, arg1, arg2, arg3, arg4);
     }
 
     /**
      * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
      */
-    public boolean applyVectorfield2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLImageInterface arg4) {
-        return ApplyVectorField2D.applyVectorfield2D(clijx, arg1, arg2, arg3, arg4);
+    public boolean applyVectorfield(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLImageInterface arg4) {
+        return ApplyVectorField2D.applyVectorfield(clijx, arg1, arg2, arg3, arg4);
     }
 
 
     // net.haesleinhuepf.clijx.advancedfilters.ApplyVectorField3D
     //----------------------------------------------------
     /**
-     * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
-     */
-    public boolean applyVectorfield(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLImageInterface arg4, ClearCLImageInterface arg5) {
-        return ApplyVectorField3D.applyVectorfield(clijx, arg1, arg2, arg3, arg4, arg5);
-    }
-
-    /**
      * Image source, Image vectorX, Image vectorY, Image vectorZ, Image destination
      */
     public boolean applyVectorfield3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLImageInterface arg4, ClearCLImageInterface arg5) {
         return ApplyVectorField3D.applyVectorfield3D(clijx, arg1, arg2, arg3, arg4, arg5);
+    }
+
+    /**
+     * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
+     */
+    public boolean applyVectorfield(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLImageInterface arg4, ClearCLImageInterface arg5) {
+        return ApplyVectorField3D.applyVectorfield(clijx, arg1, arg2, arg3, arg4, arg5);
     }
 
 
@@ -4198,5 +4104,75 @@ public abstract class CLIJxOps {
         return DilateBoxSliceBySlice.dilateBoxSliceBySlice(clijx, arg1, arg2);
     }
 
+
+    // net.haesleinhuepf.clijx.advancedfilters.Copy
+    //----------------------------------------------------
+    /**
+     * Copies an image.
+     * 
+     * <pre>f(x) = x</pre>
+     */
+    public boolean copy(ClearCLImageInterface arg1, ClearCLImageInterface arg2) {
+        return Copy.copy(clijx, arg1, arg2);
+    }
+
+
+    // net.haesleinhuepf.clijx.advancedfilters.CopySlice
+    //----------------------------------------------------
+    /**
+     * This method has two purposes: 
+     * It copies a 2D image to a given slice z position in a 3D image stack or 
+     * It copies a given slice at position z in an image stack to a 2D image.
+     * 
+     * The first case is only available via ImageJ macro. If you are using it, it is recommended that the 
+     * target 3D image already pre-exists in GPU memory before calling this method. Otherwise, CLIJ create 
+     * the image stack with z planes.
+     */
+    public boolean copySlice(ClearCLBuffer source, ClearCLBuffer destination, double sliceIndex) {
+        return CopySlice.copySlice(clijx, source, destination, new Double (sliceIndex).intValue());
+    }
+
+
+    // net.haesleinhuepf.clijx.advancedfilters.Crop2D
+    //----------------------------------------------------
+    /**
+     * Crops a given rectangle out of a given image.
+     * 
+     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
+     */
+    public boolean crop(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return Crop2D.crop(clijx, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    }
+
+    /**
+     * Crops a given rectangle out of a given image.
+     * 
+     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
+     */
+    public boolean crop2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return Crop2D.crop2D(clijx, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    }
+
+
+    // net.haesleinhuepf.clijx.advancedfilters.Crop3D
+    //----------------------------------------------------
+    /**
+     * Crops a given rectangle out of a given image.
+     * 
+     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
+     */
+    public boolean crop(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return Crop3D.crop(clijx, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    }
+
+    /**
+     * Crops a given sub-stack out of a given image stack.
+     * 
+     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
+     */
+    public boolean crop3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return Crop3D.crop3D(clijx, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    }
+
 }
-// 416 methods generated.
+// 410 methods generated.

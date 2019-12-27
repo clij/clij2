@@ -180,7 +180,11 @@ public interface CLIJ2Plugins {
             DilateSphere.class,
             DilateBox.class,
             DilateSphereSliceBySlice.class,
-            DilateBoxSliceBySlice.class
+            DilateBoxSliceBySlice.class,
+            Copy.class,
+            CopySlice.class,
+            Crop2D.class,
+            Crop3D.class
     };
 
     public String blockList = ";" +
@@ -210,5 +214,8 @@ public interface CLIJ2Plugins {
             "Kernels.dilateBox;" +
             "Kernels.dilateSphere;" +
             "Kernels.dilateBoxSliceBySlice;" +
-            "Kernels.dilateSphereSliceBySlice;";
+            "Kernels.dilateSphereSliceBySlice;" +
+            "Kernels.copy;" +
+            "Kernels.crop;" +
+            "Kernels.copySlice;";
 }
