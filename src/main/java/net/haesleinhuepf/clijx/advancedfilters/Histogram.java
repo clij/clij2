@@ -5,6 +5,7 @@ import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
+import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -37,6 +38,25 @@ public class Histogram extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         Float maximumGreyValue = asFloat(args[4]);
         Boolean determineMinMax = asBoolean(args[5]);
         return histogram(getCLIJx(), src, histogram, numberOfBins, minimumGreyValue, maximumGreyValue, determineMinMax, true);
+    }
+
+    public static float[] histogram(CLIJx clijx, ClearCLBuffer image, Float minGreyValue, Float maxGreyValue, Integer numberOfBins) {
+        ClearCLBuffer histogram = clijx.create(new long[]{numberOfBins, 1, 1}, NativeTypeEnum.Float);
+
+        if (minGreyValue == null) {
+            minGreyValue = new Double(clijx.minimumOfAllPixels(image)).floatValue();
+        }
+        if (maxGreyValue == null) {
+            maxGreyValue = new Double(clijx.maximumOfAllPixels(image)).floatValue();
+        }
+
+        fillHistogram(clijx, image, histogram, minGreyValue, maxGreyValue);
+
+        ImagePlus histogramImp = clijx.convert(histogram, ImagePlus.class);
+        histogram.close();
+
+        float[] determinedHistogram = (float[])(histogramImp.getProcessor().getPixels());
+        return determinedHistogram;
     }
 
     public static boolean histogram(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer histogram) {

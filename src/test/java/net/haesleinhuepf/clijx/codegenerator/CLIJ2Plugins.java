@@ -22,7 +22,6 @@ import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
 import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
-import net.imagej.ops.Ops;
 
 public interface CLIJ2Plugins {
     public Class[] classes = {
@@ -197,8 +196,16 @@ public interface CLIJ2Plugins {
             MeanZProjection.class,
             MinimumZProjection.class,
             Power.class,
-            AbstractTenengradFusion.class
-    };
+            AbstractTenengradFusion.class,
+            DivideImages.class,
+            MaximumImages.class,
+            MaximumImageAndScalar.class,
+            MinimumImages.class,
+            MinimumImageAndScalar.class,
+            MultiplyImageAndScalar.class,
+            MultiplyStackWithPlane.class
+
+};
 
     public String blockList = ";" +
             "BinaryIntersection.binaryAnd;" +
@@ -215,6 +222,7 @@ public interface CLIJ2Plugins {
             "Kernels.applyVectorfield;" +
             "Kernels.argMaximumZProjection;" +
             "Kernels.fillHistogram;" +
+            "Kernels.histogram;" +
             "Kernels.automaticThreshold;" +
             "Kernels.binaryAnd;" +
             "Kernels.binaryOr;" +
@@ -242,6 +250,13 @@ public interface CLIJ2Plugins {
             "Kernels.minimumZProjection;" +
             "Kernels.power;" +
             "Kernels.tenengradWeightsSliceBySlice;" +
-            "Kernels.tenengradFusion;";
+            "Kernels.tenengradFusion;" +
+            "Kernels.divideImages;" +
+            "Kernels.maximumImages;" +
+            "Kernels.maximumImageAndScalar;" +
+            "Kernels.minimumImages;" +
+            "Kernels.minimumImageAndScalar;" +
+            "Kernels.multiplyImageAndScalar;" +
+            "Kernels.multiplyStackWithPlane;";
 
 }
