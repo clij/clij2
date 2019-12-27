@@ -3,6 +3,7 @@ package net.haesleinhuepf.clijx.advancedfilters;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -10,7 +11,6 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
-import net.haesleinhuepf.clijx.utilities.CLIJUtilities;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -21,37 +21,41 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_maximumXProjection")
-public class MaximumXProjection extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_minimumZProjection")
+public class MinimumZProjection extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        return maximumXProjection(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return minimumZProjection(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
-    public static boolean maximumXProjection(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst_max) {
-        assertDifferent(src, dst_max);
+    public static boolean minimumZProjection(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst_min) {
+        assertDifferent(src, dst_min);
+
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
-        parameters.put("dst_max", dst_max);
-        clijx.execute(MaximumXProjection.class, "maximum_x_projection_3d_2d_x.cl", "maximum_x_projection_3d_2d", dst_max.getDimensions(), dst_max.getDimensions(), parameters);
+        parameters.put("dst_min", dst_min);
+
+        clijx.execute(MinimumZProjection.class, "minimum_z_projection_3d_2d_x.cl", "minimum_z_projection_3d_2d", dst_min.getDimensions(), dst_min.getDimensions(), parameters);
+
         return true;
     }
 
+
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination_max";
+        return "Image source, Image destination_sum";
     }
 
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input)
     {
-        return clij.createCLBuffer(new long[]{input.getDepth(), input.getHeight()}, input.getNativeType());
+        return getCLIJx().create(new long[]{input.getWidth(), input.getHeight()}, input.getNativeType());
     }
 
     @Override
     public String getDescription() {
-        return "Determines the maximum projection of an image along X.";
+        return "Determines the minimum projection of an image along Z.";
     }
 
     @Override

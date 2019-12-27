@@ -185,7 +185,17 @@ public interface CLIJ2Plugins {
             CopySlice.class,
             Crop2D.class,
             Crop3D.class,
-            Set.class
+            Set.class,
+            Flip2D.class,
+            Flip3D.class,
+            RotateLeft.class,
+            RotateRight.class,
+            Mask.class,
+            MaskStackWithPlane.class,
+            MaximumZProjection.class,
+            MedianZProjection.class,
+            MeanZProjection.class,
+            MinimumZProjection.class
     };
 
     public String blockList = ";" +
@@ -219,5 +229,14 @@ public interface CLIJ2Plugins {
             "Kernels.copy;" +
             "Kernels.crop;" +
             "Kernels.copySlice;" +
-            "Kernels.set;";
+            "Kernels.set;" +
+            "Kernels.flip;" +
+            "Kernels.rotateLeft;" +
+            "Kernels.rotateRight;" +
+            "Kernels.mask;" +
+            "Kernels.maskStackWithPlane;" +
+            "Kernels.maximumZProjection;" +
+            "Kernels.meanZProjection;" +
+            "Kernels.minimumZProjection;";
+
 }

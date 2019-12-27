@@ -32,7 +32,7 @@ public class MedianZProjection extends AbstractCLIJxPlugin implements CLIJMacroP
         parameters.put("src", input);
         parameters.put("dst", output);
 
-        clijx.execute(MedianZProjection.class, "median_z_projection_3d_2d_x.cl", "median_project_3d_2d", output.getDimensions(), output.getDimensions(), parameters);
+        clijx.execute(MedianZProjection.class, "median_z_projection_3d_2d_x.cl", "median_z_projection_3d_2d", output.getDimensions(), output.getDimensions(), parameters);
         return true;
     }
 
@@ -44,7 +44,7 @@ public class MedianZProjection extends AbstractCLIJxPlugin implements CLIJMacroP
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input)
     {
-        return clij.createCLBuffer(new long[]{input.getWidth(), input.getHeight()}, input.getNativeType());
+        return getCLIJx().create(new long[]{input.getWidth(), input.getHeight()}, input.getNativeType());
     }
 
     @Override

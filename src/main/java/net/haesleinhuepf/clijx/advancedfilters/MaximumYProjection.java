@@ -6,6 +6,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,23 +18,21 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_maximumYProjection")
-public class MaximumYProjection extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_maximumYProjection")
+public class MaximumYProjection extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        boolean result = maximumYProjection(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
-        releaseBuffers(args);
-        return result;
+        return maximumYProjection(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
-    public static boolean maximumYProjection(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst_max) {
+    public static boolean maximumYProjection(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst_max) {
         assertDifferent(src, dst_max);
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst_max", dst_max);
-        return clij.execute(ResliceRadial.class, "maximum_y_projection.cl", "maximum_y_projection", parameters);
+        clijx.execute(MaximumYProjection.class, "maximum_y_projection_3d_2d_x.cl", "maximum_y_projection_3d_2d", dst_max.getDimensions(), dst_max.getDimensions(), parameters);
+        return true;
     }
 
     @Override
