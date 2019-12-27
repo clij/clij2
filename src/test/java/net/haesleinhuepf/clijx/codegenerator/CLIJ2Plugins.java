@@ -1,6 +1,7 @@
 package net.haesleinhuepf.clijx.codegenerator;
 
 import net.haesleinhuepf.clijx.advancedfilters.*;
+import net.haesleinhuepf.clijx.advancedfilters.tenengradfusion.AbstractTenengradFusion;
 import net.haesleinhuepf.clijx.advancedmath.*;
 import net.haesleinhuepf.clijx.gui.OrganiseWindows;
 import net.haesleinhuepf.clijx.io.PreloadFromDisc;
@@ -194,7 +195,9 @@ public interface CLIJ2Plugins {
             MaskStackWithPlane.class,
             MaximumZProjection.class,
             MeanZProjection.class,
-            MinimumZProjection.class
+            MinimumZProjection.class,
+            Power.class,
+            AbstractTenengradFusion.class
     };
 
     public String blockList = ";" +
@@ -236,6 +239,9 @@ public interface CLIJ2Plugins {
             "Kernels.maskStackWithPlane;" +
             "Kernels.maximumZProjection;" +
             "Kernels.meanZProjection;" +
-            "Kernels.minimumZProjection;";
+            "Kernels.minimumZProjection;" +
+            "Kernels.power;" +
+            "Kernels.tenengradWeightsSliceBySlice;" +
+            "Kernels.tenengradFusion;";
 
 }
