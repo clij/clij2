@@ -3,11 +3,14 @@ package net.haesleinhuepf.clijx.advancedmath;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,27 +19,21 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_power")
-public class Power extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_power")
+public class Power extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        if (containsCLImageArguments() && clij.hasImageSupport()) {
-            return Kernels.power(clij, (ClearCLImage)( args[0]), (ClearCLImage)(args[1]), asFloat(args[2]));
-        } else {
-            Object[] args = openCLBufferArgs();
-            boolean result = Kernels.power(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
-            releaseBuffers(args);
-            return result;
-        }
+        return power(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
     }
 
-    public static boolean power(CLIJ clij, ClearCLImage src, ClearCLImage dst, Float exponent) {
+    public static boolean power(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Float exponent) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
         parameters.put("exponent", exponent);
-        return clij.execute(Kernels.class, "power_" + src.getDimension() + "d_x.cl", "power_" + src.getDimension() + "d", parameters);
+        clijx.execute(Power.class, "power_" + src.getDimension() + "d_x.cl", "power_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        return true;
     }
 
 
