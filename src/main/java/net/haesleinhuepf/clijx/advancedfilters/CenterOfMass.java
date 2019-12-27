@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clijx.temp;
+package net.haesleinhuepf.clijx.advancedfilters;
 
 import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;

@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clijx.temp;
+package net.haesleinhuepf.clijx.advancedfilters;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
@@ -21,39 +21,40 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.radiusToKernelSize;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_countNonZeroPixelsSliceBySliceSphere")
-public class CountNonZeroPixelsSliceBySliceSphere extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_countNonZeroVoxels3DSphere")
+public class CountNonZeroVoxels3DSphere extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        return countNonZeroPixelsLocallySliceBySlice(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
+        return countNonZeroVoxelsLocally(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
     }
 
-    public static boolean countNonZeroPixelsLocallySliceBySlice(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY) {
-        return countNonZeroPixelsSliceBySliceSphere(clijx, src, dst, radiusX, radiusY);
+    public static boolean countNonZeroVoxelsLocally(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
+        return countNonZeroVoxels3DSphere(clijx, src, dst, radiusX, radiusY, radiusZ);
     }
 
-    public static boolean countNonZeroPixelsSliceBySliceSphere(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY) {
+    public static boolean countNonZeroVoxels3DSphere(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
         assertDifferent(src, dst);
 
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("Nx", radiusToKernelSize(radiusX));
         parameters.put("Ny", radiusToKernelSize(radiusY));
+        parameters.put("Nz", radiusToKernelSize(radiusZ));
         parameters.put("src", src);
         parameters.put("dst", dst);
-        clijx.execute(CountNonZeroPixelsSliceBySliceSphere.class, "count_nonzero_pixels_slice_by_slice_sphere_3d_x.cl", "count_nonzero_pixels_slice_by_slice_sphere_3d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(Kernels.class, "count_nonzero_voxels_sphere_3d_x.cl", "count_nonzero_voxels_sphere_3d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 
-
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number radiusX, Number radiusY";
+        return "Image source, Image destination, Number radiusX, Number radiusY, Number radiusZ";
     }
 
     @Override
     public String getDescription() {
-        return "Counts non-zero pixels in a sphere around every pixel slice by slice in a stack and puts the resulting number in the destination image stack.";
+        return "Counts non-zero voxels in a sphere around every voxel." +
+                "Put the number in the result image.";
     }
 
     @Override

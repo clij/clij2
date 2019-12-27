@@ -19,11 +19,9 @@ import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
 import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
 import net.haesleinhuepf.clijx.registration.TranslationRegistration;
 import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
-import net.haesleinhuepf.clijx.temp.*;
 import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
-import net.imglib2.algorithm.neighborhood.CenteredRectangleShape;
 
 public interface CLIJ2Plugins {
     public Class[] classes = {

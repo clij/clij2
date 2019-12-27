@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clijx.temp;
+package net.haesleinhuepf.clijx.advancedfilters;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;

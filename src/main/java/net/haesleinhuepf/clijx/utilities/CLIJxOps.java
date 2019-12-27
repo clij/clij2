@@ -8,7 +8,6 @@ import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import ij.measure.ResultsTable;
 import ij.gui.Roi;
 import net.haesleinhuepf.clij.kernels.Kernels;
-import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
 import net.haesleinhuepf.clijx.advancedfilters.BinaryUnion;
 import net.haesleinhuepf.clijx.advancedfilters.BinaryIntersection;
 import net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabeling;
@@ -186,12 +185,12 @@ import net.haesleinhuepf.clijx.advancedmath.MinimumImages;
 import net.haesleinhuepf.clijx.advancedmath.MinimumImageAndScalar;
 import net.haesleinhuepf.clijx.advancedmath.MultiplyImageAndScalar;
 import net.haesleinhuepf.clijx.advancedmath.MultiplyStackWithPlane;
-import net.haesleinhuepf.clijx.temp.CountNonZeroPixels2DSphere;
-import net.haesleinhuepf.clijx.temp.CountNonZeroPixelsSliceBySliceSphere;
-import net.haesleinhuepf.clijx.temp.CountNonZeroVoxels3DSphere;
-import net.haesleinhuepf.clijx.temp.SumZProjection;
-import net.haesleinhuepf.clijx.temp.SumOfAllPixels;
-import net.haesleinhuepf.clijx.temp.CenterOfMass;
+import net.haesleinhuepf.clijx.advancedfilters.CountNonZeroPixels2DSphere;
+import net.haesleinhuepf.clijx.advancedfilters.CountNonZeroPixelsSliceBySliceSphere;
+import net.haesleinhuepf.clijx.advancedfilters.CountNonZeroVoxels3DSphere;
+import net.haesleinhuepf.clijx.advancedfilters.SumZProjection;
+import net.haesleinhuepf.clijx.advancedfilters.SumOfAllPixels;
+import net.haesleinhuepf.clijx.advancedfilters.CenterOfMass;
 import net.haesleinhuepf.clijx.advancedfilters.Invert;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract class CLIJxOps {
