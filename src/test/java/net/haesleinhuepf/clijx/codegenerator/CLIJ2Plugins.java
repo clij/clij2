@@ -193,7 +193,6 @@ public interface CLIJ2Plugins {
             Mask.class,
             MaskStackWithPlane.class,
             MaximumZProjection.class,
-            MedianZProjection.class,
             MeanZProjection.class,
             MinimumZProjection.class
     };
