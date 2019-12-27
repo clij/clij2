@@ -8,6 +8,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.Arrays;
@@ -19,23 +21,23 @@ import java.util.Arrays;
  *         November 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_automaticThresholdInplace")
-public class AutomaticThresholdInplace extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class AutomaticThresholdInplace extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
         ClearCLBuffer dst = (ClearCLBuffer) (args[0]);
         String userSelectedMethod = (String)args[1];
 
-        automaticThresholdInplace(clij, dst, userSelectedMethod);
+        automaticThresholdInplace(getCLIJx(), dst, userSelectedMethod);
 
         return true;
     }
 
-    public static boolean automaticThresholdInplace(CLIJ clij, ClearCLBuffer src_dst, String userSelectedMethod) {
-        ClearCLBuffer buffer = clij.create(src_dst);
-        clij.op().copy(src_dst, buffer);
-        Kernels.automaticThreshold(clij, buffer, src_dst, userSelectedMethod);
-        buffer.close();
+    public static boolean automaticThresholdInplace(CLIJx clijx, ClearCLBuffer src_dst, String userSelectedMethod) {
+        ClearCLBuffer buffer = clijx.create(src_dst);
+        clijx.copy(src_dst, buffer);
+        AutomaticThreshold.automaticThreshold(clijx, buffer, src_dst, userSelectedMethod);
+        clijx.release(buffer);
         return true;
     }
 
