@@ -1,5 +1,7 @@
 package net.haesleinhuepf.clijx.advancedfilters;
 
+import ij.ImageJ;
+import ij.gui.WaitForUserDialog;
 import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
@@ -57,9 +59,13 @@ public class MeanClosestSpotDistance extends AbstractCLIJxPlugin implements CLIJ
         ClearCLBuffer pointlist2 = clijx.create(new long[]{numberOfSpots2, spotsA.getDimension()}, NativeTypeEnum.Float);
         SpotsToPointList.spotsToPointList(clijx, spotsB, pointlist2);
 
-        ClearCLBuffer distanceMatrix = clijx.create(new long[]{ numberOfSpots1, numberOfSpots2}, NativeTypeEnum.Float);
+        ClearCLBuffer distanceMatrix = clijx.create(new long[]{ numberOfSpots1+1, numberOfSpots2+1}, NativeTypeEnum.Float);
 
         GenerateDistanceMatrix.generateDistanceMatrix(clijx, pointlist1, pointlist2, distanceMatrix);
+
+        //new ImageJ();
+        //clijx.show(distanceMatrix, "dis");
+        //new WaitForUserDialog("dis").show();
 
         pointlist1.close();
         pointlist2.close();
@@ -67,7 +73,10 @@ public class MeanClosestSpotDistance extends AbstractCLIJxPlugin implements CLIJ
         ClearCLBuffer result = clijx.create(new long[]{distanceMatrix.getWidth(), 1}, distanceMatrix.getNativeType());
         ShortestDistances.shortestDistances(clijx, distanceMatrix, result);
 
-        meanDistances[0] = clijx.sumPixels(result) / result.getWidth() / result.getHeight() / result.getDepth();
+        //clijx.show(result, "res");
+        //new WaitForUserDialog("dis").show();
+
+        meanDistances[0] = clijx.sumPixels(result) / (result.getWidth() - 1) / result.getHeight() / result.getDepth();
         System.out.println("mean distance A B: " + meanDistances[0]);
         result.close();
 

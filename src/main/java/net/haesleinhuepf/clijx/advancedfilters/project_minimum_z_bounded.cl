@@ -21,7 +21,7 @@ __kernel void project_minimum_z_bounded(
     end = max_z;
   }
 
-  for(int z = start; z < end; z++)
+  for(int z = start; z <= end; z++)
   {
     float value = READ_IMAGE_3D(src,sampler,(int4)(x,y,z,0)).x;
     if (value < min || z == start) {

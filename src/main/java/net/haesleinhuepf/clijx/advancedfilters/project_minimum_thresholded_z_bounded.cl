@@ -23,7 +23,7 @@ __kernel void project_minimum_thresholded_z_bounded(
   }
 
   bool initialized = 0;
-  for(int z = start; z < end; z++)
+  for(int z = start; z <= end; z++)
   {
     float value = READ_IMAGE_3D(src,sampler,(int4)(x,y,z,0)).x;
     if ((threshold_intensity < value) && (value < min || initialized == 0)) {

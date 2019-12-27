@@ -33,7 +33,8 @@ public class ShortestDistances extends AbstractCLIJxPlugin implements CLIJMacroP
 
         TransposeYZ.transposeYZ(clijx, input, temp);
 
-        clijx.minimumZProjection(temp, output);
+        clijx.projectMinimumThresholdedZBounded(temp, output, -1, 1, temp.getDepth());
+        //minimumZProjectionIgnoringFirstColumn(temp, output);
 
         temp.close();
         return true;
