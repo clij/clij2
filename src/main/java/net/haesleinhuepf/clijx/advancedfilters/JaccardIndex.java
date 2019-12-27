@@ -8,6 +8,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -15,7 +17,7 @@ import org.scijava.plugin.Plugin;
  * July 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_jaccardIndex")
-public class JaccardIndex extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class JaccardIndex extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
@@ -23,7 +25,7 @@ public class JaccardIndex extends AbstractCLIJPlugin implements CLIJMacroPlugin,
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
         ClearCLBuffer buffer2 = (ClearCLBuffer)( args[1]);
 
-        double jaccardIndex = jaccardIndex(clij, buffer1, buffer2);
+        double jaccardIndex = jaccardIndex(getCLIJx(), buffer1, buffer2);
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();
@@ -32,18 +34,18 @@ public class JaccardIndex extends AbstractCLIJPlugin implements CLIJMacroPlugin,
         return true;
     }
 
-    public static double jaccardIndex(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2) {
-        ClearCLBuffer intersection = clij.create(input1.getDimensions(), NativeTypeEnum.Byte);
-        ClearCLBuffer union = clij.create(input1.getDimensions(), NativeTypeEnum.Byte);
+    public static double jaccardIndex(CLIJx clijx, ClearCLBuffer input1, ClearCLBuffer input2) {
+        ClearCLBuffer intersection = clijx.create(input1.getDimensions(), NativeTypeEnum.Byte);
+        ClearCLBuffer union = clijx.create(input1.getDimensions(), NativeTypeEnum.Byte);
 
-        BinaryIntersection.binaryIntersection(clij, input1, input2, intersection);
-        BinaryUnion.binaryUnion(clij, input1, input2, union);
+        BinaryIntersection.binaryIntersection(clijx, input1, input2, intersection);
+        BinaryUnion.binaryUnion(clijx, input1, input2, union);
 
-        double countIntersection = CountNonZeroPixels.countNonZeroPixels(clij, intersection);
-        double countUnion = CountNonZeroPixels.countNonZeroPixels(clij, union);
+        double countIntersection = CountNonZeroPixels.countNonZeroPixels(clijx, intersection);
+        double countUnion = CountNonZeroPixels.countNonZeroPixels(clijx, union);
 
-        intersection.close();
-        union.close();
+        clijx.release(intersection);
+        clijx.release(union);
 
         double jaccardIndex = countIntersection / countUnion;
         return jaccardIndex;

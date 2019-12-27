@@ -29,7 +29,7 @@ public class WatershedTest {
         Watershed.watershed(clijx, thresholded, watershed);
 
         clijx.show(watershed, "watershed");
-        new WaitForUserDialog("wait").show();
+        //new WaitForUserDialog("wait").show();
 
         watershed.close();
         thresholded.close();

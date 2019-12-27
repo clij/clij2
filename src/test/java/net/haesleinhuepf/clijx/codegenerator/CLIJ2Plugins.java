@@ -21,6 +21,7 @@ import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
 import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
+import net.imagej.ops.Ops;
 
 public interface CLIJ2Plugins {
     public Class[] classes = {
@@ -167,10 +168,24 @@ public interface CLIJ2Plugins {
             ArgMaximumZProjection.class,
             Histogram.class,
             AutomaticThreshold.class,
-            Threshold.class
+            Threshold.class,
+            BinaryOr.class,
+            BinaryAnd.class,
+            BinaryXOr.class,
+            BinaryNot.class,
+            ErodeSphere.class,
+            ErodeBox.class,
+            ErodeSphereSliceBySlice.class,
+            ErodeBoxSliceBySlice.class,
+            DilateSphere.class,
+            DilateBox.class,
+            DilateSphereSliceBySlice.class,
+            DilateBoxSliceBySlice.class
     };
 
     public String blockList = ";" +
+            "BinaryIntersection.binaryAnd;" +
+            "BinaryUnion.binaryOr;" +
             "Kernels.absolute;" +
             "Kernels.addImagesWeighted;" +
             "Kernels.addImages;" +
@@ -183,5 +198,17 @@ public interface CLIJ2Plugins {
             "Kernels.applyVectorfield;" +
             "Kernels.argMaximumZProjection;" +
             "Kernels.fillHistogram;" +
-            "Kernels.automaticThreshold;";
+            "Kernels.automaticThreshold;" +
+            "Kernels.binaryAnd;" +
+            "Kernels.binaryOr;" +
+            "Kernels.binaryXOr;" +
+            "Kernels.binaryNot;" +
+            "Kernels.erodeBox;" +
+            "Kernels.erodeSphere;" +
+            "Kernels.erodeBoxSliceBySlice;" +
+            "Kernels.erodeSphereSliceBySlice;" +
+            "Kernels.dilateBox;" +
+            "Kernels.dilateSphere;" +
+            "Kernels.dilateBoxSliceBySlice;" +
+            "Kernels.dilateSphereSliceBySlice;";
 }

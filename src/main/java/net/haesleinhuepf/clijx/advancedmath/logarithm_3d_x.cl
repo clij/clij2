@@ -11,7 +11,7 @@ __kernel void logarithm_3d(
 
   const int4 pos = (int4){x,y,z,0};
 
-  const double input = (double)READ_src_IMAGE(src, sampler, pos).x;
+  const float input = (float)READ_src_IMAGE(src, sampler, pos).x;
 
   const IMAGE_dst_PIXEL_TYPE value = CONVERT_dst_PIXEL_TYPE(log( input ));
 

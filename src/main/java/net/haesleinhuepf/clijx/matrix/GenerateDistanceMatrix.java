@@ -7,6 +7,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,17 +18,17 @@ import java.util.HashMap;
  * December 2018
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_generateDistanceMatrix")
-public class GenerateDistanceMatrix extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class GenerateDistanceMatrix extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = generateDistanceMatrix(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = generateDistanceMatrix(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean generateDistanceMatrix(CLIJ clij, ClearCLBuffer src_pointlist1, ClearCLBuffer src_pointlist2, ClearCLBuffer dst_distance_matrix) {
+    public static boolean generateDistanceMatrix(CLIJx clijx, ClearCLBuffer src_pointlist1, ClearCLBuffer src_pointlist2, ClearCLBuffer dst_distance_matrix) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src_point_list1", src_pointlist1);
         parameters.put("src_point_list2", src_pointlist2);
@@ -34,7 +36,8 @@ public class GenerateDistanceMatrix extends AbstractCLIJPlugin implements CLIJMa
 
         long[] globalSizes = new long[]{src_pointlist1.getWidth(),  1, 1};
 
-        return clij.execute(GenerateDistanceMatrix.class, "distance_matrix.cl", "generate_distance_matrix", globalSizes, parameters);
+        clijx.execute(GenerateDistanceMatrix.class, "generate_distance_matrix_x.cl", "generate_distance_matrix", globalSizes, globalSizes, parameters);
+        return true;
     }
 
     @Override

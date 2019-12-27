@@ -10,7 +10,7 @@ __kernel void exponential_2d(
 
   const int2 pos = (int2){x,y};
 
-  const double input = (double)READ_src_IMAGE(src, sampler, pos).x;
+  const float input = (float)READ_src_IMAGE(src, sampler, pos).x;
 
   const IMAGE_dst_PIXEL_TYPE value = CONVERT_dst_PIXEL_TYPE(exp( input ));
 

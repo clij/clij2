@@ -8,10 +8,12 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.matrix.GenerateDistanceMatrix;
 import net.haesleinhuepf.clijx.matrix.ShortestDistances;
 import net.haesleinhuepf.clijx.matrix.SpotsToPointList;
 import net.haesleinhuepf.clijx.matrix.TransposeXY;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -19,7 +21,7 @@ import org.scijava.plugin.Plugin;
  * July 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_meanClosestSpotDistance")
-public class MeanClosestSpotDistance extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class MeanClosestSpotDistance extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
@@ -28,7 +30,7 @@ public class MeanClosestSpotDistance extends AbstractCLIJPlugin implements CLIJM
         ClearCLBuffer buffer2 = (ClearCLBuffer)( args[1]);
         Boolean bidirectional = asBoolean(args[2]);
 
-        double[] minimumDistances = meanClosestSpotDistances(clij, buffer1, buffer2, bidirectional);
+        double[] minimumDistances = meanClosestSpotDistances(getCLIJx(), buffer1, buffer2, bidirectional);
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();
@@ -40,44 +42,44 @@ public class MeanClosestSpotDistance extends AbstractCLIJPlugin implements CLIJM
         return true;
     }
 
-    public static double meanClosestSpotDistances(CLIJ clij, ClearCLBuffer spotsA, ClearCLBuffer spotsB) {
-        return meanClosestSpotDistances(clij, spotsA, spotsB, false)[0];
+    public static double meanClosestSpotDistances(CLIJx clijx, ClearCLBuffer spotsA, ClearCLBuffer spotsB) {
+        return meanClosestSpotDistances(clijx, spotsA, spotsB, false)[0];
     }
 
-    public static double[] meanClosestSpotDistances(CLIJ clij, ClearCLBuffer spotsA, ClearCLBuffer spotsB, Boolean bidirectional) {
+    public static double[] meanClosestSpotDistances(CLIJx clijx, ClearCLBuffer spotsA, ClearCLBuffer spotsB, Boolean bidirectional) {
         double[] meanDistances = new double[bidirectional?2:1];
 
-        long numberOfSpots1 = (long) CountNonZeroPixels.countNonZeroPixels(clij, spotsA);
-        ClearCLBuffer pointlist1 = clij.create(new long[]{numberOfSpots1, spotsA.getDimension()}, NativeTypeEnum.Float);
-        SpotsToPointList.spotsToPointList(clij, spotsA, pointlist1);
+        long numberOfSpots1 = (long) CountNonZeroPixels.countNonZeroPixels(clijx, spotsA);
+        ClearCLBuffer pointlist1 = clijx.create(new long[]{numberOfSpots1, spotsA.getDimension()}, NativeTypeEnum.Float);
+        SpotsToPointList.spotsToPointList(clijx, spotsA, pointlist1);
 
-        long numberOfSpots2 = (long) CountNonZeroPixels.countNonZeroPixels(clij, spotsB);
-        ClearCLBuffer pointlist2 = clij.create(new long[]{numberOfSpots2, spotsA.getDimension()}, NativeTypeEnum.Float);
-        SpotsToPointList.spotsToPointList(clij, spotsB, pointlist2);
+        long numberOfSpots2 = (long) CountNonZeroPixels.countNonZeroPixels(clijx, spotsB);
+        ClearCLBuffer pointlist2 = clijx.create(new long[]{numberOfSpots2, spotsA.getDimension()}, NativeTypeEnum.Float);
+        SpotsToPointList.spotsToPointList(clijx, spotsB, pointlist2);
 
-        ClearCLBuffer distanceMatrix = clij.create(new long[]{ numberOfSpots1, numberOfSpots2}, NativeTypeEnum.Float);
+        ClearCLBuffer distanceMatrix = clijx.create(new long[]{ numberOfSpots1, numberOfSpots2}, NativeTypeEnum.Float);
 
-        GenerateDistanceMatrix.generateDistanceMatrix(clij, pointlist1, pointlist2, distanceMatrix);
+        GenerateDistanceMatrix.generateDistanceMatrix(clijx, pointlist1, pointlist2, distanceMatrix);
 
         pointlist1.close();
         pointlist2.close();
 
-        ClearCLBuffer result = clij.create(new long[]{distanceMatrix.getWidth(), 1}, distanceMatrix.getNativeType());
-        ShortestDistances.shortestDistances(clij, distanceMatrix, result);
+        ClearCLBuffer result = clijx.create(new long[]{distanceMatrix.getWidth(), 1}, distanceMatrix.getNativeType());
+        ShortestDistances.shortestDistances(clijx, distanceMatrix, result);
 
-        meanDistances[0] = clij.op().sumPixels(result) / result.getWidth() / result.getHeight() / result.getDepth();
+        meanDistances[0] = clijx.sumPixels(result) / result.getWidth() / result.getHeight() / result.getDepth();
         System.out.println("mean distance A B: " + meanDistances[0]);
         result.close();
 
         if (bidirectional) {
-            ClearCLBuffer transposedMatrix = clij.create(new long[]{distanceMatrix.getHeight(), distanceMatrix.getWidth()}, distanceMatrix.getNativeType());
+            ClearCLBuffer transposedMatrix = clijx.create(new long[]{distanceMatrix.getHeight(), distanceMatrix.getWidth()}, distanceMatrix.getNativeType());
 
-            TransposeXY.transposeXY(clij, distanceMatrix, transposedMatrix);
+            TransposeXY.transposeXY(clijx, distanceMatrix, transposedMatrix);
 
-            ClearCLBuffer result2 = clij.create(new long[]{transposedMatrix.getWidth(), 1}, transposedMatrix.getNativeType());
-            ShortestDistances.shortestDistances(clij, transposedMatrix, result2);
+            ClearCLBuffer result2 = clijx.create(new long[]{transposedMatrix.getWidth(), 1}, transposedMatrix.getNativeType());
+            ShortestDistances.shortestDistances(clijx, transposedMatrix, result2);
 
-            meanDistances[1] = clij.op().sumPixels(result2) / result2.getWidth() / result2.getHeight() / result2.getDepth();
+            meanDistances[1] = clijx.sumPixels(result2) / result2.getWidth() / result2.getHeight() / result2.getDepth();
             System.out.println("mean distance B A: " + meanDistances[1]);
 
             transposedMatrix.close();

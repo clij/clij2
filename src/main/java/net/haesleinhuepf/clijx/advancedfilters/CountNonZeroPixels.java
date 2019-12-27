@@ -8,6 +8,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.numeric.RealType;
@@ -21,20 +23,14 @@ import java.util.HashMap;
  * June 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_countNonZeroPixels")
-public class CountNonZeroPixels extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class CountNonZeroPixels extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
         double sum = 0;
 
-        Object[] args = openCLBufferArgs();
-
         ClearCLBuffer buffer = (ClearCLBuffer)( args[0]);
-
-        sum = countNonZeroPixels(clij, buffer);
-
-        releaseBuffers(args);
-
+        sum = countNonZeroPixels(getCLIJx(), buffer);
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();
@@ -43,19 +39,19 @@ public class CountNonZeroPixels extends AbstractCLIJPlugin implements CLIJMacroP
         return true;
     }
 
-    public static double countNonZeroPixels(CLIJ clij, ClearCLBuffer clImage) {
+    public static double countNonZeroPixels(CLIJx clijx, ClearCLBuffer clImage) {
         ClearCLBuffer clReducedImage = clImage;
         if (clImage.getDimension() == 3) {
-            clReducedImage = clij.createCLBuffer(new long[]{clImage.getWidth(), clImage.getHeight()}, NativeTypeEnum.Float);
+            clReducedImage = clijx.create(new long[]{clImage.getWidth(), clImage.getHeight()}, NativeTypeEnum.Float);
 
             HashMap<String, Object> parameters = new HashMap<>();
             parameters.put("src", clImage);
             parameters.put("dst", clReducedImage);
             parameters.put("tolerance", new Float(0.0));
-            clij.execute(CountNonZeroPixels.class, "countnonzeropixels.cl", "count_non_zero_project_3d_2d", parameters);
+            clijx.execute(CountNonZeroPixels.class, "count_non_zero_projection_3d_2d_x.cl", "count_non_zero_projection_3d_2d", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
         }
 
-        RandomAccessibleInterval rai = clij.convert(clReducedImage, RandomAccessibleInterval.class);
+        RandomAccessibleInterval rai = clijx.convert(clReducedImage, RandomAccessibleInterval.class);
         Cursor cursor = Views.iterable(rai).cursor();
         float sum = 0;
         while (cursor.hasNext()) {

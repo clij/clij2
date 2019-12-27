@@ -25,6 +25,7 @@ public class StandardDeviationOfMaskedPixelsTest {
 
         DrawBox.drawBox(clijx.getClij(), mask, 10f, 10f, 20f, 20f);
 
+        // ERROR
         double stdDev = StandardDeviationOfMaskedPixels.standardDeviationOfMaskedPixels(clijx, input, mask);
 
         imp.setRoi(new Roi(10,10, 20, 20));

@@ -2,10 +2,12 @@ package net.haesleinhuepf.clijx.io;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clijx.CLIJx;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class PreloadFromDiscTest {
 
+    @Ignore // ignore becuse this test exhausts other tests resources
     @Test
     public void testWithDifferentlySizedImages() {
         String[] filenames = {
@@ -24,6 +26,7 @@ public class PreloadFromDiscTest {
         }
     }
 
+    @Ignore // ignore becuse this test exhausts other tests resources
     @Test
     public void testWithSameSizedImages() {
         String[] filenames = {

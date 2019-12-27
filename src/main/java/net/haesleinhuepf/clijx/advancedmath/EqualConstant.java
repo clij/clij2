@@ -36,7 +36,7 @@ public class EqualConstant extends AbstractCLIJxPlugin implements CLIJMacroPlugi
         parameters.put("scalar", scalar);
         parameters.put("dst", dst);
 
-        clijx.execute(EqualConstant.class, "equal_constant_" + src1.getDimension() + "_x.cl", "equal_constant_" + src1.getDimension() + "d", src1.getDimensions(), src1.getDimensions(), parameters);
+        clijx.execute(EqualConstant.class, "equal_constant_" + src1.getDimension() + "d_x.cl", "equal_constant_" + src1.getDimension() + "d", src1.getDimensions(), src1.getDimensions(), parameters);
         return true;
     }
     

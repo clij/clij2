@@ -11,12 +11,13 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_spotsToPointList")
-public class SpotsToPointList extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class SpotsToPointList extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -25,17 +26,12 @@ public class SpotsToPointList extends AbstractCLIJPlugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        boolean result = spotsToPointList(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
-        releaseBuffers(args);
-        return result;
+        return spotsToPointList(getCLIJx(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
     }
 
-    public static boolean spotsToPointList(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
-        ClearCLBuffer temp1 = clij.create(input.getDimensions(), NativeTypeEnum.Float);
+    public static boolean spotsToPointList(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output) {
+        ClearCLBuffer temp1 = clijx.create(input.getDimensions(), NativeTypeEnum.Float);
 
-
-        CLIJx clijx = CLIJx.getInstance();
         ConnectedComponentsLabeling.connectedComponentsLabeling(clijx, input, temp1);
         //clij.show(temp1, "cca");
 
@@ -45,7 +41,7 @@ public class SpotsToPointList extends AbstractCLIJPlugin implements CLIJMacroPlu
 
         long[] globalSizes = temp1.getDimensions();
 
-        clij.execute(SpotsToPointList.class, "pointlists.cl", "generate_spotlist", globalSizes, parameters);
+        clijx.execute(SpotsToPointList.class, "spots_to_point_list_" + input.getDimension() + "d_x.cl", "spots_to_point_list_" + input.getDimension() + "d", globalSizes, globalSizes, parameters);
 
         temp1.close();
         return true;
@@ -53,7 +49,7 @@ public class SpotsToPointList extends AbstractCLIJPlugin implements CLIJMacroPlu
 
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
-        long numberOfSpots = (long) CountNonZeroPixels.countNonZeroPixels(clij, input);
+        long numberOfSpots = (long) CountNonZeroPixels.countNonZeroPixels(getCLIJx(), input);
 
         return clij.create(new long[]{numberOfSpots, input.getDimension()}, NativeTypeEnum.Float);
     }

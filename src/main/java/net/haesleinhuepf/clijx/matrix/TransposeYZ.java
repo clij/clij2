@@ -7,12 +7,14 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_transposeYZ")
-public class TransposeYZ extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class TransposeYZ extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -21,18 +23,15 @@ public class TransposeYZ extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
 
     @Override
     public boolean executeCL() {
-
-        Object[] args = openCLBufferArgs();
-        boolean result = transposeYZ(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
-        releaseBuffers(args);
-        return result;
+        return transposeYZ(getCLIJx(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
     }
 
-    public static boolean transposeYZ(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
+    public static boolean transposeYZ(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output) {
         HashMap<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("src", input);
         parameters.put("dst", output);
-        return clij.execute(TransposeYZ.class, "transpose.cl", "transpose_yz", parameters);
+        clijx.execute(TransposeXY.class, "transpose_yz_3d_x.cl", "transpose_yz_3d", output.getDimensions(), output.getDimensions(), parameters);
+        return true;
     }
 
     @Override

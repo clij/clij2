@@ -8,6 +8,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -15,7 +17,7 @@ import org.scijava.plugin.Plugin;
  * July 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_sorensenDiceCoefficient")
-public class SorensenDiceCoefficent extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class SorensenDiceCoefficent extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
@@ -23,7 +25,7 @@ public class SorensenDiceCoefficent extends AbstractCLIJPlugin implements CLIJMa
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
         ClearCLBuffer buffer2 = (ClearCLBuffer)( args[1]);
 
-        double jaccardIndex = JaccardIndex.jaccardIndex(clij, buffer1, buffer2);
+        double jaccardIndex = JaccardIndex.jaccardIndex(getCLIJx(), buffer1, buffer2);
         double sorensenDiceCoefficient = sorensenDiceCoefficient(jaccardIndex);
 
         ResultsTable table = ResultsTable.getResultsTable();
@@ -33,8 +35,8 @@ public class SorensenDiceCoefficent extends AbstractCLIJPlugin implements CLIJMa
         return true;
     }
 
-    public static double sorensenDiceCoefficient(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2) {
-        double jaccardIndex = JaccardIndex.jaccardIndex(clij, input1, input2);
+    public static double sorensenDiceCoefficient(CLIJx clijx, ClearCLBuffer input1, ClearCLBuffer input2) {
+        double jaccardIndex = JaccardIndex.jaccardIndex(clijx, input1, input2);
         return sorensenDiceCoefficient(jaccardIndex);
     }
 

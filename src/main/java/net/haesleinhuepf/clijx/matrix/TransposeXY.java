@@ -7,12 +7,14 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_transposeXY")
-public class TransposeXY extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class TransposeXY extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -21,26 +23,23 @@ public class TransposeXY extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
 
     @Override
     public boolean executeCL() {
-
-        Object[] args = openCLBufferArgs();
-        boolean result = transposeXY(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
-        releaseBuffers(args);
-        return result;
+        return transposeXY(getCLIJx(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
     }
 
-    public static boolean transposeXY(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
+    public static boolean transposeXY(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output) {
         HashMap<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("src", input);
         parameters.put("dst", output);
-        return clij.execute(TransposeXY.class, "transpose.cl", "transpose_xy", parameters);
+        clijx.execute(TransposeXY.class, "transpose_xy_" + output.getDimension() + "d_x.cl", "transpose_xy_" + output.getDimension() + "d", output.getDimensions(), output.getDimensions(), parameters);
+        return true;
     }
 
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
         if (input.getDimension() == 2) {
-            return clij.create(new long[]{input.getHeight(), input.getWidth()}, input.getNativeType());
+            return getCLIJx().create(new long[]{input.getHeight(), input.getWidth()}, input.getNativeType());
         } else {
-            return clij.create(new long[]{input.getHeight(), input.getWidth(), input.getDepth()}, input.getNativeType());
+            return getCLIJx().create(new long[]{input.getHeight(), input.getWidth(), input.getDepth()}, input.getNativeType());
         }
     }
 

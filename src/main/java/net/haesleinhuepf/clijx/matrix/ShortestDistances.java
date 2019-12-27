@@ -8,10 +8,12 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_shortestDistances")
-public class ShortestDistances extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class ShortestDistances extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -21,17 +23,17 @@ public class ShortestDistances extends AbstractCLIJPlugin implements CLIJMacroPl
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = shortestDistances(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
+        boolean result = shortestDistances(getCLIJx(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean shortestDistances(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output) {
-        ClearCLBuffer temp = clij.create(new long[]{input.getWidth(), 1, input.getHeight()}, input.getNativeType());
+    public static boolean shortestDistances(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output) {
+        ClearCLBuffer temp = clijx.create(new long[]{input.getWidth(), 1, input.getHeight()}, input.getNativeType());
 
-        TransposeYZ.transposeYZ(clij, input, temp);
+        TransposeYZ.transposeYZ(clijx, input, temp);
 
-        clij.op().minimumZProjection(temp, output);
+        clijx.minimumZProjection(temp, output);
 
         temp.close();
         return true;
