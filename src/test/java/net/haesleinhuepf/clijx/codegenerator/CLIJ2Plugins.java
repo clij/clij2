@@ -19,9 +19,11 @@ import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
 import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
 import net.haesleinhuepf.clijx.registration.TranslationRegistration;
 import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
+import net.haesleinhuepf.clijx.temp.*;
 import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
+import net.imglib2.algorithm.neighborhood.CenteredRectangleShape;
 
 public interface CLIJ2Plugins {
     public Class[] classes = {
@@ -203,7 +205,14 @@ public interface CLIJ2Plugins {
             MinimumImages.class,
             MinimumImageAndScalar.class,
             MultiplyImageAndScalar.class,
-            MultiplyStackWithPlane.class
+            MultiplyStackWithPlane.class,
+            CountNonZeroPixels2DSphere.class,
+            CountNonZeroPixelsSliceBySliceSphere.class,
+            CountNonZeroVoxels3DSphere.class,
+            SumZProjection.class,
+            SumOfAllPixels.class,
+            CenterOfMass.class,
+            Invert.class
 
 };
 
@@ -257,6 +266,12 @@ public interface CLIJ2Plugins {
             "Kernels.minimumImages;" +
             "Kernels.minimumImageAndScalar;" +
             "Kernels.multiplyImageAndScalar;" +
-            "Kernels.multiplyStackWithPlane;";
-
+            "Kernels.multiplyStackWithPlane;" +
+            "Kernels.countNonZeroPixelsLocallySliceBySlice;" +
+            "Kernels.countNonZeroVoxelsLocally;" +
+            "Kernels.countNonZeroPixelsLocally;" +
+            "Kernels.sumPixels;" +
+            "Kernels.sumZProjection;" +
+            "Kernels.centerOfMass;" +
+            "Kernels.invert;";
 }

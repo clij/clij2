@@ -25,7 +25,7 @@ public class Invert extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJ
     }
 
     public static boolean invert(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst) {
-        return MultiplyImageAndScalar.multiplyImageAndScalar(clijx, src, dst, -1f);
+        return clijx.multiplyImageAndScalar(src, dst, -1f);
     }
 
     @Override

@@ -196,17 +196,6 @@ public class CLIJxAPIConsistencyWorkaround {
     }
 
 
-    public static boolean countNonZeroPixels2DSphere(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY) {
-        return Kernels.countNonZeroPixelsLocally(clij, src, dst, radiusX, radiusY);
-    }
-
-    public static boolean countNonZeroVoxels3DSphere(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
-        return Kernels.countNonZeroVoxelsLocally(clij, src, dst, radiusX, radiusY, radiusZ);
-    }
-
-    public static boolean countNonZeroPixelsSliceBySliceSphere(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY) {
-        return Kernels.countNonZeroPixelsLocallySliceBySlice(clij, src, dst, radiusX, radiusY);
-    }
 
 
 
