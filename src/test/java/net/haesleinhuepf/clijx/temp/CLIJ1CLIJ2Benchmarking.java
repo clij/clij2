@@ -29,10 +29,10 @@ public class CLIJ1CLIJ2Benchmarking {
         ClearCLBuffer output = clij.create(input);
         ClearCLBuffer output2 = clij.create(input);
 
-        Object[] i2f3 = {input, output, new Float(3), new Float(3), new Float(3)};
-        Object[] i2f2 = {input, output, new Float(3), new Float(3), new Float(3)};
-        Object[] i3f3 = {input, output, output2, new Float(3), new Float(3), new Float(3)};
-        Object[] i3f2 = {input, output, output2, new Float(3), new Float(3), new Float(3)};
+        Object[] b2f3 = {input, output, new Float(3), new Float(3), new Float(3)};
+        Object[] b2f2 = {input, output, new Float(3), new Float(3), new Float(3)};
+        Object[] b3f3 = {input, output, output2, new Float(3), new Float(3), new Float(3)};
+        Object[] b3f2 = {input, output, output2, new Float(3), new Float(3), new Float(3)};
 
         CLIJMacroPluginService service = new Context(CLIJMacroPluginService.class).getService(CLIJMacroPluginService.class);
         for (String pluginName : service.getCLIJMethodNames()) {
@@ -42,6 +42,8 @@ public class CLIJ1CLIJ2Benchmarking {
 
                 if (clijPlugin != null && clijxPlugin != null) {
                     System.out.println(clijPlugin + " <=> " + clijxPlugin);
+                } else if (clijxPlugin == null) {
+                    System.out.println("Error: No successor found for " + pluginName);
                 }
             }
         }
@@ -55,7 +57,7 @@ public class CLIJ1CLIJ2Benchmarking {
             //clij.op().meanBox(input, output, 3, 3, 3);
             //System.out.println("CLIJ mean took " + (System.currentTimeMillis() - time) + " ms");
 
-            long duration = benchmarkOp(clij, new Mean3DBox(), i2f3);
+            long duration = benchmarkOp(clij, new Mean3DBox(), b2f3);
             System.out.println("CLIJ mean took " + (duration) + " ms");
         }
 
@@ -64,7 +66,7 @@ public class CLIJ1CLIJ2Benchmarking {
             //long time = System.currentTimeMillis();
             //clijx.meanBox(input, output, 3, 3, 3);
             //System.out.println("CLIJx mean took " + (System.currentTimeMillis() - time) + " ms");
-            long duration = benchmarkOp(clij, new net.haesleinhuepf.clijx.advancedfilters.Mean3DBox(), i2f3);
+            long duration = benchmarkOp(clij, new net.haesleinhuepf.clijx.advancedfilters.Mean3DBox(), b2f3);
             System.out.println("CLIJx mean took " + (duration) + " ms");
 
         }
