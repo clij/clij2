@@ -48,13 +48,17 @@ public class CLIJ1CLIJ2Benchmarking {
         String foundParameterHashes = ";";
 
         // these operations must be tested individually
-        String blackList = ";CLIJ_automaticThreshold;CLIJ_maskStackWithPlane;CLIJ_multiplyStackWithPlane;CLIJ_histogram;";
-//;
+        String blackList = ";CLIJ_automaticThreshold;CLIJ_maskStackWithPlane;CLIJ_multiplyStackWithPlane;CLIJ_histogram;" +
+                "CLIJ_clear;CLIJ_clInfo;CLIJ_convertFloat;CLIJ_convertUInt8;CLIJ_convertUInt16;CLIJ_create2D;CLIJ_create3D;" +
+                "CLIJ_pull;CLIJ_pullBinary;" +
+                "CLIJ_push;CLIJ_pushCurrentSlice;CLIJ_pushCurrentZStack;CLIJ_Release;";
+
 
 
         CLIJMacroPluginService service = new Context(CLIJMacroPluginService.class).getService(CLIJMacroPluginService.class);
         for (String pluginName : service.getCLIJMethodNames()) {
             if (!new File(pluginName + ".txt").exists()) {
+                System.out.println(pluginName);
                 if (pluginName.startsWith("CLIJ_") && !blackList.contains(";" + pluginName + ";")) {
                     CLIJMacroPlugin clijPlugin = service.getCLIJMacroPlugin(pluginName);
                     CLIJMacroPlugin clijxPlugin = service.getCLIJMacroPlugin(pluginName.replace("CLIJ_", "CLIJx_"));
