@@ -166,12 +166,22 @@ public class CLIJx extends CLIJxOps{
         return op;
     }
 
+    public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants) {
+        ClearCLKernel kernel = executeSubsequently(anchorClass, programFilename, kernelname,  dimensions, globalsizes, parameters, constants, null);
+        kernel.close();
+    }
+
     public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters) {
         ClearCLKernel kernel = executeSubsequently(anchorClass, programFilename, kernelname,  dimensions, globalsizes, parameters, null);
         kernel.close();
     }
 
     public ClearCLKernel executeSubsequently(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, ClearCLKernel kernel) {
+        return executeSubsequently(anchorClass, pProgramFilename, pKernelname, dimensions, globalsizes, parameters, null, kernel);
+    }
+
+    public ClearCLKernel executeSubsequently(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants, ClearCLKernel kernel) {
+
         final ClearCLKernel[] result = {kernel};
 
         if (CLIJ.debug) {
@@ -185,6 +195,7 @@ public class CLIJx extends CLIJxOps{
             mCLKernelExecutor.setKernelName(pKernelname);
             mCLKernelExecutor.setAnchorClass(anchorClass);
             mCLKernelExecutor.setParameterMap(parameters);
+            mCLKernelExecutor.setConstantsMap(constants);
             mCLKernelExecutor.setGlobalSizes(globalsizes);
 
             result[0] = mCLKernelExecutor.enqueue(true, kernel);
