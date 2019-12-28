@@ -39,7 +39,7 @@ public class BinaryXOr extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         parameters.put("src2", src2);
         parameters.put("dst", dst);
 
-        clijx.execute(BinaryXOr.class, "binaryProcessing" + src1.getDimension() + "D.cl", "binary_xor_" + src1.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(BinaryXOr.class, "binary_xor_" + src1.getDimension() + "d_x.cl", "binary_xor_" + src1.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 

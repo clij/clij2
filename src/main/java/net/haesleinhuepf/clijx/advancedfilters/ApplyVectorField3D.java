@@ -84,13 +84,13 @@ public class ApplyVectorField3D extends AbstractCLIJxPlugin implements CLIJMacro
 
     @Override
     public String getParameterHelpText() {
-        return "Deforms an image stack according to distances provided in the given vector image stacks. " +
-                "It is recommended to use 32-bit image stacks for input, output and vector image stacks. ";
+        return "Image source, Image vectorX, Image vectorY, Image vectorZ, Image destination";
     }
 
     @Override
     public String getDescription() {
-        return "Image source, Image vectorX, Image vectorY, Image vectorZ, Image destination";
+        return "Deforms an image stack according to distances provided in the given vector image stacks. " +
+                "It is recommended to use 32-bit image stacks for input, output and vector image stacks. ";
     }
 
     @Override

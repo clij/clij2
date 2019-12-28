@@ -8,10 +8,10 @@
 #endif
 
 __kernel void apply_vectorfield_2d_interpolate(
-    IMAGE_src_IMAGE src,
-    IMAGE_vectorX_IMAGE vectorX,
-    IMAGE_vectorY_IMAGE vectorY,
-    IMAGE_dst_IMAGE dst
+    IMAGE_src_TYPE src,
+    IMAGE_vectorX_TYPE vectorX,
+    IMAGE_vectorY_TYPE vectorY,
+    IMAGE_dst_TYPE dst
 )
 {
   const sampler_t sampler = CLK_NORMALIZED_COORDS_TRUE|

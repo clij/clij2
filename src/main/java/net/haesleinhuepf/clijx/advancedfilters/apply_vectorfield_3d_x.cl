@@ -8,11 +8,11 @@
 #endif
 
 __kernel void apply_vectorfield_3d(
-    IMAGE_src_IMAGE src,
-    IMAGE_vectorX_IMAGE vectorX,
-    IMAGE_vectorY_IMAGE vectorY,
-    IMAGE_vectorZ_IMAGE vectorZ,
-    IMAGE_dst_IMAGE dst
+    IMAGE_src_TYPE src,
+    IMAGE_vectorX_TYPE vectorX,
+    IMAGE_vectorY_TYPE vectorY,
+    IMAGE_vectorZ_TYPE vectorZ,
+    IMAGE_dst_TYPE dst
 )
 {
   const sampler_t sampler = CLK_NORMALIZED_COORDS_TRUE|
