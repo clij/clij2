@@ -26,6 +26,9 @@ import net.haesleinhuepf.clijx.advancedfilters.GradientX;
 import net.haesleinhuepf.clijx.advancedfilters.GradientY;
 import net.haesleinhuepf.clijx.advancedfilters.GradientZ;
 import net.haesleinhuepf.clijx.advancedfilters.LocalThreshold;
+import net.haesleinhuepf.clijx.temp.Blur2D;
+import net.haesleinhuepf.clijx.temp.Blur3D;
+import net.haesleinhuepf.clijx.temp.Blur3DSliceBySlice;
 import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
@@ -248,7 +251,10 @@ public interface CLIJ2Plugins {
             Minimum2DBox.class,
             Minimum3DBox.class,
             MinimumSliceBySliceSphere.class,
-            MultiplyImages.class
+            MultiplyImages.class,
+            Blur2D.class,
+            Blur3D.class,
+            Blur3DSliceBySlice.class
     };
 
     public String blockList = ";" +
@@ -332,8 +338,8 @@ public interface CLIJ2Plugins {
             "Kernels.maximumBox;" +
             "Kernels.minimumIJ;" +
             "Kernels.maximumIJ;" +
-            "Kernels.multiplyImages;";
+            "Kernels.multiplyImages;" +
+            "Kernels.blur;" +
+            "Kernels.blurSliceBySlice;";
 
-
-            ;
 }

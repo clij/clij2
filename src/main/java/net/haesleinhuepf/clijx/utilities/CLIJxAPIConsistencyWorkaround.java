@@ -48,27 +48,6 @@ public class CLIJxAPIConsistencyWorkaround {
         return crop3D.executeCL();
     }
 
-    public static boolean blur2D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float sigmaX, Float sigmaY) {
-        return Kernels.blur(clij, input, output, sigmaX, sigmaY);
-    }
-
-    public static boolean blur3D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float sigmaX, Float sigmaY, Float sigmaZ) {
-        return Kernels.blur(clij, input, output, sigmaX, sigmaY, sigmaZ);
-    }
-
-    public static boolean blur3DSliceBySlice(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float sigmaX, Float sigmaY) {
-        return Kernels.blur(clij, input, output, sigmaX, sigmaY, 0.0f);
-    }
-
-
-    public static boolean downsample3D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY, Float factorZ) {
-        return Kernels.downsample(clij, input, output, factorX, factorY, factorZ);
-    }
-
-    public static boolean downsample2D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY) {
-        return Kernels.downsample(clij, input, output, factorX, factorY);
-    }
-
     public static boolean translate2D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float translateX, Float translateY) {
         Translate2D translate2D = new Translate2D();
         translate2D.setClij(clij);
