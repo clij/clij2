@@ -16,7 +16,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  * Author: @haesleinhuepf
  * December 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_projectMinimumZBounded")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_projectMinimumZBounded")
 public class ProjectMinimumZBounded extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

@@ -18,7 +18,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  * 12 2018
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_downsampleSliceBySliceHalfMedian")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_downsampleSliceBySliceHalfMedian")
 public class DownsampleSliceBySliceHalfMedian extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
