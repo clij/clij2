@@ -187,7 +187,8 @@ public class OpGenerator {
                 "CLIJx_" + methodName.replace( "Box", "2DBox"),
                 "CLIJx_" + methodName.replace( "Box", "3DBox"),
                 "CLIJx_" + methodName.replace( "Pixels", "OfAllPixels"),
-                "CLIJx_" + methodName.replace( "SliceBySlice", "3DSliceBySlice")
+                "CLIJx_" + methodName.replace( "SliceBySlice", "3DSliceBySlice"),
+                "CLIJx_" + methodName.replace( "3DSliceBySlice", "SliceBySlice")
         };
 
         for (String name : potentialMethodNames) {

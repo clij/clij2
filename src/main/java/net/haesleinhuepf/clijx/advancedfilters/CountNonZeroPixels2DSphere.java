@@ -17,7 +17,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.radiusToKernelSize;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_countNonZeroPixels2DSphere")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_countNonZeroPixels2DSphere")
 public class CountNonZeroPixels2DSphere extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

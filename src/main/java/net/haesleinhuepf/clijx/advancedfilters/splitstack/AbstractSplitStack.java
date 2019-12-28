@@ -1,16 +1,25 @@
 package net.haesleinhuepf.clijx.advancedfilters.splitstack;
 
+import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
+
+import java.util.HashMap;
+
+import static net.haesleinhuepf.clij.kernels.Kernels.copy;
+import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
 
 /**
  * Author: @haesleinhuepf
  * June 2019
  */
-public abstract class AbstractSplitStack extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public abstract class AbstractSplitStack extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
@@ -21,7 +30,32 @@ public abstract class AbstractSplitStack extends AbstractCLIJPlugin implements C
         for (int i = 1; i < args.length; i++) {
             output[i-1] = (ClearCLBuffer) args[i];
         }
-        clij.op().splitStack(input, output);
+        splitStack(getCLIJx(), input, output);
+        return true;
+    }
+
+    public static boolean splitStack(CLIJx clijx, ClearCLBuffer clImageIn, ClearCLBuffer... clImagesOut) {
+        for (int i = 0; i < clImagesOut.length; i++) {
+            assertDifferent(clImageIn, clImagesOut[i]);
+        }
+
+        if (clImagesOut.length > 12) {
+            throw new IllegalArgumentException("Error: splitStack does not support more than 12 stacks.");
+        }
+        if (clImagesOut.length == 1) {
+            return clijx.copy(clImageIn, clImagesOut[0]);
+        }
+        if (clImagesOut.length == 0) {
+            throw new IllegalArgumentException("Error: splitstack didn't get any output images.");
+        }
+
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src", clImageIn);
+        for (int i = 0; i < clImagesOut.length; i++) {
+            parameters.put("dst" + i, clImagesOut[i]);
+        }
+
+        clijx.execute(AbstractSplitStack.class, "split_stack_x.cl", "split_" + clImagesOut.length + "_stacks", clImageIn.getDimensions(), clImageIn.getDimensions(), parameters);
         return true;
     }
 

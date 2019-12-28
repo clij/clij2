@@ -63,6 +63,10 @@ public class CLIJx extends CLIJxOps{
         return instance;
     }
 
+    public static String clinfo() {
+        return CLIJ.clinfo();
+    }
+
     public String getGPUName() {
         return clij.getGPUName();
     }

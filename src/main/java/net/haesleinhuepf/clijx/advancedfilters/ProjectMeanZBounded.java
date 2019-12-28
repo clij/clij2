@@ -16,7 +16,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  * Author: @haesleinhuepf
  * December 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ_projectMeanZBounded")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_projectMeanZBounded")
 public class ProjectMeanZBounded extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

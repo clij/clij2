@@ -1,8 +1,10 @@
 package net.haesleinhuepf.clijx.codegenerator;
 
 import net.haesleinhuepf.clijx.advancedfilters.*;
+import net.haesleinhuepf.clijx.advancedfilters.splitstack.AbstractSplitStack;
 import net.haesleinhuepf.clijx.advancedfilters.tenengradfusion.AbstractTenengradFusion;
 import net.haesleinhuepf.clijx.advancedmath.*;
+import net.haesleinhuepf.clijx.base.*;
 import net.haesleinhuepf.clijx.gui.OrganiseWindows;
 import net.haesleinhuepf.clijx.io.PreloadFromDisc;
 import net.haesleinhuepf.clijx.io.ReadImageFromDisc;
@@ -29,6 +31,7 @@ import net.haesleinhuepf.clijx.advancedfilters.LocalThreshold;
 import net.haesleinhuepf.clijx.advancedfilters.Blur2D;
 import net.haesleinhuepf.clijx.advancedfilters.Blur3D;
 import net.haesleinhuepf.clijx.advancedfilters.Blur3DSliceBySlice;
+import net.haesleinhuepf.clijx.temp.*;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
 
@@ -262,7 +265,29 @@ public interface CLIJ2Plugins {
             Scale2D.class,
             Scale3D.class,
             Translate2D.class,
-            Translate3D.class
+            Translate3D.class,
+            Clear.class,
+            ClInfo.class,
+            ConvertFloat.class,
+            ConvertUInt8.class,
+            ConvertUInt16.class,
+            Create2D.class,
+            Create3D.class,
+            Pull.class,
+            PullBinary.class,
+            Push.class,
+            PushCurrentSlice.class,
+            PushCurrentZStack.class,
+            Release.class,
+            AddImageAndScalar.class,
+            DetectMinimaBox.class,
+            DetectMaximaBox.class,
+            DetectMaximaSliceBySliceBox.class,
+            DetectMinimaSliceBySliceBox.class,
+            MaximumOfAllPixels.class,
+            MinimumOfAllPixels.class,
+            ReportMemory.class,
+            AbstractSplitStack.class
     };
 
     public String blockList = ";" +
@@ -361,6 +386,14 @@ public interface CLIJ2Plugins {
             "Kernels.scale;" +
             "Kernels.rotate2D;" +
             "Kernels.rotate3D;" +
-            "Kernels.radialProjection;";
+            "Kernels.radialProjection;" +
+            "Kernels.maximumOfAllPixels;" +
+            "Kernels.minimumOfAllPixels;" +
+            "Kernels.detectMinimaBox;" +
+            "Kernels.detectMinimaSliceBySliceBox;" +
+            "Kernels.detectMaximaBox;" +
+            "Kernels.detectMaximaSliceBySliceBox;" +
+            "Kernels.addImageAndScalar;" +
+            "Kernels.splitStack;";
 
 }

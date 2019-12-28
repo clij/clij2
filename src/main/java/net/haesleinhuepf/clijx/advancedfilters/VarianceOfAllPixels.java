@@ -3,6 +3,7 @@ package net.haesleinhuepf.clijx.advancedfilters;
 import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -45,8 +46,8 @@ public class VarianceOfAllPixels extends AbstractCLIJxPlugin implements CLIJMacr
         return varianceOfAllPixels(clijx, buffer1, new Float(meanIntensity));
     }
 
-    public static double varianceOfAllPixels(CLIJx clijx, ClearCLBuffer buffer1, Float meanIntensity) {
-        ClearCLBuffer clReducedImage = buffer1;
+    public static double varianceOfAllPixels(CLIJx clijx, ClearCLImageInterface buffer1, Float meanIntensity) {
+        ClearCLImageInterface clReducedImage = buffer1;
         float sum = 0;
         if (buffer1.getDimension() == 3) {
             clReducedImage = clijx.create(new long[]{buffer1.getWidth(), buffer1.getHeight()}, NativeTypeEnum.Float);
@@ -63,7 +64,7 @@ public class VarianceOfAllPixels extends AbstractCLIJxPlugin implements CLIJMacr
                 sum += ((RealType) cursor.next()).getRealFloat();
             }
 
-            clReducedImage.close();
+            clijx.release(clReducedImage);
         } else {
             RandomAccessibleInterval rai = clijx.convert(clReducedImage, RandomAccessibleInterval.class);
             Cursor cursor = Views.iterable(rai).cursor();

@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clijx.advancedfilters;
+package net.haesleinhuepf.clijx.temp;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
@@ -10,6 +10,7 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.advancedmath.MinimumImageAndScalar;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
@@ -20,44 +21,39 @@ import static net.haesleinhuepf.clijx.utilities.CLIJUtilities.checkDimensions;
 
 /**
  * Author: @haesleinhuepf
- * 12 2018
+ * December 2018
  */
-
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_mask")
-public class Mask extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_addImageAndScalar")
+public class AddImageAndScalar extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        return mask(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        return addImageAndScalar(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
     }
 
-    public static boolean mask(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface mask, ClearCLImageInterface dst) {
+    public static boolean addImageAndScalar(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Float scalar) {
         assertDifferent(src, dst);
-        assertDifferent(mask, dst);
 
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
-        parameters.put("mask", mask);
+        parameters.put("scalar", scalar);
         parameters.put("dst", dst);
 
-        if (!checkDimensions(src.getDimension(), dst.getDimension())) {
-            throw new IllegalArgumentException("Error: number of dimensions don't match! (mask)");
+        if (!checkDimensions(src.getDimension(), src.getDimension(), dst.getDimension())) {
+            throw new IllegalArgumentException("Error: number of dimensions don't match! (minimumImageAndScalar)");
         }
-        clijx.execute(Mask.class, "mask_" + src.getDimension() + "d_x.cl", "mask_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(MinimumImageAndScalar.class, "add_image_and_scalar_" + src.getDimension() + "d_x.cl", "add_image_and_scalar_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image mask, Image destination";
+        return "Image source, Image destination, Number scalar";
     }
 
     @Override
     public String getDescription() {
-        return "Computes a masked image by applying a mask to an image. All pixel values x of image X will be copied\n" +
-                "to the destination image in case pixel value m at the same position in the mask image is not equal to \n" +
-                "zero.\n\n" +
-                "<pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>";
+        return "Adds a scalar value s to all pixels x of a given image X.\n\n<pre>f(x, s) = x + s</pre>";
     }
 
     @Override

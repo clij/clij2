@@ -3,6 +3,7 @@ package net.haesleinhuepf.clijx.advancedfilters;
 import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -33,12 +34,12 @@ public class StandardDeviationOfAllPixels extends AbstractCLIJxPlugin implements
         return true;
     }
 
-    public static double standardDeviationOfAllPixels(CLIJx clijx, ClearCLBuffer buffer1) {
+    public static double standardDeviationOfAllPixels(CLIJx clijx, ClearCLImageInterface buffer1) {
         double meanIntensity = clijx.sumPixels(buffer1) / (buffer1.getWidth() * buffer1.getHeight() * buffer1.getDepth());
         return standardDeviationOfAllPixels(clijx, buffer1, new Float(meanIntensity));
     }
 
-    public static double standardDeviationOfAllPixels(CLIJx clijx, ClearCLBuffer buffer1, Float meanIntensity) {
+    public static double standardDeviationOfAllPixels(CLIJx clijx, ClearCLImageInterface buffer1, Float meanIntensity) {
         return Math.sqrt(VarianceOfAllPixels.varianceOfAllPixels(clijx, buffer1, meanIntensity));
     }
 
