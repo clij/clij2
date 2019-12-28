@@ -42,7 +42,7 @@ public class AddImageAndScalar extends AbstractCLIJxPlugin implements CLIJMacroP
         if (!checkDimensions(src.getDimension(), src.getDimension(), dst.getDimension())) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (minimumImageAndScalar)");
         }
-        clijx.execute(MinimumImageAndScalar.class, "add_image_and_scalar_" + src.getDimension() + "d_x.cl", "add_image_and_scalar_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(AddImageAndScalar .class, "add_image_and_scalar_" + src.getDimension() + "d_x.cl", "add_image_and_scalar_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 
