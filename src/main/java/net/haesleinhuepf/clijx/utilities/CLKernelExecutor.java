@@ -31,6 +31,7 @@ public class CLKernelExecutor {
     String programFilename;
     String kernelName;
     Map<String, Object> parameterMap;
+    Map<String, Object> constantsMap;
     long[] globalSizes;
 
     private final HashMap<String, ClearCLProgram> programCacheMap = new HashMap();
@@ -149,6 +150,9 @@ public class CLKernelExecutor {
     public void setParameterMap(Map<String, Object> parameterMap) {
         this.parameterMap = parameterMap;
     }
+    public void setConstantsMap(Map<String, Object> constantsMap) {
+        this.constantsMap = constantsMap;
+    }
 
     public ClearCLKernel enqueue(boolean waitToFinish) {
         return enqueue(waitToFinish, null);
@@ -165,6 +169,11 @@ public class CLKernelExecutor {
             Map<String, Object> openCLDefines = new HashMap();
             openCLDefines.put("MAX_ARRAY_SIZE", MAX_ARRAY_SIZE); // needed for median. Median is limited to a given array length to be sorted
 
+            if (constantsMap != null) {
+                for (String key : constantsMap.keySet()) {
+                    openCLDefines.put(key, constantsMap.get(key));
+                }
+            }
 
             // deal with image width/height/depth for all images and buffers
             ArrayList<String> definedParameterKeys = new ArrayList<String>();

@@ -147,12 +147,17 @@ public class Histogram extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         if (src.getDimension() > 2) {
             parameters.put("step_size_z", stepSizeZ);
         }
+
+        HashMap<String, Object> constants = new HashMap<>();
+        constants.put("NUMBER_OF_HISTOGRAM_BINS", dstHistogram.getWidth());
+
         clijx.execute(Histogram.class,
                 "histogram_" + src.getDimension() + "d_x.cl",
                 "histogram_" + src.getDimension() + "d",
                 dstHistogram.getDimensions(),
                 globalSizes,
-                parameters);
+                parameters,
+                constants);
 
         clijx.sumZProjection(partialHistograms, dstHistogram);
         //IJ.log("Histogram generation took " + (System.currentTimeMillis() - timeStamp) + " msec");
