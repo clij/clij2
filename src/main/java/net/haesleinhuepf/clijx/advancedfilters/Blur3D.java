@@ -1,12 +1,8 @@
-package net.haesleinhuepf.clijx.temp;
+package net.haesleinhuepf.clijx.advancedfilters;
 
-import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
-import net.haesleinhuepf.clij.converters.implementations.ClearCLBufferToImagePlusConverter;
-import net.haesleinhuepf.clij.kernels.Kernels;
-import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;

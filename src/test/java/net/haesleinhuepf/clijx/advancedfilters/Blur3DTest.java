@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clijx.tmep;
+package net.haesleinhuepf.clijx.advancedfilters;
 
 import ij.IJ;
 import ij.ImagePlus;

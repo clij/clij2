@@ -8,7 +8,6 @@ import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import ij.measure.ResultsTable;
 import ij.gui.Roi;
 import net.haesleinhuepf.clij.kernels.Kernels;
-import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
 import net.haesleinhuepf.clijx.advancedfilters.BinaryUnion;
 import net.haesleinhuepf.clijx.advancedfilters.BinaryIntersection;
 import net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabeling;
@@ -224,9 +223,9 @@ import net.haesleinhuepf.clijx.advancedfilters.Minimum2DBox;
 import net.haesleinhuepf.clijx.advancedfilters.Minimum3DBox;
 import net.haesleinhuepf.clijx.advancedfilters.MinimumSliceBySliceSphere;
 import net.haesleinhuepf.clijx.advancedmath.MultiplyImages;
-import net.haesleinhuepf.clijx.temp.Blur2D;
-import net.haesleinhuepf.clijx.temp.Blur3D;
-import net.haesleinhuepf.clijx.temp.Blur3DSliceBySlice;
+import net.haesleinhuepf.clijx.advancedfilters.Blur2D;
+import net.haesleinhuepf.clijx.advancedfilters.Blur3D;
+import net.haesleinhuepf.clijx.advancedfilters.Blur3DSliceBySlice;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract class CLIJxOps {
    protected CLIJ clij;
