@@ -2,8 +2,7 @@
 __kernel void detect_maxima_2d(
         IMAGE_src_TYPE src,
         IMAGE_dst_TYPE dst,
-        __private int radius,
-        __private int detect_maxima
+        __private int radius
 )
 {
     const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;

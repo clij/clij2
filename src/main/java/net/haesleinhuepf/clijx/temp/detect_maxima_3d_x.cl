@@ -8,7 +8,7 @@ __kernel void detect_maxima_3d(
     const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
 
     int4 pos = {get_global_id(0), get_global_id(1), get_global_id(2), 0};
-    float localMax = READ_src_IMAGE(src, sampler, pos).x -1 1;
+    float localMax = READ_src_IMAGE(src, sampler, pos).x - 1;
     int4 localMaxPos = pos;
 
     for(int x = -radius; x < radius + 1; x++)
