@@ -62,7 +62,7 @@ public class ErodeBoxSliceBySlice extends AbstractCLIJxPlugin implements CLIJMac
 
     @Override
     public String getAvailableForDimensions() {
-        return "2D, 3D";
+        return "3D";
     }
 
 }

@@ -61,7 +61,7 @@ public class ErodeSphereSliceBySlice extends AbstractCLIJxPlugin implements CLIJ
 
     @Override
     public String getAvailableForDimensions() {
-        return "2D, 3D";
+        return "3D";
     }
 
 }
