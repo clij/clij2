@@ -44,7 +44,7 @@ public class Median3DBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
         parameters.put("Ny", kernelSizeY);
         parameters.put("Nz", kernelSizeZ);
 
-        return clij.execute(Median3DBox.class, "meadian_box_3d_x.cl", "median_box_3d", parameters);
+        return clij.execute(Median3DBox.class, "median_box_3d_x.cl", "median_box_3d", parameters);
     }
 
     @Override
