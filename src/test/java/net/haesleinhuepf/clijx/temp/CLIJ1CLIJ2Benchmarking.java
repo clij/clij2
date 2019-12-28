@@ -51,7 +51,7 @@ public class CLIJ1CLIJ2Benchmarking {
         String blackList = ";CLIJ_automaticThreshold;CLIJ_maskStackWithPlane;CLIJ_multiplyStackWithPlane;CLIJ_histogram;" +
                 "CLIJ_clear;CLIJ_clInfo;CLIJ_convertFloat;CLIJ_convertUInt8;CLIJ_convertUInt16;CLIJ_create2D;CLIJ_create3D;" +
                 "CLIJ_pull;CLIJ_pullBinary;" +
-                "CLIJ_push;CLIJ_pushCurrentSlice;CLIJ_pushCurrentZStack;CLIJ_Release;";
+                "CLIJ_push;CLIJ_pushCurrentSlice;CLIJ_pushCurrentZStack;CLIJ_release;CLIJ_reportMemory;";
 
 
 
