@@ -58,13 +58,13 @@ public class Scale3D extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLI
     }
 
 
-    public static boolean scale(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY, Float factorZ) {
-        return scale3D(clij, input, output, factorX, factorY, factorZ);
+    public static boolean scale(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY, Float factorZ) {
+        return scale3D(clijx, input, output, factorX, factorY, factorZ);
     }
 
-    public static boolean scale3D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY, Float factorZ) {
+    public static boolean scale3D(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY, Float factorZ) {
         Scale3D scale3D = new Scale3D();
-        scale3D.setClij(clij);
+        scale3D.setClij(clijx.getClij());
         scale3D.setArgs(new Object[]{input, output, factorX, factorY, factorZ});
         return scale3D.executeCL();
     }

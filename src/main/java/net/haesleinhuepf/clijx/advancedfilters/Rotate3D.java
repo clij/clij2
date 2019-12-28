@@ -60,9 +60,9 @@ public class Rotate3D extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CL
     }
 
 
-    public static boolean rotate3D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float angleX, Float angleY, Float angleZ, Boolean rotateAroundCenter) {
+    public static boolean rotate3D(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output, Float angleX, Float angleY, Float angleZ, Boolean rotateAroundCenter) {
         Rotate3D rotate3D = new Rotate3D();
-        rotate3D.setClij(clij);
+        rotate3D.setClij(clijx.getClij());
         rotate3D.setArgs(new Object[]{input, output, angleX, angleY, angleZ, rotateAroundCenter});
         return rotate3D.executeCL();
     }

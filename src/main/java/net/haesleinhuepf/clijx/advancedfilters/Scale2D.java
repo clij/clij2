@@ -58,13 +58,13 @@ public class Scale2D extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLI
     }
 
 
-    public static boolean scale(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY) {
-        return scale2D(clij, input, output, factorX, factorY);
+    public static boolean scale(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY) {
+        return scale2D(clijx, input, output, factorX, factorY);
     }
 
-    public static boolean scale2D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY) {
+    public static boolean scale2D(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY) {
         Scale2D scale2D = new Scale2D();
-        scale2D.setClij(clij);
+        scale2D.setClij(clijx.getClij());
         scale2D.setArgs(new Object[]{input, output, factorX, factorY});
         return scale2D.executeCL();
     }

@@ -48,9 +48,9 @@ public class Translate3D extends AbstractCLIJxPlugin implements CLIJMacroPlugin,
     }
 
 
-    public static boolean translate3D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float translateX, Float translateY, Float translateZ) {
+    public static boolean translate3D(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output, Float translateX, Float translateY, Float translateZ) {
         Translate3D translate3D = new Translate3D();
-        translate3D.setClij(clij);
+        translate3D.setClij(clijx.getClij());
         translate3D.setArgs(new Object[]{input, output, translateX, translateY, translateZ});
         return translate3D.executeCL();
     }

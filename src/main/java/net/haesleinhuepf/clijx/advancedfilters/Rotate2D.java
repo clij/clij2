@@ -54,9 +54,9 @@ public class Rotate2D extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CL
         }
     }
 
-    public static boolean rotate2D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float angleX, Float angleY, Boolean rotateAroundCenter) {
+    public static boolean rotate2D(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output, Float angleX, Float angleY, Boolean rotateAroundCenter) {
         Rotate2D rotate2D = new Rotate2D();
-        rotate2D.setClij(clij);
+        rotate2D.setClij(clijx.getClij());
         rotate2D.setArgs(new Object[]{input, output, angleX, angleY, rotateAroundCenter});
         return rotate2D.executeCL();
     }

@@ -46,9 +46,9 @@ public class Translate2D extends AbstractCLIJxPlugin implements CLIJMacroPlugin,
         }
     }
 
-    public static boolean translate2D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float translateX, Float translateY) {
+    public static boolean translate2D(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output, Float translateX, Float translateY) {
         Translate2D translate2D = new Translate2D();
-        translate2D.setClij(clij);
+        translate2D.setClij(clijx.getClij());
         translate2D.setArgs(new Object[]{input, output, translateX, translateY});
         return translate2D.executeCL();
     }
