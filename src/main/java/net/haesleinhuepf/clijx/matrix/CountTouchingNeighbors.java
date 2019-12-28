@@ -33,6 +33,7 @@ public class CountTouchingNeighbors extends AbstractCLIJxPlugin implements CLIJM
 
         long[] globalSizes = {src_touch_matrix.getWidth(), 1, 1};
 
+        clijx.activateSizeIndependentKernelCompilation();
         clijx.execute(CountTouchingNeighbors.class, "count_touching_neighbors_x.cl", "count_touching_neighbors", globalSizes, globalSizes, parameters);
         return true;
     }

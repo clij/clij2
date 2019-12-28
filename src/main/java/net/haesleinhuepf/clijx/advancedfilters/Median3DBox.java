@@ -8,6 +8,8 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij.utilities.CLKernelExecutor;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -20,14 +22,14 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.radiusToKernelSize;
  * 12 2018
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_median3DBox")
-public class Median3DBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class Median3DBox extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        return median3DBox(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
+        return median3DBox(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
     }
 
-    public static boolean median3DBox(CLIJ clij, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
+    public static boolean median3DBox(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
         assertDifferent(src, dst);
 
         int kernelSizeX = radiusToKernelSize(radiusX);
@@ -44,7 +46,8 @@ public class Median3DBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, 
         parameters.put("Ny", kernelSizeY);
         parameters.put("Nz", kernelSizeZ);
 
-        return clij.execute(Median3DBox.class, "median_box_3d_x.cl", "median_box_3d", parameters);
+        clijx.execute(Median3DBox.class, "median_box_3d_x.cl", "median_box_3d", dst.getDimensions(), dst.getDimensions(), parameters);
+        return true;
     }
 
     @Override

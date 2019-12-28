@@ -42,6 +42,7 @@ public class PointIndexListToMesh extends AbstractCLIJxPlugin implements CLIJMac
         parameters.put("dst_mesh", mesh);
 
         long[] dimensions = {indexlist.getDimensions()[0], 1, 1};
+        clijx.activateSizeIndependentKernelCompilation();
         clijx.execute(PointIndexListToMesh.class, "pointindexlist_to_mesh_3d_x.cl", "pointindexlist_to_mesh_3d", dimensions, dimensions, parameters);
         return true;
     }

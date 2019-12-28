@@ -40,9 +40,8 @@ public class SpotsToPointList extends AbstractCLIJxPlugin implements CLIJMacroPl
         parameters.put("dst_point_list", output);
 
         long[] globalSizes = temp1.getDimensions();
-
+        clijx.activateSizeIndependentKernelCompilation();
         clijx.execute(SpotsToPointList.class, "spots_to_point_list_" + input.getDimension() + "d_x.cl", "spots_to_point_list_" + input.getDimension() + "d", globalSizes, globalSizes, parameters);
-
         temp1.close();
         return true;
     }

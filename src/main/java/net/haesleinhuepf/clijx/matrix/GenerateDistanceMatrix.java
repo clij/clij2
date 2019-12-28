@@ -36,6 +36,7 @@ public class GenerateDistanceMatrix extends AbstractCLIJxPlugin implements CLIJM
 
         long[] globalSizes = new long[]{src_pointlist1.getWidth(),  1, 1};
 
+        clijx.activateSizeIndependentKernelCompilation();
         clijx.execute(GenerateDistanceMatrix.class, "generate_distance_matrix_x.cl", "generate_distance_matrix", globalSizes, globalSizes, parameters);
         return true;
     }

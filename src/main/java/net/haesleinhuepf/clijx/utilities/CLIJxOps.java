@@ -1006,7 +1006,7 @@ public abstract class CLIJxOps {
      * Multiplies two matrices with each other.
      */
     public boolean multiplyMatrix(ClearCLBuffer matrix1, ClearCLBuffer matrix2, ClearCLBuffer matrix_destination) {
-        return MultiplyMatrix.multiplyMatrix(clij, matrix1, matrix2, matrix_destination);
+        return MultiplyMatrix.multiplyMatrix(clijx, matrix1, matrix2, matrix_destination);
     }
 
 
@@ -1326,7 +1326,7 @@ public abstract class CLIJxOps {
      * This corresponds to the n row indices with minimum values for each column of the distance matrix.
      */
     public boolean nClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2) {
-        return NClosestPoints.nClosestPoints(clij, arg1, arg2);
+        return NClosestPoints.nClosestPoints(clijx, arg1, arg2);
     }
 
 
@@ -1527,7 +1527,7 @@ public abstract class CLIJxOps {
      * Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where all pixels are set to 0 exept those where labels are touching.Only half of the matrix is filled (with x < y). For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.
      */
     public boolean generateTouchMatrix(ClearCLBuffer label_map, ClearCLBuffer touch_matrix_destination) {
-        return GenerateTouchMatrix.generateTouchMatrix(clij, label_map, touch_matrix_destination);
+        return GenerateTouchMatrix.generateTouchMatrix(clijx, label_map, touch_matrix_destination);
     }
 
 
@@ -3307,7 +3307,7 @@ public abstract class CLIJxOps {
      * For technical reasons, the volume of the cuboid must contain less than 1000 voxels.
      */
     public boolean median3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Median3DBox.median3DBox(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        return Median3DBox.median3DBox(clijx, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
 
@@ -3608,7 +3608,7 @@ public abstract class CLIJxOps {
      * It is recommended to apply the rotation to an isotropic image.
      */
     public boolean rotate2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, boolean arg5) {
-        return Rotate2D.rotate2D(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), arg5);
+        return Rotate2D.rotate2D(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), arg5);
     }
 
 
@@ -3621,7 +3621,7 @@ public abstract class CLIJxOps {
      * It is recommended to apply the rotation to an isotropic image stack.
      */
     public boolean rotate3D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, boolean arg6) {
-        return Rotate3D.rotate3D(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+        return Rotate3D.rotate3D(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
     }
 
 
@@ -3631,14 +3631,14 @@ public abstract class CLIJxOps {
      * DEPRECATED: CLIJ scale() is deprecated. Use scale2D or scale3D instead!
      */
     public boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return Scale2D.scale(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        return Scale2D.scale(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
 
     /**
      * Scales an image with a given factor.
      */
     public boolean scale2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return Scale2D.scale2D(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        return Scale2D.scale2D(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
 
 
@@ -3648,14 +3648,14 @@ public abstract class CLIJxOps {
      * DEPRECATED: CLIJ scale() is deprecated. Use scale2D or scale3D instead!
      */
     public boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Scale3D.scale(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        return Scale3D.scale(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
      * Scales an image with a given factor.
      */
     public boolean scale3D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Scale3D.scale3D(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        return Scale3D.scale3D(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
 
@@ -3665,7 +3665,7 @@ public abstract class CLIJxOps {
      * Translate an image stack in X and Y.
      */
     public boolean translate2D(ClearCLBuffer source, ClearCLBuffer destination, double translateX, double translateY) {
-        return Translate2D.translate2D(clij, source, destination, new Double (translateX).floatValue(), new Double (translateY).floatValue());
+        return Translate2D.translate2D(clijx, source, destination, new Double (translateX).floatValue(), new Double (translateY).floatValue());
     }
 
 
@@ -3675,7 +3675,7 @@ public abstract class CLIJxOps {
      * Translate an image stack in X, Y and Z.
      */
     public boolean translate3D(ClearCLBuffer source, ClearCLBuffer destination, double translateX, double translateY, double translateZ) {
-        return Translate3D.translate3D(clij, source, destination, new Double (translateX).floatValue(), new Double (translateY).floatValue(), new Double (translateZ).floatValue());
+        return Translate3D.translate3D(clijx, source, destination, new Double (translateX).floatValue(), new Double (translateY).floatValue(), new Double (translateZ).floatValue());
     }
 
 

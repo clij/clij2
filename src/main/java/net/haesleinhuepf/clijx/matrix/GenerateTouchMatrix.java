@@ -7,6 +7,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,19 +18,17 @@ import java.util.HashMap;
  *         October 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_generateTouchMatrix")
-public class GenerateTouchMatrix extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class GenerateTouchMatrix extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        boolean result = generateTouchMatrix(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
-        releaseBuffers(args);
+        boolean result = generateTouchMatrix(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return result;
     }
 
-    public static boolean generateTouchMatrix(CLIJ clij, ClearCLBuffer src_label_map, ClearCLBuffer dst_distance_matrix) {
+    public static boolean generateTouchMatrix(CLIJx clijx, ClearCLBuffer src_label_map, ClearCLBuffer dst_distance_matrix) {
 
-        clij.op().set(dst_distance_matrix, 0f);
+        clijx.set(dst_distance_matrix, 0f);
 
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src_label_map", src_label_map);
@@ -36,7 +36,9 @@ public class GenerateTouchMatrix extends AbstractCLIJPlugin implements CLIJMacro
 
         long[] globalSizes = src_label_map.getDimensions();
 
-        return clij.execute(GenerateTouchMatrix.class, "touch_matrix.cl", "generate_touch_matrix_" + src_label_map.getDimension() + "d", globalSizes, parameters);
+        clijx.activateSizeIndependentKernelCompilation();
+        clijx.execute(GenerateTouchMatrix.class, "touch_matrix.cl", "generate_touch_matrix_" + src_label_map.getDimension() + "d", globalSizes, globalSizes, parameters);
+        return true;
     }
 
     @Override

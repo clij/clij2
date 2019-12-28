@@ -39,6 +39,7 @@ public class TouchMatrixToMesh extends AbstractCLIJxPlugin implements CLIJMacroP
         parameters.put("dst_mesh", mesh);
 
         long[] dimensions = {touch_matrix.getDimensions()[0], 1, 1};
+        clijx.activateSizeIndependentKernelCompilation();
         clijx.execute(TouchMatrixToMesh.class, "touch_matrix_to_mesh_3d_x.cl", "touch_matrix_to_mesh_3d", dimensions, dimensions, parameters);
         return true;
     }

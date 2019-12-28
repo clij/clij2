@@ -42,6 +42,7 @@ public class AverageDistanceOfNClosestPoints extends AbstractCLIJxPlugin impleme
 
         long[] globalSizes = new long[]{distance_matrix.getWidth()};
 
+        clijx.activateSizeIndependentKernelCompilation();
         clijx.execute(AverageDistanceOfNClosestPoints.class, "average_distance_of_n_shortest_distances_x.cl", "average_distance_of_n_closest_points", globalSizes, globalSizes, parameters);
 
         return true;

@@ -40,6 +40,8 @@ public class DistanceMatrixToMesh extends AbstractCLIJxPlugin implements CLIJMac
         parameters.put("distance_threshold", distanceThreshold);
 
         long[] dimensions = {distance_matrix.getDimensions()[0], 1, 1};
+
+        clijx.activateSizeIndependentKernelCompilation();
         clijx.execute(DistanceMatrixToMesh.class, "distance_matrix_to_mesh_3d_x.cl", "distance_matrix_to_mesh_3d", dimensions, dimensions, parameters);
         return true;
     }

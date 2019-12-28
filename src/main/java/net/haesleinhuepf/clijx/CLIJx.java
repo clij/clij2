@@ -203,9 +203,19 @@ public class CLIJx extends CLIJxOps{
             mCLKernelExecutor.setGlobalSizes(globalsizes);
 
             result[0] = mCLKernelExecutor.enqueue(true, kernel);
+
+            mCLKernelExecutor.setImageSizeIndependentCompilation(false);
         });
 
         return result[0];
+    }
+
+    public boolean isSizeIndependentKernelCompilation() {
+        return mCLKernelExecutor.isImageSizeIndependentCompilation();
+    }
+
+    public void activateSizeIndependentKernelCompilation() {
+        mCLKernelExecutor.setImageSizeIndependentCompilation(true);
     }
 
     @Deprecated

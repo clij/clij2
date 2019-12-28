@@ -9,10 +9,7 @@ import net.haesleinhuepf.clij.clearcl.util.ElapsedTime;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This executor can call OpenCL files. It
@@ -33,6 +30,9 @@ public class CLKernelExecutor {
     Map<String, Object> parameterMap;
     Map<String, Object> constantsMap;
     long[] globalSizes;
+
+
+    boolean imageSizeIndependentCompilation = false;
 
     private final HashMap<String, ClearCLProgram> programCacheMap = new HashMap();
     ClearCLProgram currentProgram = null;
@@ -161,7 +161,7 @@ public class CLKernelExecutor {
     public ClearCLKernel enqueue(boolean waitToFinish, ClearCLKernel kernel) {
 
         if (kernel == null) {
-
+            long time = System.currentTimeMillis();
             if (CLIJ.debug) {
                 System.out.println("Loading " + kernelName);
             }
@@ -180,17 +180,19 @@ public class CLKernelExecutor {
             for (String key : parameterMap.keySet()) {
                 if (parameterMap.get(key) instanceof ClearCLImage) {
                     ClearCLImage image = (ClearCLImage) parameterMap.get(key);
-//                    openCLDefines.put("IMAGE_SIZE_" + key + "_WIDTH", image.getWidth());
-//                    openCLDefines.put("IMAGE_SIZE_" + key + "_HEIGHT", image.getHeight());
-//                    openCLDefines.put("IMAGE_SIZE_" + key + "_DEPTH", image.getDepth());
-//
+                    if (!imageSizeIndependentCompilation) {
+                        openCLDefines.put("IMAGE_SIZE_" + key + "_WIDTH", image.getWidth());
+                        openCLDefines.put("IMAGE_SIZE_" + key + "_HEIGHT", image.getHeight());
+                        openCLDefines.put("IMAGE_SIZE_" + key + "_DEPTH", image.getDepth());
+                    }
                     getOpenCLDefines(openCLDefines, key, image.getChannelDataType(), (int) image.getDimension());
                 } else if (parameterMap.get(key) instanceof ClearCLBuffer) {
                     ClearCLBuffer image = (ClearCLBuffer) parameterMap.get(key);
-//                    openCLDefines.put("IMAGE_SIZE_" + key + "_WIDTH", image.getWidth());
-//                    openCLDefines.put("IMAGE_SIZE_" + key + "_HEIGHT", image.getHeight());
-//                    openCLDefines.put("IMAGE_SIZE_" + key + "_DEPTH", image.getDepth());
-//
+                    if (!imageSizeIndependentCompilation) {
+                        openCLDefines.put("IMAGE_SIZE_" + key + "_WIDTH", image.getWidth());
+                        openCLDefines.put("IMAGE_SIZE_" + key + "_HEIGHT", image.getHeight());
+                        openCLDefines.put("IMAGE_SIZE_" + key + "_DEPTH", image.getDepth());
+                    }
                     getOpenCLDefines(openCLDefines, key, image.getNativeType(), (int) image.getDimension());
                 }
                 definedParameterKeys.add(key);
@@ -214,9 +216,15 @@ public class CLKernelExecutor {
 //                }
 //            }
 
-            openCLDefines.put("GET_IMAGE_WIDTH(image_key)", "image_size_ ## image_key ## _width");
-            openCLDefines.put("GET_IMAGE_HEIGHT(image_key)", "image_size_ ## image_key ## _height");
-            openCLDefines.put("GET_IMAGE_DEPTH(image_key)", "image_size_ ## image_key ## _depth");
+            if (imageSizeIndependentCompilation) {
+                openCLDefines.put("GET_IMAGE_WIDTH(image_key)", "image_size_ ## image_key ## _width");
+                openCLDefines.put("GET_IMAGE_HEIGHT(image_key)", "image_size_ ## image_key ## _height");
+                openCLDefines.put("GET_IMAGE_DEPTH(image_key)", "image_size_ ## image_key ## _depth");
+            } else {
+                openCLDefines.put("GET_IMAGE_WIDTH(image_key)", "IMAGE_SIZE_ ## image_key ## _WIDTH");
+                openCLDefines.put("GET_IMAGE_HEIGHT(image_key)", "IMAGE_SIZE_ ## image_key ## _HEIGHT");
+                openCLDefines.put("GET_IMAGE_DEPTH(image_key)", "IMAGE_SIZE_ ## image_key ## _DEPTH");
+            }
 
             if (CLIJ.debug) {
                 for (String key : openCLDefines.keySet()) {
@@ -237,32 +245,40 @@ public class CLKernelExecutor {
                 e1.printStackTrace();
                 return null;
             }
+            System.out.println("Finding kernel took " + (System.currentTimeMillis() - time));
         }
         if (kernel != null) {
             if (globalSizes != null) {
-                kernel.setGlobalSizes(globalSizes);
+                System.out.println("Global sizes " + Arrays.toString(globalSizes));
+                kernel.setGlobalSizes(globalSizes); //globalSizes);
             }/* else if (dstImage != null) {
                 clearCLKernel.setGlobalSizes(dstImage.getDimensions());
             } else if (dstBuffer != null) {
                 clearCLKernel.setGlobalSizes(dstBuffer.getDimensions());
             }*/
-            if (parameterMap != null) {
-                for (String key : parameterMap.keySet()) {
-                    Object obj = parameterMap.get(key);
-                    kernel.setArgument(key, obj);
-                    if (obj instanceof ClearCLImageInterface) {
-                        kernel.setArgument("image_size_" + key + "_width", ((ClearCLImageInterface) obj).getWidth());
-                        kernel.setArgument("image_size_" + key + "_height", ((ClearCLImageInterface) obj).getHeight());
-                        kernel.setArgument("image_size_" + key + "_depth", ((ClearCLImageInterface) obj).getDepth());
+            final ClearCLKernel workaround = kernel;
+            ElapsedTime.measure("Setting arguments", () -> {
+                if (parameterMap != null) {
+                    for (String key : parameterMap.keySet()) {
+                        Object obj = parameterMap.get(key);
+                        //System.out.println(key + " = " + parameterMap.get(key));
+                        workaround.setArgument(key, obj);
+                        if (obj instanceof ClearCLImageInterface) {
+                            //System.out.println(key + "_w = " + ((ClearCLImageInterface) obj).getWidth());
+                            //System.out.println(key + "_h = " + ((ClearCLImageInterface) obj).getHeight());
+                            //System.out.println(key + "_d = " + ((ClearCLImageInterface) obj).getDepth());
+                            workaround.setArgument("image_size_" + key + "_width", ((ClearCLImageInterface) obj).getWidth());
+                            workaround.setArgument("image_size_" + key + "_height", ((ClearCLImageInterface) obj).getHeight());
+                            workaround.setArgument("image_size_" + key + "_depth", ((ClearCLImageInterface) obj).getDepth());
+                        }
                     }
                 }
-            }
+            });
             if (CLIJ.debug) {
                 System.out.println("Executing " + kernelName);
             }
 
-            final ClearCLKernel workaround = kernel;
-            double duration = ElapsedTime.measure("Pure kernel execution", () -> {
+            double duration = ElapsedTime.measureForceOutput("Pure kernel execution2 ", () -> {
                 try {
                     workaround.run(waitToFinish);
                 } catch (Exception e) {
@@ -428,5 +444,14 @@ public class CLKernelExecutor {
         }
 
         programCacheMap.clear();
+    }
+
+
+    public boolean isImageSizeIndependentCompilation() {
+        return imageSizeIndependentCompilation;
+    }
+
+    public void setImageSizeIndependentCompilation(boolean imageSizeIndependentCompilation) {
+        this.imageSizeIndependentCompilation = imageSizeIndependentCompilation;
     }
 }
