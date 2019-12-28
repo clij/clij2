@@ -11,6 +11,7 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPluginService;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
+import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij.macro.modules.Mean3DBox;
 import net.haesleinhuepf.clij.test.TestUtilities;
 import net.haesleinhuepf.clijx.CLIJx;
@@ -30,13 +31,9 @@ public class CLIJ1CLIJ2Benchmarking {
 
         ImagePlus random = NewImage.createFloatImage("rand", 1024, 1024, 50, NewImage.FILL_RANDOM);
         ClearCLBuffer input = clij.push(random);
-        ClearCLBuffer output = clij.create(input);
-        ClearCLBuffer output2 = clij.create(input);
 
-        Object[] i2n3 = {input, output, "3", "3", "3"};
-        Object[] i2n2 = {input, output, "3", "3", "3"};
-        Object[] i3n3 = {input, output, output2, "3", "3", "3"};
-        Object[] i3n2 = {input, output, output2, "3", "3", "3"};
+        ImagePlus random2d = NewImage.createFloatImage("rand", 1024, 1024, 1, NewImage.FILL_RANDOM);
+        ClearCLBuffer input2d = clij.push(random2d);
 
         String foundParameterHashes = ";";
 
@@ -64,30 +61,64 @@ public class CLIJ1CLIJ2Benchmarking {
                         continue;
                     }
 
-                    Object[] argsCLIJ = buildArgs(clijx, clijPlugin, clijParameterTypeHash, input);
-                    Object[] argsCLIJx = buildArgs(clijx, clijxPlugin, clijxParameterTypeHash, input);
 
-                    clijPlugin.setClij(clij);
-                    clijxPlugin.setClij(clij);
+                    if (!clijPlugin.getName().contains("2D")) { // test 3D
+                        if (clijxPlugin instanceof OffersDocumentation && ((OffersDocumentation) clijPlugin).getAvailableForDimensions().contains("3D")) {
+                            Object[] argsCLIJ = buildArgs(clijx, clijPlugin, clijParameterTypeHash, input);
+                            Object[] argsCLIJx = buildArgs(clijx, clijxPlugin, clijxParameterTypeHash, input);
 
-                    clijPlugin.setArgs(argsCLIJ);
-                    clijxPlugin.setArgs(argsCLIJx);
+                            clijPlugin.setClij(clij);
+                            clijxPlugin.setClij(clij);
 
-                    if (clijPlugin instanceof CLIJOpenCLProcessor) {
-                        System.out.println("executing clij...");
-                        ((CLIJOpenCLProcessor) clijPlugin).executeCL();
+                            clijPlugin.setArgs(argsCLIJ);
+                            clijxPlugin.setArgs(argsCLIJx);
+
+                            if (clijPlugin instanceof CLIJOpenCLProcessor) {
+                                System.out.println("executing clij...");
+                                ((CLIJOpenCLProcessor) clijPlugin).executeCL();
+                            }
+                            if (clijxPlugin instanceof CLIJOpenCLProcessor) {
+                                System.out.println("executing clijx...");
+                                ((CLIJOpenCLProcessor) clijxPlugin).executeCL();
+                            }
+
+                            System.out.println("comparing 3D ...");
+                            compareResults(clijx, argsCLIJ, argsCLIJx, clijParameterTypeHash);
+
+                            cleanUpArgs(clijx, argsCLIJ, input);
+                            cleanUpArgs(clijx, argsCLIJx, input);
+                        }
                     }
-                    if (clijxPlugin instanceof CLIJOpenCLProcessor) {
-                        System.out.println("executing clijx...");
-                        ((CLIJOpenCLProcessor) clijxPlugin).executeCL();
+
+                    if ((!clijPlugin.getName().contains("3D")) && (!clijPlugin.getName().toLowerCase().contains("project"))) { // test 2D
+                        if (clijxPlugin instanceof OffersDocumentation && ((OffersDocumentation) clijPlugin).getAvailableForDimensions().contains("2D")) {
+
+
+                            Object[] argsCLIJ = buildArgs(clijx, clijPlugin, clijParameterTypeHash, input2d);
+                            Object[] argsCLIJx = buildArgs(clijx, clijxPlugin, clijxParameterTypeHash, input2d);
+
+                            clijPlugin.setClij(clij);
+                            clijxPlugin.setClij(clij);
+
+                            clijPlugin.setArgs(argsCLIJ);
+                            clijxPlugin.setArgs(argsCLIJx);
+
+                            if (clijPlugin instanceof CLIJOpenCLProcessor) {
+                                System.out.println("executing clij...");
+                                ((CLIJOpenCLProcessor) clijPlugin).executeCL();
+                            }
+                            if (clijxPlugin instanceof CLIJOpenCLProcessor) {
+                                System.out.println("executing clijx...");
+                                ((CLIJOpenCLProcessor) clijxPlugin).executeCL();
+                            }
+
+                            System.out.println("comparing 2D...");
+                            compareResults(clijx, argsCLIJ, argsCLIJx, clijParameterTypeHash);
+
+                            cleanUpArgs(clijx, argsCLIJ, input2d);
+                            cleanUpArgs(clijx, argsCLIJx, input2d);
+                        }
                     }
-
-                    System.out.println("comparing...");
-                    compareResults(clijx, argsCLIJ, argsCLIJx, clijParameterTypeHash);
-
-
-                    cleanUpArgs(clijx, argsCLIJ, input);
-                    cleanUpArgs(clijx, argsCLIJx, input);
 
                 } else if (clijxPlugin == null) {
                     System.out.println("Error: No successor found for " + pluginName);
@@ -97,6 +128,7 @@ public class CLIJ1CLIJ2Benchmarking {
 
         System.out.println("Found hashes: " + foundParameterHashes);
 
+        /*
         if (true) return;
 
 
@@ -118,7 +150,7 @@ public class CLIJ1CLIJ2Benchmarking {
             long duration = benchmarkOp(clij, new net.haesleinhuepf.clijx.advancedfilters.Mean3DBox(), i2n3);
             System.out.println("CLIJx mean took " + (duration) + " ms");
 
-        }
+        }*/
     }
 
     private static void compareResults(CLIJx clijx, Object[] argsCLIJ, Object[] argsCLIJx, String hash) {
