@@ -38,7 +38,7 @@ public class MinimumImageAndScalar extends AbstractCLIJxPlugin implements CLIJMa
         if (!checkDimensions(src.getDimension(), src.getDimension(), dst.getDimension())) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (minimumImageAndScalar)");
         }
-        clijx.execute(MinimumImageAndScalar.class, "math" + src.getDimension() + "D.cl", "minPixelwiseScalar_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(MinimumImageAndScalar.class, "minimum_image_and_scalar_" + src.getDimension() + "d_x.cl", "minimum_image_and_scalar_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 

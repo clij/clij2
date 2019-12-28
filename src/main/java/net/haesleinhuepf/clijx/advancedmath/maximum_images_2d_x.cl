@@ -16,5 +16,5 @@ __kernel void maximum_images_2d(
 
   const IMAGE_dst_PIXEL_TYPE value = CONVERT_dst_PIXEL_TYPE(max(input, input1));
 
-  WRITE_IMAGE_2D (dst, pos, value);
+  WRITE_dst_IMAGE(dst, pos, value);
 }

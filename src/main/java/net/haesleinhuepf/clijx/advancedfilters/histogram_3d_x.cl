@@ -36,7 +36,7 @@ void histogram_3d(
     int     y = get_global_id(0);
     float range = maximum - minimum;
 
-    uint tmp_histogram[GET_IMAGE_WIDTH(dst_histogram)];
+    local uint tmp_histogram[GET_IMAGE_WIDTH(dst_histogram)];
     for (int i = 0; i < GET_IMAGE_WIDTH(dst_histogram); i++) {
         tmp_histogram[i] = 0;
     }

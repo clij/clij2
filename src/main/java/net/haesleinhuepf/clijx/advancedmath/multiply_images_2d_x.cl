@@ -13,6 +13,6 @@ __kernel void multiply_images_2d(
 
   const float value = (float)READ_src_IMAGE(src, sampler, pos).x * READ_src1_IMAGE(src1, sampler, pos).x;
 
-  WRITE_IMAGE_2D (dst, pos, CONVERT_dst_PIXEL_TYPE(value));
+  WRITE_dst_IMAGE(dst, pos, CONVERT_dst_PIXEL_TYPE(value));
 }
 

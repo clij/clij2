@@ -11,7 +11,7 @@ __kernel void multiply_image_and_coordinate_2d(
 
   const int2 pos = (int2){x,y};
 
-  const IMAGE_dst_PIXEL_TYPE value = CONVERT_dst_PIXEL_TYPE(READ_src_IMAGE(src sampler, pos).x * get_global_id(dimension));
+  const IMAGE_dst_PIXEL_TYPE value = CONVERT_dst_PIXEL_TYPE(READ_src_IMAGE(src, sampler, pos).x * get_global_id(dimension));
 
   WRITE_dst_IMAGE (dst, pos, value);
 }

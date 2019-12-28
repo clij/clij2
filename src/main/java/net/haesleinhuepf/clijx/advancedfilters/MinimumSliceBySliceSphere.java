@@ -12,6 +12,7 @@ import org.scijava.plugin.Plugin;
 import java.util.HashMap;
 
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
+import static net.haesleinhuepf.clij.utilities.CLIJUtilities.radiusToKernelSize;
 
 /**
  * Author: @haesleinhuepf
@@ -28,8 +29,11 @@ public class MinimumSliceBySliceSphere extends AbstractCLIJxPlugin implements CL
         return minimum3DSliceBySliceSphere(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
     }
 
-    public static boolean minimum3DSliceBySliceSphere(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Integer kernelSizeX, Integer kernelSizeY) {
+    public static boolean minimum3DSliceBySliceSphere(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY) {
         assertDifferent(src, dst);
+
+        int kernelSizeX = radiusToKernelSize(radiusX);
+        int kernelSizeY = radiusToKernelSize(radiusY);
 
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);

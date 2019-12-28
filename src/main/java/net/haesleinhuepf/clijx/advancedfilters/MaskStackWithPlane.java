@@ -40,7 +40,7 @@ public class MaskStackWithPlane extends AbstractCLIJxPlugin implements CLIJMacro
         parameters.put("mask", mask);
         parameters.put("dst", dst);
 
-        clijx.execute(Kernels.class, "mask_stack_with_plane_3d_x.cl", "mask_stack_with_plane_3d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(MaskStackWithPlane.class, "mask_stack_with_plane_3d_x.cl", "mask_stack_with_plane_3d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 

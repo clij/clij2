@@ -22,5 +22,5 @@ __kernel void flip_3d (    IMAGE_src_TYPE src,
 
   const float value = READ_src_IMAGE(src, intsampler, pos).x;
 
-  WRITE_dst_IMAGE_3D (dst, (int4)(x,y,z,0), CONVERT_dst_PIXEL_TYPE(value));
+  WRITE_dst_IMAGE(dst, (int4)(x,y,z,0), CONVERT_dst_PIXEL_TYPE(value));
 }

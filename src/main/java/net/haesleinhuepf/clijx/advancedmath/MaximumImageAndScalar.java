@@ -43,7 +43,7 @@ public class MaximumImageAndScalar extends AbstractCLIJxPlugin implements CLIJMa
         if (!checkDimensions(src.getDimension(), src.getDimension(), dst.getDimension())) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (maximumImages)");
         }
-        clijx.execute(Kernels.class, "maximum_image_and_scalar_" + src.getDimension() + "d_x.cl", "maximum_image_and_scalar_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(MaximumImageAndScalar.class, "maximum_image_and_scalar_" + src.getDimension() + "d_x.cl", "maximum_image_and_scalar_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 

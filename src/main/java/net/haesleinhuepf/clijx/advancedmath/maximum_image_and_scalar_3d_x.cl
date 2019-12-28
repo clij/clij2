@@ -2,8 +2,8 @@ __constant sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_T
 
 __kernel void maximum_image_and_scalar_3d(
     IMAGE_src_TYPE  src,
-    IMAGE_src1_TYPE  src1,
-    IMAGE_dst_TYPE  dst
+    IMAGE_dst_TYPE  dst,
+    float valueB
 )
 {
   const int x = get_global_id(0);
@@ -12,8 +12,8 @@ __kernel void maximum_image_and_scalar_3d(
 
   const int4 pos = (int4){x,y,z,0};
 
-  const IMAGE_src_PIXEL_TYPE input = READ_src_IMAGE(src, sampler, pos).x;
-  const IMAGE_src1_PIXEL_TYPE input1 = READ_src1_IMAGE(src1, sampler, pos).x;
+  const float input = READ_src_IMAGE(src, sampler, pos).x;
+  const float input1 = valueB;
 
   const IMAGE_dst_PIXEL_TYPE value = CONVERT_dst_PIXEL_TYPE(max(input, input1));
 

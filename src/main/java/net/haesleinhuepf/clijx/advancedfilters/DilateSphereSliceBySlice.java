@@ -39,7 +39,7 @@ public class DilateSphereSliceBySlice extends AbstractCLIJxPlugin implements CLI
         if (!checkDimensions(src.getDimension(), dst.getDimension())) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (copy)");
         }
-        clijx.execute(DilateSphereSliceBySlice.class, "dilate_diamond_slice_by_slice_3d_x.cl", "dilate_diamond_slice_by_slice_3d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(DilateSphereSliceBySlice.class, "dilate_sphere_slice_by_slice_3d_x.cl", "dilate_sphere_slice_by_slice_3d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 

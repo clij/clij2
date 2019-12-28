@@ -42,7 +42,7 @@ public class CountNonZeroVoxels3DSphere extends AbstractCLIJxPlugin implements C
         parameters.put("Nz", radiusToKernelSize(radiusZ));
         parameters.put("src", src);
         parameters.put("dst", dst);
-        clijx.execute(Kernels.class, "count_nonzero_voxels_sphere_3d_x.cl", "count_nonzero_voxels_sphere_3d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(CountNonZeroVoxels3DSphere.class, "count_nonzero_voxels_sphere_3d_x.cl", "count_nonzero_voxels_sphere_3d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 

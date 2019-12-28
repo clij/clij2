@@ -46,7 +46,7 @@ __kernel void median_box_2d
       count++;
     }
   }
-  array_size = count
+  array_size = count;
   //copyBoxNeighborhoodToArray(src, array, coord, Nx, Ny);
 
   IMAGE_dst_PIXEL_TYPE res = median(array, array_size);

@@ -12,8 +12,8 @@ __kernel void minimum_image_and_scalar_3d(
 
   const int4 pos = (int4){x,y,z,0};
 
-  const IMAGE_src_PIXEL_TYPE input = READ_src_IMAGE(src, sampler, pos).x;
-  const IMAGE_src_PIXEL_TYPE input1 = valueB;
+  const float input = READ_src_IMAGE(src, sampler, pos).x;
+  const float input1 = valueB;
 
   const IMAGE_dst_PIXEL_TYPE value = CONVERT_dst_PIXEL_TYPE(min(input, input1));
 

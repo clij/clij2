@@ -45,7 +45,7 @@ public class Median2DBox extends AbstractCLIJxPlugin implements CLIJMacroPlugin,
         parameters.put("Nx", kernelSizeX);
         parameters.put("Ny", kernelSizeY);
 
-        clijx.execute(Median2DBox.class, "median_box_2d_x.cl", "median_box_2d_x", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(Median2DBox.class, "median_box_2d_x.cl", "median_box_2d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 
