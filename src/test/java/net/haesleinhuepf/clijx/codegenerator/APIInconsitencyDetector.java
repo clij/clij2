@@ -24,10 +24,6 @@ public class APIInconsitencyDetector {
     public static void main(String[] args) {
         CLIJMacroPluginService service = new Context(CLIJMacroPluginService.class).getService(CLIJMacroPluginService.class);
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("package net.haesleinhuepf.clijx.utilities;\n");
-        builder.append("import net.haesleinhuepf.clij.kernels.Kernels;\n");
-
         for (String macroMethodName : service.getCLIJMethodNames()) {
             boolean methodFound = false;
 
