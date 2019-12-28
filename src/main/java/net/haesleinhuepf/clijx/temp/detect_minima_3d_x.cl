@@ -30,9 +30,9 @@ __kernel void detect_minima_3d(
     }
 
     if (pos.x == localMinPos.x && pos.y == localMinPos.y && pos.z == localMinPos.z) {
-        WRITE_dst_IMAGE(dst, pos, ((DTYPE_OUT){1, 0, 0, 0}));
+        WRITE_dst_IMAGE(dst, pos, 1);
     } else {
-        WRITE_dst_IMAGE(dst, pos, ((DTYPE_OUT){0, 0, 0, 0}));
+        WRITE_dst_IMAGE(dst, pos, 0);
     }
 }
 

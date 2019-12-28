@@ -26,7 +26,7 @@ __kernel void detect_minima_2d(
         }
     }
 
-    if (pos.x == localMaxPos.x && pos.y == localMaxPos.y) {
+    if (pos.x == localMinPos.x && pos.y == localMinPos.y) {
         WRITE_dst_IMAGE(dst, pos, 1);
     } else {
         WRITE_dst_IMAGE(dst, pos, 0);

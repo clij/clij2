@@ -28,8 +28,8 @@ __kernel void detect_maxima_3d_slice_by_slice(
     }
 
     if (pos.x == localMaxPos.x && pos.y == localMaxPos.y) {
-        WRITE_dst_IMAGE(dst, pos, ((DTYPE_OUT){1, 0, 0, 0}));
+        WRITE_dst_IMAGE(dst, pos, 1);
     } else {
-        WRITE_dst_IMAGE(dst, pos, ((DTYPE_OUT){0, 0, 0, 0}));
+        WRITE_dst_IMAGE(dst, pos, 0);
     }
 }
