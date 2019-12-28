@@ -8,12 +8,14 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_nClosestPoints")
-public class NClosestPoints extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class NClosestPoints extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -23,12 +25,12 @@ public class NClosestPoints extends AbstractCLIJPlugin implements CLIJMacroPlugi
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = nClosestPoints(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
+        boolean result = nClosestPoints(getCLIJx(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean nClosestPoints(CLIJ clij, ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination) {
+    public static boolean nClosestPoints(CLIJx clijx, ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination) {
         //ClearCLBuffer temp = clij.create(new long[]{input.getWidth(), 1, input.getHeight()}, input.getNativeType());
 
         if (indexlist_destination.getHeight() > 1000) {
@@ -40,9 +42,8 @@ public class NClosestPoints extends AbstractCLIJPlugin implements CLIJMacroPlugi
         parameters.put("dst_indexlist", indexlist_destination);
 
         long[] globalSizes = new long[]{distance_matrix.getWidth(), 1, 1};
-
-        clij.execute(NClosestPoints.class, "n_shortest_distances.cl", "find_n_closest_points", globalSizes, parameters);
-
+        clijx.activateSizeIndependentKernelCompilation();
+        clijx.execute(NClosestPoints.class, "n_shortest_distances_x.cl", "find_n_closest_points", globalSizes, globalSizes, parameters);
 
         //temp.close();
         return true;

@@ -7,6 +7,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,23 +18,25 @@ import java.util.HashMap;
  *         August 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_multiplyMatrix")
-public class MultiplyMatrix extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class MultiplyMatrix extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = multiplyMatrix(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = multiplyMatrix(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean multiplyMatrix(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer output) {
+    public static boolean multiplyMatrix(CLIJx clijx, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer output) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src1", input1);
         parameters.put("src2", input2);
         parameters.put("dst_matrix", output);
 
-        return clij.execute(MultiplyMatrix.class, "matrix.cl", "multiply_matrix", parameters);
+        clijx.activateSizeIndependentKernelCompilation();
+        clijx.execute(MultiplyMatrix.class, "multipl_matrix_x.cl", "multiply_matrix", output.getDimensions(), output.getDimensions(), parameters);
+        return true;
     }
 
     @Override

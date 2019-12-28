@@ -1,7 +1,8 @@
 
 __kernel void find_n_closest_points(
-DTYPE_IMAGE_IN_2D src_distancematrix,
-DTYPE_IMAGE_OUT_2D dst_indexlist) {
+    IMAGE_src_distancematrix_TYPE src_distancematrix,
+    IMAGE_dst_indexlist_TYPE dst_indexlist
+) {
   const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
 
   const int pointIndex = get_global_id(0);
@@ -20,7 +21,7 @@ DTYPE_IMAGE_OUT_2D dst_indexlist) {
   int2 pos = (int2){pointIndex, 0};
   for (int y = 0; y < height; y++) {
     pos.y = y;
-    float distance = READ_IMAGE_2D(src_distancematrix, sampler, pos).x;
+    float distance = READ_src_distancematrix_IMAGE(src_distancematrix, sampler, pos).x;
 
     if (initialized_values < n) {
       initialized_values++;
@@ -47,6 +48,6 @@ DTYPE_IMAGE_OUT_2D dst_indexlist) {
   for (int i = 0; i < initialized_values; i++) {
     pos.y = i;
 
-    WRITE_IMAGE_2D(dst_indexlist, pos, CONVERT_DTYPE_OUT(indices[i]));
+    WRITE_dst_indexlist_IMAGE(dst_indexlist, pos, CONVERT_dst_indexlist_PIXEL_TYPE(indices[i]));
   }
 }
