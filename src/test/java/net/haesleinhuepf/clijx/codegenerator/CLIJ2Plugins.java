@@ -29,14 +29,12 @@ import net.haesleinhuepf.clijx.advancedfilters.LocalThreshold;
 import net.haesleinhuepf.clijx.advancedfilters.Blur2D;
 import net.haesleinhuepf.clijx.advancedfilters.Blur3D;
 import net.haesleinhuepf.clijx.advancedfilters.Blur3DSliceBySlice;
-import net.haesleinhuepf.clijx.utilities.CLIJxAPIConsistencyWorkaround;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
 
 public interface CLIJ2Plugins {
     public Class[] classes = {
             Kernels.class,
-            CLIJxAPIConsistencyWorkaround.class,
             BinaryUnion.class,
             BinaryIntersection.class,
             ConnectedComponentsLabeling.class,
@@ -254,7 +252,17 @@ public interface CLIJ2Plugins {
             MultiplyImages.class,
             Blur2D.class,
             Blur3D.class,
-            Blur3DSliceBySlice.class
+            Blur3DSliceBySlice.class,
+            ResliceBottom.class,
+            ResliceTop.class,
+            ResliceLeft.class,
+            ResliceRight.class,
+            Rotate2D.class,
+            Rotate3D.class,
+            Scale2D.class,
+            Scale3D.class,
+            Translate2D.class,
+            Translate3D.class
     };
 
     public String blockList = ";" +
@@ -340,6 +348,19 @@ public interface CLIJ2Plugins {
             "Kernels.maximumIJ;" +
             "Kernels.multiplyImages;" +
             "Kernels.blur;" +
-            "Kernels.blurSliceBySlice;";
+            "Kernels.blurSliceBySlice;" +
+            "Kernels.resliceTop;" +
+            "Kernels.resliceBottom;" +
+            "Kernels.resliceLeft;" +
+            "Kernels.resliceRight;" +
+            "Kernels.translate2D;" +
+            "Kernels.translate3D;" +
+            "Kernels.translate;" +
+            "Kernels.scale2D;" +
+            "Kernels.scale3D;" +
+            "Kernels.scale;" +
+            "Kernels.rotate2D;" +
+            "Kernels.rotate3D;" +
+            "Kernels.radialProjection;";
 
 }

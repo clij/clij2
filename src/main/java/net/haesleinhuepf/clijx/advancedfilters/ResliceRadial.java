@@ -32,6 +32,14 @@ public class ResliceRadial extends AbstractCLIJPlugin implements CLIJMacroPlugin
         return result;
     }
 
+    /*
+     * Deprecated: use resliceRadial instead
+     */
+    @Deprecated
+    public static boolean radialProjection(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Float deltaAngle) {
+        return resliceRadial(clij, src, dst, deltaAngle, 0.0f, src.getWidth() / 2.0f, src.getHeight() / 2.0f,  1.0f, 1.0f);
+    }
+
     public static boolean resliceRadial(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst, Float deltaAngle) {
         return resliceRadial(clij, src, dst, deltaAngle, 0.0f, src.getWidth() / 2.0f, src.getHeight() / 2.0f,  1.0f, 1.0f);
     }

@@ -9,6 +9,7 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij.macro.modules.Crop3D;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
@@ -28,6 +29,16 @@ public class Crop2D extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJ
     public boolean executeCL() {
         return crop(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
     }
+
+
+    public static boolean crop2D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer startX, Integer startY, Integer width, Integer height) {
+        net.haesleinhuepf.clij.macro.modules.Crop2D crop2D = new net.haesleinhuepf.clij.macro.modules.Crop2D();
+        crop2D.setClij(clij);
+        crop2D.setArgs(new Object[]{input, output, startX, startY, width, height});
+        return crop2D.executeCL();
+    }
+
+
 
     public static boolean crop2D(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Integer startX, Integer startY) {
         return crop(clijx, src, dst, startX, startY);

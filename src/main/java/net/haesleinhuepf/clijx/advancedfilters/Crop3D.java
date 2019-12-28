@@ -29,6 +29,14 @@ public class Crop3D extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJ
         return crop(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
     }
 
+    public static boolean crop3D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer startX, Integer startY, Integer startZ, Integer width, Integer height, Integer depth) {
+        net.haesleinhuepf.clij.macro.modules.Crop3D crop3D = new net.haesleinhuepf.clij.macro.modules.Crop3D();
+        crop3D.setClij(clij);
+        crop3D.setArgs(new Object[]{input, output, startX, startY, startZ, width, height, depth});
+        return crop3D.executeCL();
+    }
+
+
     public static boolean crop3D(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Integer startX, Integer startY, Integer startZ) {
         return crop(clijx, src, dst, startX, startY, startZ);
     }

@@ -45,9 +45,10 @@ public class Flip3D extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJ
         parameters.put("dst", dst);
         parameters.put("flipx", flipx ? 1 : 0);
         parameters.put("flipy", flipy ? 1 : 0);
-        parameters.put("flipz", flipz ? 1 : 0);
-
-        clijx.execute(Flip3D.class, "flip_3d_x.cl", "flip_3d", dst.getDimensions(), dst.getDimensions(), parameters);
+        if (src.getDimension() > 2) {
+            parameters.put("flipz", flipz ? 1 : 0);
+        }
+        clijx.execute(Flip3D.class, "flip_" + src.getDimension() +  "d_x.cl", "flip_" + src.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 
