@@ -154,6 +154,58 @@ public class CLIJ1CLIJ2Benchmarking {
 
                     } else if (clijxPlugin == null) {
                         System.out.println("Error: No successor found for " + pluginName);
+                    } else if (clijPlugin == null) {
+                        System.out.println("Error: No clij1 found for " + pluginName);
+
+                        System.out.println(clijPlugin + " <=> " + clijxPlugin);
+                        String clijxParameterTypeHash = getParameterTypeHash(clijxPlugin);
+
+                        if (!foundParameterHashes.contains(";" + clijxParameterTypeHash + ";")) {
+                            foundParameterHashes = foundParameterHashes + clijxParameterTypeHash + ";";
+                        }
+
+                        if (!clijxPlugin.getName().contains("2D")) { // test 3D
+                            if (clijxPlugin instanceof OffersDocumentation && ((OffersDocumentation) clijxPlugin).getAvailableForDimensions().contains("3D")) {
+                                addTableLine("", clijxPlugin.getClass().getName(), "3D", 0 );
+                                Object[] argsCLIJx = buildArgs(clijx, clijxPlugin, clijxParameterTypeHash, input);
+
+                                clijxPlugin.setClij(clij);
+
+                                clijxPlugin.setArgs(argsCLIJx);
+
+                                if (clijxPlugin instanceof CLIJOpenCLProcessor) {
+                                    System.out.print("executing clijx...");
+                                    long time = System.currentTimeMillis();
+                                    ((CLIJOpenCLProcessor) clijxPlugin).executeCL();
+                                    System.out.println(" took " + (System.currentTimeMillis() - time) + " ms");
+                                }
+
+                                cleanUpArgs(clijx, argsCLIJx, input);
+                            }
+                        }
+
+                        if ((!clijxPlugin.getName().contains("3D")) && (!clijxPlugin.getName().toLowerCase().contains("project"))) { // test 2D
+                            if (clijxPlugin instanceof OffersDocumentation && ((OffersDocumentation) clijxPlugin).getAvailableForDimensions().contains("2D")) {
+                                addTableLine("", clijxPlugin.getClass().getName(), "2D", 0 );
+
+                                Object[] argsCLIJx = buildArgs(clijx, clijxPlugin, clijxParameterTypeHash, input2d);
+
+                                clijxPlugin.setClij(clij);
+
+                                clijxPlugin.setArgs(argsCLIJx);
+
+                                if (clijxPlugin instanceof CLIJOpenCLProcessor) {
+                                    System.out.print("executing clijx...");
+                                    long time = System.currentTimeMillis();
+                                    ((CLIJOpenCLProcessor) clijxPlugin).executeCL();
+                                    long duration = (System.currentTimeMillis() - time);
+                                    System.out.println(" took " + (duration) + " ms");
+                                    table.addValue("CLIJx duration", (duration));
+                                }
+
+                                cleanUpArgs(clijx, argsCLIJx, input2d);
+                            }
+                        }
                     }
 
                     Files.write(Paths.get(pluginName+ ".txt"), new byte[1]);
