@@ -249,7 +249,7 @@ public class CLKernelExecutor {
         }
         if (kernel != null) {
             if (globalSizes != null) {
-                System.out.println("Global sizes " + Arrays.toString(globalSizes));
+                //System.out.println("Global sizes " + Arrays.toString(globalSizes));
                 kernel.setGlobalSizes(globalSizes); //globalSizes);
             }/* else if (dstImage != null) {
                 clearCLKernel.setGlobalSizes(dstImage.getDimensions());
@@ -278,7 +278,7 @@ public class CLKernelExecutor {
                 System.out.println("Executing " + kernelName);
             }
 
-            double duration = ElapsedTime.measureForceOutput("Pure kernel execution2 ", () -> {
+            double duration = ElapsedTime.measure("Pure kernel execution", () -> {
                 try {
                     workaround.run(waitToFinish);
                 } catch (Exception e) {
