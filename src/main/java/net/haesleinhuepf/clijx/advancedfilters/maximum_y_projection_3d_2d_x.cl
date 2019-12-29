@@ -8,7 +8,7 @@ __kernel void maximum_y_projection_3d_2d (
   const int x = get_global_id(0);
   const int z = get_global_id(1);
   float max = 0;
-  for(int y = 0; y < GET_IMAGE_IN_HEIGHT(src); y++)
+  for(int y = 0; y < GET_IMAGE_HEIGHT(src); y++)
   {
     float value = READ_src_IMAGE(src,sampler,(int4)(x,y,z,0)).x;
     if (value > max || y == 0) {
