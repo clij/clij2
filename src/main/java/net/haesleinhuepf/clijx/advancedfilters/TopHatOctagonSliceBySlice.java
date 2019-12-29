@@ -3,7 +3,6 @@ package net.haesleinhuepf.clijx.advancedfilters;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
-import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -11,8 +10,6 @@ import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import net.haesleinhuepf.clijx.utilities.CLIJUtilities;
 import org.scijava.plugin.Plugin;
-
-import java.util.HashMap;
 
 import static net.haesleinhuepf.clijx.advancedfilters.MaximumOctagon.maximumBox;
 import static net.haesleinhuepf.clijx.advancedfilters.MaximumOctagon.maximumDiamond;
@@ -23,52 +20,60 @@ import static net.haesleinhuepf.clijx.advancedfilters.MinimumOctagon.minimumDiam
  * Author: @haesleinhuepf
  *         December 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_topHatOctagon")
-public class TopHatOctagon extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_topHatOctagonSliceBySlice")
+public class TopHatOctagonSliceBySlice extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        return topHatOctagon(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return topHatOctagonSliceBySlice(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
     }
 
-    public static boolean topHatOctagon(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst, Integer iterations) {
+    public static boolean topHatOctagonSliceBySlice(CLIJx clijx, ClearCLBuffer src3D, ClearCLBuffer dst3D, Integer iterations) {
 
-        ClearCLImage flip = clijx.create(dst.getDimensions(), CLIJUtilities.nativeToChannelType(dst.getNativeType()));
+        ClearCLImage flip = clijx.create(new long[]{src3D.getWidth(), src3D.getHeight()}, CLIJUtilities.nativeToChannelType(src3D.getNativeType()));
         ClearCLImage flop = clijx.create(flip);
+        ClearCLImage src2D = clijx.create(flip);
 
         ClearCLKernel flipMinKernel = null;
         ClearCLKernel flopMinKernel = null;
         ClearCLKernel flipMaxKernel = null;
         ClearCLKernel flopMaxKernel = null;
 
-        clijx.copy(src, flip);
+        for (int z = 0; z < dst3D.getDepth(); z++) {
 
-        for (int i = 0; i < iterations; i++) {
-            if (i % 2 == 0) {
-                flipMinKernel = minimumBox(clijx, flip, flop, flipMinKernel);
+
+
+            clijx.copySlice(src3D, src2D, z);
+            clijx.copy(src2D, flip);
+
+            for (int i = 0; i < iterations; i++) {
+                if (i % 2 == 0) {
+                    flipMinKernel = minimumBox(clijx, flip, flop, flipMinKernel);
+                } else {
+                    flopMinKernel = minimumDiamond(clijx, flop, flip, flopMinKernel);
+                }
+            }
+            if (iterations % 2 == 0) {
+                //clijx.copy(flip, dst);
             } else {
-                flopMinKernel = minimumDiamond(clijx, flop, flip, flopMinKernel);
+                clijx.copy(flop, flip);
+            }
+
+            for (int i = 0; i < iterations; i++) {
+                if (i % 2 == 0) {
+                    flipMaxKernel = maximumBox(clijx, flip, flop, flipMaxKernel);
+                } else {
+                    flopMaxKernel = maximumDiamond(clijx, flop, flip, flopMaxKernel);
+                }
+            }
+            if (iterations % 2 == 0) {
+                clijx.subtractImages(src2D, flip, flop);
+                clijx.copySlice(flop, dst3D, z);
+            } else {
+                clijx.subtractImages(src2D, flop, flip);
+                clijx.copySlice(flop, dst3D, z);
             }
         }
-        if (iterations % 2 == 0) {
-            //clijx.copy(flip, dst);
-        } else {
-            clijx.copy(flop, flip);
-        }
-
-        for (int i = 0; i < iterations; i++) {
-            if (i % 2 == 0) {
-                flipMaxKernel = maximumBox(clijx, flip, flop, flipMaxKernel);
-            } else {
-                flopMaxKernel = maximumDiamond(clijx, flop, flip, flopMaxKernel);
-            }
-        }
-        if (iterations % 2 == 0) {
-            clijx.subtractImages(src, flip, dst);
-        } else {
-            clijx.subtractImages(src, flop, dst);
-        }
-
         if (flipMinKernel != null) {
             flipMinKernel.close();
         }
@@ -83,6 +88,7 @@ public class TopHatOctagon extends AbstractCLIJxPlugin implements CLIJMacroPlugi
         }
         flip.close();
         flop.close();
+        src2D.close();
 
         return true;
     }
