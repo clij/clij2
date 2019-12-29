@@ -52,7 +52,7 @@ public abstract class AbstractTenengradFusion extends AbstractCLIJxPlugin implem
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", clImageIn);
         parameters.put("dst", clImageOut);
-        clijx.execute(AbstractTenengradFusion.class,"tenengrad_fusion_x.cl", "tenengrad_weight_unnormalized_slice_wise", clImageOut.getDimensions(), clImageOut.getDimensions(), parameters);
+        clijx.execute(AbstractTenengradFusion.class,"tenengrad_weight_unnormalized_slice_wise_x.cl", "tenengrad_weight_unnormalized_slice_wise", clImageOut.getDimensions(), clImageOut.getDimensions(), parameters);
         return true;
     }
 
@@ -92,7 +92,7 @@ public abstract class AbstractTenengradFusion extends AbstractCLIJxPlugin implem
             parameters.put("src", clImagesIn[i]);
             parameters.put("dst", temporaryImage);
 
-            clijx.execute(AbstractTenengradFusion.class, "tenengrad_fusion_x.cl", "tenengrad_weight_unnormalized", temporaryImage.getDimensions(), temporaryImage.getDimensions(), parameters);
+            clijx.execute(AbstractTenengradFusion.class, "tenengrad_weight_unnormalized_x.cl", "tenengrad_weight_unnormalized", temporaryImage.getDimensions(), temporaryImage.getDimensions(), parameters);
 
             if (temporaryImage2 != null) {
                 clijx.power(temporaryImage, temporaryImage2, exponent);
@@ -108,7 +108,7 @@ public abstract class AbstractTenengradFusion extends AbstractCLIJxPlugin implem
         lFusionParameters.put("dst", clImageOut);
         lFusionParameters.put("factor", (int) (clImagesIn[0].getWidth() / temporaryImages[0].getWidth()));
 
-        clijx.execute(AbstractTenengradFusion.class, "tenengrad_fusion_x.cl", String.format("tenengrad_fusion_with_provided_weights_%d_images", clImagesIn.length), clImageOut.getDimensions(), clImageOut.getDimensions(), lFusionParameters);
+        clijx.execute(AbstractTenengradFusion.class, "tenengrad_fusion_of_" + clImagesIn.length + "_x.cl", String.format("tenengrad_fusion_with_provided_weights_%d_images", clImagesIn.length), clImageOut.getDimensions(), clImageOut.getDimensions(), lFusionParameters);
 
         temporaryImage.close();
         for (int i = 0; i < temporaryImages.length; i++) {

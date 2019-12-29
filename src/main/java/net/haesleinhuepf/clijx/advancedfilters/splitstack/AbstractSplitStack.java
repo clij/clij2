@@ -55,7 +55,7 @@ public abstract class AbstractSplitStack extends AbstractCLIJxPlugin implements 
             parameters.put("dst" + i, clImagesOut[i]);
         }
 
-        clijx.execute(AbstractSplitStack.class, "split_stack_x.cl", "split_" + clImagesOut.length + "_stacks", clImageIn.getDimensions(), clImageIn.getDimensions(), parameters);
+        clijx.execute(AbstractSplitStack.class, "split_stack_into_" + clImagesOut.length + "_x.cl", "split_" + clImagesOut.length + "_stacks", clImageIn.getDimensions(), clImageIn.getDimensions(), parameters);
         return true;
     }
 
