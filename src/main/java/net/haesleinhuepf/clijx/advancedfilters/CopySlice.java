@@ -1,6 +1,7 @@
 package net.haesleinhuepf.clijx.advancedfilters;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -25,7 +26,7 @@ public class CopySlice extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         return copySlice(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
     }
 
-    public static boolean copySlice(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst, Integer planeIndex) {
+    public static boolean copySlice(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Integer planeIndex) {
         assertDifferent(src, dst);
 
         HashMap<String, Object> parameters = new HashMap<>();
