@@ -1,11 +1,11 @@
 ## logarithm
 ![Image](images/mini_clijx_logo.png)
 
-By Peter Haub
+By Peter Haub, Robert Haase
 
-Computes baseE logarithm of all pixels values.
+Computes base e logarithm of all pixels values.
 
-f(x) = logarithm(x)
+f(x) = log(x)
 
 ### Usage in ImageJ macro
 ```
@@ -21,23 +21,21 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination = clij.create(source);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.logarithm(clij, source, destination);
+clijx.logarithm(clij, arg1, arg2);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination.close();
+arg1.close();
+arg2.close();
 ```
 
 

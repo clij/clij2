@@ -1,5 +1,5 @@
 ## multiplyStackWithPlane
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Multiplies all pairs of pixel values x and y from an image stack X and a 2D image Y. x and y are at 
 the same spatial position within a plane.
@@ -8,7 +8,7 @@ the same spatial position within a plane.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_multiplyStackWithPlane(Image sourceStack, Image sourcePlane, Image destination);
+Ext.CLIJx_multiplyStackWithPlane(Image sourceStack, Image sourcePlane, Image destination);
 ```
 
 
@@ -20,25 +20,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer sourceStack = clijx.push(sourceStackImagePlus);
-ClearCLBuffer sourcePlane = clijx.push(sourcePlaneImagePlus);
-destination = clij.create(sourceStack);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.multiplyStackWithPlane(clij, sourceStack, sourcePlane, destination);
+clijx.multiplyStackWithPlane(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-sourceStack.close();
-sourcePlane.close();
-destination.close();
+arg1.close();
+arg2.close();
+arg3.close();
 ```
 
 

@@ -19,25 +19,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source1 = clijx.push(source1ImagePlus);
-ClearCLBuffer source2 = clijx.push(source2ImagePlus);
-destination = clij.create(source1);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.notEqual(clij, source1, source2, destination);
+clijx.notEqual(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-source1.close();
-source2.close();
-destination.close();
+arg1.close();
+arg2.close();
+arg3.close();
 ```
 
 

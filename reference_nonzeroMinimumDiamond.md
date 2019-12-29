@@ -24,12 +24,11 @@ ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
 
 ```
 // Execute operation on GPU
-ClearCLKernel resultNonzeroMinimumDiamond = clijx.nonzeroMinimumDiamond(clij, arg1, arg2, arg3, arg4);
+clijx.nonzeroMinimumDiamond(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-System.out.println(resultNonzeroMinimumDiamond);
 
 // cleanup memory on GPU
 arg1.close();

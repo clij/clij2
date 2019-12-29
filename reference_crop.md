@@ -1,5 +1,5 @@
 ## crop
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Crops a given rectangle out of a given image.
 
@@ -7,7 +7,7 @@ Note: If the destination image pre-exists already, it will be overwritten and ke
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_crop(Image source, Image destination, Number startX, Number startY, Number width, Number height);
+Ext.CLIJx_crop(Image source, Image destination, Number startX, Number startY, Number width, Number height);
 ```
 
 
@@ -42,10 +42,9 @@ arg2.close();
 
 
 ### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [allocateBigImages.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/allocateBigImages.ijm)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [crop.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/crop.ijm)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [oddEven.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/oddEven.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [allocateBigImages.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/allocateBigImages.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [crop.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/crop.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [crop.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/crop.py)  
 <a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [crop.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/crop.m)  
 
 

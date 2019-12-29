@@ -1,5 +1,5 @@
 ## threshold
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Computes a binary image with pixel values 0 and 1. All pixel values x of a given input image with 
 value larger or equal to a given threshold t will be set to 1.
@@ -10,7 +10,7 @@ This plugin is comparable to setting a raw threshold in ImageJ and using the 'Co
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_threshold(Image source, Image destination, Number threshold);
+Ext.CLIJx_threshold(Image source, Image destination, Number threshold);
 ```
 
 
@@ -44,13 +44,11 @@ arg2.close();
 
 
 ### Example scripts
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [binaryProcessing.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/binaryProcessing.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [create_object_outlines.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/create_object_outlines.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [motionCorrection.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/motionCorrection.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [motionCorrection_compare_stackreg.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/motionCorrection_compare_stackreg.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [thresholding.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/thresholding.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [binaryProcessing.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/binaryProcessing.py)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [blurg.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/blurg.py)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [binaryProcessing.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/binaryProcessing.ijm)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [create_object_outlines.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/create_object_outlines.ijm)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [motionCorrection.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/motionCorrection.ijm)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [motionCorrection_compare_stackreg.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/motionCorrection_compare_stackreg.ijm)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [thresholding.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/thresholding.ijm)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/"><img src="images/language_java.png" height="20"/></a> [BenchmarkingWorkflowDemo.java](https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/BenchmarkingWorkflowDemo.java)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/"><img src="images/language_java.png" height="20"/></a> [MotionCorrectionDemo.java](https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/MotionCorrectionDemo.java)  
 

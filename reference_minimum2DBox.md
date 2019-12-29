@@ -20,8 +20,6 @@ CLIJx clijx = CLIJx.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-int arg3 = 10;
-int arg4 = 20;
 ```
 
 ```

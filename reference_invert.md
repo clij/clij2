@@ -1,5 +1,5 @@
 ## invert
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Computes the negative value of all pixels in a given image. It is recommended to convert images to 
 32-bit float before applying this operation.
@@ -10,7 +10,7 @@ For binary images, use binaryNot.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_invert(Image source, Image destination);
+Ext.CLIJx_invert(Image source, Image destination);
 ```
 
 
@@ -22,23 +22,21 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination = clij.create(source);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.invert(clij, source, destination);
+clijx.invert(clij, arg1, arg2);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination.close();
+arg1.close();
+arg2.close();
 ```
 
 

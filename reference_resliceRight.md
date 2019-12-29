@@ -1,12 +1,12 @@
 ## resliceRight
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Flippes X, Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method 
  but offers less flexibility such as interpolation.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_resliceRight(Image source, Image destination);
+Ext.CLIJx_resliceRight(Image source, Image destination);
 ```
 
 
@@ -18,23 +18,21 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination = clij.create(new long[]{source.getHeight(), source.getDepth(), source.getWidth()}, source.getNativeType());
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.resliceRight(clij, source, destination);
+clijx.resliceRight(clij, arg1, arg2);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination.close();
+arg1.close();
+arg2.close();
 ```
 
 

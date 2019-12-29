@@ -42,8 +42,8 @@ arg2.close();
 
 
 ### Example scripts
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [mean.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/mean.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [mean_detailed_comparison_IJ_CLIJ.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/mean_detailed_comparison_IJ_CLIJ.ijm)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [mean.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/mean.ijm)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [mean_detailed_comparison_IJ_CLIJ.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/mean_detailed_comparison_IJ_CLIJ.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

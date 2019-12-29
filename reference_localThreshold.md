@@ -1,5 +1,5 @@
 ## localThreshold
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Computes a binary image with pixel values 0 and 1 depending on if a pixel value x in image X 
 was above of equal to the pixel value m in mask image M.
@@ -8,7 +8,7 @@ was above of equal to the pixel value m in mask image M.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_localThreshold(Image source, Image localThreshold, Image destination);
+Ext.CLIJx_localThreshold(Image source, Image localThreshold, Image destination);
 ```
 
 
@@ -20,25 +20,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-ClearCLBuffer localThreshold = clijx.push(localThresholdImagePlus);
-destination = clij.create(source);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.localThreshold(clij, source, localThreshold, destination);
+clijx.localThreshold(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-localThreshold.close();
-destination.close();
+arg1.close();
+arg2.close();
+arg3.close();
 ```
 
 

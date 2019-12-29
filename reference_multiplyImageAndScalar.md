@@ -1,5 +1,5 @@
 ## multiplyImageAndScalar
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Multiplies all pixels value x in a given image X with a constant scalar s.
 
@@ -7,7 +7,7 @@ Multiplies all pixels value x in a given image X with a constant scalar s.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_multiplyImageAndScalar(Image source, Image destination, Number scalar);
+Ext.CLIJx_multiplyImageAndScalar(Image source, Image destination, Number scalar);
 ```
 
 
@@ -41,8 +41,7 @@ arg2.close();
 
 
 ### Example scripts
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [bitdepthConversion.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/bitdepthConversion.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [addImages.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/addImages.py)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [bitdepthConversion.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/bitdepthConversion.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

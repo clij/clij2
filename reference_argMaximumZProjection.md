@@ -1,12 +1,12 @@
 ## argMaximumZProjection
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Determines the maximum projection of an image stack along Z.
 Furthermore, another 2D image is generated with pixels containing the z-index where the maximum was found (zero based).
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_argMaximumZProjection(Image source, Image destination_max, Image destination_arg_max);
+Ext.CLIJx_argMaximumZProjection(Image source, Image destination_max, Image destination_arg_max);
 ```
 
 
@@ -18,27 +18,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination_max = clij.create(source);
-destination_arg_max = clij.create(source);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.argMaximumZProjection(clij, source, destination_max, destination_arg_max);
+clijx.argMaximumZProjection(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-destination_maxImagePlus = clij.pull(destination_max);
-destination_maxImagePlus.show();
-destination_arg_maxImagePlus = clij.pull(destination_arg_max);
-destination_arg_maxImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination_max.close();
-destination_arg_max.close();
+arg1.close();
+arg2.close();
+arg3.close();
 ```
 
 

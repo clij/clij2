@@ -1,12 +1,12 @@
 ## detectMinimaBox
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Detects local minima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
 there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_detectMinimaBox(Image source, Image destination, Number radius);
+Ext.CLIJx_detectMinimaBox(Image source, Image destination, Number radius);
 ```
 
 

@@ -1,11 +1,11 @@
 ## radialProjection
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 null
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_radialProjection(null);
+Ext.CLIJx_radialProjection(null);
 ```
 
 
@@ -34,13 +34,6 @@ clijx.radialProjection(clij, arg1, arg2, arg3);
 arg1.close();
 arg2.close();
 ```
-
-
-
-
-### Example scripts
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [interactiveSpotDetection.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/interactiveSpotDetection.py)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [spotDetectionpy.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/spotDetectionpy.py)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

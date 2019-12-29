@@ -1,5 +1,5 @@
 ## detectMinimaSliceBySliceBox
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Detects local minima in a given square neighborhood of an input image stack. The input image stack is 
 processed slice by slice. Pixels in the resulting image are set to 1 if there is no other pixel in a 
@@ -7,7 +7,7 @@ given radius which has a lower intensity, and to 0 otherwise.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_detectMinimaSliceBySliceBox(Image source, Image destination, Number radius);
+Ext.CLIJx_detectMinimaSliceBySliceBox(Image source, Image destination, Number radius);
 ```
 
 

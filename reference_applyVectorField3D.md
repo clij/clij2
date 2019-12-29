@@ -1,11 +1,11 @@
-## applyVectorField3D
+## applyVectorfield3D
 ![Image](images/mini_clijx_logo.png)
 
-Image source, Image vectorX, Image vectorY, Image vectorZ, Image destination
+Deforms an image stack according to distances provided in the given vector image stacks. It is recommended to use 32-bit image stacks for input, output and vector image stacks. 
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_applyVectorField3D(Deforms an image stack according to distances provided in the given vector image stacks. It is recommended to use 32-bit image stacks for input, output and vector image stacks. );
+Ext.CLIJx_applyVectorfield3D(Image source, Image vectorX, Image vectorY, Image vectorZ, Image destination);
 ```
 
 
@@ -26,7 +26,7 @@ ClearCLBuffer arg5 = clijx.push(arg5ImagePlus);
 
 ```
 // Execute operation on GPU
-clijx.applyVectorField3D(clij, arg1, arg2, arg3, arg4, arg5);
+clijx.applyVectorfield3D(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```

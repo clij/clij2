@@ -1,5 +1,5 @@
 ## meanSliceBySliceSphere
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Computes the local mean average of a pixels ellipsoidal 2D neighborhood in an image stack 
 slice by slice. The ellipses size is specified by its half-width and half-height (radius).
@@ -8,7 +8,7 @@ This filter is applied slice by slice in 2D.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_meanSliceBySliceSphere(Image source, Image destination, Number radiusX, Number radiusY);
+Ext.CLIJx_meanSliceBySliceSphere(Image source, Image destination, Number radiusX, Number radiusY);
 ```
 
 

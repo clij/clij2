@@ -1,12 +1,12 @@
 ## gradientZ
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Computes the gradient of gray values along Z. Assuming a, b and c are three adjacent
  pixels in Z direction. In the target image will be saved as: <pre>b' = c - a;</pre>
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_gradientZ(Image source, Image destination);
+Ext.CLIJx_gradientZ(Image source, Image destination);
 ```
 
 

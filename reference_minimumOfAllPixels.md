@@ -1,12 +1,12 @@
 ## minimumOfAllPixels
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Determines the minimum of all pixels in a given image. It will be stored in a new row of ImageJs
 Results table in the column 'Min'.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_minimumOfAllPixels(Image source);
+Ext.CLIJx_minimumOfAllPixels(Image source);
 ```
 
 
@@ -18,12 +18,12 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double resultMinimumOfAllPixels = clijx.minimumOfAllPixels(clij, source);
+double resultMinimumOfAllPixels = clijx.minimumOfAllPixels(clij, arg1);
 ```
 
 ```
@@ -31,14 +31,14 @@ double resultMinimumOfAllPixels = clijx.minimumOfAllPixels(clij, source);
 System.out.println(resultMinimumOfAllPixels);
 
 // cleanup memory on GPU
-source.close();
+arg1.close();
 ```
 
 
 
 
 ### Example scripts
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [statistics.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/statistics.ijm)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [statistics.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/statistics.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

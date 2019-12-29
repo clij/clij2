@@ -1,11 +1,11 @@
 ## multiplyImageAndCoordinate
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
-null
+Multiplies all pixel intensities with the x, y or z coordinate, depending on specified dimension.</pre>
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_multiplyImageAndCoordinate(null);
+Ext.CLIJx_multiplyImageAndCoordinate(Image source, Image destination, Number dimension);
 ```
 
 

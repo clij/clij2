@@ -19,12 +19,11 @@ CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-float arg2 = 1.0;
 ```
 
 ```
 // Execute operation on GPU
-double resultStandardDeviationOfAllPixels = clijx.standardDeviationOfAllPixels(clij, arg1, arg2);
+double resultStandardDeviationOfAllPixels = clijx.standardDeviationOfAllPixels(clij, arg1);
 ```
 
 ```

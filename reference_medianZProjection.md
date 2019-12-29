@@ -1,7 +1,7 @@
 ## medianZProjection
 ![Image](images/mini_clijx_logo.png)
 
-Determines the median projection of an image along Z.
+Determines the median projection of an image stack along Z.
 
 ### Usage in ImageJ macro
 ```
@@ -17,23 +17,21 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination = clij.create(source);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.medianZProjection(clij, source, destination);
+clijx.medianZProjection(clij, arg1, arg2);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination.close();
+arg1.close();
+arg2.close();
 ```
 
 
@@ -42,7 +40,6 @@ destination.close();
 ### Example scripts
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [medianZProjectionComparion.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/medianZProjectionComparion.ijm)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [projections.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/projections.ijm)  
-<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [medianZProjectionComparion.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/medianZProjectionComparion.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

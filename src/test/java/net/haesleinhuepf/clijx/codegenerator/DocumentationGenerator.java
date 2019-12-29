@@ -163,8 +163,8 @@ public class DocumentationGenerator {
 
             String linkToExamples =
                 searchForExampleScripts("CLIJx_" + item.methodName, "src/main/macro/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/", "macro") +
-                searchForExampleScripts("CLIJ_" + item.methodName, "src/main/macro/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/", "macro") +
-                searchForExampleScripts("CLIJ_" + item.methodName, "../clij-docs/src/main/macro/", "https://github.com/clij/clij-docs/blob/master/src/main/macro/", "macro") +
+                //searchForExampleScripts("CLIJ_" + item.methodName, "src/main/macro/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/", "macro") +
+                //searchForExampleScripts("CLIJ_" + item.methodName, "../clij-docs/src/main/macro/", "https://github.com/clij/clij-docs/blob/master/src/main/macro/", "macro") +
                 searchForExampleScripts("clijx." + item.methodName, "src/main/jython/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/", "jython") +
 
                 searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/groovy/", "https://github.com/clij/clij-docs/blob/master/src/main/groovy/", "groovy") +
@@ -375,6 +375,7 @@ public class DocumentationGenerator {
 
     protected static String searchForExampleScripts(String searchFor, String searchinFolder, String baseLink, String language) {
         StringBuilder result = new StringBuilder();
+        //System.out.println(searchinFolder);
         for (File file : new File(searchinFolder).listFiles()) {
             if (!file.isDirectory()) {
                 String content = readFile(file.getAbsolutePath());

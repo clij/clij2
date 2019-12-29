@@ -1,5 +1,5 @@
 ## dilateBoxSliceBySlice
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
 The dilation takes the Moore-neighborhood (8 pixels in 2D and 26 pixels in 3d) into account.
@@ -12,7 +12,7 @@ This filter is applied slice by slice in 2D.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_dilateBoxSliceBySlice(Image source, Image destination);
+Ext.CLIJx_dilateBoxSliceBySlice(Image source, Image destination);
 ```
 
 
@@ -24,23 +24,21 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination = clij.create(source);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.dilateBoxSliceBySlice(clij, source, destination);
+clijx.dilateBoxSliceBySlice(clij, arg1, arg2);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination.close();
+arg1.close();
+arg2.close();
 ```
 
 

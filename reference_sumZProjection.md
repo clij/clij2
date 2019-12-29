@@ -1,11 +1,11 @@
 ## sumZProjection
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Determines the sum projection of an image along Z.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_sumZProjection(Image source, Image destination_sum);
+Ext.CLIJx_sumZProjection(Image source, Image destination_sum);
 ```
 
 
@@ -17,23 +17,21 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination_sum = clij.create(source);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.sumZProjection(clij, source, destination_sum);
+clijx.sumZProjection(clij, arg1, arg2);
 ```
 
 ```
 //show result
-destination_sumImagePlus = clij.pull(destination_sum);
-destination_sumImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination_sum.close();
+arg1.close();
+arg2.close();
 ```
 
 

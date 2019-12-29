@@ -1,5 +1,5 @@
 ## minimumImageAndScalar
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Computes the maximum of a constant scalar s and each pixel value x in a given image X.
 
@@ -7,7 +7,7 @@ Computes the maximum of a constant scalar s and each pixel value x in a given im
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_minimumImageAndScalar(Image source, Image destination, Number scalar);
+Ext.CLIJx_minimumImageAndScalar(Image source, Image destination, Number scalar);
 ```
 
 

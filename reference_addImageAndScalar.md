@@ -1,5 +1,5 @@
 ## addImageAndScalar
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Adds a scalar value s to all pixels x of a given image X.
 
@@ -7,7 +7,7 @@ Adds a scalar value s to all pixels x of a given image X.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_addImageAndScalar(Image source, Image destination, Number scalar);
+Ext.CLIJx_addImageAndScalar(Image source, Image destination, Number scalar);
 ```
 
 

@@ -1,5 +1,5 @@
 ## divideImages
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Divides two images X and Y by each other pixel wise.
 
@@ -7,7 +7,7 @@ Divides two images X and Y by each other pixel wise.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_divideImages(Image divident, Image divisor, Image destination);
+Ext.CLIJx_divideImages(Image divident, Image divisor, Image destination);
 ```
 
 
@@ -19,25 +19,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer divident = clijx.push(dividentImagePlus);
-ClearCLBuffer divisor = clijx.push(divisorImagePlus);
-destination = clij.create(divident);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.divideImages(clij, divident, divisor, destination);
+clijx.divideImages(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-divident.close();
-divisor.close();
-destination.close();
+arg1.close();
+arg2.close();
+arg3.close();
 ```
 
 

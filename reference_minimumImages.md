@@ -1,5 +1,5 @@
 ## minimumImages
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Computes the minimum of a pair of pixel values x, y from two given images X and Y.
 
@@ -7,7 +7,7 @@ Computes the minimum of a pair of pixel values x, y from two given images X and 
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_minimumImages(Image source1, Image source2, Image destination);
+Ext.CLIJx_minimumImages(Image source1, Image source2, Image destination);
 ```
 
 
@@ -19,25 +19,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source1 = clijx.push(source1ImagePlus);
-ClearCLBuffer source2 = clijx.push(source2ImagePlus);
-destination = clij.create(source1);
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.minimumImages(clij, source1, source2, destination);
+clijx.minimumImages(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-source1.close();
-source2.close();
-destination.close();
+arg1.close();
+arg2.close();
+arg3.close();
 ```
 
 

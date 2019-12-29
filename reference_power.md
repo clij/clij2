@@ -1,5 +1,5 @@
 ## power
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 Computes all pixels value x to the power of a given exponent a.
 
@@ -7,7 +7,7 @@ Computes all pixels value x to the power of a given exponent a.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_power(Image source, Image destination, Number exponent);
+Ext.CLIJx_power(Image source, Image destination, Number exponent);
 ```
 
 

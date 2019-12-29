@@ -1,11 +1,11 @@
 ## countNonZeroVoxelsLocally
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clijx_logo.png)
 
 null
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_countNonZeroVoxelsLocally(null);
+Ext.CLIJx_countNonZeroVoxelsLocally(null);
 ```
 
 
