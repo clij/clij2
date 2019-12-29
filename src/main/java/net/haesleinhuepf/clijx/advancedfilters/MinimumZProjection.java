@@ -36,7 +36,7 @@ public class MinimumZProjection extends AbstractCLIJxPlugin implements CLIJMacro
         parameters.put("src", src);
         parameters.put("dst_min", dst_min);
 
-        clijx.execute(MinimumZProjection.class, "minimum_z_projection_3d_2d_x.cl", "minimum_z_projection_3d_2d", dst_min.getDimensions(), dst_min.getDimensions(), parameters);
+        clijx.execute(MinimumZProjection.class, "minimum_z_projection_" + src.getDimension() + "d_" + dst_min.getDimension() + "d_x.cl", "minimum_z_projection_" + src.getDimension() + "d_" + dst_min.getDimension() + "d", dst_min.getDimensions(), dst_min.getDimensions(), parameters);
 
         return true;
     }

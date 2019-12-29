@@ -31,7 +31,7 @@ public class MaximumYProjection extends AbstractCLIJxPlugin implements CLIJMacro
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst_max", dst_max);
-        clijx.execute(MaximumYProjection.class, "maximum_y_projection_3d_2d_x.cl", "maximum_y_projection_3d_2d", dst_max.getDimensions(), dst_max.getDimensions(), parameters);
+        clijx.execute(MaximumXProjection.class, "maximum_y_projection_" + src.getDimension() + "d_" + dst_max.getDimension() + "d_x.cl", "maximum_y_projection_" + src.getDimension() + "d_" + dst_max.getDimension() + "d", dst_max.getDimensions(), dst_max.getDimensions(), parameters);
         return true;
     }
 

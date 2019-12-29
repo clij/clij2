@@ -53,7 +53,7 @@ public class VarianceOfMaskedPixels extends AbstractCLIJxPlugin implements CLIJM
             parameters.put("src_mask", mask);
             parameters.put("dst", clReducedImage);
             parameters.put("mean_intensity", meanIntensity);
-            clijx.execute(VarianceOfMaskedPixels.class, "variance_projection_3d_2d_x.cl", "masked_squared_sum_project_3d_2d", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
+            clijx.execute(VarianceOfMaskedPixels.class, "variance_masked_projection_" + buffer1.getDimension() + "d_" + clReducedImage.getDimension() + "d_x.cl", "masked_squared_sum_project_" + buffer1.getDimension() + "d_" + clReducedImage.getDimension() + "d", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
         } else {
             clReducedImage = clijx.create(new long[]{buffer1.getWidth(), buffer1.getHeight()}, NativeTypeEnum.Float);
 

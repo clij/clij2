@@ -32,7 +32,7 @@ public class MedianZProjection extends AbstractCLIJxPlugin implements CLIJMacroP
         parameters.put("src", input);
         parameters.put("dst", output);
 
-        clijx.execute(MedianZProjection.class, "median_z_projection_3d_2d_x.cl", "median_z_projection_3d_2d", output.getDimensions(), output.getDimensions(), parameters);
+        clijx.execute(MedianZProjection.class, "median_z_projection_" + input.getDimension() + "d_" + output.getDimension() + "d_x.cl", "median_z_projection_" + input.getDimension() + "d_" + output.getDimension() + "d", output.getDimensions(), output.getDimensions(), parameters);
         return true;
     }
 
