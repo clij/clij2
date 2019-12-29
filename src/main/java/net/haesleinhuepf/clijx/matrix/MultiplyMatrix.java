@@ -35,8 +35,9 @@ public class MultiplyMatrix extends AbstractCLIJxPlugin implements CLIJMacroPlug
         parameters.put("dst_matrix", output);
 
         clijx.activateSizeIndependentKernelCompilation();
-        clijx.execute(MultiplyMatrix.class, "multiply_matrix_x.cl", "multiply_matrix", output.getDimensions(), output.getDimensions(), parameters);
+        clijx.execute(MultiplyMatrix.class, "multiply_matrix_" + input1.getDimension() + "d_" + input1.getDimension() + "d_" + output.getDimension() + "d_x.cl", "multiply_matrix", output.getDimensions(), output.getDimensions(), parameters);
         return true;
+        
     }
 
     @Override
