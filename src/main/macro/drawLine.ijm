@@ -17,13 +17,13 @@ width = 100;
 height = 100;
 
 // create output image with different bit-type
-Ext.CLIJ_create2D("image", width, height, 8);
-Ext.CLIJ_set("image", 0);
+Ext.CLIJx_create2D("image", width, height, 8);
+Ext.CLIJx_set("image", 0);
 
 // draw a line
 Ext.CLIJx_drawLine("image", 10, 10, 0, 50, 50, 0, 5);
 
 // show result
-Ext.CLIJ_pull("image");
+Ext.CLIJx_pull("image");
 
 

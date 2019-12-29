@@ -19,10 +19,10 @@ stddev_projected = "stddev_projected";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 // push images to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJx_push(input);
 
 // CleanUp ImageJ
 close();
@@ -34,9 +34,9 @@ Ext.CLIJx_medianZProjection(input, median_projected);
 Ext.CLIJx_standardDeviationZProjection(input, stddev_projected);
 
 // Get results back from GPU
-Ext.CLIJ_pull(median_projected);
-Ext.CLIJ_pull(stddev_projected);
+Ext.CLIJx_pull(median_projected);
+Ext.CLIJx_pull(stddev_projected);
 
 
 // Cleanup by the end
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();

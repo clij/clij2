@@ -9,7 +9,7 @@
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 imageFilenames = newArray(
 	"https://bds.mpi-cbg.de/CLIJ_benchmarking_data/000300.raw.tif",
@@ -23,18 +23,18 @@ for (i = 0; i < lengthOf(imageFilenames); i++) {
 	// loading image data
 	open(imageFilenames[i]);
 	rename("original");
-	Ext.CLIJ_push("original");
+	Ext.CLIJx_push("original");
 	run("Close All");
 
 	// some heavy processing
-	Ext.CLIJ_blur3D("original", "processed", 15, 15, 15);
-	Ext.CLIJ_meanOfAllPixels("processed");
+	Ext.CLIJx_blur3D("original", "processed", 15, 15, 15);
+	Ext.CLIJx_meanOfAllPixels("processed");
 	IJ.log("mean: " + getResult("Mean", nResults() - 1));
 	IJ.log("opening and processing took: " + (getTime() - time) + " msec"); 
 }
 
 // cleanup
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 for (i = 0; i < lengthOf(imageFilenames); i++) {
 	time = getTime();
@@ -44,12 +44,12 @@ for (i = 0; i < lengthOf(imageFilenames); i++) {
 	Ext.CLIJx_preloadFromDisc("original", currentFilename, nextFilename, "");
 	
 	// some heavy processing
-	Ext.CLIJ_blur3D("original", "processed", 15, 15, 15);
-	Ext.CLIJ_meanOfAllPixels("processed");
+	Ext.CLIJx_blur3D("original", "processed", 15, 15, 15);
+	Ext.CLIJx_meanOfAllPixels("processed");
 	IJ.log("mean: " + getResult("Mean", nResults() - 1));
 	IJ.log("preloading and processing took: " + (getTime() - time) + " msec"); 
 }
 
 // cleanup
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 

@@ -27,17 +27,17 @@ binaryImage = "binaryImage";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJx_push(input);
 
 // create a mask using a fixed threshold
-Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
+Ext.CLIJx_automaticThreshold(input, mask, "Otsu");
 
 Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
 
-Ext.CLIJ_maximumOfAllPixels(labelmap);
+Ext.CLIJx_maximumOfAllPixels(labelmap);
 number_of_objects = getResult("Max", nResults() - 1);
 
 for (i = 0; i < number_of_objects; i++) {

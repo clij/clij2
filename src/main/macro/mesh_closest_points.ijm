@@ -72,7 +72,7 @@ for (p = 0; p < number_of_detected_spots; p++) {
     // don't want to draw line from the point
     // to itself
 	for (q = 1; q < n_closest_points; q++) {
-		pointIndex = getResult("X" + p, 2 + q);
+		pointIndex = getResult("X" + p, q + 2) - 1;
 		x2 = getResult("X" + pointIndex, 0);
 		y2 = getResult("X" + pointIndex, 1);
 

@@ -10,11 +10,11 @@ tiles = 10;
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
-Ext.CLIJ_push("input");
+Ext.CLIJx_push("input");
 
-Ext.CLIJ_create2D("output", width * tiles, height * tiles, 16);
+Ext.CLIJx_create2D("output", width * tiles, height * tiles, 16);
 
 for (x = 0; x < tiles; x++) {
 	for (y = 0; y < tiles; y++) {
@@ -22,6 +22,6 @@ for (x = 0; x < tiles; x++) {
 	}
 }
 
-Ext.CLIJ_pull("output");
+Ext.CLIJx_pull("output");
 
 

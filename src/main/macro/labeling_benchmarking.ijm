@@ -20,26 +20,26 @@ labelmap = "labelmap";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJx_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // create a mask using a fixed threshold
-Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
+Ext.CLIJx_automaticThreshold(input, mask, "Otsu");
 
 time = getTime();
 Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
 
 print("CLIJ took" + (getTime() - time) + " msec"); 
 // show result
-Ext.CLIJ_pull(labelmap);
+Ext.CLIJx_pull(labelmap);
 run("glasbey on dark");
 
-Ext.CLIJ_pull(mask);
+Ext.CLIJx_pull(mask);
 setThreshold(1, 1);
 setOption("BlackBackground", true);
 run("Convert to Mask");

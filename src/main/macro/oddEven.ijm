@@ -23,59 +23,54 @@ minimum = "minimum";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJx_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 cropped = "cropped";
-Ext.CLIJ_crop3D(input, cropped, 0, 0, 0, 100, 100, 100);
+Ext.CLIJx_crop3D(input, cropped, 0, 0, 0, 100, 100, 100);
 
 // reslice
 for (i = 0; i < 10; i++) {
 	time = getTime();
-	Ext.CLIJ_minimum3DSphere(cropped, minimum, 10, 10, 10);
+	Ext.CLIJx_minimum3DSphere(cropped, minimum, 10, 10, 10);
 	print("min even took " + (getTime() - time));
 }
 
-Ext.CLIJ_release(cropped);
-Ext.CLIJ_crop3D(input, cropped, 0, 0, 0, 101, 101, 101);
+Ext.CLIJx_release(cropped);
+Ext.CLIJx_crop3D(input, cropped, 0, 0, 0, 101, 101, 101);
 for (i = 0; i < 10; i++) {
 	time = getTime();
-	Ext.CLIJ_minimum3DSphere(cropped, minimum, 10, 10, 10);
+	Ext.CLIJx_minimum3DSphere(cropped, minimum, 10, 10, 10);
 	print("min odd-xyz took " + (getTime() - time));
 }
 
-Ext.CLIJ_release(cropped);
-Ext.CLIJ_crop3D(input, cropped, 0, 0, 0, 101, 100, 100);
+Ext.CLIJx_release(cropped);
+Ext.CLIJx_crop3D(input, cropped, 0, 0, 0, 101, 100, 100);
 for (i = 0; i < 10; i++) {
 	time = getTime();
-	Ext.CLIJ_minimum3DSphere(cropped, minimum, 10, 10, 10);
+	Ext.CLIJx_minimum3DSphere(cropped, minimum, 10, 10, 10);
 	print("min odd-x took " + (getTime() - time));
 }
 
 
-Ext.CLIJ_release(cropped);
-Ext.CLIJ_crop3D(input, cropped, 0, 0, 0, 100, 101, 100);
+Ext.CLIJx_release(cropped);
+Ext.CLIJx_crop3D(input, cropped, 0, 0, 0, 100, 101, 100);
 for (i = 0; i < 10; i++) {
 	time = getTime();
-	Ext.CLIJ_minimum3DSphere(cropped, minimum, 10, 10, 10);
+	Ext.CLIJx_minimum3DSphere(cropped, minimum, 10, 10, 10);
 	print("min odd-y took " + (getTime() - time));
 }
 
 
-Ext.CLIJ_release(cropped);
-Ext.CLIJ_crop3D(input, cropped, 0, 0, 0, 100, 100, 101);
+Ext.CLIJx_release(cropped);
+Ext.CLIJx_crop3D(input, cropped, 0, 0, 0, 100, 100, 101);
 for (i = 0; i < 10; i++) {
 	time = getTime();
-	Ext.CLIJ_minimum3DSphere(cropped, minimum, 10, 10, 10);
+	Ext.CLIJx_minimum3DSphere(cropped, minimum, 10, 10, 10);
 	print("min odd-z took " + (getTime() - time));
 }
-
-
-
-
-

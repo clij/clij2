@@ -27,14 +27,13 @@ Ext.CLIJ_push(input);
 run("Close All");
 
 // create a mask using a fixed threshold
-Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
+Ext.CLIJx_automaticThreshold(input, mask, "Otsu");
 
 distance_map = "distance_map";
 Ext.CLIJx_distanceMap(mask, distance_map);
 
 
-Ext.CLIJ_pull(distance_map);
-IJ.run(imp, "Enhance Contrast", "saturated=0.35");
+Ext.CLIJx_pull(distance_map);
 run("Fire");
-
-
+run("Enhance Contrast", "saturated=0.35");
+

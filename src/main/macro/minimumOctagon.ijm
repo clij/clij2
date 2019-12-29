@@ -18,10 +18,10 @@ mean_blurred = "meanBlurred";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 // push images to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJx_push(input);
 
 // cleanup ImageJ
 run("Close All");
@@ -29,11 +29,11 @@ run("Close All");
 // Blur in GPU
 for (radius = 10; radius < 15; radius += 5) {
 	time = getTime();
-	Ext.CLIJ_minimum3DSphere(input, blurred, radius, radius, radius);
+	Ext.CLIJx_minimum3DSphere(input, blurred, radius, radius, radius);
 	IJ.log("min sphere took " + (getTime() - time ));
 	
 	time = getTime();
-	Ext.CLIJ_minimum3DBox(input, blurred, radius, radius, radius);
+	Ext.CLIJx_minimum3DBox(input, blurred, radius, radius, radius);
 	IJ.log("min box took " + (getTime() - time ));
 
 	minimum = 1000000;
@@ -62,4 +62,4 @@ for (radius = 10; radius < 15; radius += 5) {
 
 
 // Cleanup by the end
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();

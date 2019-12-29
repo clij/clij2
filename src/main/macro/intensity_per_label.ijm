@@ -23,30 +23,30 @@ singleLabel = "singleLabel";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJx_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // create a mask using a fixed threshold
-Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
+Ext.CLIJx_automaticThreshold(input, mask, "Otsu");
 
 Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
 
-Ext.CLIJ_maximumOfAllPixels(labelmap);
+Ext.CLIJx_maximumOfAllPixels(labelmap);
 numberOfObjects = getResult("Max", nResults() - 1);
 
 for (i = 0; i < numberOfObjects; i++) {
 	Ext.CLIJx_maskLabel(input, labelmap, singleLabel, i + 1);
 	
-	Ext.CLIJ_sumOfAllPixels(singleLabel);
+	Ext.CLIJx_sumOfAllPixels(singleLabel);
 	sum = getResult("Sum", nResults() - 1);
 	
-	Ext.CLIJ_create2D("white", width, height, 8);
-	Ext.CLIJ_set("white", 1);
+	Ext.CLIJx_create2D("white", width, height, 8);
+	Ext.CLIJx_set("white", 1);
 	
 	Ext.CLIJx_maskLabel("white", labelmap, singleLabel, i + 1);
 	Ext.CLIJx_countNonZeroPixels(singleLabel);
@@ -57,9 +57,9 @@ for (i = 0; i < numberOfObjects; i++) {
 }
 
 // show result
-Ext.CLIJ_pull(mask);
+Ext.CLIJx_pull(mask);
 
-Ext.CLIJ_pull(singleLabel);
+Ext.CLIJx_pull(singleLabel);
 
 
 

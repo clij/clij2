@@ -20,18 +20,18 @@ rename(original);
 
 // init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 // push images to GPU
-Ext.CLIJ_push("original");
+Ext.CLIJx_push("original");
 
 // cleanup imagej
 run("Close All");
 
 for (i = -10; i < 10; i += 1) {
 	
-	Ext.CLIJ_translate2D(original, image1, i, 0);
-	Ext.CLIJ_translate2D(original, image2, 0, i);
+	Ext.CLIJx_translate2D(original, image1, i, 0);
+	Ext.CLIJx_translate2D(original, image2, 0, i);
 	
 	Ext.CLIJx_showRGB(original, image1, image2, "hello RGB");
 	Ext.CLIJx_showGrey(image2, "hello grey");

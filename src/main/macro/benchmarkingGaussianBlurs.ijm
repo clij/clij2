@@ -51,13 +51,13 @@ for (g = 0; g < lengthOf(availableGPUs); g++) {
 	for (size = minsize; size <= maxsize; size += stepsize) {
 		sizes[index] = size * 2; // in MB
 		
-		Ext.CLIJ_clear();
-		Ext.CLIJ_create3D("input", 1024, 1024, size, 16);
+		Ext.CLIJx_clear();
+		Ext.CLIJx_create3D("input", 1024, 1024, size, 16);
 
 		// filter in GPU
 		for (i = 0; i <= num_repeats; i++) {
 			time = getTime();
-			Ext.CLIJ_blur3D(input, blurred, radius, radius, radius);
+			Ext.CLIJx_blur3D(input, blurred, radius, radius, radius);
 			deltaTime = (getTime() - time);
 			if (i > 0) {
 				measurements1[index] += deltaTime / num_repeats / 1000;
@@ -71,12 +71,12 @@ for (g = 0; g < lengthOf(availableGPUs); g++) {
 		// filter in GPU
 		for (i = 0; i <= num_repeats; i++) {
 			time = getTime();
-			Ext.CLIJ_blur3D(input, blurred, radius, radius, radius);
+			Ext.CLIJx_blur3D(input, blurred, radius, radius, radius);
 			deltaTime = (getTime() - time);
 			if (i > 0) {
 				measurements2[index] += deltaTime / num_repeats / 1000;
 			}
-			Ext.CLIJ_release(blurred);
+			Ext.CLIJx_release(blurred);
 			print("GPU Gaussian blur clij1 with clear filter no " + i + " took " + deltaTime + " ms");
 		}
 		if (maxTime < measurements2[index]) {
@@ -156,13 +156,13 @@ for (g = 0; g < lengthOf(availableGPUs); g++) {
 		size = defaultsize; // in MB
 		radii[index] = radius;
 		
-		Ext.CLIJ_clear();
-		Ext.CLIJ_create3D("input", 1024, 1024, size, 16);
+		Ext.CLIJx_clear();
+		Ext.CLIJx_create3D("input", 1024, 1024, size, 16);
 
 		// filter in GPU
 		for (i = 0; i <= num_repeats; i++) {
 			time = getTime();
-			Ext.CLIJ_blur3D(input, blurred, radius, radius, radius);
+			Ext.CLIJx_blur3D(input, blurred, radius, radius, radius);
 			deltaTime = (getTime() - time);
 			if (i > 0) {
 				measurements1[index] += deltaTime / num_repeats / 1000;
@@ -177,12 +177,12 @@ for (g = 0; g < lengthOf(availableGPUs); g++) {
 		// filter in GPU
 		for (i = 0; i <= num_repeats; i++) {
 			time = getTime();
-			Ext.CLIJ_blur3D(input, blurred, radius, radius, radius);
+			Ext.CLIJx_blur3D(input, blurred, radius, radius, radius);
 			deltaTime = (getTime() - time);
 			if (i > 0) {
 				measurements2[index] += deltaTime / num_repeats / 1000;
 			}
-			Ext.CLIJ_release(blurred);
+			Ext.CLIJx_release(blurred);
 			print("GPU Gaussian blur clij1 with clear filter no " + i + " took " + deltaTime + " ms");
 		}
 		if (maxTime < measurements2[index]) {

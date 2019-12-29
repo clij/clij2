@@ -20,7 +20,7 @@ run("Duplicate...", "duplicate");
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 
 for (i=-8;i<=8;i+=4) {
@@ -29,21 +29,21 @@ for (i=-8;i<=8;i+=4) {
 	print("pushing " + imageName);
 	rename(imageName);
 	setSlice(edfZ);
-	Ext.CLIJ_pushCurrentSlice(imageName);
+	Ext.CLIJx_pushCurrentSlice(imageName);
 }
 
 
-Ext.CLIJ_reportMemory();
+Ext.CLIJx_reportMemory();
 
 Ext.CLIJx_tenengradFusionOf5("slice2", 
 "slice6", "slice10", 
 "slice14", "slice18", "fused", 10, 10, 0);
 
-Ext.CLIJ_pull("fused");
+Ext.CLIJx_pull("fused");
 
 
 for (i=-8;i<=8;i+=4) {
 	edfZ = 10 + i;
 	imageName = "slice" + edfZ;
-	Ext.CLIJ_pull(imageName);
+	Ext.CLIJx_pull(imageName);
 }
