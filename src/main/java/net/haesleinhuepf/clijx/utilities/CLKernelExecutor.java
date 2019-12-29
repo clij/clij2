@@ -245,7 +245,6 @@ public class CLKernelExecutor {
                 e1.printStackTrace();
                 return null;
             }
-            System.out.println("Finding kernel took " + (System.currentTimeMillis() - time));
         }
         if (kernel != null) {
             if (globalSizes != null) {
