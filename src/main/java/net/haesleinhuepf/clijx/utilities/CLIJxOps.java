@@ -695,7 +695,7 @@ public abstract class CLIJxOps {
      * Determines the standard deviation projection of an image stack along Z.
      */
     public boolean standardDeviationZProjection(ClearCLImageInterface arg1, ClearCLImageInterface arg2) {
-        return StandardDeviationZProjection.standardDeviationZProjection(clij, arg1, arg2);
+        return StandardDeviationZProjection.standardDeviationZProjection(clijx, arg1, arg2);
     }
 
 

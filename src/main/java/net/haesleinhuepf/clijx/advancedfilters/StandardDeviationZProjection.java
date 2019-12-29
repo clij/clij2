@@ -8,6 +8,8 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -17,20 +19,21 @@ import java.util.HashMap;
  * June 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_standardDeviationZProjection")
-public class StandardDeviationZProjection extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class StandardDeviationZProjection extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        boolean result = standardDeviationZProjection(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        boolean result = standardDeviationZProjection(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return result;
     }
 
-    public static boolean standardDeviationZProjection(CLIJ clij, ClearCLImageInterface input, ClearCLImageInterface output) {
+    public static boolean standardDeviationZProjection(CLIJx clijx, ClearCLImageInterface input, ClearCLImageInterface output) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", input);
         parameters.put("dst", output);
 
-        return clij.execute(StandardDeviationZProjection.class, "standard_deviation_z_projection_3d_2d_x.cl", "standard_deviation_z_projection_3d_2d", parameters);
+        clijx.execute(StandardDeviationZProjection.class, "standard_deviation_z_projection_3d_" + output.getDimension() + "d_x.cl", "standard_deviation_z_projection_3d_" + output.getDimension() + "d", output.getDimensions(), output.getDimensions(), parameters);
+        return true;
     }
 
     @Override
@@ -41,7 +44,7 @@ public class StandardDeviationZProjection extends AbstractCLIJPlugin implements 
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input)
     {
-        return clij.createCLBuffer(new long[]{input.getWidth(), input.getHeight()}, input.getNativeType());
+        return getCLIJx().create(new long[]{input.getWidth(), input.getHeight()}, input.getNativeType());
     }
 
     @Override
