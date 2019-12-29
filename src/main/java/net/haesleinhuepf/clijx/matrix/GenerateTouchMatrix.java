@@ -37,7 +37,7 @@ public class GenerateTouchMatrix extends AbstractCLIJxPlugin implements CLIJMacr
         long[] globalSizes = src_label_map.getDimensions();
 
         clijx.activateSizeIndependentKernelCompilation();
-        clijx.execute(GenerateTouchMatrix.class, "touch_matrix.cl", "generate_touch_matrix_" + src_label_map.getDimension() + "d", globalSizes, globalSizes, parameters);
+        clijx.execute(GenerateTouchMatrix.class, "generate_touch_matrix_" + src_label_map.getDimension() + "d_x.cl", "generate_touch_matrix_" + src_label_map.getDimension() + "d", globalSizes, globalSizes, parameters);
         return true;
     }
 
