@@ -15,7 +15,7 @@ __kernel void apply_vectorfield_3d(
     IMAGE_dst_TYPE dst
 )
 {
-  const sampler_t sampler = CLK_NORMALIZED_COORDS_TRUE|
+  const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE |
       SAMPLER_ADDRESS |	SAMPLER_FILTER;
 
   uint i = get_global_id(0);
