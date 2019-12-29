@@ -287,7 +287,8 @@ public interface CLIJ2Plugins {
             MaximumOfAllPixels.class,
             MinimumOfAllPixels.class,
             ReportMemory.class,
-            AbstractSplitStack.class
+            AbstractSplitStack.class,
+            TopHatOctagonSliceBySlice.class
     };
 
     public String blockList = ";" +
