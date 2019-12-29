@@ -59,12 +59,12 @@ public class CLIJ1CLIJ2Benchmarking {
         for (String pluginName : service.getCLIJMethodNames()) {
             if (!new File(pluginName + ".txt").exists()) {
                 System.out.println(pluginName);
-                if (pluginName.startsWith("CLIJ_") && !blackList.contains(";" + pluginName + ";")) {
+                if (pluginName.startsWith("CLIJ") && !blackList.contains(";" + pluginName + ";")) {
                     CLIJMacroPlugin clijPlugin = service.getCLIJMacroPlugin(pluginName);
                     CLIJMacroPlugin clijxPlugin = service.getCLIJMacroPlugin(pluginName.replace("CLIJ_", "CLIJx_"));
 
                     System.out.println("----");
-                    if (clijPlugin != null && clijxPlugin != null) {
+                    if (pluginName.startsWith("CLIJ_") && clijPlugin != null && clijxPlugin != null) {
 
                         System.out.println(clijPlugin + " <=> " + clijxPlugin);
                         String clijParameterTypeHash = getParameterTypeHash(clijPlugin);
