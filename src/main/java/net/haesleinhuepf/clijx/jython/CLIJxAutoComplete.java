@@ -314,8 +314,8 @@ class CLIJxAutoComplete {
        headline = "clijx.greater(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>greater</b><br><br>Determines if two images A and B greater pixel wise.<br><br>f(a, b) = 1 if a > b; 0 otherwise. <br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6, boolean arg7)";
-       description = "<b>histogram</b><br><br>Determines the histogram of a given image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6, boolean arg7";
+       headline = "clijx.histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6)";
+       description = "<b>histogram</b><br><br>Determines the histogram of a given image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.image2DToResultsTable(ClearCLBuffer arg1, ResultsTable arg2)";
        description = "<b>image2DToResultsTable</b><br><br>Converts an image into a table.<br><br>Parameters:<br>ClearCLBuffer arg1, ResultsTable arg2";
@@ -608,8 +608,8 @@ class CLIJxAutoComplete {
        headline = "clijx.readImageFromDisc(String arg1)";
        description = "<b>readImageFromDisc</b><br><br>Read an image from disc.<br><br>Parameters:<br>String arg1";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.readRawImageFromDisc(ClearCLBuffer arg1, String arg2)";
-       description = "<b>readRawImageFromDisc</b><br><br>Reads a raw file from disc and pushes it immediately to the GPU.<br><br>Parameters:<br>ClearCLBuffer arg1, String arg2";
+       headline = "clijx.readRawImageFromDisc(String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5)";
+       description = "<b>readRawImageFromDisc</b><br><br>Reads a raw file from disc and pushes it immediately to the GPU.<br><br>Parameters:<br>String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.replaceIntensities(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>replaceIntensities</b><br><br>Replaces integer intensities specified in a vector image. The vector image must be 3D with size (m, 1, 1) where m corresponds to the maximum intensity in the original image. Assuming the vector image contains values (0, 1, 0, 2) means: <br> * All pixels with value 0 (first entry in the vector image) get value 0<br> * All pixels with value 1 get value 1<br> * All pixels with value 2 get value 0<br> * All pixels with value 3 get value 2<br><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
@@ -713,6 +713,9 @@ class CLIJxAutoComplete {
        headline = "clijx.standardDeviationOfAllPixels(ClearCLImageInterface arg1)";
        description = "<b>standardDeviationOfAllPixels</b><br><br>Determines the standard deviation of all pixels in an image. The value will be stored in a new row of ImageJs<br>Results table in the column 'Standard_deviation'.<br><br>Parameters:<br>ClearCLImageInterface arg1";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.standardDeviationOfMaskedPixels(ClearCLBuffer source, ClearCLBuffer mask)";
+       description = "<b>standardDeviationOfMaskedPixels</b><br><br>Determines the standard deviation of all pixels in an image which have non-zero value in a corresponding mask image. The value will be stored in a new row of ImageJs<br>Results table in the column 'Masked_standard_deviation'.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer mask";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.standardDeviationZProjection(ClearCLImageInterface arg1, ClearCLImageInterface arg2)";
        description = "<b>standardDeviationZProjection</b><br><br>Determines the standard deviation projection of an image stack along Z.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -776,8 +779,8 @@ class CLIJxAutoComplete {
        headline = "clijx.translate3D(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5)";
        description = "<b>translate3D</b><br><br>Translate an image stack in X, Y and Z.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.translationRegistration(ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3)";
-       description = "<b>translationRegistration</b><br><br>Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3";
+       headline = "clijx.translationRegistration(ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination)";
+       description = "<b>translationRegistration</b><br><br>Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.<br><br>Parameters:<br>ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.translationTimelapseRegistration(ClearCLBuffer input, ClearCLBuffer output)";
        description = "<b>translationTimelapseRegistration</b><br><br>Applies 2D translation registration to every pair of t, t+1 slices of a 2D+t image stack.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer output";
@@ -794,6 +797,9 @@ class CLIJxAutoComplete {
        headline = "clijx.varianceOfAllPixels(ClearCLBuffer source)";
        description = "<b>varianceOfAllPixels</b><br><br>Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs<br>Results table in the column 'Variance'.<br><br>Parameters:<br>ClearCLBuffer source";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.varianceOfMaskedPixels(ClearCLBuffer source, ClearCLBuffer mask)";
+       description = "<b>varianceOfMaskedPixels</b><br><br>Determines the variance in an image, but only in pixels which have non-zero values in another binary mask image. The result is put in the results table as new column named 'Masked_variance'.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer mask";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.watershed(ClearCLBuffer binary_source, ClearCLBuffer destination)";
        description = "<b>watershed</b><br><br>Apply a binary watershed to a binary image and introduces black pixels between objects.<br><br>Parameters:<br>ClearCLBuffer binary_source, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -803,4 +809,4 @@ class CLIJxAutoComplete {
         return list;
     }
 }
-// 264 methods generated.
+// 266 methods generated.

@@ -293,6 +293,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 * <a href="https://clij.github.io/clij-advanced-filters/reference_spotsToPointList">spotsToPointList</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_stackToTiles">stackToTiles</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_standardDeviationOfAllPixels">standardDeviationOfAllPixels</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_standardDeviationOfMaskedPixels">standardDeviationOfMaskedPixels</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_standardDeviationZProjection">standardDeviationZProjection</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_statisticsOfLabelledPixels">statisticsOfLabelledPixels</a>
 * <a href="https://clij.github.io/clij-advanced-filters/reference_stopWatch">stopWatch</a>
@@ -326,6 +327,7 @@ __Please note:__ CLIJx is under heavy construction. This list may change at any 
 
 ## V
 * <a href="https://clij.github.io/clij-advanced-filters/reference_varianceOfAllPixels">varianceOfAllPixels</a>
+* <a href="https://clij.github.io/clij-advanced-filters/reference_varianceOfMaskedPixels">varianceOfMaskedPixels</a>
 <a name="W"></a>
 
 ## W

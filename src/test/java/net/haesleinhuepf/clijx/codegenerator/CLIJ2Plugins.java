@@ -115,6 +115,8 @@ public interface CLIJ2Plugins {
             StatisticsOfLabelledPixels.class,
             VarianceOfAllPixels.class,
             StandardDeviationOfAllPixels.class,
+            VarianceOfMaskedPixels.class,
+            StandardDeviationOfMaskedPixels.class,
             ExcludeLabelsOnEdges.class,
             BinarySubtract.class,
             BinaryEdgeDetection.class,
