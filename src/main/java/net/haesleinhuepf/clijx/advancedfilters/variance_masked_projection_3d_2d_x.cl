@@ -12,7 +12,7 @@ __kernel void masked_squared_sum_project_3d_2d(
   float sum = 0;
   for(int z = 0; z < GET_IMAGE_DEPTH(src); z++)
   {
-    if (READ_src_MAGE(src_mask,sampler,(int4)(x,y,z,0)).x > 0) {
+    if (READ_src_mask_IMAGE(src_mask,sampler,(int4)(x,y,z,0)).x > 0) {
         float value = READ_src_IMAGE(src,sampler,(int4)(x,y,z,0)).x;
         sum = sum + pow(value - mean_intensity, 2);
     }
