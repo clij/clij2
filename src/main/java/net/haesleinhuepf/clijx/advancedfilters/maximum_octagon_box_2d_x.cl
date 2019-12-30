@@ -20,7 +20,7 @@ __kernel void maximum_octagon_box_2d
     maximum = value;
   }
   value = READ_src_IMAGE(src, sampler, (pos + (int2){1, 0})).x;
-  if (minimum < value) {
+  if (maximum < value) {
     maximum = value;
   }
   value = READ_src_IMAGE(src, sampler, (pos + (int2){0, 1})).x;
