@@ -2920,21 +2920,21 @@ public abstract class CLIJxOps {
      * 
      */
     public boolean tenengradWeightsSliceBySlice(ClearCLImage arg1, ClearCLImage arg2) {
-        return AbstractTenengradFusion.tenengradWeightsSliceBySlice(clijx, arg1, arg2);
+        return Kernels.tenengradWeightsSliceBySlice(clij, arg1, arg2);
     }
 
     /**
      * 
      */
     public boolean tenengradFusion(ClearCLImage arg1, float[] arg2, float arg3, ClearCLImage[] arg4) {
-        return AbstractTenengradFusion.tenengradFusion(clijx, arg1, arg2, arg3, arg4);
+        return Kernels.tenengradFusion(clij, arg1, arg2, arg3, arg4);
     }
 
     /**
      * 
      */
     public boolean tenengradFusion(ClearCLImage arg1, float[] arg2, ClearCLImage[] arg3) {
-        return AbstractTenengradFusion.tenengradFusion(clijx, arg1, arg2, arg3);
+        return Kernels.tenengradFusion(clij, arg1, arg2, arg3);
     }
 
 
@@ -3846,7 +3846,7 @@ public abstract class CLIJxOps {
      * 
      */
     public boolean splitStack(ClearCLBuffer arg1, ClearCLBuffer[] arg2) {
-        return AbstractSplitStack.splitStack(clijx, arg1, arg2);
+        return Kernels.splitStack(clij, arg1, arg2);
     }
 
 
