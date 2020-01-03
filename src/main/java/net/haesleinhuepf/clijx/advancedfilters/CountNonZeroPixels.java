@@ -49,6 +49,9 @@ public class CountNonZeroPixels extends AbstractCLIJxPlugin implements CLIJMacro
             parameters.put("dst", clReducedImage);
             parameters.put("tolerance", new Float(0.0));
             clijx.execute(CountNonZeroPixels.class, "count_non_zero_projection_3d_2d_x.cl", "count_non_zero_projection_3d_2d", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
+        } else {
+            clReducedImage = clijx.create(new long[]{clImage.getWidth(), clImage.getHeight()}, NativeTypeEnum.Float);
+            clijx.greaterConstant(clImage, clReducedImage, 0);
         }
 
         RandomAccessibleInterval rai = clijx.convert(clReducedImage, RandomAccessibleInterval.class);
