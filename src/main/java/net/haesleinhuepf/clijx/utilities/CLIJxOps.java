@@ -3646,8 +3646,8 @@ public abstract class CLIJxOps {
      * 
      * It is recommended to apply the rotation to an isotropic image.
      */
-    public boolean rotate2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, boolean arg5) {
-        return Rotate2D.rotate2D(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), arg5);
+    public boolean rotate2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg5) {
+        return Rotate2D.rotate2D(clijx, arg1, arg2, new Double (arg3).floatValue(), arg5);
     }
 
 
