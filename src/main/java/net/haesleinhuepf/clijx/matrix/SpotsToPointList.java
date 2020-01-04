@@ -33,15 +33,9 @@ public class SpotsToPointList extends AbstractCLIJxPlugin implements CLIJMacroPl
         ClearCLBuffer temp1 = clijx.create(input.getDimensions(), NativeTypeEnum.Float);
 
         ConnectedComponentsLabeling.connectedComponentsLabeling(clijx, input, temp1);
-        //clij.show(temp1, "cca");
 
-        HashMap<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("src", temp1);
-        parameters.put("dst_point_list", output);
+        clijx.labelledSpotsToPointList(temp1, output);
 
-        long[] globalSizes = temp1.getDimensions();
-        clijx.activateSizeIndependentKernelCompilation();
-        clijx.execute(SpotsToPointList.class, "spots_to_point_list_" + input.getDimension() + "d_x.cl", "spots_to_point_list_" + input.getDimension() + "d", globalSizes, globalSizes, parameters);
         temp1.close();
         return true;
     }
@@ -55,7 +49,7 @@ public class SpotsToPointList extends AbstractCLIJxPlugin implements CLIJMacroPl
 
     @Override
     public String getDescription() {
-        return "Transforms a spots image as resulting from maximum/minimum detection in an image where every column cotains d \n" +
+        return "Transforms a spots image as resulting from maximum/minimum detection in an image where every column contains d \n" +
                 "pixels (with d = dimensionality of the original image) with the coordinates of the maxima/minima.";
     }
 
