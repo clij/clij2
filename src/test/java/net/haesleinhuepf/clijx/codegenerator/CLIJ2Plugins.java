@@ -290,7 +290,14 @@ public interface CLIJ2Plugins {
             MinimumOfAllPixels.class,
             ReportMemory.class,
             AbstractSplitStack.class,
-            TopHatOctagonSliceBySlice.class
+            TopHatOctagonSliceBySlice.class,
+            SetColumn.class,
+            SetRow.class,
+            SumYProjection.class,
+            AverageDistanceOfTouchingNeighbors.class,
+            LabelledSpotsToPointList.class,
+            LabelSpots.class,
+            MinimumDistanceOfTouchingNeighbors.class
     };
 
     public String blockList = ";" +
