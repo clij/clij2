@@ -14,6 +14,7 @@ import net.imglib2.img.array.ArrayImgs;
 import net.imglib2.type.numeric.real.FloatType;
 import org.scijava.plugin.Plugin;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -71,6 +72,7 @@ public class WriteXYZPointListToDisc extends AbstractCLIJxPlugin implements CLIJ
         System.out.println(coordinateList.toString());
 
         try {
+            new File(filename).getParentFile().mkdirs();
             Files.write(Paths.get(filename), coordinateList.toString().getBytes());
         } catch (IOException e) {
             e.printStackTrace();
