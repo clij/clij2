@@ -6,9 +6,7 @@ import net.haesleinhuepf.clijx.advancedfilters.tenengradfusion.AbstractTenengrad
 import net.haesleinhuepf.clijx.advancedmath.*;
 import net.haesleinhuepf.clijx.base.*;
 import net.haesleinhuepf.clijx.gui.OrganiseWindows;
-import net.haesleinhuepf.clijx.io.PreloadFromDisc;
-import net.haesleinhuepf.clijx.io.ReadImageFromDisc;
-import net.haesleinhuepf.clijx.io.ReadRawImageFromDisc;
+import net.haesleinhuepf.clijx.io.*;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clijx.matrix.*;
 import net.haesleinhuepf.clijx.painting.DrawBox;
@@ -297,7 +295,9 @@ public interface CLIJ2Plugins {
             AverageDistanceOfTouchingNeighbors.class,
             LabelledSpotsToPointList.class,
             LabelSpots.class,
-            MinimumDistanceOfTouchingNeighbors.class
+            MinimumDistanceOfTouchingNeighbors.class,
+            WriteVTKLineListToDisc.class,
+            WriteXYZPointListToDisc.class
     };
 
     public String blockList = ";" +
