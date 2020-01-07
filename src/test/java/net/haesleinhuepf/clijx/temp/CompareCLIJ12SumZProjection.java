@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class CompareCLIJ12SumProjection {
+public class CompareCLIJ12SumZProjection {
     @Test
     public void testCompareCLIJ12VariableDims() {
         ImagePlus imp = IJ.openImage("src/test/resources/Haarlem_DZ_thumbnails_sb_text.gif");
