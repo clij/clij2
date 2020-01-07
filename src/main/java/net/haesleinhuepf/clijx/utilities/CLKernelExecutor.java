@@ -91,10 +91,10 @@ public class CLKernelExecutor {
     private static void getPositionDefineOpenCLDefines(Map<String, Object> defines, String key, int dimension) {
         if (dimension < 3) {
             defines.put("POS_" + key + "_TYPE", "int2");
-            defines.put("POS_" + key + "_DEFINE(pos0, pos1, pos2, pos3)", "((int2)(pos0, pos1))");
+            defines.put("POS_" + key + "_INSTANCE(pos0, pos1, pos2, pos3)", "((int2)(pos0, pos1))");
         } else {
             defines.put("POS_" + key + "_TYPE", "int4");
-            defines.put("POS_" + key + "_DEFINE(pos0, pos1, pos2, pos3)", "((int4)(pos0, pos1, pos2, pos3))");
+            defines.put("POS_" + key + "_INSTANCE(pos0, pos1, pos2, pos3)", "((int4)(pos0, pos1, pos2, pos3))");
         }
     }
 

@@ -10,12 +10,12 @@ __kernel void maximum_z_projection(
   float max = 0;
   for(int z = 0; z < GET_IMAGE_DEPTH(src); z++)
   {
-    POS_src_TYPE pos = POS_src_DEFINE(x,y,z,0);
+    POS_src_TYPE pos = POS_src_INSTANCE(x,y,z,0);
     float value = READ_src_IMAGE(src,sampler,pos).x;
     if (value > max || z == 0) {
       max = value;
     }
   }
-  POS_dst_max_TYPE pos = POS_dst_max_DEFINE(x,y,0,0);
+  POS_dst_max_TYPE pos = POS_dst_max_INSTANCE(x,y,0,0);
   WRITE_dst_max_IMAGE(dst_max, pos, CONVERT_dst_max_PIXEL_TYPE(max));
 }
