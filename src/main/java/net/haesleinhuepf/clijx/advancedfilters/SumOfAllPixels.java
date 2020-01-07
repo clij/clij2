@@ -47,7 +47,7 @@ public class SumOfAllPixels extends AbstractCLIJxPlugin implements CLIJMacroPlug
             HashMap<String, Object> parameters = new HashMap<>();
             parameters.put("src", clImage);
             parameters.put("dst", clReducedImage);
-            clijx.execute(SumOfAllPixels.class, "sum_z_projection_3d_2d_x.cl", "sum_z_projection_3d_2d", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
+            clijx.execute(SumOfAllPixels.class, "sum_z_projection_x.cl", "sum_z_projection", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
         }
 
         RandomAccessibleInterval rai = clijx.convert(clReducedImage, RandomAccessibleInterval.class);

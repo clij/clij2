@@ -32,7 +32,7 @@ public class SumZProjection extends AbstractCLIJxPlugin implements CLIJMacroPlug
         parameters.put("src", src);
         parameters.put("dst", dst);
 
-        clijx.execute(SumZProjection.class, "sum_z_projection_" + src.getDimension() + "d_" + dst.getDimension() + "d_x.cl", "sum_z_projection_" + src.getDimension() + "d_" + dst.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(SumZProjection.class, "sum_z_projection_x.cl", "sum_z_projection", dst.getDimensions(), dst.getDimensions(), parameters);
 
         return true;
     }
