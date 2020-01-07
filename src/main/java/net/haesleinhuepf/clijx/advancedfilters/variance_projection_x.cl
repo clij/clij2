@@ -1,4 +1,4 @@
-__kernel void squared_sum_project_3d_3d(
+__kernel void squared_sum_project(
     IMAGE_dst_TYPE dst,
     IMAGE_src_TYPE src,
     float mean_intensity
@@ -10,8 +10,8 @@ __kernel void squared_sum_project_3d_3d(
   float sum = 0;
   for(int z = 0; z < GET_IMAGE_DEPTH(src); z++)
   {
-    float value = READ_src_IMAGE(src,sampler,(int4)(x,y,z,0)).x;
+    float value = READ_src_IMAGE(src,sampler,POS_src_INSTANCE(x,y,z,0)).x;
     sum = sum + pow(value - mean_intensity, 2);
   }
-  WRITE_dst_IMAGE(dst,(int4)(x,y,0,0), CONVERT_sum_PIXEL_TYPE(sum));
+  WRITE_dst_IMAGE(dst,POS_dst_INSTANCE(x,y,0,0), CONVERT_sum_PIXEL_TYPE(sum));
 }

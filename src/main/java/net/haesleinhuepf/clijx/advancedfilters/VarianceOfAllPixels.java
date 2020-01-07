@@ -56,7 +56,7 @@ public class VarianceOfAllPixels extends AbstractCLIJxPlugin implements CLIJMacr
             parameters.put("src", buffer1);
             parameters.put("dst", clReducedImage);
             parameters.put("mean_intensity", meanIntensity);
-            clijx.execute(VarianceOfMaskedPixels.class, "variance_projection_" + buffer1.getDimension() + "d_" + clReducedImage.getDimension() + "d_x.cl", "squared_sum_project_" + buffer1.getDimension() + "d_" + clReducedImage.getDimension() + "d", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
+            clijx.execute(VarianceOfMaskedPixels.class, "variance_projection_x.cl", "squared_sum_project", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
 
             RandomAccessibleInterval rai = clijx.convert(clReducedImage, RandomAccessibleInterval.class);
             Cursor cursor = Views.iterable(rai).cursor();
