@@ -19,15 +19,11 @@ IMAGE_dst_mesh_TYPE dst_mesh) {
   // so many point candidates are available:
   const int num_pointBs = GET_IMAGE_HEIGHT(src_touch_matrix);
   for (int pointBIndex = pointIndex + 1; pointBIndex < num_pointBs; pointBIndex++) {
-    pos = (int2){pointIndex + 1, pointBIndex + 1};
-    const float touching = READ_src_touch_matrix_IMAGE(src_touch_matrix, sampler, pos).x;
+    const float touching = READ_src_touch_matrix_IMAGE(src_touch_matrix, sampler, POS_src_touch_matrix_INSTANCE(pointIndex + 1, pointBIndex + 1, 0, 0)).x;
     if (touching > 0.5) {
-      pos = (int2){pointBIndex, 0};
-      const float pointBx = READ_src_pointlist_IMAGE(src_pointlist, sampler, pos).x;
-      pos = (int2){pointBIndex, 1};
-      const float pointBy = READ_src_pointlist_IMAGE(src_pointlist, sampler, pos).x;
-      pos = (int2){pointBIndex, 2};
-      const float pointBz = READ_src_pointlist_IMAGE(src_pointlist, sampler, pos).x;
+      const float pointBx = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointBIndex, 0, 0, 0)).x;
+      const float pointBy = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointBIndex, 1, 0, 0)).x;
+      const float pointBz = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointBIndex, 2, 0, 0)).x;
 
       // draw line from A to B
       float distanceX = pow(pointAx - pointBx, (float)2.0);
@@ -36,10 +32,10 @@ IMAGE_dst_mesh_TYPE dst_mesh) {
 
       float distance = sqrt(distanceX + distanceY + distanceZ);
       for (float d = 0; d < distance; d = d + 0.5) {
-        int4 tPos = (int4){pointAx + (pointBx - pointAx) * d / distance,
+        POS_dst_mesh_TYPE tPos = POS_dst_mesh_INSTANCE(pointAx + (pointBx - pointAx) * d / distance,
                            pointAy + (pointBy - pointAy) * d / distance,
                            pointAz + (pointBz - pointAz) * d / distance,
-                           0};
+                           0);
         WRITE_dst_mesh_IMAGE(dst_mesh, tPos, 1);
       }
     }

@@ -13,21 +13,19 @@ IMAGE_dst_count_list_TYPE dst_count_list
   int y = label_id;
   int x = 0;
   for (x = 0; x < label_id; x++) {
-    int2 pos = (int2)(x, y);
-    float value = READ_src_touch_matrix_IMAGE(src_touch_matrix, sampler, pos).x;
+    float value = READ_src_touch_matrix_IMAGE(src_touch_matrix, sampler, POS_src_touch_matrix_INSTANCE(x, y, 0, 0)).x;
     if (value > 0) {
       count++;
     }
   }
   x = label_id;
   for (y = label_id + 1; y < label_count; y++) {
-    int2 pos = (int2)(x, y);
-    float value = READ_src_touch_matrix_IMAGE(src_touch_matrix, sampler, pos).x;
+    float value = READ_src_touch_matrix_IMAGE(src_touch_matrix, sampler, POS_src_touch_matrix_INSTANCE(x, y, 0, 0)).x;
     if (value > 0) {
       count++;
     }
   }
 
-  WRITE_dst_count_list_IMAGE(dst_count_list, ((int4)(label_id, 0, 0, 0)), CONVERT_dst_count_list_PIXEL_TYPE(count));
+  WRITE_dst_count_list_IMAGE(dst_count_list, (POS_dst_count_list_INSTANCE(label_id, 0, 0, 0)), CONVERT_dst_count_list_PIXEL_TYPE(count));
 }
 

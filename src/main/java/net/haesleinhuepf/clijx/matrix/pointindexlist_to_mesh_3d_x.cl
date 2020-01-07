@@ -9,31 +9,23 @@ IMAGE_dst_mesh_TYPE dst_mesh) {
   if (pointIndex == 0) {
     return;
   }
-  int2 pos = (int2){pointIndex - 1, 0};
-  const float pointAx = READ_src_pointlist_IMAGE(src_pointlist, sampler, pos).x;
-  pos = (int2){pointIndex - 1, 1};
-  const float pointAy = READ_src_pointlist_IMAGE(src_pointlist, sampler, pos).x;
-  pos = (int2){pointIndex - 1, 2};
-  const float pointAz = READ_src_pointlist_IMAGE(src_pointlist, sampler, pos).x;
+  const float pointAx = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointIndex - 1, 0, 0, 0)).x;
+  const float pointAy = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointIndex - 1, 1, 0, 0)).x;
+  const float pointAz = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointIndex - 1, 2, 0, 0)).x;
 
-  int4 pointA = (int4){pointAx, pointAy, pointAz, 0};
+  //int4 pointA = (int4){pointAx, pointAy, pointAz, 0};
 
   // so many point candidates are available:
   const int num_pointBs = GET_IMAGE_HEIGHT(src_indexlist);
   for (int pointB = 0; pointB < num_pointBs; pointB++) {
-
-    pos = (int2){pointIndex, pointB};
-    const float pointBIndex = READ_src_indexlist_IMAGE(src_indexlist, sampler, pos).x - 1;
+    const float pointBIndex = READ_src_indexlist_IMAGE(src_indexlist, sampler, POS_src_indexlist_INSTANCE(pointIndex, pointB, 0, 0)).x - 1;
     if (pointBIndex < 0) {
       continue;
     }
 
-    pos = (int2){pointBIndex, 0};
-    const float pointBx = READ_src_pointlist_IMAGE(src_pointlist, sampler, pos).x;
-    pos = (int2){pointBIndex, 1};
-    const float pointBy = READ_src_pointlist_IMAGE(src_pointlist, sampler, pos).x;
-    pos = (int2){pointBIndex, 2};
-    const float pointBz = READ_src_pointlist_IMAGE(src_pointlist, sampler, pos).x;
+    const float pointBx = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointBIndex, 0, 0, 0)).x;
+    const float pointBy = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointBIndex, 2, 0, 0)).x;
+    const float pointBz = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointBIndex, 3, 0, 0)).x;
 
     // draw line from A to B
     float distanceX = pow(pointAx - pointBx, (float)2.0);
@@ -42,10 +34,10 @@ IMAGE_dst_mesh_TYPE dst_mesh) {
 
     float distance = sqrt(distanceX + distanceY + distanceZ);
     for (float d = 0; d < distance; d = d + 0.5) {
-      int4 tPos = (int4){pointAx + (pointBx - pointAx) * d / distance,
+      POS_dst_mesh_TYPE tPos = POS_dst_mesh_INSTANCE(pointAx + (pointBx - pointAx) * d / distance,
                          pointAy + (pointBy - pointAy) * d / distance,
                          pointAz + (pointBz - pointAz) * d / distance,
-                         0};
+                         0);
       WRITE_dst_mesh_IMAGE(dst_mesh, tPos, 1);
     }
   }

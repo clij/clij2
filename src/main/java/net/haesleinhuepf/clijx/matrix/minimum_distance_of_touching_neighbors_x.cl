@@ -14,7 +14,7 @@ __kernel void minimum_distance_of_touching_neighbors (
   int y = label_id;
   int x = 0;
   for (x = 0; x < label_id; x++) {
-    int2 pos = (int2)(x, y);
+    POS_src_touch_matrix_TYPE pos = POS_src_touch_matrix_INSTANCE(x, y, 0, 0);
     float value = READ_src_touch_matrix_IMAGE(src_touch_matrix, sampler, pos).x;
     if (value > 0) {
       if (minimum > value || minimum == 0) {
@@ -24,7 +24,7 @@ __kernel void minimum_distance_of_touching_neighbors (
   }
   x = label_id;
   for (y = label_id + 1; y < label_count; y++) {
-    int2 pos = (int2)(x, y);
+    POS_src_touch_matrix_TYPE pos = POS_src_touch_matrix_INSTANCE(x, y, 0, 0);
     float value = READ_src_touch_matrix_IMAGE(src_touch_matrix, sampler, pos).x;
     if (value > 0) {
       if (minimum > value || minimum == 0) {
@@ -33,6 +33,6 @@ __kernel void minimum_distance_of_touching_neighbors (
     }
   }
 
-  WRITE_dst_minimum_distance_list_IMAGE(dst_minimum_distance_list, ((int4)(label_id, 0, 0, 0)), CONVERT_dst_minimum_distance_list_PIXEL_TYPE(minimum));
+  WRITE_dst_minimum_distance_list_IMAGE(dst_minimum_distance_list, (POS_dst_minimum_distance_list_INSTANCE(label_id, 0, 0, 0)), CONVERT_dst_minimum_distance_list_PIXEL_TYPE(minimum));
 }
 

@@ -18,10 +18,8 @@ __kernel void find_n_closest_points(
 
   int initialized_values = 0;
 
-  int2 pos = (int2){pointIndex, 0};
   for (int y = 0; y < height; y++) {
-    pos.y = y;
-    float distance = READ_src_distancematrix_IMAGE(src_distancematrix, sampler, pos).x;
+    float distance = READ_src_distancematrix_IMAGE(src_distancematrix, sampler, POS_src_distancematrix_INSTANCE(pointIndex, y, 0, 0)).x;
 
     if (initialized_values < n) {
       initialized_values++;
@@ -46,8 +44,6 @@ __kernel void find_n_closest_points(
   }
 
   for (int i = 0; i < initialized_values; i++) {
-    pos.y = i;
-
-    WRITE_dst_indexlist_IMAGE(dst_indexlist, pos, CONVERT_dst_indexlist_PIXEL_TYPE(indices[i]));
+    WRITE_dst_indexlist_IMAGE(dst_indexlist, POS_dst_indexlist_INSTANCE(pointIndex, i), CONVERT_dst_indexlist_PIXEL_TYPE(indices[i]));
   }
 }

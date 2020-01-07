@@ -13,10 +13,8 @@ IMAGE_dst_indexlist_TYPE dst_indexlist, int nPoints) {
 
   int initialized_values = 0;
 
-  int2 pos = (int2){pointIndex, 0};
   for (int y = 0; y < height; y++) {
-    pos.y = y;
-    float distance = READ_src_distancematrix_IMAGE(src_distancematrix, sampler, pos).x;
+    float distance = READ_src_distancematrix_IMAGE(src_distancematrix, sampler, POS_src_distancematrix_INSTANCE(pointIndex, y, 0, 0)).x;
 
     if (initialized_values < nPoints) {
       initialized_values++;
@@ -47,7 +45,6 @@ IMAGE_dst_indexlist_TYPE dst_indexlist, int nPoints) {
     count++;
   }
 
-  int4 iPos = (int4){pointIndex, 0, 0, 0};
   float res = sum / count;
-  WRITE_dst_indexlist_IMAGE(dst_indexlist, iPos, CONVERT_dst_indexlist_PIXEL_TYPE(res));
+  WRITE_dst_indexlist_IMAGE(dst_indexlist, POS_dst_indexlist_INSTANCE(pointIndex, 0, 0, 0), CONVERT_dst_indexlist_PIXEL_TYPE(res));
 }

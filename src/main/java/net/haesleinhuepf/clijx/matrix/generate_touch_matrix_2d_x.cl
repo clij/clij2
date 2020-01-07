@@ -15,19 +15,18 @@ __kernel void generate_touch_matrix_2d(
     return;
   }
 
-  int2 pos = (int2){x, y};
-  float label = READ_src_label_map_IMAGE(src_label_map, sampler, pos).x;
-  float labelx = READ_src_label_map_IMAGE(src_label_map, sampler, (pos + (int2)(1, 0))).x;
-  float labely = READ_src_label_map_IMAGE(src_label_map, sampler, (pos + (int2)(0, 1))).x;
+  float label = READ_src_label_map_IMAGE(src_label_map, sampler, POS_src_label_map_INSTANCE(x, y, 0, 0)).x;
+  float labelx = READ_src_label_map_IMAGE(src_label_map, sampler, POS_src_label_map_INSTANCE(x + 1, y, 0, 0)).x;
+  float labely = READ_src_label_map_IMAGE(src_label_map, sampler, POS_src_label_map_INSTANCE(x, y + 1, 0, 0)).x;
 
   if (label < labelx) {
-    WRITE_dst_matrix_IMAGE(dst_matrix, ((int2)(label, labelx)), CONVERT_dst_matrix_PIXEL_TYPE(1));
+    WRITE_dst_matrix_IMAGE(dst_matrix, (POS_dst_matrix_INSTANCE(label, labelx, 0, 0)), CONVERT_dst_matrix_PIXEL_TYPE(1));
   } else if (label > labelx) {
-    WRITE_dst_matrix_IMAGE(dst_matrix, ((int2)(labelx, label)), CONVERT_dst_matrix_PIXEL_TYPE(1));
+    WRITE_dst_matrix_IMAGE(dst_matrix, (POS_dst_matrix_INSTANCE(labelx, label, 0, 0)), CONVERT_dst_matrix_PIXEL_TYPE(1));
   }
   if (label < labely) {
-    WRITE_dst_matrix_IMAGE(dst_matrix, ((int2)(label, labely)), CONVERT_dst_matrix_PIXEL_TYPE(1));
+    WRITE_dst_matrix_IMAGE(dst_matrix, (POS_dst_matrix_INSTANCE(label, labely, 0, 0)), CONVERT_dst_matrix_PIXEL_TYPE(1));
   } else if (label > labely) {
-    WRITE_dst_matrix_IMAGE(dst_matrix, ((int2)(labely, label)), CONVERT_dst_matrix_PIXEL_TYPE(1));
+    WRITE_dst_matrix_IMAGE(dst_matrix, (POS_dst_matrix_INSTANCE(labely, label, 0, 0)), CONVERT_dst_matrix_PIXEL_TYPE(1));
   }
 }

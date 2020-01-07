@@ -13,12 +13,9 @@ __kernel void multiply_matrix(
 
   float sum = 0;
   for (int i = 0; i < n_x; i ++) {
-      int4 pos1 = (int4){i, dy,0,0};
-      int2 pos2 = (int2){dx, i};
-      sum = sum + READ_src1_IMAGE(src1, sampler, pos1).x * READ_src2_IMAGE(src2, sampler, pos2).x;
+      sum = sum + READ_src1_IMAGE(src1, sampler, POS_src1_INSTANCE(i, dy,0,0)).x * READ_src2_IMAGE(src2, sampler, POS_src2_INSTANCE(dx, i,0,0)).x;
   }
   float out = sum;
-  int2 pos = (int2){dx, dy};
-  WRITE_dst_matrix_IMAGE(dst_matrix, pos, CONVERT_dst_matrix_PIXEL_TYPE(out));
+  WRITE_dst_matrix_IMAGE(dst_matrix, POS_dst_matrix_INSTANCE(dx, dy, 0, 0), CONVERT_dst_matrix_PIXEL_TYPE(out));
 
 }
