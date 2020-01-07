@@ -39,7 +39,7 @@ public class ArgMaximumZProjection extends AbstractCLIJxPlugin implements CLIJMa
         parameters.put("dst_max", dst_max);
         parameters.put("dst_arg", dst_arg);
 
-        clijx.execute(ArgMaximumZProjection.class, "arg_maximum_z_projection_3d_2d_x.cl", "arg_maximum_z_projection_3d_2d", dst_arg.getDimensions(), dst_arg.getDimensions(), parameters);
+        clijx.execute(ArgMaximumZProjection.class, "arg_maximum_z_projection_x.cl", "arg_maximum_z_projection", dst_arg.getDimensions(), dst_arg.getDimensions(), parameters);
         return true;
     }
 

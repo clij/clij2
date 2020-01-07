@@ -1,5 +1,5 @@
 
-__kernel void arg_maximum_z_projection_3d_2d(
+__kernel void arg_maximum_z_projection (
     IMAGE_dst_max_TYPE dst_max,
     IMAGE_dst_arg_TYPE dst_arg,
     IMAGE_src_TYPE src
@@ -12,12 +12,12 @@ __kernel void arg_maximum_z_projection_3d_2d(
   int max_pos = 0;
   for(int z = 0; z < GET_IMAGE_DEPTH(src); z++)
   {
-    float value = READ_src_IMAGE(src,sampler,(int4)(x,y,z,0)).x;
+    float value = READ_src_IMAGE(src,sampler,POS_src_INSTANCE(x,y,z,0)).x;
     if (value > max || z == 0) {
       max = value;
       max_pos = z;
     }
   }
-  WRITE_dst_max_IMAGE(dst_max,(int2)(x,y), CONVERT_dst_max_PIXEL_TYPE(max));
-  WRITE_dst_arg_IMAGE(dst_arg,(int2)(x,y), CONVERT_dst_arg_PIXEL_TYPE(max_pos));
+  WRITE_dst_max_IMAGE(dst_max,POS_dst_max_INSTANCE(x,y,0,0), CONVERT_dst_max_PIXEL_TYPE(max));
+  WRITE_dst_arg_IMAGE(dst_arg,POS_dst_arg_INSTANCE(x,y,0,0), CONVERT_dst_arg_PIXEL_TYPE(max_pos));
 }
