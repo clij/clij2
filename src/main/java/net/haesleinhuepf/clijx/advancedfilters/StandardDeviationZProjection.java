@@ -32,7 +32,7 @@ public class StandardDeviationZProjection extends AbstractCLIJxPlugin implements
         parameters.put("src", input);
         parameters.put("dst", output);
 
-        clijx.execute(StandardDeviationZProjection.class, "standard_deviation_z_projection_3d_" + output.getDimension() + "d_x.cl", "standard_deviation_z_projection_3d_" + output.getDimension() + "d", output.getDimensions(), output.getDimensions(), parameters);
+        clijx.execute(StandardDeviationZProjection.class, "standard_deviation_z_projection_x.cl", "standard_deviation_z_projection", output.getDimensions(), output.getDimensions(), parameters);
         return true;
     }
 
