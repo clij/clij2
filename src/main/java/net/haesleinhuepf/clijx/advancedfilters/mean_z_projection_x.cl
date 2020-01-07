@@ -1,6 +1,6 @@
 
 
-__kernel void mean_z_projection_3d_2d(
+__kernel void mean_z_projection(
     IMAGE_dst_TYPE dst,
     IMAGE_src_TYPE src
 ) {
@@ -12,8 +12,8 @@ __kernel void mean_z_projection_3d_2d(
   int count = 0;
   for(int z = 0; z < GET_IMAGE_DEPTH(src); z++)
   {
-    sum = sum + READ_src_IMAGE(src,sampler,(int4)(x,y,z,0)).x;
+    sum = sum + READ_src_IMAGE(src,sampler,POS_src_INSTANCE(x,y,z,0)).x;
     count++;
   }
-  WRITE_dst_IMAGE(dst,(int2)(x,y), CONVERT_dst_PIXEL_TYPE(sum / count));
+  WRITE_dst_IMAGE(dst,POS_dst_INSTANCE(x,y,0,0), CONVERT_dst_PIXEL_TYPE(sum / count));
 }

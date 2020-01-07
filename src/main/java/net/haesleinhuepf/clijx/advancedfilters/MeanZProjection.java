@@ -36,7 +36,7 @@ public class MeanZProjection extends AbstractCLIJxPlugin implements CLIJMacroPlu
         parameters.put("src", src);
         parameters.put("dst", dst);
 
-        clijx.execute(MeanZProjection.class, "mean_z_projection_3d_2d_x.cl", "mean_z_projection_3d_2d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(MeanZProjection.class, "mean_z_projection_x.cl", "mean_z_projection", dst.getDimensions(), dst.getDimensions(), parameters);
 
         return true;
     }
