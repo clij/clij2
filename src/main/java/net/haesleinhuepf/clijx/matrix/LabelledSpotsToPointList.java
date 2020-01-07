@@ -30,13 +30,13 @@ public class LabelledSpotsToPointList extends AbstractCLIJxPlugin implements CLI
     public static boolean labelledSpotsToPointList(CLIJx clijx, ClearCLBuffer input_labelmap, ClearCLBuffer output) {
 
         HashMap<String, Object> parameters = new HashMap<String, Object>();
+        System.out.println("src: " + input_labelmap);
         parameters.put("src", input_labelmap);
         parameters.put("dst_point_list", output);
 
         long[] globalSizes = input_labelmap.getDimensions();
         clijx.activateSizeIndependentKernelCompilation();
-        clijx.execute(LabelledSpotsToPointList.class, "spots_to_point_list_" + input_labelmap.getDimension() + "d_x.cl", "spots_to_point_list_" + input_labelmap.getDimension() + "d", globalSizes, globalSizes, parameters);
-        input_labelmap.close();
+        clijx.execute(LabelledSpotsToPointList.class, "spots_to_point_list_x.cl", "spots_to_point_list", globalSizes, globalSizes, parameters);
         return true;
     }
 
