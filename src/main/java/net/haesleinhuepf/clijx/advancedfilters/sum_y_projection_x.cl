@@ -1,6 +1,6 @@
 
 
-__kernel void sum_y_projection_3d_3d(
+__kernel void sum_y_projection(
     IMAGE_dst_TYPE dst,
     IMAGE_src_TYPE src
 ) {
@@ -9,9 +9,9 @@ __kernel void sum_y_projection_3d_3d(
   const int x = get_global_id(0);
   const int z = get_global_id(1);
   float sum = 0;
-  for(int y = 0; y < GET_IMAGE_HEIGHT(src); z++)
+  for(int y = 0; y < GET_IMAGE_HEIGHT(src); y++)
   {
-    sum = sum + READ_src_IMAGE(src,sampler,(int4)(x,y,z,0)).x;
+    sum = sum + READ_src_IMAGE(src,sampler,POS_src_INSTANCE(x,y,z,0)).x;
   }
-  WRITE_dst_IMAGE(dst,(int4)(x,z,0,0), CONVERT_dst_PIXEL_TYPE(sum));
+  WRITE_dst_IMAGE(dst,POS_dst_INSTANCE(x,z,0,0), CONVERT_dst_PIXEL_TYPE(sum));
 }

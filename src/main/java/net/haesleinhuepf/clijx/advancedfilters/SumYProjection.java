@@ -32,7 +32,7 @@ public class SumYProjection extends AbstractCLIJxPlugin implements CLIJMacroPlug
         parameters.put("src", src);
         parameters.put("dst", dst);
 
-        clijx.execute(SumYProjection.class, "sum_y_projection_" + src.getDimension() + "d_" + dst.getDimension() + "d_x.cl", "sum_y_projection_" + src.getDimension() + "d_" + dst.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clijx.execute(SumYProjection.class, "sum_y_projection_x.cl", "sum_y_projection", dst.getDimensions(), dst.getDimensions(), parameters);
 
         return true;
     }
