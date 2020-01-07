@@ -19,7 +19,7 @@ inline IMAGE_dst_PIXEL_TYPE median(IMAGE_dst_PIXEL_TYPE array[], int array_size)
 }
 
 
-__kernel void median_z_projection_3d_3d
+__kernel void median_z_projection
 (
    IMAGE_dst_TYPE dst,
    IMAGE_src_TYPE src
@@ -34,12 +34,12 @@ __kernel void median_z_projection_3d_3d
   int count = 0;
   for(int z = 0; z < GET_IMAGE_DEPTH(src); z++)
   {
-    array[count] = (float)(READ_src_IMAGE(src,sampler,(int4)(x,y,z,0)).x);
+    array[count] = (float)(READ_src_IMAGE(src,sampler,POS_src_INSTANCE(x,y,z,0)).x);
     count++;
   }
 
   IMAGE_dst_PIXEL_TYPE res = median(array, count);
 
-  WRITE_dst_IMAGE(dst,(int4)(x,y,0,0), CONVERT_dst_PIXEL_TYPE(res));
+  WRITE_dst_IMAGE(dst,POS_dst_INSTANCE(x,y,0,0), CONVERT_dst_PIXEL_TYPE(res));
 }
 
