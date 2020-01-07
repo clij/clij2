@@ -32,7 +32,7 @@ public class MaximumZProjection extends AbstractCLIJxPlugin implements CLIJMacro
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst_max", dst_max);
-        clijx.execute(MaximumZProjection.class, "maximum_z_projection_" + src.getDimension() + "d_" + dst_max.getDimension() + "d_x.cl", "maximum_z_projection_" + src.getDimension() + "d_" + dst_max.getDimension() + "d", dst_max.getDimensions(), dst_max.getDimensions(), parameters);
+        clijx.execute(MaximumZProjection.class, "maximum_z_projection_x.cl", "maximum_z_projection", dst_max.getDimensions(), dst_max.getDimensions(), parameters);
         return true;
     }
 

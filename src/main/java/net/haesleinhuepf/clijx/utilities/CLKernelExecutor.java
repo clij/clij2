@@ -88,6 +88,16 @@ public class CLKernelExecutor {
         }
     }
 
+    private static void getPositionDefineOpenCLDefines(Map<String, Object> defines, String key, int dimension) {
+        if (dimension < 3) {
+            defines.put("POS_" + key + "_TYPE", "int2");
+            defines.put("POS_" + key + "_DEFINE(pos0, pos1, pos2, pos3)", "((int2)(pos0, pos1))");
+        } else {
+            defines.put("POS_" + key + "_TYPE", "int4");
+            defines.put("POS_" + key + "_DEFINE(pos0, pos1, pos2, pos3)", "((int4)(pos0, pos1, pos2, pos3))");
+        }
+    }
+
     public static void getOpenCLDefines(Map<String, Object> defines, String key, NativeTypeEnum nativeTypeEnum, int dimension) {
         String typeName = nativeTypeToOpenCLTypeName(nativeTypeEnum);
         String typeId = nativeTypeToOpenCLTypeShortName(nativeTypeEnum);
@@ -186,6 +196,7 @@ public class CLKernelExecutor {
                         openCLDefines.put("IMAGE_SIZE_" + key + "_DEPTH", image.getDepth());
                     }
                     getOpenCLDefines(openCLDefines, key, image.getChannelDataType(), (int) image.getDimension());
+                    getPositionDefineOpenCLDefines(openCLDefines, key, (int) image.getDimension());
                 } else if (parameterMap.get(key) instanceof ClearCLBuffer) {
                     ClearCLBuffer image = (ClearCLBuffer) parameterMap.get(key);
                     if (!imageSizeIndependentCompilation) {
@@ -194,6 +205,7 @@ public class CLKernelExecutor {
                         openCLDefines.put("IMAGE_SIZE_" + key + "_DEPTH", image.getDepth());
                     }
                     getOpenCLDefines(openCLDefines, key, image.getNativeType(), (int) image.getDimension());
+                    getPositionDefineOpenCLDefines(openCLDefines, key, (int) image.getDimension());
                 }
                 definedParameterKeys.add(key);
             }
