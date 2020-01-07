@@ -5,9 +5,13 @@ import ij.ImagePlus;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clijx.CLIJx;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class CompareCLIJ12MaxProjection {
-    public static void main(String[] args) {
+    @Test
+    public void testCompareCLIJ12VariableDims() {
         ImagePlus imp = IJ.openImage("src/test/resources/Haarlem_DZ_thumbnails_sb_text.gif");
 
         CLIJx clijx = CLIJx.getInstance();
@@ -18,6 +22,7 @@ public class CompareCLIJ12MaxProjection {
         ClearCLBuffer output1a = clijx.create(new long[]{input.getWidth(), input.getHeight(), 1}, input.getNativeType());
         ClearCLBuffer output1b = clijx.create(new long[]{input.getWidth(), input.getHeight()}, input.getNativeType());
         ClearCLBuffer output1c = clijx.create(new long[]{input.getWidth(), input.getHeight()}, input.getNativeType());
+        ClearCLBuffer output1d = clijx.create(new long[]{input.getWidth(), input.getHeight(), 1}, input.getNativeType());
         ClearCLBuffer output2 = clijx.create(output1);
 
         clijx.maximumZProjection(input, output1);
@@ -36,11 +41,25 @@ public class CompareCLIJ12MaxProjection {
         clijx.maximumZProjection(input, output1a); // 3d -> 3d
         clijx.maximumZProjection(output1a, output1b); // 3d -> 2d
         clijx.maximumZProjection(output1, output1c); // 2d -> 2d
+        clijx.maximumZProjection(output1, output1d); // 2d -> 3d
 
-        System.out.println("mean1a " + clijx.meanOfAllPixels(output1a));
-        System.out.println("mean1b " + clijx.meanOfAllPixels(output1b));
-        System.out.println("mean1c " + clijx.meanOfAllPixels(output1c));
+        double mean1a = clijx.meanOfAllPixels(output1a);
+        double mean1b = clijx.meanOfAllPixels(output1b);
+        double mean1c = clijx.meanOfAllPixels(output1c);
+        double mean1d = clijx.meanOfAllPixels(output1d);
 
+        System.out.println("mean1a " + mean1a);
+        System.out.println("mean1b " + mean1b);
+        System.out.println("mean1c " + mean1c);
+        System.out.println("mean1d " + mean1d);
 
+        assertEquals(0, mse, 0);
+        assertEquals(mean1, mean2, 0);
+        assertEquals(mean1, mean1a, 0);
+        assertEquals(mean1, mean1b, 0);
+        assertEquals(mean1, mean1c, 0);
+        assertEquals(mean1, mean1d, 0);
+
+        clijx.clear();
     }
 }
