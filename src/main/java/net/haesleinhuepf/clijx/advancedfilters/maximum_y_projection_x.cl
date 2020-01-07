@@ -1,5 +1,5 @@
 
-__kernel void maximum_y_projection_3d_3d (
+__kernel void maximum_y_projection (
     IMAGE_dst_max_TYPE dst_max,
     IMAGE_src_TYPE src
 ) {
@@ -10,10 +10,10 @@ __kernel void maximum_y_projection_3d_3d (
   float max = 0;
   for(int y = 0; y < GET_IMAGE_HEIGHT(src); y++)
   {
-    float value = READ_src_IMAGE(src,sampler,(int4)(x,y,z,0)).x;
+    float value = READ_src_IMAGE(src,sampler,POS_src_INSTANCE(x,y,z,0)).x;
     if (value > max || y == 0) {
       max = value;
     }
   }
-  WRITE_dst_max_IMAGE(dst_max,(int4)(x,z,0,0), CONVERT_dst_max_PIXEL_TYPE(max));
+  WRITE_dst_max_IMAGE(dst_max,POS_dst_max_INSTANCE(x,z,0,0), CONVERT_dst_max_PIXEL_TYPE(max));
 }
