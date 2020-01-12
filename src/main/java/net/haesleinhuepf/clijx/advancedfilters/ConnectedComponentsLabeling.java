@@ -1,6 +1,9 @@
 package net.haesleinhuepf.clijx.advancedfilters;
 
+import ij.IJ;
+import ij.ImageJ;
 import ij.ImagePlus;
+import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
@@ -120,18 +123,104 @@ public class ConnectedComponentsLabeling extends AbstractCLIJxPlugin implements 
         return true;
     }
 
-    public static boolean shiftIntensitiesToCloseGaps(CLIJx clijx, ClearCLImageInterface input, ClearCLImageInterface output) {
-        int maximum = 0;
-        if (input instanceof ClearCLImage) {
-            maximum = (int) clijx.maximumOfAllPixels((ClearCLImage) input);
-        } else {
-            maximum = (int) clijx.maximumOfAllPixels((ClearCLBuffer) input);
-        }
+    public static boolean shiftIntensitiesToCloseGaps(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output) {
+        //clijx.stopWatch("");
+        int maximum = (int) clijx.maximumOfAllPixels((ClearCLBuffer) input);
         final float[] allNewIndices = new float[maximum + 1];
+        //clijx.stopWatch("max " + maximum);
 
         float[] count = {1};
+/*
+        long number_of_pixels = (int) (input.getWidth() * input.getHeight());
+        if (number_of_pixels < Integer.MAX_VALUE && input.getNativeType() == NativeTypeEnum.Float) {
+            clijx.stopWatch("");
+
+            ClearCLBuffer sliceBuffer = (input.getDimension() == 3)?clijx.create(new long[]{input.getWidth(), input.getHeight()}, input.getNativeType()):null;
+
+            float[] slice1 = new float[(int) number_of_pixels];
+            FloatBuffer buffer1 = FloatBuffer.wrap(slice1);
+            float[] slice2 = new float[(int) number_of_pixels];
+            FloatBuffer buffer2 = FloatBuffer.wrap(slice2);
+
+
+            clijx.stopWatch("alloc/wrap");
+
+            for (int z = -1; z < input.getDepth(); z++) {
+                final float[] slice = (z%2==0)?slice1:slice2;
+                final FloatBuffer buffer = (z%2==1)?buffer1:buffer2;
+                final int currentZ = z;
+                Thread copyThread = null;
+                if (z < input.getDepth() - 1) {
+                    copyThread = new Thread() {
+                        @Override
+                        public void run() {
+                            //System.out.println("input size " + input.getSizeInBytes());
+                            //System.out.println("input pixel size " + input.getPixelSizeInBytes());
+                            //System.out.println("number_of_pixels " + number_of_pixels);
+                            //System.out.println("currentZ " + currentZ);
+                            //if (input.getDimension() == 3) {
+                            //    input.writeTo(buffer, new long[]{0, 0, currentZ+1}, new long[]{0,0,0}, new long[]{input.getWidth(), input.getHeight(), 1}, true);
+                            //} else {
+                            //    input.writeTo(buffer, new long[]{0, 0}, new long[]{0,0}, new long[]{input.getWidth(), input.getHeight()}, true);
+                            //}
+                            if (input.getDimension() == 3) {
+                                clijx.copySlice(input, sliceBuffer, currentZ);
+                                sliceBuffer.writeTo(buffer, true);
+                            } else {
+                                input.writeTo(buffer, true);
+                            }
+                            //input.writeTo(buffer, (currentZ + 1) * number_of_pixels, number_of_pixels, true);
+
+                        }
+                    };
+                    copyThread.start();
+                }
+
+                // clijx.stopWatch("copy");
+
+                Thread readerThread = null;
+                if (z >= 0) {
+                    readerThread  = new Thread() {
+                        @Override
+                        public void run() {
+                            for (int i = 0; i < slice.length; i++) {
+                                int key = (int) slice[i];
+                                if (key > 0 && allNewIndices[key] == 0) {
+                                    allNewIndices[key] = count[0];
+                                    count[0] = count[0] + 1;
+                                }
+                            }
+                            //System.out.println("                         count " + count[0]);
+                        }
+                    };
+                    readerThread.start();
+                }
+
+                if (copyThread != null) {
+                    try {
+                        copyThread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (readerThread != null) {
+                    try {
+                        readerThread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            if (sliceBuffer != null) {
+                clijx.release(sliceBuffer);
+            }
+            clijx.stopWatch("parse " + count[0]);
+*/
+
         long number_of_pixels = (int) (input.getWidth() * input.getHeight() * input.getDepth());
         if (number_of_pixels < Integer.MAX_VALUE && input.getNativeType() == NativeTypeEnum.Float) {
+            //clijx.stopWatch("");
             float[] slice = new float[(int) number_of_pixels];
             FloatBuffer buffer = FloatBuffer.wrap(slice);
 
@@ -143,6 +232,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJxPlugin implements 
                     count[0] = count[0] + 1;
                 }
             }
+            //clijx.stopWatch("parse" + count[0]);
         } else { // that's slower but more generic:
             RandomAccessibleInterval rai = clijx.convert(input, RandomAccessibleInterval.class);
             Cursor<RealType> cursor = Views.iterable(rai).cursor();
@@ -156,13 +246,62 @@ public class ConnectedComponentsLabeling extends AbstractCLIJxPlugin implements 
             }
         }
 
+        //clijx.stopWatch("");
+
         ClearCLBuffer keyValueMap = clijx.create(new long[]{allNewIndices.length, 1, 1}, NativeTypeEnum.Float);
+        //clijx.stopWatch("alloc2");
         keyValueMap.readFrom(FloatBuffer.wrap(allNewIndices), true);
+        //clijx.stopWatch("copy2");
 
         ReplaceIntensities.replaceIntensities(clijx, input, keyValueMap, output);
+        //clijx.stopWatch("repl");
 
         keyValueMap.close();
         return true;
+    }
+
+    public static void main(String[] args) {
+        new ImageJ();
+        ImagePlus imp = IJ.openImage("src/test/resources/miniBlobs.tif");
+        imp.show();
+
+        CLIJx clijx = CLIJx.getInstance();
+        CLIJ clij = clijx.getClij();
+
+        int size = 20;
+
+        ClearCLBuffer miniBlobs = clij.push(imp);
+        ClearCLBuffer input = clij.create(new long[]{miniBlobs.getWidth() * size, miniBlobs.getHeight() * size, miniBlobs.getDepth() * size}, miniBlobs.getNativeType());
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                for (int z = 0; z < size; z++) {
+                    Paste3D.paste(clij, miniBlobs, input, (int)(x * miniBlobs.getWidth()), (int)(y * miniBlobs.getHeight()), (int)(z * miniBlobs.getDepth()));
+                }
+            }
+        }
+        clij.show(input, "input");
+
+        ClearCLBuffer thresholded = clij.create(input);
+        ClearCLBuffer output = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
+
+        clij.op().threshold(input, thresholded, 7f);
+        clij.show(thresholded, "thresholded");
+
+        for (int i = 0; i < 3; i++) {
+            connectedComponentsLabeling(clijx, thresholded, output);
+
+
+            //assertEquals(375.0, clij.op().maximumOfAllPixels(output), 0.1);
+        }
+        clij.show(output, "result");
+
+        new WaitForUserDialog("wait").show();
+
+
+        input.close();
+        output.close();
+        thresholded.close();
+
     }
 
     public static boolean setNonZeroPixelsToPixelIndex(CLIJ clij, ClearCLImageInterface src, ClearCLImageInterface dst) {
