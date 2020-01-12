@@ -2,6 +2,7 @@ package net.haesleinhuepf.clijx.advancedfilters;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -26,7 +27,7 @@ public class MaximumYProjection extends AbstractCLIJxPlugin implements CLIJMacro
         return maximumYProjection(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
-    public static boolean maximumYProjection(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst_max) {
+    public static boolean maximumYProjection(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst_max) {
         assertDifferent(src, dst_max);
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);

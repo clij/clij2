@@ -2,6 +2,7 @@ package net.haesleinhuepf.clijx.advancedfilters;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -27,7 +28,7 @@ public class MaximumZProjection extends AbstractCLIJxPlugin implements CLIJMacro
         return maximumZProjection(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
-    public static boolean maximumZProjection(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst_max) {
+    public static boolean maximumZProjection(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst_max) {
         assertDifferent(src, dst_max);
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
