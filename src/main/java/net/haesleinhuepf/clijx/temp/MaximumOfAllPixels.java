@@ -18,6 +18,7 @@ import net.imglib2.type.numeric.RealType;
 import net.imglib2.view.Views;
 import org.scijava.plugin.Plugin;
 
+import java.nio.FloatBuffer;
 import java.util.HashMap;
 
 /**
@@ -41,15 +42,40 @@ public class MaximumOfAllPixels extends AbstractCLIJxPlugin implements CLIJMacro
 
     public static double maximumOfAllPixels(CLIJx clijx, ClearCLImageInterface clImage) {
         ClearCLImageInterface clReducedImage = clImage;
+        ClearCLImageInterface clReducedImage2 = clImage;
+
         if (clImage.getDimension() == 3) {
             clReducedImage = clijx.create(new long[]{clImage.getWidth(), clImage.getHeight()}, clImage.getNativeType());
 
-            HashMap<String, Object> parameters = new HashMap<>();
-            parameters.put("src", clImage);
-            parameters.put("dst", clReducedImage);
-            clijx.execute(MaximumOfAllPixels.class, "maximum_projection_3d_2d_x.cl", "maximum_projection_3d_2d", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
+            clijx.maximumZProjection(clImage, clReducedImage);
+            //HashMap<String, Object> parameters = new HashMap<>();
+            //parameters.put("src", clImage);
+            //parameters.put("dst", clReducedImage);
+            //clijx.execute(MaximumOfAllPixels.class, "maximum_z_projection_x.cl", "maximum_z_projection", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
+        }
+        if (clReducedImage.getDimension() == 2) {
+            clReducedImage2 = clijx.create(new long[]{clReducedImage.getWidth(), 1}, clImage.getNativeType());
+            clijx.maximumYProjection(clReducedImage, clReducedImage2);
+            //HashMap<String, Object> parameters = new HashMap<>();
+            //parameters.put("src", clImage);
+            //parameters.put("dst", clReducedImage);
+            //clijx.execute(MaximumOfAllPixels.class, "maximum_z_projection_x.cl", "maximum_z_projection", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
         }
 
+        ClearCLBuffer clReducedImage3 = clijx.create(new long[]{1, 1}, clijx.Float);
+        clijx.maximumXProjection(clReducedImage2, clReducedImage3);
+
+        float[] arr = new float[1];
+        FloatBuffer buffer = FloatBuffer.wrap(arr);
+
+        clReducedImage3.writeTo(buffer, true);
+
+        clijx.release(clReducedImage3);
+
+        double maximumGreyValue = arr[0];
+
+
+/*
         RandomAccessibleInterval rai = clijx.convert(clReducedImage, RandomAccessibleInterval.class);
         Cursor cursor = Views.iterable(rai).cursor();
         float maximumGreyValue = -Float.MAX_VALUE;
@@ -58,10 +84,13 @@ public class MaximumOfAllPixels extends AbstractCLIJxPlugin implements CLIJMacro
             if (maximumGreyValue < greyValue) {
                 maximumGreyValue = greyValue;
             }
-        }
+        }*/
 
         if (clImage != clReducedImage) {
             clijx.release(clReducedImage);
+        }
+        if (clImage != clReducedImage2) {
+            clijx.release(clReducedImage2);
         }
         return maximumGreyValue;
     }
