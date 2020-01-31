@@ -61,7 +61,7 @@ public class WekaDemo {
 
         clijx.show(featureStack, "feature stack");
 
-        /*
+
         CLIJxWeka cw = new CLIJxWeka(clijx, featureStack, partialGroundTruth);
 
         AbstractClassifier classifier = cw.getClassifier();
@@ -71,7 +71,7 @@ public class WekaDemo {
 
         ClearCLBuffer buffer = cw2.getClassification();
         clijx.show(buffer, "classification");
-        */
+
 
         clijx.clear();
     }
