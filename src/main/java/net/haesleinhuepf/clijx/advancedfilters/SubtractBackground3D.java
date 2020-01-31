@@ -3,16 +3,19 @@ package net.haesleinhuepf.clijx.advancedfilters;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_subtractBackground3D")
-public class SubtractBackground3D extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class SubtractBackground3D extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -22,24 +25,24 @@ public class SubtractBackground3D extends AbstractCLIJPlugin implements CLIJMacr
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = subtractBackground(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asFloat(args[2]), asFloat(args[3]), asFloat(args[4]));
+        boolean result = subtractBackground(getCLIJx(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asFloat(args[2]), asFloat(args[3]), asFloat(args[4]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean subtractBackground3D(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float sigmaX, Float sigmaY, Float sigmaZ) {
-        return subtractBackground(clij, input, output, sigmaX, sigmaY, sigmaZ);
+    public static boolean subtractBackground3D(CLIJx clijx, ClearCLImageInterface input, ClearCLImageInterface output, Float sigmaX, Float sigmaY, Float sigmaZ) {
+        return subtractBackground(clijx, input, output, sigmaX, sigmaY, sigmaZ);
     }
 
-    public static boolean subtractBackground(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Float sigmaX, Float sigmaY, Float sigmaZ) {
+    public static boolean subtractBackground(CLIJx clijx, ClearCLImageInterface input, ClearCLImageInterface output, Float sigmaX, Float sigmaY, Float sigmaZ) {
 
-        ClearCLBuffer background = clij.create(input);
+        ClearCLBuffer background = clijx.create(input.getDimensions(), input.getNativeType());
 
-        clij.op().blur(input, background, sigmaX, sigmaY, sigmaZ);
+        clijx.blur(input, background, sigmaX, sigmaY, sigmaZ);
 
-        clij.op().subtractImages(input, background, output);
+        clijx.subtractImages(input, background, output);
 
-        background.close();
+        clijx.release(background);
         return true;
     }
 
