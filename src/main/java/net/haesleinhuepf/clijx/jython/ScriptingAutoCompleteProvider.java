@@ -4,6 +4,7 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.Roi;
 import ij.macro.Interpreter;
+import ij.plugin.frame.RoiManager;
 import ij.process.ImageProcessor;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
@@ -86,6 +87,7 @@ public class ScriptingAutoCompleteProvider extends DefaultCompletionProvider
         addClassToAutoCompletion(ImageProcessor.class, "ip.");
         addClassToAutoCompletion(IJ.class, "IJ.");
         addClassToAutoCompletion(Roi.class, "roi.");
+        addClassToAutoCompletion(RoiManager.class, "rm.");
 
         addClassToAutoCompletion(ArrayImgs.class, "ArrayImgs.");
         addClassToAutoCompletion(Cursor.class, "cursor.");
