@@ -1,11 +1,13 @@
-## translationRegistration
+## setRow
 ![Image](images/mini_clijx_logo.png)
 
-Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.
+Sets all pixel values x of a given row in X to a constant value v.
+
+<pre>f(x) = v</pre>
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_translationRegistration(Image input1, Image input2, Image destination);
+Ext.CLIJx_setRow(Image source, Number rowIndex, Number value);
 ```
 
 
@@ -18,12 +20,13 @@ CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+int arg2 = 10;
+float arg3 = 1.0;
 ```
 
 ```
 // Execute operation on GPU
-clijx.translationRegistration(clij, arg1, arg2, arg3);
+clijx.setRow(clij, arg1, arg2, arg3);
 ```
 
 ```
@@ -31,7 +34,6 @@ clijx.translationRegistration(clij, arg1, arg2, arg3);
 
 // cleanup memory on GPU
 arg1.close();
-arg2.close();
 ```
 
 

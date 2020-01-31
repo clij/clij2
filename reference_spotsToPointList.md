@@ -1,7 +1,7 @@
 ## spotsToPointList
 ![Image](images/mini_clijx_logo.png)
 
-Transforms a spots image as resulting from maximum/minimum detection in an image where every column cotains d 
+Transforms a spots image as resulting from maximum/minimum detection in an image where every column contains d 
 pixels (with d = dimensionality of the original image) with the coordinates of the maxima/minima.
 
 ### Usage in ImageJ macro

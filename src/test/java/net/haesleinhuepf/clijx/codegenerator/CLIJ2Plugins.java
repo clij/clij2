@@ -120,6 +120,7 @@ public interface CLIJ2Plugins {
             BinaryEdgeDetection.class,
             DistanceMap.class,
             PullAsROI.class,
+            PullLabelsToROIManager.class,
             NonzeroMaximumDiamond.class,
             OnlyzeroOverwriteMaximumDiamond.class,
             OnlyzeroOverwriteMaximumBox.class,

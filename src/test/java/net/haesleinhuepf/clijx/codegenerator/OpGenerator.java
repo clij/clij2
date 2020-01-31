@@ -27,6 +27,8 @@ public class OpGenerator {
         builder.append("import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;\n");
         builder.append("import ij.measure.ResultsTable;\n");
         builder.append("import ij.gui.Roi;\n");
+        builder.append("import ij.plugin.frame.RoiManager;\n");
+
 
         for (Class klass : CLIJ2Plugins.classes) {
             builder.append("import " + klass.getName() + ";\n");

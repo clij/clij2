@@ -1,11 +1,11 @@
-## maximumYProjection
+## sumYProjection
 ![Image](images/mini_clijx_logo.png)
 
-Determines the maximum projection of an image along X.
+Determines the sum intensity projection of an image along Z.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_maximumYProjection(Image source, Image destination_max);
+Ext.CLIJx_sumYProjection(Image source, Image destination);
 ```
 
 
@@ -23,7 +23,7 @@ ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 
 ```
 // Execute operation on GPU
-clijx.maximumYProjection(clij, arg1, arg2);
+clijx.sumYProjection(clij, arg1, arg2);
 ```
 
 ```
@@ -33,12 +33,6 @@ clijx.maximumYProjection(clij, arg1, arg2);
 arg1.close();
 arg2.close();
 ```
-
-
-
-
-### Example scripts
-<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [orthogonalMaximumProjections.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/orthogonalMaximumProjections.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

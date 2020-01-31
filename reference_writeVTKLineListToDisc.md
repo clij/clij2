@@ -1,11 +1,11 @@
-## maximumYProjection
+## writeVTKLineListToDisc
 ![Image](images/mini_clijx_logo.png)
 
-Determines the maximum projection of an image along X.
+Takes a point list image representing n points (n*2 for 2D points, n*3 for 3D points) and a corresponding touch matrix , sized (n+1)*(n+1), and exports them in VTK format.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_maximumYProjection(Image source, Image destination_max);
+Ext.CLIJx_writeVTKLineListToDisc(Image pointlist, Image touch_matrix, String filename);
 ```
 
 
@@ -23,7 +23,7 @@ ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 
 ```
 // Execute operation on GPU
-clijx.maximumYProjection(clij, arg1, arg2);
+clijx.writeVTKLineListToDisc(clij, arg1, arg2, arg3);
 ```
 
 ```
@@ -33,12 +33,6 @@ clijx.maximumYProjection(clij, arg1, arg2);
 arg1.close();
 arg2.close();
 ```
-
-
-
-
-### Example scripts
-<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [orthogonalMaximumProjections.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/orthogonalMaximumProjections.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

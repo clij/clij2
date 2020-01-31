@@ -23,13 +23,12 @@ CLIJx clijx = CLIJx.getInstance();
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 float arg3 = 1.0;
-float arg4 = 2.0;
-boolean arg5 = true;
+boolean arg4 = true;
 ```
 
 ```
 // Execute operation on GPU
-clijx.rotate2D(clij, arg1, arg2, arg3, arg4, arg5);
+clijx.rotate2D(clij, arg1, arg2, arg3, arg4);
 ```
 
 ```

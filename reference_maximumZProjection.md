@@ -17,23 +17,21 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination_max = clij.create(new long[]{source.getWidth(), source.getHeight()}, source.getNativeType());
+ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.maximumZProjection(clij, source, destination_max);
+clijx.maximumZProjection(clij, arg1, arg2);
 ```
 
 ```
 //show result
-destination_maxImagePlus = clij.pull(destination_max);
-destination_maxImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination_max.close();
+arg1.close();
+arg2.close();
 ```
 
 
