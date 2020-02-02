@@ -39,8 +39,8 @@ public class DistanceMap extends AbstractCLIJxPlugin implements CLIJMacroPlugin,
         ClearCLBuffer temp2 = clijx.create(dst);
         ClearCLBuffer temp3 = clijx.create(dst);
 
-        clijx.op.copy(src, temp1);
-        clijx.op.copy(src, temp3);
+        clijx.copy(src, temp1);
+        clijx.copy(src, temp3);
 
         int iteration = 0;
         while (flagValue[0] > 0) {
@@ -49,17 +49,17 @@ public class DistanceMap extends AbstractCLIJxPlugin implements CLIJMacroPlugin,
 
             if (iteration % 2 == 0 ) {
                 localPositiveMinimum(clijx, temp1, temp2, flag);
-                clijx.op.addImages(temp3, temp2, dst);
+                clijx.addImages(temp3, temp2, dst);
             } else {
                 localPositiveMinimum(clijx, temp2, temp1, flag);
-                clijx.op.addImages(dst, temp1, temp3);
+                clijx.addImages(dst, temp1, temp3);
             }
 
             flag.writeTo(FloatBuffer.wrap(flagValue), true);
             iteration++;
         }
         if (iteration % 2 != 0 ) {
-            clijx.op.copy(temp3, dst);
+            clijx.copy(temp3, dst);
         }
         temp1.close();
         temp2.close();
