@@ -27,7 +27,7 @@ import java.util.HashMap;
  * The CLIJ2 gateway
  *
  * Author: @haesleinhuepf
- * December 2020
+ * December 2019
  */
 public class CLIJ2 implements CLIJ2Ops {
     private static CLIJ2 instance;
