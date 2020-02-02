@@ -4,6 +4,7 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.Roi;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij2.plugins.StandardDeviationOfMaskedPixels;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.painting.DrawBox;
 import org.junit.Test;

@@ -7,8 +7,8 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
-import net.haesleinhuepf.clijx.utilities.HasAuthor;
-import net.haesleinhuepf.clijx.utilities.HasLicense;
+import net.haesleinhuepf.clij2.utilities.HasAuthor;
+import net.haesleinhuepf.clij2.utilities.HasLicense;
 import org.scijava.plugin.Plugin;
 
 /**

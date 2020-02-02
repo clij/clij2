@@ -6,13 +6,14 @@ import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij2.plugins.Blur3D;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
-import net.haesleinhuepf.clijx.utilities.CLIJUtilities;
+import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
 import org.scijava.plugin.Plugin;
 
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.sigmaToKernelSize;
-import static net.haesleinhuepf.clijx.utilities.CLIJUtilities.executeSeparableKernel;
+import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.executeSeparableKernel;
 
 /**
  * Author: @haesleinhuepf

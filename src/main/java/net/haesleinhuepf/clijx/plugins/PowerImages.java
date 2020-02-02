@@ -14,6 +14,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  *         August 2019
  */
+@Deprecated
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_powerImages")
 public class PowerImages extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 

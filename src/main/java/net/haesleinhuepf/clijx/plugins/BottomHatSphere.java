@@ -7,10 +7,12 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_bottomHatSphere")
-public class BottomHatSphere extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class BottomHatSphere extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -21,20 +23,24 @@ public class BottomHatSphere extends AbstractCLIJPlugin implements CLIJMacroPlug
     public boolean executeCL() {
 
         Object[] args = openCLBufferArgs();
-        boolean result = bottomHatSphere(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
+        boolean result = bottomHatSphere(getCLIJx(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean bottomHatSphere(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ) {
+    public static boolean bottomHatSphere(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ) {
 
-        ClearCLBuffer temp1 = clij.create(input);
-        ClearCLBuffer temp2 = clij.create(input);
+        ClearCLBuffer temp1 = clijx.create(input);
+        ClearCLBuffer temp2 = clijx.create(input);
 
-        clij.op().minimumSphere(input, temp1, radiusX, radiusX, radiusZ);
-        clij.op().maximumSphere(temp1, temp2, radiusX, radiusY, radiusZ);
-
-        clij.op().subtractImages(input, temp2, output);
+        if (input.getDimension() == 3) {
+            clijx.minimum3DSphere(input, temp1, radiusX, radiusX, radiusZ);
+            clijx.maximum3DSphere(temp1, temp2, radiusX, radiusY, radiusZ);
+        } else {
+            clijx.minimum2DSphere(input, temp1, radiusX, radiusX);
+            clijx.maximum2DSphere(temp1, temp2, radiusX, radiusY);
+        }
+        clijx.subtractImages(input, temp2, output);
 
         temp1.close();
         temp2.close();

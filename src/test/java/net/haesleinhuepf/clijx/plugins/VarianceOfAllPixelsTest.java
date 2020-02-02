@@ -3,6 +3,7 @@ package net.haesleinhuepf.clijx.plugins;
 import ij.IJ;
 import ij.ImagePlus;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij2.plugins.VarianceOfAllPixels;
 import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
 

@@ -57,33 +57,38 @@ public class ScriptingAutoCompleteProvider extends DefaultCompletionProvider
 
     private ScriptingAutoCompleteProvider() {
 
-        addCompletion(makeListEntry(this, "clijx.create([width, height])", null, "<b>create</b><br>Create a 2D buffer of given dimensions with type Float / 32-bit."));
-        addCompletion(makeListEntry(this, "clijx.create([width, height, depth])", null, "<b>create</b><br>Create a 3D buffer of given dimensions with type Float / 32-bit."));
-        addCompletion(makeListEntry(this, "clijx.create([width, height, depth], NativeTypeEnum type)", null, "<b>create</b><br>Create a 3D buffer of given dimensions given with."));
-        addCompletion(makeListEntry(this, "clijx.Float", null, "<b>Float</b><br>32-bit pixel type."));
-        addCompletion(makeListEntry(this, "clijx.UnsignedShort", null, "<b>UnsignedShort</b><br16-bit pixel type."));
-        addCompletion(makeListEntry(this, "clijx.UnsignedByte", null, "<b>UnsignedByte/b><br>8-bit pixel type."));
+        for (String clijInstanceName : new String[]{"clij2", "clijx"}) {
+            String clijClassName = clijInstanceName.toUpperCase().replace("X", "x");
+            
+            addCompletion(makeListEntry(this, clijInstanceName + ".create([width, height])", null, "<b>create</b><br>Create a 2D buffer of given dimensions with type Float / 32-bit."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".create([width, height, depth])", null, "<b>create</b><br>Create a 3D buffer of given dimensions with type Float / 32-bit."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".create([width, height, depth], NativeTypeEnum type)", null, "<b>create</b><br>Create a 3D buffer of given dimensions given with."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".Float", null, "<b>Float</b><br>32-bit pixel type."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".UnsignedShort", null, "<b>UnsignedShort</b><br16-bit pixel type."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".UnsignedByte", null, "<b>UnsignedByte/b><br>8-bit pixel type."));
 
-        addCompletion(makeListEntry(this, "clijx.create(ClearCLBuffer buffer)", null, "<b>create</b><br>Create a buffer with dimensions and type as the given buffer."));
-        addCompletion(makeListEntry(this, "clijx.getGPUName()", null, "<b>getGPUName</b><br>Returns the name of the currently selected device."));
-        addCompletion(makeListEntry(this, "clijx.push(Object objectOnCPU)", null, "<b>push</b><br>Pushes an image to GPU memory and returns the buffer on the GPU."));
-        addCompletion(makeListEntry(this, "clijx.pull(Object objectOnGPU)", null, "<b>pull</b><br>Pulls an image out of GPU memory and return an ImagePlus."));
-        addCompletion(makeListEntry(this, "clijx.execute(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters)", null, "<b>execute</b><br>Executes an OpenCL kernel. TODO: Write details."));
-        addCompletion(makeListEntry(this, "clijx.show(Object object, String title)", null, "<b>show</b><br>Pulls an image from GPU memory and shows it in a window with the given title."));
-        addCompletion(makeListEntry(this, "clijx.getOpenCLVersion()", null, "<b>getOpenCLVersion</b><br>Returns the supported OpenCL version of the selected device."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".create(ClearCLBuffer buffer)", null, "<b>create</b><br>Create a buffer with dimensions and type as the given buffer."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".getGPUName()", null, "<b>getGPUName</b><br>Returns the name of the currently selected device."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".push(Object objectOnCPU)", null, "<b>push</b><br>Pushes an image to GPU memory and returns the buffer on the GPU."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".pull(Object objectOnGPU)", null, "<b>pull</b><br>Pulls an image out of GPU memory and return an ImagePlus."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".execute(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters)", null, "<b>execute</b><br>Executes an OpenCL kernel. TODO: Write details."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".show(Object object, String title)", null, "<b>show</b><br>Pulls an image from GPU memory and shows it in a window with the given title."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".getOpenCLVersion()", null, "<b>getOpenCLVersion</b><br>Returns the supported OpenCL version of the selected device."));
 
-        addCompletion(makeListEntry(this, "clijx.release(ClearCLImageInterface image_or_buffer)", null, "<b>release</b><br>Releases a given image or buffer.\n\nNote: You need to call clijx.setKeepReferences(true); to activate this functionality."));
-        addCompletion(makeListEntry(this, "from net.haesleinhuepf.clijx import CLIJx;\nclijx = CLIJx.getInstance()", null, "<b>CLIJx.getInstance</b><br>Initialize CLIJx."));
-        addCompletion(makeListEntry(this, "clijx.clear()", null, "<b>clear</b><br>Releases all images and buffers currently stored on the GPU. \n\nNote: You need to call clijx.setKeepReferences(true); to activate this functionality."));
-        addCompletion(makeListEntry(this, "clijx.reportMemory()", null, "<b>reportMemory</b><br>Returns a report as string listing which images and buffers are currently stored in the GPU.\n\nNote: You need to call clijx.setKeepReferences(true); to activate this functionality."));
-
+            addCompletion(makeListEntry(this, clijInstanceName + ".release(ClearCLImageInterface image_or_buffer)", null, "<b>release</b><br>Releases a given image or buffer.\n\nNote: You need to call " + clijInstanceName + ".setKeepReferences(true); to activate this functionality."));
+            addCompletion(makeListEntry(this, "from net.haesleinhuepf." + clijInstanceName + " import " + clijClassName + ";\nclijx = " + clijClassName + ".getInstance()", null, "<b>" + clijClassName + ".getInstance</b><br>Initialize " + clijClassName + "."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".clear()", null, "<b>clear</b><br>Releases all images and buffers currently stored on the GPU. \n\nNote: You need to call " + clijInstanceName + ".setKeepReferences(true); to activate this functionality."));
+            addCompletion(makeListEntry(this, clijInstanceName + ".reportMemory()", null, "<b>reportMemory</b><br>Returns a report as string listing which images and buffers are currently stored in the GPU.\n\nNote: You need to call " + clijInstanceName +  ".setKeepReferences(true); to activate this functionality."));
+        }
         for (BasicCompletion basicCompletion : CLIJxAutoComplete.getCompletions(this)) {
+            addCompletion(basicCompletion);
+        }
+        for (BasicCompletion basicCompletion : CLIJ2AutoComplete.getCompletions(this)) {
             addCompletion(basicCompletion);
         }
 
         addClassToAutoCompletion(CLIJOps.class, "clij.op().");
         addClassToAutoCompletion(CLIJ.class, "clij.");
-        //addClassToAutoCompletion(CLIJx.class, "clijx.");
         addClassToAutoCompletion(ClearCLBuffer.class, "buffer.");
 
         addClassToAutoCompletion(ImagePlus.class, "imp.");

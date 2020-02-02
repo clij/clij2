@@ -6,11 +6,12 @@ import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij2.plugins.CountNonZeroPixels;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.matrix.GenerateDistanceMatrix;
 import net.haesleinhuepf.clijx.matrix.ShortestDistances;
 import net.haesleinhuepf.clijx.matrix.SpotsToPointList;
-import net.haesleinhuepf.clijx.matrix.TransposeXY;
+import net.haesleinhuepf.clij2.plugins.TransposeXY;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 

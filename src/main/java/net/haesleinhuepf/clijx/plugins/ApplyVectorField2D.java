@@ -8,7 +8,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
-import net.haesleinhuepf.clijx.utilities.CLIJUtilities;
+import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;

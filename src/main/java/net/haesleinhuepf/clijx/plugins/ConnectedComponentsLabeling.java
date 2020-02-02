@@ -13,6 +13,7 @@ import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij2.plugins.ReplaceIntensities;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import net.imglib2.Cursor;
@@ -26,7 +27,7 @@ import java.nio.FloatBuffer;
 import java.util.HashMap;
 
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
-import static net.haesleinhuepf.clijx.utilities.CLIJUtilities.checkDimensions;
+import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
 
 /**
  * ConnectedComponentsLabeling

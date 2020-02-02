@@ -7,8 +7,8 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPluginService;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.utilities.HasAuthor;
-import net.haesleinhuepf.clijx.utilities.HasLicense;
+import net.haesleinhuepf.clij2.utilities.HasAuthor;
+import net.haesleinhuepf.clij2.utilities.HasLicense;
 import org.scijava.Context;
 
 import java.io.*;
@@ -387,7 +387,11 @@ public class DocumentationGenerator {
         builder.append("import java.util.ArrayList;");
 
         builder.append("// this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details\n");
-        builder.append("class CLIJxAutoComplete {\n");
+        if (isCLIJ2) {
+            builder.append("class CLIJ2AutoComplete {\n");
+        } else {
+            builder.append("class CLIJxAutoComplete {\n");
+        }
         builder.append("   \n");
         builder.append("   public static ArrayList<BasicCompletion> getCompletions(final ScriptingAutoCompleteProvider provider) {\n");
 
@@ -398,18 +402,27 @@ public class DocumentationGenerator {
         int methodCount = 0;
         for (String name : names) {
             DocumentationItem item = methodMap.get(name);
+            if (
+                    (isCLIJ2 && item.klass.getPackage().toString().contains(".clij2.")) ||
+                    ((!isCLIJ2) && (item.klass.getPackage().toString().contains(".clijx.") || item.klass.getPackage().toString().contains(".clij2.")))
+            ) {
 
-            String htmlDescription = item.description;
-            if (htmlDescription != null) {
-                htmlDescription = htmlDescription.replace("\n", "<br>");
-                htmlDescription = htmlDescription.replace("\"", "&quot;");
-                htmlDescription = htmlDescription + "<br><br>Parameters:<br>" + item.parametersJava;
+                String htmlDescription = item.description;
+                if (htmlDescription != null) {
+                    htmlDescription = htmlDescription.replace("\n", "<br>");
+                    htmlDescription = htmlDescription.replace("\"", "&quot;");
+                    htmlDescription = htmlDescription + "<br><br>Parameters:<br>" + item.parametersJava;
+                }
+                if (isCLIJ2) {
+                    builder.append("       headline = \"clij2." + item.methodName + "(" + item.parametersJava + ")\";\n");
+                } else {
+                    builder.append("       headline = \"clijx." + item.methodName + "(" + item.parametersJava + ")\";\n");
+                }
+                builder.append("       description = \"<b>" + item.methodName + "</b><br><br>" + htmlDescription + "\";\n");
+                builder.append("       list.add(new BasicCompletion(provider, headline, null, description));\n");
+
+                methodCount++;
             }
-            builder.append("       headline = \"clijx." + item.methodName + "(" + item.parametersJava + ")\";\n");
-            builder.append("       description = \"<b>" + item.methodName + "</b><br><br>" + htmlDescription + "\";\n");
-            builder.append("       list.add(new BasicCompletion(provider, headline, null, description));\n");
-
-            methodCount++;
         }
 
         builder.append("        return list;\n");
@@ -417,8 +430,12 @@ public class DocumentationGenerator {
         builder.append("}\n");
         builder.append("// " + methodCount + " methods generated.\n");
 
-        File outputTarget = new File("src/main/java/net/haesleinhuepf/clijx/jython/CLIJxAutoComplete.java");
-
+        File outputTarget;
+        if (isCLIJ2) {
+            outputTarget = new File("src/main/java/net/haesleinhuepf/clijx/jython/CLIJ2AutoComplete.java");
+        } else {
+            outputTarget = new File("src/main/java/net/haesleinhuepf/clijx/jython/CLIJxAutoComplete.java");
+        }
         try {
             FileWriter writer = new FileWriter(outputTarget);
             writer.write(builder.toString());

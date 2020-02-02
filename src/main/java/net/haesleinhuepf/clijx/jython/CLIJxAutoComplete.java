@@ -47,8 +47,8 @@ class CLIJxAutoComplete {
        headline = "clijx.automaticThresholdInplace(ClearCLBuffer arg1, String arg2)";
        description = "<b>automaticThresholdInplace</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, String arg2";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3)";
-       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3";
+       headline = "clijx.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6)";
+       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.averageDistanceOfClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3)";
        description = "<b>averageDistanceOfClosestPoints</b><br><br>Determine the n point indices with shortest distance for all points in a distance matrix.<br>This corresponds to the n row indices with minimum values for each column of the distance matrix.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3";
@@ -116,9 +116,6 @@ class CLIJxAutoComplete {
        headline = "clijx.connectedComponentsLabeling(ClearCLBuffer binary_input, ClearCLBuffer labeling_destination)";
        description = "<b>connectedComponentsLabeling</b><br><br>Performs connected components analysis to a binary image and generates a label map.<br><br>Parameters:<br>ClearCLBuffer binary_input, ClearCLBuffer labeling_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.convertToImageJBinary(ClearCLBuffer arg1, ClearCLBuffer arg2)";
-       description = "<b>convertToImageJBinary</b><br><br>null";
-       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.copySlice(ClearCLImageInterface arg1, ClearCLImageInterface arg2, Integer arg3)";
        description = "<b>copySlice</b><br><br>This method has two purposes: <br>It copies a 2D image to a given slice z position in a 3D image stack or <br>It copies a given slice at position z in an image stack to a 2D image.<br><br>The first case is only available via ImageJ macro. If you are using it, it is recommended that the <br>target 3D image already pre-exists in GPU memory before calling this method. Otherwise, CLIJ create <br>the image stack with z planes.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, Integer arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -178,12 +175,6 @@ class CLIJxAutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.detectMinimaSliceBySliceBox(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3)";
        description = "<b>detectMinimaSliceBySliceBox</b><br><br>Detects local minima in a given square neighborhood of an input image stack. The input image stack is <br>processed slice by slice. Pixels in the resulting image are set to 1 if there is no other pixel in a <br>given radius which has a lower intensity, and to 0 otherwise.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3";
-       list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Boolean arg4)";
-       description = "<b>detectOptimaSliceBySlice</b><br><br>null";
-       list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.detectOptima(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Boolean arg4)";
-       description = "<b>detectOptima</b><br><br>null";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.differenceOfGaussian2D(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5, Float arg6)";
        description = "<b>differenceOfGaussian2D</b><br><br>Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.<br><br>It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5, Float arg6";
@@ -317,8 +308,8 @@ class CLIJxAutoComplete {
        headline = "clijx.greater(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>greater</b><br><br>Determines if two images A and B greater pixel wise.<br><br>f(a, b) = 1 if a > b; 0 otherwise. <br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6, boolean arg7)";
-       description = "<b>histogram</b><br><br>Determines the histogram of a given image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6, boolean arg7";
+       headline = "clijx.histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6)";
+       description = "<b>histogram</b><br><br>Determines the histogram of a given image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.image2DToResultsTable(ClearCLBuffer arg1, ResultsTable arg2)";
        description = "<b>image2DToResultsTable</b><br><br>Converts an image into a table.<br><br>Parameters:<br>ClearCLBuffer arg1, ResultsTable arg2";
@@ -386,8 +377,11 @@ class CLIJxAutoComplete {
        headline = "clijx.maximum3DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, Integer arg3, Integer arg4, Integer arg5)";
        description = "<b>maximum3DSphere</b><br><br>Computes the local maximum of a pixels spherical neighborhood. The spheres size is specified by <br>its half-width, half-height and half-depth (radius).<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, Integer arg3, Integer arg4, Integer arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.maximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, int arg3, int arg4, int arg5)";
-       description = "<b>maximumBox</b><br><br>Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by <br>its half-width and half-height (radius).<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, int arg3, int arg4, int arg5";
+       headline = "clijx.maximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3)";
+       description = "<b>maximumBox</b><br><br>Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by <br>its half-width and half-height (radius).<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.maximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3)";
+       description = "<b>maximumDiamond</b><br><br>null";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.maximumImageAndScalar(ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3)";
        description = "<b>maximumImageAndScalar</b><br><br>Computes the maximum of a constant scalar s and each pixel value x in a given image X.<br><br><pre>f(x, s) = max(x, s)</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3";
@@ -406,9 +400,6 @@ class CLIJxAutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.maximumXProjection(ClearCLImageInterface arg1, ClearCLImageInterface arg2)";
        description = "<b>maximumXProjection</b><br><br>Determines the maximum projection of an image along X.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2";
-       list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.maximumXYZProjection(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
-       description = "<b>maximumXYZProjection</b><br><br>Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y<br> dimesions of the resulting image must be specified by the user according to its definition:<br>X = 0<br>Y = 1<br>Z = 2<br><br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.maximumYProjection(ClearCLImageInterface arg1, ClearCLImageInterface arg2)";
        description = "<b>maximumYProjection</b><br><br>Determines the maximum projection of an image along X.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2";
@@ -488,8 +479,11 @@ class CLIJxAutoComplete {
        headline = "clijx.minimum3DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, Integer arg3, Integer arg4, Integer arg5)";
        description = "<b>minimum3DSphere</b><br><br>Computes the local minimum of a pixels spherical neighborhood. The spheres size is specified by <br>its half-width, half-height and half-depth (radius).<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, Integer arg3, Integer arg4, Integer arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.minimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, int arg3, int arg4, int arg5)";
-       description = "<b>minimumBox</b><br><br>Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by <br>its half-width and half-height (radius).<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, int arg3, int arg4, int arg5";
+       headline = "clijx.minimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3)";
+       description = "<b>minimumBox</b><br><br>Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by <br>its half-width and half-height (radius).<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.minimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3)";
+       description = "<b>minimumDiamond</b><br><br>null";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.minimumDistanceOfTouchingNeighbors(ClearCLBuffer distance_matrix, ClearCLBuffer touch_matrix, ClearCLBuffer minimum_distancelist_destination)";
        description = "<b>minimumDistanceOfTouchingNeighbors</b><br><br>Takes a touch matrix and a distance matrix to determine the shortest distance of touching neighbors for every object.<br><br>Parameters:<br>ClearCLBuffer distance_matrix, ClearCLBuffer touch_matrix, ClearCLBuffer minimum_distancelist_destination";
@@ -523,9 +517,6 @@ class CLIJxAutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.multiplyMatrix(ClearCLBuffer matrix1, ClearCLBuffer matrix2, ClearCLBuffer matrix_destination)";
        description = "<b>multiplyMatrix</b><br><br>Multiplies two matrices with each other.<br><br>Parameters:<br>ClearCLBuffer matrix1, ClearCLBuffer matrix2, ClearCLBuffer matrix_destination";
-       list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.multiplySliceBySliceWithScalars(ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3)";
-       description = "<b>multiplySliceBySliceWithScalars</b><br><br>null";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.multiplyStackWithPlane(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>multiplyStackWithPlane</b><br><br>Multiplies all pairs of pixel values x and y from an image stack X and a 2D image Y. x and y are at <br>the same spatial position within a plane.<br><br><pre>f(x, y) = x * y</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
@@ -623,8 +614,8 @@ class CLIJxAutoComplete {
        headline = "clijx.readImageFromDisc(String arg1)";
        description = "<b>readImageFromDisc</b><br><br>Read an image from disc.<br><br>Parameters:<br>String arg1";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.readRawImageFromDisc(String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5)";
-       description = "<b>readRawImageFromDisc</b><br><br>Reads a raw file from disc and pushes it immediately to the GPU.<br><br>Parameters:<br>String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5";
+       headline = "clijx.readRawImageFromDisc(ClearCLBuffer arg1, String arg2)";
+       description = "<b>readRawImageFromDisc</b><br><br>Reads a raw file from disc and pushes it immediately to the GPU.<br><br>Parameters:<br>ClearCLBuffer arg1, String arg2";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.replaceIntensities(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>replaceIntensities</b><br><br>Replaces integer intensities specified in a vector image. The vector image must be 3D with size (m, 1, 1) where m corresponds to the maximum intensity in the original image. Assuming the vector image contains values (0, 1, 0, 2) means: <br> * All pixels with value 0 (first entry in the vector image) get value 0<br> * All pixels with value 1 get value 1<br> * All pixels with value 2 get value 0<br> * All pixels with value 3 get value 2<br><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
@@ -761,9 +752,6 @@ class CLIJxAutoComplete {
        headline = "clijx.sumOfAllPixels(ClearCLImageInterface arg1)";
        description = "<b>sumOfAllPixels</b><br><br>Determines the sum of all pixels in a given image. It will be stored in a new row of ImageJs<br>Results table in the column 'Sum'.<br><br>Parameters:<br>ClearCLImageInterface arg1";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.sumPixelsSliceBySlice(ClearCLBuffer arg1)";
-       description = "<b>sumPixelsSliceBySlice</b><br><br>null";
-       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.sumPixels(ClearCLImageInterface arg1)";
        description = "<b>sumPixels</b><br><br>Determines the sum of all pixels in a given image. It will be stored in a new row of ImageJs<br>Results table in the column 'Sum'.<br><br>Parameters:<br>ClearCLImageInterface arg1";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -836,4 +824,4 @@ class CLIJxAutoComplete {
         return list;
     }
 }
-// 275 methods generated.
+// 271 methods generated.

@@ -2,7 +2,7 @@ package net.haesleinhuepf.clijx.matrix;
 
 
 import net.haesleinhuepf.clijx.plugins.ConnectedComponentsLabeling;
-import net.haesleinhuepf.clijx.plugins.CountNonZeroPixels;
+import net.haesleinhuepf.clij2.plugins.CountNonZeroPixels;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;

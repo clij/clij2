@@ -7,10 +7,12 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_bottomHatBox")
-public class BottomHatBox extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class BottomHatBox extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -21,23 +23,23 @@ public class BottomHatBox extends AbstractCLIJPlugin implements CLIJMacroPlugin,
     public boolean executeCL() {
 
         Object[] args = openCLBufferArgs();
-        boolean result = bottomHatBox(clij, (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
+        boolean result = bottomHatBox(getCLIJx(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean bottomHatBox(CLIJ clij, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ) {
+    public static boolean bottomHatBox(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output, Integer radiusX, Integer radiusY, Integer radiusZ) {
 
-        ClearCLBuffer temp1 = clij.create(input);
-        ClearCLBuffer temp2 = clij.create(input);
+        ClearCLBuffer temp1 = clijx.create(input);
+        ClearCLBuffer temp2 = clijx.create(input);
 
-        clij.op().maximumBox(input, temp1, radiusX, radiusX, radiusZ);
-        clij.op().minimumBox(temp1, temp2, radiusX, radiusY, radiusZ);
+        clijx.maximumBox(input, temp1, radiusX, radiusX, radiusZ);
+        clijx.minimumBox(temp1, temp2, radiusX, radiusY, radiusZ);
 
-        clij.op().subtractImages(input, temp2, output);
+        clijx.subtractImages(input, temp2, output);
 
-        temp1.close();
-        temp2.close();
+        clijx.release(temp1);
+        clijx.release(temp2);
         return true;
     }
 

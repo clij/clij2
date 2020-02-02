@@ -8,8 +8,8 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij.test.TestUtilities;
-import net.haesleinhuepf.clijx.utilities.HasAuthor;
-import net.haesleinhuepf.clijx.utilities.HasLicense;
+import net.haesleinhuepf.clij2.utilities.HasAuthor;
+import net.haesleinhuepf.clij2.utilities.HasLicense;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;

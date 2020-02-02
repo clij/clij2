@@ -1,7 +1,7 @@
 package net.haesleinhuepf.clijx.advmath;
 
 import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.plugins.Exponential;
+import net.haesleinhuepf.clij2.plugins.Exponential;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import ij.IJ;

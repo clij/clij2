@@ -1,6 +1,7 @@
 package net.haesleinhuepf.clijx.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij2.plugins.JaccardIndex;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgs;

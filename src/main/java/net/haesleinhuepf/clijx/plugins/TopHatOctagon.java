@@ -8,13 +8,13 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
-import net.haesleinhuepf.clijx.utilities.CLIJUtilities;
+import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
 import org.scijava.plugin.Plugin;
 
-import static net.haesleinhuepf.clijx.plugins.MaximumOctagon.maximumBox;
-import static net.haesleinhuepf.clijx.plugins.MaximumOctagon.maximumDiamond;
-import static net.haesleinhuepf.clijx.plugins.MinimumOctagon.minimumBox;
-import static net.haesleinhuepf.clijx.plugins.MinimumOctagon.minimumDiamond;
+import static net.haesleinhuepf.clij2.plugins.MaximumOctagon.maximumBox;
+import static net.haesleinhuepf.clij2.plugins.MaximumOctagon.maximumDiamond;
+import static net.haesleinhuepf.clij2.plugins.MinimumOctagon.minimumBox;
+import static net.haesleinhuepf.clij2.plugins.MinimumOctagon.minimumDiamond;
 
 /**
  * Author: @haesleinhuepf

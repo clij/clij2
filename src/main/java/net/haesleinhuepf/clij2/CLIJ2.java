@@ -29,7 +29,7 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * December 2020
  */
-public class CLIJ2 {
+public class CLIJ2 implements CLIJ2Ops {
     private static CLIJ2 instance;
 
     protected CLIJ clij;

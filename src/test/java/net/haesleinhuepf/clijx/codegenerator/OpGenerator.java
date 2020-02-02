@@ -1,6 +1,7 @@
 package net.haesleinhuepf.clijx.codegenerator;
 
 import net.haesleinhuepf.clij.CLIJ;
+import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPluginService;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -26,6 +27,7 @@ public class OpGenerator {
             if (isCLIJ2) {
                 builder.append("package net.haesleinhuepf.clij2;\n");
                 builder.append("import net.haesleinhuepf.clij2.CLIJ2;\n");
+                builder.append("import net.haesleinhuepf.clijx.CLIJx;\n");
             } else {
                 builder.append("package net.haesleinhuepf.clijx.utilities;\n");
                 builder.append("import net.haesleinhuepf.clij2.CLIJ2;\n");
@@ -54,6 +56,7 @@ public class OpGenerator {
             builder.append("   CLIJ getCLIJ();\n");
             if (isCLIJ2) {
                 builder.append("   CLIJ2 getCLIJ2();\n");
+                builder.append("   default CLIJx getCLIJx() {return null;}\n");
             } else {
                 builder.append("   CLIJ2 getCLIJ2();\n");
                 builder.append("   CLIJx getCLIJx();\n");
@@ -63,7 +66,10 @@ public class OpGenerator {
 
             int methodCount = 0;
             for (Class klass : CLIJxPlugins.classes) {
-                if (klass.getPackage().toString().contains(".clij2.") || !isCLIJ2) {
+                if (
+                        (klass.getPackage().toString().contains(".clij2.") && isCLIJ2) ||
+                        ((klass == Kernels.class || klass.getPackage().toString().contains(".clijx.")) && !isCLIJ2)
+                ) {
                     builder.append("\n    // " + klass.getName() + "\n");
                     builder.append("    //----------------------------------------------------\n");
                     for (Method method : klass.getMethods()) {

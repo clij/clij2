@@ -11,7 +11,7 @@ import org.scijava.plugin.Plugin;
 import java.util.HashMap;
 
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
-import static net.haesleinhuepf.clijx.utilities.CLIJUtilities.checkDimensions;
+import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
 
 /**
  * Author: @haesleinhuepf
