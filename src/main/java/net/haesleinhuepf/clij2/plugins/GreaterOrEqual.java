@@ -1,10 +1,12 @@
-package net.haesleinhuepf.clijx.plugins;
+package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
+import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
@@ -16,16 +18,16 @@ import java.util.HashMap;
  * 	        August 2019
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_greater")
-public class Greater extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_greaterOrEqual")
+public class GreaterOrEqual extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        boolean result = greater(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = greaterOrEqual(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         return result;
     }
 
-    public static boolean greater(CLIJx clijx, ClearCLImageInterface src1, ClearCLImageInterface src2, ClearCLImageInterface dst) {
+    public static boolean greaterOrEqual(CLIJ2 clij2, ClearCLImageInterface src1, ClearCLImageInterface src2, ClearCLImageInterface dst) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
@@ -34,7 +36,7 @@ public class Greater extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLI
         parameters.put("src2", src2);
         parameters.put("dst", dst);
 
-        clijx.execute(Greater.class, "greater_" + src1.getDimension() + "d_x.cl", "greater_" + src1.getDimension() + "d", src1.getDimensions(), src1.getDimensions(), parameters);
+        clij2.execute(GreaterOrEqual.class, "greater_or_equal_" + src1.getDimension() + "d_x.cl", "greater_or_equal_" + src1.getDimension() + "d", src1.getDimensions(), src1.getDimensions(), parameters);
         return true;
     }
         
@@ -47,7 +49,7 @@ public class Greater extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLI
 
     @Override
     public String getDescription() {
-        return "Determines if two images A and B greater pixel wise.\n\nf(a, b) = 1 if a > b; 0 otherwise. ";
+        return "Determines if two images A and B greater or equal pixel wise.\n\nf(a, b) = 1 if a >= b; 0 otherwise. ";
     }
     
     @Override

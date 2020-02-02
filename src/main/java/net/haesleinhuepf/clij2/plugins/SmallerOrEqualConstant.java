@@ -1,9 +1,11 @@
-package net.haesleinhuepf.clijx.plugins;
+package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
+import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
@@ -15,31 +17,31 @@ import java.util.HashMap;
  * 	        August 2019
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_smallerOrEqual")
-public class SmallerOrEqual extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_smallerOrEqualConstant")
+public class SmallerOrEqualConstant extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        boolean result = smallerOrEqual(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = smallerOrEqualConstant(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
         return result;
     }
 
-    public static boolean smallerOrEqual(CLIJx clijx, ClearCLBuffer src1, ClearCLBuffer src2, ClearCLBuffer dst) {
+    public static boolean smallerOrEqualConstant(CLIJ2 clij2, ClearCLBuffer src1, ClearCLBuffer dst, Float scalar) {
 
         HashMap<String, Object> parameters = new HashMap<>();
         
         parameters.clear();
         parameters.put("src1", src1);
-        parameters.put("src2", src2);
+        parameters.put("scalar", scalar);
         parameters.put("dst", dst);
 
-        clijx.execute(SmallerOrEqual.class, "smaller_or_equal_" + src1.getDimension() + "d_x.cl", "smaller_or_equal_" + src1.getDimension() + "d", src1.getDimensions(), src1.getDimensions(), parameters);
+        clij2.execute(SmallerOrEqualConstant.class, "smaller_or_equal_constant_" + src1.getDimension() + "d_x.cl", "smaller_or_equal_constant_" + src1.getDimension() + "d", src1.getDimensions(), src1.getDimensions(), parameters);
         return true;
     }
     
     @Override
     public String getParameterHelpText() {
-        return "Image source1, Image source2, Image destination";
+        return "Image source, Image destination, Number constant";
     }
 
     @Override
