@@ -9,34 +9,34 @@ import ij.measure.ResultsTable;
 import ij.gui.Roi;
 import ij.plugin.frame.RoiManager;
 import net.haesleinhuepf.clij.kernels.Kernels;
-import net.haesleinhuepf.clijx.advancedfilters.BinaryUnion;
-import net.haesleinhuepf.clijx.advancedfilters.BinaryIntersection;
-import net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabeling;
-import net.haesleinhuepf.clijx.advancedfilters.CountNonZeroPixels;
-import net.haesleinhuepf.clijx.advancedfilters.CrossCorrelation;
-import net.haesleinhuepf.clijx.advancedfilters.DifferenceOfGaussian2D;
-import net.haesleinhuepf.clijx.advancedfilters.DifferenceOfGaussian3D;
-import net.haesleinhuepf.clijx.advancedfilters.Extrema;
-import net.haesleinhuepf.clijx.advancedfilters.LocalExtremaBox;
-import net.haesleinhuepf.clijx.advancedfilters.LocalID;
-import net.haesleinhuepf.clijx.advancedfilters.MaskLabel;
-import net.haesleinhuepf.clijx.advancedfilters.MeanClosestSpotDistance;
-import net.haesleinhuepf.clijx.advancedfilters.MeanSquaredError;
-import net.haesleinhuepf.clijx.advancedfilters.MedianZProjection;
-import net.haesleinhuepf.clijx.advancedfilters.NonzeroMinimumDiamond;
-import net.haesleinhuepf.clijx.advancedfilters.Paste2D;
-import net.haesleinhuepf.clijx.advancedfilters.Paste3D;
-import net.haesleinhuepf.clijx.advancedfilters.Presign;
-import net.haesleinhuepf.clijx.advancedfilters.JaccardIndex;
-import net.haesleinhuepf.clijx.advancedfilters.SorensenDiceCoefficent;
-import net.haesleinhuepf.clijx.advancedfilters.StandardDeviationZProjection;
-import net.haesleinhuepf.clijx.advancedfilters.StackToTiles;
-import net.haesleinhuepf.clijx.advancedfilters.SubtractBackground2D;
-import net.haesleinhuepf.clijx.advancedfilters.SubtractBackground3D;
-import net.haesleinhuepf.clijx.advancedfilters.TopHatBox;
-import net.haesleinhuepf.clijx.advancedfilters.TopHatSphere;
-import net.haesleinhuepf.clijx.advancedmath.Exponential;
-import net.haesleinhuepf.clijx.advancedmath.Logarithm;
+import net.haesleinhuepf.clijx.plugins.BinaryUnion;
+import net.haesleinhuepf.clijx.plugins.BinaryIntersection;
+import net.haesleinhuepf.clijx.plugins.ConnectedComponentsLabeling;
+import net.haesleinhuepf.clijx.plugins.CountNonZeroPixels;
+import net.haesleinhuepf.clijx.plugins.CrossCorrelation;
+import net.haesleinhuepf.clijx.plugins.DifferenceOfGaussian2D;
+import net.haesleinhuepf.clijx.plugins.DifferenceOfGaussian3D;
+import net.haesleinhuepf.clijx.plugins.Extrema;
+import net.haesleinhuepf.clijx.plugins.LocalExtremaBox;
+import net.haesleinhuepf.clijx.plugins.LocalID;
+import net.haesleinhuepf.clijx.plugins.MaskLabel;
+import net.haesleinhuepf.clijx.plugins.MeanClosestSpotDistance;
+import net.haesleinhuepf.clijx.plugins.MeanSquaredError;
+import net.haesleinhuepf.clijx.plugins.MedianZProjection;
+import net.haesleinhuepf.clijx.plugins.NonzeroMinimumDiamond;
+import net.haesleinhuepf.clijx.plugins.Paste2D;
+import net.haesleinhuepf.clijx.plugins.Paste3D;
+import net.haesleinhuepf.clijx.plugins.Presign;
+import net.haesleinhuepf.clijx.plugins.JaccardIndex;
+import net.haesleinhuepf.clijx.plugins.SorensenDiceCoefficent;
+import net.haesleinhuepf.clijx.plugins.StandardDeviationZProjection;
+import net.haesleinhuepf.clijx.plugins.StackToTiles;
+import net.haesleinhuepf.clijx.plugins.SubtractBackground2D;
+import net.haesleinhuepf.clijx.plugins.SubtractBackground3D;
+import net.haesleinhuepf.clijx.plugins.TopHatBox;
+import net.haesleinhuepf.clijx.plugins.TopHatSphere;
+import net.haesleinhuepf.clijx.plugins.Exponential;
+import net.haesleinhuepf.clijx.plugins.Logarithm;
 import net.haesleinhuepf.clijx.matrix.GenerateDistanceMatrix;
 import net.haesleinhuepf.clijx.matrix.ShortestDistances;
 import net.haesleinhuepf.clijx.matrix.SpotsToPointList;
@@ -49,223 +49,207 @@ import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
 import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
 import net.haesleinhuepf.clijx.registration.TranslationRegistration;
 import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
-import net.haesleinhuepf.clijx.advancedfilters.SetWhereXequalsY;
-import net.haesleinhuepf.clijx.advancedfilters.LaplaceSphere;
-import net.haesleinhuepf.clijx.advancedfilters.Image2DToResultsTable;
-import net.haesleinhuepf.clijx.advancedfilters.WriteValuesToPositions;
-import net.haesleinhuepf.clijx.advancedfilters.GetSize;
+import net.haesleinhuepf.clijx.plugins.SetWhereXequalsY;
+import net.haesleinhuepf.clijx.plugins.LaplaceSphere;
+import net.haesleinhuepf.clijx.plugins.Image2DToResultsTable;
+import net.haesleinhuepf.clijx.plugins.WriteValuesToPositions;
+import net.haesleinhuepf.clijx.plugins.GetSize;
 import net.haesleinhuepf.clijx.matrix.MultiplyMatrix;
 import net.haesleinhuepf.clijx.matrix.MatrixEqual;
-import net.haesleinhuepf.clijx.advancedfilters.PowerImages;
-import net.haesleinhuepf.clijx.advancedmath.Equal;
-import net.haesleinhuepf.clijx.advancedmath.GreaterOrEqual;
-import net.haesleinhuepf.clijx.advancedmath.Greater;
-import net.haesleinhuepf.clijx.advancedmath.Smaller;
-import net.haesleinhuepf.clijx.advancedmath.SmallerOrEqual;
-import net.haesleinhuepf.clijx.advancedmath.NotEqual;
+import net.haesleinhuepf.clijx.plugins.PowerImages;
+import net.haesleinhuepf.clijx.plugins.Equal;
+import net.haesleinhuepf.clijx.plugins.GreaterOrEqual;
+import net.haesleinhuepf.clijx.plugins.Greater;
+import net.haesleinhuepf.clijx.plugins.Smaller;
+import net.haesleinhuepf.clijx.plugins.SmallerOrEqual;
+import net.haesleinhuepf.clijx.plugins.NotEqual;
 import net.haesleinhuepf.clijx.io.ReadImageFromDisc;
 import net.haesleinhuepf.clijx.io.ReadRawImageFromDisc;
 import net.haesleinhuepf.clijx.io.PreloadFromDisc;
-import net.haesleinhuepf.clijx.advancedmath.EqualConstant;
-import net.haesleinhuepf.clijx.advancedmath.GreaterOrEqualConstant;
-import net.haesleinhuepf.clijx.advancedmath.GreaterConstant;
-import net.haesleinhuepf.clijx.advancedmath.SmallerConstant;
-import net.haesleinhuepf.clijx.advancedmath.SmallerOrEqualConstant;
-import net.haesleinhuepf.clijx.advancedmath.NotEqualConstant;
+import net.haesleinhuepf.clijx.plugins.EqualConstant;
+import net.haesleinhuepf.clijx.plugins.GreaterOrEqualConstant;
+import net.haesleinhuepf.clijx.plugins.GreaterConstant;
+import net.haesleinhuepf.clijx.plugins.SmallerConstant;
+import net.haesleinhuepf.clijx.plugins.SmallerOrEqualConstant;
+import net.haesleinhuepf.clijx.plugins.NotEqualConstant;
 import net.haesleinhuepf.clijx.painting.DrawBox;
 import net.haesleinhuepf.clijx.painting.DrawLine;
 import net.haesleinhuepf.clijx.painting.DrawSphere;
-import net.haesleinhuepf.clijx.advancedfilters.ReplaceIntensity;
-import net.haesleinhuepf.clijx.advancedfilters.BoundingBox;
-import net.haesleinhuepf.clijx.advancedfilters.MinimumOfMaskedPixels;
-import net.haesleinhuepf.clijx.advancedfilters.MaximumOfMaskedPixels;
-import net.haesleinhuepf.clijx.advancedfilters.MeanOfMaskedPixels;
-import net.haesleinhuepf.clijx.advancedfilters.LabelToMask;
+import net.haesleinhuepf.clijx.plugins.ReplaceIntensity;
+import net.haesleinhuepf.clijx.plugins.BoundingBox;
+import net.haesleinhuepf.clijx.plugins.MinimumOfMaskedPixels;
+import net.haesleinhuepf.clijx.plugins.MaximumOfMaskedPixels;
+import net.haesleinhuepf.clijx.plugins.MeanOfMaskedPixels;
+import net.haesleinhuepf.clijx.plugins.LabelToMask;
 import net.haesleinhuepf.clijx.matrix.NClosestPoints;
 import net.haesleinhuepf.clijx.matrix.GaussJordan;
-import net.haesleinhuepf.clijx.advancedfilters.StatisticsOfLabelledPixels;
-import net.haesleinhuepf.clijx.advancedfilters.VarianceOfAllPixels;
-import net.haesleinhuepf.clijx.advancedfilters.StandardDeviationOfAllPixels;
-import net.haesleinhuepf.clijx.advancedfilters.VarianceOfMaskedPixels;
-import net.haesleinhuepf.clijx.advancedfilters.StandardDeviationOfMaskedPixels;
-import net.haesleinhuepf.clijx.advancedfilters.ExcludeLabelsOnEdges;
-import net.haesleinhuepf.clijx.advancedfilters.BinarySubtract;
-import net.haesleinhuepf.clijx.advancedfilters.BinaryEdgeDetection;
-import net.haesleinhuepf.clijx.advancedfilters.DistanceMap;
-import net.haesleinhuepf.clijx.advancedfilters.PullAsROI;
-import net.haesleinhuepf.clijx.advancedfilters.PullLabelsToROIManager;
-import net.haesleinhuepf.clijx.advancedfilters.NonzeroMaximumDiamond;
-import net.haesleinhuepf.clijx.advancedfilters.OnlyzeroOverwriteMaximumDiamond;
-import net.haesleinhuepf.clijx.advancedfilters.OnlyzeroOverwriteMaximumBox;
+import net.haesleinhuepf.clijx.plugins.StatisticsOfLabelledPixels;
+import net.haesleinhuepf.clijx.plugins.VarianceOfAllPixels;
+import net.haesleinhuepf.clijx.plugins.StandardDeviationOfAllPixels;
+import net.haesleinhuepf.clijx.plugins.VarianceOfMaskedPixels;
+import net.haesleinhuepf.clijx.plugins.StandardDeviationOfMaskedPixels;
+import net.haesleinhuepf.clijx.plugins.ExcludeLabelsOnEdges;
+import net.haesleinhuepf.clijx.plugins.BinarySubtract;
+import net.haesleinhuepf.clijx.plugins.BinaryEdgeDetection;
+import net.haesleinhuepf.clijx.plugins.DistanceMap;
+import net.haesleinhuepf.clijx.plugins.PullAsROI;
+import net.haesleinhuepf.clijx.plugins.PullLabelsToROIManager;
+import net.haesleinhuepf.clijx.plugins.NonzeroMaximumDiamond;
+import net.haesleinhuepf.clijx.plugins.OnlyzeroOverwriteMaximumDiamond;
+import net.haesleinhuepf.clijx.plugins.OnlyzeroOverwriteMaximumBox;
 import net.haesleinhuepf.clijx.matrix.GenerateTouchMatrix;
-import net.haesleinhuepf.clijx.advancedfilters.DetectLabelEdges;
-import net.haesleinhuepf.clijx.advancedfilters.StopWatch;
+import net.haesleinhuepf.clijx.plugins.DetectLabelEdges;
+import net.haesleinhuepf.clijx.plugins.StopWatch;
 import net.haesleinhuepf.clijx.matrix.CountTouchingNeighbors;
-import net.haesleinhuepf.clijx.advancedfilters.ReplaceIntensities;
+import net.haesleinhuepf.clijx.plugins.ReplaceIntensities;
 import net.haesleinhuepf.clijx.painting.DrawTwoValueLine;
 import net.haesleinhuepf.clijx.matrix.AverageDistanceOfNClosestPoints;
-import net.haesleinhuepf.clijx.advancedfilters.SaveAsTIF;
-import net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabelingInplace;
+import net.haesleinhuepf.clijx.plugins.SaveAsTIF;
+import net.haesleinhuepf.clijx.plugins.ConnectedComponentsLabelingInplace;
 import net.haesleinhuepf.clijx.matrix.TouchMatrixToMesh;
-import net.haesleinhuepf.clijx.advancedfilters.AutomaticThresholdInplace;
-import net.haesleinhuepf.clijx.advancedfilters.DifferenceOfGaussianInplace3D;
-import net.haesleinhuepf.clijx.advancedfilters.AbsoluteInplace;
-import net.haesleinhuepf.clijx.advancedfilters.Resample;
-import net.haesleinhuepf.clijx.advancedfilters.EqualizeMeanIntensitiesOfSlices;
-import net.haesleinhuepf.clijx.advancedfilters.Watershed;
-import net.haesleinhuepf.clijx.advancedfilters.ResliceRadial;
-import net.haesleinhuepf.clijx.advancedfilters.ShowRGB;
-import net.haesleinhuepf.clijx.advancedfilters.ShowGrey;
-import net.haesleinhuepf.clijx.advancedfilters.Sobel;
-import net.haesleinhuepf.clijx.advancedfilters.Absolute;
-import net.haesleinhuepf.clijx.advancedfilters.LaplaceBox;
-import net.haesleinhuepf.clijx.advancedfilters.BottomHatBox;
-import net.haesleinhuepf.clijx.advancedfilters.BottomHatSphere;
-import net.haesleinhuepf.clijx.advancedfilters.ClosingBox;
-import net.haesleinhuepf.clijx.advancedfilters.ClosingDiamond;
-import net.haesleinhuepf.clijx.advancedfilters.OpeningBox;
-import net.haesleinhuepf.clijx.advancedfilters.OpeningDiamond;
-import net.haesleinhuepf.clijx.advancedfilters.MaximumXProjection;
-import net.haesleinhuepf.clijx.advancedfilters.MaximumYProjection;
-import net.haesleinhuepf.clijx.advancedfilters.ProjectMaximumZBounded;
-import net.haesleinhuepf.clijx.advancedfilters.ProjectMinimumZBounded;
-import net.haesleinhuepf.clijx.advancedfilters.ProjectMeanZBounded;
-import net.haesleinhuepf.clijx.advancedfilters.NonzeroMaximumBox;
-import net.haesleinhuepf.clijx.advancedfilters.NonzeroMinimumBox;
-import net.haesleinhuepf.clijx.advancedfilters.ProjectMinimumThresholdedZBounded;
-import net.haesleinhuepf.clijx.advancedfilters.MeanOfPixelsAboveThreshold;
+import net.haesleinhuepf.clijx.plugins.AutomaticThresholdInplace;
+import net.haesleinhuepf.clijx.plugins.DifferenceOfGaussianInplace3D;
+import net.haesleinhuepf.clijx.plugins.AbsoluteInplace;
+import net.haesleinhuepf.clijx.plugins.Resample;
+import net.haesleinhuepf.clijx.plugins.EqualizeMeanIntensitiesOfSlices;
+import net.haesleinhuepf.clijx.plugins.Watershed;
+import net.haesleinhuepf.clijx.plugins.ResliceRadial;
+import net.haesleinhuepf.clijx.plugins.ShowRGB;
+import net.haesleinhuepf.clijx.plugins.ShowGrey;
+import net.haesleinhuepf.clijx.plugins.Sobel;
+import net.haesleinhuepf.clijx.plugins.Absolute;
+import net.haesleinhuepf.clijx.plugins.LaplaceBox;
+import net.haesleinhuepf.clijx.plugins.BottomHatBox;
+import net.haesleinhuepf.clijx.plugins.BottomHatSphere;
+import net.haesleinhuepf.clijx.plugins.ClosingBox;
+import net.haesleinhuepf.clijx.plugins.ClosingDiamond;
+import net.haesleinhuepf.clijx.plugins.OpeningBox;
+import net.haesleinhuepf.clijx.plugins.OpeningDiamond;
+import net.haesleinhuepf.clijx.plugins.MaximumXProjection;
+import net.haesleinhuepf.clijx.plugins.MaximumYProjection;
+import net.haesleinhuepf.clijx.plugins.ProjectMaximumZBounded;
+import net.haesleinhuepf.clijx.plugins.ProjectMinimumZBounded;
+import net.haesleinhuepf.clijx.plugins.ProjectMeanZBounded;
+import net.haesleinhuepf.clijx.plugins.NonzeroMaximumBox;
+import net.haesleinhuepf.clijx.plugins.NonzeroMinimumBox;
+import net.haesleinhuepf.clijx.plugins.ProjectMinimumThresholdedZBounded;
+import net.haesleinhuepf.clijx.plugins.MeanOfPixelsAboveThreshold;
 import net.haesleinhuepf.clijx.gui.OrganiseWindows;
 import net.haesleinhuepf.clijx.matrix.DistanceMatrixToMesh;
 import net.haesleinhuepf.clijx.matrix.PointIndexListToMesh;
-import net.haesleinhuepf.clijx.advancedfilters.MinimumOctagon;
-import net.haesleinhuepf.clijx.advancedfilters.MaximumOctagon;
-import net.haesleinhuepf.clijx.advancedfilters.TopHatOctagon;
-import net.haesleinhuepf.clijx.advancedfilters.AddImages;
-import net.haesleinhuepf.clijx.advancedfilters.AddImagesWeighted;
-import net.haesleinhuepf.clijx.advancedfilters.SubtractImages;
-import net.haesleinhuepf.clijx.advancedfilters.ShowGlasbeyOnGrey;
+import net.haesleinhuepf.clijx.plugins.MinimumOctagon;
+import net.haesleinhuepf.clijx.plugins.MaximumOctagon;
+import net.haesleinhuepf.clijx.plugins.TopHatOctagon;
+import net.haesleinhuepf.clijx.plugins.AddImages;
+import net.haesleinhuepf.clijx.plugins.AddImagesWeighted;
+import net.haesleinhuepf.clijx.plugins.SubtractImages;
+import net.haesleinhuepf.clijx.plugins.ShowGlasbeyOnGrey;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
-import net.haesleinhuepf.clijx.advancedfilters.AffineTransform2D;
-import net.haesleinhuepf.clijx.advancedfilters.AffineTransform3D;
-import net.haesleinhuepf.clijx.advancedfilters.ApplyVectorField2D;
-import net.haesleinhuepf.clijx.advancedfilters.ApplyVectorField3D;
-import net.haesleinhuepf.clijx.advancedfilters.ArgMaximumZProjection;
-import net.haesleinhuepf.clijx.advancedfilters.Histogram;
-import net.haesleinhuepf.clijx.advancedfilters.AutomaticThreshold;
-import net.haesleinhuepf.clijx.advancedfilters.Threshold;
-import net.haesleinhuepf.clijx.advancedfilters.BinaryOr;
-import net.haesleinhuepf.clijx.advancedfilters.BinaryAnd;
-import net.haesleinhuepf.clijx.advancedfilters.BinaryXOr;
-import net.haesleinhuepf.clijx.advancedfilters.BinaryNot;
-import net.haesleinhuepf.clijx.advancedfilters.ErodeSphere;
-import net.haesleinhuepf.clijx.advancedfilters.ErodeBox;
-import net.haesleinhuepf.clijx.advancedfilters.ErodeSphereSliceBySlice;
-import net.haesleinhuepf.clijx.advancedfilters.ErodeBoxSliceBySlice;
-import net.haesleinhuepf.clijx.advancedfilters.DilateSphere;
-import net.haesleinhuepf.clijx.advancedfilters.DilateBox;
-import net.haesleinhuepf.clijx.advancedfilters.DilateSphereSliceBySlice;
-import net.haesleinhuepf.clijx.advancedfilters.DilateBoxSliceBySlice;
-import net.haesleinhuepf.clijx.advancedfilters.Copy;
-import net.haesleinhuepf.clijx.advancedfilters.CopySlice;
-import net.haesleinhuepf.clijx.advancedfilters.Crop2D;
-import net.haesleinhuepf.clijx.advancedfilters.Crop3D;
-import net.haesleinhuepf.clijx.advancedfilters.Set;
-import net.haesleinhuepf.clijx.advancedfilters.Flip2D;
-import net.haesleinhuepf.clijx.advancedfilters.Flip3D;
-import net.haesleinhuepf.clijx.advancedfilters.RotateLeft;
-import net.haesleinhuepf.clijx.advancedfilters.RotateRight;
-import net.haesleinhuepf.clijx.advancedfilters.Mask;
-import net.haesleinhuepf.clijx.advancedfilters.MaskStackWithPlane;
-import net.haesleinhuepf.clijx.advancedfilters.MaximumZProjection;
-import net.haesleinhuepf.clijx.advancedfilters.MeanZProjection;
-import net.haesleinhuepf.clijx.advancedfilters.MinimumZProjection;
-import net.haesleinhuepf.clijx.advancedmath.Power;
-import net.haesleinhuepf.clijx.advancedfilters.tenengradfusion.AbstractTenengradFusion;
-import net.haesleinhuepf.clijx.advancedmath.DivideImages;
-import net.haesleinhuepf.clijx.advancedmath.MaximumImages;
-import net.haesleinhuepf.clijx.advancedmath.MaximumImageAndScalar;
-import net.haesleinhuepf.clijx.advancedmath.MinimumImages;
-import net.haesleinhuepf.clijx.advancedmath.MinimumImageAndScalar;
-import net.haesleinhuepf.clijx.advancedmath.MultiplyImageAndScalar;
-import net.haesleinhuepf.clijx.advancedmath.MultiplyStackWithPlane;
-import net.haesleinhuepf.clijx.advancedfilters.CountNonZeroPixels2DSphere;
-import net.haesleinhuepf.clijx.advancedfilters.CountNonZeroPixelsSliceBySliceSphere;
-import net.haesleinhuepf.clijx.advancedfilters.CountNonZeroVoxels3DSphere;
-import net.haesleinhuepf.clijx.advancedfilters.SumZProjection;
-import net.haesleinhuepf.clijx.advancedfilters.SumOfAllPixels;
-import net.haesleinhuepf.clijx.advancedfilters.CenterOfMass;
-import net.haesleinhuepf.clijx.advancedfilters.Invert;
-import net.haesleinhuepf.clijx.advancedfilters.Downsample2D;
-import net.haesleinhuepf.clijx.advancedfilters.Downsample3D;
-import net.haesleinhuepf.clijx.advancedfilters.DownsampleSliceBySliceHalfMedian;
-import net.haesleinhuepf.clijx.advancedfilters.LocalThreshold;
-import net.haesleinhuepf.clijx.advancedfilters.GradientX;
-import net.haesleinhuepf.clijx.advancedfilters.GradientY;
-import net.haesleinhuepf.clijx.advancedfilters.GradientZ;
-import net.haesleinhuepf.clijx.advancedfilters.MultiplyImageAndCoordinate;
-import net.haesleinhuepf.clijx.advancedfilters.Mean2DBox;
-import net.haesleinhuepf.clijx.advancedfilters.Mean2DSphere;
-import net.haesleinhuepf.clijx.advancedfilters.Mean3DBox;
-import net.haesleinhuepf.clijx.advancedfilters.Mean3DSphere;
-import net.haesleinhuepf.clijx.advancedfilters.MeanSliceBySliceSphere;
-import net.haesleinhuepf.clijx.advancedfilters.MeanOfAllPixels;
-import net.haesleinhuepf.clijx.advancedfilters.Median2DBox;
-import net.haesleinhuepf.clijx.advancedfilters.Median2DSphere;
-import net.haesleinhuepf.clijx.advancedfilters.Median3DBox;
-import net.haesleinhuepf.clijx.advancedfilters.Median3DSphere;
-import net.haesleinhuepf.clijx.advancedfilters.MedianSliceBySliceBox;
-import net.haesleinhuepf.clijx.advancedfilters.MedianSliceBySliceSphere;
-import net.haesleinhuepf.clijx.advancedfilters.Maximum2DSphere;
-import net.haesleinhuepf.clijx.advancedfilters.Maximum3DSphere;
-import net.haesleinhuepf.clijx.advancedfilters.Maximum2DBox;
-import net.haesleinhuepf.clijx.advancedfilters.Maximum3DBox;
-import net.haesleinhuepf.clijx.advancedfilters.MaximumSliceBySliceSphere;
-import net.haesleinhuepf.clijx.advancedfilters.Minimum2DSphere;
-import net.haesleinhuepf.clijx.advancedfilters.Minimum3DSphere;
-import net.haesleinhuepf.clijx.advancedfilters.Minimum2DBox;
-import net.haesleinhuepf.clijx.advancedfilters.Minimum3DBox;
-import net.haesleinhuepf.clijx.advancedfilters.MinimumSliceBySliceSphere;
-import net.haesleinhuepf.clijx.advancedmath.MultiplyImages;
-import net.haesleinhuepf.clijx.advancedfilters.Blur2D;
-import net.haesleinhuepf.clijx.advancedfilters.Blur3D;
-import net.haesleinhuepf.clijx.advancedfilters.Blur3DSliceBySlice;
-import net.haesleinhuepf.clijx.advancedfilters.ResliceBottom;
-import net.haesleinhuepf.clijx.advancedfilters.ResliceTop;
-import net.haesleinhuepf.clijx.advancedfilters.ResliceLeft;
-import net.haesleinhuepf.clijx.advancedfilters.ResliceRight;
-import net.haesleinhuepf.clijx.advancedfilters.Rotate2D;
-import net.haesleinhuepf.clijx.advancedfilters.Rotate3D;
-import net.haesleinhuepf.clijx.advancedfilters.Scale2D;
-import net.haesleinhuepf.clijx.advancedfilters.Scale3D;
-import net.haesleinhuepf.clijx.advancedfilters.Translate2D;
-import net.haesleinhuepf.clijx.advancedfilters.Translate3D;
-import net.haesleinhuepf.clijx.base.Clear;
-import net.haesleinhuepf.clijx.base.ClInfo;
-import net.haesleinhuepf.clijx.base.ConvertFloat;
-import net.haesleinhuepf.clijx.base.ConvertUInt8;
-import net.haesleinhuepf.clijx.base.ConvertUInt16;
-import net.haesleinhuepf.clijx.base.Create2D;
-import net.haesleinhuepf.clijx.base.Create3D;
-import net.haesleinhuepf.clijx.base.Pull;
-import net.haesleinhuepf.clijx.base.PullBinary;
-import net.haesleinhuepf.clijx.base.Push;
-import net.haesleinhuepf.clijx.base.PushCurrentSlice;
-import net.haesleinhuepf.clijx.base.PushCurrentZStack;
-import net.haesleinhuepf.clijx.base.Release;
-import net.haesleinhuepf.clijx.temp.AddImageAndScalar;
-import net.haesleinhuepf.clijx.temp.DetectMinimaBox;
-import net.haesleinhuepf.clijx.temp.DetectMaximaBox;
-import net.haesleinhuepf.clijx.temp.DetectMaximaSliceBySliceBox;
-import net.haesleinhuepf.clijx.temp.DetectMinimaSliceBySliceBox;
-import net.haesleinhuepf.clijx.temp.MaximumOfAllPixels;
-import net.haesleinhuepf.clijx.temp.MinimumOfAllPixels;
-import net.haesleinhuepf.clijx.temp.ReportMemory;
-import net.haesleinhuepf.clijx.advancedfilters.splitstack.AbstractSplitStack;
-import net.haesleinhuepf.clijx.advancedfilters.TopHatOctagonSliceBySlice;
-import net.haesleinhuepf.clijx.advancedfilters.SetColumn;
-import net.haesleinhuepf.clijx.advancedfilters.SetRow;
-import net.haesleinhuepf.clijx.advancedfilters.SumYProjection;
+import net.haesleinhuepf.clijx.plugins.AffineTransform2D;
+import net.haesleinhuepf.clijx.plugins.AffineTransform3D;
+import net.haesleinhuepf.clijx.plugins.ApplyVectorField2D;
+import net.haesleinhuepf.clijx.plugins.ApplyVectorField3D;
+import net.haesleinhuepf.clijx.plugins.ArgMaximumZProjection;
+import net.haesleinhuepf.clijx.plugins.Histogram;
+import net.haesleinhuepf.clijx.plugins.AutomaticThreshold;
+import net.haesleinhuepf.clijx.plugins.Threshold;
+import net.haesleinhuepf.clijx.plugins.BinaryOr;
+import net.haesleinhuepf.clijx.plugins.BinaryAnd;
+import net.haesleinhuepf.clijx.plugins.BinaryXOr;
+import net.haesleinhuepf.clijx.plugins.BinaryNot;
+import net.haesleinhuepf.clijx.plugins.ErodeSphere;
+import net.haesleinhuepf.clijx.plugins.ErodeBox;
+import net.haesleinhuepf.clijx.plugins.ErodeSphereSliceBySlice;
+import net.haesleinhuepf.clijx.plugins.ErodeBoxSliceBySlice;
+import net.haesleinhuepf.clijx.plugins.DilateSphere;
+import net.haesleinhuepf.clijx.plugins.DilateBox;
+import net.haesleinhuepf.clijx.plugins.DilateSphereSliceBySlice;
+import net.haesleinhuepf.clijx.plugins.DilateBoxSliceBySlice;
+import net.haesleinhuepf.clijx.plugins.Copy;
+import net.haesleinhuepf.clijx.plugins.CopySlice;
+import net.haesleinhuepf.clijx.plugins.Crop2D;
+import net.haesleinhuepf.clijx.plugins.Crop3D;
+import net.haesleinhuepf.clijx.plugins.Set;
+import net.haesleinhuepf.clijx.plugins.Flip2D;
+import net.haesleinhuepf.clijx.plugins.Flip3D;
+import net.haesleinhuepf.clijx.plugins.RotateLeft;
+import net.haesleinhuepf.clijx.plugins.RotateRight;
+import net.haesleinhuepf.clijx.plugins.Mask;
+import net.haesleinhuepf.clijx.plugins.MaskStackWithPlane;
+import net.haesleinhuepf.clijx.plugins.MaximumZProjection;
+import net.haesleinhuepf.clijx.plugins.MeanZProjection;
+import net.haesleinhuepf.clijx.plugins.MinimumZProjection;
+import net.haesleinhuepf.clijx.plugins.Power;
+import net.haesleinhuepf.clijx.plugins.DivideImages;
+import net.haesleinhuepf.clijx.plugins.MaximumImages;
+import net.haesleinhuepf.clijx.plugins.MaximumImageAndScalar;
+import net.haesleinhuepf.clijx.plugins.MinimumImages;
+import net.haesleinhuepf.clijx.plugins.MinimumImageAndScalar;
+import net.haesleinhuepf.clijx.plugins.MultiplyImageAndScalar;
+import net.haesleinhuepf.clijx.plugins.MultiplyStackWithPlane;
+import net.haesleinhuepf.clijx.plugins.CountNonZeroPixels2DSphere;
+import net.haesleinhuepf.clijx.plugins.CountNonZeroPixelsSliceBySliceSphere;
+import net.haesleinhuepf.clijx.plugins.CountNonZeroVoxels3DSphere;
+import net.haesleinhuepf.clijx.plugins.SumZProjection;
+import net.haesleinhuepf.clijx.plugins.SumOfAllPixels;
+import net.haesleinhuepf.clijx.plugins.CenterOfMass;
+import net.haesleinhuepf.clijx.plugins.Invert;
+import net.haesleinhuepf.clijx.plugins.Downsample2D;
+import net.haesleinhuepf.clijx.plugins.Downsample3D;
+import net.haesleinhuepf.clijx.plugins.DownsampleSliceBySliceHalfMedian;
+import net.haesleinhuepf.clijx.plugins.LocalThreshold;
+import net.haesleinhuepf.clijx.plugins.GradientX;
+import net.haesleinhuepf.clijx.plugins.GradientY;
+import net.haesleinhuepf.clijx.plugins.GradientZ;
+import net.haesleinhuepf.clijx.plugins.MultiplyImageAndCoordinate;
+import net.haesleinhuepf.clijx.plugins.Mean2DBox;
+import net.haesleinhuepf.clijx.plugins.Mean2DSphere;
+import net.haesleinhuepf.clijx.plugins.Mean3DBox;
+import net.haesleinhuepf.clijx.plugins.Mean3DSphere;
+import net.haesleinhuepf.clijx.plugins.MeanSliceBySliceSphere;
+import net.haesleinhuepf.clijx.plugins.MeanOfAllPixels;
+import net.haesleinhuepf.clijx.plugins.Median2DBox;
+import net.haesleinhuepf.clijx.plugins.Median2DSphere;
+import net.haesleinhuepf.clijx.plugins.Median3DBox;
+import net.haesleinhuepf.clijx.plugins.Median3DSphere;
+import net.haesleinhuepf.clijx.plugins.MedianSliceBySliceBox;
+import net.haesleinhuepf.clijx.plugins.MedianSliceBySliceSphere;
+import net.haesleinhuepf.clijx.plugins.Maximum2DSphere;
+import net.haesleinhuepf.clijx.plugins.Maximum3DSphere;
+import net.haesleinhuepf.clijx.plugins.Maximum2DBox;
+import net.haesleinhuepf.clijx.plugins.Maximum3DBox;
+import net.haesleinhuepf.clijx.plugins.MaximumSliceBySliceSphere;
+import net.haesleinhuepf.clijx.plugins.Minimum2DSphere;
+import net.haesleinhuepf.clijx.plugins.Minimum3DSphere;
+import net.haesleinhuepf.clijx.plugins.Minimum2DBox;
+import net.haesleinhuepf.clijx.plugins.Minimum3DBox;
+import net.haesleinhuepf.clijx.plugins.MinimumSliceBySliceSphere;
+import net.haesleinhuepf.clijx.plugins.MultiplyImages;
+import net.haesleinhuepf.clijx.plugins.Blur2D;
+import net.haesleinhuepf.clijx.plugins.Blur3D;
+import net.haesleinhuepf.clijx.plugins.Blur3DSliceBySlice;
+import net.haesleinhuepf.clijx.plugins.ResliceBottom;
+import net.haesleinhuepf.clijx.plugins.ResliceTop;
+import net.haesleinhuepf.clijx.plugins.ResliceLeft;
+import net.haesleinhuepf.clijx.plugins.ResliceRight;
+import net.haesleinhuepf.clijx.plugins.Rotate2D;
+import net.haesleinhuepf.clijx.plugins.Rotate3D;
+import net.haesleinhuepf.clijx.plugins.Scale2D;
+import net.haesleinhuepf.clijx.plugins.Scale3D;
+import net.haesleinhuepf.clijx.plugins.Translate2D;
+import net.haesleinhuepf.clijx.plugins.Translate3D;
+import net.haesleinhuepf.clijx.plugins.AddImageAndScalar;
+import net.haesleinhuepf.clijx.plugins.DetectMinimaBox;
+import net.haesleinhuepf.clijx.plugins.DetectMaximaBox;
+import net.haesleinhuepf.clijx.plugins.DetectMaximaSliceBySliceBox;
+import net.haesleinhuepf.clijx.plugins.DetectMinimaSliceBySliceBox;
+import net.haesleinhuepf.clijx.plugins.MaximumOfAllPixels;
+import net.haesleinhuepf.clijx.plugins.MinimumOfAllPixels;
+import net.haesleinhuepf.clijx.plugins.TopHatOctagonSliceBySlice;
+import net.haesleinhuepf.clijx.plugins.SetColumn;
+import net.haesleinhuepf.clijx.plugins.SetRow;
+import net.haesleinhuepf.clijx.plugins.SumYProjection;
 import net.haesleinhuepf.clijx.matrix.AverageDistanceOfTouchingNeighbors;
 import net.haesleinhuepf.clijx.matrix.LabelledSpotsToPointList;
 import net.haesleinhuepf.clijx.matrix.LabelSpots;
@@ -283,15 +267,24 @@ public abstract class CLIJxOps {
     /**
      * 
      */
-    public boolean detectOptima(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
+    public boolean detectOptima(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
         return Kernels.detectOptima(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
     }
 
     /**
      * 
      */
-    public boolean detectOptima(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
+    public boolean detectOptima(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
         return Kernels.detectOptima(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+    /**
+     * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
+     * 
+     * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
+     */
+    public boolean differenceOfGaussian(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.differenceOfGaussian(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
@@ -313,34 +306,6 @@ public abstract class CLIJxOps {
      */
     public boolean differenceOfGaussianSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
         return Kernels.differenceOfGaussianSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * 
-     */
-    public boolean multiplySliceBySliceWithScalars(ClearCLImage arg1, ClearCLImage arg2, float[] arg3) {
-        return Kernels.multiplySliceBySliceWithScalars(clij, arg1, arg2, arg3);
-    }
-
-    /**
-     * 
-     */
-    public boolean multiplySliceBySliceWithScalars(ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3) {
-        return Kernels.multiplySliceBySliceWithScalars(clij, arg1, arg2, arg3);
-    }
-
-    /**
-     * 
-     */
-    public boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptimaSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
-    }
-
-    /**
-     * 
-     */
-    public boolean detectOptimaSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptimaSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
     }
 
     /**
@@ -368,15 +333,6 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
-     * 
-     * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
-     */
-    public boolean differenceOfGaussian(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.differenceOfGaussian(clij, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
      * 
      */
     public double[] sumPixelsSliceBySlice(ClearCLBuffer arg1) {
@@ -390,8 +346,36 @@ public abstract class CLIJxOps {
         return Kernels.sumPixelsSliceBySlice(clij, arg1);
     }
 
+    /**
+     * 
+     */
+    public boolean multiplySliceBySliceWithScalars(ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3) {
+        return Kernels.multiplySliceBySliceWithScalars(clij, arg1, arg2, arg3);
+    }
 
-    // net.haesleinhuepf.clijx.advancedfilters.BinaryUnion
+    /**
+     * 
+     */
+    public boolean multiplySliceBySliceWithScalars(ClearCLImage arg1, ClearCLImage arg2, float[] arg3) {
+        return Kernels.multiplySliceBySliceWithScalars(clij, arg1, arg2, arg3);
+    }
+
+    /**
+     * 
+     */
+    public boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptimaSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+    /**
+     * 
+     */
+    public boolean detectOptimaSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptimaSliceBySlice(clij, arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+
+    // net.haesleinhuepf.clijx.plugins.BinaryUnion
     //----------------------------------------------------
     /**
      * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
@@ -403,7 +387,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.BinaryIntersection
+    // net.haesleinhuepf.clijx.plugins.BinaryIntersection
     //----------------------------------------------------
     /**
      * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
@@ -417,7 +401,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabeling
+    // net.haesleinhuepf.clijx.plugins.ConnectedComponentsLabeling
     //----------------------------------------------------
     /**
      * 
@@ -427,21 +411,21 @@ public abstract class CLIJxOps {
     }
 
     /**
-     * Performs connected components analysis to a binary image and generates a label map.
-     */
-    public boolean connectedComponentsLabeling(ClearCLBuffer binary_input, ClearCLBuffer labeling_destination) {
-        return ConnectedComponentsLabeling.connectedComponentsLabeling(clijx, binary_input, labeling_destination);
-    }
-
-    /**
      * 
      */
     public boolean setNonZeroPixelsToPixelIndex(ClearCLImageInterface arg1, ClearCLImageInterface arg2) {
         return ConnectedComponentsLabeling.setNonZeroPixelsToPixelIndex(clij, arg1, arg2);
     }
 
+    /**
+     * Performs connected components analysis to a binary image and generates a label map.
+     */
+    public boolean connectedComponentsLabeling(ClearCLBuffer binary_input, ClearCLBuffer labeling_destination) {
+        return ConnectedComponentsLabeling.connectedComponentsLabeling(clijx, binary_input, labeling_destination);
+    }
 
-    // net.haesleinhuepf.clijx.advancedfilters.CountNonZeroPixels
+
+    // net.haesleinhuepf.clijx.plugins.CountNonZeroPixels
     //----------------------------------------------------
     /**
      * Determines the number of all pixels in a given image which are not equal to 0. It will be stored in a new row of ImageJs
@@ -452,7 +436,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.CrossCorrelation
+    // net.haesleinhuepf.clijx.plugins.CrossCorrelation
     //----------------------------------------------------
     /**
      * Performs cross correlation analysis between two images. The second image is shifted by deltaPos in the given dimension. The cross correlation coefficient is calculated for each pixel in a range around the given pixel with given radius in the given dimension. Together with the original images it is recommended to hand over mean filtered images using the same radius.  
@@ -469,7 +453,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.DifferenceOfGaussian2D
+    // net.haesleinhuepf.clijx.plugins.DifferenceOfGaussian2D
     //----------------------------------------------------
     /**
      * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
@@ -490,7 +474,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.DifferenceOfGaussian3D
+    // net.haesleinhuepf.clijx.plugins.DifferenceOfGaussian3D
     //----------------------------------------------------
     /**
      * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
@@ -511,7 +495,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Extrema
+    // net.haesleinhuepf.clijx.plugins.Extrema
     //----------------------------------------------------
     /**
      * Returns an image with pixel values most distant from 0: f(x, y) = x if abs(x) > abs(y), y else.
@@ -521,7 +505,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.LocalExtremaBox
+    // net.haesleinhuepf.clijx.plugins.LocalExtremaBox
     //----------------------------------------------------
     /**
      * Applies a local minimum and maximum filter. Afterwards, the value is returned which is more far from zero.
@@ -531,7 +515,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.LocalID
+    // net.haesleinhuepf.clijx.plugins.LocalID
     //----------------------------------------------------
     /**
      * local id
@@ -541,7 +525,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MaskLabel
+    // net.haesleinhuepf.clijx.plugins.MaskLabel
     //----------------------------------------------------
     /**
      * Computes a masked image by applying a label mask to an image. All pixel values x of image X will be copied
@@ -554,7 +538,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MeanClosestSpotDistance
+    // net.haesleinhuepf.clijx.plugins.MeanClosestSpotDistance
     //----------------------------------------------------
     /**
      * 
@@ -571,7 +555,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MeanSquaredError
+    // net.haesleinhuepf.clijx.plugins.MeanSquaredError
     //----------------------------------------------------
     /**
      * Determines the mean squared error (MSE) between two images. The MSE will be stored in a new row of ImageJs
@@ -582,7 +566,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MedianZProjection
+    // net.haesleinhuepf.clijx.plugins.MedianZProjection
     //----------------------------------------------------
     /**
      * Determines the median projection of an image stack along Z.
@@ -592,7 +576,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.NonzeroMinimumDiamond
+    // net.haesleinhuepf.clijx.plugins.NonzeroMinimumDiamond
     //----------------------------------------------------
     /**
      * Apply a minimum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
@@ -616,7 +600,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Paste2D
+    // net.haesleinhuepf.clijx.plugins.Paste2D
     //----------------------------------------------------
     /**
      * Pastes an image into another image at a given position.
@@ -640,7 +624,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Paste3D
+    // net.haesleinhuepf.clijx.plugins.Paste3D
     //----------------------------------------------------
     /**
      * Pastes an image into another image at a given position.
@@ -664,7 +648,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Presign
+    // net.haesleinhuepf.clijx.plugins.Presign
     //----------------------------------------------------
     /**
      * Determines the extrema of pixel values: f(x) = x / abs(x).
@@ -674,7 +658,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.JaccardIndex
+    // net.haesleinhuepf.clijx.plugins.JaccardIndex
     //----------------------------------------------------
     /**
      * Determines the overlap of two binary images using the Jaccard index.
@@ -688,7 +672,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.SorensenDiceCoefficent
+    // net.haesleinhuepf.clijx.plugins.SorensenDiceCoefficent
     //----------------------------------------------------
     /**
      * Determines the overlap of two binary images using the Sorensen-Dice coefficent.
@@ -702,7 +686,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.StandardDeviationZProjection
+    // net.haesleinhuepf.clijx.plugins.StandardDeviationZProjection
     //----------------------------------------------------
     /**
      * Determines the standard deviation projection of an image stack along Z.
@@ -712,7 +696,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.StackToTiles
+    // net.haesleinhuepf.clijx.plugins.StackToTiles
     //----------------------------------------------------
     /**
      * Stack to tiles.
@@ -729,7 +713,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.SubtractBackground2D
+    // net.haesleinhuepf.clijx.plugins.SubtractBackground2D
     //----------------------------------------------------
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
@@ -746,15 +730,8 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.SubtractBackground3D
+    // net.haesleinhuepf.clijx.plugins.SubtractBackground3D
     //----------------------------------------------------
-    /**
-     * Applies Gaussian blur to the input image and subtracts the result from the original image.
-     */
-    public boolean subtractBackground(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return SubtractBackground3D.subtractBackground(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
      */
@@ -762,8 +739,15 @@ public abstract class CLIJxOps {
         return SubtractBackground3D.subtractBackground3D(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
+    /**
+     * Applies Gaussian blur to the input image and subtracts the result from the original image.
+     */
+    public boolean subtractBackground(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return SubtractBackground3D.subtractBackground(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
 
-    // net.haesleinhuepf.clijx.advancedfilters.TopHatBox
+
+    // net.haesleinhuepf.clijx.plugins.TopHatBox
     //----------------------------------------------------
     /**
      * Applies a top-hat filter for background subtraction to the input image.
@@ -773,7 +757,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.TopHatSphere
+    // net.haesleinhuepf.clijx.plugins.TopHatSphere
     //----------------------------------------------------
     /**
      * Applies a top-hat filter for background subtraction to the input image.
@@ -873,14 +857,14 @@ public abstract class CLIJxOps {
     /**
      * 
      */
-    public boolean particleImageVelocimetry2D(ClearCLImage arg1, ClearCLImage arg2, ClearCLImage arg3, ClearCLImage arg4, double arg5) {
+    public boolean particleImageVelocimetry2D(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, double arg5) {
         return FastParticleImageVelocimetry.particleImageVelocimetry2D(clij, arg1, arg2, arg3, arg4, new Double (arg5).intValue());
     }
 
     /**
      * 
      */
-    public boolean particleImageVelocimetry2D(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, double arg5) {
+    public boolean particleImageVelocimetry2D(ClearCLImage arg1, ClearCLImage arg2, ClearCLImage arg3, ClearCLImage arg4, double arg5) {
         return FastParticleImageVelocimetry.particleImageVelocimetry2D(clij, arg1, arg2, arg3, arg4, new Double (arg5).intValue());
     }
 
@@ -944,7 +928,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.SetWhereXequalsY
+    // net.haesleinhuepf.clijx.plugins.SetWhereXequalsY
     //----------------------------------------------------
     /**
      * Sets all pixel values a of a given image A to a constant value v in case its coordinates x == y. Otherwise the pixel is not overwritten.
@@ -967,7 +951,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.LaplaceSphere
+    // net.haesleinhuepf.clijx.plugins.LaplaceSphere
     //----------------------------------------------------
     /**
      * Applies the Laplace operator (Diamond neighborhood) to an image.
@@ -977,7 +961,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Image2DToResultsTable
+    // net.haesleinhuepf.clijx.plugins.Image2DToResultsTable
     //----------------------------------------------------
     /**
      * Converts an image into a table.
@@ -994,7 +978,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.WriteValuesToPositions
+    // net.haesleinhuepf.clijx.plugins.WriteValuesToPositions
     //----------------------------------------------------
     /**
      * Takes an image with three/four rows (2D: height = 3; 3D: height = 4): x, y [, z] and v and target image. The value v will be written at position x/y[/z] in the target image.
@@ -1004,7 +988,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.GetSize
+    // net.haesleinhuepf.clijx.plugins.GetSize
     //----------------------------------------------------
     /**
      * Reads out the size of an image [stack] and writes it to the results table in the columns 'Width', 'Height' and 'Depth'.
@@ -1035,7 +1019,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.PowerImages
+    // net.haesleinhuepf.clijx.plugins.PowerImages
     //----------------------------------------------------
     /**
      * Calculates x to the power of y pixel wise of two images X and Y.
@@ -1132,15 +1116,15 @@ public abstract class CLIJxOps {
     /**
      * Reads a raw file from disc and pushes it immediately to the GPU.
      */
-    public boolean readRawImageFromDisc(ClearCLBuffer arg1, String arg2) {
-        return ReadRawImageFromDisc.readRawImageFromDisc(clij, arg1, arg2);
+    public ClearCLBuffer readRawImageFromDisc(String arg1, double arg2, double arg3, double arg4, double arg5) {
+        return ReadRawImageFromDisc.readRawImageFromDisc(clij, arg1, new Double (arg2).intValue(), new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
     /**
      * Reads a raw file from disc and pushes it immediately to the GPU.
      */
-    public ClearCLBuffer readRawImageFromDisc(String arg1, double arg2, double arg3, double arg4, double arg5) {
-        return ReadRawImageFromDisc.readRawImageFromDisc(clij, arg1, new Double (arg2).intValue(), new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    public boolean readRawImageFromDisc(ClearCLBuffer arg1, String arg2) {
+        return ReadRawImageFromDisc.readRawImageFromDisc(clij, arg1, arg2);
     }
 
 
@@ -1272,7 +1256,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ReplaceIntensity
+    // net.haesleinhuepf.clijx.plugins.ReplaceIntensity
     //----------------------------------------------------
     /**
      * Replaces a specific intensity in an image with a given new value.
@@ -1282,7 +1266,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.BoundingBox
+    // net.haesleinhuepf.clijx.plugins.BoundingBox
     //----------------------------------------------------
     /**
      * Determines the bounding box of all non-zero pixels in a binary image. The positions will be stored in a new row of ImageJs
@@ -1293,7 +1277,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MinimumOfMaskedPixels
+    // net.haesleinhuepf.clijx.plugins.MinimumOfMaskedPixels
     //----------------------------------------------------
     /**
      * Determines the minimum intensity in an image, but only in pixels which have non-zero values in another mask image.
@@ -1303,7 +1287,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MaximumOfMaskedPixels
+    // net.haesleinhuepf.clijx.plugins.MaximumOfMaskedPixels
     //----------------------------------------------------
     /**
      * Determines the maximum intensity in an image, but only in pixels which have non-zero values in another mask image.
@@ -1313,7 +1297,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MeanOfMaskedPixels
+    // net.haesleinhuepf.clijx.plugins.MeanOfMaskedPixels
     //----------------------------------------------------
     /**
      * Determines the mean intensity in an image, but only in pixels which have non-zero values in another binary mask image.
@@ -1323,7 +1307,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.LabelToMask
+    // net.haesleinhuepf.clijx.plugins.LabelToMask
     //----------------------------------------------------
     /**
      * Masks a single label in a label map: Sets all pixels in the target image to 1, where the given label index was present in the label map. Other pixels are set to 0.
@@ -1365,7 +1349,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.StatisticsOfLabelledPixels
+    // net.haesleinhuepf.clijx.plugins.StatisticsOfLabelledPixels
     //----------------------------------------------------
     /**
      * Determines bounding box, area (in pixels/voxels), min, max and mean intensity  of a labelled object in a label map and corresponding pixels in the original image.Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
@@ -1396,7 +1380,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.VarianceOfAllPixels
+    // net.haesleinhuepf.clijx.plugins.VarianceOfAllPixels
     //----------------------------------------------------
     /**
      * Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs
@@ -1415,7 +1399,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.StandardDeviationOfAllPixels
+    // net.haesleinhuepf.clijx.plugins.StandardDeviationOfAllPixels
     //----------------------------------------------------
     /**
      * Determines the standard deviation of all pixels in an image. The value will be stored in a new row of ImageJs
@@ -1434,7 +1418,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.VarianceOfMaskedPixels
+    // net.haesleinhuepf.clijx.plugins.VarianceOfMaskedPixels
     //----------------------------------------------------
     /**
      * Determines the variance in an image, but only in pixels which have non-zero values in another binary mask image. The result is put in the results table as new column named 'Masked_variance'.
@@ -1451,7 +1435,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.StandardDeviationOfMaskedPixels
+    // net.haesleinhuepf.clijx.plugins.StandardDeviationOfMaskedPixels
     //----------------------------------------------------
     /**
      * Determines the standard deviation of all pixels in an image which have non-zero value in a corresponding mask image. The value will be stored in a new row of ImageJs
@@ -1470,7 +1454,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ExcludeLabelsOnEdges
+    // net.haesleinhuepf.clijx.plugins.ExcludeLabelsOnEdges
     //----------------------------------------------------
     /**
      * Removes all labels from a label map which touch the edges of the image (in X, Y and Z if the image is 3D). Remaining label elements are renumbered afterwards.
@@ -1480,7 +1464,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.BinarySubtract
+    // net.haesleinhuepf.clijx.plugins.BinarySubtract
     //----------------------------------------------------
     /**
      * Subtracts one binary image from another.
@@ -1490,7 +1474,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.BinaryEdgeDetection
+    // net.haesleinhuepf.clijx.plugins.BinaryEdgeDetection
     //----------------------------------------------------
     /**
      * Determines pixels/voxels which are on the surface of a binary objects and sets only them to 1 in the destination image. All other pixels are set to 0.
@@ -1500,15 +1484,8 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.DistanceMap
+    // net.haesleinhuepf.clijx.plugins.DistanceMap
     //----------------------------------------------------
-    /**
-     * Generates a distance map from a binary image. Pixels with non-zero value in the binary image are set to a number representing the distance to the closest zero-value pixel.
-     */
-    public boolean distanceMap(ClearCLBuffer source, ClearCLBuffer destination) {
-        return DistanceMap.distanceMap(clijx, source, destination);
-    }
-
     /**
      * 
      */
@@ -1516,8 +1493,15 @@ public abstract class CLIJxOps {
         return DistanceMap.localPositiveMinimum(clijx, arg1, arg2, arg3);
     }
 
+    /**
+     * Generates a distance map from a binary image. Pixels with non-zero value in the binary image are set to a number representing the distance to the closest zero-value pixel.
+     */
+    public boolean distanceMap(ClearCLBuffer source, ClearCLBuffer destination) {
+        return DistanceMap.distanceMap(clijx, source, destination);
+    }
 
-    // net.haesleinhuepf.clijx.advancedfilters.PullAsROI
+
+    // net.haesleinhuepf.clijx.plugins.PullAsROI
     //----------------------------------------------------
     /**
      * Pulls a binary image from the GPU memory and puts it on the currently active ImageJ window.
@@ -1527,7 +1511,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.PullLabelsToROIManager
+    // net.haesleinhuepf.clijx.plugins.PullLabelsToROIManager
     //----------------------------------------------------
     /**
      * Pulls all labels in a label map as ROIs to the ROI manager.
@@ -1544,7 +1528,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.NonzeroMaximumDiamond
+    // net.haesleinhuepf.clijx.plugins.NonzeroMaximumDiamond
     //----------------------------------------------------
     /**
      * Apply a maximum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
@@ -1568,7 +1552,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.OnlyzeroOverwriteMaximumDiamond
+    // net.haesleinhuepf.clijx.plugins.OnlyzeroOverwriteMaximumDiamond
     //----------------------------------------------------
     /**
      * TODO
@@ -1578,7 +1562,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.OnlyzeroOverwriteMaximumBox
+    // net.haesleinhuepf.clijx.plugins.OnlyzeroOverwriteMaximumBox
     //----------------------------------------------------
     /**
      * 
@@ -1598,7 +1582,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.DetectLabelEdges
+    // net.haesleinhuepf.clijx.plugins.DetectLabelEdges
     //----------------------------------------------------
     /**
      * Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.
@@ -1608,7 +1592,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.StopWatch
+    // net.haesleinhuepf.clijx.plugins.StopWatch
     //----------------------------------------------------
     /**
      * Measures time and outputs delay to last call.
@@ -1628,7 +1612,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ReplaceIntensities
+    // net.haesleinhuepf.clijx.plugins.ReplaceIntensities
     //----------------------------------------------------
     /**
      * Replaces integer intensities specified in a vector image. The vector image must be 3D with size (m, 1, 1) where m corresponds to the maximum intensity in the original image. Assuming the vector image contains values (0, 1, 0, 2) means: 
@@ -1664,7 +1648,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.SaveAsTIF
+    // net.haesleinhuepf.clijx.plugins.SaveAsTIF
     //----------------------------------------------------
     /**
      * Pulls an image from the GPU memory and saves it as TIF to disc.
@@ -1674,7 +1658,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabelingInplace
+    // net.haesleinhuepf.clijx.plugins.ConnectedComponentsLabelingInplace
     //----------------------------------------------------
     /**
      * Performs connected components analysis to a binary image and generates a label map.
@@ -1694,7 +1678,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.AutomaticThresholdInplace
+    // net.haesleinhuepf.clijx.plugins.AutomaticThresholdInplace
     //----------------------------------------------------
     /**
      * The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on 
@@ -1707,7 +1691,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.DifferenceOfGaussianInplace3D
+    // net.haesleinhuepf.clijx.plugins.DifferenceOfGaussianInplace3D
     //----------------------------------------------------
     /**
      * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
@@ -1719,7 +1703,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.AbsoluteInplace
+    // net.haesleinhuepf.clijx.plugins.AbsoluteInplace
     //----------------------------------------------------
     /**
      * Computes the absolute value of every individual pixel x in a given image.
@@ -1731,7 +1715,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Resample
+    // net.haesleinhuepf.clijx.plugins.Resample
     //----------------------------------------------------
     /**
      * Resamples an image with given size factors using an affine transform.
@@ -1741,7 +1725,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.EqualizeMeanIntensitiesOfSlices
+    // net.haesleinhuepf.clijx.plugins.EqualizeMeanIntensitiesOfSlices
     //----------------------------------------------------
     /**
      * Determines correction factors for each z-slice so that the average intensity in all slices can be made the same and multiplies these factors with the slices.
@@ -1752,7 +1736,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Watershed
+    // net.haesleinhuepf.clijx.plugins.Watershed
     //----------------------------------------------------
     /**
      * Apply a binary watershed to a binary image and introduces black pixels between objects.
@@ -1762,8 +1746,15 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ResliceRadial
+    // net.haesleinhuepf.clijx.plugins.ResliceRadial
     //----------------------------------------------------
+    /**
+     * 
+     */
+    public boolean radialProjection(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        return ResliceRadial.radialProjection(clij, arg1, arg2, new Double (arg3).floatValue());
+    }
+
     /**
      * Computes a radial projection of an image stack. Starting point for the line is the center in any 
      * X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
@@ -1776,27 +1767,20 @@ public abstract class CLIJxOps {
      * Computes a radial projection of an image stack. Starting point for the line is the center in any 
      * X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
      */
-    public boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return ResliceRadial.resliceRadial(clij, arg1, arg2, new Double (arg3).floatValue());
+    public boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return ResliceRadial.resliceRadial(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
      * Computes a radial projection of an image stack. Starting point for the line is the center in any 
      * X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
      */
-    public boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return ResliceRadial.resliceRadial(clij, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * 
-     */
-    public boolean radialProjection(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return ResliceRadial.radialProjection(clij, arg1, arg2, new Double (arg3).floatValue());
+    public boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        return ResliceRadial.resliceRadial(clij, arg1, arg2, new Double (arg3).floatValue());
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ShowRGB
+    // net.haesleinhuepf.clijx.plugins.ShowRGB
     //----------------------------------------------------
     /**
      * Visualises three 2D images as one RGB image
@@ -1806,7 +1790,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ShowGrey
+    // net.haesleinhuepf.clijx.plugins.ShowGrey
     //----------------------------------------------------
     /**
      * Visualises a single 2D image.
@@ -1816,7 +1800,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Sobel
+    // net.haesleinhuepf.clijx.plugins.Sobel
     //----------------------------------------------------
     /**
      * Convolve the image with the Sobel kernel.
@@ -1826,7 +1810,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Absolute
+    // net.haesleinhuepf.clijx.plugins.Absolute
     //----------------------------------------------------
     /**
      * Computes the absolute value of every individual pixel x in a given image.
@@ -1838,7 +1822,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.LaplaceBox
+    // net.haesleinhuepf.clijx.plugins.LaplaceBox
     //----------------------------------------------------
     /**
      * Applies the Laplace operator (Box neighborhood) to an image.
@@ -1848,7 +1832,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.BottomHatBox
+    // net.haesleinhuepf.clijx.plugins.BottomHatBox
     //----------------------------------------------------
     /**
      * Apply a bottom-hat filter for background subtraction to the input image.
@@ -1858,7 +1842,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.BottomHatSphere
+    // net.haesleinhuepf.clijx.plugins.BottomHatSphere
     //----------------------------------------------------
     /**
      * Applies a bottom-hat filter for background subtraction to the input image.
@@ -1868,7 +1852,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ClosingBox
+    // net.haesleinhuepf.clijx.plugins.ClosingBox
     //----------------------------------------------------
     /**
      * Apply a binary closing to the input image by calling n dilations and n erosions subsequenntly.
@@ -1878,7 +1862,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ClosingDiamond
+    // net.haesleinhuepf.clijx.plugins.ClosingDiamond
     //----------------------------------------------------
     /**
      * Apply a binary closing to the input image by calling n dilations and n erosions subsequenntly.
@@ -1888,7 +1872,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.OpeningBox
+    // net.haesleinhuepf.clijx.plugins.OpeningBox
     //----------------------------------------------------
     /**
      * Apply a binary opening to the input image by calling n erosions and n dilations subsequenntly.
@@ -1898,7 +1882,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.OpeningDiamond
+    // net.haesleinhuepf.clijx.plugins.OpeningDiamond
     //----------------------------------------------------
     /**
      * Apply a binary opening to the input image by calling n erosions and n dilations subsequenntly.
@@ -1908,7 +1892,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MaximumXProjection
+    // net.haesleinhuepf.clijx.plugins.MaximumXProjection
     //----------------------------------------------------
     /**
      * Determines the maximum projection of an image along X.
@@ -1918,7 +1902,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MaximumYProjection
+    // net.haesleinhuepf.clijx.plugins.MaximumYProjection
     //----------------------------------------------------
     /**
      * Determines the maximum projection of an image along X.
@@ -1928,7 +1912,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ProjectMaximumZBounded
+    // net.haesleinhuepf.clijx.plugins.ProjectMaximumZBounded
     //----------------------------------------------------
     /**
      * Determines the maximum projection of an image along Z within a given z range.
@@ -1938,7 +1922,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ProjectMinimumZBounded
+    // net.haesleinhuepf.clijx.plugins.ProjectMinimumZBounded
     //----------------------------------------------------
     /**
      * Determines the minimum projection of an image along Z within a given z range.
@@ -1948,7 +1932,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ProjectMeanZBounded
+    // net.haesleinhuepf.clijx.plugins.ProjectMeanZBounded
     //----------------------------------------------------
     /**
      * Determines the mean projection of an image along Z within a given z range.
@@ -1958,7 +1942,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.NonzeroMaximumBox
+    // net.haesleinhuepf.clijx.plugins.NonzeroMaximumBox
     //----------------------------------------------------
     /**
      * Apply a maximum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
@@ -1975,7 +1959,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.NonzeroMinimumBox
+    // net.haesleinhuepf.clijx.plugins.NonzeroMinimumBox
     //----------------------------------------------------
     /**
      * 
@@ -1992,7 +1976,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ProjectMinimumThresholdedZBounded
+    // net.haesleinhuepf.clijx.plugins.ProjectMinimumThresholdedZBounded
     //----------------------------------------------------
     /**
      * Determines the minimum projection of all pixels in an image above a given threshold along Z within a given z range.
@@ -2002,7 +1986,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MeanOfPixelsAboveThreshold
+    // net.haesleinhuepf.clijx.plugins.MeanOfPixelsAboveThreshold
     //----------------------------------------------------
     /**
      * Determines the mean intensity in an image, but only in pixels which are above a given threshold.
@@ -2042,7 +2026,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MinimumOctagon
+    // net.haesleinhuepf.clijx.plugins.MinimumOctagon
     //----------------------------------------------------
     /**
      * Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter result very similar to minimum sphere. Approximately:radius = iterations - 2
@@ -2052,7 +2036,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MaximumOctagon
+    // net.haesleinhuepf.clijx.plugins.MaximumOctagon
     //----------------------------------------------------
     /**
      * Applies a maximum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter result very similar to minimum sphere. Approximately:radius = iterations - 2
@@ -2062,7 +2046,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.TopHatOctagon
+    // net.haesleinhuepf.clijx.plugins.TopHatOctagon
     //----------------------------------------------------
     /**
      * Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations - 2 makes the filter result very similar to minimum sphere.
@@ -2072,7 +2056,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.AddImages
+    // net.haesleinhuepf.clijx.plugins.AddImages
     //----------------------------------------------------
     /**
      * Calculates the sum of pairs of pixels x and y of two images X and Y.
@@ -2084,7 +2068,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.AddImagesWeighted
+    // net.haesleinhuepf.clijx.plugins.AddImagesWeighted
     //----------------------------------------------------
     /**
      * Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b.
@@ -2096,17 +2080,8 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.SubtractImages
+    // net.haesleinhuepf.clijx.plugins.SubtractImages
     //----------------------------------------------------
-    /**
-     * Subtracts one image X from another image Y pixel wise.
-     * 
-     * <pre>f(x, y) = x - y</pre>
-     */
-    public boolean subtract(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
-        return SubtractImages.subtract(clijx, arg1, arg2, arg3);
-    }
-
     /**
      * Subtracts one image X from another image Y pixel wise.
      * 
@@ -2116,8 +2091,17 @@ public abstract class CLIJxOps {
         return SubtractImages.subtractImages(clijx, arg1, arg2, arg3);
     }
 
+    /**
+     * Subtracts one image X from another image Y pixel wise.
+     * 
+     * <pre>f(x, y) = x - y</pre>
+     */
+    public boolean subtract(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
+        return SubtractImages.subtract(clijx, arg1, arg2, arg3);
+    }
 
-    // net.haesleinhuepf.clijx.advancedfilters.ShowGlasbeyOnGrey
+
+    // net.haesleinhuepf.clijx.plugins.ShowGlasbeyOnGrey
     //----------------------------------------------------
     /**
      * Visualises two 2D images as one RGB image. The first channel is shown in grey, the second with glasbey LUT.
@@ -2150,7 +2134,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.AffineTransform2D
+    // net.haesleinhuepf.clijx.plugins.AffineTransform2D
     //----------------------------------------------------
     /**
      * Applies an affine transform to a 2D image. Individual transforms must be separated by spaces.
@@ -2258,7 +2242,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.AffineTransform3D
+    // net.haesleinhuepf.clijx.plugins.AffineTransform3D
     //----------------------------------------------------
     /**
      * Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.
@@ -2416,7 +2400,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ApplyVectorField2D
+    // net.haesleinhuepf.clijx.plugins.ApplyVectorField2D
     //----------------------------------------------------
     /**
      * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
@@ -2433,7 +2417,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ApplyVectorField3D
+    // net.haesleinhuepf.clijx.plugins.ApplyVectorField3D
     //----------------------------------------------------
     /**
      * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
@@ -2450,7 +2434,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ArgMaximumZProjection
+    // net.haesleinhuepf.clijx.plugins.ArgMaximumZProjection
     //----------------------------------------------------
     /**
      * Determines the maximum projection of an image stack along Z.
@@ -2461,13 +2445,13 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Histogram
+    // net.haesleinhuepf.clijx.plugins.Histogram
     //----------------------------------------------------
     /**
-     * Determines the histogram of a given image.
+     * 
      */
-    public boolean histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, boolean arg6) {
-        return Histogram.histogram(clijx, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+    public boolean fillHistogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        return Histogram.fillHistogram(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
 
     /**
@@ -2487,37 +2471,27 @@ public abstract class CLIJxOps {
     /**
      * Determines the histogram of a given image.
      */
-    public boolean histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, boolean arg6, boolean arg7) {
-        return Histogram.histogram(clijx, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6, arg7);
-    }
-
-    /**
-     * Determines the histogram of a given image.
-     */
     public ClearCLBuffer histogram(ClearCLBuffer arg1) {
         return Histogram.histogram(clijx, arg1);
     }
 
     /**
-     * 
+     * Determines the histogram of a given image.
      */
-    public boolean fillHistogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return Histogram.fillHistogram(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+    public boolean histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, boolean arg6) {
+        return Histogram.histogram(clijx, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
     }
 
-
-    // net.haesleinhuepf.clijx.advancedfilters.AutomaticThreshold
-    //----------------------------------------------------
     /**
-     * The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on 
-     * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one 
-     * of these methods in the method text field:
-     * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
+     * Determines the histogram of a given image.
      */
-    public boolean automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3) {
-        return AutomaticThreshold.automaticThreshold(clijx, arg1, arg2, arg3);
+    public boolean histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, boolean arg6, boolean arg7) {
+        return Histogram.histogram(clijx, arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6, arg7);
     }
 
+
+    // net.haesleinhuepf.clijx.plugins.AutomaticThreshold
+    //----------------------------------------------------
     /**
      * The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on 
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one 
@@ -2528,8 +2502,18 @@ public abstract class CLIJxOps {
         return AutomaticThreshold.automaticThreshold(clijx, arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).intValue());
     }
 
+    /**
+     * The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on 
+     * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one 
+     * of these methods in the method text field:
+     * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
+     */
+    public boolean automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3) {
+        return AutomaticThreshold.automaticThreshold(clijx, arg1, arg2, arg3);
+    }
 
-    // net.haesleinhuepf.clijx.advancedfilters.Threshold
+
+    // net.haesleinhuepf.clijx.plugins.Threshold
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1. All pixel values x of a given input image with 
@@ -2544,7 +2528,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.BinaryOr
+    // net.haesleinhuepf.clijx.plugins.BinaryOr
     //----------------------------------------------------
     /**
      * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
@@ -2556,7 +2540,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.BinaryAnd
+    // net.haesleinhuepf.clijx.plugins.BinaryAnd
     //----------------------------------------------------
     /**
      * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
@@ -2570,7 +2554,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.BinaryXOr
+    // net.haesleinhuepf.clijx.plugins.BinaryXOr
     //----------------------------------------------------
     /**
      * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
@@ -2584,7 +2568,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.BinaryNot
+    // net.haesleinhuepf.clijx.plugins.BinaryNot
     //----------------------------------------------------
     /**
      * Computes a binary image (containing pixel values 0 and 1) from an image X by negating its pixel values
@@ -2598,7 +2582,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ErodeSphere
+    // net.haesleinhuepf.clijx.plugins.ErodeSphere
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
@@ -2610,7 +2594,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ErodeBox
+    // net.haesleinhuepf.clijx.plugins.ErodeBox
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
@@ -2625,7 +2609,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ErodeSphereSliceBySlice
+    // net.haesleinhuepf.clijx.plugins.ErodeSphereSliceBySlice
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
@@ -2639,7 +2623,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ErodeBoxSliceBySlice
+    // net.haesleinhuepf.clijx.plugins.ErodeBoxSliceBySlice
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
@@ -2656,7 +2640,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.DilateSphere
+    // net.haesleinhuepf.clijx.plugins.DilateSphere
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
@@ -2668,7 +2652,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.DilateBox
+    // net.haesleinhuepf.clijx.plugins.DilateBox
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
@@ -2683,7 +2667,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.DilateSphereSliceBySlice
+    // net.haesleinhuepf.clijx.plugins.DilateSphereSliceBySlice
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
@@ -2697,7 +2681,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.DilateBoxSliceBySlice
+    // net.haesleinhuepf.clijx.plugins.DilateBoxSliceBySlice
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
@@ -2714,7 +2698,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Copy
+    // net.haesleinhuepf.clijx.plugins.Copy
     //----------------------------------------------------
     /**
      * Copies an image.
@@ -2726,7 +2710,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.CopySlice
+    // net.haesleinhuepf.clijx.plugins.CopySlice
     //----------------------------------------------------
     /**
      * This method has two purposes: 
@@ -2742,7 +2726,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Crop2D
+    // net.haesleinhuepf.clijx.plugins.Crop2D
     //----------------------------------------------------
     /**
      * Crops a given rectangle out of a given image.
@@ -2772,7 +2756,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Crop3D
+    // net.haesleinhuepf.clijx.plugins.Crop3D
     //----------------------------------------------------
     /**
      * Crops a given rectangle out of a given image.
@@ -2802,7 +2786,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Set
+    // net.haesleinhuepf.clijx.plugins.Set
     //----------------------------------------------------
     /**
      * Sets all pixel values x of a given image X to a constant value v.
@@ -2814,7 +2798,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Flip2D
+    // net.haesleinhuepf.clijx.plugins.Flip2D
     //----------------------------------------------------
     /**
      * Flips an image in X and/or Y direction depending on boolean flags.
@@ -2831,7 +2815,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Flip3D
+    // net.haesleinhuepf.clijx.plugins.Flip3D
     //----------------------------------------------------
     /**
      * Flips an image in X and/or Y direction depending on boolean flags.
@@ -2848,7 +2832,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.RotateLeft
+    // net.haesleinhuepf.clijx.plugins.RotateLeft
     //----------------------------------------------------
     /**
      * Rotates a given input image by 90 degrees counter-clockwise. For that, X and Y axis of an image stack
@@ -2860,7 +2844,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.RotateRight
+    // net.haesleinhuepf.clijx.plugins.RotateRight
     //----------------------------------------------------
     /**
      * Rotates a given input image by 90 degrees clockwise. For that, X and Y axis of an image stack
@@ -2872,7 +2856,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Mask
+    // net.haesleinhuepf.clijx.plugins.Mask
     //----------------------------------------------------
     /**
      * Computes a masked image by applying a mask to an image. All pixel values x of image X will be copied
@@ -2886,7 +2870,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MaskStackWithPlane
+    // net.haesleinhuepf.clijx.plugins.MaskStackWithPlane
     //----------------------------------------------------
     /**
      * Computes a masked image by applying a 2D mask to an image stack. All pixel values x of image X will be copied
@@ -2900,7 +2884,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MaximumZProjection
+    // net.haesleinhuepf.clijx.plugins.MaximumZProjection
     //----------------------------------------------------
     /**
      * Determines the maximum projection of an image along Z.
@@ -2910,7 +2894,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MeanZProjection
+    // net.haesleinhuepf.clijx.plugins.MeanZProjection
     //----------------------------------------------------
     /**
      * Determines the mean average projection of an image along Z.
@@ -2920,7 +2904,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MinimumZProjection
+    // net.haesleinhuepf.clijx.plugins.MinimumZProjection
     //----------------------------------------------------
     /**
      * Determines the minimum projection of an image along Z.
@@ -2942,7 +2926,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.tenengradfusion.AbstractTenengradFusion
+    // net.haesleinhuepf.clijx.plugins.tenengradfusion.AbstractTenengradFusion
     //----------------------------------------------------
 
     // net.haesleinhuepf.clijx.advancedmath.DivideImages
@@ -3030,7 +3014,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.CountNonZeroPixels2DSphere
+    // net.haesleinhuepf.clijx.plugins.CountNonZeroPixels2DSphere
     //----------------------------------------------------
     /**
      * 
@@ -3047,7 +3031,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.CountNonZeroPixelsSliceBySliceSphere
+    // net.haesleinhuepf.clijx.plugins.CountNonZeroPixelsSliceBySliceSphere
     //----------------------------------------------------
     /**
      * 
@@ -3064,7 +3048,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.CountNonZeroVoxels3DSphere
+    // net.haesleinhuepf.clijx.plugins.CountNonZeroVoxels3DSphere
     //----------------------------------------------------
     /**
      * 
@@ -3081,7 +3065,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.SumZProjection
+    // net.haesleinhuepf.clijx.plugins.SumZProjection
     //----------------------------------------------------
     /**
      * Determines the sum projection of an image along Z.
@@ -3091,16 +3075,8 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.SumOfAllPixels
+    // net.haesleinhuepf.clijx.plugins.SumOfAllPixels
     //----------------------------------------------------
-    /**
-     * Determines the sum of all pixels in a given image. It will be stored in a new row of ImageJs
-     * Results table in the column 'Sum'.
-     */
-    public double sumOfAllPixels(ClearCLImageInterface arg1) {
-        return SumOfAllPixels.sumOfAllPixels(clijx, arg1);
-    }
-
     /**
      * Determines the sum of all pixels in a given image. It will be stored in a new row of ImageJs
      * Results table in the column 'Sum'.
@@ -3109,8 +3085,16 @@ public abstract class CLIJxOps {
         return SumOfAllPixels.sumPixels(clijx, arg1);
     }
 
+    /**
+     * Determines the sum of all pixels in a given image. It will be stored in a new row of ImageJs
+     * Results table in the column 'Sum'.
+     */
+    public double sumOfAllPixels(ClearCLImageInterface arg1) {
+        return SumOfAllPixels.sumOfAllPixels(clijx, arg1);
+    }
 
-    // net.haesleinhuepf.clijx.advancedfilters.CenterOfMass
+
+    // net.haesleinhuepf.clijx.plugins.CenterOfMass
     //----------------------------------------------------
     /**
      * Determines the center of mass of an image or image stack and writes the result in the results table
@@ -3121,7 +3105,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Invert
+    // net.haesleinhuepf.clijx.plugins.Invert
     //----------------------------------------------------
     /**
      * Computes the negative value of all pixels in a given image. It is recommended to convert images to 
@@ -3136,7 +3120,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Downsample2D
+    // net.haesleinhuepf.clijx.plugins.Downsample2D
     //----------------------------------------------------
     /**
      * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
@@ -3155,7 +3139,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Downsample3D
+    // net.haesleinhuepf.clijx.plugins.Downsample3D
     //----------------------------------------------------
     /**
      * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
@@ -3174,7 +3158,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.DownsampleSliceBySliceHalfMedian
+    // net.haesleinhuepf.clijx.plugins.DownsampleSliceBySliceHalfMedian
     //----------------------------------------------------
     /**
      * Scales an image using scaling factors 0.5 for X and Y dimensions. The Z dimension stays untouched. Thus, each slice is processed separately.
@@ -3186,7 +3170,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.LocalThreshold
+    // net.haesleinhuepf.clijx.plugins.LocalThreshold
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 depending on if a pixel value x in image X 
@@ -3199,7 +3183,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.GradientX
+    // net.haesleinhuepf.clijx.plugins.GradientX
     //----------------------------------------------------
     /**
      * Computes the gradient of gray values along X. Assuming a, b and c are three adjacent
@@ -3210,7 +3194,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.GradientY
+    // net.haesleinhuepf.clijx.plugins.GradientY
     //----------------------------------------------------
     /**
      * Computes the gradient of gray values along Y. Assuming a, b and c are three adjacent
@@ -3221,7 +3205,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.GradientZ
+    // net.haesleinhuepf.clijx.plugins.GradientZ
     //----------------------------------------------------
     /**
      * Computes the gradient of gray values along Z. Assuming a, b and c are three adjacent
@@ -3232,7 +3216,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MultiplyImageAndCoordinate
+    // net.haesleinhuepf.clijx.plugins.MultiplyImageAndCoordinate
     //----------------------------------------------------
     /**
      * Multiplies all pixel intensities with the x, y or z coordinate, depending on specified dimension.</pre>
@@ -3242,7 +3226,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Mean2DBox
+    // net.haesleinhuepf.clijx.plugins.Mean2DBox
     //----------------------------------------------------
     /**
      * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
@@ -3253,7 +3237,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Mean2DSphere
+    // net.haesleinhuepf.clijx.plugins.Mean2DSphere
     //----------------------------------------------------
     /**
      * Computes the local mean average of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
@@ -3264,7 +3248,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Mean3DBox
+    // net.haesleinhuepf.clijx.plugins.Mean3DBox
     //----------------------------------------------------
     /**
      * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
@@ -3283,7 +3267,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Mean3DSphere
+    // net.haesleinhuepf.clijx.plugins.Mean3DSphere
     //----------------------------------------------------
     /**
      * Computes the local mean average of a pixels spherical neighborhood. The spheres size is specified by 
@@ -3294,7 +3278,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MeanSliceBySliceSphere
+    // net.haesleinhuepf.clijx.plugins.MeanSliceBySliceSphere
     //----------------------------------------------------
     /**
      * Computes the local mean average of a pixels ellipsoidal 2D neighborhood in an image stack 
@@ -3307,7 +3291,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MeanOfAllPixels
+    // net.haesleinhuepf.clijx.plugins.MeanOfAllPixels
     //----------------------------------------------------
     /**
      * Determines the mean average of all pixels in a given image. It will be stored in a new row of ImageJs
@@ -3318,7 +3302,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Median2DBox
+    // net.haesleinhuepf.clijx.plugins.Median2DBox
     //----------------------------------------------------
     /**
      * Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by 
@@ -3331,7 +3315,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Median2DSphere
+    // net.haesleinhuepf.clijx.plugins.Median2DSphere
     //----------------------------------------------------
     /**
      * Computes the local median of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
@@ -3344,7 +3328,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Median3DBox
+    // net.haesleinhuepf.clijx.plugins.Median3DBox
     //----------------------------------------------------
     /**
      * Computes the local median of a pixels cuboid neighborhood. The cuboid size is specified by 
@@ -3357,7 +3341,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Median3DSphere
+    // net.haesleinhuepf.clijx.plugins.Median3DSphere
     //----------------------------------------------------
     /**
      * Computes the local median of a pixels spherical neighborhood. The spheres size is specified by 
@@ -3370,7 +3354,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MedianSliceBySliceBox
+    // net.haesleinhuepf.clijx.plugins.MedianSliceBySliceBox
     //----------------------------------------------------
     /**
      * Computes the local median of a pixels rectangular neighborhood. This is done slice-by-slice in a 3D 
@@ -3383,7 +3367,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.MedianSliceBySliceSphere
+    // net.haesleinhuepf.clijx.plugins.MedianSliceBySliceSphere
     //----------------------------------------------------
     /**
      * Computes the local median of a pixels ellipsoidal neighborhood. This is done slice-by-slice in a 3D 
@@ -3396,7 +3380,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Maximum2DSphere
+    // net.haesleinhuepf.clijx.plugins.Maximum2DSphere
     //----------------------------------------------------
     /**
      * Computes the local maximum of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
@@ -3407,7 +3391,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Maximum3DSphere
+    // net.haesleinhuepf.clijx.plugins.Maximum3DSphere
     //----------------------------------------------------
     /**
      * Computes the local maximum of a pixels spherical neighborhood. The spheres size is specified by 
@@ -3418,7 +3402,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Maximum2DBox
+    // net.haesleinhuepf.clijx.plugins.Maximum2DBox
     //----------------------------------------------------
     /**
      * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
@@ -3429,16 +3413,8 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Maximum3DBox
+    // net.haesleinhuepf.clijx.plugins.Maximum3DBox
     //----------------------------------------------------
-    /**
-     * Computes the local maximum of a pixels cube neighborhood. The cubes size is specified by 
-     * its half-width, half-height and half-depth (radius).
-     */
-    public boolean maximum3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, int arg3, int arg4, int arg5) {
-        return Maximum3DBox.maximum3DBox(clijx, arg1, arg2, arg3, arg4, arg5);
-    }
-
     /**
      * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
      * its half-width and half-height (radius).
@@ -3447,8 +3423,16 @@ public abstract class CLIJxOps {
         return Maximum3DBox.maximumBox(clijx, arg1, arg2, arg3, arg4, arg5);
     }
 
+    /**
+     * Computes the local maximum of a pixels cube neighborhood. The cubes size is specified by 
+     * its half-width, half-height and half-depth (radius).
+     */
+    public boolean maximum3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, int arg3, int arg4, int arg5) {
+        return Maximum3DBox.maximum3DBox(clijx, arg1, arg2, arg3, arg4, arg5);
+    }
 
-    // net.haesleinhuepf.clijx.advancedfilters.MaximumSliceBySliceSphere
+
+    // net.haesleinhuepf.clijx.plugins.MaximumSliceBySliceSphere
     //----------------------------------------------------
     /**
      * Computes the local maximum of a pixels ellipsoidal 2D neighborhood in an image stack 
@@ -3461,7 +3445,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Minimum2DSphere
+    // net.haesleinhuepf.clijx.plugins.Minimum2DSphere
     //----------------------------------------------------
     /**
      * Computes the local minimum of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
@@ -3472,7 +3456,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Minimum3DSphere
+    // net.haesleinhuepf.clijx.plugins.Minimum3DSphere
     //----------------------------------------------------
     /**
      * Computes the local minimum of a pixels spherical neighborhood. The spheres size is specified by 
@@ -3483,7 +3467,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Minimum2DBox
+    // net.haesleinhuepf.clijx.plugins.Minimum2DBox
     //----------------------------------------------------
     /**
      * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
@@ -3494,16 +3478,8 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Minimum3DBox
+    // net.haesleinhuepf.clijx.plugins.Minimum3DBox
     //----------------------------------------------------
-    /**
-     * Computes the local minimum of a pixels cube neighborhood. The cubes size is specified by 
-     * its half-width, half-height and half-depth (radius).
-     */
-    public boolean minimum3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, int arg3, int arg4, int arg5) {
-        return Minimum3DBox.minimum3DBox(clijx, arg1, arg2, arg3, arg4, arg5);
-    }
-
     /**
      * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
      * its half-width and half-height (radius).
@@ -3512,8 +3488,16 @@ public abstract class CLIJxOps {
         return Minimum3DBox.minimumBox(clijx, arg1, arg2, arg3, arg4, arg5);
     }
 
+    /**
+     * Computes the local minimum of a pixels cube neighborhood. The cubes size is specified by 
+     * its half-width, half-height and half-depth (radius).
+     */
+    public boolean minimum3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, int arg3, int arg4, int arg5) {
+        return Minimum3DBox.minimum3DBox(clijx, arg1, arg2, arg3, arg4, arg5);
+    }
 
-    // net.haesleinhuepf.clijx.advancedfilters.MinimumSliceBySliceSphere
+
+    // net.haesleinhuepf.clijx.plugins.MinimumSliceBySliceSphere
     //----------------------------------------------------
     /**
      * Computes the local minimum of a pixels ellipsoidal 2D neighborhood in an image stack 
@@ -3538,17 +3522,8 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Blur2D
+    // net.haesleinhuepf.clijx.plugins.Blur2D
     //----------------------------------------------------
-    /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
-     * 
-     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
-     */
-    public boolean blur2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Blur2D.blur2D(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
-    }
-
     /**
      * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
      * 
@@ -3558,18 +3533,18 @@ public abstract class CLIJxOps {
         return Blur2D.blur(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
 
-
-    // net.haesleinhuepf.clijx.advancedfilters.Blur3D
-    //----------------------------------------------------
     /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X, Y and Z. Thus, the filterkernel can have non-isotropic shape.
+     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
      * 
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
-    public boolean blur3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Blur3D.blur3D(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    public boolean blur2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return Blur2D.blur2D(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
 
+
+    // net.haesleinhuepf.clijx.plugins.Blur3D
+    //----------------------------------------------------
     /**
      * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
      * 
@@ -3579,8 +3554,17 @@ public abstract class CLIJxOps {
         return Blur3D.blur(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
+    /**
+     * Computes the Gaussian blurred image of an image given two sigma values in X, Y and Z. Thus, the filterkernel can have non-isotropic shape.
+     * 
+     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
+     */
+    public boolean blur3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return Blur3D.blur3D(clijx, arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
 
-    // net.haesleinhuepf.clijx.advancedfilters.Blur3DSliceBySlice
+
+    // net.haesleinhuepf.clijx.plugins.Blur3DSliceBySlice
     //----------------------------------------------------
     /**
      * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
@@ -3601,7 +3585,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ResliceBottom
+    // net.haesleinhuepf.clijx.plugins.ResliceBottom
     //----------------------------------------------------
     /**
      * Flippes Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method but
@@ -3612,7 +3596,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ResliceTop
+    // net.haesleinhuepf.clijx.plugins.ResliceTop
     //----------------------------------------------------
     /**
      * Flippes Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method but
@@ -3623,7 +3607,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ResliceLeft
+    // net.haesleinhuepf.clijx.plugins.ResliceLeft
     //----------------------------------------------------
     /**
      * Flippes X, Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method 
@@ -3634,7 +3618,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.ResliceRight
+    // net.haesleinhuepf.clijx.plugins.ResliceRight
     //----------------------------------------------------
     /**
      * Flippes X, Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method 
@@ -3645,7 +3629,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Rotate2D
+    // net.haesleinhuepf.clijx.plugins.Rotate2D
     //----------------------------------------------------
     /**
      * Rotates an image in plane. All angles are entered in degrees. If the image is not rotated around 
@@ -3658,7 +3642,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Rotate3D
+    // net.haesleinhuepf.clijx.plugins.Rotate3D
     //----------------------------------------------------
     /**
      * Rotates an image stack in 3D. All angles are entered in degrees. If the image is not rotated around 
@@ -3671,7 +3655,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Scale2D
+    // net.haesleinhuepf.clijx.plugins.Scale2D
     //----------------------------------------------------
     /**
      * DEPRECATED: CLIJ scale() is deprecated. Use scale2D or scale3D instead!
@@ -3688,7 +3672,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Scale3D
+    // net.haesleinhuepf.clijx.plugins.Scale3D
     //----------------------------------------------------
     /**
      * DEPRECATED: CLIJ scale() is deprecated. Use scale2D or scale3D instead!
@@ -3705,7 +3689,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Translate2D
+    // net.haesleinhuepf.clijx.plugins.Translate2D
     //----------------------------------------------------
     /**
      * Translate an image stack in X and Y.
@@ -3715,7 +3699,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.Translate3D
+    // net.haesleinhuepf.clijx.plugins.Translate3D
     //----------------------------------------------------
     /**
      * Translate an image stack in X, Y and Z.
@@ -3847,10 +3831,10 @@ public abstract class CLIJxOps {
     // net.haesleinhuepf.clijx.temp.ReportMemory
     //----------------------------------------------------
 
-    // net.haesleinhuepf.clijx.advancedfilters.splitstack.AbstractSplitStack
+    // net.haesleinhuepf.clijx.plugins.splitstack.AbstractSplitStack
     //----------------------------------------------------
 
-    // net.haesleinhuepf.clijx.advancedfilters.TopHatOctagonSliceBySlice
+    // net.haesleinhuepf.clijx.plugins.TopHatOctagonSliceBySlice
     //----------------------------------------------------
     /**
      * Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations - 2 makes the filter result very similar to minimum sphere.
@@ -3860,7 +3844,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.SetColumn
+    // net.haesleinhuepf.clijx.plugins.SetColumn
     //----------------------------------------------------
     /**
      * Sets all pixel values x of a given column in X to a constant value v.
@@ -3872,7 +3856,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.SetRow
+    // net.haesleinhuepf.clijx.plugins.SetRow
     //----------------------------------------------------
     /**
      * Sets all pixel values x of a given row in X to a constant value v.
@@ -3884,7 +3868,7 @@ public abstract class CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.advancedfilters.SumYProjection
+    // net.haesleinhuepf.clijx.plugins.SumYProjection
     //----------------------------------------------------
     /**
      * Determines the sum intensity projection of an image along Z.

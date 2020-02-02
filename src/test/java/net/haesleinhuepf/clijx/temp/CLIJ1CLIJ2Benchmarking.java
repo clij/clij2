@@ -239,7 +239,7 @@ public class CLIJ1CLIJ2Benchmarking {
             //long time = System.currentTimeMillis();
             //clijx.meanBox(input, output, 3, 3, 3);
             //System.out.println("CLIJx mean took " + (System.currentTimeMillis() - time) + " ms");
-            long duration = benchmarkOp(clij, new net.haesleinhuepf.clijx.advancedfilters.Mean3DBox(), i2n3);
+            long duration = benchmarkOp(clij, new net.haesleinhuepf.clijx.plugins.Mean3DBox(), i2n3);
             System.out.println("CLIJx mean took " + (duration) + " ms");
 
         }*/

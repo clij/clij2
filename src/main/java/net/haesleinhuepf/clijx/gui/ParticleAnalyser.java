@@ -10,7 +10,7 @@ import ij.plugin.PlugIn;
 import ij.process.ImageProcessor;
 import ij.util.Tools;
 import net.haesleinhuepf.clij.CLIJ;
-import net.haesleinhuepf.clijx.advancedfilters.*;
+import net.haesleinhuepf.clijx.plugins.*;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clijx.CLIJx;

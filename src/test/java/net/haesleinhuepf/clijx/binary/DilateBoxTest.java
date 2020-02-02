@@ -1,14 +1,12 @@
 package net.haesleinhuepf.clijx.binary;
 
 import ij.IJ;
-import ij.ImageJ;
 import ij.ImagePlus;
 import ij.gui.NewImage;
 import ij.process.ImageProcessor;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.macro.AbstractMacroPluginTest;
 import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.advancedfilters.DilateBox;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -1,12 +1,11 @@
 package net.haesleinhuepf.clijx.advmath;
 
 import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.advancedmath.Logarithm;
+import net.haesleinhuepf.clijx.plugins.Logarithm;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import ij.IJ;
 import ij.ImagePlus;
-import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.test.TestUtilities;
 import org.junit.Test;
 

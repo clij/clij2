@@ -1,20 +1,16 @@
 package net.haesleinhuepf.clijx.matrix;
 
 
-import net.haesleinhuepf.clij.CLIJ;
-import net.haesleinhuepf.clijx.advancedfilters.ConnectedComponentsLabeling;
-import net.haesleinhuepf.clijx.advancedfilters.CountNonZeroPixels;
+import net.haesleinhuepf.clijx.plugins.ConnectedComponentsLabeling;
+import net.haesleinhuepf.clijx.plugins.CountNonZeroPixels;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
-import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
-
-import java.util.HashMap;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_spotsToPointList")
 public class SpotsToPointList extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {

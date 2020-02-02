@@ -18,24 +18,22 @@ CLIJx clijx = CLIJx.getInstance();
 
 // get input parameters
 ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-int arg3 = 10;
-float arg4 = 1.0;
-float arg5 = 2.0;
-boolean arg6 = true;
+float arg2 = 1.0;
+float arg3 = 2.0;
+int arg4 = 10;
 ```
 
 ```
 // Execute operation on GPU
-clijx.histogram(clij, arg1, arg2, arg3, arg4, arg5, arg6);
+float[] resultHistogram = clijx.histogram(clij, arg1, arg2, arg3, arg4);
 ```
 
 ```
 //show result
+System.out.println(resultHistogram);
 
 // cleanup memory on GPU
 arg1.close();
-arg2.close();
 ```
 
 
