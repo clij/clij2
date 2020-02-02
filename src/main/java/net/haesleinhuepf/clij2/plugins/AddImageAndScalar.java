@@ -1,10 +1,12 @@
-package net.haesleinhuepf.clijx.plugins;
+package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
+import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
@@ -18,15 +20,15 @@ import static net.haesleinhuepf.clijx.utilities.CLIJUtilities.checkDimensions;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_addImageAndScalar")
-public class AddImageAndScalar extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_addImageAndScalar")
+public class AddImageAndScalar extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        return addImageAndScalar(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        return addImageAndScalar(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
     }
 
-    public static boolean addImageAndScalar(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Float scalar) {
+    public static boolean addImageAndScalar(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Float scalar) {
         assertDifferent(src, dst);
 
         HashMap<String, Object> parameters = new HashMap<>();
@@ -37,7 +39,7 @@ public class AddImageAndScalar extends AbstractCLIJxPlugin implements CLIJMacroP
         if (!checkDimensions(src.getDimension(), src.getDimension(), dst.getDimension())) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (minimumImageAndScalar)");
         }
-        clijx.execute(AddImageAndScalar .class, "add_image_and_scalar_" + src.getDimension() + "d_x.cl", "add_image_and_scalar_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(AddImageAndScalar .class, "add_image_and_scalar_" + src.getDimension() + "d_x.cl", "add_image_and_scalar_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 

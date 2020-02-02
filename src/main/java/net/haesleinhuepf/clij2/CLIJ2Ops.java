@@ -117,7 +117,7 @@ import net.haesleinhuepf.clijx.plugins.ResliceRadial;
 import net.haesleinhuepf.clijx.plugins.ShowRGB;
 import net.haesleinhuepf.clijx.plugins.ShowGrey;
 import net.haesleinhuepf.clijx.plugins.Sobel;
-import net.haesleinhuepf.clijx.plugins.Absolute;
+import net.haesleinhuepf.clij2.plugins.Absolute;
 import net.haesleinhuepf.clijx.plugins.LaplaceBox;
 import net.haesleinhuepf.clijx.plugins.BottomHatBox;
 import net.haesleinhuepf.clijx.plugins.BottomHatSphere;
@@ -253,7 +253,7 @@ import net.haesleinhuepf.clijx.base.Push;
 import net.haesleinhuepf.clijx.base.PushCurrentSlice;
 import net.haesleinhuepf.clijx.base.PushCurrentZStack;
 import net.haesleinhuepf.clijx.base.Release;
-import net.haesleinhuepf.clijx.plugins.AddImageAndScalar;
+import net.haesleinhuepf.clij2.plugins.AddImageAndScalar;
 import net.haesleinhuepf.clijx.plugins.DetectMinimaBox;
 import net.haesleinhuepf.clijx.plugins.DetectMaximaBox;
 import net.haesleinhuepf.clijx.plugins.DetectMaximaSliceBySliceBox;
@@ -277,6 +277,18 @@ public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
    CLIJ2 getCLIJ2();
    
+
+    // net.haesleinhuepf.clij2.plugins.Absolute
+    //----------------------------------------------------
+    /**
+     * Computes the absolute value of every individual pixel x in a given image.
+     * 
+     * <pre>f(x) = |x| </pre>
+     */
+    default boolean absolute(ClearCLImageInterface arg1, ClearCLImageInterface arg2) {
+        return Absolute.absolute(getCLIJ2(), arg1, arg2);
+    }
+
 
     // net.haesleinhuepf.clij2.plugins.AddImages
     //----------------------------------------------------
@@ -323,5 +335,17 @@ public abstract interface CLIJ2Ops {
         return SubtractImages.subtractImages(getCLIJ2(), arg1, arg2, arg3);
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.AddImageAndScalar
+    //----------------------------------------------------
+    /**
+     * Adds a scalar value s to all pixels x of a given image X.
+     * 
+     * <pre>f(x, s) = x + s</pre>
+     */
+    default boolean addImageAndScalar(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
+        return AddImageAndScalar.addImageAndScalar(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+    }
+
 }
-// 4 methods generated.
+// 6 methods generated.
