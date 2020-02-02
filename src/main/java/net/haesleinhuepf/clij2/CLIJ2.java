@@ -2,6 +2,7 @@ package net.haesleinhuepf.clij2;
 
 import ij.IJ;
 import ij.ImagePlus;
+import ij.plugin.Duplicator;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
@@ -21,8 +22,15 @@ import net.imglib2.view.Views;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+/**
+ * The CLIJ2 gateway
+ *
+ * Author: @haesleinhuepf
+ * December 2020
+ */
 public class CLIJ2 {
-    private static CLIJx instance;
+    private static CLIJ2 instance;
 
     protected CLIJ clij;
 
@@ -47,18 +55,18 @@ public class CLIJ2 {
         mCLKernelExecutor = new CLKernelExecutor(clij.getClearCLContext());
     }
 
-    public static CLIJx getInstance() {
+    public static CLIJ2 getInstance() {
         CLIJ clij = CLIJ.getInstance();
         if (instance == null || instance.clij != CLIJ.getInstance()) {
-            instance = new CLIJx(clij);
+            instance = new CLIJ2(clij);
         }
         return instance;
     }
 
-    public static CLIJx getInstance(String id) {
+    public static CLIJ2 getInstance(String id) {
         CLIJ clij = CLIJ.getInstance(id);
         if (instance == null || instance.clij != clij) {
-            instance = new CLIJx(clij);
+            instance = new CLIJ2(clij);
         }
         return instance;
     }
@@ -88,6 +96,13 @@ public class CLIJ2 {
     }
 
     public ClearCLBuffer pushCurrentSlice(ImagePlus imp) {
+        ClearCLBuffer buffer = clij.pushCurrentSlice(imp);
+        registerReference(buffer);
+        return buffer;
+    }
+
+    public ClearCLBuffer pushCurrentSelection(ImagePlus imp) {
+        imp = new Duplicator().run(imp);
         ClearCLBuffer buffer = clij.pushCurrentSlice(imp);
         registerReference(buffer);
         return buffer;

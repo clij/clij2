@@ -8,7 +8,7 @@ import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
-import static net.haesleinhuepf.clijx.plugins.AddImagesWeighted.addImagesWeighted;
+import static net.haesleinhuepf.clij2.plugins.AddImagesWeighted.addImagesWeighted;
 
 /**
  * Author: @haesleinhuepf

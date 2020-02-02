@@ -70,6 +70,7 @@ public class OpGenerator {
                                 Modifier.isPublic(method.getModifiers()) &&
                                 method.getParameterCount() > 0 &&
                                 (method.getParameters()[0].getType() == CLIJ.class ||
+                                        method.getParameters()[0].getType() == CLIJ2.class ||
                                         method.getParameters()[0].getType() == CLIJx.class
                                 ) && blockListOk(klass, method)) {
 

@@ -141,7 +141,7 @@ import net.haesleinhuepf.clijx.plugins.MinimumOctagon;
 import net.haesleinhuepf.clijx.plugins.MaximumOctagon;
 import net.haesleinhuepf.clijx.plugins.TopHatOctagon;
 import net.haesleinhuepf.clijx.plugins.AddImages;
-import net.haesleinhuepf.clijx.plugins.AddImagesWeighted;
+import net.haesleinhuepf.clij2.plugins.AddImagesWeighted;
 import net.haesleinhuepf.clijx.plugins.SubtractImages;
 import net.haesleinhuepf.clijx.plugins.ShowGlasbeyOnGrey;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
@@ -277,5 +277,17 @@ public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
    CLIJ2 getCLIJ2();
    
+
+    // net.haesleinhuepf.clij2.plugins.AddImagesWeighted
+    //----------------------------------------------------
+    /**
+     * Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b.
+     * 
+     * <pre>f(x, y, a, b) = x * a + y * b</pre>
+     */
+    default boolean addImagesWeighted(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, double arg4, double arg5) {
+        return AddImagesWeighted.addImagesWeighted(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
+
 }
-// 0 methods generated.
+// 1 methods generated.

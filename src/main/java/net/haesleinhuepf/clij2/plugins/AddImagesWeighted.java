@@ -1,11 +1,11 @@
-package net.haesleinhuepf.clijx.plugins;
+package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
-import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
+import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
+import net.haesleinhuepf.clij2.CLIJ2;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -17,15 +17,15 @@ import static net.haesleinhuepf.clijx.utilities.CLIJUtilities.checkDimensions;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_addImagesWeighted")
-public class AddImagesWeighted extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_addImagesWeighted")
+public class AddImagesWeighted extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        return addImagesWeighted(getCLIJx(), (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), (ClearCLImageInterface)(args[2]), asFloat(args[3]), asFloat(args[4]));
+        return addImagesWeighted(getCLIJ2(), (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), (ClearCLImageInterface)(args[2]), asFloat(args[3]), asFloat(args[4]));
     }
 
-    public static boolean addImagesWeighted(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface src1, ClearCLImageInterface dst, Float factor, Float factor1) {
+    public static boolean addImagesWeighted(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface src1, ClearCLImageInterface dst, Float factor, Float factor1) {
         assertDifferent(src, dst);
         assertDifferent(src1, dst);
 
@@ -39,7 +39,7 @@ public class AddImagesWeighted extends AbstractCLIJxPlugin implements CLIJMacroP
         if (!checkDimensions(src.getDimension(), src1.getDimension(), dst.getDimension())) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (addImageAndScalar)");
         }
-        clijx.execute(AddImagesWeighted.class, "add_images_weighted_"  + src.getDimension() +  "d_x.cl", "add_images_weighted_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(AddImagesWeighted.class, "add_images_weighted_"  + src.getDimension() +  "d_x.cl", "add_images_weighted_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 
