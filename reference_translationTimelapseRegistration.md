@@ -1,5 +1,5 @@
 ## translationTimelapseRegistration
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Applies 2D translation registration to every pair of t, t+1 slices of a 2D+t image stack.
 
@@ -12,28 +12,28 @@ Ext.CLIJx_translationTimelapseRegistration(Image input, Image output);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer input = clijx.push(inputImagePlus);
+ClearCLBuffer input = clij2.push(inputImagePlus);
 output = clij.create(input);
 ```
 
 ```
 // Execute operation on GPU
-clijx.translationTimelapseRegistration(clij, input, output);
+clij2.translationTimelapseRegistration(clij, input, output);
 ```
 
 ```
 //show result
-outputImagePlus = clij.pull(output);
+outputImagePlus = clij2.pull(output);
 outputImagePlus.show();
 
 // cleanup memory on GPU
-input.close();
-output.close();
+clij2.release(input);
+clij2.release(output);
 ```
 
 

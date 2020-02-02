@@ -1,5 +1,5 @@
 ## drawLine
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Draws a line between two points with a given thickness. All pixels other than on the line are untouched. Consider using clij.op.set(buffer, 0); in advance.
 
@@ -12,12 +12,12 @@ Ext.CLIJx_drawLine(Image destination, Number x1, Number y1, Number z1, Number x2
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
 float arg2 = 1.0;
 float arg3 = 2.0;
 float arg4 = 3.0;
@@ -29,14 +29,14 @@ float arg8 = 7.0;
 
 ```
 // Execute operation on GPU
-clijx.drawLine(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+clij2.drawLine(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-arg1.close();
+clij2.release(arg1);
 ```
 
 

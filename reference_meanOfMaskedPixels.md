@@ -1,5 +1,5 @@
 ## meanOfMaskedPixels
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the mean intensity in an image, but only in pixels which have non-zero values in another binary mask image.
 
@@ -12,18 +12,18 @@ Ext.CLIJx_meanOfMaskedPixels(Image source, Image mask);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-ClearCLBuffer mask = clijx.push(maskImagePlus);
+ClearCLBuffer source = clij2.push(sourceImagePlus);
+ClearCLBuffer mask = clij2.push(maskImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double resultMeanOfMaskedPixels = clijx.meanOfMaskedPixels(clij, source, mask);
+double resultMeanOfMaskedPixels = clij2.meanOfMaskedPixels(clij, source, mask);
 ```
 
 ```
@@ -31,8 +31,8 @@ double resultMeanOfMaskedPixels = clijx.meanOfMaskedPixels(clij, source, mask);
 System.out.println(resultMeanOfMaskedPixels);
 
 // cleanup memory on GPU
-source.close();
-mask.close();
+clij2.release(source);
+clij2.release(mask);
 ```
 
 

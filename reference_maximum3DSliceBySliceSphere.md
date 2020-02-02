@@ -1,5 +1,5 @@
 ## maximum3DSliceBySliceSphere
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes the local maximum of a pixels ellipsoidal 2D neighborhood in an image stack 
 slice by slice. The ellipses size is specified by its half-width and half-height (radius).
@@ -15,28 +15,28 @@ Ext.CLIJx_maximum3DSliceBySliceSphere(Image source, Image destination, Number ra
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 int arg3 = 10;
 int arg4 = 20;
 ```
 
 ```
 // Execute operation on GPU
-clijx.maximum3DSliceBySliceSphere(clij, arg1, arg2, arg3, arg4);
+clij2.maximum3DSliceBySliceSphere(clij, arg1, arg2, arg3, arg4);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-arg1.close();
-arg2.close();
+clij2.release(arg1);
+clij2.release(arg2);
 ```
 
 

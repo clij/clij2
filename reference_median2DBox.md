@@ -1,5 +1,5 @@
 ## median2DBox
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by 
 its half-width and half-height (radius).
@@ -15,28 +15,28 @@ Ext.CLIJx_median2DBox(Image source, Image destination, Number radiusX, Number ra
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 int arg3 = 10;
 int arg4 = 20;
 ```
 
 ```
 // Execute operation on GPU
-clijx.median2DBox(clij, arg1, arg2, arg3, arg4);
+clij2.median2DBox(clij, arg1, arg2, arg3, arg4);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-arg1.close();
-arg2.close();
+clij2.release(arg1);
+clij2.release(arg2);
 ```
 
 

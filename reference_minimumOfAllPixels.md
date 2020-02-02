@@ -1,5 +1,5 @@
 ## minimumOfAllPixels
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the minimum of all pixels in a given image. It will be stored in a new row of ImageJs
 Results table in the column 'Min'.
@@ -13,17 +13,17 @@ Ext.CLIJx_minimumOfAllPixels(Image source);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double resultMinimumOfAllPixels = clijx.minimumOfAllPixels(clij, arg1);
+double resultMinimumOfAllPixels = clij2.minimumOfAllPixels(clij, arg1);
 ```
 
 ```
@@ -31,7 +31,7 @@ double resultMinimumOfAllPixels = clijx.minimumOfAllPixels(clij, arg1);
 System.out.println(resultMinimumOfAllPixels);
 
 // cleanup memory on GPU
-arg1.close();
+clij2.release(arg1);
 ```
 
 

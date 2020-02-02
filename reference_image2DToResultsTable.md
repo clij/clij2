@@ -1,5 +1,5 @@
 ## image2DToResultsTable
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Converts an image into a table.
 
@@ -12,17 +12,17 @@ Ext.CLIJx_image2DToResultsTable(Image source);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-ResultsTable resultImage2DToResultsTable = clijx.image2DToResultsTable(clij, arg1, arg2);
+ResultsTable resultImage2DToResultsTable = clij2.image2DToResultsTable(clij, arg1, arg2);
 ```
 
 ```
@@ -30,7 +30,7 @@ ResultsTable resultImage2DToResultsTable = clijx.image2DToResultsTable(clij, arg
 System.out.println(resultImage2DToResultsTable);
 
 // cleanup memory on GPU
-arg1.close();
+clij2.release(arg1);
 ```
 
 

@@ -1,5 +1,5 @@
 ## showGrey
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Visualises a single 2D image.
 
@@ -12,24 +12,24 @@ Ext.CLIJx_showGrey(Image input, String title);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.showGrey(clij, arg1, arg2);
+clij2.showGrey(clij, arg1, arg2);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-arg1.close();
+clij2.release(arg1);
 ```
 
 

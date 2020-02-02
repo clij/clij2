@@ -1,5 +1,5 @@
 ## varianceOfMaskedPixels
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the variance in an image, but only in pixels which have non-zero values in another binary mask image. The result is put in the results table as new column named 'Masked_variance'.
 
@@ -12,18 +12,18 @@ Ext.CLIJx_varianceOfMaskedPixels(Image source, Image mask);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-ClearCLBuffer mask = clijx.push(maskImagePlus);
+ClearCLBuffer source = clij2.push(sourceImagePlus);
+ClearCLBuffer mask = clij2.push(maskImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double resultVarianceOfMaskedPixels = clijx.varianceOfMaskedPixels(clij, source, mask);
+double resultVarianceOfMaskedPixels = clij2.varianceOfMaskedPixels(clij, source, mask);
 ```
 
 ```
@@ -31,8 +31,8 @@ double resultVarianceOfMaskedPixels = clijx.varianceOfMaskedPixels(clij, source,
 System.out.println(resultVarianceOfMaskedPixels);
 
 // cleanup memory on GPU
-source.close();
-mask.close();
+clij2.release(source);
+clij2.release(mask);
 ```
 
 

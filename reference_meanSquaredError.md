@@ -1,5 +1,5 @@
 ## meanSquaredError
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the mean squared error (MSE) between two images. The MSE will be stored in a new row of ImageJs
 Results table in the column 'MSE'.
@@ -13,18 +13,18 @@ Ext.CLIJx_meanSquaredError(Image source1, Image source2);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source1 = clijx.push(source1ImagePlus);
-ClearCLBuffer source2 = clijx.push(source2ImagePlus);
+ClearCLBuffer source1 = clij2.push(source1ImagePlus);
+ClearCLBuffer source2 = clij2.push(source2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double resultMeanSquaredError = clijx.meanSquaredError(clij, source1, source2);
+double resultMeanSquaredError = clij2.meanSquaredError(clij, source1, source2);
 ```
 
 ```
@@ -32,8 +32,8 @@ double resultMeanSquaredError = clijx.meanSquaredError(clij, source1, source2);
 System.out.println(resultMeanSquaredError);
 
 // cleanup memory on GPU
-source1.close();
-source2.close();
+clij2.release(source1);
+clij2.release(source2);
 ```
 
 

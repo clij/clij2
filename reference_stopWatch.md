@@ -1,5 +1,5 @@
 ## stopWatch
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Measures time and outputs delay to last call.
 
@@ -12,16 +12,16 @@ Ext.CLIJx_stopWatch(String text);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
 ```
 
 ```
 // Execute operation on GPU
-clijx.stopWatch(clij, arg1);
+clij2.stopWatch(clij, arg1);
 ```
 
 ```

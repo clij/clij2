@@ -1,5 +1,5 @@
 ## shortestDistances
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determine the shortest distance from a distance matrix. This corresponds to the minimum in a matrix for each individial column.
 
@@ -12,28 +12,28 @@ Ext.CLIJx_shortestDistances(Image distance_matrix, Image destination_minimum_dis
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer distance_matrix = clijx.push(distance_matrixImagePlus);
+ClearCLBuffer distance_matrix = clij2.push(distance_matrixImagePlus);
 destination_minimum_distances = clij.create(distance_matrix);
 ```
 
 ```
 // Execute operation on GPU
-clijx.shortestDistances(clij, distance_matrix, destination_minimum_distances);
+clij2.shortestDistances(clij, distance_matrix, destination_minimum_distances);
 ```
 
 ```
 //show result
-destination_minimum_distancesImagePlus = clij.pull(destination_minimum_distances);
+destination_minimum_distancesImagePlus = clij2.pull(destination_minimum_distances);
 destination_minimum_distancesImagePlus.show();
 
 // cleanup memory on GPU
-distance_matrix.close();
-destination_minimum_distances.close();
+clij2.release(distance_matrix);
+clij2.release(destination_minimum_distances);
 ```
 
 

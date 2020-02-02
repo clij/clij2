@@ -1,5 +1,5 @@
 ## pointIndexListToMesh
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Meshes all points in a given point list which are indiced in a corresponding index list. TODO: Explain better
 
@@ -12,28 +12,28 @@ Ext.CLIJx_pointIndexListToMesh(Image pointlist, Image indexList, Image Mesh);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer pointlist = clijx.push(pointlistImagePlus);
-ClearCLBuffer indexList = clijx.push(indexListImagePlus);
-ClearCLBuffer Mesh = clijx.push(MeshImagePlus);
+ClearCLBuffer pointlist = clij2.push(pointlistImagePlus);
+ClearCLBuffer indexList = clij2.push(indexListImagePlus);
+ClearCLBuffer Mesh = clij2.push(MeshImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.pointIndexListToMesh(clij, pointlist, indexList, Mesh);
+clij2.pointIndexListToMesh(clij, pointlist, indexList, Mesh);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-pointlist.close();
-indexList.close();
-Mesh.close();
+clij2.release(pointlist);
+clij2.release(indexList);
+clij2.release(Mesh);
 ```
 
 

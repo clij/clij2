@@ -1,5 +1,5 @@
 ## multiplyImageAndScalar
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Multiplies all pixels value x in a given image X with a constant scalar s.
 
@@ -14,27 +14,27 @@ Ext.CLIJx_multiplyImageAndScalar(Image source, Image destination, Number scalar)
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 float arg3 = 1.0;
 ```
 
 ```
 // Execute operation on GPU
-clijx.multiplyImageAndScalar(clij, arg1, arg2, arg3);
+clij2.multiplyImageAndScalar(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-arg1.close();
-arg2.close();
+clij2.release(arg1);
+clij2.release(arg2);
 ```
 
 
@@ -42,6 +42,7 @@ arg2.close();
 
 ### Example scripts
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [bitdepthConversion.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/bitdepthConversion.ijm)  
+<a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [addImages.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/addImages.py)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

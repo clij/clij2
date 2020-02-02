@@ -1,5 +1,5 @@
 ## projectMinimumThresholdedZBounded
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the minimum projection of all pixels in an image above a given threshold along Z within a given z range.
 
@@ -12,13 +12,13 @@ Ext.CLIJx_projectMinimumThresholdedZBounded(Image source, Image destination_min,
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 float arg3 = 1.0;
 int arg4 = 10;
 int arg5 = 20;
@@ -26,15 +26,15 @@ int arg5 = 20;
 
 ```
 // Execute operation on GPU
-clijx.projectMinimumThresholdedZBounded(clij, arg1, arg2, arg3, arg4, arg5);
+clij2.projectMinimumThresholdedZBounded(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-arg1.close();
-arg2.close();
+clij2.release(arg1);
+clij2.release(arg2);
 ```
 
 

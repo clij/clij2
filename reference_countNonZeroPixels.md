@@ -1,5 +1,5 @@
 ## countNonZeroPixels
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the number of all pixels in a given image which are not equal to 0. It will be stored in a new row of ImageJs
 Results table in the column 'CountNonZero'.
@@ -13,17 +13,17 @@ Ext.CLIJx_countNonZeroPixels(Image source);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
+ClearCLBuffer source = clij2.push(sourceImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double resultCountNonZeroPixels = clijx.countNonZeroPixels(clij, source);
+double resultCountNonZeroPixels = clij2.countNonZeroPixels(clij, source);
 ```
 
 ```
@@ -31,7 +31,7 @@ double resultCountNonZeroPixels = clijx.countNonZeroPixels(clij, source);
 System.out.println(resultCountNonZeroPixels);
 
 // cleanup memory on GPU
-source.close();
+clij2.release(source);
 ```
 
 

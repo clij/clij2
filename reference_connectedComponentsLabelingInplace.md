@@ -1,5 +1,5 @@
 ## connectedComponentsLabelingInplace
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Performs connected components analysis to a binary image and generates a label map.
 
@@ -12,9 +12,9 @@ Ext.CLIJx_connectedComponentsLabelingInplace(Image binary_source_labeling_destin
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
 binary_source_labeling_destination = clij.create();
@@ -22,16 +22,16 @@ binary_source_labeling_destination = clij.create();
 
 ```
 // Execute operation on GPU
-clijx.connectedComponentsLabelingInplace(clij, binary_source_labeling_destination);
+clij2.connectedComponentsLabelingInplace(clij, binary_source_labeling_destination);
 ```
 
 ```
 //show result
-binary_source_labeling_destinationImagePlus = clij.pull(binary_source_labeling_destination);
+binary_source_labeling_destinationImagePlus = clij2.pull(binary_source_labeling_destination);
 binary_source_labeling_destinationImagePlus.show();
 
 // cleanup memory on GPU
-binary_source_labeling_destination.close();
+clij2.release(binary_source_labeling_destination);
 ```
 
 

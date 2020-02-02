@@ -1,5 +1,5 @@
 ## boundingBox
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the bounding box of all non-zero pixels in a binary image. The positions will be stored in a new row of ImageJs
 Results table in the column 'BoundingBoxX', 'BoundingBoxY', 'BoundingBoxZ', 'BoundingBoxWidth', 'BoundingBoxHeight' 'BoundingBoxDepth'.In case of 2D images Z and depth will be zero.
@@ -13,17 +13,17 @@ Ext.CLIJx_boundingBox(Image source);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
+ClearCLBuffer source = clij2.push(sourceImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double[] resultBoundingBox = clijx.boundingBox(clij, source);
+double[] resultBoundingBox = clij2.boundingBox(clij, source);
 ```
 
 ```
@@ -31,7 +31,7 @@ double[] resultBoundingBox = clijx.boundingBox(clij, source);
 System.out.println(resultBoundingBox);
 
 // cleanup memory on GPU
-source.close();
+clij2.release(source);
 ```
 
 

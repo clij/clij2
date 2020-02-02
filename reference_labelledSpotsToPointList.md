@@ -1,5 +1,5 @@
 ## labelledSpotsToPointList
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Transforms a labelmap of spots (single pixels with values 1, 2, ..., n for n spots) as resulting from connected components analysis in an image where every column contains d 
 pixels (with d = dimensionality of the original image) with the coordinates of the maxima/minima.
@@ -13,28 +13,28 @@ Ext.CLIJx_labelledSpotsToPointList(Image input_labelled_spots, Image destination
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer input_labelled_spots = clijx.push(input_labelled_spotsImagePlus);
+ClearCLBuffer input_labelled_spots = clij2.push(input_labelled_spotsImagePlus);
 destination_pointlist = clij.create(input_labelled_spots);
 ```
 
 ```
 // Execute operation on GPU
-clijx.labelledSpotsToPointList(clij, input_labelled_spots, destination_pointlist);
+clij2.labelledSpotsToPointList(clij, input_labelled_spots, destination_pointlist);
 ```
 
 ```
 //show result
-destination_pointlistImagePlus = clij.pull(destination_pointlist);
+destination_pointlistImagePlus = clij2.pull(destination_pointlist);
 destination_pointlistImagePlus.show();
 
 // cleanup memory on GPU
-input_labelled_spots.close();
-destination_pointlist.close();
+clij2.release(input_labelled_spots);
+clij2.release(destination_pointlist);
 ```
 
 

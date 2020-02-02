@@ -1,5 +1,5 @@
 ## centerOfMass
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the center of mass of an image or image stack and writes the result in the results table
 in the columns MassX, MassY and MassZ.
@@ -13,17 +13,17 @@ Ext.CLIJx_centerOfMass(Image source);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
+ClearCLBuffer source = clij2.push(sourceImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double[] resultCenterOfMass = clijx.centerOfMass(clij, source);
+double[] resultCenterOfMass = clij2.centerOfMass(clij, source);
 ```
 
 ```
@@ -31,7 +31,7 @@ double[] resultCenterOfMass = clijx.centerOfMass(clij, source);
 System.out.println(resultCenterOfMass);
 
 // cleanup memory on GPU
-source.close();
+clij2.release(source);
 ```
 
 

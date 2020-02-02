@@ -1,5 +1,5 @@
 ## minimumDistanceOfTouchingNeighbors
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Takes a touch matrix and a distance matrix to determine the shortest distance of touching neighbors for every object.
 
@@ -12,30 +12,30 @@ Ext.CLIJx_minimumDistanceOfTouchingNeighbors(Image distance_matrix, Image touch_
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer distance_matrix = clijx.push(distance_matrixImagePlus);
-ClearCLBuffer touch_matrix = clijx.push(touch_matrixImagePlus);
+ClearCLBuffer distance_matrix = clij2.push(distance_matrixImagePlus);
+ClearCLBuffer touch_matrix = clij2.push(touch_matrixImagePlus);
 minimum_distancelist_destination = clij.create(distance_matrix);
 ```
 
 ```
 // Execute operation on GPU
-clijx.minimumDistanceOfTouchingNeighbors(clij, distance_matrix, touch_matrix, minimum_distancelist_destination);
+clij2.minimumDistanceOfTouchingNeighbors(clij, distance_matrix, touch_matrix, minimum_distancelist_destination);
 ```
 
 ```
 //show result
-minimum_distancelist_destinationImagePlus = clij.pull(minimum_distancelist_destination);
+minimum_distancelist_destinationImagePlus = clij2.pull(minimum_distancelist_destination);
 minimum_distancelist_destinationImagePlus.show();
 
 // cleanup memory on GPU
-distance_matrix.close();
-touch_matrix.close();
-minimum_distancelist_destination.close();
+clij2.release(distance_matrix);
+clij2.release(touch_matrix);
+clij2.release(minimum_distancelist_destination);
 ```
 
 

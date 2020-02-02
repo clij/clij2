@@ -1,5 +1,5 @@
 ## detectMaximaBox
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
 there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
@@ -13,27 +13,27 @@ Ext.CLIJx_detectMaximaBox(Image source, Image destination, Number radius);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 int arg3 = 10;
 ```
 
 ```
 // Execute operation on GPU
-clijx.detectMaximaBox(clij, arg1, arg2, arg3);
+clij2.detectMaximaBox(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-arg1.close();
-arg2.close();
+clij2.release(arg1);
+clij2.release(arg2);
 ```
 
 

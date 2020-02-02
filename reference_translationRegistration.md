@@ -1,5 +1,5 @@
 ## translationRegistration
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.
 
@@ -12,26 +12,30 @@ Ext.CLIJx_translationRegistration(Image input1, Image input2, Image destination)
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer input1 = clij2.push(input1ImagePlus);
+ClearCLBuffer input2 = clij2.push(input2ImagePlus);
+destination = clij.create(input1);
 ```
 
 ```
 // Execute operation on GPU
-clijx.translationRegistration(clij, arg1, arg2, arg3);
+clij2.translationRegistration(clij, input1, input2, destination);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-arg1.close();
-arg2.close();
+clij2.release(input1);
+clij2.release(input2);
+clij2.release(destination);
 ```
 
 

@@ -1,5 +1,5 @@
 ## addImagesWeighted
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b.
 
@@ -14,30 +14,30 @@ Ext.CLIJx_addImagesWeighted(Image summand1, Image summand2, Image destination, N
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clijx.push(arg3ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
 float arg4 = 1.0;
 float arg5 = 2.0;
 ```
 
 ```
 // Execute operation on GPU
-clijx.addImagesWeighted(clij, arg1, arg2, arg3, arg4, arg5);
+clij2.addImagesWeighted(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-arg1.close();
-arg2.close();
-arg3.close();
+clij2.release(arg1);
+clij2.release(arg2);
+clij2.release(arg3);
 ```
 
 

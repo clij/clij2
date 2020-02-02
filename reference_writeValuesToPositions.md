@@ -1,5 +1,5 @@
 ## writeValuesToPositions
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Takes an image with three/four rows (2D: height = 3; 3D: height = 4): x, y [, z] and v and target image. The value v will be written at position x/y[/z] in the target image.
 
@@ -12,28 +12,28 @@ Ext.CLIJx_writeValuesToPositions(Image positionsAndValues, Image destination);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer positionsAndValues = clijx.push(positionsAndValuesImagePlus);
+ClearCLBuffer positionsAndValues = clij2.push(positionsAndValuesImagePlus);
 destination = clij.create(positionsAndValues);
 ```
 
 ```
 // Execute operation on GPU
-clijx.writeValuesToPositions(clij, positionsAndValues, destination);
+clij2.writeValuesToPositions(clij, positionsAndValues, destination);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
+destinationImagePlus = clij2.pull(destination);
 destinationImagePlus.show();
 
 // cleanup memory on GPU
-positionsAndValues.close();
-destination.close();
+clij2.release(positionsAndValues);
+clij2.release(destination);
 ```
 
 
