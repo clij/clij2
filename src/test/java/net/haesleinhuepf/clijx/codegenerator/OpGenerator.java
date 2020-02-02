@@ -1,6 +1,5 @@
 package net.haesleinhuepf.clijx.codegenerator;
 
-import ij.gui.Roi;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPluginService;
@@ -30,7 +29,7 @@ public class OpGenerator {
         builder.append("import ij.plugin.frame.RoiManager;\n");
 
 
-        for (Class klass : CLIJ2Plugins.classes) {
+        for (Class klass : CLIJxPlugins.classes) {
             builder.append("import " + klass.getName() + ";\n");
         }
 
@@ -41,7 +40,7 @@ public class OpGenerator {
         builder.append("   \n");
 
         int methodCount = 0;
-        for (Class klass : CLIJ2Plugins.classes) {
+        for (Class klass : CLIJxPlugins.classes) {
             builder.append("\n    // " + klass.getName() + "\n");
             builder.append("    //----------------------------------------------------\n");
             for (Method method : klass.getMethods()) {
@@ -128,7 +127,7 @@ public class OpGenerator {
 
     static boolean blockListOk(Class klass, Method method) {
         String searchString = klass.getSimpleName() + "." + method.getName();
-        if (CLIJ2Plugins.blockList.contains(";" + searchString + ";")) {
+        if (CLIJxPlugins.blockList.contains(";" + searchString + ";")) {
             //System.out.println("BLOCKING " + searchString);
             return false;
         }

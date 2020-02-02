@@ -46,7 +46,7 @@ public class DocumentationGenerator {
         String processedNames = ";";
 
         int methodCount = 0;
-        for(Class klass : CLIJ2Plugins.classes)
+        for(Class klass : CLIJxPlugins.classes)
         {
             for (Method method : klass.getMethods()) {
                 if (Modifier.isStatic(method.getModifiers()) &&

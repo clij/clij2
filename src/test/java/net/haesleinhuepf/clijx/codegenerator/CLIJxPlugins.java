@@ -33,7 +33,7 @@ import net.haesleinhuepf.clijx.temp.*;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
 
-public interface CLIJ2Plugins {
+public interface CLIJxPlugins {
     public Class[] classes = {
             Kernels.class,
             BinaryUnion.class,
