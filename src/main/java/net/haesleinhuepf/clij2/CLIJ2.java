@@ -1,6 +1,5 @@
 package net.haesleinhuepf.clij2;
 
-import ij.IJ;
 import ij.ImagePlus;
 import ij.plugin.Duplicator;
 import net.haesleinhuepf.clij.CLIJ;
@@ -11,9 +10,7 @@ import net.haesleinhuepf.clij.clearcl.enums.ImageChannelDataType;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.clearcl.util.ElapsedTime;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
-import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.utilities.CLIJxOps;
-import net.haesleinhuepf.clijx.utilities.CLKernelExecutor;
+import net.haesleinhuepf.clij.clearcl.util.CLKernelExecutor;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.numeric.RealType;
