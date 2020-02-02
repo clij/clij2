@@ -320,7 +320,10 @@ public class DocumentationGenerator {
         builder.append("# CLIJ reference\n");
         builder.append("This reference contains all methods currently available in CLIJx.\n\n");
         builder.append("__Please note:__ CLIJx is under heavy construction. This list may change at any point.");
-        builder.append("Methods marked with ' were available in CLIJ1.\n\n");
+        builder.append("\n\n");
+        builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"18\" height=\"18\"/> Method is available in CLIJ (stable release)\n");
+        builder.append("<img src=\"images/mini_clij2_logo.png\" width=\"18\" height=\"18\"/> Method is available in CLIJ2 (upcoming beta release)\n");
+        builder.append("<img src=\"images/mini_clijx_logo.png\" width=\"18\" height=\"18\"/> Method is available in CLIJx (experimental version)\n");
         builder.append("\n\n##ALPHABET##\n\n");
 
         String firstChar = " ";
