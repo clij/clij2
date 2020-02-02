@@ -1,5 +1,5 @@
 ## varianceOfAllPixels
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs
 Results table in the column 'Variance'.

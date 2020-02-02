@@ -1,5 +1,5 @@
 ## erodeBoxSliceBySlice
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
 The erosion takes the Moore-neighborhood (8 pixels in 2D and 26 pixels in 3d) into account.

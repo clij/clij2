@@ -1,5 +1,5 @@
 ## maximum3DSphere
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes the local maximum of a pixels spherical neighborhood. The spheres size is specified by 
 its half-width, half-height and half-depth (radius).

@@ -1,5 +1,5 @@
 ## countNonZeroPixels
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the number of all pixels in a given image which are not equal to 0. It will be stored in a new row of ImageJs
 Results table in the column 'CountNonZero'.

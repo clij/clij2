@@ -1,5 +1,5 @@
 ## countTouchingNeighbors
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Takes a touching-neighbors-matrix as input and delivers a vector with number of touching neighbors per label as a vector.
 

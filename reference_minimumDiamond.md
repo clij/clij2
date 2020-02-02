@@ -1,11 +1,11 @@
-## averageDistanceOfClosestPoints
+## minimumDiamond
 ![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 null
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_averageDistanceOfClosestPoints(null);
+Ext.CLIJx_minimumDiamond(null);
 ```
 
 
@@ -19,16 +19,16 @@ CLIJ2 clij2 = CLIJ2.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-int arg3 = 10;
 ```
 
 ```
 // Execute operation on GPU
-clij2.averageDistanceOfClosestPoints(clij, arg1, arg2, arg3);
+ClearCLKernel resultMinimumDiamond = clij2.minimumDiamond(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
+System.out.println(resultMinimumDiamond);
 
 // cleanup memory on GPU
 clij2.release(arg1);

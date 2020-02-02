@@ -1,5 +1,5 @@
 ## copySlice
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 This method has two purposes: 
 It copies a 2D image to a given slice z position in a 3D image stack or 

@@ -1,5 +1,5 @@
 ## setColumn
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Sets all pixel values x of a given column in X to a constant value v.
 

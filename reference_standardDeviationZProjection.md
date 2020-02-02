@@ -1,5 +1,5 @@
 ## standardDeviationZProjection
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the standard deviation projection of an image stack along Z.
 

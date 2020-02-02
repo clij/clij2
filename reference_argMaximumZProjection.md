@@ -1,5 +1,5 @@
 ## argMaximumZProjection
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the maximum projection of an image stack along Z.
 Furthermore, another 2D image is generated with pixels containing the z-index where the maximum was found (zero based).

@@ -1,5 +1,5 @@
 ## averageDistanceOfTouchingNeighbors
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Takes a touch matrix and a distance matrix to determine the average distance of touching neighbors for every object.
 

@@ -1,5 +1,5 @@
 ## histogram
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the histogram of a given image.
 
@@ -19,11 +19,15 @@ CLIJ2 clij2 = CLIJ2.getInstance();
 // get input parameters
 ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
 ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
+int arg3 = 10;
+float arg4 = 1.0;
+float arg5 = 2.0;
+boolean arg6 = true;
 ```
 
 ```
 // Execute operation on GPU
-clij2.histogram(clij, arg1, arg2);
+clij2.histogram(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 ```
 
 ```

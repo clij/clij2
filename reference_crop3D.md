@@ -24,14 +24,11 @@ ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 int arg3 = 10;
 int arg4 = 20;
 int arg5 = 30;
-int arg6 = 40;
-int arg7 = 50;
-int arg8 = 60;
 ```
 
 ```
 // Execute operation on GPU
-clij2.crop3D(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+clij2.crop3D(clij, arg1, arg2, arg3, arg4, arg5);
 ```
 
 ```

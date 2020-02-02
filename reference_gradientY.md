@@ -1,5 +1,5 @@
 ## gradientY
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes the gradient of gray values along Y. Assuming a, b and c are three adjacent
  pixels in Y direction. In the target image will be saved as: <pre>b' = c - a;</pre>

@@ -1,5 +1,5 @@
 ## countNonZeroVoxels3DSphere
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Counts non-zero voxels in a sphere around every voxel.Put the number in the result image.
 

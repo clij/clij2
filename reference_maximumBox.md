@@ -1,5 +1,5 @@
 ## maximumBox
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
 its half-width and half-height (radius).
@@ -24,11 +24,12 @@ ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 
 ```
 // Execute operation on GPU
-clij2.maximumBox(clij, arg1, arg2, arg3, arg4, arg5);
+ClearCLKernel resultMaximumBox = clij2.maximumBox(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
+System.out.println(resultMaximumBox);
 
 // cleanup memory on GPU
 clij2.release(arg1);

@@ -1,5 +1,5 @@
 ## threshold
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes a binary image with pixel values 0 and 1. All pixel values x of a given input image with 
 value larger or equal to a given threshold t will be set to 1.

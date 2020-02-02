@@ -1,5 +1,5 @@
 ## median2DBox
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by 
 its half-width and half-height (radius).

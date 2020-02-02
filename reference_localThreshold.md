@@ -1,5 +1,5 @@
 ## localThreshold
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes a binary image with pixel values 0 and 1 depending on if a pixel value x in image X 
 was above of equal to the pixel value m in mask image M.

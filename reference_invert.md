@@ -1,5 +1,5 @@
 ## invert
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes the negative value of all pixels in a given image. It is recommended to convert images to 
 32-bit float before applying this operation.

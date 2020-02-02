@@ -1,5 +1,5 @@
 ## pullAsROI
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Pulls a binary image from the GPU memory and puts it on the currently active ImageJ window.
 

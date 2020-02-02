@@ -1,5 +1,5 @@
 ## detectLabelEdges
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.
 
