@@ -337,21 +337,25 @@ public class DocumentationGenerator {
             builder.append(" * ");
 
             if (item.klass == Kernels.class) {
-                builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"12\" height=\"12\"/>");
-                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"12\" height=\"12\"/>");
-                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"12\" height=\"12\"/>");
-            } else if (item.klass.getPackage().toString().contains("clij2")) {
+                builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"18\" height=\"18\"/>");
+                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+            } else {
                 if (service.getCLIJMacroPlugin("CLIJ_" + item.methodName) != null) {
-                    builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"12\" height=\"12\"/>");
+                    builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"18\" height=\"18\"/>");
                 } else {
-                    builder.append("<img src=\"images/mini_empty_logo.png\" width=\"12\" height=\"12\"/>");
+                    builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
                 }
-                builder.append("<img src=\"images/mini_clij2_logo.png\" width=\"12\" height=\"12\"/>");
-                builder.append("<img src=\"images/mini_clijx_logo.png\" width=\"12\" height=\"12\"/>");
-            } else if (item.klass.getPackage().toString().contains("clijx")) {
-                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"12\" height=\"12\"/>");
-                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"12\" height=\"12\"/>");
-                builder.append("<img src=\"images/mini_clijx_logo.png\" width=\"12\" height=\"12\"/>");
+                if (item.klass.getPackage().toString().contains("clij2")) {
+                    builder.append("<img src=\"images/mini_clij2_logo.png\" width=\"18\" height=\"18\"/>");
+                } else {
+                    builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                }
+                if (item.klass.getPackage().toString().contains("clijx")) {
+                    builder.append("<img src=\"images/mini_clijx_logo.png\" width=\"18\" height=\"18\"/>");
+                } else {
+                    builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                }
             }
 
             builder.append("<a href=\"" + HTTP_ROOT + "reference_" + item.methodName + "\">");
