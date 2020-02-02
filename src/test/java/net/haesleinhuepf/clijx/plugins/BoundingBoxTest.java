@@ -16,11 +16,11 @@ public class BoundingBoxTest {
 
         ClearCLBuffer buffer = clijx.create(new long[]{100, 100}, NativeTypeEnum.Byte);
 
-        clijx.op.set(buffer, 0f);
+        clijx.set(buffer, 0f);
 
-        clijx.op.drawBox(buffer, 10f, 10f, 20f, 20f);
+        clijx.drawBox(buffer, 10f, 10f, 20f, 20f);
 
-        double[] bb = clijx.op.boundingBox(buffer);
+        double[] bb = clijx.boundingBox(buffer);
         System.out.println("bb " + Arrays.toString(bb));
 
         double[] reference = {10, 10, 0, 20, 20, 0};
@@ -33,11 +33,11 @@ public class BoundingBoxTest {
 
         ClearCLBuffer buffer = clijx.create(new long[]{100, 100, 10}, NativeTypeEnum.Byte);
 
-        clijx.op.set(buffer, 0f);
+        clijx.set(buffer, 0f);
 
-        clijx.op.drawBox(buffer, 10f, 10f, 2f, 20f, 20f, 7f );
+        clijx.drawBox(buffer, 10f, 10f, 2f, 20f, 20f, 7f );
 
-        double[] bb = clijx.op.boundingBox(buffer);
+        double[] bb = clijx.boundingBox(buffer);
         System.out.println("bb " + Arrays.toString(bb));
 
         double[] reference = {10, 10, 2, 20, 20, 7};

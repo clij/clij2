@@ -16,11 +16,11 @@ public class PreloadFromDiscTest {
                 "src/test/resources/t1-head.tif"
         };
 
-        CLIJx clij = CLIJx.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
         for (int j = 0; j < 2; j++) {
             for (int i = 0; i < filenames.length; i++) {
                 ClearCLBuffer buffer = null;
-                buffer = clij.op.preloadFromDisc(buffer, filenames[i], filenames[i%filenames.length], "");
+                buffer = clijx.preloadFromDisc(buffer, filenames[i], filenames[i%filenames.length], "");
                 buffer.close();
             }
         }
@@ -35,11 +35,11 @@ public class PreloadFromDiscTest {
                 "src/test/resources/blobs3.tif"
         };
 
-        CLIJx clij = CLIJx.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
         for (int j = 0; j < 2; j++) {
             ClearCLBuffer buffer = null;
             for (int i = 0; i < filenames.length; i++) {
-                buffer = clij.op.preloadFromDisc(buffer, filenames[i], filenames[i%filenames.length], "");
+                buffer = clijx.preloadFromDisc(buffer, filenames[i], filenames[i%filenames.length], "");
             }
             buffer.close();
         }

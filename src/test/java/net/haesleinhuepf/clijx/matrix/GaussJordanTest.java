@@ -43,7 +43,7 @@ public class GaussJordanTest {
         ClearCLBuffer clC = clijx.push(c);
         GaussJordan.gaussJordan(clij, clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clijx.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(clijx.matrixEqual(clTest, clC, 0f));
         clC.close();
     }
 

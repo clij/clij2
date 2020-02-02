@@ -18,13 +18,13 @@ public class DistanceMapTest {
         ClearCLBuffer buffer = clijx.create(new long[]{10,10});
         ClearCLBuffer distance_map = clijx.create(buffer);
 
-        clijx.op.set(buffer, 0f);
-        clijx.op.drawBox(buffer, 2f, 2f, 5f, 5f);
+        clijx.set(buffer, 0f);
+        clijx.drawBox(buffer, 2f, 2f, 5f, 5f);
 
-        clijx.op.distanceMap(buffer, distance_map);
+        clijx.distanceMap(buffer, distance_map);
 
-        double minimum = clijx.op.minimumOfAllPixels(distance_map);
-        double maximum = clijx.op.maximumOfAllPixels(distance_map);
+        double minimum = clijx.minimumOfAllPixels(distance_map);
+        double maximum = clijx.maximumOfAllPixels(distance_map);
 
         assertEquals(0, minimum, 0.1);
         assertEquals(3, maximum, 0.1);
@@ -37,13 +37,13 @@ public class DistanceMapTest {
         ClearCLBuffer buffer = clijx.create(new long[]{10, 10, 10});
         ClearCLBuffer distance_map = clijx.create(buffer);
 
-        clijx.op.set(buffer, 0f);
-        clijx.op.drawBox(buffer, 2f, 2f, 2f, 5f, 5f, 5f);
+        clijx.set(buffer, 0f);
+        clijx.drawBox(buffer, 2f, 2f, 2f, 5f, 5f, 5f);
 
-        clijx.op.distanceMap(buffer, distance_map);
+        clijx.distanceMap(buffer, distance_map);
 
-        double minimum = clijx.op.minimumOfAllPixels(distance_map);
-        double maximum = clijx.op.maximumOfAllPixels(distance_map);
+        double minimum = clijx.minimumOfAllPixels(distance_map);
+        double maximum = clijx.maximumOfAllPixels(distance_map);
 
         assertEquals(0, minimum, 0.1);
         assertEquals(3, maximum, 0.1);

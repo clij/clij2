@@ -48,9 +48,9 @@ public class MultiplyMatrixTest {
         mm.setArgs(new Object[]{clA, clB});
         ClearCLBuffer clTest = mm.createOutputBufferFromSource(clA);
         ClearCLBuffer clC = clijx.push(c);
-        clijx.op.multiplyMatrix(clA, clB, clTest);
+        clijx.multiplyMatrix(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clijx.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(clijx.matrixEqual(clTest, clC, 0f));
         clC.close();
 
         // b * a using CLIJ
@@ -59,9 +59,9 @@ public class MultiplyMatrixTest {
         mm.setArgs(new Object[]{clB, clA});
         clTest = mm.createOutputBufferFromSource(clA);
         clC = clijx.push(cInv);
-        clijx.op.multiplyMatrix(clB, clA, clTest);
+        clijx.multiplyMatrix(clB, clA, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clijx.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(clijx.matrixEqual(clTest, clC, 0f));
 
 
 
@@ -96,9 +96,9 @@ public class MultiplyMatrixTest {
         ClearCLBuffer clTest = mm.createOutputBufferFromSource(clA);
         ClearCLBuffer clC = clijx.push(c);
 
-        clijx.op.multiplyMatrix(clA, clB, clTest);
+        clijx.multiplyMatrix(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clijx.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(clijx.matrixEqual(clTest, clC, 0f));
 
         clA.close();
         clB.close();
@@ -130,9 +130,9 @@ public class MultiplyMatrixTest {
         ClearCLBuffer clTest = mm.createOutputBufferFromSource(clA);
         ClearCLBuffer clC = clijx.push(c);
 
-        clijx.op.multiplyMatrix(clA, clB, clTest);
+        clijx.multiplyMatrix(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clijx.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(clijx.matrixEqual(clTest, clC, 0f));
 
         clA.close();
         clB.close();
