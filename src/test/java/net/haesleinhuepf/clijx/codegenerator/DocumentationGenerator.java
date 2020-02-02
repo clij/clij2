@@ -337,22 +337,21 @@ public class DocumentationGenerator {
             builder.append(" * ");
 
             if (item.klass == Kernels.class) {
-                builder.append("![Image](images/mini_clij1_logo.png)");
-                builder.append("![Image](images/mini_empty_logo.png)");
-                builder.append("![Image](images/mini_empty_logo.png)");
+                builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"12\" height=\"12\"/>");
+                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"12\" height=\"12\"/>");
+                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"12\" height=\"12\"/>");
             } else if (item.klass.getPackage().toString().contains("clij2")) {
                 if (service.getCLIJMacroPlugin("CLIJ_" + item.methodName) != null) {
-                    builder.append("![Image](images/mini_clij1_logo.png)");
+                    builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"12\" height=\"12\"/>");
                 } else {
-                    builder.append("![Image](images/mini_empty_logo.png)");
+                    builder.append("<img src=\"images/mini_empty_logo.png\" width=\"12\" height=\"12\"/>");
                 }
-                builder.append("![Image](images/mini_clij2_logo.png)");
-                builder.append("![Image](images/mini_clijx_logo.png)");
+                builder.append("<img src=\"images/mini_clij2_logo.png\" width=\"12\" height=\"12\"/>");
+                builder.append("<img src=\"images/mini_clijx_logo.png\" width=\"12\" height=\"12\"/>");
             } else if (item.klass.getPackage().toString().contains("clijx")) {
-
-                builder.append("![Image](images/mini_empty_logo.png)");
-                builder.append("![Image](images/mini_empty_logo.png)");
-                builder.append("![Image](images/mini_clijx_logo.png)");
+                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"12\" height=\"12\"/>");
+                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"12\" height=\"12\"/>");
+                builder.append("<img src=\"images/mini_clijx_logo.png\" width=\"12\" height=\"12\"/>");
             }
 
             builder.append("<a href=\"" + HTTP_ROOT + "reference_" + item.methodName + "\">");
