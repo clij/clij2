@@ -7,14 +7,15 @@ __kernel void count_non_zero_projection_3d_2d(
 
   const int x = get_global_id(0);
   const int y = get_global_id(1);
-  foat count = 0;
+  float count = 0;
   for(int z = 0; z < GET_IMAGE_DEPTH(src); z++)
   {
-    int4 pos = (int4){x,y,z,0};
+    POS_src_TYPE pos = POS_src_INSTANCE(x,y,z,0);
     float value = READ_src_IMAGE(src,sampler,pos).x;
     if (value > tolerance || value < -tolerance) {
         count = count + 1;
     }
   }
-  WRITE_dst_IMAGE(dst,(int2)(x,y), CONVERT_dst_PIXEL_TYPE(count);
+  POS_dst_TYPE pos2 = POS_dst_INSTANCE(x,y,0,0);
+  WRITE_dst_IMAGE(dst, pos2, CONVERT_dst_PIXEL_TYPE(count));
 }
