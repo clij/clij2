@@ -4,7 +4,6 @@ import fiji.util.gui.GenericDialogPlus;
 import ij.IJ;
 import ij.Macro;
 import ij.WindowManager;
-import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJHandler;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -21,8 +20,8 @@ import org.scijava.plugin.Plugin;
  * 12 2018
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_pushCurrentZStack")
-public class PushCurrentZStack extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_pushCurrentSelection")
+public class PushCurrentSelection extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
@@ -30,9 +29,8 @@ public class PushCurrentZStack extends AbstractCLIJxPlugin implements CLIJMacroP
             Macro.abort();
             throw new IllegalArgumentException("You tried to push the image '" + args[0] + "' to the GPU.\n" +
                     "However, this image doesn't exist.");
-
         } else {
-            CLIJHandler.getInstance().pushCurrentZStackToGPU((String) args[0]);
+            CLIJHandler.getInstance().pushCurrentSelectionToGPU((String) args[0]);
         }
         return true;
     }

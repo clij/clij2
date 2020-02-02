@@ -27,18 +27,10 @@ public class PushCurrentSlice extends AbstractCLIJxPlugin implements CLIJMacroPl
     @Override
     public boolean executeCL() {
         if (WindowManager.getImage((String)args[0]) == null) {
-            GenericDialogPlus gd = new GenericDialogPlus("CLIJ_pushCurrentSlice() Error");
-            gd.addMessage("You tried to push the image '" + args[0] + "' to the GPU.\n" +
-                    "However, this image doesn't exist. Please choose another one.");
+            Macro.abort();
+            throw new IllegalArgumentException("You tried to push the image '" + args[0] + "' to the GPU.\n" +
+                    "However, this image doesn't exist.");
 
-            gd.addImageChoice("Image", IJ.getImage().getTitle());
-            gd.showDialog();
-
-            if (gd.wasCanceled()) {
-                Macro.abort();
-            } else {
-                CLIJHandler.getInstance().pushCurrentSliceToGPU(gd.getNextImage().getTitle());
-            }
         } else {
             CLIJHandler.getInstance().pushCurrentSliceToGPU((String) args[0]);
         }
