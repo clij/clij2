@@ -2,8 +2,10 @@ package net.haesleinhuepf.clijx.jython;
 
 import ij.IJ;
 import ij.ImagePlus;
+import ij.gui.Overlay;
 import ij.gui.Roi;
 import ij.macro.Interpreter;
+import ij.measure.ResultsTable;
 import ij.plugin.frame.RoiManager;
 import ij.process.ImageProcessor;
 import net.haesleinhuepf.clij.CLIJ;
@@ -24,6 +26,7 @@ import org.fife.ui.autocomplete.SortByRelevanceComparator;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
+import java.awt.*;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
@@ -88,6 +91,10 @@ public class ScriptingAutoCompleteProvider extends DefaultCompletionProvider
         addClassToAutoCompletion(IJ.class, "IJ.");
         addClassToAutoCompletion(Roi.class, "roi.");
         addClassToAutoCompletion(RoiManager.class, "rm.");
+        addClassToAutoCompletion(Color.class, "Color.");
+        addClassToAutoCompletion(Overlay.class, "overlay.");
+        addClassToAutoCompletion(ResultsTable.class, "table.");
+
 
         addClassToAutoCompletion(ArrayImgs.class, "ArrayImgs.");
         addClassToAutoCompletion(Cursor.class, "cursor.");
