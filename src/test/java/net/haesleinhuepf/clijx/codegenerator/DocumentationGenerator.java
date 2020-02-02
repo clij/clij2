@@ -349,12 +349,12 @@ public class DocumentationGenerator {
                 } else {
                     builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
                 }
-                if (item.klass.getPackage().toString().contains("clij2")) {
+                if (service.getCLIJMacroPlugin("CLIJ2_" + item.methodName) != null) {
                     builder.append("<img src=\"images/mini_clij2_logo.png\" width=\"18\" height=\"18\"/>");
                 } else {
                     builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
                 }
-                if (item.klass.getPackage().toString().contains("clijx")) {
+                if (service.getCLIJMacroPlugin("CLIJx_" + item.methodName) != null) {
                     builder.append("<img src=\"images/mini_clijx_logo.png\" width=\"18\" height=\"18\"/>");
                 } else {
                     builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
