@@ -1,6 +1,8 @@
 package net.haesleinhuepf.clijx.codegenerator;
 
+import net.haesleinhuepf.clij2.plugins.AddImages;
 import net.haesleinhuepf.clij2.plugins.AddImagesWeighted;
+import net.haesleinhuepf.clij2.plugins.SubtractImages;
 import net.haesleinhuepf.clijx.plugins.*;
 import net.haesleinhuepf.clijx.plugins.splitstack.AbstractSplitStack;
 import net.haesleinhuepf.clijx.plugins.tenengradfusion.AbstractTenengradFusion;

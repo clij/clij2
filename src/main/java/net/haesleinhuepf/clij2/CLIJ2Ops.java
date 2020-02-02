@@ -140,9 +140,9 @@ import net.haesleinhuepf.clijx.matrix.PointIndexListToMesh;
 import net.haesleinhuepf.clijx.plugins.MinimumOctagon;
 import net.haesleinhuepf.clijx.plugins.MaximumOctagon;
 import net.haesleinhuepf.clijx.plugins.TopHatOctagon;
-import net.haesleinhuepf.clijx.plugins.AddImages;
+import net.haesleinhuepf.clij2.plugins.AddImages;
 import net.haesleinhuepf.clij2.plugins.AddImagesWeighted;
-import net.haesleinhuepf.clijx.plugins.SubtractImages;
+import net.haesleinhuepf.clij2.plugins.SubtractImages;
 import net.haesleinhuepf.clijx.plugins.ShowGlasbeyOnGrey;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
@@ -278,6 +278,18 @@ public abstract interface CLIJ2Ops {
    CLIJ2 getCLIJ2();
    
 
+    // net.haesleinhuepf.clij2.plugins.AddImages
+    //----------------------------------------------------
+    /**
+     * Calculates the sum of pairs of pixels x and y of two images X and Y.
+     * 
+     * <pre>f(x, y) = x + y</pre>
+     */
+    default boolean addImages(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
+        return AddImages.addImages(getCLIJ2(), arg1, arg2, arg3);
+    }
+
+
     // net.haesleinhuepf.clij2.plugins.AddImagesWeighted
     //----------------------------------------------------
     /**
@@ -289,5 +301,27 @@ public abstract interface CLIJ2Ops {
         return AddImagesWeighted.addImagesWeighted(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.SubtractImages
+    //----------------------------------------------------
+    /**
+     * Subtracts one image X from another image Y pixel wise.
+     * 
+     * <pre>f(x, y) = x - y</pre>
+     */
+    @Deprecated
+    default boolean subtract(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
+        return SubtractImages.subtract(getCLIJ2(), arg1, arg2, arg3);
+    }
+
+    /**
+     * Subtracts one image X from another image Y pixel wise.
+     * 
+     * <pre>f(x, y) = x - y</pre>
+     */
+    default boolean subtractImages(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
+        return SubtractImages.subtractImages(getCLIJ2(), arg1, arg2, arg3);
+    }
+
 }
-// 1 methods generated.
+// 4 methods generated.

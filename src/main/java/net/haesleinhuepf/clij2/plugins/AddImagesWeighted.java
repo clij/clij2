@@ -17,7 +17,7 @@ import static net.haesleinhuepf.clijx.utilities.CLIJUtilities.checkDimensions;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_addImagesWeighted")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_addImagesWeighted")
 public class AddImagesWeighted extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

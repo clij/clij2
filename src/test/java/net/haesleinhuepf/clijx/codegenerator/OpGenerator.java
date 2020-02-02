@@ -9,6 +9,7 @@ import net.haesleinhuepf.clijx.CLIJx;
 import org.scijava.Context;
 
 import java.io.*;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
@@ -62,7 +63,7 @@ public class OpGenerator {
 
             int methodCount = 0;
             for (Class klass : CLIJxPlugins.classes) {
-                if (klass.getPackage().toString().contains("clij2") || !isCLIJ2) {
+                if (klass.getPackage().toString().contains(".clij2.") || !isCLIJ2) {
                     builder.append("\n    // " + klass.getName() + "\n");
                     builder.append("    //----------------------------------------------------\n");
                     for (Method method : klass.getMethods()) {
@@ -128,6 +129,16 @@ public class OpGenerator {
                             builder.append("    /**\n");
                             builder.append("     * " + documentation.replace("\n", "\n     * ") + "\n");
                             builder.append("     */\n");
+
+                            boolean deprecated = false;
+                            for (Annotation annotation : method.getDeclaredAnnotations()) {
+                                if (annotation instanceof Deprecated) {
+                                    deprecated = true;
+                                }
+                            }
+                            if (deprecated) {
+                                builder.append("    @Deprecated\n");
+                            }
 
                             builder.append("    default " + returnType + " " + methodName + "(");
                             builder.append(parametersHeader);
@@ -209,6 +220,17 @@ public class OpGenerator {
                 "CLIJ_" + methodName.replace( "Box", "3DBox"),
                 "CLIJ_" + methodName.replace( "Pixels", "OfAllPixels"),
                 "CLIJ_" + methodName.replace( "SliceBySlice", "3DSliceBySlice"),
+                "CLIJ2_" + methodName,
+                "CLIJ2_" + methodName + "2D",
+                "CLIJ2_" + methodName + "3D",
+                "CLIJ2_" + methodName + "Images",
+                "CLIJ2_" + methodName.replace( "Sphere", "2DBox"),
+                "CLIJ2_" + methodName.replace( "Sphere", "3DBox"),
+                "CLIJ2_" + methodName.replace( "Box", "2DBox"),
+                "CLIJ2_" + methodName.replace( "Box", "3DBox"),
+                "CLIJ2_" + methodName.replace( "Pixels", "OfAllPixels"),
+                "CLIJ2_" + methodName.replace( "SliceBySlice", "3DSliceBySlice"),
+                "CLIJ2_" + methodName.replace( "3DSliceBySlice", "SliceBySlice"),
                 "CLIJx_" + methodName,
                 "CLIJx_" + methodName + "2D",
                 "CLIJx_" + methodName + "3D",
@@ -220,6 +242,7 @@ public class OpGenerator {
                 "CLIJx_" + methodName.replace( "Pixels", "OfAllPixels"),
                 "CLIJx_" + methodName.replace( "SliceBySlice", "3DSliceBySlice"),
                 "CLIJx_" + methodName.replace( "3DSliceBySlice", "SliceBySlice")
+
         };
 
         for (String name : potentialMethodNames) {
