@@ -1,11 +1,11 @@
-package net.haesleinhuepf.clijx.painting;
+package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
-import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
+import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -18,8 +18,8 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * 08 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_drawLine")
-public class DrawLine extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_drawLine")
+public class DrawLine extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -37,10 +37,10 @@ public class DrawLine extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CL
         Float z2 = asFloat(args[6]);
         Float thickness = asFloat(args[7]);
 
-        return drawLine(getCLIJx(), input, x1, y1, z1, x2, y2, z2, thickness);
+        return drawLine(getCLIJ2(), input, x1, y1, z1, x2, y2, z2, thickness);
     }
 
-    public static boolean drawLine(CLIJx clijx, ClearCLBuffer output, Float x1, Float y1, Float z1, Float x2, Float y2, Float z2, Float thickness) {
+    public static boolean drawLine(CLIJ2 clij2, ClearCLBuffer output, Float x1, Float y1, Float z1, Float x2, Float y2, Float z2, Float thickness) {
 
         long[] globalSizes;
 
@@ -68,7 +68,7 @@ public class DrawLine extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CL
 
 
         //System.out.println("Draw line from " + x1 + "/" + y1 + "/" + z1 + " to "  + x2 + "/" + y2 + "/" + z2);
-        clijx.execute(DrawLine.class, "drawline_" +output.getDimension() + "d_x.cl", "draw_line_" +output.getDimension() + "D", globalSizes, globalSizes, parameters);
+        clij2.execute(DrawLine.class, "drawline_" +output.getDimension() + "d_x.cl", "draw_line_" +output.getDimension() + "D", globalSizes, globalSizes, parameters);
         return true;
     }
 

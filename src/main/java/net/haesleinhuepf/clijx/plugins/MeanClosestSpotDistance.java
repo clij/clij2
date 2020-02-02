@@ -8,7 +8,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.plugins.CountNonZeroPixels;
 import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.matrix.GenerateDistanceMatrix;
+import net.haesleinhuepf.clij2.plugins.GenerateDistanceMatrix;
 import net.haesleinhuepf.clijx.matrix.ShortestDistances;
 import net.haesleinhuepf.clijx.matrix.SpotsToPointList;
 import net.haesleinhuepf.clij2.plugins.TransposeXY;

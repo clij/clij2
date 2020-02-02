@@ -13,6 +13,11 @@ import net.haesleinhuepf.clij2.plugins.Threshold;
 import net.haesleinhuepf.clij2.plugins.Set;
 import net.haesleinhuepf.clij2.plugins.SetColumn;
 import net.haesleinhuepf.clij2.plugins.SetRow;
+import net.haesleinhuepf.clij2.plugins.AffineTransform2D;
+import net.haesleinhuepf.clij2.plugins.AffineTransform3D;
+import net.haesleinhuepf.clij2.plugins.LabelToMask;
+import net.haesleinhuepf.clij2.plugins.MinimumDistanceOfTouchingNeighbors;
+import net.haesleinhuepf.clijx.matrix.SpotsToPointList;
 import net.haesleinhuepf.clijx.plugins.*;
 import net.haesleinhuepf.clijx.plugins.splitstack.AbstractSplitStack;
 import net.haesleinhuepf.clijx.plugins.tenengradfusion.AbstractTenengradFusion;
@@ -22,7 +27,7 @@ import net.haesleinhuepf.clijx.io.*;
 import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clijx.matrix.*;
 import net.haesleinhuepf.clijx.painting.DrawBox;
-import net.haesleinhuepf.clijx.painting.DrawLine;
+import net.haesleinhuepf.clij2.plugins.DrawLine;
 import net.haesleinhuepf.clijx.painting.DrawSphere;
 import net.haesleinhuepf.clijx.painting.DrawTwoValueLine;
 import net.haesleinhuepf.clijx.piv.FastParticleImageVelocimetry;
@@ -66,7 +71,7 @@ public interface CLIJxPlugins {
             Paste3D.class,
             Presign.class,
             JaccardIndex.class,
-            SorensenDiceCoefficent.class,
+            SorensenDiceCoefficient.class,
             StandardDeviationZProjection.class,
             StackToTiles.class,
             SubtractBackground2D.class,

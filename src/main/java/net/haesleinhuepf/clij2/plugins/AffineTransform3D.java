@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clijx.plugins;
+package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
@@ -8,8 +8,8 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij.utilities.AffineTransform;
-import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
+import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
 import net.haesleinhuepf.clij2.utilities.HasAuthor;
 import net.haesleinhuepf.clij2.utilities.HasLicense;
@@ -25,8 +25,8 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  *         December 2019
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_affineTransform3D")
-public class AffineTransform3D extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_affineTransform3D")
+public class AffineTransform3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
 
     @Override
     public boolean executeCL() {
@@ -35,10 +35,10 @@ public class AffineTransform3D extends AbstractCLIJxPlugin implements CLIJMacroP
         ClearCLBuffer output = (ClearCLBuffer) args[1];
         String transform = (String) args[2];
 
-        return affineTransform3D(getCLIJx(), input, output, transform);
+        return affineTransform3D(getCLIJ2(), input, output, transform);
     }
 
-    public static boolean affineTransform3D(CLIJx clijx, ClearCLBuffer input, ClearCLBuffer output, String transform) {
+    public static boolean affineTransform3D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, String transform) {
         String[] transformCommands = transform.trim().toLowerCase().split(" ");
         net.imglib2.realtransform.AffineTransform3D at = new net.imglib2.realtransform.AffineTransform3D();
         for(String transformCommand : transformCommands) {
@@ -137,25 +137,25 @@ public class AffineTransform3D extends AbstractCLIJxPlugin implements CLIJMacroP
             }
         }
 
-        if (!clijx.hasImageSupport()) {
+        if (!clij2.hasImageSupport()) {
 
-            return affineTransform3D(clijx, input, output, net.haesleinhuepf.clij.utilities.AffineTransform.matrixToFloatArray(at));
+            return affineTransform3D(clij2, input, output, net.haesleinhuepf.clij.utilities.AffineTransform.matrixToFloatArray(at));
         } else {
-            ClearCLImage inputImage = clijx.create(input.getDimensions(), CLIJUtilities.nativeToChannelType(input.getNativeType()));
-            clijx.copy(input, inputImage);
+            ClearCLImage inputImage = clij2.create(input.getDimensions(), CLIJUtilities.nativeToChannelType(input.getNativeType()));
+            clij2.copy(input, inputImage);
 
-            boolean result = affineTransform3D(clijx, inputImage, output, net.haesleinhuepf.clij.utilities.AffineTransform.matrixToFloatArray(at));
+            boolean result = affineTransform3D(clij2, inputImage, output, net.haesleinhuepf.clij.utilities.AffineTransform.matrixToFloatArray(at));
 
-            clijx.release(inputImage);
+            clij2.release(inputImage);
 
             return result;
         }
     }
 
-    public static boolean affineTransform3D(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst, float[] matrix) {
+    public static boolean affineTransform3D(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, float[] matrix) {
         assertDifferent(src, dst);
 
-        ClearCLBuffer matrixCl = clijx.create(new long[]{matrix.length, 1, 1}, NativeTypeEnum.Float);
+        ClearCLBuffer matrixCl = clij2.create(new long[]{matrix.length, 1, 1}, NativeTypeEnum.Float);
 
         FloatBuffer buffer = FloatBuffer.wrap(matrix);
         matrixCl.readFrom(buffer, true);
@@ -165,24 +165,24 @@ public class AffineTransform3D extends AbstractCLIJxPlugin implements CLIJMacroP
         parameters.put("output", dst);
         parameters.put("mat", matrixCl);
 
-        clijx.execute(AffineTransform3D.class, "affine_transform_3d_x.cl", "affine_transform_3d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(AffineTransform3D.class, "affine_transform_3d_x.cl", "affine_transform_3d", dst.getDimensions(), dst.getDimensions(), parameters);
 
         matrixCl.close();
 
         return true;
     }
 
-    public static boolean affineTransform3D(CLIJx clijx, ClearCLBuffer src, ClearCLBuffer dst, net.imglib2.realtransform.AffineTransform3D at) {
+    public static boolean affineTransform3D(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, net.imglib2.realtransform.AffineTransform3D at) {
         assertDifferent(src, dst);
         at = at.inverse();
         float[] matrix = AffineTransform.matrixToFloatArray(at);
-        return affineTransform3D(clijx, src, dst, matrix);
+        return affineTransform3D(clij2, src, dst, matrix);
     }
 
-    public static boolean affineTransform3D(CLIJx clijx, ClearCLImage src, ClearCLImageInterface dst, float[] matrix) {
+    public static boolean affineTransform3D(CLIJ2 clij2, ClearCLImage src, ClearCLImageInterface dst, float[] matrix) {
         assertDifferent(src, dst);
 
-        ClearCLBuffer matrixCl = clijx.create(new long[]{matrix.length, 1, 1}, NativeTypeEnum.Float);
+        ClearCLBuffer matrixCl = clij2.create(new long[]{matrix.length, 1, 1}, NativeTypeEnum.Float);
 
         FloatBuffer buffer = FloatBuffer.wrap(matrix);
         matrixCl.readFrom(buffer, true);
@@ -192,19 +192,19 @@ public class AffineTransform3D extends AbstractCLIJxPlugin implements CLIJMacroP
         parameters.put("output", dst);
         parameters.put("mat", matrixCl);
 
-        clijx.execute(AffineTransform3D.class, "affine_transform_3d_interpolate_x.cl", "affine_transform_3d_interpolate", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(AffineTransform3D.class, "affine_transform_3d_interpolate_x.cl", "affine_transform_3d_interpolate", dst.getDimensions(), dst.getDimensions(), parameters);
 
         matrixCl.close();
 
         return true;
     }
 
-    public static boolean affineTransform3D(CLIJx clijx, ClearCLImage src, ClearCLImageInterface dst, net.imglib2.realtransform.AffineTransform3D at) {
+    public static boolean affineTransform3D(CLIJ2 clij2, ClearCLImage src, ClearCLImageInterface dst, net.imglib2.realtransform.AffineTransform3D at) {
         assertDifferent(src, dst);
 
         at = at.inverse();
         float[] matrix = AffineTransform.matrixToFloatArray(at);
-        return affineTransform3D(clijx, src, dst, matrix);
+        return affineTransform3D(clij2, src, dst, matrix);
     }
 
 

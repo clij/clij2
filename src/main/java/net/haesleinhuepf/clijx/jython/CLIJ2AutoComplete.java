@@ -20,11 +20,23 @@ class CLIJ2AutoComplete {
        headline = "clij2.addImages(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>addImages</b><br><br>Calculates the sum of pairs of pixels x and y of two images X and Y.<br><br><pre>f(x, y) = x + y</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.affineTransform2D(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3)";
+       description = "<b>affineTransform2D</b><br><br>Applies an affine transform to a 2D image. Individual transforms must be separated by spaces.<br><br>Supported transforms:<br>* center: translate the coordinate origin to the center of the image<br>* -center: translate the coordinate origin back to the initial origin<br>* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* scale=[factor]: isotropic scaling according to given zoom factor<br>* scaleX=[factor]: scaling along X-axis according to given zoom factor<br>* scaleY=[factor]: scaling along Y-axis according to given zoom factor<br>* shearXY=[factor]: shearing along X-axis in XY plane according to given factor<br>* translateX=[distance]: translate along X-axis by distance given in pixels<br>* translateY=[distance]: translate along X-axis by distance given in pixels<br><br>Example transform:<br>transform = &quot;center scale=2 rotate=45 -center&quot;;<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.affineTransform3D(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3)";
+       description = "<b>affineTransform3D</b><br><br>Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.<br><br>Supported transforms:<br>* center: translate the coordinate origin to the center of the image<br>* -center: translate the coordinate origin back to the initial origin<br>* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees<br>* rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees<br>* rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* scale=[factor]: isotropic scaling according to given zoom factor<br>* scaleX=[factor]: scaling along X-axis according to given zoom factor<br>* scaleY=[factor]: scaling along Y-axis according to given zoom factor<br>* scaleZ=[factor]: scaling along Z-axis according to given zoom factor<br>* shearXY=[factor]: shearing along X-axis in XY plane according to given factor<br>* shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor<br>* shearYX=[factor]: shearing along Y-axis in XY plane according to given factor<br>* shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor<br>* shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor<br>* shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor<br>* translateX=[distance]: translate along X-axis by distance given in pixels<br>* translateY=[distance]: translate along X-axis by distance given in pixels<br>* translateZ=[distance]: translate along X-axis by distance given in pixels<br><br>Example transform:<br>transform = &quot;center scale=2 rotate=45 -center&quot;;<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.argMaximumZProjection(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>argMaximumZProjection</b><br><br>Determines the maximum projection of an image stack along Z.<br>Furthermore, another 2D image is generated with pixels containing the z-index where the maximum was found (zero based).<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clij2.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6)";
-       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6";
+       headline = "clij2.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3)";
+       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.averageDistanceOfClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3)";
+       description = "<b>averageDistanceOfClosestPoints</b><br><br>null";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.averageDistanceOfTouchingNeighbors(ClearCLBuffer distance_matrix, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination)";
+       description = "<b>averageDistanceOfTouchingNeighbors</b><br><br>Takes a touch matrix and a distance matrix to determine the average distance of touching neighbors for every object.<br><br>Parameters:<br>ClearCLBuffer distance_matrix, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.binaryAnd(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>binaryAnd</b><br><br>Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of<br>pixels x and y with the binary AND operator &.<br>All pixel values except 0 in the input images are interpreted as 1.<br><br><pre>f(x, y) = x & y</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
@@ -89,6 +101,9 @@ class CLIJ2AutoComplete {
        headline = "clij2.countNonZeroVoxelsLocally(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Integer arg4, Integer arg5)";
        description = "<b>countNonZeroVoxelsLocally</b><br><br>null";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.countTouchingNeighbors(ClearCLBuffer touch_matrix, ClearCLBuffer touching_neighbors_count_destination)";
+       description = "<b>countTouchingNeighbors</b><br><br>Takes a touching-neighbors-matrix as input and delivers a vector with number of touching neighbors per label as a vector.<br><br>Parameters:<br>ClearCLBuffer touch_matrix, ClearCLBuffer touching_neighbors_count_destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.detectLabelEdges(ClearCLBuffer label_map, ClearCLBuffer edge_image_destination)";
        description = "<b>detectLabelEdges</b><br><br>Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.<br><br>Parameters:<br>ClearCLBuffer label_map, ClearCLBuffer edge_image_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -119,11 +134,17 @@ class CLIJ2AutoComplete {
        headline = "clij2.distanceMap(ClearCLBuffer source, ClearCLBuffer destination)";
        description = "<b>distanceMap</b><br><br>Generates a distance map from a binary image. Pixels with non-zero value in the binary image are set to a number representing the distance to the closest zero-value pixel.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.distanceMatrixToMesh(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, Float arg4)";
+       description = "<b>distanceMatrixToMesh</b><br><br>Takes a pointlist with dimensions n*d with n point coordinates in d dimensions and a distance matrix of size n*n to draw lines from all points to points if the corresponding pixel in the distance matrix is smaller than a given distance threshold.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, Float arg4";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.divideImages(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>divideImages</b><br><br>Divides two images X and Y by each other pixel wise.<br><br><pre>f(x, y) = x / y</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.downsampleSliceBySliceHalfMedian(ClearCLImageInterface arg1, ClearCLImageInterface arg2)";
        description = "<b>downsampleSliceBySliceHalfMedian</b><br><br>Scales an image using scaling factors 0.5 for X and Y dimensions. The Z dimension stays untouched. Thus, each slice is processed separately.<br>The median method is applied. Thus, each pixel value in the destination image equals to the median of<br>four corresponding pixels in the source image.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.drawLine(ClearCLBuffer arg1, Float arg2, Float arg3, Float arg4, Float arg5, Float arg6, Float arg7, Float arg8)";
+       description = "<b>drawLine</b><br><br>Draws a line between two points with a given thickness. All pixels other than on the line are untouched. Consider using clij.op.set(buffer, 0); in advance.<br><br>Parameters:<br>ClearCLBuffer arg1, Float arg2, Float arg3, Float arg4, Float arg5, Float arg6, Float arg7, Float arg8";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.equalConstant(ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3)";
        description = "<b>equalConstant</b><br><br>Determines if an image A and a constant b are equal.<br><br>f(a, b) = 1 if a == b; 0 otherwise. <br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3";
@@ -158,6 +179,12 @@ class CLIJ2AutoComplete {
        headline = "clij2.flip(ClearCLImageInterface arg1, ClearCLImageInterface arg2, Boolean arg3, Boolean arg4)";
        description = "<b>flip</b><br><br>Flips an image in X and/or Y direction depending on boolean flags.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, Boolean arg3, Boolean arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.generateDistanceMatrix(ClearCLBuffer coordinate_list1, ClearCLBuffer coordinate_list2, ClearCLBuffer distance_matrix_destination)";
+       description = "<b>generateDistanceMatrix</b><br><br>Takes two images containing coordinates and builds up a matrix containing distance between the points. Convention: image width represents number of points, height represents dimensionality (2D, 3D, ... 10D). The result image has width the first input image and height equals to the width of the second input image.<br><br>Parameters:<br>ClearCLBuffer coordinate_list1, ClearCLBuffer coordinate_list2, ClearCLBuffer distance_matrix_destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.generateTouchMatrix(ClearCLBuffer label_map, ClearCLBuffer touch_matrix_destination)";
+       description = "<b>generateTouchMatrix</b><br><br>Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where all pixels are set to 0 exept those where labels are touching.Only half of the matrix is filled (with x < y). For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.<br><br>Parameters:<br>ClearCLBuffer label_map, ClearCLBuffer touch_matrix_destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.gradientX(ClearCLBuffer source, ClearCLBuffer destination)";
        description = "<b>gradientX</b><br><br>Computes the gradient of gray values along X. Assuming a, b and c are three adjacent<br> pixels in X direction. In the target image will be saved as: <pre>b' = c - a;</pre><br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -179,14 +206,20 @@ class CLIJ2AutoComplete {
        headline = "clij2.greater(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>greater</b><br><br>Determines if two images A and B greater pixel wise.<br><br>f(a, b) = 1 if a > b; 0 otherwise. <br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clij2.histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6)";
-       description = "<b>histogram</b><br><br>Determines the histogram of a given image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6";
+       headline = "clij2.histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6, boolean arg7)";
+       description = "<b>histogram</b><br><br>Determines the histogram of a given image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6, boolean arg7";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.invert(ClearCLImageInterface arg1, ClearCLImageInterface arg2)";
        description = "<b>invert</b><br><br>Computes the negative value of all pixels in a given image. It is recommended to convert images to <br>32-bit float before applying this operation.<br><br><pre>f(x) = - x</pre><br><br>For binary images, use binaryNot.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.jaccardIndex(ClearCLBuffer source1, ClearCLBuffer source2)";
        description = "<b>jaccardIndex</b><br><br>Determines the overlap of two binary images using the Jaccard index.<br>A value of 0 suggests no overlap, 1 means perfect overlap.<br>The resulting Jaccard index is saved to the results table in the 'Jaccard_Index' column.<br>Note that the Sorensen-Dice coefficient can be calculated from the Jaccard index j using this formula:<br><pre>s = f(j) = 2 j / (j + 1)</pre><br><br>Parameters:<br>ClearCLBuffer source1, ClearCLBuffer source2";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.labelToMask(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3)";
+       description = "<b>labelToMask</b><br><br>Masks a single label in a label map: Sets all pixels in the target image to 1, where the given label index was present in the label map. Other pixels are set to 0.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.labelledSpotsToPointList(ClearCLBuffer input_labelled_spots, ClearCLBuffer destination_pointlist)";
+       description = "<b>labelledSpotsToPointList</b><br><br>Transforms a labelmap of spots (single pixels with values 1, 2, ..., n for n spots) as resulting from connected components analysis in an image where every column contains d <br>pixels (with d = dimensionality of the original image) with the coordinates of the maxima/minima.<br><br>Parameters:<br>ClearCLBuffer input_labelled_spots, ClearCLBuffer destination_pointlist";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.localPositiveMinimum(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>localPositiveMinimum</b><br><br>null";
@@ -266,6 +299,9 @@ class CLIJ2AutoComplete {
        headline = "clij2.meanOfMaskedPixels(ClearCLBuffer source, ClearCLBuffer mask)";
        description = "<b>meanOfMaskedPixels</b><br><br>Determines the mean intensity in an image, but only in pixels which have non-zero values in another binary mask image.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer mask";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.meanZProjection(ClearCLImageInterface arg1, ClearCLImageInterface arg2)";
+       description = "<b>meanZProjection</b><br><br>Determines the mean average projection of an image along Z.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.median2DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, Integer arg3, Integer arg4)";
        description = "<b>median2DBox</b><br><br>Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by <br>its half-width and half-height (radius).<br><br>For technical reasons, the area of the rectangle must have less than 1000 pixels.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, Integer arg3, Integer arg4";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -299,6 +335,9 @@ class CLIJ2AutoComplete {
        headline = "clij2.minimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3)";
        description = "<b>minimumDiamond</b><br><br>null";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.minimumDistanceOfTouchingNeighbors(ClearCLBuffer distance_matrix, ClearCLBuffer touch_matrix, ClearCLBuffer minimum_distancelist_destination)";
+       description = "<b>minimumDistanceOfTouchingNeighbors</b><br><br>Takes a touch matrix and a distance matrix to determine the shortest distance of touching neighbors for every object.<br><br>Parameters:<br>ClearCLBuffer distance_matrix, ClearCLBuffer touch_matrix, ClearCLBuffer minimum_distancelist_destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.minimumImageAndScalar(ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3)";
        description = "<b>minimumImageAndScalar</b><br><br>Computes the maximum of a constant scalar s and each pixel value x in a given image X.<br><br><pre>f(x, s) = min(x, s)</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -329,11 +368,17 @@ class CLIJ2AutoComplete {
        headline = "clij2.multiplyStackWithPlane(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>multiplyStackWithPlane</b><br><br>Multiplies all pairs of pixel values x and y from an image stack X and a 2D image Y. x and y are at <br>the same spatial position within a plane.<br><br><pre>f(x, y) = x * y</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.nClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2)";
+       description = "<b>nClosestPoints</b><br><br>Determine the n point indices with shortest distance for all points in a distance matrix.<br>This corresponds to the n row indices with minimum values for each column of the distance matrix.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.notEqualConstant(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3)";
        description = "<b>notEqualConstant</b><br><br>Determines if two images A and B equal pixel wise.<br><br>f(a, b) = 1 if a != b; 0 otherwise. <br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.notEqual(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLBuffer arg3)";
        description = "<b>notEqual</b><br><br>Determines if two images A and B equal pixel wise.<br><br>f(a, b) = 1 if a != b; 0 otherwise. <br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLBuffer arg3";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.pointIndexListToMesh(ClearCLBuffer pointlist, ClearCLBuffer indexList, ClearCLBuffer Mesh)";
+       description = "<b>pointIndexListToMesh</b><br><br>Meshes all points in a given point list which are indiced in a corresponding index list. TODO: Explain better<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer indexList, ClearCLBuffer Mesh";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.power(ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3)";
        description = "<b>power</b><br><br>Computes all pixels value x to the power of a given exponent a.<br><br><pre>f(x, a) = x ^ a</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3";
@@ -346,6 +391,9 @@ class CLIJ2AutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.replaceIntensities(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>replaceIntensities</b><br><br>Replaces integer intensities specified in a vector image. The vector image must be 3D with size (m, 1, 1) where m corresponds to the maximum intensity in the original image. Assuming the vector image contains values (0, 1, 0, 2) means: <br> * All pixels with value 0 (first entry in the vector image) get value 0<br> * All pixels with value 1 get value 1<br> * All pixels with value 2 get value 0<br> * All pixels with value 3 get value 2<br><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.resample(ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3, Float arg4, Float arg5, boolean arg6)";
+       description = "<b>resample</b><br><br>Resamples an image with given size factors using an affine transform.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, Float arg3, Float arg4, Float arg5, boolean arg6";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.resliceBottom(ClearCLImageInterface arg1, ClearCLImageInterface arg2)";
        description = "<b>resliceBottom</b><br><br>Flippes Y and Z axis of an image stack. This operation is similar to ImageJs 'Reslice [/]' method but<br>offers less flexibility such as interpolation.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2";
@@ -413,6 +461,9 @@ class CLIJ2AutoComplete {
        headline = "clij2.threshold(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3)";
        description = "<b>threshold</b><br><br>Computes a binary image with pixel values 0 and 1. All pixel values x of a given input image with <br>value larger or equal to a given threshold t will be set to 1.<br><br>f(x,t) = (1 if (x >= t); (0 otherwise))<br><br>This plugin is comparable to setting a raw threshold in ImageJ and using the 'Convert to Mask' menu.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.touchMatrixToMesh(ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer mesh_destination)";
+       description = "<b>touchMatrixToMesh</b><br><br>Takes a pointlist with dimensions n*d with n point coordinates in d dimensions and a touch matrix of size n*n to draw lines from all points to points if the corresponding pixel in the touch matrix is 1.<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer mesh_destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.transposeXY(ClearCLBuffer input, ClearCLBuffer destination)";
        description = "<b>transposeXY</b><br><br>Transpose X and Y axes of an image.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -431,4 +482,4 @@ class CLIJ2AutoComplete {
         return list;
     }
 }
-// 140 methods generated.
+// 157 methods generated.

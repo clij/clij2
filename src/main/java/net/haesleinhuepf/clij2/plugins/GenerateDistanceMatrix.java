@@ -1,14 +1,12 @@
-package net.haesleinhuepf.clijx.matrix;
+package net.haesleinhuepf.clij2.plugins;
 
-import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
-import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
-import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
+import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -17,18 +15,18 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * December 2018
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_generateDistanceMatrix")
-public class GenerateDistanceMatrix extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_generateDistanceMatrix")
+public class GenerateDistanceMatrix extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = generateDistanceMatrix(getCLIJx(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = generateDistanceMatrix(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean generateDistanceMatrix(CLIJx clijx, ClearCLBuffer src_pointlist1, ClearCLBuffer src_pointlist2, ClearCLBuffer dst_distance_matrix) {
+    public static boolean generateDistanceMatrix(CLIJ2 clij2, ClearCLBuffer src_pointlist1, ClearCLBuffer src_pointlist2, ClearCLBuffer dst_distance_matrix) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src_point_list1", src_pointlist1);
         parameters.put("src_point_list2", src_pointlist2);
@@ -36,8 +34,8 @@ public class GenerateDistanceMatrix extends AbstractCLIJxPlugin implements CLIJM
 
         long[] globalSizes = new long[]{src_pointlist1.getWidth(),  1, 1};
 
-        clijx.activateSizeIndependentKernelCompilation();
-        clijx.execute(GenerateDistanceMatrix.class, "generate_distance_matrix_x.cl", "generate_distance_matrix", globalSizes, globalSizes, parameters);
+        clij2.activateSizeIndependentKernelCompilation();
+        clij2.execute(GenerateDistanceMatrix.class, "generate_distance_matrix_x.cl", "generate_distance_matrix", globalSizes, globalSizes, parameters);
         return true;
     }
 

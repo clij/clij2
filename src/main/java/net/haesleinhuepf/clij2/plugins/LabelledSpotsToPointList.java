@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clijx.matrix;
+package net.haesleinhuepf.clij2.plugins;
 
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
@@ -6,15 +6,14 @@ import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
-import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clij2.plugins.CountNonZeroPixels;
-import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
+import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_labelledSpotsToPointList")
-public class LabelledSpotsToPointList extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_labelledSpotsToPointList")
+public class LabelledSpotsToPointList extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -23,10 +22,10 @@ public class LabelledSpotsToPointList extends AbstractCLIJxPlugin implements CLI
 
     @Override
     public boolean executeCL() {
-        return labelledSpotsToPointList(getCLIJx(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
+        return labelledSpotsToPointList(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
     }
 
-    public static boolean labelledSpotsToPointList(CLIJx clijx, ClearCLBuffer input_labelmap, ClearCLBuffer output) {
+    public static boolean labelledSpotsToPointList(CLIJ2 clij2, ClearCLBuffer input_labelmap, ClearCLBuffer output) {
 
         HashMap<String, Object> parameters = new HashMap<String, Object>();
         System.out.println("src: " + input_labelmap);
@@ -34,14 +33,14 @@ public class LabelledSpotsToPointList extends AbstractCLIJxPlugin implements CLI
         parameters.put("dst_point_list", output);
 
         long[] globalSizes = input_labelmap.getDimensions();
-        clijx.activateSizeIndependentKernelCompilation();
-        clijx.execute(LabelledSpotsToPointList.class, "spots_to_point_list_x.cl", "spots_to_point_list", globalSizes, globalSizes, parameters);
+        clij2.activateSizeIndependentKernelCompilation();
+        clij2.execute(LabelledSpotsToPointList.class, "labelled_spots_to_point_list_x.cl", "labelled_spots_to_point_list", globalSizes, globalSizes, parameters);
         return true;
     }
 
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
-        long numberOfSpots = (long) CountNonZeroPixels.countNonZeroPixels(getCLIJx(), input);
+        long numberOfSpots = (long) CountNonZeroPixels.countNonZeroPixels(getCLIJ2(), input);
 
         return clij.create(new long[]{numberOfSpots, input.getDimension()}, NativeTypeEnum.Float);
     }

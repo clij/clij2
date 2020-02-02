@@ -1,5 +1,5 @@
 
-__kernel void spots_to_point_list (
+__kernel void labelled_spots_to_point_list (
     IMAGE_src_TYPE src,
     IMAGE_dst_point_list_TYPE dst_point_list
 ) {
