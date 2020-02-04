@@ -81,3 +81,6 @@ Ext.CLIJx_applyWekaModel(feature_stack, result, "test4.model");
 
 Ext.CLIJ_pull(result);
 run("glasbey on dark");
+
+// clean up by the end
+Ext.CLIJ_clear();
