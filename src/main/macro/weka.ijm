@@ -15,8 +15,8 @@ Ext.CLIJ_clear();
 
 // -------------------------------------------------------------------
 // Get test data
-//run("Blobs (25K)");
-open("C:/structure/data/blobs.tif");
+run("Blobs (25K)");
+//open("C:/structure/data/blobs.tif");
 
 
 run("32-bit"); // interplation works better with float images
