@@ -178,19 +178,18 @@ public class DocumentationGenerator {
 
             String linkToExamples =
                 searchForExampleScripts("CLIJx_" + item.methodName, "src/main/macro/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/", "macro") +
+                searchForExampleScripts("CLIJ2_" + item.methodName, "src/main/macro/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/", "macro") +
                 //searchForExampleScripts("CLIJ_" + item.methodName, "src/main/macro/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/", "macro") +
                 //searchForExampleScripts("CLIJ_" + item.methodName, "../clij-docs/src/main/macro/", "https://github.com/clij/clij-docs/blob/master/src/main/macro/", "macro") +
                 searchForExampleScripts("clijx." + item.methodName, "src/main/jython/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/", "jython") +
 
-                searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/groovy/", "https://github.com/clij/clij-docs/blob/master/src/main/groovy/", "groovy") +
-                searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/jython/", "https://github.com/clij/clij-docs/blob/master/src/main/jython/", "jython") +
+                //searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/groovy/", "https://github.com/clij/clij-docs/blob/master/src/main/groovy/", "groovy") +
+                //searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/jython/", "https://github.com/clij/clij-docs/blob/master/src/main/jython/", "jython") +
                 searchForExampleScripts("clijx." + item.methodName, "../clijpy/python/", "https://github.com/clij/clijpy/blob/master/python/", "python") +
-                searchForExampleScripts("clij2." + item.methodName, "../clijpy/python/", "https://github.com/clij/clijpy/blob/master/python/", "python") +
                 searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/java/net/haesleinhuepf/clij/examples/", "https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/", "java") +
 
                 searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/javascript/", "https://github.com/clij/clij-docs/blob/master/src/main/javascript/", "javascript") +
                 searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/beanshell/", "https://github.com/clij/clij-docs/blob/master/src/main/beanshell/", "beanshell") +
-                searchForExampleScripts("clij2." + item.methodName, "../clatlab/src/main/matlab/", "https://github.com/clij/clatlab/blob/master/src/main/matlab/", "matlab") +
                 searchForExampleScripts("clijx." + item.methodName, "../clatlab/src/main/matlab/", "https://github.com/clij/clatlab/blob/master/src/main/matlab/", "matlab");
 
 
