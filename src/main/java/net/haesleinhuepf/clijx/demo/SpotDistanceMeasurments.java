@@ -4,7 +4,7 @@ import ij.IJ;
 import ij.ImageJ;
 import ij.ImagePlus;
 import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.plugins.MeanClosestSpotDistance;
+import net.haesleinhuepf.clij2.plugins.MeanClosestSpotDistance;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.imglib2.realtransform.AffineTransform3D;

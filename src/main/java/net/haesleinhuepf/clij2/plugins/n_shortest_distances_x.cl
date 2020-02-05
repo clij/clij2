@@ -44,6 +44,6 @@ __kernel void find_n_closest_points(
   }
 
   for (int i = 0; i < initialized_values; i++) {
-    WRITE_dst_indexlist_IMAGE(dst_indexlist, POS_dst_indexlist_INSTANCE(pointIndex, i), CONVERT_dst_indexlist_PIXEL_TYPE(indices[i]));
+    WRITE_dst_indexlist_IMAGE(dst_indexlist, POS_dst_indexlist_INSTANCE(pointIndex, i, 0, 0), CONVERT_dst_indexlist_PIXEL_TYPE(indices[i]));
   }
 }

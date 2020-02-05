@@ -6,7 +6,7 @@ import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
-import net.haesleinhuepf.clij2.plugins.Blur3D;
+import net.haesleinhuepf.clij2.plugins.GaussianBlur3D;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
@@ -48,7 +48,7 @@ public class Blur3DSliceBySlice extends AbstractCLIJxPlugin implements CLIJMacro
      */
     @Deprecated
     public static boolean blurSliceBySlice(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Float blurSigmaX, Float blurSigmaY) {
-        return Blur3D.blur(clijx, src, dst, blurSigmaX, blurSigmaY, 0f);
+        return GaussianBlur3D.blur(clijx, src, dst, blurSigmaX, blurSigmaY, 0f);
     }
 
     /**
@@ -56,7 +56,7 @@ public class Blur3DSliceBySlice extends AbstractCLIJxPlugin implements CLIJMacro
      */
     @Deprecated
     public static boolean blurSliceBySlice(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Integer kernelSizeX, Integer kernelSizeY, Float blurSigmaX, Float blurSigmaY) {
-        return executeSeparableKernel(clijx, src, dst, Blur3D.class, "blur_separable_" + src.getDimension() + "d_x.cl", "blur_separable_" + src.getDimension() + "d", sigmaToKernelSize(blurSigmaX), sigmaToKernelSize(blurSigmaY), sigmaToKernelSize(0), blurSigmaX, blurSigmaY, 0, src.getDimension());
+        return executeSeparableKernel(clijx, src, dst, GaussianBlur3D.class, "blur_separable_" + src.getDimension() + "d_x.cl", "blur_separable_" + src.getDimension() + "d", sigmaToKernelSize(blurSigmaX), sigmaToKernelSize(blurSigmaY), sigmaToKernelSize(0), blurSigmaX, blurSigmaY, 0, src.getDimension());
     }
 
         @Override

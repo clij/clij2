@@ -16,19 +16,19 @@ newImage("original", "8-bit ramp", width, height, slices);
 
 // init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJx_push("original");
+Ext.CLIJ2_push("original");
 
 // cleanup imagej
 run("Close All");
 
 // add images
-Ext.CLIJx_maximumZProjection("original", "max");
+Ext.CLIJ2_maximumZProjection("original", "max");
 
 // show result
-Ext.CLIJx_pull("max");
+Ext.CLIJ2_pull("max");
 
-Ext.CLIJx_reportMemory();
-Ext.CLIJx_clear();
+Ext.CLIJ2_reportMemory();
+Ext.CLIJ2_clear();

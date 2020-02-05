@@ -33,10 +33,10 @@ getDimensions(width, height, channels, slices, frames);
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 
-Ext.CLIJx_push(inputStack);
+Ext.CLIJ2_push(inputStack);
 
 formerX = 0;
 formerY = 0;
@@ -45,11 +45,11 @@ formerY = 0;
 for (z = 0; z  < slices; z++) {
 	IJ.log("z: " + z);
 	
-	Ext.CLIJx_copySlice(inputStack, slice, z);
+	Ext.CLIJ2_copySlice(inputStack, slice, z);
 
 	// determine center of mass
-	Ext.CLIJx_threshold(slice, binary, threshold);
-	Ext.CLIJx_centerOfMass(binary);
+	Ext.CLIJ2_threshold(slice, binary, threshold);
+	Ext.CLIJ2_centerOfMass(binary);
 	x = getResult("MassX", nResults() - 1);
 	y = getResult("MassY", nResults() - 1);
 
@@ -60,10 +60,10 @@ for (z = 0; z  < slices; z++) {
 		deltaY = y - formerY;
 
 		// apply translation transformation
-		Ext.CLIJx_affineTransform2D(slice, shifted, "translatex=" + deltaX + " translatey=" + deltaY);
+		Ext.CLIJ2_affineTransform2D(slice, shifted, "translatex=" + deltaX + " translatey=" + deltaY);
 
 		// copy result back
-		Ext.CLIJx_copySlice(shifted, inputStack, z);
+		Ext.CLIJ2_copySlice(shifted, inputStack, z);
 	
 	} else {
 		formerX = x;
@@ -72,5 +72,5 @@ for (z = 0; z  < slices; z++) {
 }
 
 // show result
-Ext.CLIJx_pull(inputStack);
+Ext.CLIJ2_pull(inputStack);
 rename("outputStack");

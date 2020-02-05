@@ -28,39 +28,39 @@ getDimensions(width, height, channels, depth, frames);
 
 // init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 time = getTime();
 
 // push images to GPU
-Ext.CLIJx_push("original");
+Ext.CLIJ2_push("original");
 // reserve the right amount of memory for the result image
-Ext.CLIJx_create3D("target", width, height, 360 / angle_step, 32);
+Ext.CLIJ2_create3D("target", width, height, 360 / angle_step, 32);
 
 // reserve a bit more pixels in Z for translated and rotated image because we
 // need space for the shoulders if we rotated the patient around the Y-axis
-Ext.CLIJx_create3D("rotated", width, height, depth * 2, 32);
-Ext.CLIJx_create3D("translated", width, height, depth * 2, 32);
+Ext.CLIJ2_create3D("rotated", width, height, depth * 2, 32);
+Ext.CLIJ2_create3D("translated", width, height, depth * 2, 32);
 
 // cleanup imagej
 run("Close All");
 
 // we need to translate the stack in Z to get some space for the shoulders 
 // when we rotate the head around the y-axis 
-Ext.CLIJx_translate3D("original", "translated", 0, 0, depth / 2);
+Ext.CLIJ2_translate3D("original", "translated", 0, 0, depth / 2);
 	
 count = 0;
 for (angle = 0; angle < 360; angle += angle_step) {
-	Ext.CLIJx_rotate3D("translated", "rotated", 0, angle, 0.0, true);
-	Ext.CLIJx_maximumZProjection("rotated", "maxProjected");
+	Ext.CLIJ2_rotate3D("translated", "rotated", 0, angle, 0.0, true);
+	Ext.CLIJ2_maximumZProjection("rotated", "maxProjected");
 
 	// put the maximum projection in the right place in the result stack
-	Ext.CLIJx_copySlice("maxProjected", "target", count);
+	Ext.CLIJ2_copySlice("maxProjected", "target", count);
 	
 	count++;
 }
 
 // show result
-Ext.CLIJx_pull("target");
+Ext.CLIJ2_pull("target");
 
 IJ.log("GPU 3D projection took " + (getTime()-time) + " msec");

@@ -17,23 +17,24 @@ background_subtracted = "background_subtracted";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // CleanUp ImageJ
 close();
 
 // Blur in GPU
-Ext.CLIJx_blur3D(input, background, 10, 10, 1);
+Ext.CLIJ2_gaussianBlur3D(input, background, 10, 10, 1);
 
 // subtraction from original
-Ext.CLIJx_addImagesWeighted(input, background, background_subtracted, 1, -1);
+Ext.CLIJ2_addImagesWeighted(input, background, background_subtracted, 1, -1);
 
 // Get results back from GPU
-Ext.CLIJx_pull(input);
-Ext.CLIJx_pull(background_subtracted);
+Ext.CLIJ2_pull(input);
+Ext.CLIJ2_pull(background_subtracted);
+
 
 // Cleanup by the end
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();

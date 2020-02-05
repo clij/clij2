@@ -17,19 +17,17 @@ import net.haesleinhuepf.clij2.plugins.AffineTransform2D;
 import net.haesleinhuepf.clij2.plugins.AffineTransform3D;
 import net.haesleinhuepf.clij2.plugins.LabelToMask;
 import net.haesleinhuepf.clij2.plugins.MinimumDistanceOfTouchingNeighbors;
-import net.haesleinhuepf.clijx.matrix.SpotsToPointList;
+import net.haesleinhuepf.clij2.plugins.SpotsToPointList;
 import net.haesleinhuepf.clijx.plugins.*;
 import net.haesleinhuepf.clijx.plugins.splitstack.AbstractSplitStack;
 import net.haesleinhuepf.clijx.plugins.tenengradfusion.AbstractTenengradFusion;
-import net.haesleinhuepf.clijx.base.*;
 import net.haesleinhuepf.clijx.gui.OrganiseWindows;
 import net.haesleinhuepf.clijx.io.*;
 import net.haesleinhuepf.clij.kernels.Kernels;
-import net.haesleinhuepf.clijx.matrix.*;
-import net.haesleinhuepf.clijx.painting.DrawBox;
+import net.haesleinhuepf.clij2.plugins.DrawBox;
 import net.haesleinhuepf.clij2.plugins.DrawLine;
-import net.haesleinhuepf.clijx.painting.DrawSphere;
-import net.haesleinhuepf.clijx.painting.DrawTwoValueLine;
+import net.haesleinhuepf.clij2.plugins.DrawSphere;
+import net.haesleinhuepf.clijx.plugins.DrawTwoValueLine;
 import net.haesleinhuepf.clijx.piv.FastParticleImageVelocimetry;
 import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetry;
 import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
@@ -43,8 +41,8 @@ import net.haesleinhuepf.clij2.plugins.GradientX;
 import net.haesleinhuepf.clij2.plugins.GradientY;
 import net.haesleinhuepf.clij2.plugins.GradientZ;
 import net.haesleinhuepf.clij2.plugins.LocalThreshold;
-import net.haesleinhuepf.clij2.plugins.Blur2D;
-import net.haesleinhuepf.clij2.plugins.Blur3D;
+import net.haesleinhuepf.clij2.plugins.GaussianBlur2D;
+import net.haesleinhuepf.clij2.plugins.GaussianBlur3D;
 import net.haesleinhuepf.clijx.plugins.Blur3DSliceBySlice;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
@@ -93,7 +91,7 @@ public interface CLIJxPlugins {
             TranslationRegistration.class,
             TranslationTimelapseRegistration.class,
             SetWhereXequalsY.class,
-            LaplaceSphere.class,
+            LaplaceDiamond.class,
             Image2DToResultsTable.class,
             WriteValuesToPositions.class,
             GetSize.class,
@@ -170,12 +168,12 @@ public interface CLIJxPlugins {
             OpeningDiamond.class,
             MaximumXProjection.class,
             MaximumYProjection.class,
-            ProjectMaximumZBounded.class,
-            ProjectMinimumZBounded.class,
-            ProjectMeanZBounded.class,
+            MaximumZProjectionBounded.class,
+            MinimumZProjectionBounded.class,
+            MeanZProjectionBounded.class,
             NonzeroMaximumBox.class,
             NonzeroMinimumBox.class,
-            ProjectMinimumThresholdedZBounded.class,
+            MinimumZProjectionThresholdedBounded.class,
             MeanOfPixelsAboveThreshold.class,
             OrganiseWindows.class,
             DistanceMatrixToMesh.class,
@@ -216,8 +214,8 @@ public interface CLIJxPlugins {
             Set.class,
             Flip2D.class,
             Flip3D.class,
-            RotateLeft.class,
-            RotateRight.class,
+            RotateCounterClockwise.class,
+            RotateClockwise.class,
             Mask.class,
             MaskStackWithPlane.class,
             MaximumZProjection.class,
@@ -270,8 +268,8 @@ public interface CLIJxPlugins {
             Minimum3DBox.class,
             MinimumSliceBySliceSphere.class,
             MultiplyImages.class,
-            Blur2D.class,
-            Blur3D.class,
+            GaussianBlur2D.class,
+            GaussianBlur3D.class,
             Blur3DSliceBySlice.class,
             ResliceBottom.class,
             ResliceTop.class,
@@ -314,7 +312,11 @@ public interface CLIJxPlugins {
             LabelSpots.class,
             MinimumDistanceOfTouchingNeighbors.class,
             WriteVTKLineListToDisc.class,
-            WriteXYZPointListToDisc.class
+            WriteXYZPointListToDisc.class,
+            SetWhereXgreaterThanY.class,
+            SetWhereXsmallerThanY.class,
+            SetNonZeroPixelsToPixelIndex.class,
+            CloseIndexGapsInLabelMap.class
     };
 
     public String blockList = ";" +

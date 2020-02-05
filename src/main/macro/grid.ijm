@@ -24,10 +24,10 @@ image = "image";
 run("CLIJ Macro Extensions", "cl_device=[Intel(R) UHD Graphics 620]");
 
 // create an empty image on the GPU
-Ext.CLIJx_create2D(image, width, height, 8);
+Ext.CLIJ2_create2D(image, width, height, 8);
 
 // initialize the image with zeros
-Ext.CLIJx_set(image, 0);
+Ext.CLIJ2_set(image, 0);
 
 for(x = 0; x < width; x += gridspacing) {
 	for(y = 0; y < height; y += gridspacing) {
@@ -38,7 +38,7 @@ for(x = 0; x < width; x += gridspacing) {
 		y2 = height;
 		z1 = 0;
 		z2 = 0;
-		Ext.CLIJx_drawLine(image, x1, y1, z1, x2, y2, z2, thickness);
+		Ext.CLIJ2_drawLine(image, x1, y1, z1, x2, y2, z2, thickness);
 
 		// horizontal line
 		x1 = 0;
@@ -47,8 +47,8 @@ for(x = 0; x < width; x += gridspacing) {
 		y2 = y;
 		z1 = 0;
 		z2 = 0;
-		Ext.CLIJx_drawLine(image, x1, y1, z1, x2, y2, z2, thickness);
+		Ext.CLIJ2_drawLine(image, x1, y1, z1, x2, y2, z2, thickness);
 	}
 }
-Ext.CLIJx_pull(image);
+Ext.CLIJ2_pull(image);
 

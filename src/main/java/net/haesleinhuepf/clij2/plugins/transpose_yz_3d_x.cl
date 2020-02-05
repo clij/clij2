@@ -9,8 +9,8 @@ __kernel void transpose_yz_3d (
   const int y = get_global_id(1);
   const int z = get_global_id(2);
 
-  const int4 spos = (int4)(x, z, y,0);
-  const int4 tpos = (int4)(x, y, z,0);
+  const POS_src_TYPE spos = POS_src_INSTANCE(x, z, y,0);
+  const POS_dst_TYPE tpos = POS_dst_INSTANCE(x, y, z,0);
 
   float value = READ_src_IMAGE(src, intsampler, spos).x;
 

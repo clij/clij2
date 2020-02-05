@@ -3,14 +3,13 @@ package net.haesleinhuepf.clijx.plugins;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.NewImage;
-import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
 
-import static net.haesleinhuepf.clijx.plugins.ConnectedComponentsLabeling.connectedComponentsLabeling;
-import static net.haesleinhuepf.clijx.plugins.MaskLabel.maskLabel;
+import static net.haesleinhuepf.clij2.plugins.ConnectedComponentsLabeling.connectedComponentsLabeling;
+import static net.haesleinhuepf.clij2.plugins.MaskLabel.maskLabel;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -34,19 +33,18 @@ public class MaskLabelTest {
         imp.show();
 
         CLIJx clijx = CLIJx.getInstance();
-        CLIJ clij = clijx.getClij();
 
-        ClearCLBuffer input = clij.push(imp);
+        ClearCLBuffer input = clijx.push(imp);
 
-        ClearCLBuffer labelmap = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
-        ClearCLBuffer singleLabel = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
+        ClearCLBuffer labelmap = clijx.create(input.getDimensions(), NativeTypeEnum.Float);
+        ClearCLBuffer singleLabel = clijx.create(input.getDimensions(), NativeTypeEnum.Float);
 
         connectedComponentsLabeling(clijx, input, labelmap);
-        maskLabel(clij, input, labelmap, singleLabel, 2f);
+        maskLabel(clijx, input, labelmap, singleLabel, 2f);
 
 
-        assertEquals(clij.op().maximumOfAllPixels(singleLabel), 1.0, 0.1);
-        assertEquals(clij.op().sumPixels(singleLabel), 100.0, 0.1);
+        assertEquals(clijx.maximumOfAllPixels(singleLabel), 1.0, 0.1);
+        assertEquals(clijx.sumPixels(singleLabel), 100.0, 0.1);
         //clij.show(singleLabel, "result");
         //new WaitForUserDialog("hello").show();
 
@@ -69,27 +67,26 @@ public class MaskLabelTest {
         imp.show();
 
         CLIJx clijx = CLIJx.getInstance();
-        CLIJ clij = clijx.getClij();
 
-        ClearCLBuffer input = clij.push(imp);
+        ClearCLBuffer input = clijx.push(imp);
 
-        ClearCLBuffer labelmap = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
-        ClearCLBuffer singleLabel = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
+        ClearCLBuffer labelmap = clijx.create(input.getDimensions(), NativeTypeEnum.Float);
+        ClearCLBuffer singleLabel = clijx.create(input.getDimensions(), NativeTypeEnum.Float);
 
         connectedComponentsLabeling(clijx, input, labelmap);
         //CLIJ.debug = true;
         System.out.println(input);
         System.out.println(labelmap);
         System.out.println(singleLabel);
-        maskLabel(clij, input, labelmap, singleLabel, 2f);
+        maskLabel(clijx, input, labelmap, singleLabel, 2f);
 
 
         //clij.show(singleLabel, "result");
         //new WaitForUserDialog("hello").show();
 
 
-        assertEquals(clij.op().maximumOfAllPixels(singleLabel), 1.0, 0.1);
-        assertEquals(clij.op().sumPixels(singleLabel), 100.0, 0.1);
+        assertEquals(clijx.maximumOfAllPixels(singleLabel), 1.0, 0.1);
+        assertEquals(clijx.sumOfAllPixels(singleLabel), 100.0, 0.1);
 
         input.close();
         labelmap.close();

@@ -25,6 +25,7 @@ public class CountNonZeroVoxels3DSphere extends AbstractCLIJ2Plugin implements C
         return countNonZeroVoxelsLocally(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
     }
 
+    @Deprecated
     public static boolean countNonZeroVoxelsLocally(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
         return countNonZeroVoxels3DSphere(clij2, src, dst, radiusX, radiusY, radiusZ);
     }

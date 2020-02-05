@@ -6,7 +6,7 @@ import ij.gui.Roi;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij2.plugins.StandardDeviationOfMaskedPixels;
 import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.painting.DrawBox;
+import net.haesleinhuepf.clij2.plugins.DrawBox;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -23,7 +23,7 @@ public class StandardDeviationOfMaskedPixelsTest {
         ClearCLBuffer mask = clijx.create(input);
         clijx.set(mask, 0f);
 
-        DrawBox.drawBox(clijx.getClij(), mask, 10f, 10f, 20f, 20f);
+        DrawBox.drawBox(clijx, mask, 10f, 10f, 20f, 20f);
 
         // ERROR
         double stdDev = StandardDeviationOfMaskedPixels.standardDeviationOfMaskedPixels(clijx, input, mask);

@@ -30,24 +30,24 @@ run("Enhance Contrast", "saturated=0.35");
 
 // init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_push("blobs");
-Ext.CLIJx_push("shiftX");
-Ext.CLIJx_push("shiftY");
-Ext.CLIJx_push("resultStack");
+Ext.CLIJ2_push("blobs");
+Ext.CLIJ2_push("shiftX");
+Ext.CLIJ2_push("shiftY");
+Ext.CLIJ2_push("resultStack");
 
 for (i = 0; i < 36; i++) {
 
 	// change the shift from slice to slice
-	Ext.CLIJx_affineTransform2D("shiftX", "rotatedShiftX", "center rotate=" + (i * 10) + " -center");
+	Ext.CLIJ2_affineTransform2D("shiftX", "rotatedShiftX", "center rotate=" + (i * 10) + " -center");
 	
 	// apply transform
-	Ext.CLIJx_applyVectorField2D("blobs", "rotatedShiftX", "shiftY", "transformed");
+	Ext.CLIJ2_applyVectorField2D("blobs", "rotatedShiftX", "shiftY", "transformed");
 
 	// put resulting 2D image in the right plane
-	Ext.CLIJx_copySlice("transformed", "resultStack", i);
+	Ext.CLIJ2_copySlice("transformed", "resultStack", i);
 }
 
 
 // get result back from GPU
-Ext.CLIJx_pull("resultStack");
+Ext.CLIJ2_pull("resultStack");
 run("Invert LUT");

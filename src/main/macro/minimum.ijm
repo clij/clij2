@@ -19,18 +19,18 @@ minimum = "minimum";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // reslice
-Ext.CLIJx_minimum3DBox(input, minimum, 3, 3, 3);
+Ext.CLIJ2_minimum3DBox(input, minimum, 3, 3, 3);
 
 // show results
-Ext.CLIJx_pull(input);
-Ext.CLIJx_pull(minimum);
+Ext.CLIJ2_pull(input);
+Ext.CLIJ2_pull(minimum);
 

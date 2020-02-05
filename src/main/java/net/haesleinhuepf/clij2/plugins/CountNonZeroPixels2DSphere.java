@@ -25,6 +25,7 @@ public class CountNonZeroPixels2DSphere extends AbstractCLIJ2Plugin implements C
         return countNonZeroPixelsLocally(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
     }
 
+    @Deprecated
     public static boolean countNonZeroPixelsLocally(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY) {
         return countNonZeroPixels2DSphere(clij2, src, dst, radiusX, radiusY);
     }

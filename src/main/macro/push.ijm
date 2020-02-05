@@ -13,9 +13,9 @@ input = getTitle();
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
-Ext.CLIJx_reportMemory();
+Ext.CLIJ2_reportMemory();

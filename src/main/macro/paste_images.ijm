@@ -16,21 +16,21 @@ getDimensions(width, height, channels, slices, frames)
 
 // init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJx_push("logo");
+Ext.CLIJ2_push("logo");
 
 // cleanup imagej
 run("Close All");
 
 // create output image with 32 bits
-Ext.CLIJx_create2D("map", 4096, 4096, 8);
+Ext.CLIJ2_create2D("map", 4096, 4096, 8);
 
 // add images
-Ext.CLIJx_paste2D("logo", "map", 100, 100);
+Ext.CLIJ2_paste2D("logo", "map", 100, 100);
 //Ext.CLIJx_paste2D("logo", "map", 2000, 2000);
-Ext.CLIJx_paste2D("logo", "map", 500, 1000);
+Ext.CLIJ2_paste2D("logo", "map", 500, 1000);
 
 // show result
-Ext.CLIJx_pull("map");
+Ext.CLIJ2_pull("map");

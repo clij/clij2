@@ -11,6 +11,7 @@ import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clijx.CLIJx;
 import net.imglib2.realtransform.AffineTransform3D;
 import org.scijava.plugin.Plugin;
 
@@ -78,10 +79,10 @@ public class LFRecon extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
 
         int imagesize = imp.getWidth();
 
-        CLIJ clij = CLIJ.getInstance();
-        ClearCLImage input = clij.convert(imp, ClearCLImage.class);
-        ClearCLImage temp = clij.create(new long[]{900, 900}, input.getChannelDataType());
-        ClearCLImage output = clij.create(new long[]{imagesize / tilesize, imagesize / tilesize, tilesize * tilesize}, input.getChannelDataType());
+        CLIJx clijx = CLIJx.getInstance();
+        ClearCLImage input = clijx.convert(imp, ClearCLImage.class);
+        ClearCLImage temp = clijx.create(new long[]{900, 900}, input.getChannelDataType());
+        ClearCLImage output = clijx.create(new long[]{imagesize / tilesize, imagesize / tilesize, tilesize * tilesize}, input.getChannelDataType());
 
         AffineTransform3D at = new AffineTransform3D();
         //at.scale(temp.getWidth() / input.getWidth());
@@ -98,22 +99,22 @@ public class LFRecon extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJ
         scaleTransform.set(1, 2, 2);
         at.concatenate(scaleTransform);
 
-        clij.op().affineTransform3D(input, temp, at);
+        clijx.affineTransform3D(input, temp, at);
 
-        clij.show(temp, "temp");
+        clijx.show(temp, "temp");
 
-        lfrecon(clij, temp, output, tilesize, tilesize);
+        lfrecon(clijx.getClij(), temp, output, tilesize, tilesize);
 
-        clij.show(output, "output");
+        clijx.show(output, "output");
 
-        System.out.println("sum output: " + clij.op().sumPixels(output));
+        System.out.println("sum output: " + clijx.sumOfAllPixels(output));
 
-        ClearCLImage tiles_output = clij.create(new long[]{output.getWidth() * tilesize, output.getHeight() * tilesize}, output.getChannelDataType());
+        ClearCLImage tiles_output = clijx.create(new long[]{output.getWidth() * tilesize, output.getHeight() * tilesize}, output.getChannelDataType());
 
-        StackToTiles.stackToTiles(clij, output, tiles_output, tilesize, tilesize);
-        System.out.println("sum output tiles: " + clij.op().sumPixels(tiles_output));
+        StackToTiles.stackToTiles(clijx, output, tiles_output, tilesize, tilesize);
+        System.out.println("sum output tiles: " + clijx.sumOfAllPixels(tiles_output));
 
-        clij.show(tiles_output, "tiles");
+        clijx.show(tiles_output, "tiles");
 
     }
 

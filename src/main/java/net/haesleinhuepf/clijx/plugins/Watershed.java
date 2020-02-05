@@ -8,6 +8,7 @@ import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij2.plugins.ConnectedComponentsLabeling;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
@@ -129,7 +130,7 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         }
 
         if (iterationCount[0] % 2 == 0) {
-            ConnectedComponentsLabeling.copyInternal(clijx.getClij(), maximaIn, maximaOut, maximaOut.getDimension(), maximaOut.getDimension());
+           clijx.copy(maximaIn, maximaOut);
         }
         if (flipkernel != null) {
             flipkernel.close();
@@ -187,8 +188,8 @@ public class Watershed extends AbstractCLIJxPlugin implements CLIJMacroPlugin, C
         flag.close();
 
         if (iterationCount[0] % 2 == 0) {
-            ConnectedComponentsLabeling.copyInternal(clijx.getClij(), labelMapIn, labelMapOut, labelMapOut.getDimension(), labelMapOut.getDimension());
-            ConnectedComponentsLabeling.copyInternal(clijx.getClij(), distanceMapIn, distanceMapOut, distanceMapOut.getDimension(), distanceMapOut.getDimension());
+            clijx.copy(labelMapIn, labelMapOut);
+            clijx.copy(distanceMapIn, distanceMapOut);
         }
         if (flipkernel != null) {
             flipkernel.close();

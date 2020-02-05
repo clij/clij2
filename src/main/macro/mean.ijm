@@ -18,10 +18,10 @@ blurred = "Mean GPU";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // Local mean filter in CPU
 selectWindow(input);
@@ -29,13 +29,13 @@ run("Mean 3D...", "x=3 y=3 z=3");
 
 
 // Local mean filter in GPU
-Ext.CLIJx_mean3DSphere(input, blurred, 3, 3, 3);
+Ext.CLIJ2_mean3DSphere(input, blurred, 3, 3, 3);
 
 // Get results back from GPU
-Ext.CLIJx_pull(blurred);
+Ext.CLIJ2_pull(blurred);
 
 // Cleanup GPU 
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 
 imageCalculator("Subtract create 32-bit stack", "Mean CPU","Mean GPU");

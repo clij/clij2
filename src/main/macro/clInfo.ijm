@@ -8,4 +8,4 @@
 
 
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clInfo();
+Ext.CLIJ2_clInfo();

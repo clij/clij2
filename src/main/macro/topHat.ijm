@@ -23,22 +23,22 @@ output = "output";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // CleanUp ImageJ
 close();
 
 
-Ext.CLIJx_medianSliceBySliceSphere(input, median, 1, 1);
-Ext.CLIJx_minimum3DBox(median, temp1, radiusXY, radiusXY, radiusZ);
-Ext.CLIJx_maximum3DBox(temp1, temp2, radiusXY, radiusXY, radiusZ);
-Ext.CLIJx_subtractImages(median, temp2, output);
+Ext.CLIJ2_medianSliceBySliceSphere(input, median, 1, 1);
+Ext.CLIJ2_minimum3DBox(median, temp1, radiusXY, radiusXY, radiusZ);
+Ext.CLIJ2_maximum3DBox(temp1, temp2, radiusXY, radiusXY, radiusZ);
+Ext.CLIJ2_subtractImages(median, temp2, output);
 
-Ext.CLIJx_pull(input);
-Ext.CLIJx_pull(output);
+Ext.CLIJ2_pull(input);
+Ext.CLIJ2_pull(output);
 
 // Cleanup by the end
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();

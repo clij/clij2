@@ -10,7 +10,7 @@ import net.haesleinhuepf.clij2.plugins.DetectLabelEdges;
 import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
 
-import static net.haesleinhuepf.clijx.plugins.ConnectedComponentsLabeling.connectedComponentsLabeling;
+import static net.haesleinhuepf.clij2.plugins.ConnectedComponentsLabeling.connectedComponentsLabeling;
 
 public class DetectLabelEdgesTest {
     @Test

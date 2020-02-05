@@ -14,24 +14,21 @@ getDimensions(width, height, channels, slices, frames);
 input = getTitle();
 threshold = 128;
 
-// create memory for mask image
-newImage("Untitled", "8-bit black", width, height, slices);
-rename("Mask");
-mask = getTitle();
+// name memory for mask image
+mask = "mask";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJx_push(input);
-Ext.CLIJx_push(mask);
+Ext.CLIJ2_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // create a mask using a fixed threshold
-Ext.CLIJx_threshold(input, mask, threshold);
+Ext.CLIJ2_threshold(input, mask, threshold);
 
 // show result
-Ext.CLIJx_pullBinary(mask);
+Ext.CLIJ2_pullBinary(mask);

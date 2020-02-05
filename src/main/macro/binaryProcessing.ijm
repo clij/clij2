@@ -23,26 +23,26 @@ temp = "temp";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // create a mask using a fixed threshold
-Ext.CLIJx_threshold(input, mask, threshold);
+Ext.CLIJ2_threshold(input, mask, threshold);
 
 // binary opening: erosion + dilation, twice each
-Ext.CLIJx_erodeBox(mask, temp);
-Ext.CLIJx_erodeBox(temp, mask);
+Ext.CLIJ2_erodeBox(mask, temp);
+Ext.CLIJ2_erodeBox(temp, mask);
 
-Ext.CLIJx_dilateBox(mask, temp);
-Ext.CLIJx_dilateBox(temp, mask);
+Ext.CLIJ2_dilateBox(mask, temp);
+Ext.CLIJ2_dilateBox(temp, mask);
 
 
 // show result
-Ext.CLIJx_pullBinary(mask);
+Ext.CLIJ2_pullBinary(mask);
 
 

@@ -9,13 +9,16 @@ import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij2.plugins.CloseIndexGapsInLabelMap;
+import net.haesleinhuepf.clij2.plugins.NonzeroMinimumBox;
+import net.haesleinhuepf.clij2.plugins.SetNonZeroPixelsToPixelIndex;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.nio.ByteBuffer;
 
-import static net.haesleinhuepf.clijx.plugins.ConnectedComponentsLabeling.*;
+import static net.haesleinhuepf.clij2.plugins.ConnectedComponentsLabeling.*;
 
 /**
  * ConnectedComponentsLabeling
@@ -52,7 +55,7 @@ public class ConnectedComponentsLabelingInplace extends AbstractCLIJxPlugin impl
         aByteBufferWithAZero.put((byte)0);
         flag.readFrom(aByteBufferWithAZero, true);
 
-        setNonZeroPixelsToPixelIndex(clijx.getClij(), output, temp1);
+        SetNonZeroPixelsToPixelIndex.setNonZeroPixelsToPixelIndex(clijx, output, temp1);
 
         clijx.set(temp2, 0f);
 
@@ -89,9 +92,9 @@ public class ConnectedComponentsLabelingInplace extends AbstractCLIJxPlugin impl
         }
 
         if (iterationCount[0] % 2 == 0) {
-            copyInternal(clijx.getClij(), temp1, temp3, temp1.getDimension(), temp3.getDimension());
+            clijx.copy(temp1, temp3);
         } else {
-            copyInternal(clijx.getClij(), temp2, temp3, temp2.getDimension(), temp3.getDimension());
+            clijx.copy(temp1, temp3);
         }
         if (flipkernel != null) {
             flipkernel.close();
@@ -101,7 +104,7 @@ public class ConnectedComponentsLabelingInplace extends AbstractCLIJxPlugin impl
         }
 
 
-        shiftIntensitiesToCloseGaps(clijx, temp3, output);
+        CloseIndexGapsInLabelMap.closeIndexGapsInLabelMap(clijx, temp3, output);
 
         clijx.release(temp1);
         clijx.release(temp2);

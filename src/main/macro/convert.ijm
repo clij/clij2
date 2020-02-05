@@ -14,16 +14,19 @@ run("Blobs (25K)");
 source = getTitle();
 
 run("CLIJ Macro Extensions", "cl_device=" + cl_device);
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
-Ext.CLIJx_push(source);
+Ext.CLIJ2_push(source);
 
-Ext.CLIJx_convertFloat(source, "float");
-Ext.CLIJx_pull("float");
+Ext.CLIJ2_convertFloat(source, "float");
+Ext.CLIJ2_pull("float");
 
-Ext.CLIJx_convertUInt8("float", "uint8");
-Ext.CLIJx_pull("uint8");
+Ext.CLIJ2_convertUInt8("float", "uint8");
+Ext.CLIJ2_pull("uint8");
 
-Ext.CLIJx_convertUInt16(source, "uint16");
-Ext.CLIJx_pull("uint16");
+Ext.CLIJ2_convertUInt16(source, "uint16");
+Ext.CLIJ2_pull("uint16");
+
+
+
 

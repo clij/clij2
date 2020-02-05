@@ -33,9 +33,9 @@ run("CLIJ Macro Extensions", "cl_device=");
 
 // do operation on GPU
 outputGPU = "mean2d_GPU";
-Ext.CLIJx_push(input);
-Ext.CLIJx_mean2DSphere(input, outputGPU, radius, radius);
-Ext.CLIJx_pull(outputGPU);
+Ext.CLIJ2_push(input);
+Ext.CLIJ2_mean2DSphere(input, outputGPU, radius, radius);
+Ext.CLIJ2_pull(outputGPU);
 
 // visualise result
 zoom(10);
@@ -75,9 +75,9 @@ run("CLIJ Macro Extensions", "cl_device=");
 
 // do operation on GPU
 outputGPU = "mean3d_GPU";
-Ext.CLIJx_push(input);
-Ext.CLIJx_mean3DSphere(input, outputGPU, radius, radius, radius);
-Ext.CLIJx_pull(outputGPU);
+Ext.CLIJ2_push(input);
+Ext.CLIJ2_mean3DSphere(input, outputGPU, radius, radius, radius);
+Ext.CLIJ2_pull(outputGPU);
 
 // visualise result
 setSlice(4);

@@ -3,9 +3,10 @@ package net.haesleinhuepf.clijx.plugins;
 import ij.ImageJ;
 import ij.ImagePlus;
 import ij.gui.NewImage;
-import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.test.TestUtilities;
+import net.haesleinhuepf.clij2.plugins.NonzeroMinimumDiamond;
+import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -23,18 +24,18 @@ public class NonzeroMinimumDiamondTest {
 
         imp.show();
 
-        CLIJ clij = CLIJ.getInstance();
-        ClearCLBuffer input = clij.push(imp);
-        ClearCLBuffer output = clij.create(input);
-        ClearCLBuffer outputRef = clij.create(input);
-        ClearCLBuffer flag = clij.create(new long[]{1,1,1}, output.getNativeType());
+        CLIJx clijx = CLIJx.getInstance();
+        ClearCLBuffer input = clijx.push(imp);
+        ClearCLBuffer output = clijx.create(input);
+        ClearCLBuffer outputRef = clijx.create(input);
+        ClearCLBuffer flag = clijx.create(new long[]{1,1,1}, output.getNativeType());
 
-        NonzeroMinimumDiamond.nonzeroMinimumDiamond(clij, input, flag, output);
-        clij.op().minimumSphere(input, outputRef, 3, 3, 3);
+        NonzeroMinimumDiamond.nonzeroMinimumDiamond(clijx, input, flag, output);
+        clijx.minimum3DSphere(input, outputRef, 3, 3, 3);
 
         //clij.show(output, "output");
         //clij.show(output, "outputRef");
-        assertTrue(TestUtilities.clBuffersEqual(clij, output, input, 0));
+        assertTrue(TestUtilities.clBuffersEqual(clijx.getCLIJ(), output, input, 0));
         //new WaitForUserDialog("44").show();
 
         input.close();

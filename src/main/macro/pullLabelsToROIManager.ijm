@@ -9,6 +9,7 @@
 //         September 2019
 // ---------------------------------------------
 
+run("Close All");
 
 // Get test data
 run("Blobs (25K)");
@@ -19,23 +20,23 @@ mask = "mask";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // create a mask using a fixed threshold
-Ext.CLIJx_automaticThreshold(input, mask, "Otsu");
+Ext.CLIJ2_automaticThreshold(input, mask, "Otsu");
 
 // differentiate labels
 label_map = "label_map";
-Ext.CLIJx_connectedComponentsLabeling(mask, label_map);
+Ext.CLIJ2_connectedComponentsLabeling(mask, label_map);
 
 // remove labels touching edges
 removed_edge_labels = "removed_edge_labels";
-Ext.CLIJx_excludeLabelsOnEdges(label_map, removed_edge_labels);
+Ext.CLIJ2_excludeLabelsOnEdges(label_map, removed_edge_labels);
 
 // send results to ROI manager
-Ext.CLIJx_pullLabelsToROIManager(removed_edge_labels);
+Ext.CLIJ2_pullLabelsToROIManager(removed_edge_labels);
 roiManager("show all");
 

@@ -25,6 +25,7 @@ public class CountNonZeroPixelsSliceBySliceSphere extends AbstractCLIJ2Plugin im
         return countNonZeroPixelsLocallySliceBySlice(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
     }
 
+    @Deprecated
     public static boolean countNonZeroPixelsLocallySliceBySlice(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY) {
         return countNonZeroPixelsSliceBySliceSphere(clij2, src, dst, radiusX, radiusY);
     }

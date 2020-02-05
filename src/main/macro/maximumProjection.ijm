@@ -18,19 +18,19 @@ maximum_projected = "maximum_projected";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // CleanUp ImageJ
 close();
 
 // maximum projection
-Ext.CLIJx_maximumZProjection(input, maximum_projected);
+Ext.CLIJ2_maximumZProjection(input, maximum_projected);
 
 // Get results back from GPU
-Ext.CLIJx_pull(maximum_projected);
+Ext.CLIJ2_pull(maximum_projected);
 
 // Cleanup by the end
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();

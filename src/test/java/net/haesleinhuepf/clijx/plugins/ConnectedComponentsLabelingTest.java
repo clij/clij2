@@ -7,10 +7,11 @@ import ij.gui.NewImage;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
+import net.haesleinhuepf.clij2.plugins.Paste3D;
 import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
 
-import static net.haesleinhuepf.clijx.plugins.ConnectedComponentsLabeling.connectedComponentsLabeling;
+import static net.haesleinhuepf.clij2.plugins.ConnectedComponentsLabeling.connectedComponentsLabeling;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -125,31 +126,31 @@ public class ConnectedComponentsLabelingTest {
         imp.show();
 
         CLIJx clijx = CLIJx.getInstance();
-        CLIJ clij = clijx.getClij();
+        //CLIJ clij = clijx.getClij();
 
-        ClearCLBuffer miniBlobs = clij.push(imp);
-        ClearCLBuffer input = clij.create(new long[]{miniBlobs.getWidth() * 5, miniBlobs.getHeight() * 5, miniBlobs.getDepth() * 5}, miniBlobs.getNativeType());
+        ClearCLBuffer miniBlobs = clijx.push(imp);
+        ClearCLBuffer input = clijx.create(new long[]{miniBlobs.getWidth() * 5, miniBlobs.getHeight() * 5, miniBlobs.getDepth() * 5}, miniBlobs.getNativeType());
         for (int x = 0; x < 5; x++) {
             for (int y = 0; y < 5; y++) {
                 for (int z = 0; z < 5; z++) {
-                    Paste3D.paste(clij, miniBlobs, input, (int)(x * miniBlobs.getWidth()), (int)(y * miniBlobs.getHeight()), (int)(z * miniBlobs.getDepth()));
+                    Paste3D.paste(clijx, miniBlobs, input, (int)(x * miniBlobs.getWidth()), (int)(y * miniBlobs.getHeight()), (int)(z * miniBlobs.getDepth()));
                 }
             }
         }
-        clij.show(input, "input");
+        clijx.show(input, "input");
 
-        ClearCLBuffer thresholded = clij.create(input);
-        ClearCLBuffer output = clij.createCLBuffer(input.getDimensions(), NativeTypeEnum.Float);
+        ClearCLBuffer thresholded = clijx.create(input);
+        ClearCLBuffer output = clijx.create(input.getDimensions(), NativeTypeEnum.Float);
 
-        clij.op().threshold(input, thresholded, 7f);
-        clij.show(thresholded, "thresholded");
+        clijx.threshold(input, thresholded, 7f);
+        clijx.show(thresholded, "thresholded");
         connectedComponentsLabeling(clijx, thresholded, output);
 
-        clij.show(output, "result");
+        clijx.show(output, "result");
 
         //new WaitForUserDialog("wait").show();
 
-        assertEquals(375.0, clij.op().maximumOfAllPixels(output), 0.1);
+        assertEquals(375.0, clijx.maximumOfAllPixels(output), 0.1);
 
         input.close();
         output.close();

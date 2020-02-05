@@ -11,7 +11,9 @@ import ij.process.ImageProcessor;
 import ij.util.Tools;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij2.plugins.ReplaceIntensities;
-import net.haesleinhuepf.clijx.plugins.*;
+import net.haesleinhuepf.clij2.plugins.ConnectedComponentsLabeling;
+import net.haesleinhuepf.clij2.plugins.ExcludeLabelsOnEdges;
+import net.haesleinhuepf.clij2.plugins.StatisticsOfLabelledPixels;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clijx.CLIJx;
@@ -217,7 +219,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
 
         // exclude on edges
         if (excludeOnEdges) {
-            ExcludeLabelsOnEdges.excludeLabelsOnEdges(clijx.getClij(), flop, flip);
+            ExcludeLabelsOnEdges.excludeLabelsOnEdges(clijx, flop, flip);
             clijx.copy(flip, flop);
             //clij.show(flop, "excl");
         }
@@ -327,7 +329,7 @@ public class ParticleAnalyser implements PlugIn, AdjustmentListener, FocusListen
             if (!newRT) {
                 table.reset();
             }
-            StatisticsOfLabelledPixels.statisticsOfLabelledPixels(clijx.getClij(), buffer, flop, table);
+            StatisticsOfLabelledPixels.statisticsOfLabelledPixels(clijx, buffer, flop, table);
 
             if (showStat) {
                 if (newRT) {

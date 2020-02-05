@@ -20,19 +20,19 @@ for (radius = 1; radius < 4; radius++) {
 	
 	
 	run("CLIJ Macro Extensions", "cl_device=");
-	Ext.CLIJx_clear();
+	Ext.CLIJ2_clear();
 	
-	Ext.CLIJx_push("original");
-	Ext.CLIJx_push("orignal1slice");
+	Ext.CLIJ2_push("original");
+	Ext.CLIJ2_push("orignal1slice");
 	
 	
 	
-	Ext.CLIJx_maximum3DSphere("original", "maximum3DSphereCLIJ_" + radius, radius, radius, radius);
-	Ext.CLIJx_pull("maximum3DSphereCLIJ_" + radius);
+	Ext.CLIJ2_maximum3DSphere("original", "maximum3DSphereCLIJ_" + radius, radius, radius, radius);
+	Ext.CLIJ2_pull("maximum3DSphereCLIJ_" + radius);
 	zoom("maximum3DSphereCLIJ_" + radius);
 	
-	Ext.CLIJx_maximum2DSphere("orignal1slice", "maximum2DSphereCLIJ_" + radius, radius, radius);
-	Ext.CLIJx_pull("maximum2DSphereCLIJ_" + radius);
+	Ext.CLIJ2_maximum2DSphere("orignal1slice", "maximum2DSphereCLIJ_" + radius, radius, radius);
+	Ext.CLIJ2_pull("maximum2DSphereCLIJ_" + radius);
 	zoom("maximum2DSphereCLIJ_" + radius);
 	
 	selectWindow("original");

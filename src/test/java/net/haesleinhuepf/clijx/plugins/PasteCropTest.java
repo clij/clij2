@@ -2,8 +2,11 @@ package net.haesleinhuepf.clijx.plugins;
 
 import ij.IJ;
 import ij.ImagePlus;
-import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij2.plugins.MeanSquaredError;
+import net.haesleinhuepf.clij2.plugins.Paste2D;
+import net.haesleinhuepf.clij2.plugins.Paste3D;
+import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -19,19 +22,19 @@ import static org.junit.Assert.assertEquals;
 public class PasteCropTest {
     @Test
     public void pasteCropTest3D() {
-        CLIJ clij = CLIJ.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
         ImagePlus imp = IJ.openImage("src/test/resources/t1-head.tif");
 
-        ClearCLBuffer input = clij.push(imp);
-        ClearCLBuffer intermediate = clij.create(new long[]{1000, 1000, 200}, input.getNativeType());
-        ClearCLBuffer output = clij.createCLBuffer(input);
-        Paste3D.paste(clij, input, intermediate, 100, 100, 0);
+        ClearCLBuffer input = clijx.push(imp);
+        ClearCLBuffer intermediate = clijx.create(new long[]{1000, 1000, 200}, input.getNativeType());
+        ClearCLBuffer output = clijx.create(input);
+        Paste3D.paste(clijx, input, intermediate, 100, 100, 0);
 
-        clij.op().crop(intermediate, output, 100, 100, 0);
+        clijx.crop(intermediate, output, 100, 100, 0);
 
-        double mse = MeanSquaredError.meanSquaredError(clij, input, output);
-        double sumIn = clij.op().sumPixels(input);
-        double sumOut = clij.op().sumPixels(output);
+        double mse = MeanSquaredError.meanSquaredError(clijx, input, output);
+        double sumIn = clijx.sumOfAllPixels(input);
+        double sumOut = clijx.sumOfAllPixels(output);
 
         System.out.println(sumIn);
         assertEquals(mse, 0.0, 0.0);
@@ -44,19 +47,19 @@ public class PasteCropTest {
 
     @Test
     public void pasteCropTest2D() {
-        CLIJ clij = CLIJ.getInstance();
+        CLIJx clijx = CLIJx.getInstance();
         ImagePlus imp = IJ.openImage("src/test/resources/blobs.tif");
 
-        ClearCLBuffer input = clij.push(imp);
-        ClearCLBuffer intermediate = clij.create(new long[]{1000, 1000, 1}, input.getNativeType());
-        ClearCLBuffer output = clij.createCLBuffer(input);
-        Paste2D.paste(clij, input, intermediate, 100, 100);
+        ClearCLBuffer input = clijx.push(imp);
+        ClearCLBuffer intermediate = clijx.create(new long[]{1000, 1000, 1}, input.getNativeType());
+        ClearCLBuffer output = clijx.create(input);
+        Paste2D.paste(clijx, input, intermediate, 100, 100);
 
-        clij.op().crop(intermediate, output, 100, 100, 0);
+        clijx.crop(intermediate, output, 100, 100, 0);
 
-        double mse = MeanSquaredError.meanSquaredError(clij, input, output);
-        double sumIn = clij.op().sumPixels(input);
-        double sumOut = clij.op().sumPixels(output);
+        double mse = MeanSquaredError.meanSquaredError(clijx, input, output);
+        double sumIn = clijx.sumOfAllPixels(input);
+        double sumOut = clijx.sumOfAllPixels(output);
 
         System.out.println(sumIn);
         assertEquals(mse, 0.0, 0.0);

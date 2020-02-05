@@ -13,12 +13,12 @@ input = getTitle();
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJx_pushCurrentSlice(input);
+Ext.CLIJ2_pushCurrentSlice(input);
 
 run("Close All");
 
 // pull the image back to see what it was
-Ext.CLIJx_pull(input);
+Ext.CLIJ2_pull(input);

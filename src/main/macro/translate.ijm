@@ -24,26 +24,26 @@ getDimensions(width, height, channels, depth, frames);
 
 // init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJx_push("original");
+Ext.CLIJ2_push("original");
 // reserve the right amount of memory for the result image
-Ext.CLIJx_create3D("target",  width, height, 200 / step, 32);
+Ext.CLIJ2_create3D("target",  width, height, 200 / step, 32);
 
 // cleanup imagej
 run("Close All");
 	
 count = 0;
 for (displacement = 0; displacement < 200; displacement += step) {
-	Ext.CLIJx_translate2D("original", "translated", displacement, 0);
+	Ext.CLIJ2_translate2D("original", "translated", displacement, 0);
 
 	// put the translated image in the right place in the result stack
-	Ext.CLIJx_copySlice("translated", "target", count);
+	Ext.CLIJ2_copySlice("translated", "target", count);
 	
 	count++;
 }
 
 // show result
-Ext.CLIJx_pull("target");
+Ext.CLIJ2_pull("target");
 run("Invert LUT");

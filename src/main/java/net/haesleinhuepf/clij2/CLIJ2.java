@@ -345,4 +345,5 @@ public class CLIJ2 implements CLIJ2Ops {
     public ImagePlus pullBinary(ClearCLBuffer input) {
         return clij.pullBinary(input);
     }
+
 }

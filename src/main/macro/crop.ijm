@@ -14,14 +14,14 @@ rename("original");
 
 // init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJx_push("original");
+Ext.CLIJ2_push("original");
 
 // crop image
-Ext.CLIJx_crop2D("original", "cropped", 10, 10, 75, 75);
+Ext.CLIJ2_crop2D("original", "cropped", 10, 10, 75, 75);
 
 // show result
-Ext.CLIJx_pull("cropped");
+Ext.CLIJ2_pull("cropped");
 run("Invert LUT");

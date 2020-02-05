@@ -15,26 +15,26 @@ input = getTitle()
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ_clear();
 
 // push data to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // get min/max of all pixels
-Ext.CLIJx_minimumOfAllPixels(input);
+Ext.CLIJ2_minimumOfAllPixels(input);
 minimumIntensity = getResult("Minimum", nResults() - 1);
-Ext.CLIJx_maximumOfAllPixels(input);
+Ext.CLIJ2_maximumOfAllPixels(input);
 maximumIntensity = getResult("Maximum", nResults() - 1);
 
 // create a binary image
 binary = "binary";
-Ext.CLIJx_automaticThreshold(input, binary, "Otsu");
+Ext.CLIJ2_automaticThreshold(input, binary, "Otsu");
 
 // area of binary image
-Ext.CLIJx_sumOfAllPixels(binary);
+Ext.CLIJ2_sumOfAllPixels(binary);
 mx = getResult("Sum", nResults() - 1);
 
 // determine center of mass
-Ext.CLIJx_centerOfMass(binary);
+Ext.CLIJ2_centerOfMass(binary);
 mx = getResult("MassX", nResults() - 1);
 my = getResult("MassY", nResults() - 1);

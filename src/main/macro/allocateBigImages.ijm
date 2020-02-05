@@ -21,30 +21,30 @@ crop = "crop";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
 rename(input);
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // CleanUp ImageJ
 close();
 
 // create an 8 GB image in GPU memory
-Ext.CLIJx_create3D(bigStack, 2048, 2048, 1000, 16);
+Ext.CLIJ2_create3D(bigStack, 2048, 2048, 1000, 16);
 
 
 for (i = 0; i < 10; i++) {
 	// fill the image with content
-	Ext.CLIJx_copySlice(input, bigStack, i);
+	Ext.CLIJ2_copySlice(input, bigStack, i);
 }
-Ext.CLIJx_crop3D(bigStack, crop, 0, 0, 0, 150, 150, 10);
+Ext.CLIJ2_crop3D(bigStack, crop, 0, 0, 0, 150, 150, 10);
 
 // Get results back from GPU
-Ext.CLIJx_pull(crop);
+Ext.CLIJ2_pull(crop);
 
 // report about what's allocated in the GPU memory
-Ext.CLIJx_reportMemory();
+Ext.CLIJ2_reportMemory();
 
 // Cleanup by the end
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();

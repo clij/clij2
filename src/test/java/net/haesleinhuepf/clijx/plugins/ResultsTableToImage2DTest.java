@@ -3,7 +3,8 @@ package net.haesleinhuepf.clijx.plugins;
 import ij.measure.ResultsTable;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clijx.matrix.MatrixEqual;
+import net.haesleinhuepf.clij2.plugins.Image2DToResultsTable;
+import net.haesleinhuepf.clij2.plugins.ResultsTableToImage2D;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgs;
@@ -46,10 +47,10 @@ public class ResultsTableToImage2DTest {
         CLIJx clijx = CLIJx.getInstance();
         ClearCLBuffer buffer1 = clijx.push(a);
 
-        ResultsTable table = Image2DToResultsTable.image2DToResultsTable(CLIJ.getInstance(), buffer1, ResultsTable.getResultsTable());
+        ResultsTable table = Image2DToResultsTable.image2DToResultsTable(clijx, buffer1, ResultsTable.getResultsTable());
 
         ClearCLBuffer buffer2 = clijx.create(buffer1);
-        ResultsTableToImage2D.resultsTableToImage2D(CLIJ.getInstance(), buffer2, table);
+        ResultsTableToImage2D.resultsTableToImage2D(clijx, buffer2, table);
 
         assertTrue(MatrixEqual.matrixEqual(CLIJ.getInstance(), buffer1, buffer2, 0f));
         ResultsTable.getResultsTable().reset();

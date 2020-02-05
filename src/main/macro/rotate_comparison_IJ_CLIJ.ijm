@@ -19,19 +19,19 @@ rotated = "Rotated";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=1070");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // rotate on CPU
 run("Rotate... ", "angle=45 grid=1 interpolation=Bilinear");
 
 // rotate on GPU
-Ext.CLIJx_affineTransform2D(input, rotated, "center rotate=45 -center");
+Ext.CLIJ2_affineTransform2D(input, rotated, "center rotate=45 -center");
 
 // show results
-Ext.CLIJx_pull(rotated);
+Ext.CLIJ2_pull(rotated);
 
 // calculate difference image between CPU and GPU
 imageCalculator("Subtract create 32-bit", input, rotated);

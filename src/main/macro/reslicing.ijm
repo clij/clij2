@@ -17,13 +17,13 @@ resliced = "Resliced left";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // reslice
-Ext.CLIJx_resliceLeft(input, resliced);
+Ext.CLIJ2_resliceLeft(input, resliced);
 
 // show results
-Ext.CLIJx_pull(resliced);
+Ext.CLIJ2_pull(resliced);

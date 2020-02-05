@@ -17,13 +17,13 @@ rotated = "Rotate left";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // rotate
-Ext.CLIJx_rotateLeft(input, rotated);
+Ext.CLIJ2_rotateCounterClockwise(input, rotated);
 
 // show results
-Ext.CLIJx_pull(rotated);
+Ext.CLIJ2_pull(rotated);

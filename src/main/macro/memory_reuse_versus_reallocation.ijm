@@ -19,10 +19,10 @@ newImage("original", "16-bit ramp", width, height, slices);
 
 // init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJ_push("original");
+Ext.CLIJ2_push("original");
 
 // cleanup imagej
 run("Close All");
@@ -31,15 +31,15 @@ for (j = 0; j < 10; j++) {
 	// copy the image 10 times wihile reusing target memory
 	time = getTime();
 	for (i = 0; i < 10; i++) {
-		Ext.CLIJx_copy("original", "copy");
+		Ext.CLIJ2_copy("original", "copy");
 	}
 	IJ.log("Copying with memory reusing took " + (getTime() - time));
 	
 	// copy the image 10 times while releasing and reallocating target memory.
 	time = getTime();
 	for (i = 0; i < 10; i++) {
-		Ext.CLIJx_copy("original", "copy");
-		Ext.CLIJx_release("copy");
+		Ext.CLIJ2_copy("original", "copy");
+		Ext.CLIJ2_release("copy");
 	}
 	IJ.log("Copying with memory reallocation took " + (getTime() - time));
 }

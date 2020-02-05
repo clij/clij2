@@ -28,8 +28,13 @@ public class AverageDistanceOfNClosestPoints extends AbstractCLIJ2Plugin impleme
         return result;
     }
 
+    public static boolean averageDistanceOfNClosestPoints(CLIJ2 clij2, ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination, Integer nPoints) {
+        return averageDistanceOfClosestPoints(clij2, distance_matrix, indexlist_destination, nPoints);
+    }
+
     public static boolean averageDistanceOfClosestPoints(CLIJ2 clij2, ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination, Integer nPoints) {
-        //ClearCLBuffer temp = clij.create(new long[]{input.getWidth(), 1, input.getHeight()}, input.getNativeType());
+
+            //ClearCLBuffer temp = clij.create(new long[]{input.getWidth(), 1, input.getHeight()}, input.getNativeType());
 
         if (indexlist_destination.getHeight() > 1000) {
             System.out.println("Warning: NClosestPoints is limited to n=1000 for technical reasons.");

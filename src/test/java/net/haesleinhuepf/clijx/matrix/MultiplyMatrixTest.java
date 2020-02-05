@@ -3,6 +3,7 @@ package net.haesleinhuepf.clijx.matrix;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.test.TestUtilities;
+import net.haesleinhuepf.clij2.plugins.MultiplyMatrix;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgs;

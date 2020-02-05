@@ -16,19 +16,19 @@ blurred = "Blurred";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJx_push(input);
+Ext.CLIJ2_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // Blur in GPU
-Ext.CLIJx_blur3D(input, blurred, 5, 5, 1);
+Ext.CLIJ2_gaussianBlur3D(input, blurred, 5, 5, 1);
 
 // Get results back from GPU
-Ext.CLIJx_pull(blurred);
+Ext.CLIJ2_pull(blurred);
 
 // Cleanup by the end
-Ext.CLIJx_clear();
+Ext.CLIJ2_clear();

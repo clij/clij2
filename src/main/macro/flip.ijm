@@ -17,16 +17,16 @@ flipped = "Flipped along X";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJ2_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // flip along x axis
-Ext.CLIJ_flip3D(input, flipped, true, false, false);
+Ext.CLIJ2_flip3D(input, flipped, true, false, false);
 
 // show results
-Ext.CLIJ_pull(flipped);
+Ext.CLIJ2_pull(flipped);
