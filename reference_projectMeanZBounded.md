@@ -1,11 +1,11 @@
 ## projectMeanZBounded
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
-Determines the mean projection of an image along Z within a given z range.
+null
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_projectMeanZBounded(Image source, Image destination_mean, Number min_z, Number max_z);
+Ext.CLIJx_projectMeanZBounded(null);
 ```
 
 

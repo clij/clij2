@@ -1,5 +1,5 @@
 ## maskLabel
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes a masked image by applying a label mask to an image. All pixel values x of image X will be copied
 to the destination image in case pixel value m at the same position in the label_map image has the right index value i.

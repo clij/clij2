@@ -1,5 +1,5 @@
 ## crop2D
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Crops a given rectangle out of a given image.
 
@@ -42,6 +42,7 @@ clij2.release(arg2);
 
 
 ### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [allocateBig2DImages.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/allocateBig2DImages.ijm)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [crop.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/crop.ijm)  
 
 

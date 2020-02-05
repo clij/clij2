@@ -1,5 +1,5 @@
 ## getSize
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Reads out the size of an image [stack] and writes it to the results table in the columns 'Width', 'Height' and 'Depth'.
 

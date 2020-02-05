@@ -1,5 +1,5 @@
 ## scale
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 DEPRECATED: CLIJ scale() is <b>deprecated</b>. Use scale2D or scale3D instead!
 

@@ -1,5 +1,5 @@
 ## replaceIntensity
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Replaces a specific intensity in an image with a given new value.
 

@@ -37,6 +37,12 @@ clij2.release(destination);
 ```
 
 
+
+
+### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [spot_distance_measurement.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/spot_distance_measurement.ijm)  
+
+
 [Back to CLIJ documentation](https://clij.github.io/)
 
 [Imprint](https://clij.github.io/imprint)

@@ -42,7 +42,7 @@ clij2.release(arg2);
 
 ### Example scripts
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [bitdepthConversion.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/bitdepthConversion.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [addImages.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/addImages.py)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [rgb_invert_black_white.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/rgb_invert_black_white.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

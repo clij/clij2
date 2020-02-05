@@ -46,6 +46,12 @@ clij2.release(arg5);
 ```
 
 
+
+
+### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [crossCorrelationPIV.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/crossCorrelationPIV.py)  
+
+
 [Back to CLIJ documentation](https://clij.github.io/)
 
 [Imprint](https://clij.github.io/imprint)

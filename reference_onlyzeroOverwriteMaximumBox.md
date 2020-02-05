@@ -1,11 +1,11 @@
 ## onlyzeroOverwriteMaximumBox
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
-null
+TODO
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_onlyzeroOverwriteMaximumBox(null);
+Ext.CLIJx_onlyzeroOverwriteMaximumBox(Image input, Image destination);
 ```
 
 

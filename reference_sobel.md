@@ -1,7 +1,7 @@
 ## sobel
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
-By Ruth Whelan-Jeans
+By Ruth Whelan-Jeans, Robert Haase
 
 Convolve the image with the Sobel kernel.
 

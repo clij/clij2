@@ -1,5 +1,5 @@
 ## medianZProjection
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the median projection of an image stack along Z.
 

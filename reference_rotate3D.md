@@ -1,5 +1,5 @@
 ## rotate3D
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Rotates an image stack in 3D. All angles are entered in degrees. If the image is not rotated around 
 the center, it is rotated around the coordinate origin.

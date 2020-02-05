@@ -17,22 +17,19 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-int arg2 = 10;
-int arg3 = 20;
-int arg4 = 30;
-int arg5 = 40;
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-ClearCLBuffer resultReadRawImageFromDisc = clij2.readRawImageFromDisc(clij, arg1, arg2, arg3, arg4, arg5);
+clij2.readRawImageFromDisc(clij, arg1, arg2);
 ```
 
 ```
 //show result
-System.out.println(resultReadRawImageFromDisc);
 
 // cleanup memory on GPU
+clij2.release(arg1);
 ```
 
 

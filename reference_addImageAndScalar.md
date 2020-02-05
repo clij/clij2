@@ -42,6 +42,7 @@ clij2.release(arg2);
 
 ### Example scripts
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [absolute.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/absolute.ijm)  
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [rgb_invert_black_white.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/rgb_invert_black_white.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

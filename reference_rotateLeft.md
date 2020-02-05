@@ -1,5 +1,5 @@
 ## rotateLeft
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Rotates a given input image by 90 degrees counter-clockwise. For that, X and Y axis of an image stack
 are flipped. This operation is similar to ImageJs 'Reslice [/]' method but offers less flexibility 
@@ -35,12 +35,6 @@ clij2.rotateLeft(clij, arg1, arg2);
 clij2.release(arg1);
 clij2.release(arg2);
 ```
-
-
-
-
-### Example scripts
-<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [rotate.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/rotate.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

@@ -1,11 +1,11 @@
 ## setNonZeroPixelsToPixelIndex
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
-null
+Sets all pixels in an image which are not zero to the index of the pixel. This can be used for Connected Components Analysis.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_setNonZeroPixelsToPixelIndex(null);
+Ext.CLIJx_setNonZeroPixelsToPixelIndex(Image source, Image destination);
 ```
 
 

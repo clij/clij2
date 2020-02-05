@@ -1,5 +1,5 @@
 ## bottomHatBox
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Apply a bottom-hat filter for background subtraction to the input image.
 

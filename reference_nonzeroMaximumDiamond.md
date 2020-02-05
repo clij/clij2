@@ -1,7 +1,7 @@
 ## nonzeroMaximumDiamond
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
-Apply a maximum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
+Apply a maximum filter (diamond shape) to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
 
 ### Usage in ImageJ macro
 ```
@@ -24,11 +24,12 @@ ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
 
 ```
 // Execute operation on GPU
-clij2.nonzeroMaximumDiamond(clij, arg1, arg2, arg3);
+ClearCLKernel resultNonzeroMaximumDiamond = clij2.nonzeroMaximumDiamond(clij, arg1, arg2, arg3, arg4);
 ```
 
 ```
 //show result
+System.out.println(resultNonzeroMaximumDiamond);
 
 // cleanup memory on GPU
 clij2.release(arg1);

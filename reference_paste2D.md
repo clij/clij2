@@ -1,5 +1,5 @@
 ## paste2D
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Pastes an image into another image at a given position.
 
@@ -40,6 +40,7 @@ clij2.release(arg2);
 
 
 ### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [paste_images.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/paste_images.ijm)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [allocateBig2DImages.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/allocateBig2DImages.ijm)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [make_super_blobs.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/make_super_blobs.ijm)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [paste_images.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/paste_images.ijm)  

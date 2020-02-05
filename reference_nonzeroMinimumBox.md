@@ -1,11 +1,11 @@
 ## nonzeroMinimumBox
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
-null
+Apply a minimum filter (box shape) to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_nonzeroMinimumBox(null);
+Ext.CLIJx_nonzeroMinimumBox(Image input, Image destination);
 ```
 
 

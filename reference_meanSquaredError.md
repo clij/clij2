@@ -1,5 +1,5 @@
 ## meanSquaredError
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the mean squared error (MSE) between two images. The MSE will be stored in a new row of ImageJs
 Results table in the column 'MSE'.

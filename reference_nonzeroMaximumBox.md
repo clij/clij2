@@ -1,7 +1,7 @@
 ## nonzeroMaximumBox
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
-Apply a maximum-sphere filter to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
+Apply a maximum filter (box shape) to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.
 
 ### Usage in ImageJ macro
 ```
