@@ -41,7 +41,7 @@
 #define SAMPLER_ADDRESS CLK_ADDRESS_CLAMP
 #endif
 
-__kernel void affine_2D(
+__kernel void affine_transform_2d(
     IMAGE_input_TYPE input,
     IMAGE_output_TYPE output,
     IMAGE_mat_TYPE mat)
