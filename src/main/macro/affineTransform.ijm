@@ -18,10 +18,10 @@ rename("original");
 
 // init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJ_push("original");
+Ext.CLIJ2_push("original");
 
 // cleanup imagej
 run("Close All");
@@ -32,8 +32,8 @@ transform = transform + " scaleX=2"; // relative zoom factor
 transform = transform + " translateY=25"; // pixels
 transform = transform + " -center";
 
-Ext.CLIJx_affineTransform2D("original", "target", transform);
+Ext.CLIJ2_affineTransform2D("original", "target", transform);
 
 // show result
-Ext.CLIJ_pull("target");
+Ext.CLIJ2_pull("target");
 run("Invert LUT");

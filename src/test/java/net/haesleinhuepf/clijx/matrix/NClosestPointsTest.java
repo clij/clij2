@@ -30,17 +30,17 @@ public class NClosestPointsTest {
 
         ClearCLBuffer distanceMatrix = clijx.create(new long[]{clPointsA.getWidth(), clPointsB.getWidth()}, NativeTypeEnum.Float);
 
-        clijx.op.generateDistanceMatrix(clPointsA, clPointsB, distanceMatrix);
+        clijx.generateDistanceMatrix(clPointsA, clPointsB, distanceMatrix);
 
         new ImageJ();
         clijx.show(distanceMatrix, "dist");
 
         int n = 3;
         ClearCLBuffer nClosestPointIndices = clijx.create(new long[]{clPointsA.getWidth(), n}, NativeTypeEnum.Float);
-        clijx.op.nClosestPoints(distanceMatrix, nClosestPointIndices);
+        clijx.nClosestPoints(distanceMatrix, nClosestPointIndices);
 
         clijx.show(nClosestPointIndices, "closestPoints");
-        new WaitForUserDialog("closestPoints").show();
+        //new WaitForUserDialog("closestPoints").show();
 
 
     }

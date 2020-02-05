@@ -24,21 +24,21 @@ singleLabelMask = "singleLabelMask";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJx_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // create a mask using a fixed threshold
-Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
+Ext.CLIJx_automaticThreshold(input, mask, "Otsu");
 
 Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
 
 // determine how many objects were found
-Ext.CLIJ_maximumOfAllPixels(labelmap);
+Ext.CLIJx_maximumOfAllPixels(labelmap);
 numberOfObjects = getResult("Max", nResults() - 1);
 
 // go through all objects
@@ -48,7 +48,7 @@ for (i = 0; i < numberOfObjects; i++) {
 
 	// all pixels in a binary image are 1, 
 	// thus the sum can be used to count them:
-	Ext.CLIJ_sumOfAllPixels(singleLabelMask);
+	Ext.CLIJx_sumOfAllPixels(singleLabelMask);
 	num_of_pixels = getResult("Sum", nResults() - 1);
 
 	// print out object number and size
@@ -56,7 +56,7 @@ for (i = 0; i < numberOfObjects; i++) {
 }
 
 // show resulting label map
-Ext.CLIJ_pull(labelmap);
+Ext.CLIJx_pull(labelmap);
 
 
 

@@ -10,7 +10,7 @@
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 // push a vector and a matrix to the GPU
 A = newArray(1, 2, 3);
@@ -23,7 +23,7 @@ Ext.CLIJx_multiplyMatrix("A", "B", "C");
 run("Clear Results");
 Ext.CLIJx_image2DToResultsTable("C");
 
-Ext.CLIJ_release("C");
+Ext.CLIJx_release("C");
 // matrix multiplication
 Ext.CLIJx_multiplyMatrix("B", "A", "C");
 

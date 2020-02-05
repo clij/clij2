@@ -18,22 +18,22 @@ newImage("background", "16-bit ramp", width, height, slices);
 
 // init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJ_push("original");
-Ext.CLIJ_push("background");
+Ext.CLIJ2_push("original");
+Ext.CLIJ2_push("background");
 
 
 // cleanup imagej
 run("Close All");
 
 // create output image with 32 bits
-Ext.CLIJ_create2D("originalWithBackground", width, height, 32);
+Ext.CLIJ2_create2D("originalWithBackground", width, height, 32);
 
 // add images
-Ext.CLIJx_addImagesWeighted("original", "background", "originalWithBackground", 1, 0.01);
+Ext.CLIJ2_addImagesWeighted("original", "background", "originalWithBackground", 1, 0.01);
 
 // show result
-Ext.CLIJ_pull("originalWithBackground");
+Ext.CLIJ2_pull("originalWithBackground");
 run("Invert LUT");

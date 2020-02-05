@@ -1,7 +1,5 @@
 package net.haesleinhuepf.clijx.codegenerator;
 
-import net.haesleinhuepf.clij.macro.documentation.DocumentationUtilities;
-
 import java.io.IOException;
 
 /**

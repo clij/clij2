@@ -34,9 +34,9 @@ public class GreaterTest {
         ClearCLBuffer clTest = clijx.create(clA);
         ClearCLBuffer clC = clijx.push(c);
 
-        clijx.op.greater(clA, clB, clTest);
+        clijx.greater(clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clijx.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(clijx.matrixEqual(clTest, clC, 0f));
 
         clA.close();
         clB.close();

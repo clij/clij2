@@ -4,6 +4,7 @@ import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.test.TestUtilities;
 import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.plugins.GaussJordan;
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgs;
 import net.imglib2.type.numeric.real.FloatType;
@@ -43,7 +44,7 @@ public class GaussJordanTest {
         ClearCLBuffer clC = clijx.push(c);
         GaussJordan.gaussJordan(clij, clA, clB, clTest);
         TestUtilities.printBuffer(CLIJ.getInstance(), clTest);
-        assertTrue(clijx.op.matrixEqual(clTest, clC, 0f));
+        assertTrue(clijx.matrixEqual(clTest, clC, 0f));
         clC.close();
     }
 

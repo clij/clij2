@@ -1,5 +1,5 @@
 ## smaller
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines if two images A and B smaller pixel wise.
 
@@ -14,30 +14,30 @@ Ext.CLIJx_smaller(Image source1, Image source2, Image destination);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source1 = clijx.push(source1ImagePlus);
-ClearCLBuffer source2 = clijx.push(source2ImagePlus);
+ClearCLBuffer source1 = clij2.push(source1ImagePlus);
+ClearCLBuffer source2 = clij2.push(source2ImagePlus);
 destination = clij.create(source1);
 ```
 
 ```
 // Execute operation on GPU
-clijx.smaller(clij, source1, source2, destination);
+clij2.smaller(clij, source1, source2, destination);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
+destinationImagePlus = clij2.pull(destination);
 destinationImagePlus.show();
 
 // cleanup memory on GPU
-source1.close();
-source2.close();
-destination.close();
+clij2.release(source1);
+clij2.release(source2);
+clij2.release(destination);
 ```
 
 

@@ -1,5 +1,5 @@
 ## multiplyMatrix
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Multiplies two matrices with each other.
 
@@ -12,30 +12,30 @@ Ext.CLIJx_multiplyMatrix(Image matrix1, Image matrix2, Image matrix_destination)
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer matrix1 = clijx.push(matrix1ImagePlus);
-ClearCLBuffer matrix2 = clijx.push(matrix2ImagePlus);
+ClearCLBuffer matrix1 = clij2.push(matrix1ImagePlus);
+ClearCLBuffer matrix2 = clij2.push(matrix2ImagePlus);
 matrix_destination = clij.create(matrix1);
 ```
 
 ```
 // Execute operation on GPU
-clijx.multiplyMatrix(clij, matrix1, matrix2, matrix_destination);
+clij2.multiplyMatrix(clij, matrix1, matrix2, matrix_destination);
 ```
 
 ```
 //show result
-matrix_destinationImagePlus = clij.pull(matrix_destination);
+matrix_destinationImagePlus = clij2.pull(matrix_destination);
 matrix_destinationImagePlus.show();
 
 // cleanup memory on GPU
-matrix1.close();
-matrix2.close();
-matrix_destination.close();
+clij2.release(matrix1);
+clij2.release(matrix2);
+clij2.release(matrix_destination);
 ```
 
 

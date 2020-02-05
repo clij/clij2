@@ -1,5 +1,5 @@
 ## sorensenDiceCoefficient
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the overlap of two binary images using the Sorensen-Dice coefficent.
 A value of 0 suggests no overlap, 1 means perfect overlap.
@@ -16,18 +16,18 @@ Ext.CLIJx_sorensenDiceCoefficient(Image source1, Image source2);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source1 = clijx.push(source1ImagePlus);
-ClearCLBuffer source2 = clijx.push(source2ImagePlus);
+ClearCLBuffer source1 = clij2.push(source1ImagePlus);
+ClearCLBuffer source2 = clij2.push(source2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double resultSorensenDiceCoefficient = clijx.sorensenDiceCoefficient(clij, source1, source2);
+double resultSorensenDiceCoefficient = clij2.sorensenDiceCoefficient(clij, source1, source2);
 ```
 
 ```
@@ -35,8 +35,8 @@ double resultSorensenDiceCoefficient = clijx.sorensenDiceCoefficient(clij, sourc
 System.out.println(resultSorensenDiceCoefficient);
 
 // cleanup memory on GPU
-source1.close();
-source2.close();
+clij2.release(source1);
+clij2.release(source2);
 ```
 
 

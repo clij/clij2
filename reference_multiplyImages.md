@@ -1,5 +1,5 @@
 ## multiplyImages
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Multiplies all pairs of pixel values x and y from two image X and Y.
 
@@ -7,37 +7,35 @@ Multiplies all pairs of pixel values x and y from two image X and Y.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_multiplyImages(Image factor1, Image factor2, Image destination);
+Ext.CLIJx_multiplyImages(Image factor1, Image factor2, Image destination);
 ```
 
 
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer factor1 = clijx.push(factor1ImagePlus);
-ClearCLBuffer factor2 = clijx.push(factor2ImagePlus);
-destination = clij.create(factor1);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.multiplyImages(clij, factor1, factor2, destination);
+clij2.multiplyImages(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-factor1.close();
-factor2.close();
-destination.close();
+clij2.release(arg1);
+clij2.release(arg2);
+clij2.release(arg3);
 ```
 
 

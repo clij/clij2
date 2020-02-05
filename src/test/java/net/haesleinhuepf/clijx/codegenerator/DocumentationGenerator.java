@@ -5,9 +5,10 @@ import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPluginService;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.utilities.HasAuthor;
-import net.haesleinhuepf.clijx.utilities.HasLicense;
+import net.haesleinhuepf.clij2.utilities.HasAuthor;
+import net.haesleinhuepf.clij2.utilities.HasLicense;
 import org.scijava.Context;
 
 import java.io.*;
@@ -37,100 +38,105 @@ public class DocumentationGenerator {
         String license;
     }
 
+    private static boolean isCLIJ2;
+    private static CLIJMacroPluginService service;
+
     public static void main(String ... args) throws IOException {
 
-        CLIJMacroPluginService service = new Context(CLIJMacroPluginService.class).getService(CLIJMacroPluginService.class);
+        service = new Context(CLIJMacroPluginService.class).getService(CLIJMacroPluginService.class);
+        boolean[] booleans = new boolean[]{false, true};
 
-        HashMap<String, DocumentationItem> methodMap = new HashMap<String, DocumentationItem>();
+        for (int b = 0; b < booleans.length; b++) {
+            isCLIJ2 = booleans[b];
+            HashMap<String, DocumentationItem> methodMap = new HashMap<String, DocumentationItem>();
 
-        String processedNames = ";";
+            String processedNames = ";";
 
-        int methodCount = 0;
-        for(Class klass : CLIJ2Plugins.classes)
-        {
-            for (Method method : klass.getMethods()) {
-                if (Modifier.isStatic(method.getModifiers()) &&
-                        Modifier.isPublic(method.getModifiers()) &&
-                        method.getParameterCount() > 0 &&
-                        (method.getParameters()[0].getType() == CLIJ.class ||
-                         method.getParameters()[0].getType() == CLIJx.class) &&
-                        OpGenerator.blockListOk(klass, method) &&
-                        !processedNames.contains(";" + method.getName() + ";")
-                ) {
-                    String methodName = method.getName();
-                    String returnType = typeToString(method.getReturnType());
-                    String parametersHeader = "";
-                    String parametersCall = "";
+            int methodCount = 0;
+            for (Class klass : CLIJxPlugins.classes) {
+                for (Method method : klass.getMethods()) {
+                    if (Modifier.isStatic(method.getModifiers()) &&
+                            Modifier.isPublic(method.getModifiers()) &&
+                            method.getParameterCount() > 0 &&
+                            (method.getParameters()[0].getType() == CLIJ.class ||
+                                    method.getParameters()[0].getType() == CLIJ2.class||
+                                    method.getParameters()[0].getType() == CLIJx.class) &&
+                            OpGenerator.blockListOk(klass, method) &&
+                            !processedNames.contains(";" + method.getName() + ";")
+                    ) {
+                        String methodName = method.getName();
+                        String returnType = typeToString(method.getReturnType());
+                        String parametersHeader = "";
+                        String parametersCall = "";
 
-                    for (Parameter parameter : method.getParameters()) {
-                        if (parametersCall.length() == 0) { // first parameter
-                            parametersCall = "clij";
-                            continue;
-                        }
-
-                        if (parametersHeader.length() > 0) {
-                            parametersHeader = parametersHeader + ", ";
-                        }
-                        parametersHeader = parametersHeader + parameter.getType().getSimpleName() + " " + parameter.getName();
-                        parametersCall = parametersCall + ", " + parameter.getName();
-                    }
-
-                    String[] variableNames = guessParameterNames(service, methodName, parametersHeader.split(","));
-                    if (variableNames.length > 0) {
-                        for (int i = 0; i < variableNames.length; i++) {
-                            parametersCall = parametersCall.replace("arg" + (i + 1), variableNames[i]);
-                            parametersHeader = parametersHeader.replace("arg" + (i + 1), variableNames[i]);
-                        }
-                    }
-
-                    if (!parametersHeader.contains("ClearCLImage ")) { // we document only  buffer methods for now
-                        CLIJMacroPlugin plugin = findPlugin(service, methodName);
-
-                        DocumentationItem item = new DocumentationItem();
-
-                        if (plugin != null) {
-                            item.parametersMacro = plugin.getParameterHelpText();
-                            if (plugin instanceof OffersDocumentation) {
-                                item.description = ((OffersDocumentation) plugin).getDescription();
-                                item.description = item.description.replace("deprecated", "<b>deprecated</b>");
+                        for (Parameter parameter : method.getParameters()) {
+                            if (parametersCall.length() == 0) { // first parameter
+                                parametersCall = "clij";
+                                continue;
                             }
-                            if (plugin instanceof HasAuthor) {
-                                item.author = ((HasAuthor) plugin).getAuthorName();
+
+                            if (parametersHeader.length() > 0) {
+                                parametersHeader = parametersHeader + ", ";
                             }
-                            if (plugin instanceof HasLicense) {
-                                item.license = ((HasLicense) plugin).getLicense();
+                            parametersHeader = parametersHeader + parameter.getType().getSimpleName() + " " + parameter.getName();
+                            parametersCall = parametersCall + ", " + parameter.getName();
+                        }
+
+                        String[] variableNames = guessParameterNames(service, methodName, parametersHeader.split(","));
+                        if (variableNames.length > 0) {
+                            for (int i = 0; i < variableNames.length; i++) {
+                                parametersCall = parametersCall.replace("arg" + (i + 1), variableNames[i]);
+                                parametersHeader = parametersHeader.replace("arg" + (i + 1), variableNames[i]);
                             }
                         }
 
-                        //System.out.println(documentation);
+                        if (!parametersHeader.contains("ClearCLImage ")) { // we document only  buffer methods for now
+                            CLIJMacroPlugin plugin = findPlugin(service, methodName);
 
-                        item.klass = klass;
-                        item.methodName = methodName;
-                        item.parametersJava = parametersHeader;
-                        item.parametersHeader = parametersHeader;
-                        item.parametersCall = parametersCall;
-                        item.returnType = returnType;
+                            DocumentationItem item = new DocumentationItem();
 
-                        methodMap.put(methodName + "_" + methodCount, item);
+                            if (plugin != null) {
+                                item.parametersMacro = plugin.getParameterHelpText();
+                                if (plugin instanceof OffersDocumentation) {
+                                    item.description = ((OffersDocumentation) plugin).getDescription();
+                                    item.description = item.description.replace("deprecated", "<b>deprecated</b>");
+                                }
+                                if (plugin instanceof HasAuthor) {
+                                    item.author = ((HasAuthor) plugin).getAuthorName();
+                                }
+                                if (plugin instanceof HasLicense) {
+                                    item.license = ((HasLicense) plugin).getLicense();
+                                }
+                            }
 
-                        methodCount++;
-                        processedNames = processedNames + method.getName() + ";";
+                            //System.out.println(documentation);
+
+                            item.klass = klass;
+                            item.methodName = methodName;
+                            item.parametersJava = parametersHeader;
+                            item.parametersHeader = parametersHeader;
+                            item.parametersCall = parametersCall;
+                            item.returnType = returnType;
+
+                            methodMap.put(methodName + "_" + methodCount, item);
+
+                            methodCount++;
+                            processedNames = processedNames + method.getName() + ";";
+                        }
                     }
                 }
             }
+
+            ArrayList<String> names = new ArrayList<String>();
+            names.addAll(methodMap.keySet());
+            Collections.sort(names);
+
+
+            // auto-completion list
+            buildAutoCompletion(names, methodMap);
+            buildReference(names, methodMap);
+            buildIndiviualOperationReferences(names, methodMap);
         }
-
-        ArrayList<String> names = new ArrayList<String>();
-        names.addAll(methodMap.keySet());
-        Collections.sort(names);
-
-
-
-
-        // auto-completion list
-        buildAutoCompletion(names, methodMap);
-        buildReference(names, methodMap);
-        buildIndiviualOperationReferences(names, methodMap);
     }
 
     private static void buildIndiviualOperationReferences(ArrayList<String> names, HashMap<String, DocumentationItem> methodMap) throws IOException {
@@ -141,7 +147,16 @@ public class DocumentationGenerator {
             builder.append("## " + item.methodName + "\n");
             if (item.klass == Kernels.class) {
                 builder.append("![Image](images/mini_clij1_logo.png)");
-            } else {
+            }
+            if (item.klass.getPackage().toString().contains("clij2") || item.klass.getPackage().toString().contains("clijx")) {
+                // TODO: Check if it already existed in CLIJ1
+                if (service.getCLIJMacroPlugin("CLIJ_" + item.methodName) != null) {
+                    builder.append("![Image](images/mini_clij1_logo.png)");
+                }
+                builder.append("![Image](images/mini_clij2_logo.png)");
+                builder.append("![Image](images/mini_clijx_logo.png)");
+            }
+            if (item.klass.getPackage().toString().contains("clijx")) {
                 builder.append("![Image](images/mini_clijx_logo.png)");
             }
             builder.append("\n\n");
@@ -163,12 +178,13 @@ public class DocumentationGenerator {
 
             String linkToExamples =
                 searchForExampleScripts("CLIJx_" + item.methodName, "src/main/macro/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/", "macro") +
-                searchForExampleScripts("CLIJ_" + item.methodName, "src/main/macro/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/", "macro") +
-                searchForExampleScripts("CLIJ_" + item.methodName, "../clij-docs/src/main/macro/", "https://github.com/clij/clij-docs/blob/master/src/main/macro/", "macro") +
+                searchForExampleScripts("CLIJ2_" + item.methodName, "src/main/macro/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/", "macro") +
+                //searchForExampleScripts("CLIJ_" + item.methodName, "src/main/macro/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/", "macro") +
+                //searchForExampleScripts("CLIJ_" + item.methodName, "../clij-docs/src/main/macro/", "https://github.com/clij/clij-docs/blob/master/src/main/macro/", "macro") +
                 searchForExampleScripts("clijx." + item.methodName, "src/main/jython/", "https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/", "jython") +
 
-                searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/groovy/", "https://github.com/clij/clij-docs/blob/master/src/main/groovy/", "groovy") +
-                searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/jython/", "https://github.com/clij/clij-docs/blob/master/src/main/jython/", "jython") +
+                //searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/groovy/", "https://github.com/clij/clij-docs/blob/master/src/main/groovy/", "groovy") +
+                //searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/jython/", "https://github.com/clij/clij-docs/blob/master/src/main/jython/", "jython") +
                 searchForExampleScripts("clijx." + item.methodName, "../clijpy/python/", "https://github.com/clij/clijpy/blob/master/python/", "python") +
                 searchForExampleScripts("clij.op()." + item.methodName, "../clij-docs/src/main/java/net/haesleinhuepf/clij/examples/", "https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/", "java") +
 
@@ -214,10 +230,22 @@ public class DocumentationGenerator {
         StringBuilder code = new StringBuilder();
 
         code.append("// init CLIJ and GPU\n");
-        code.append("import net.haesleinhuepf.clijx.CLIJ;\n");
-        code.append("import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;\n");
-        code.append("CLIJx clijx = CLIJx.getInstance();\n\n");
 
+        String clijObjectName;
+
+        if (isCLIJ2) {
+            code.append("import net.haesleinhuepf.clij2.CLIJ;\n");
+            code.append("import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;\n");
+            code.append("CLIJ2 clij2 = CLIJ2.getInstance();\n\n");
+
+            clijObjectName = "clij2";
+        } else {
+            code.append("import net.haesleinhuepf.clijx.CLIJ;\n");
+            code.append("import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;\n");
+            code.append("CLIJx clijx = CLIJx.getInstance();\n\n");
+
+            clijObjectName = "clijx";
+        }
         code.append("// get input parameters\n");
         String[] parametersArray = parametersWithType.split(",");
         String inputImage = "";
@@ -228,7 +256,7 @@ public class DocumentationGenerator {
                 if (inputImage.length() == 0) {
                     inputImage = parameterName;
                 }
-                code.append("ClearCLBuffer " + parameterName + " = clijx.push(" + parameterName + "ImagePlus);\n");
+                code.append("ClearCLBuffer " + parameterName + " = " + clijObjectName + ".push(" + parameterName + "ImagePlus);\n");
             } else if (isOutputParameter(parameter)) {
                 code.append(createOutputImageCode(methodName, parameterName, inputImage));
             } else if (parameter.startsWith("Float")) {
@@ -257,7 +285,7 @@ public class DocumentationGenerator {
         if (returnType.toLowerCase().compareTo("boolean") != 0) {
             code.append(returnType + " result" + methodName.substring(0,1).toUpperCase() + methodName.substring(1, methodName.length()) + " = ");
         }
-        code.append("clijx." + methodName + "(" + parameters + ");\n");
+        code.append(clijObjectName + "." + methodName + "(" + parameters + ");\n");
         code.append("```\n\n```");
 
         code.append("\n//show result\n");
@@ -269,7 +297,7 @@ public class DocumentationGenerator {
             parameter = parameter.trim();
             String parameterName = parameter.split(" ")[1];
             if (isOutputParameter(parameter)) {
-                code.append(parameterName + "ImagePlus = clij.pull(" + parameterName + ");\n");
+                code.append(parameterName + "ImagePlus = " + clijObjectName + ".pull(" + parameterName + ");\n");
                 code.append(parameterName + "ImagePlus.show();\n");
             }
         }
@@ -279,7 +307,7 @@ public class DocumentationGenerator {
             parameter = parameter.trim();
             String parameterName = parameter.split(" ")[1];
             if (isInputParameter(parameter) || isOutputParameter(parameter)) {
-                code.append(parameterName + ".close();\n");
+                code.append(clijObjectName + ".release(" + parameterName + ");\n");
             }
         }
 
@@ -288,10 +316,13 @@ public class DocumentationGenerator {
 
     private static void buildReference(ArrayList<String> names, HashMap<String, DocumentationItem> methodMap) throws IOException {
         StringBuilder builder = new StringBuilder();
-        builder.append("# CLIJx reference\n");
+        builder.append("# CLIJ reference\n");
         builder.append("This reference contains all methods currently available in CLIJx.\n\n");
         builder.append("__Please note:__ CLIJx is under heavy construction. This list may change at any point.");
-        builder.append("Methods marked with ' were available in CLIJ1.\n\n");
+        builder.append("\n\n");
+        builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"18\" height=\"18\"/> Method is available in CLIJ (stable release)\n");
+        builder.append("<img src=\"images/mini_clij2_logo.png\" width=\"18\" height=\"18\"/> Method is available in CLIJ2 (upcoming beta release)\n");
+        builder.append("<img src=\"images/mini_clijx_logo.png\" width=\"18\" height=\"18\"/> Method is available in CLIJx (experimental version)\n");
         builder.append("\n\n##ALPHABET##\n\n");
 
         String firstChar = " ";
@@ -305,13 +336,36 @@ public class DocumentationGenerator {
                 listOfChars = listOfChars.replace(" " + firstChar, "<a href=\"#" + firstChar + "\">\\[" + firstChar + "\\]</a>");
             }
             DocumentationItem item = methodMap.get(sortedName);
-            builder.append("* <a href=\"" + HTTP_ROOT + "reference_" + item.methodName + "\">");
+            builder.append(" * ");
+
+            if (item.klass == Kernels.class) {
+                builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"18\" height=\"18\"/>");
+                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+            } else {
+                if (service.getCLIJMacroPlugin("CLIJ_" + item.methodName) != null) {
+                    builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"18\" height=\"18\"/>");
+                } else {
+                    builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                }
+                if (service.getCLIJMacroPlugin("CLIJ2_" + item.methodName) != null) {
+                    builder.append("<img src=\"images/mini_clij2_logo.png\" width=\"18\" height=\"18\"/>");
+                } else {
+                    builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                }
+                if (service.getCLIJMacroPlugin("CLIJx_" + item.methodName) != null) {
+                    builder.append("<img src=\"images/mini_clijx_logo.png\" width=\"18\" height=\"18\"/>");
+                } else {
+                    builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                }
+            }
+
+            builder.append("<a href=\"" + HTTP_ROOT + "reference_" + item.methodName + "\">");
             builder.append(item.methodName);
             if (item.klass == Kernels.class) {
                 builder.append("'");
             }
             builder.append("</a>\n");
-
         }
 
 
@@ -332,7 +386,11 @@ public class DocumentationGenerator {
         builder.append("import java.util.ArrayList;");
 
         builder.append("// this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details\n");
-        builder.append("class CLIJxAutoComplete {\n");
+        if (isCLIJ2) {
+            builder.append("class CLIJ2AutoComplete {\n");
+        } else {
+            builder.append("class CLIJxAutoComplete {\n");
+        }
         builder.append("   \n");
         builder.append("   public static ArrayList<BasicCompletion> getCompletions(final ScriptingAutoCompleteProvider provider) {\n");
 
@@ -343,18 +401,27 @@ public class DocumentationGenerator {
         int methodCount = 0;
         for (String name : names) {
             DocumentationItem item = methodMap.get(name);
+            if (
+                    (isCLIJ2 && item.klass.getPackage().toString().contains(".clij2.")) ||
+                    ((!isCLIJ2) && (item.klass.getPackage().toString().contains(".clijx.") || item.klass.getPackage().toString().contains(".clij2.")))
+            ) {
 
-            String htmlDescription = item.description;
-            if (htmlDescription != null) {
-                htmlDescription = htmlDescription.replace("\n", "<br>");
-                htmlDescription = htmlDescription.replace("\"", "&quot;");
-                htmlDescription = htmlDescription + "<br><br>Parameters:<br>" + item.parametersJava;
+                String htmlDescription = item.description;
+                if (htmlDescription != null) {
+                    htmlDescription = htmlDescription.replace("\n", "<br>");
+                    htmlDescription = htmlDescription.replace("\"", "&quot;");
+                    htmlDescription = htmlDescription + "<br><br>Parameters:<br>" + item.parametersJava;
+                }
+                if (isCLIJ2) {
+                    builder.append("       headline = \"clij2." + item.methodName + "(" + item.parametersJava + ")\";\n");
+                } else {
+                    builder.append("       headline = \"clijx." + item.methodName + "(" + item.parametersJava + ")\";\n");
+                }
+                builder.append("       description = \"<b>" + item.methodName + "</b><br><br>" + htmlDescription + "\";\n");
+                builder.append("       list.add(new BasicCompletion(provider, headline, null, description));\n");
+
+                methodCount++;
             }
-            builder.append("       headline = \"clijx." + item.methodName + "(" + item.parametersJava + ")\";\n");
-            builder.append("       description = \"<b>" + item.methodName + "</b><br><br>" + htmlDescription + "\";\n");
-            builder.append("       list.add(new BasicCompletion(provider, headline, null, description));\n");
-
-            methodCount++;
         }
 
         builder.append("        return list;\n");
@@ -362,8 +429,12 @@ public class DocumentationGenerator {
         builder.append("}\n");
         builder.append("// " + methodCount + " methods generated.\n");
 
-        File outputTarget = new File("src/main/java/net/haesleinhuepf/clijx/jython/CLIJxAutoComplete.java");
-
+        File outputTarget;
+        if (isCLIJ2) {
+            outputTarget = new File("src/main/java/net/haesleinhuepf/clijx/jython/CLIJ2AutoComplete.java");
+        } else {
+            outputTarget = new File("src/main/java/net/haesleinhuepf/clijx/jython/CLIJxAutoComplete.java");
+        }
         try {
             FileWriter writer = new FileWriter(outputTarget);
             writer.write(builder.toString());
@@ -375,6 +446,7 @@ public class DocumentationGenerator {
 
     protected static String searchForExampleScripts(String searchFor, String searchinFolder, String baseLink, String language) {
         StringBuilder result = new StringBuilder();
+        //System.out.println(searchinFolder);
         for (File file : new File(searchinFolder).listFiles()) {
             if (!file.isDirectory()) {
                 String content = readFile(file.getAbsolutePath());

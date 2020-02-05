@@ -1,5 +1,5 @@
 ## erodeSphereSliceBySlice
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
 The erosion takes the von-Neumann-neighborhood (4 pixels in 2D and 6 pixels in 3d) into account.
@@ -9,35 +9,33 @@ This filter is applied slice by slice in 2D.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_erodeSphereSliceBySlice(Image source, Image destination);
+Ext.CLIJx_erodeSphereSliceBySlice(Image source, Image destination);
 ```
 
 
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination = clij.create(source);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.erodeSphereSliceBySlice(clij, source, destination);
+clij2.erodeSphereSliceBySlice(clij, arg1, arg2);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination.close();
+clij2.release(arg1);
+clij2.release(arg2);
 ```
 
 

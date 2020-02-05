@@ -14,12 +14,12 @@ input = getTitle();
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJ2_push(input);
 
-Ext.CLIJx_getSize(input);
+Ext.CLIJ2_getSize(input);
 width = getResult("Width", nResults() - 1);
 height = getResult("Height", nResults() - 1);
 

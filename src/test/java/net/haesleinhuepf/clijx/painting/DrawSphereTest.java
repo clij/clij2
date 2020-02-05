@@ -3,6 +3,7 @@ package net.haesleinhuepf.clijx.painting;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
+import net.haesleinhuepf.clij2.plugins.DrawSphere;
 import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
 

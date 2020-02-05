@@ -1,5 +1,5 @@
 ## transposeXY
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Transpose X and Y axes of an image.
 
@@ -12,28 +12,28 @@ Ext.CLIJx_transposeXY(Image input, Image destination);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer input = clijx.push(inputImagePlus);
+ClearCLBuffer input = clij2.push(inputImagePlus);
 destination = clij.create(input);
 ```
 
 ```
 // Execute operation on GPU
-clijx.transposeXY(clij, input, destination);
+clij2.transposeXY(clij, input, destination);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
+destinationImagePlus = clij2.pull(destination);
 destinationImagePlus.show();
 
 // cleanup memory on GPU
-input.close();
-destination.close();
+clij2.release(input);
+clij2.release(destination);
 ```
 
 

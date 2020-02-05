@@ -1,5 +1,5 @@
 ## resliceRadial
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes a radial projection of an image stack. Starting point for the line is the center in any 
 X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
@@ -13,13 +13,13 @@ Ext.CLIJx_resliceRadial(Image source, Image destination, Number numberOfAngles, 
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 float arg3 = 1.0;
 float arg4 = 2.0;
 float arg5 = 3.0;
@@ -30,15 +30,15 @@ float arg8 = 6.0;
 
 ```
 // Execute operation on GPU
-clijx.resliceRadial(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+clij2.resliceRadial(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-arg1.close();
-arg2.close();
+clij2.release(arg1);
+clij2.release(arg2);
 ```
 
 

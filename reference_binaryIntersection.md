@@ -1,5 +1,5 @@
 ## binaryIntersection
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
 pixels x and y with the binary intersection operator &.
@@ -16,30 +16,30 @@ Ext.CLIJx_binaryIntersection(Image operand1, Image operand2, Image destination);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer operand1 = clijx.push(operand1ImagePlus);
-ClearCLBuffer operand2 = clijx.push(operand2ImagePlus);
+ClearCLBuffer operand1 = clij2.push(operand1ImagePlus);
+ClearCLBuffer operand2 = clij2.push(operand2ImagePlus);
 destination = clij.create(operand1);
 ```
 
 ```
 // Execute operation on GPU
-clijx.binaryIntersection(clij, operand1, operand2, destination);
+clij2.binaryIntersection(clij, operand1, operand2, destination);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
+destinationImagePlus = clij2.pull(destination);
 destinationImagePlus.show();
 
 // cleanup memory on GPU
-operand1.close();
-operand2.close();
-destination.close();
+clij2.release(operand1);
+clij2.release(operand2);
+clij2.release(destination);
 ```
 
 

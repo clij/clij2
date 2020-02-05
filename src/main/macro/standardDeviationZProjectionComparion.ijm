@@ -15,11 +15,11 @@ run("32-bit");
 
 // standard deviation Z-projection on the GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
-Ext.CLIJ_push(getTitle());
-Ext.CLIJx_standardDeviationZProjection(getTitle, "CLIJ_standardDeviationZProjection_destination_t1-head.tif");
-Ext.CLIJ_pull("CLIJ_standardDeviationZProjection_destination_t1-head.tif");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
+Ext.CLIJ2_push(getTitle());
+Ext.CLIJ2_standardDeviationZProjection(getTitle, "CLIJ_standardDeviationZProjection_destination_t1-head.tif");
+Ext.CLIJ2_pull("CLIJ_standardDeviationZProjection_destination_t1-head.tif");
+Ext.CLIJ2_clear();
 
 // standard deviation Z-projection on the CPU
 selectWindow("t1-head.tif");

@@ -1,5 +1,5 @@
 ## set
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Sets all pixel values x of a given image X to a constant value v.
 
@@ -7,32 +7,32 @@ Sets all pixel values x of a given image X to a constant value v.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_set(Image source, Number value);
+Ext.CLIJx_set(Image source, Number value);
 ```
 
 
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
 float arg2 = 1.0;
 ```
 
 ```
 // Execute operation on GPU
-clijx.set(clij, arg1, arg2);
+clij2.set(clij, arg1, arg2);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-arg1.close();
+clij2.release(arg1);
 ```
 
 
@@ -49,8 +49,6 @@ arg1.close();
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [interactiveSphereProjection.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/interactiveSphereProjection.py)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [jaccardIndex.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/jaccardIndex.py)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [multiply_images_test.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/multiply_images_test.py)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [interactiveSpotDetection.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/interactiveSpotDetection.py)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [spotDetectionpy.py](https://github.com/clij/clij-docs/blob/master/src/main/jython/spotDetectionpy.py)  
 <a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [drawBinaryRectangle.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/drawBinaryRectangle.m)  
 <a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [paste.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/paste.m)  
 

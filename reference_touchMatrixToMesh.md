@@ -1,5 +1,5 @@
 ## touchMatrixToMesh
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Takes a pointlist with dimensions n*d with n point coordinates in d dimensions and a touch matrix of size n*n to draw lines from all points to points if the corresponding pixel in the touch matrix is 1.
 
@@ -12,30 +12,30 @@ Ext.CLIJx_touchMatrixToMesh(Image pointlist, Image touch_matrix, Image mesh_dest
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer pointlist = clijx.push(pointlistImagePlus);
-ClearCLBuffer touch_matrix = clijx.push(touch_matrixImagePlus);
+ClearCLBuffer pointlist = clij2.push(pointlistImagePlus);
+ClearCLBuffer touch_matrix = clij2.push(touch_matrixImagePlus);
 mesh_destination = clij.create(pointlist);
 ```
 
 ```
 // Execute operation on GPU
-clijx.touchMatrixToMesh(clij, pointlist, touch_matrix, mesh_destination);
+clij2.touchMatrixToMesh(clij, pointlist, touch_matrix, mesh_destination);
 ```
 
 ```
 //show result
-mesh_destinationImagePlus = clij.pull(mesh_destination);
+mesh_destinationImagePlus = clij2.pull(mesh_destination);
 mesh_destinationImagePlus.show();
 
 // cleanup memory on GPU
-pointlist.close();
-touch_matrix.close();
-mesh_destination.close();
+clij2.release(pointlist);
+clij2.release(touch_matrix);
+clij2.release(mesh_destination);
 ```
 
 

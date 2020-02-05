@@ -1,5 +1,5 @@
 ## meanClosestSpotDistances
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 null
 
@@ -12,19 +12,18 @@ Ext.CLIJx_meanClosestSpotDistances(null);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clijx.push(arg2ImagePlus);
-boolean arg3 = true;
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double[] resultMeanClosestSpotDistances = clijx.meanClosestSpotDistances(clij, arg1, arg2, arg3);
+double resultMeanClosestSpotDistances = clij2.meanClosestSpotDistances(clij, arg1, arg2);
 ```
 
 ```
@@ -32,8 +31,8 @@ double[] resultMeanClosestSpotDistances = clijx.meanClosestSpotDistances(clij, a
 System.out.println(resultMeanClosestSpotDistances);
 
 // cleanup memory on GPU
-arg1.close();
-arg2.close();
+clij2.release(arg1);
+clij2.release(arg2);
 ```
 
 

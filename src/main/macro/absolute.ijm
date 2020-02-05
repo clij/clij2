@@ -17,20 +17,20 @@ newImage(original, "32-bit ramp", width, height, slices);
 
 // init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJ_push(original);
+Ext.CLIJ2_push(original);
 
 // cleanup imagej
 run("Close All");
 
 subtracted = "subtracted";
-Ext.CLIJ_addImageAndScalar(original, subtracted, -0.5);
+Ext.CLIJ2_addImageAndScalar(original, subtracted, -0.5);
 
 absolute = "absolute";
-Ext.CLIJx_absolute(subtracted, absolute);
+Ext.CLIJ2_absolute(subtracted, absolute);
 
 // show result
-Ext.CLIJ_pull(absolute);
+Ext.CLIJ2_pull(absolute);
 

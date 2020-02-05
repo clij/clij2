@@ -24,23 +24,23 @@ singleLabelMask = "singleLabelMask";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJ2_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // create a mask using a fixed threshold
-Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
+Ext.CLIJ2_automaticThreshold(input, mask, "Otsu");
 
-Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
+Ext.CLIJ2_connectedComponentsLabeling(mask, labelmap);
 
-Ext.CLIJx_statisticsOfLabelledPixels(input, labelmap);
+Ext.CLIJ2_statisticsOfLabelledPixels(input, labelmap);
 
 // show result
-Ext.CLIJ_pull(mask);
+Ext.CLIJ2_pull(labelmap);
 run("glasbey on dark");
 
 

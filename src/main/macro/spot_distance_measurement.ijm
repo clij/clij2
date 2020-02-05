@@ -22,47 +22,52 @@ labelmap = "labelmap";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJ2_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 blurred = "blurred";
 
-Ext.CLIJ_blur2D(input, blurred, 5, 5);
+Ext.CLIJ2_gaussianBlur2D(input, blurred, 5, 5);
 
 detected = "detected";
-Ext.CLIJ_detectMaximaBox(blurred, detected, 3);
+Ext.CLIJ2_detectMaximaBox(blurred, detected, 3);
+Ext.CLIJ2_pull(detected);
+
 
 shiftDetected = "shiftDetected";
-Ext.CLIJ_translate2D(detected, shiftDetected, 1, 0);
-Ext.CLIJ_pull(shiftDetected);
+Ext.CLIJ2_translate2D(detected, shiftDetected, 1, 0);
+Ext.CLIJ2_pull(shiftDetected);
 
 pointlist1 = "pointlist1";
-Ext.CLIJx_spotsToPointList(detected, pointlist1);
-Ext.CLIJ_pull(pointlist1);
+Ext.CLIJ2_spotsToPointList(detected, pointlist1);
+Ext.CLIJ2_pull(pointlist1);
 
 pointlist2 = "pointlist2";
-Ext.CLIJx_spotsToPointList(shiftDetected, pointlist2);
-Ext.CLIJ_pull(pointlist2);
+Ext.CLIJ2_spotsToPointList(shiftDetected, pointlist2);
+Ext.CLIJ2_pull(pointlist2);
 
 distance_matrix = "distance_matrix";
-Ext.CLIJx_generateDistanceMatrix(pointlist1, pointlist2, distance_matrix);
+Ext.CLIJ2_generateDistanceMatrix(pointlist1, pointlist2, distance_matrix);
 
-Ext.CLIJ_pull(distance_matrix);
+Ext.CLIJ2_pull(distance_matrix);
+
+Ext.CLIJ2_transposeXZ(distance_matrix, "test");
+Ext.CLIJ2_pull("test");
 
 minimum_distances = "minimum_distances";
-Ext.CLIJx_shortestDistances(distance_matrix, minimum_distances);
+Ext.CLIJ2_shortestDistances(distance_matrix, minimum_distances);
 
-Ext.CLIJ_meanOfAllPixels(minimum_distances);
+Ext.CLIJ2_meanOfAllPixels(minimum_distances);
 meanDistance = getResult("Mean", nResults() - 1);
 IJ.log("mean distance: " + meanDistance);
 
 
-Ext.CLIJ_pull(minimum_distances);
+Ext.CLIJ2_pull(minimum_distances);
 
 
 

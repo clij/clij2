@@ -1,5 +1,5 @@
 ## watershed
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 Apply a binary watershed to a binary image and introduces black pixels between objects.
 
@@ -12,28 +12,28 @@ Ext.CLIJx_watershed(Image binary_source, Image destination);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer binary_source = clijx.push(binary_sourceImagePlus);
+ClearCLBuffer binary_source = clij2.push(binary_sourceImagePlus);
 destination = clij.create(binary_source);
 ```
 
 ```
 // Execute operation on GPU
-clijx.watershed(clij, binary_source, destination);
+clij2.watershed(clij, binary_source, destination);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
+destinationImagePlus = clij2.pull(destination);
 destinationImagePlus.show();
 
 // cleanup memory on GPU
-binary_source.close();
-destination.close();
+clij2.release(binary_source);
+clij2.release(destination);
 ```
 
 

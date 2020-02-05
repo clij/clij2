@@ -11,7 +11,7 @@
 
 from ij import IJ;
 from ij.gui import NewImage;
-from net.haesleinhuepf.clij import CLIJ;
+from net.haesleinhuepf.clij2 import CLIJ2;
 from net.haesleinhuepf.clijx import CLIJx;
 
 # load example image
@@ -24,37 +24,30 @@ for x in range(100, 120):
     for y in range(100, 120):
         vfXImp.getProcessor().setf(x, y, 2);
 
-clij = CLIJ.getInstance();
+clij2 = CLIJ2.getInstance();
 clijx = CLIJx.getInstance();
 
-
 # push images to GPU and create memory for vector field
-input = clij.push(imp);
-vfraw = clij.push(vfXImp);
-vf = clij.create(input);
-shifted = clij.create(input);
+input = clij2.push(imp);
+vfraw = clij2.push(vfXImp);
+vf = clij2.create(input);
+shifted = clij2.create(input);
 
 # make a smoothly changing warp
-clij.op().blur(vfraw, vf, 5, 5);
+clij2.blur(vfraw, vf, 5, 5);
 
 # apply vector field
-clij.op().applyVectorfield(input, vf, vf, shifted);
+clij2.applyVectorfield(input, vf, vf, shifted);
 
 # analyse shift
-vfXAnalysed = clij.create(input);
-vfYAnalysed = clij.create(input);
-clijx.op().particleImageVelocimetry2D(input, shifted, vfXAnalysed, vfYAnalysed, 5);
+vfXAnalysed = clij2.create(input);
+vfYAnalysed = clij2.create(input);
+clijx.particleImageVelocimetry2D(input, shifted, vfXAnalysed, vfYAnalysed, 5);
 
 # show analysed vector field
-clij.show(vfXAnalysed, "vfXAnalysed");
-clij.show(vfYAnalysed, "vfYAnalysed");
+clij2.show(vfXAnalysed, "vfXAnalysed");
+clij2.show(vfYAnalysed, "vfYAnalysed");
 
 # clean up 
-input.close();
-vfraw.close();
-vf.close();
-vfXAnalysed.close();
-vfYAnalysed.close();
-
-shifted.close();
+clij2.clear();
 

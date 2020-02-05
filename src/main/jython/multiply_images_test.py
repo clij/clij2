@@ -13,9 +13,7 @@
 #########################################
 
 
-from net.haesleinhuepf.clij.coremem.enums import NativeTypeEnum
-
-from net.haesleinhuepf.clijx import CLIJx;
+from net.haesleinhuepf.clij2 import CLIJ2;
 
 def main ():
 
@@ -24,34 +22,34 @@ def main ():
 	for device_name in cl_devices:
 
 		# Init GPU
-		clijx = CLIJx.getInstance(device_name);
-		clijx.setKeepReferences(True);
-		clijx.clear();
+		clij2 = CLIJ2.getInstance(device_name);
+		clij2.setKeepReferences(True);
+		clij2.clear();
 	
-		types = [NativeTypeEnum.Float, NativeTypeEnum.UnsignedShort, NativeTypeEnum.UnsignedByte];
+		types = [clij2.Float, clij2.UnsignedShort, clij2.UnsignedByte];
 	
 		for aType in types:
-			print("Testing " + clijx.getGPUName() + " OpenCL Version " + str(clijx.getOpenCLVersion()) + " with images of type " + str(aType));
-			input1 = clijx.create([1, 1, 1], aType);
-			input2 = clijx.create([1, 1, 1], aType);
-			output = clijx.create([1, 1, 1], aType);
-			testMultiplyImages(clijx, input1, input2, output, 100, 2);
-			testMultiplyImages(clijx, input1, input2, output, 200, 2);
-			testMultiplyImages(clijx, input1, input2, output, 20000, 2);
-			testMultiplyImages(clijx, input1, input2, output, 40000, 2);
-			clijx.clear();
+			print("Testing " + clij2.getGPUName() + " OpenCL Version " + str(clij2.getOpenCLVersion()) + " with images of type " + str(aType));
+			input1 = clij2.create([1, 1, 1], aType);
+			input2 = clij2.create([1, 1, 1], aType);
+			output = clij2.create([1, 1, 1], aType);
+			testMultiplyImages(clij2, input1, input2, output, 100, 2);
+			testMultiplyImages(clij2, input1, input2, output, 200, 2);
+			testMultiplyImages(clij2, input1, input2, output, 20000, 2);
+			testMultiplyImages(clij2, input1, input2, output, 40000, 2);
+			clij2.clear();
 	
 	
 
 	
 
-def testMultiplyImages(clijx, input1, input2, output, val1, val2):
-	clijx.set(input1, val1);
-	clijx.set(input2, val2);
+def testMultiplyImages(clij2, input1, input2, output, val1, val2):
+	clij2.set(input1, val1);
+	clij2.set(input2, val2);
 	
-	clijx.multiplyImages(input1, input2, output);
+	clij2.multiplyImages(input1, input2, output);
 	
-	maximum = clijx.maximumOfAllPixels(output);
+	maximum = clij2.maximumOfAllPixels(output);
 
 	print(str(val1) + " * " + str(val2) + " = " + str(maximum));
 

@@ -27,24 +27,24 @@ binaryImage = "binaryImage";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJ2_push(input);
 
 // create a mask using a fixed threshold
-Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
+Ext.CLIJ2_automaticThreshold(input, mask, "Otsu");
 
-Ext.CLIJx_connectedComponentsLabeling(mask, labelmap);
+Ext.CLIJ2_connectedComponentsLabeling(mask, labelmap);
 
-Ext.CLIJ_maximumOfAllPixels(labelmap);
+Ext.CLIJ2_maximumOfAllPixels(labelmap);
 number_of_objects = getResult("Max", nResults() - 1);
 
 for (i = 0; i < number_of_objects; i++) {
 	// cut label map into individual masks
-	Ext.CLIJx_labelToMask(labelmap, binaryImage, i + 1); // 0 is background, 1 is the first label
+	Ext.CLIJ2_labelToMask(labelmap, binaryImage, i + 1); // 0 is background, 1 is the first label
 	// put bounding boxes in the ROI manager
-	Ext.CLIJx_boundingBox(binaryImage);
+	Ext.CLIJ2_boundingBox(binaryImage);
 	x = getResult("BoundingBoxX", nResults() - 1);
 	y = getResult("BoundingBoxY", nResults() - 1);
 	w = getResult("BoundingBoxWidth", nResults() - 1);

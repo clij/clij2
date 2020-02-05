@@ -1,52 +1,42 @@
-## applyVectorField2D
-![Image](images/mini_clijx_logo.png)
+## applyVectorfield2D
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_applyVectorField2D(Image source, Image vectorX, Image vectorY, Image destination);
+Ext.CLIJx_applyVectorfield2D(Image source, Image vectorX, Image vectorY, Image destination);
 ```
 
 
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-ClearCLBuffer vectorX = clijx.push(vectorXImagePlus);
-ClearCLBuffer vectorY = clijx.push(vectorYImagePlus);
-destination = clij.create(source);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
+ClearCLBuffer arg4 = clij2.push(arg4ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.applyVectorField2D(clij, source, vectorX, vectorY, destination);
+clij2.applyVectorfield2D(clij, arg1, arg2, arg3, arg4);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-vectorX.close();
-vectorY.close();
-destination.close();
+clij2.release(arg1);
+clij2.release(arg2);
+clij2.release(arg3);
+clij2.release(arg4);
 ```
-
-
-
-
-### Example scripts
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [applyVectorField.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/applyVectorField.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [warpCat.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/warpCat.ijm)  
-<a href="https://github.com/clij/clij-docs/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [warpCat_RGB.ijm](https://github.com/clij/clij-docs/blob/master/src/main/macro/warpCat_RGB.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

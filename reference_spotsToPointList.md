@@ -1,7 +1,7 @@
 ## spotsToPointList
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
-Transforms a spots image as resulting from maximum/minimum detection in an image where every column cotains d 
+Transforms a spots image as resulting from maximum/minimum detection in an image where every column contains d 
 pixels (with d = dimensionality of the original image) with the coordinates of the maxima/minima.
 
 ### Usage in ImageJ macro
@@ -13,28 +13,28 @@ Ext.CLIJx_spotsToPointList(Image input_spots, Image destination_pointlist);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer input_spots = clijx.push(input_spotsImagePlus);
+ClearCLBuffer input_spots = clij2.push(input_spotsImagePlus);
 destination_pointlist = clij.create(input_spots);
 ```
 
 ```
 // Execute operation on GPU
-clijx.spotsToPointList(clij, input_spots, destination_pointlist);
+clij2.spotsToPointList(clij, input_spots, destination_pointlist);
 ```
 
 ```
 //show result
-destination_pointlistImagePlus = clij.pull(destination_pointlist);
+destination_pointlistImagePlus = clij2.pull(destination_pointlist);
 destination_pointlistImagePlus.show();
 
 // cleanup memory on GPU
-input_spots.close();
-destination_pointlist.close();
+clij2.release(input_spots);
+clij2.release(destination_pointlist);
 ```
 
 

@@ -19,19 +19,19 @@ mask2 = "Mask2";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJx_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // create a mask using a fixed threshold
-Ext.CLIJ_automaticThreshold(input, mask1, "Otsu");
+Ext.CLIJx_automaticThreshold(input, mask1, "Otsu");
 
 // create another mask to compare to 
-Ext.CLIJ_automaticThreshold(input, mask2, "MinError");
+Ext.CLIJx_automaticThreshold(input, mask2, "MinError");
 
 // measure overlap
 Ext.CLIJx_jaccardIndex(mask1, mask2);
@@ -40,7 +40,7 @@ Ext.CLIJx_sorensenDiceCoefficient(mask1, mask2);
 diceIndex = getResult("Sorensen_Dice_coefficient", nResults() - 1);
 
 // cleanup GPU memory
-Ext.CLIJ_clear();
+Ext.CLIJx_clear();
 
 // output result
 IJ.log("Overlap (Jaccard): " + (jaccardIndex*100) + "%");

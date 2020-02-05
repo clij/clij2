@@ -1,5 +1,5 @@
 ## pullAsROI
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Pulls a binary image from the GPU memory and puts it on the currently active ImageJ window.
 
@@ -12,17 +12,17 @@ Ext.CLIJx_pullAsROI(Image binary_input);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer binary_input = clijx.push(binary_inputImagePlus);
+ClearCLBuffer binary_input = clij2.push(binary_inputImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-Roi resultPullAsROI = clijx.pullAsROI(clij, binary_input);
+Roi resultPullAsROI = clij2.pullAsROI(clij, binary_input);
 ```
 
 ```
@@ -30,7 +30,7 @@ Roi resultPullAsROI = clijx.pullAsROI(clij, binary_input);
 System.out.println(resultPullAsROI);
 
 // cleanup memory on GPU
-binary_input.close();
+clij2.release(binary_input);
 ```
 
 

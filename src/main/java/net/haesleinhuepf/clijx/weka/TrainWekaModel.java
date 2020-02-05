@@ -1,20 +1,14 @@
 package net.haesleinhuepf.clijx.weka;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
-import net.haesleinhuepf.clijx.utilities.HasAuthor;
-import net.haesleinhuepf.clijx.utilities.HasLicense;
+import net.haesleinhuepf.clij2.utilities.HasAuthor;
+import net.haesleinhuepf.clij2.utilities.HasLicense;
 import org.scijava.plugin.Plugin;
-
-import java.util.HashMap;
-
-import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
-import static net.haesleinhuepf.clijx.utilities.CLIJUtilities.checkDimensions;
 
 /**
  * Author: @haesleinhuepf

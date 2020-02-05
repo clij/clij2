@@ -1,5 +1,5 @@
 ## varianceOfAllPixels
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs
 Results table in the column 'Variance'.
@@ -13,18 +13,17 @@ Ext.CLIJx_varianceOfAllPixels(Image source);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clijx.push(arg1ImagePlus);
-float arg2 = 1.0;
+ClearCLBuffer source = clij2.push(sourceImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double resultVarianceOfAllPixels = clijx.varianceOfAllPixels(clij, arg1, arg2);
+double resultVarianceOfAllPixels = clij2.varianceOfAllPixels(clij, source);
 ```
 
 ```
@@ -32,7 +31,7 @@ double resultVarianceOfAllPixels = clijx.varianceOfAllPixels(clij, arg1, arg2);
 System.out.println(resultVarianceOfAllPixels);
 
 // cleanup memory on GPU
-arg1.close();
+clij2.release(source);
 ```
 
 

@@ -1,7 +1,7 @@
 ## sobel
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
-By Ruth Whelan-Jeans
+By Ruth Whelan-Jeans, Robert Haase
 
 Convolve the image with the Sobel kernel.
 
@@ -14,29 +14,35 @@ Ext.CLIJx_sobel(Image source, Image destination);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
+ClearCLBuffer source = clij2.push(sourceImagePlus);
 destination = clij.create(source);
 ```
 
 ```
 // Execute operation on GPU
-clijx.sobel(clij, source, destination);
+clij2.sobel(clij, source, destination);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
+destinationImagePlus = clij2.pull(destination);
 destinationImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination.close();
+clij2.release(source);
+clij2.release(destination);
 ```
+
+
+
+
+### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [weka.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/weka.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

@@ -18,19 +18,19 @@ mask = "mask";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
 
 // push data to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJ2_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // create a mask using a fixed threshold
-Ext.CLIJ_automaticThreshold(input, mask, "Otsu");
+Ext.CLIJ2_automaticThreshold(input, mask, "Otsu");
 
 outline = "outline";
-Ext.CLIJx_binaryEdgeDetection(mask, outline);
+Ext.CLIJ2_binaryEdgeDetection(mask, outline);
 
-Ext.CLIJ_pullBinary(outline);
+Ext.CLIJ2_pullBinary(outline);
 

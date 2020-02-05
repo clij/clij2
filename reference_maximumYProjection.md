@@ -1,5 +1,5 @@
 ## maximumYProjection
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Determines the maximum projection of an image along X.
 
@@ -12,29 +12,33 @@ Ext.CLIJx_maximumYProjection(Image source, Image destination_max);
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination_max = clij.create(source);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.maximumYProjection(clij, source, destination_max);
+clij2.maximumYProjection(clij, arg1, arg2);
 ```
 
 ```
 //show result
-destination_maxImagePlus = clij.pull(destination_max);
-destination_maxImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination_max.close();
+clij2.release(arg1);
+clij2.release(arg2);
 ```
+
+
+
+
+### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [orthogonalMaximumProjections.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/orthogonalMaximumProjections.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

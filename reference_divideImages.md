@@ -1,5 +1,5 @@
 ## divideImages
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Divides two images X and Y by each other pixel wise.
 
@@ -7,37 +7,35 @@ Divides two images X and Y by each other pixel wise.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_divideImages(Image divident, Image divisor, Image destination);
+Ext.CLIJx_divideImages(Image divident, Image divisor, Image destination);
 ```
 
 
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer divident = clijx.push(dividentImagePlus);
-ClearCLBuffer divisor = clijx.push(divisorImagePlus);
-destination = clij.create(divident);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
+ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.divideImages(clij, divident, divisor, destination);
+clij2.divideImages(clij, arg1, arg2, arg3);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-divident.close();
-divisor.close();
-destination.close();
+clij2.release(arg1);
+clij2.release(arg2);
+clij2.release(arg3);
 ```
 
 

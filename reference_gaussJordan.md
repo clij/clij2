@@ -1,5 +1,5 @@
 ## gaussJordan
-![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
 
 By Robert Haase with code from (Shuai Che: sc5nf@cs.virginia.edu
 and Kevin Skadron: skadron@cs.virginia.edu)
@@ -26,30 +26,30 @@ Ext.CLIJx_gaussJordan(Image A_matrix, Image B_result_vector, Image solution_dest
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer A_matrix = clijx.push(A_matrixImagePlus);
-ClearCLBuffer B_result_vector = clijx.push(B_result_vectorImagePlus);
+ClearCLBuffer A_matrix = clij2.push(A_matrixImagePlus);
+ClearCLBuffer B_result_vector = clij2.push(B_result_vectorImagePlus);
 solution_destination = clij.create(A_matrix);
 ```
 
 ```
 // Execute operation on GPU
-clijx.gaussJordan(clij, A_matrix, B_result_vector, solution_destination);
+clij2.gaussJordan(clij, A_matrix, B_result_vector, solution_destination);
 ```
 
 ```
 //show result
-solution_destinationImagePlus = clij.pull(solution_destination);
+solution_destinationImagePlus = clij2.pull(solution_destination);
 solution_destinationImagePlus.show();
 
 // cleanup memory on GPU
-A_matrix.close();
-B_result_vector.close();
-solution_destination.close();
+clij2.release(A_matrix);
+clij2.release(B_result_vector);
+clij2.release(solution_destination);
 ```
 
 

@@ -1,5 +1,5 @@
 ## invert
-![Image](images/mini_clij1_logo.png)
+![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Computes the negative value of all pixels in a given image. It is recommended to convert images to 
 32-bit float before applying this operation.
@@ -10,36 +10,40 @@ For binary images, use binaryNot.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJ_invert(Image source, Image destination);
+Ext.CLIJx_invert(Image source, Image destination);
 ```
 
 
 ### Usage in Java
 ```
 // init CLIJ and GPU
-import net.haesleinhuepf.clijx.CLIJ;
+import net.haesleinhuepf.clij2.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-CLIJx clijx = CLIJx.getInstance();
+CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clijx.push(sourceImagePlus);
-destination = clij.create(source);
+ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clijx.invert(clij, source, destination);
+clij2.invert(clij, arg1, arg2);
 ```
 
 ```
 //show result
-destinationImagePlus = clij.pull(destination);
-destinationImagePlus.show();
 
 // cleanup memory on GPU
-source.close();
-destination.close();
+clij2.release(arg1);
+clij2.release(arg2);
 ```
+
+
+
+
+### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [rgb_invert_black_white.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/rgb_invert_black_white.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

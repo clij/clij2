@@ -1,7 +1,7 @@
 package net.haesleinhuepf.clijx.piv;
 
 import net.haesleinhuepf.clij.CLIJ;
-import net.haesleinhuepf.clijx.advancedfilters.CrossCorrelation;
+import net.haesleinhuepf.clijx.plugins.CrossCorrelation;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.kernels.Kernels;

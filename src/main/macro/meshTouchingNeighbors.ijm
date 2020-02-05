@@ -17,27 +17,27 @@ blurred = "Blurred";
 
 // Init GPU
 run("CLIJ Macro Extensions", "cl_device=");
-Ext.CLIJ_clear();
+Ext.CLIJ2_clear();
 
 // push images to GPU
-Ext.CLIJ_push(input);
+Ext.CLIJ2_push(input);
 
 // cleanup ImageJ
 run("Close All");
 
 // Blur in GPU
-Ext.CLIJ_blur3D(input, blurred, 5, 5, 1);
-Ext.CLIJ_pull(blurred);
+Ext.CLIJ2_gaussianBlur3D(input, blurred, 5, 5, 1);
+Ext.CLIJ2_pull(blurred);
 
 detected_spots = "detected_spots";
-Ext.CLIJ_detectMaximaBox(blurred, detected_spots, 3);
-Ext.CLIJ_pull(detected_spots);
+Ext.CLIJ2_detectMaximaBox(blurred, detected_spots, 3);
+Ext.CLIJ2_pullBinary(detected_spots);
 
 // get spot positions as pointlist
 pointlist = "pointlist";
-Ext.CLIJx_spotsToPointList(detected_spots, pointlist);
+Ext.CLIJ2_spotsToPointList(detected_spots, pointlist);
 
-Ext.CLIJx_getSize(pointlist);
+Ext.CLIJ2_getSize(pointlist);
 number_of_detected_spots = getResult("Width", nResults() - 1);
 IJ.log("number of spots: " + number_of_detected_spots);
 
@@ -45,21 +45,21 @@ labelled_spots = "labelled_spots";
 //Ext.CLIJ_copy(detected_spots, labelled_spots);
 //Ext.CLIJ_set(labelled_spots, 0);
 
-Ext.CLIJx_connectedComponentsLabeling(detected_spots, labelled_spots);
-Ext.CLIJ_pull(labelled_spots);
+Ext.CLIJ2_connectedComponentsLabeling(detected_spots, labelled_spots);
+Ext.CLIJ2_pull(labelled_spots);
 
 temp = "temp";
 for (i = 0; i < 20; i++) {
 	//print("hll wrld");
-	Ext.CLIJx_onlyzeroOverwriteMaximumDiamond(labelled_spots, temp);
-	Ext.CLIJx_onlyzeroOverwriteMaximumDiamond(temp, labelled_spots);
+	Ext.CLIJ2_onlyzeroOverwriteMaximumDiamond(labelled_spots, temp);
+	Ext.CLIJ2_onlyzeroOverwriteMaximumDiamond(temp, labelled_spots);
 	//Ext.CLIJ_maximum2DSphere(labelled_spots, temp, 1, 1);
 	//Ext.CLIJ_maximum2DSphere(temp, labelled_spots, 1, 1);	
 }
 
 touch_matrix = "touch_matrix";
-Ext.CLIJx_generateTouchMatrix(labelled_spots, touch_matrix);
-Ext.CLIJ_pull(labelled_spots);
+Ext.CLIJ2_generateTouchMatrix(labelled_spots, touch_matrix);
+Ext.CLIJ2_pull(labelled_spots);
 
 // empty results table
 run("Clear Results");
@@ -67,12 +67,12 @@ run("Clear Results");
 // we build a table with 2+n rows:
 // x and y of the points and n rows with indices to closes points. 
 // as every points is the closest to itself, row number 3 will always be 0, 1, 3, 4 ...
-Ext.CLIJx_image2DToResultsTable(pointlist);
-Ext.CLIJx_image2DToResultsTable(touch_matrix);
+Ext.CLIJ2_image2DToResultsTable(pointlist);
+Ext.CLIJ2_image2DToResultsTable(touch_matrix);
 
 mesh = "mesh";
-Ext.CLIJ_create2D(mesh, width, height, 32);
-Ext.CLIJ_set(mesh, 0);
+Ext.CLIJ2_create2D(mesh, width, height, 32);
+Ext.CLIJ2_set(mesh, 0);
 
 print("points: " + number_of_detected_spots);
 for (p = 0; p < number_of_detected_spots; p++) {
@@ -90,22 +90,22 @@ for (p = 0; p < number_of_detected_spots; p++) {
 			y2 = getResult("X" + (q), 1);
 	
 			thickness = 1;
-			Ext.CLIJx_drawLine(mesh, x1, y1, 0, x2, y2, 0, thickness);
+			Ext.CLIJ2_drawLine(mesh, x1, y1, 0, x2, y2, 0, thickness);
 		}
 	}
 }
 
 
 // Get results back from GPU
-Ext.CLIJ_pull(labelled_spots);
-Ext.CLIJ_pull(touch_matrix);
+Ext.CLIJ2_pull(labelled_spots);
+Ext.CLIJ2_pull(touch_matrix);
 
-Ext.CLIJ_pull(mesh);
+Ext.CLIJ2_pull(mesh);
 
 
 // Cleanup by the end
-Ext.CLIJ_clear();
-Ext.CLIJ_reportMemory();
+Ext.CLIJ2_clear();
+Ext.CLIJ2_reportMemory();
 
 
 
