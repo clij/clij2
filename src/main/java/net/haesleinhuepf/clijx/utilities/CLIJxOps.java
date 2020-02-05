@@ -289,8 +289,15 @@ public abstract interface CLIJxOps {
     /**
      * 
      */
-    default boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    default boolean detectOptima(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+    /**
+     * 
+     */
+    default boolean detectOptima(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
     }
 
     /**
@@ -303,8 +310,8 @@ public abstract interface CLIJxOps {
     /**
      * 
      */
-    default boolean differenceOfGaussianSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.differenceOfGaussianSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    default boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
     }
 
     /**
@@ -314,6 +321,13 @@ public abstract interface CLIJxOps {
      */
     default boolean differenceOfGaussian(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
         return Kernels.differenceOfGaussian(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
+
+    /**
+     * 
+     */
+    default boolean differenceOfGaussianSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.differenceOfGaussianSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
@@ -333,8 +347,15 @@ public abstract interface CLIJxOps {
     /**
      * 
      */
-    default double[] sumPixelsSliceBySlice(ClearCLImage arg1) {
-        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
+    default boolean multiplySliceBySliceWithScalars(ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3) {
+        return Kernels.multiplySliceBySliceWithScalars(getCLIJ(), arg1, arg2, arg3);
+    }
+
+    /**
+     * 
+     */
+    default boolean multiplySliceBySliceWithScalars(ClearCLImage arg1, ClearCLImage arg2, float[] arg3) {
+        return Kernels.multiplySliceBySliceWithScalars(getCLIJ(), arg1, arg2, arg3);
     }
 
     /**
@@ -345,15 +366,10 @@ public abstract interface CLIJxOps {
     }
 
     /**
-     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
-     *  dimesions of the resulting image must be specified by the user according to its definition:
-     * X = 0
-     * Y = 1
-     * Z = 2
      * 
      */
-    default boolean maximumXYZProjection(ClearCLImage source, ClearCLImage destination_max, double dimensionX, double dimensionY, double projectedDimension) {
-        return Kernels.maximumXYZProjection(getCLIJ(), source, destination_max, new Double (dimensionX).intValue(), new Double (dimensionY).intValue(), new Double (projectedDimension).intValue());
+    default double[] sumPixelsSliceBySlice(ClearCLImage arg1) {
+        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
     }
 
     /**
@@ -369,31 +385,15 @@ public abstract interface CLIJxOps {
     }
 
     /**
+     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
+     *  dimesions of the resulting image must be specified by the user according to its definition:
+     * X = 0
+     * Y = 1
+     * Z = 2
      * 
      */
-    default boolean multiplySliceBySliceWithScalars(ClearCLImage arg1, ClearCLImage arg2, float[] arg3) {
-        return Kernels.multiplySliceBySliceWithScalars(getCLIJ(), arg1, arg2, arg3);
-    }
-
-    /**
-     * 
-     */
-    default boolean multiplySliceBySliceWithScalars(ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3) {
-        return Kernels.multiplySliceBySliceWithScalars(getCLIJ(), arg1, arg2, arg3);
-    }
-
-    /**
-     * 
-     */
-    default boolean detectOptima(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
-    }
-
-    /**
-     * 
-     */
-    default boolean detectOptima(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    default boolean maximumXYZProjection(ClearCLImage source, ClearCLImage destination_max, double dimensionX, double dimensionY, double projectedDimension) {
+        return Kernels.maximumXYZProjection(getCLIJ(), source, destination_max, new Double (dimensionX).intValue(), new Double (dimensionY).intValue(), new Double (projectedDimension).intValue());
     }
 
 
@@ -503,14 +503,14 @@ public abstract interface CLIJxOps {
     /**
      * 
      */
-    default boolean particleImageVelocimetry2D(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, double arg5) {
+    default boolean particleImageVelocimetry2D(ClearCLImage arg1, ClearCLImage arg2, ClearCLImage arg3, ClearCLImage arg4, double arg5) {
         return FastParticleImageVelocimetry.particleImageVelocimetry2D(getCLIJ(), arg1, arg2, arg3, arg4, new Double (arg5).intValue());
     }
 
     /**
      * 
      */
-    default boolean particleImageVelocimetry2D(ClearCLImage arg1, ClearCLImage arg2, ClearCLImage arg3, ClearCLImage arg4, double arg5) {
+    default boolean particleImageVelocimetry2D(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, double arg5) {
         return FastParticleImageVelocimetry.particleImageVelocimetry2D(getCLIJ(), arg1, arg2, arg3, arg4, new Double (arg5).intValue());
     }
 
@@ -552,15 +552,15 @@ public abstract interface CLIJxOps {
     /**
      * Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.
      */
-    default boolean translationRegistration(ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination) {
-        return TranslationRegistration.translationRegistration(getCLIJ(), input1, input2, destination);
+    default boolean translationRegistration(ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3) {
+        return TranslationRegistration.translationRegistration(getCLIJ(), arg1, arg2, arg3);
     }
 
     /**
      * Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.
      */
-    default boolean translationRegistration(ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3) {
-        return TranslationRegistration.translationRegistration(getCLIJ(), arg1, arg2, arg3);
+    default boolean translationRegistration(ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination) {
+        return TranslationRegistration.translationRegistration(getCLIJ(), input1, input2, destination);
     }
 
 
@@ -610,15 +610,15 @@ public abstract interface CLIJxOps {
     /**
      * Reads a raw file from disc and pushes it immediately to the GPU.
      */
-    default ClearCLBuffer readRawImageFromDisc(String arg1, double arg2, double arg3, double arg4, double arg5) {
-        return ReadRawImageFromDisc.readRawImageFromDisc(getCLIJ(), arg1, new Double (arg2).intValue(), new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    default boolean readRawImageFromDisc(ClearCLBuffer arg1, String arg2) {
+        return ReadRawImageFromDisc.readRawImageFromDisc(getCLIJ(), arg1, arg2);
     }
 
     /**
      * Reads a raw file from disc and pushes it immediately to the GPU.
      */
-    default boolean readRawImageFromDisc(ClearCLBuffer arg1, String arg2) {
-        return ReadRawImageFromDisc.readRawImageFromDisc(getCLIJ(), arg1, arg2);
+    default ClearCLBuffer readRawImageFromDisc(String arg1, double arg2, double arg3, double arg4, double arg5) {
+        return ReadRawImageFromDisc.readRawImageFromDisc(getCLIJ(), arg1, new Double (arg2).intValue(), new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
 

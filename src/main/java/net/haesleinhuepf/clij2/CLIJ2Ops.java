@@ -1,4 +1,5 @@
 package net.haesleinhuepf.clij2;
+import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
@@ -8,12 +9,17 @@ import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import ij.measure.ResultsTable;
 import ij.gui.Roi;
 import ij.plugin.frame.RoiManager;
+import net.haesleinhuepf.clij.kernels.Kernels;
 import net.haesleinhuepf.clij2.plugins.BinaryUnion;
 import net.haesleinhuepf.clij2.plugins.BinaryIntersection;
 import net.haesleinhuepf.clij2.plugins.ConnectedComponentsLabeling;
 import net.haesleinhuepf.clij2.plugins.CountNonZeroPixels;
+import net.haesleinhuepf.clijx.plugins.CrossCorrelation;
 import net.haesleinhuepf.clij2.plugins.DifferenceOfGaussian2D;
 import net.haesleinhuepf.clij2.plugins.DifferenceOfGaussian3D;
+import net.haesleinhuepf.clijx.plugins.Extrema;
+import net.haesleinhuepf.clijx.plugins.LocalExtremaBox;
+import net.haesleinhuepf.clijx.plugins.LocalID;
 import net.haesleinhuepf.clij2.plugins.MaskLabel;
 import net.haesleinhuepf.clij2.plugins.MeanClosestSpotDistance;
 import net.haesleinhuepf.clij2.plugins.MeanSquaredError;
@@ -21,9 +27,13 @@ import net.haesleinhuepf.clij2.plugins.MedianZProjection;
 import net.haesleinhuepf.clij2.plugins.NonzeroMinimumDiamond;
 import net.haesleinhuepf.clij2.plugins.Paste2D;
 import net.haesleinhuepf.clij2.plugins.Paste3D;
+import net.haesleinhuepf.clijx.plugins.Presign;
 import net.haesleinhuepf.clij2.plugins.JaccardIndex;
 import net.haesleinhuepf.clij2.plugins.SorensenDiceCoefficient;
 import net.haesleinhuepf.clij2.plugins.StandardDeviationZProjection;
+import net.haesleinhuepf.clijx.plugins.StackToTiles;
+import net.haesleinhuepf.clijx.plugins.SubtractBackground2D;
+import net.haesleinhuepf.clijx.plugins.SubtractBackground3D;
 import net.haesleinhuepf.clij2.plugins.TopHatBox;
 import net.haesleinhuepf.clij2.plugins.TopHatSphere;
 import net.haesleinhuepf.clij2.plugins.Exponential;
@@ -34,18 +44,29 @@ import net.haesleinhuepf.clij2.plugins.SpotsToPointList;
 import net.haesleinhuepf.clij2.plugins.TransposeXY;
 import net.haesleinhuepf.clij2.plugins.TransposeXZ;
 import net.haesleinhuepf.clij2.plugins.TransposeYZ;
+import net.haesleinhuepf.clijx.piv.FastParticleImageVelocimetry;
+import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetry;
+import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
+import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
+import net.haesleinhuepf.clijx.registration.TranslationRegistration;
+import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
 import net.haesleinhuepf.clij2.plugins.SetWhereXequalsY;
 import net.haesleinhuepf.clij2.plugins.LaplaceDiamond;
 import net.haesleinhuepf.clij2.plugins.Image2DToResultsTable;
 import net.haesleinhuepf.clij2.plugins.WriteValuesToPositions;
 import net.haesleinhuepf.clij2.plugins.GetSize;
 import net.haesleinhuepf.clij2.plugins.MultiplyMatrix;
+import net.haesleinhuepf.clijx.plugins.MatrixEqual;
+import net.haesleinhuepf.clijx.plugins.PowerImages;
 import net.haesleinhuepf.clij2.plugins.Equal;
 import net.haesleinhuepf.clij2.plugins.GreaterOrEqual;
 import net.haesleinhuepf.clij2.plugins.Greater;
 import net.haesleinhuepf.clij2.plugins.Smaller;
 import net.haesleinhuepf.clij2.plugins.SmallerOrEqual;
 import net.haesleinhuepf.clij2.plugins.NotEqual;
+import net.haesleinhuepf.clijx.io.ReadImageFromDisc;
+import net.haesleinhuepf.clijx.io.ReadRawImageFromDisc;
+import net.haesleinhuepf.clijx.io.PreloadFromDisc;
 import net.haesleinhuepf.clij2.plugins.EqualConstant;
 import net.haesleinhuepf.clij2.plugins.GreaterOrEqualConstant;
 import net.haesleinhuepf.clij2.plugins.GreaterConstant;
@@ -62,6 +83,7 @@ import net.haesleinhuepf.clij2.plugins.MaximumOfMaskedPixels;
 import net.haesleinhuepf.clij2.plugins.MeanOfMaskedPixels;
 import net.haesleinhuepf.clij2.plugins.LabelToMask;
 import net.haesleinhuepf.clij2.plugins.NClosestPoints;
+import net.haesleinhuepf.clijx.plugins.GaussJordan;
 import net.haesleinhuepf.clij2.plugins.StatisticsOfLabelledPixels;
 import net.haesleinhuepf.clij2.plugins.VarianceOfAllPixels;
 import net.haesleinhuepf.clij2.plugins.StandardDeviationOfAllPixels;
@@ -78,12 +100,23 @@ import net.haesleinhuepf.clij2.plugins.OnlyzeroOverwriteMaximumDiamond;
 import net.haesleinhuepf.clij2.plugins.OnlyzeroOverwriteMaximumBox;
 import net.haesleinhuepf.clij2.plugins.GenerateTouchMatrix;
 import net.haesleinhuepf.clij2.plugins.DetectLabelEdges;
+import net.haesleinhuepf.clijx.plugins.StopWatch;
 import net.haesleinhuepf.clij2.plugins.CountTouchingNeighbors;
 import net.haesleinhuepf.clij2.plugins.ReplaceIntensities;
+import net.haesleinhuepf.clijx.plugins.DrawTwoValueLine;
 import net.haesleinhuepf.clij2.plugins.AverageDistanceOfNClosestPoints;
+import net.haesleinhuepf.clijx.plugins.SaveAsTIF;
+import net.haesleinhuepf.clijx.plugins.ConnectedComponentsLabelingInplace;
 import net.haesleinhuepf.clij2.plugins.TouchMatrixToMesh;
+import net.haesleinhuepf.clijx.plugins.AutomaticThresholdInplace;
+import net.haesleinhuepf.clijx.plugins.DifferenceOfGaussianInplace3D;
+import net.haesleinhuepf.clijx.plugins.AbsoluteInplace;
 import net.haesleinhuepf.clij2.plugins.Resample;
+import net.haesleinhuepf.clijx.plugins.EqualizeMeanIntensitiesOfSlices;
+import net.haesleinhuepf.clijx.plugins.Watershed;
 import net.haesleinhuepf.clij2.plugins.ResliceRadial;
+import net.haesleinhuepf.clijx.plugins.ShowRGB;
+import net.haesleinhuepf.clijx.plugins.ShowGrey;
 import net.haesleinhuepf.clij2.plugins.Sobel;
 import net.haesleinhuepf.clij2.plugins.Absolute;
 import net.haesleinhuepf.clij2.plugins.LaplaceBox;
@@ -102,13 +135,18 @@ import net.haesleinhuepf.clij2.plugins.NonzeroMaximumBox;
 import net.haesleinhuepf.clij2.plugins.NonzeroMinimumBox;
 import net.haesleinhuepf.clij2.plugins.MinimumZProjectionThresholdedBounded;
 import net.haesleinhuepf.clij2.plugins.MeanOfPixelsAboveThreshold;
+import net.haesleinhuepf.clijx.gui.OrganiseWindows;
 import net.haesleinhuepf.clij2.plugins.DistanceMatrixToMesh;
 import net.haesleinhuepf.clij2.plugins.PointIndexListToMesh;
 import net.haesleinhuepf.clij2.plugins.MinimumOctagon;
 import net.haesleinhuepf.clij2.plugins.MaximumOctagon;
+import net.haesleinhuepf.clijx.plugins.TopHatOctagon;
 import net.haesleinhuepf.clij2.plugins.AddImages;
 import net.haesleinhuepf.clij2.plugins.AddImagesWeighted;
 import net.haesleinhuepf.clij2.plugins.SubtractImages;
+import net.haesleinhuepf.clijx.plugins.ShowGlasbeyOnGrey;
+import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
+import net.haesleinhuepf.clijx.weka.TrainWekaModel;
 import net.haesleinhuepf.clij2.plugins.AffineTransform2D;
 import net.haesleinhuepf.clij2.plugins.AffineTransform3D;
 import net.haesleinhuepf.clij2.plugins.ApplyVectorField2D;
@@ -144,6 +182,7 @@ import net.haesleinhuepf.clij2.plugins.MaximumZProjection;
 import net.haesleinhuepf.clij2.plugins.MeanZProjection;
 import net.haesleinhuepf.clij2.plugins.MinimumZProjection;
 import net.haesleinhuepf.clij2.plugins.Power;
+import net.haesleinhuepf.clijx.plugins.tenengradfusion.AbstractTenengradFusion;
 import net.haesleinhuepf.clij2.plugins.DivideImages;
 import net.haesleinhuepf.clij2.plugins.MaximumImages;
 import net.haesleinhuepf.clij2.plugins.MaximumImageAndScalar;
@@ -158,6 +197,8 @@ import net.haesleinhuepf.clij2.plugins.SumZProjection;
 import net.haesleinhuepf.clij2.plugins.SumOfAllPixels;
 import net.haesleinhuepf.clij2.plugins.CenterOfMass;
 import net.haesleinhuepf.clij2.plugins.Invert;
+import net.haesleinhuepf.clijx.plugins.Downsample2D;
+import net.haesleinhuepf.clijx.plugins.Downsample3D;
 import net.haesleinhuepf.clij2.plugins.DownsampleSliceBySliceHalfMedian;
 import net.haesleinhuepf.clij2.plugins.LocalThreshold;
 import net.haesleinhuepf.clij2.plugins.GradientX;
@@ -189,6 +230,7 @@ import net.haesleinhuepf.clij2.plugins.MinimumSliceBySliceSphere;
 import net.haesleinhuepf.clij2.plugins.MultiplyImages;
 import net.haesleinhuepf.clij2.plugins.GaussianBlur2D;
 import net.haesleinhuepf.clij2.plugins.GaussianBlur3D;
+import net.haesleinhuepf.clijx.plugins.Blur3DSliceBySlice;
 import net.haesleinhuepf.clij2.plugins.ResliceBottom;
 import net.haesleinhuepf.clij2.plugins.ResliceTop;
 import net.haesleinhuepf.clij2.plugins.ResliceLeft;
@@ -199,6 +241,19 @@ import net.haesleinhuepf.clij2.plugins.Scale2D;
 import net.haesleinhuepf.clij2.plugins.Scale3D;
 import net.haesleinhuepf.clij2.plugins.Translate2D;
 import net.haesleinhuepf.clij2.plugins.Translate3D;
+import net.haesleinhuepf.clij2.plugins.Clear;
+import net.haesleinhuepf.clij2.plugins.ClInfo;
+import net.haesleinhuepf.clij2.plugins.ConvertFloat;
+import net.haesleinhuepf.clij2.plugins.ConvertUInt8;
+import net.haesleinhuepf.clij2.plugins.ConvertUInt16;
+import net.haesleinhuepf.clij2.plugins.Create2D;
+import net.haesleinhuepf.clij2.plugins.Create3D;
+import net.haesleinhuepf.clij2.plugins.Pull;
+import net.haesleinhuepf.clij2.plugins.PullBinary;
+import net.haesleinhuepf.clij2.plugins.Push;
+import net.haesleinhuepf.clij2.plugins.PushCurrentSlice;
+import net.haesleinhuepf.clij2.plugins.PushCurrentZStack;
+import net.haesleinhuepf.clij2.plugins.Release;
 import net.haesleinhuepf.clij2.plugins.AddImageAndScalar;
 import net.haesleinhuepf.clij2.plugins.DetectMinimaBox;
 import net.haesleinhuepf.clij2.plugins.DetectMaximaBox;
@@ -206,6 +261,9 @@ import net.haesleinhuepf.clij2.plugins.DetectMaximaSliceBySliceBox;
 import net.haesleinhuepf.clij2.plugins.DetectMinimaSliceBySliceBox;
 import net.haesleinhuepf.clij2.plugins.MaximumOfAllPixels;
 import net.haesleinhuepf.clij2.plugins.MinimumOfAllPixels;
+import net.haesleinhuepf.clij2.plugins.ReportMemory;
+import net.haesleinhuepf.clijx.plugins.splitstack.AbstractSplitStack;
+import net.haesleinhuepf.clijx.plugins.TopHatOctagonSliceBySlice;
 import net.haesleinhuepf.clij2.plugins.SetColumn;
 import net.haesleinhuepf.clij2.plugins.SetRow;
 import net.haesleinhuepf.clij2.plugins.SumYProjection;
@@ -213,6 +271,8 @@ import net.haesleinhuepf.clij2.plugins.AverageDistanceOfTouchingNeighbors;
 import net.haesleinhuepf.clij2.plugins.LabelledSpotsToPointList;
 import net.haesleinhuepf.clij2.plugins.LabelSpots;
 import net.haesleinhuepf.clij2.plugins.MinimumDistanceOfTouchingNeighbors;
+import net.haesleinhuepf.clijx.io.WriteVTKLineListToDisc;
+import net.haesleinhuepf.clijx.io.WriteXYZPointListToDisc;
 import net.haesleinhuepf.clij2.plugins.SetWhereXgreaterThanY;
 import net.haesleinhuepf.clij2.plugins.SetWhereXsmallerThanY;
 import net.haesleinhuepf.clij2.plugins.SetNonZeroPixelsToPixelIndex;
@@ -386,15 +446,15 @@ public abstract interface CLIJ2Ops {
     /**
      * Pastes an image into another image at a given position.
      */
-    default boolean paste2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Paste2D.paste2D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    default boolean paste(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return Paste2D.paste(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
     }
 
     /**
      * Pastes an image into another image at a given position.
      */
-    default boolean paste(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Paste2D.paste(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    default boolean paste2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return Paste2D.paste2D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
     }
 
 
@@ -403,15 +463,15 @@ public abstract interface CLIJ2Ops {
     /**
      * Pastes an image into another image at a given position.
      */
-    default boolean paste3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Paste3D.paste3D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    default boolean paste(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return Paste3D.paste(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
     /**
      * Pastes an image into another image at a given position.
      */
-    default boolean paste(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Paste3D.paste(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    default boolean paste3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return Paste3D.paste3D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
 
@@ -586,14 +646,14 @@ public abstract interface CLIJ2Ops {
     /**
      * Converts an image into a table.
      */
-    default ResultsTable image2DToResultsTable(ClearCLBuffer arg1, ResultsTable arg2) {
+    default ResultsTable image2DToResultsTable(ClearCLImage arg1, ResultsTable arg2) {
         return Image2DToResultsTable.image2DToResultsTable(getCLIJ2(), arg1, arg2);
     }
 
     /**
      * Converts an image into a table.
      */
-    default ResultsTable image2DToResultsTable(ClearCLImage arg1, ResultsTable arg2) {
+    default ResultsTable image2DToResultsTable(ClearCLBuffer arg1, ResultsTable arg2) {
         return Image2DToResultsTable.image2DToResultsTable(getCLIJ2(), arg1, arg2);
     }
 
@@ -1026,17 +1086,17 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.DistanceMap
     //----------------------------------------------------
     /**
-     * 
-     */
-    default boolean localPositiveMinimum(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
-        return DistanceMap.localPositiveMinimum(getCLIJ2(), arg1, arg2, arg3);
-    }
-
-    /**
      * Generates a distance map from a binary image. Pixels with non-zero value in the binary image are set to a number representing the distance to the closest zero-value pixel.
      */
     default boolean distanceMap(ClearCLBuffer source, ClearCLBuffer destination) {
         return DistanceMap.distanceMap(getCLIJ2(), source, destination);
+    }
+
+    /**
+     * 
+     */
+    default boolean localPositiveMinimum(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
+        return DistanceMap.localPositiveMinimum(getCLIJ2(), arg1, arg2, arg3);
     }
 
 
@@ -1097,7 +1157,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.OnlyzeroOverwriteMaximumBox
     //----------------------------------------------------
     /**
-     * 
+     * TODO
      */
     default boolean onlyzeroOverwriteMaximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
         return OnlyzeroOverwriteMaximumBox.onlyzeroOverwriteMaximumBox(getCLIJ2(), arg1, arg2, arg3);
@@ -1337,20 +1397,20 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MaximumZProjectionBounded
     //----------------------------------------------------
     /**
-     * 
+     * Determines the maximum projection of an image along Z within a given z range.
      */
-    default boolean projectMaximumZBounded(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return MaximumZProjectionBounded.maximumZProjectionBounded(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    default boolean maximumZProjectionBounded(ClearCLBuffer source, ClearCLBuffer destination_max, double min_z, double max_z) {
+        return MaximumZProjectionBounded.maximumZProjectionBounded(getCLIJ2(), source, destination_max, new Double (min_z).intValue(), new Double (max_z).intValue());
     }
 
 
     // net.haesleinhuepf.clij2.plugins.MinimumZProjectionBounded
     //----------------------------------------------------
     /**
-     * 
+     * Determines the minimum projection of an image along Z within a given z range.
      */
-    default boolean projectMinimumZBounded(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return MinimumZProjectionBounded.minimumZProjectionBounded(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    default boolean minimumZProjectionBounded(ClearCLBuffer source, ClearCLBuffer destination_min, double min_z, double max_z) {
+        return MinimumZProjectionBounded.minimumZProjectionBounded(getCLIJ2(), source, destination_min, new Double (min_z).intValue(), new Double (max_z).intValue());
     }
 
 
@@ -1401,9 +1461,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MinimumZProjectionThresholdedBounded
     //----------------------------------------------------
     /**
-     * 
+     * Determines the minimum projection of all pixels in an image above a given threshold along Z within a given z range.
      */
-    default boolean projectMinimumThresholdedZBounded(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+    default boolean minimumZProjectionThresholdedBounded(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
         return MinimumZProjectionThresholdedBounded.minimumZProjectionThresholdedBounded(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
@@ -1441,17 +1501,17 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MinimumOctagon
     //----------------------------------------------------
     /**
-     * Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter result very similar to minimum sphere. Approximately:radius = iterations - 2
-     */
-    default boolean minimumOctagon(ClearCLBuffer input, ClearCLBuffer destination, double iterations) {
-        return MinimumOctagon.minimumOctagon(getCLIJ2(), input, destination, new Double (iterations).intValue());
-    }
-
-    /**
      * 
      */
     default ClearCLKernel minimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3) {
         return MinimumOctagon.minimumDiamond(getCLIJ2(), arg1, arg2, arg3);
+    }
+
+    /**
+     * Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter result very similar to minimum sphere. Approximately:radius = iterations - 2
+     */
+    default boolean minimumOctagon(ClearCLBuffer input, ClearCLBuffer destination, double iterations) {
+        return MinimumOctagon.minimumOctagon(getCLIJ2(), input, destination, new Double (iterations).intValue());
     }
 
     /**
@@ -1519,8 +1579,9 @@ public abstract interface CLIJ2Ops {
      * 
      * <pre>f(x, y) = x - y</pre>
      */
-    default boolean subtractImages(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
-        return SubtractImages.subtractImages(getCLIJ2(), arg1, arg2, arg3);
+    @Deprecated
+    default boolean subtract(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
+        return SubtractImages.subtract(getCLIJ2(), arg1, arg2, arg3);
     }
 
     /**
@@ -1528,35 +1589,13 @@ public abstract interface CLIJ2Ops {
      * 
      * <pre>f(x, y) = x - y</pre>
      */
-    @Deprecated
-    default boolean subtract(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
-        return SubtractImages.subtract(getCLIJ2(), arg1, arg2, arg3);
+    default boolean subtractImages(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
+        return SubtractImages.subtractImages(getCLIJ2(), arg1, arg2, arg3);
     }
 
 
     // net.haesleinhuepf.clij2.plugins.AffineTransform2D
     //----------------------------------------------------
-    /**
-     * Applies an affine transform to a 2D image. Individual transforms must be separated by spaces.
-     * 
-     * Supported transforms:
-     * * center: translate the coordinate origin to the center of the image
-     * * -center: translate the coordinate origin back to the initial origin
-     * * rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
-     * * scale=[factor]: isotropic scaling according to given zoom factor
-     * * scaleX=[factor]: scaling along X-axis according to given zoom factor
-     * * scaleY=[factor]: scaling along Y-axis according to given zoom factor
-     * * shearXY=[factor]: shearing along X-axis in XY plane according to given factor
-     * * translateX=[distance]: translate along X-axis by distance given in pixels
-     * * translateY=[distance]: translate along X-axis by distance given in pixels
-     * 
-     * Example transform:
-     * transform = "center scale=2 rotate=45 -center";
-     */
-    default boolean affineTransform2D(ClearCLImage arg1, ClearCLImageInterface arg2, float[] arg3) {
-        return AffineTransform2D.affineTransform2D(getCLIJ2(), arg1, arg2, arg3);
-    }
-
     /**
      * Applies an affine transform to a 2D image. Individual transforms must be separated by spaces.
      * 
@@ -1641,40 +1680,30 @@ public abstract interface CLIJ2Ops {
         return AffineTransform2D.affineTransform2D(getCLIJ2(), arg1, arg2, arg3);
     }
 
-
-    // net.haesleinhuepf.clij2.plugins.AffineTransform3D
-    //----------------------------------------------------
     /**
-     * Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.
+     * Applies an affine transform to a 2D image. Individual transforms must be separated by spaces.
      * 
      * Supported transforms:
      * * center: translate the coordinate origin to the center of the image
      * * -center: translate the coordinate origin back to the initial origin
      * * rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
-     * * rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees
-     * * rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees
-     * * rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
      * * scale=[factor]: isotropic scaling according to given zoom factor
      * * scaleX=[factor]: scaling along X-axis according to given zoom factor
      * * scaleY=[factor]: scaling along Y-axis according to given zoom factor
-     * * scaleZ=[factor]: scaling along Z-axis according to given zoom factor
      * * shearXY=[factor]: shearing along X-axis in XY plane according to given factor
-     * * shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor
-     * * shearYX=[factor]: shearing along Y-axis in XY plane according to given factor
-     * * shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor
-     * * shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor
-     * * shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor
      * * translateX=[distance]: translate along X-axis by distance given in pixels
      * * translateY=[distance]: translate along X-axis by distance given in pixels
-     * * translateZ=[distance]: translate along X-axis by distance given in pixels
      * 
      * Example transform:
      * transform = "center scale=2 rotate=45 -center";
      */
-    default boolean affineTransform3D(ClearCLImage arg1, ClearCLImageInterface arg2, float[] arg3) {
-        return AffineTransform3D.affineTransform3D(getCLIJ2(), arg1, arg2, arg3);
+    default boolean affineTransform2D(ClearCLImage arg1, ClearCLImageInterface arg2, float[] arg3) {
+        return AffineTransform2D.affineTransform2D(getCLIJ2(), arg1, arg2, arg3);
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.AffineTransform3D
+    //----------------------------------------------------
     /**
      * Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.
      * 
@@ -1799,6 +1828,37 @@ public abstract interface CLIJ2Ops {
         return AffineTransform3D.affineTransform3D(getCLIJ2(), arg1, arg2, arg3);
     }
 
+    /**
+     * Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.
+     * 
+     * Supported transforms:
+     * * center: translate the coordinate origin to the center of the image
+     * * -center: translate the coordinate origin back to the initial origin
+     * * rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
+     * * rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees
+     * * rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees
+     * * rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees
+     * * scale=[factor]: isotropic scaling according to given zoom factor
+     * * scaleX=[factor]: scaling along X-axis according to given zoom factor
+     * * scaleY=[factor]: scaling along Y-axis according to given zoom factor
+     * * scaleZ=[factor]: scaling along Z-axis according to given zoom factor
+     * * shearXY=[factor]: shearing along X-axis in XY plane according to given factor
+     * * shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor
+     * * shearYX=[factor]: shearing along Y-axis in XY plane according to given factor
+     * * shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor
+     * * shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor
+     * * shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor
+     * * translateX=[distance]: translate along X-axis by distance given in pixels
+     * * translateY=[distance]: translate along X-axis by distance given in pixels
+     * * translateZ=[distance]: translate along X-axis by distance given in pixels
+     * 
+     * Example transform:
+     * transform = "center scale=2 rotate=45 -center";
+     */
+    default boolean affineTransform3D(ClearCLImage arg1, ClearCLImageInterface arg2, float[] arg3) {
+        return AffineTransform3D.affineTransform3D(getCLIJ2(), arg1, arg2, arg3);
+    }
+
 
     // net.haesleinhuepf.clij2.plugins.ApplyVectorField2D
     //----------------------------------------------------
@@ -1899,8 +1959,8 @@ public abstract interface CLIJ2Ops {
      * of these methods in the method text field:
      * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
      */
-    default boolean automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, double arg4, double arg5, double arg6) {
-        return AutomaticThreshold.automaticThreshold(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).intValue());
+    default boolean automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3) {
+        return AutomaticThreshold.automaticThreshold(getCLIJ2(), arg1, arg2, arg3);
     }
 
     /**
@@ -1909,8 +1969,8 @@ public abstract interface CLIJ2Ops {
      * of these methods in the method text field:
      * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
      */
-    default boolean automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3) {
-        return AutomaticThreshold.automaticThreshold(getCLIJ2(), arg1, arg2, arg3);
+    default boolean automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, double arg4, double arg5, double arg6) {
+        return AutomaticThreshold.automaticThreshold(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).intValue());
     }
 
 
@@ -2918,16 +2978,6 @@ public abstract interface CLIJ2Ops {
      * 
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
-    @Deprecated
-    default boolean blur2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return GaussianBlur2D.blur2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
-    }
-
-    /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
-     * 
-     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
-     */
     default boolean gaussianBlur2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
         return GaussianBlur2D.gaussianBlur2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
@@ -2947,6 +2997,16 @@ public abstract interface CLIJ2Ops {
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
     @Deprecated
+    default boolean blur2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return GaussianBlur2D.blur2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+    }
+
+    /**
+     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+     * 
+     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
+     */
+    @Deprecated
     default boolean blur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
         return GaussianBlur2D.blur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
@@ -2954,6 +3014,15 @@ public abstract interface CLIJ2Ops {
 
     // net.haesleinhuepf.clij2.plugins.GaussianBlur3D
     //----------------------------------------------------
+    /**
+     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+     * 
+     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
+     */
+    default boolean gaussianBlur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return GaussianBlur3D.gaussianBlur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
+
     /**
      * Computes the Gaussian blurred image of an image given two sigma values in X, Y and Z. Thus, the filterkernel can have non-isotropic shape.
      * 
@@ -2971,15 +3040,6 @@ public abstract interface CLIJ2Ops {
      */
     default boolean gaussianBlur3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
         return GaussianBlur3D.gaussianBlur3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
-     * 
-     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
-     */
-    default boolean gaussianBlur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return GaussianBlur3D.gaussianBlur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
