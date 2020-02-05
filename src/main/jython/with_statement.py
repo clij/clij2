@@ -12,7 +12,7 @@
 
 from __future__ import with_statement;
 from ij import IJ;
-from net.haesleinhuepf.clijx import CLIJx;
+from net.haesleinhuepf.clij2 import CLIJ2;
 
 
 IJ.run("Close All");
@@ -23,18 +23,18 @@ IJ.run(imp, "32-bit", "");
 imp.show();
 
 # init GPU
-with CLIJx.getInstance() as clijx:
+with CLIJ2.getInstance() as clij2:
 	# push image to GPU
-	input = clijx.push(imp);
+	input = clij2.push(imp);
 	
 	# reserve memory for output, same size and type as input
-	blurred = clijx.create(input);
+	blurred = clij2.create(input);
 
 	# blur, threshold and label the image
-	clijx.blur(input, blurred, 5, 5, 0);
+	clij2.blur(input, blurred, 5, 5, 0);
 
 	# show result
-	clijx.show(blurred, "blurred");
+	clij2.show(blurred, "blurred");
 	
 	#
 	# By the end of this block, clijx will 
@@ -42,4 +42,4 @@ with CLIJx.getInstance() as clijx:
 	#
 
 # check if clijx was clean up by the end of the block
-IJ.log(CLIJx.getInstance().reportMemory());
+IJ.log(CLIJ2.getInstance().reportMemory());
