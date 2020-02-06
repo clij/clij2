@@ -45,5 +45,5 @@ __kernel void onlyzero_overwrite_maximum_diamond_3d
         WRITE_flag_dst_IMAGE(flag_dst,(int4)(0,0,0,0),1);
       }
   }
-  WRITE_dst_IMAGE_3D (dst, pos, CONVERT_dst_PIXEL_TYPE(foundMaximum));
+  WRITE_dst_IMAGE (dst, pos, CONVERT_dst_PIXEL_TYPE(foundMaximum));
 }
