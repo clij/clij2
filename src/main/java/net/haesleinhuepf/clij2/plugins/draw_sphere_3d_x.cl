@@ -8,7 +8,8 @@ __kernel void draw_sphere_3d   (
     float rz,
     float rxsq,
     float rysq,
-    float rzsq
+    float rzsq,
+    float value
 )
 {
   const float x = get_global_id(0);

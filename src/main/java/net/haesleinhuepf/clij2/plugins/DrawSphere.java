@@ -2,10 +2,13 @@ package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
+import net.haesleinhuepf.clij2.CLIJ2;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -19,11 +22,11 @@ import java.util.HashMap;
  * 08 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_drawSphere")
-public class DrawSphere extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class DrawSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
-        return "Image destination, Number x, Number y, Number z, Number radius_x, Number radius_y, Number radius_z";
+        return "Image destination, Number x, Number y, Number z, Number radius_x, Number radius_y, Number radius_z, Number value";
     }
 
     @Override
@@ -35,11 +38,15 @@ public class DrawSphere extends AbstractCLIJPlugin implements CLIJMacroPlugin, C
         Float rX = asFloat(args[4]);
         Float rY = asFloat(args[5]);
         Float rZ = asFloat(args[6]);
+        Float value = asFloat(args[7]);
 
-        return drawSphere(clij, input, x, y, z, rX, rY, rZ);
+        return drawSphere(getCLIJ2(), input, x, y, z, rX, rY, rZ);
     }
 
-    public static boolean drawSphere(CLIJ clij, ClearCLBuffer output, Float x, Float y, Float z, Float rx, Float ry, Float rz) {
+    public static boolean drawSphere(CLIJ2 clij2, ClearCLImageInterface output, Float x, Float y, Float z, Float rx, Float ry, Float rz) {
+        return drawSphere(clij2, output, x,y,z,rx,ry,rz, 1.0f);
+    }
+    public static boolean drawSphere(CLIJ2 clij2, ClearCLImageInterface output, Float x, Float y, Float z, Float rx, Float ry, Float rz, Float value) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("cx", x);
         parameters.put("cy", y);
@@ -57,14 +64,19 @@ public class DrawSphere extends AbstractCLIJPlugin implements CLIJMacroPlugin, C
         }
         parameters.put("dst", output);
 
-        return clij.execute(DrawSphere.class, "draw_sphere_" + output.getDimension() + "d_x.cl", "draw_sphere_" + output.getDimension() + "d", parameters);
+        clij2.execute(DrawSphere.class, "draw_sphere_" + output.getDimension() + "d_x.cl", "draw_sphere_" + output.getDimension() + "d", output.getDimensions(), output.getDimensions(), parameters);
+        return true;
     }
 
-    public static boolean drawSphere(CLIJ clij, ClearCLBuffer output, Float x, Float y, Float rx, Float ry) {
-        return drawSphere(clij, output, x, y, 0f, rx, ry, 0f);
+    public static boolean drawSphere(CLIJ2 clij2, ClearCLImageInterface output, Float x, Float y, Float rx, Float ry) {
+        return drawSphere(clij2, output, x, y, 0f, rx, ry, 0f, 1.0f);
     }
 
-        @Override
+    public static boolean drawSphere(CLIJ2 clij2, ClearCLImageInterface output, Float x, Float y, Float rx, Float ry, Float value) {
+        return drawSphere(clij2, output, x, y, 0f, rx, ry, 0f, value);
+    }
+
+    @Override
     public String getDescription() {
         return "Draws a sphere around a given point with given radii in x, y and z (if 3D). All pixels other than in the sphere are untouched. Consider using clij.op.set(buffer, 0); in advance.";
     }

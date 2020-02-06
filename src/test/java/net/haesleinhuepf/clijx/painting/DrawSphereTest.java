@@ -3,6 +3,7 @@ package net.haesleinhuepf.clijx.painting;
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
+import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.plugins.DrawSphere;
 import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class DrawSphereTest {
         CLIJx clijx = CLIJx.getInstance();
         ClearCLBuffer image = clijx.create(new long[]{100, 100}, NativeTypeEnum.Float);
 
-        DrawSphere.drawSphere(CLIJ.getInstance(), image, 50f, 50f, 10f, 20f);
+        DrawSphere.drawSphere(CLIJ2.getInstance(), image, 50f, 50f, 10f, 20f);
 
         //new ImageJ();
         //clijx.show(image, "image");

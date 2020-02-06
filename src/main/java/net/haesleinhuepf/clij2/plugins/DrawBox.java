@@ -1,6 +1,7 @@
 package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -23,7 +24,7 @@ public class DrawBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
     @Override
     public String getParameterHelpText() {
-        return "Image destination, Number x, Number y, Number z, Number width, Number height, Number depth";
+        return "Image destination, Number x, Number y, Number z, Number width, Number height, Number depth, Number value";
     }
 
     @Override
@@ -35,11 +36,16 @@ public class DrawBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
         Float width = asFloat(args[4]);
         Float height = asFloat(args[5]);
         Float depth = asFloat(args[6]);
+        Float value = asFloat(args[7]);
 
-        return drawBox(getCLIJ2(), input, x, y, z, width, height, depth);
+        return drawBox(getCLIJ2(), input, x, y, z, width, height, depth, value);
     }
 
-    public static boolean drawBox(CLIJ2 clij2, ClearCLBuffer output, Float x, Float y, Float z, Float width, Float height, Float depth) {
+    public static boolean drawBox(CLIJ2 clij2, ClearCLImageInterface output, Float x, Float y, Float z, Float width, Float height, Float depth) {
+        return drawBox(clij2, output, x,y,z, width,height,depth,1.0f);
+    }
+
+    public static boolean drawBox(CLIJ2 clij2, ClearCLImageInterface output, Float x, Float y, Float z, Float width, Float height, Float depth, Float value) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("x1", x);
         parameters.put("y1", y);
@@ -50,12 +56,13 @@ public class DrawBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
             parameters.put("z2", z + depth - 1);
         }
         parameters.put("dst", output);
+        parameters.put("value", value);
 
-        clij2.execute(DrawBox.class, "draw_box_" + output.getDimension() + "_x.cl", "draw_box_" + output.getDimension() + "d", output.getDimensions(), output.getDimensions(), parameters);
+        clij2.execute(DrawBox.class, "draw_box_" + output.getDimension() + "d_x.cl", "draw_box_" + output.getDimension() + "d", output.getDimensions(), output.getDimensions(), parameters);
         return true;
     }
 
-    public static boolean drawBox(CLIJ2 clij2, ClearCLBuffer output, Float x, Float y, Float width, Float height) {
+    public static boolean drawBox(CLIJ2 clij2, ClearCLImageInterface output, Float x, Float y, Float width, Float height) {
         return drawBox(clij2, output, x, y, 0f, width, height, 0f);
     }
 

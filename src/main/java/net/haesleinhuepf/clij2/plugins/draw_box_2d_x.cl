@@ -4,7 +4,8 @@ __kernel void draw_box_2d   (
     float x1,
     float y1,
     float x2,
-    float y2
+    float y2,
+    float value
 )
 {
   const int x = get_global_id(0);
@@ -18,5 +19,5 @@ __kernel void draw_box_2d   (
   }
 
   int2 ipos = (int2){x,y};
-  WRITE_dst_IMAGE (dst, ipos, 1);
+  WRITE_dst_IMAGE (dst, ipos, CONVERT_dst_PIXEL_TYPE(value));
 }

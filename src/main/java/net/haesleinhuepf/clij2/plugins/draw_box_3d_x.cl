@@ -5,7 +5,8 @@ __kernel void draw_box_3d   (
     float z1,
     float x2,
     float y2,
-    float z2
+    float z2,
+    float value
 )
 {
   const int x = get_global_id(0);
@@ -23,5 +24,5 @@ __kernel void draw_box_3d   (
   }
 
   int4 ipos = (int4){x,y,z,0};
-  WRITE_dst_IMAGE (dst, ipos, 1);
+  WRITE_dst_IMAGE (dst, ipos, CONVERT_dst_PIXEL_TYPE(value));
 }

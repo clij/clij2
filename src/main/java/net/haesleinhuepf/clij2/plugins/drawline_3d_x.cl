@@ -5,7 +5,8 @@ __kernel void draw_line_3D   (IMAGE_dst_TYPE dst,
                                    float x2,
                                    float y2,
                                    float z2,
-                                   float radius
+                                   float radius,
+                                   float value
                      )
 {
   const float x = min(x1, x2) - radius + get_global_id(0);

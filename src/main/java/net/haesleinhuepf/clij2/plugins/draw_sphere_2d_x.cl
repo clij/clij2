@@ -6,7 +6,8 @@ __kernel void draw_sphere_2d(
     float rx,
     float ry,
     float rxsq,
-    float rysq
+    float rysq,
+    float value
 )
 {
   const float x = get_global_id(0);

@@ -1,6 +1,7 @@
 package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -23,7 +24,7 @@ public class DrawLine extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getParameterHelpText() {
-        return "Image destination, Number x1, Number y1, Number z1, Number x2, Number y2, Number z2, Number thickness";
+        return "Image destination, Number x1, Number y1, Number z1, Number x2, Number y2, Number z2, Number thickness, Number value";
     }
 
     @Override
@@ -36,11 +37,17 @@ public class DrawLine extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
         Float y2 = asFloat(args[5]);
         Float z2 = asFloat(args[6]);
         Float thickness = asFloat(args[7]);
+        Float value = asFloat(args[8]);
 
-        return drawLine(getCLIJ2(), input, x1, y1, z1, x2, y2, z2, thickness);
+        return drawLine(getCLIJ2(), input, x1, y1, z1, x2, y2, z2, thickness, value);
     }
 
-    public static boolean drawLine(CLIJ2 clij2, ClearCLBuffer output, Float x1, Float y1, Float z1, Float x2, Float y2, Float z2, Float thickness) {
+
+    public static boolean drawLine(CLIJ2 clij2, ClearCLImageInterface output, Float x1, Float y1, Float z1, Float x2, Float y2, Float z2, Float thickness) {
+        return drawLine(clij2, output, x1,y1,z1, x2,y2,z2, thickness, 1.0f);
+    }
+
+    public static boolean drawLine(CLIJ2 clij2, ClearCLImageInterface output, Float x1, Float y1, Float z1, Float x2, Float y2, Float z2, Float thickness, Float value) {
 
         long[] globalSizes;
 
@@ -65,7 +72,7 @@ public class DrawLine extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
         }
         parameters.put("radius", new Float(thickness / 2));
         parameters.put("dst", output);
-
+        parameters.put("value", value);
 
         //System.out.println("Draw line from " + x1 + "/" + y1 + "/" + z1 + " to "  + x2 + "/" + y2 + "/" + z2);
         clij2.execute(DrawLine.class, "drawline_" +output.getDimension() + "d_x.cl", "draw_line_" +output.getDimension() + "D", globalSizes, globalSizes, parameters);
