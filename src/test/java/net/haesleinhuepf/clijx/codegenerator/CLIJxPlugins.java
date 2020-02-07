@@ -1,5 +1,7 @@
 package net.haesleinhuepf.clijx.codegenerator;
 
+import net.haesleinhuepf.clij2.legacyplugins.AffineTransform;
+import net.haesleinhuepf.clij2.legacyplugins.Scale;
 import net.haesleinhuepf.clij2.plugins.*;
 import net.haesleinhuepf.clij2.plugins.Equal;
 import net.haesleinhuepf.clij2.plugins.EqualConstant;
@@ -34,8 +36,8 @@ import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
 import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
 import net.haesleinhuepf.clijx.registration.TranslationRegistration;
 import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
-import net.haesleinhuepf.clijx.plugins.Downsample2D;
-import net.haesleinhuepf.clijx.plugins.Downsample3D;
+import net.haesleinhuepf.clij2.legacyplugins.Downsample2D;
+import net.haesleinhuepf.clij2.legacyplugins.Downsample3D;
 import net.haesleinhuepf.clij2.plugins.DownsampleSliceBySliceHalfMedian;
 import net.haesleinhuepf.clij2.plugins.GradientX;
 import net.haesleinhuepf.clij2.plugins.GradientY;
@@ -316,12 +318,16 @@ public interface CLIJxPlugins {
             SetWhereXgreaterThanY.class,
             SetWhereXsmallerThanY.class,
             SetNonZeroPixelsToPixelIndex.class,
-            CloseIndexGapsInLabelMap.class
+            CloseIndexGapsInLabelMap.class,
+            AffineTransform.class,
+            Scale.class
     };
 
     public String blockList = ";" +
             "BinaryIntersection.binaryAnd;" +
             "BinaryUnion.binaryOr;" +
+            "AffineTransform.affineTransform3D;"+
+            "Scale.scale3D;"+
             "Kernels.absolute;" +
             "Kernels.addImagesWeighted;" +
             "Kernels.addImages;" +
