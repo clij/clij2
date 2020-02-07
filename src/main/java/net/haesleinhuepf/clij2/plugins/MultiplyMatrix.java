@@ -37,6 +37,46 @@ public class MultiplyMatrix extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         return true;
     }
 
+    public static boolean multiplyMatrix_fast_x(CLIJ2 clij2, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer output) {
+        //int wg_size = (int) clij2.getCLIJ().getClearCLContext().getDevice().getMaxWorkGroupSize();
+        //System.out.println("wg size " + wg_size);
+
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src1", input1);
+        parameters.put("src2", input2);
+        parameters.put("dst_matrix", output);
+        //parameters.put("work_group_size", wg_size);
+
+        //long[] localSizes = new long[]{wg_size, 1, 1};
+
+        long[] globalSizes = new long[]{1, output.getHeight()};
+
+        clij2.activateSizeIndependentKernelCompilation();
+        // System.out.println("hello world");
+        clij2.execute(MultiplyMatrix.class, "multiply_matrix_x.cl", "multiply_matrix_fast_x", output.getDimensions(), globalSizes, /*localSizes,*/ parameters);
+        return true;
+    }
+
+    public static boolean multiplyMatrix_fast_y(CLIJ2 clij2, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer output) {
+        //int wg_size = (int) clij2.getCLIJ().getClearCLContext().getDevice().getMaxWorkGroupSize();
+        //System.out.println("wg size " + wg_size);
+
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src1", input1);
+        parameters.put("src2", input2);
+        parameters.put("dst_matrix", output);
+        //parameters.put("work_group_size", wg_size);
+
+        //long[] localSizes = new long[]{wg_size, 1, 1};
+
+        long[] globalSizes = new long[]{output.getWidth(), 1};
+
+        clij2.activateSizeIndependentKernelCompilation();
+        // System.out.println("hello world");
+        clij2.execute(MultiplyMatrix.class, "multiply_matrix_x.cl", "multiply_matrix_fast_y", output.getDimensions(), globalSizes, /*localSizes,*/ parameters);
+        return true;
+    }
+
     @Override
     public String getParameterHelpText() {
         return "Image matrix1, Image matrix2, Image matrix_destination";
