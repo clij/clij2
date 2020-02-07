@@ -32,9 +32,6 @@ public class Scale3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
         return scale3D(clij2, input, output, scaleFactor, scaleFactor, scaleFactor, scaleAroundCenter);
     }
 
-    public static boolean scale(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY, Float factorZ) {
-        return scale3D(clij2, input, output, factorX, factorY, factorZ);
-    }
 
     public static boolean scale3D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY, Float factorZ) {
         return scale3D(clij2, input, output, factorX, factorY, factorZ, false);

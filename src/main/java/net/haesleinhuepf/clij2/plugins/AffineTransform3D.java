@@ -38,7 +38,7 @@ public class AffineTransform3D extends AbstractCLIJ2Plugin implements CLIJMacroP
         return affineTransform3D(getCLIJ2(), input, output, transform);
     }
 
-    public static boolean affineTransform3D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, String transform) {
+    public static boolean affineTransform3D(CLIJ2 clij2, ClearCLBuffer input, ClearCLImageInterface output, String transform) {
         String[] transformCommands = transform.trim().toLowerCase().split(" ");
         net.imglib2.realtransform.AffineTransform3D at = new net.imglib2.realtransform.AffineTransform3D();
         for(String transformCommand : transformCommands) {
@@ -152,7 +152,7 @@ public class AffineTransform3D extends AbstractCLIJ2Plugin implements CLIJMacroP
         }
     }
 
-    public static boolean affineTransform3D(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, float[] matrix) {
+    public static boolean affineTransform3D(CLIJ2 clij2, ClearCLBuffer src, ClearCLImageInterface dst, float[] matrix) {
         assertDifferent(src, dst);
 
         ClearCLBuffer matrixCl = clij2.create(new long[]{matrix.length, 1, 1}, NativeTypeEnum.Float);
@@ -172,7 +172,7 @@ public class AffineTransform3D extends AbstractCLIJ2Plugin implements CLIJMacroP
         return true;
     }
 
-    public static boolean affineTransform3D(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, net.imglib2.realtransform.AffineTransform3D at) {
+    public static boolean affineTransform3D(CLIJ2 clij2, ClearCLBuffer src, ClearCLImageInterface dst, net.imglib2.realtransform.AffineTransform3D at) {
         assertDifferent(src, dst);
         at = at.inverse();
         float[] matrix = AffineTransform.matrixToFloatArray(at);

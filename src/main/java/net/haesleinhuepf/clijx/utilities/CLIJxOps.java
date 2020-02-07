@@ -197,8 +197,8 @@ import net.haesleinhuepf.clij2.plugins.SumZProjection;
 import net.haesleinhuepf.clij2.plugins.SumOfAllPixels;
 import net.haesleinhuepf.clij2.plugins.CenterOfMass;
 import net.haesleinhuepf.clij2.plugins.Invert;
-import net.haesleinhuepf.clijx.plugins.Downsample2D;
-import net.haesleinhuepf.clijx.plugins.Downsample3D;
+import net.haesleinhuepf.clij2.legacyplugins.Downsample2D;
+import net.haesleinhuepf.clij2.legacyplugins.Downsample3D;
 import net.haesleinhuepf.clij2.plugins.DownsampleSliceBySliceHalfMedian;
 import net.haesleinhuepf.clij2.plugins.LocalThreshold;
 import net.haesleinhuepf.clij2.plugins.GradientX;
@@ -277,6 +277,8 @@ import net.haesleinhuepf.clij2.plugins.SetWhereXgreaterThanY;
 import net.haesleinhuepf.clij2.plugins.SetWhereXsmallerThanY;
 import net.haesleinhuepf.clij2.plugins.SetNonZeroPixelsToPixelIndex;
 import net.haesleinhuepf.clij2.plugins.CloseIndexGapsInLabelMap;
+import net.haesleinhuepf.clij2.legacyplugins.AffineTransform;
+import net.haesleinhuepf.clij2.legacyplugins.Scale;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJxOps {
    CLIJ getCLIJ();
@@ -303,15 +305,15 @@ public abstract interface CLIJxOps {
     /**
      * 
      */
-    default boolean detectOptimaSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    default boolean convertToImageJBinary(ClearCLBuffer arg1, ClearCLBuffer arg2) {
+        return Kernels.convertToImageJBinary(getCLIJ(), arg1, arg2);
     }
 
     /**
      * 
      */
-    default boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    default boolean convertToImageJBinary(ClearCLImage arg1, ClearCLImage arg2) {
+        return Kernels.convertToImageJBinary(getCLIJ(), arg1, arg2);
     }
 
     /**
@@ -326,22 +328,15 @@ public abstract interface CLIJxOps {
     /**
      * 
      */
-    default boolean differenceOfGaussianSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.differenceOfGaussianSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    default boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
     }
 
     /**
      * 
      */
-    default boolean convertToImageJBinary(ClearCLBuffer arg1, ClearCLBuffer arg2) {
-        return Kernels.convertToImageJBinary(getCLIJ(), arg1, arg2);
-    }
-
-    /**
-     * 
-     */
-    default boolean convertToImageJBinary(ClearCLImage arg1, ClearCLImage arg2) {
-        return Kernels.convertToImageJBinary(getCLIJ(), arg1, arg2);
+    default boolean detectOptimaSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
     }
 
     /**
@@ -361,15 +356,20 @@ public abstract interface CLIJxOps {
     /**
      * 
      */
-    default double[] sumPixelsSliceBySlice(ClearCLBuffer arg1) {
-        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
+    default boolean differenceOfGaussianSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.differenceOfGaussianSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
+     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
+     *  dimesions of the resulting image must be specified by the user according to its definition:
+     * X = 0
+     * Y = 1
+     * Z = 2
      * 
      */
-    default double[] sumPixelsSliceBySlice(ClearCLImage arg1) {
-        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
+    default boolean maximumXYZProjection(ClearCLImage source, ClearCLImage destination_max, double dimensionX, double dimensionY, double projectedDimension) {
+        return Kernels.maximumXYZProjection(getCLIJ(), source, destination_max, new Double (dimensionX).intValue(), new Double (dimensionY).intValue(), new Double (projectedDimension).intValue());
     }
 
     /**
@@ -385,15 +385,17 @@ public abstract interface CLIJxOps {
     }
 
     /**
-     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
-     *  dimesions of the resulting image must be specified by the user according to its definition:
-     * X = 0
-     * Y = 1
-     * Z = 2
      * 
      */
-    default boolean maximumXYZProjection(ClearCLImage source, ClearCLImage destination_max, double dimensionX, double dimensionY, double projectedDimension) {
-        return Kernels.maximumXYZProjection(getCLIJ(), source, destination_max, new Double (dimensionX).intValue(), new Double (dimensionY).intValue(), new Double (projectedDimension).intValue());
+    default double[] sumPixelsSliceBySlice(ClearCLImage arg1) {
+        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
+    }
+
+    /**
+     * 
+     */
+    default double[] sumPixelsSliceBySlice(ClearCLBuffer arg1) {
+        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
     }
 
 
@@ -829,44 +831,6 @@ public abstract interface CLIJxOps {
     // net.haesleinhuepf.clijx.plugins.tenengradfusion.AbstractTenengradFusion
     //----------------------------------------------------
 
-    // net.haesleinhuepf.clijx.plugins.Downsample2D
-    //----------------------------------------------------
-    /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
-     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
-     */
-    default boolean downsample2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Downsample2D.downsample2D(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
-    }
-
-    /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
-     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
-     */
-    default boolean downsample(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Downsample2D.downsample(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
-    }
-
-
-    // net.haesleinhuepf.clijx.plugins.Downsample3D
-    //----------------------------------------------------
-    /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
-     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
-     */
-    default boolean downsample3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Downsample3D.downsample3D(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
-     * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
-     */
-    default boolean downsample(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Downsample3D.downsample(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-
     // net.haesleinhuepf.clijx.plugins.Blur3DSliceBySlice
     //----------------------------------------------------
     /**
@@ -923,4 +887,4 @@ public abstract interface CLIJxOps {
     }
 
 }
-// 65 methods generated.
+// 61 methods generated.
