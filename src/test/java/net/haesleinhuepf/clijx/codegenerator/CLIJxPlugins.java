@@ -320,7 +320,8 @@ public interface CLIJxPlugins {
             SetNonZeroPixelsToPixelIndex.class,
             CloseIndexGapsInLabelMap.class,
             AffineTransform.class,
-            Scale.class
+            Scale.class,
+            AverageSurfaceAngle.class
     };
 
     public String blockList = ";" +
