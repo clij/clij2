@@ -321,7 +321,7 @@ public interface CLIJxPlugins {
             CloseIndexGapsInLabelMap.class,
             AffineTransform.class,
             Scale.class,
-            AverageSurfaceAngle.class
+            AverageAngleBetweenAdjacentTriangles.class
     };
 
     public String blockList = ";" +
