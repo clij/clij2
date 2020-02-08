@@ -151,7 +151,7 @@ __kernel void average_angle_between_adjacent_triangles (
 
 
                         if (angle > 180) {
-                          angle = 180 - angle;
+                          angle = 360 - angle;
                         }
                         sum = sum + angle;
                         count++;
