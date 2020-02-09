@@ -14,6 +14,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
+import java.util.Arrays;
 
 public class OpGenerator {
     public static void main(String ... args) throws IOException {
@@ -183,9 +184,19 @@ public class OpGenerator {
 
     public static String[] guessParameterNames(CLIJMacroPluginService service, String methodName, String[] parametersHeader) {
         CLIJMacroPlugin plugin = findPlugin(service, methodName);
+
+        if(methodName.contains("paste"))
+        {
+            System.out.println("P " + plugin + " " + Arrays.toString(parametersHeader));
+        }
+
         if (plugin != null) {
             String[] parameters = plugin.getParameterHelpText().split(",");
             if (parameters.length != parametersHeader.length) {
+                if(methodName.contains("paste"))
+                {
+                    System.out.println("Leaving 1");
+                }
                 return new String[0];
             }
             String[] parameterNames = new String[parametersHeader.length];
@@ -193,16 +204,33 @@ public class OpGenerator {
                 String typeA = parameters[i].trim().split(" ")[0];
                 String typeB = parametersHeader[i].trim().split(" ")[0];
 
-                if (((typeA.compareTo("String") == 0 || typeA.compareTo("Image") == 0) && (typeB.compareTo("ClearCLBuffer") == 0 || typeB.compareTo("ClearCLImage") == 0)) ||
-                        ((typeA.compareTo("Number") == 0) && (typeB.compareTo("double") == 0))) {
+                if (
+                        ((typeA.compareTo("String") == 0 || typeA.compareTo("Image") == 0) && (typeB.compareTo("ClearCLBuffer") == 0 || typeB.compareTo("ClearCLImage") == 0 || typeB.compareTo("ClearCLImageInterface") == 0)) ||
+                        ((
+                                typeA.compareTo("Number") == 0) && (typeB.compareTo("Double") == 0 ||
+                                typeB.compareTo("Float") == 0 || typeB.compareTo("Integer") == 0)) ||
+                                (typeA.compareTo("Boolean") == 0 && typeB.compareTo("Boolean") == 0) ||
+                                (typeA.compareTo("String") == 0 && typeB.compareTo("String") == 0)
+                ) {
                     parameterNames[i] = parameters[i].trim().split(" ")[1];
                 } else {
+                    //if(methodName.contains("paste"))
+                    //{
+                    System.out.println("Leaving because " + methodName + "  " + typeA + " != " + typeB);
+                    //}
                     return new String[0];
                 }
 
             }
+            if(methodName.contains("paste")) {
+                System.out.println(Arrays.toString(parameterNames));
+            }
             return parameterNames;
         }
+        if(methodName.contains("paste")) {
+            System.out.println("nothing");
+        }
+
         return new String[0];
     }
 
@@ -220,8 +248,8 @@ public class OpGenerator {
                 "CLIJ_" + methodName + "2D",
                 "CLIJ_" + methodName + "3D",
                 "CLIJ_" + methodName + "Images",
-                "CLIJ_" + methodName.replace( "Sphere", "2DBox"),
-                "CLIJ_" + methodName.replace( "Sphere", "3DBox"),
+                "CLIJ_" + methodName.replace( "Sphere", "2DSphere"),
+                "CLIJ_" + methodName.replace( "Sphere", "3DSphere"),
                 "CLIJ_" + methodName.replace( "Box", "2DBox"),
                 "CLIJ_" + methodName.replace( "Box", "3DBox"),
                 "CLIJ_" + methodName.replace( "Pixels", "OfAllPixels"),
@@ -230,8 +258,8 @@ public class OpGenerator {
                 "CLIJ2_" + methodName + "2D",
                 "CLIJ2_" + methodName + "3D",
                 "CLIJ2_" + methodName + "Images",
-                "CLIJ2_" + methodName.replace( "Sphere", "2DBox"),
-                "CLIJ2_" + methodName.replace( "Sphere", "3DBox"),
+                "CLIJ2_" + methodName.replace( "Sphere", "2DSphere"),
+                "CLIJ2_" + methodName.replace( "Sphere", "3DSphere"),
                 "CLIJ2_" + methodName.replace( "Box", "2DBox"),
                 "CLIJ2_" + methodName.replace( "Box", "3DBox"),
                 "CLIJ2_" + methodName.replace( "Pixels", "OfAllPixels"),
@@ -241,8 +269,8 @@ public class OpGenerator {
                 "CLIJx_" + methodName + "2D",
                 "CLIJx_" + methodName + "3D",
                 "CLIJx_" + methodName + "Images",
-                "CLIJx_" + methodName.replace( "Sphere", "2DBox"),
-                "CLIJx_" + methodName.replace( "Sphere", "3DBox"),
+                "CLIJx_" + methodName.replace( "Sphere", "2DSphere"),
+                "CLIJx_" + methodName.replace( "Sphere", "3DSphere"),
                 "CLIJx_" + methodName.replace( "Box", "2DBox"),
                 "CLIJx_" + methodName.replace( "Box", "3DBox"),
                 "CLIJx_" + methodName.replace( "Pixels", "OfAllPixels"),

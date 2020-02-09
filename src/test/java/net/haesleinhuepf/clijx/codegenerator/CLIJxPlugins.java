@@ -325,7 +325,27 @@ public interface CLIJxPlugins {
             CentroidsOfLabels.class,
             SetRampX.class,
             SetRampY.class,
-            SetRampZ.class
+            SetRampZ.class,
+            SubtractImageFromScalar.class,
+            ThresholdDefault.class,
+            ThresholdOtsu.class,
+            ThresholdHuang.class,
+            ThresholdIntermodes.class,
+            ThresholdIsoData.class,
+            ThresholdIJ_IsoData.class,
+            ThresholdLi.class,
+            ThresholdMaxEntropy.class,
+            ThresholdMean.class,
+            ThresholdMinError.class,
+            ThresholdMinimum.class,
+            ThresholdMoments.class,
+            ThresholdPercentile.class,
+            ThresholdRenyiEntropy.class,
+            ThresholdShanbhag.class,
+            ThresholdTriangle.class,
+            ThresholdYen.class,
+            ExcludeLabelsSubSurface.class,
+            SetPlane.class
     };
 
     public String blockList = ";" +

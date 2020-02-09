@@ -35,7 +35,7 @@ public class MeanClosestSpotDistanceTest {
         ClearCLBuffer clBinary1 = clijx.push(binary1);
         ClearCLBuffer clBinary2 = clijx.push(binary2);
 
-        double meanShortestDistance = MeanClosestSpotDistance.meanClosestSpotDistances(clijx, clBinary1, clBinary2);
+        double meanShortestDistance = MeanClosestSpotDistance.meanClosestSpotDistance(clijx, clBinary1, clBinary2);
         assertEquals(1, meanShortestDistance, tolerance);
 
         clBinary1.close();

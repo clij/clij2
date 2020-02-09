@@ -90,7 +90,7 @@ public class DocumentationGenerator {
                             }
                         }
 
-                        if (!parametersHeader.contains("ClearCLImage ")) { // we document only  buffer methods for now
+                        if (!parametersHeader.contains("ClearCLImage ") && !parametersHeader.contains("arg1")) { // we document only  buffer methods for now
                             CLIJMacroPlugin plugin = findPlugin(service, methodName);
 
                             DocumentationItem item = new DocumentationItem();
@@ -119,10 +119,15 @@ public class DocumentationGenerator {
                             item.returnType = returnType;
 
                             methodMap.put(methodName + "_" + methodCount, item);
+                            //System.out.println("Collecting " + methodName + "(" + parametersCall + ");");
 
                             methodCount++;
                             processedNames = processedNames + method.getName() + ";";
+                        } else {
+                            //System.out.println("Ignoring  " + methodName + "(" + parametersCall + ");");
                         }
+                    } else {
+                        //System.out.println("Ignoring " + method.getName() + "(...);");
                     }
                 }
             }
