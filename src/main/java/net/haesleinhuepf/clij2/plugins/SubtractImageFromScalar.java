@@ -11,7 +11,6 @@ import org.scijava.plugin.Plugin;
 import java.util.HashMap;
 
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
-import static net.haesleinhuepf.clij2.plugins.AddImagesWeighted.addImagesWeighted;
 import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
 
 /**
@@ -24,10 +23,10 @@ public class SubtractImageFromScalar extends AbstractCLIJ2Plugin implements CLIJ
 
     @Override
     public boolean executeCL() {
-        return subtractImagesFromScalar(getCLIJ2(), (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), asFloat(args[2]));
+        return subtractImageFromScalar(getCLIJ2(), (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), asFloat(args[2]));
     }
 
-    public static boolean subtractImagesFromScalar(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Float scalar) {
+    public static boolean subtractImageFromScalar(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Float scalar) {
         assertDifferent(src, dst);
 
         HashMap<String, Object> parameters = new HashMap<>();
