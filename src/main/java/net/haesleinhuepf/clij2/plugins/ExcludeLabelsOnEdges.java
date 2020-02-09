@@ -42,7 +42,7 @@ public class ExcludeLabelsOnEdges extends AbstractCLIJ2Plugin implements CLIJMac
             label_indices[i] = i;
         }
 
-        ClearCLBuffer label_index_map = clij2.create(new long[]{label_indices.length, 1, 1}, label_map_out.getNativeType());
+        ClearCLBuffer label_index_map = clij2.create(new long[]{label_indices.length, 1, 1}, clij2.Float);
         label_index_map.readFrom(FloatBuffer.wrap(label_indices), true);
 
         HashMap<String, Object> parameters = new HashMap<String, Object>();
