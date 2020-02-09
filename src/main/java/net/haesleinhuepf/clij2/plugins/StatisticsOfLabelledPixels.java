@@ -39,9 +39,21 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         MEAN_INTENSITY(12),
         SUM_INTENSITY(13),
         STANDARD_DEVIATION_INTENSITY(14),
-        PIXEL_COUNT(15);
+        PIXEL_COUNT(15),
+        SUM_INTENSITY_TIMES_X(16),
+        SUM_INTENSITY_TIMES_Y(17),
+        SUM_INTENSITY_TIMES_Z(18),
+        MASS_CENTER_X(19),
+        MASS_CENTER_Y(20),
+        MASS_CENTER_Z(21),
+        SUM_X(22),
+        SUM_Y(23),
+        SUM_Z(24),
+        CENTROID_X(25),
+        CENTROID_Y(26),
+        CENTROID_Z(27);
 
-        static final int NUMBER_OF_ENTRIES = 16;
+        static final int NUMBER_OF_ENTRIES = 28;
 
         public final int value;
 
@@ -87,6 +99,18 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         entries.add(STATISTICS_ENTRY.SUM_INTENSITY);
         entries.add(STATISTICS_ENTRY.STANDARD_DEVIATION_INTENSITY);
         entries.add(STATISTICS_ENTRY.PIXEL_COUNT);
+        entries.add(STATISTICS_ENTRY.SUM_INTENSITY_TIMES_X);
+        entries.add(STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Y);
+        entries.add(STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Z);
+        entries.add(STATISTICS_ENTRY.MASS_CENTER_X);
+        entries.add(STATISTICS_ENTRY.MASS_CENTER_Y);
+        entries.add(STATISTICS_ENTRY.MASS_CENTER_Z);
+        entries.add(STATISTICS_ENTRY.SUM_X);
+        entries.add(STATISTICS_ENTRY.SUM_Y);
+        entries.add(STATISTICS_ENTRY.SUM_Z);
+        entries.add(STATISTICS_ENTRY.CENTROID_X);
+        entries.add(STATISTICS_ENTRY.CENTROID_Y);
+        entries.add(STATISTICS_ENTRY.CENTROID_Z);
 
         for (int line = 0; line < statistics.length; line++) {
             resultsTable.incrementCounter();
@@ -172,8 +196,16 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
                         statistics[targetIndex][STATISTICS_ENTRY.MINIMUM_INTENSITY.value] = value;
                     }
                     statistics[targetIndex][STATISTICS_ENTRY.SUM_INTENSITY.value] += value;
-                    statistics[targetIndex][STATISTICS_ENTRY.PIXEL_COUNT.value] += 1;
 
+                    statistics[targetIndex][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_X.value] += value * x;
+                    statistics[targetIndex][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Y.value] += value * y;
+                    statistics[targetIndex][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Z.value] += value * z;
+
+                    statistics[targetIndex][STATISTICS_ENTRY.SUM_X.value] += x;
+                    statistics[targetIndex][STATISTICS_ENTRY.SUM_Y.value] += y;
+                    statistics[targetIndex][STATISTICS_ENTRY.SUM_Z.value] += z;
+
+                    statistics[targetIndex][STATISTICS_ENTRY.PIXEL_COUNT.value] += 1;
 
                     initializedFlags[targetIndex] = true;
                 }
@@ -203,6 +235,28 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
                             statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_Z.value] + 1;
 
             statistics[j][STATISTICS_ENTRY.IDENTIFIER.value] = j + startLabelIndex;
+
+            statistics[j][STATISTICS_ENTRY.MASS_CENTER_X.value] =
+                    statistics[j][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_X.value] /
+                            statistics[j][STATISTICS_ENTRY.SUM_INTENSITY.value];
+            statistics[j][STATISTICS_ENTRY.MASS_CENTER_Y.value] =
+                    statistics[j][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Y.value] /
+                            statistics[j][STATISTICS_ENTRY.SUM_INTENSITY.value];
+            statistics[j][STATISTICS_ENTRY.MASS_CENTER_Z.value] =
+                    statistics[j][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Z.value] /
+                            statistics[j][STATISTICS_ENTRY.SUM_INTENSITY.value];
+
+            statistics[j][STATISTICS_ENTRY.CENTROID_X.value] =
+                    statistics[j][STATISTICS_ENTRY.SUM_X.value] /
+                            statistics[j][STATISTICS_ENTRY.PIXEL_COUNT.value];
+            statistics[j][STATISTICS_ENTRY.CENTROID_Y.value] =
+                    statistics[j][STATISTICS_ENTRY.SUM_Y.value] /
+                            statistics[j][STATISTICS_ENTRY.PIXEL_COUNT.value];
+            statistics[j][STATISTICS_ENTRY.CENTROID_Z.value] =
+                    statistics[j][STATISTICS_ENTRY.SUM_Z.value] /
+                            statistics[j][STATISTICS_ENTRY.PIXEL_COUNT.value];
+
+
         }
 
 
