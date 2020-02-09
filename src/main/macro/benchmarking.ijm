@@ -36,7 +36,7 @@ run("Close All");
 for (i = 1; i <= 10; i++) {
 	time = getTime();
 	Ext.CLIJ_mean3DBox(input, blurred, 3, 3, 3);
-	print("GLIJ GPU mean filter no " + i + " took " + (getTime() - time) + " msec");
+	print("CLIJ GPU mean filter no " + i + " took " + (getTime() - time) + " msec");
 }
 
 
