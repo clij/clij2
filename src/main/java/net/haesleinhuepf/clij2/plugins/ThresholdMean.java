@@ -17,30 +17,31 @@ import java.util.Arrays;
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
 
 /**
- * ThresholdOtsu
+ * ThresholdMean
  * <p>
  * Author: @haesleinhuepf
  *         February 2020
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_thresholdOtsu")
-public class ThresholdOtsu extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_thresholdMean")
+// This is generated code. See net.haesleinhuepf.clijx.codegenerator.GenerateThresholdOperations for details
+public class ThresholdMean extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
 
     @Override
     public boolean executeCL() {
         ClearCLBuffer src = (ClearCLBuffer) (args[0]);
         ClearCLBuffer dst = (ClearCLBuffer) (args[1]);
 
-        return thresholdOtsu(getCLIJ2(), src, dst);
+        return thresholdMean(getCLIJ2(), src, dst);
     }
 
-    public static boolean thresholdOtsu(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst) {
-        return clij2.automaticThreshold(src, dst, "Otsu");
+    public static boolean thresholdMean(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst) {
+        return clij2.automaticThreshold(src, dst, "Mean");
     }
 
     @Override
     public String getDescription() {
         StringBuilder doc = new StringBuilder();
-        doc.append("The automatic thresholder utilizes the Otsu threshold method implemented in ImageJ using a histogram determined on \n" +
+        doc.append("The automatic thresholder utilizes the Mean threshold method implemented in ImageJ using a histogram determined on \n" +
                 "the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.");
         return doc.toString();
     }
