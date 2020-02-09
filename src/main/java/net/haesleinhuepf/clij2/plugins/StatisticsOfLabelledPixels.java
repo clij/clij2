@@ -179,7 +179,7 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
                 }
 
                 x++;
-                if (x > width) {
+                if (x >= width) {
                     x = 0;
                     y++;
                 }
