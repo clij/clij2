@@ -47,8 +47,8 @@ class CLIJxAutoComplete {
        headline = "clijx.automaticThresholdInplace(ClearCLBuffer arg1, String arg2)";
        description = "<b>automaticThresholdInplace</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, String arg2";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3)";
-       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3";
+       headline = "clijx.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6)";
+       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.averageAngleBetweenAdjacentTriangles(ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination)";
        description = "<b>averageAngleBetweenAdjacentTriangles</b><br><br>Takes a pointlist and a touch matrix to determine the average angle of adjacent triangles in a surface mesh. For every point, the average angle of adjacent triangles is saved.<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination";
@@ -109,6 +109,9 @@ class CLIJxAutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.centerOfMass(ClearCLBuffer source)";
        description = "<b>centerOfMass</b><br><br>Determines the center of mass of an image or image stack and writes the result in the results table<br>in the columns MassX, MassY and MassZ.<br><br>Parameters:<br>ClearCLBuffer source";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.centroidsOfLabels(ClearCLBuffer arg1, ClearCLBuffer arg2)";
+       description = "<b>centroidsOfLabels</b><br><br>Determines the centroids of all labels in a label image or image stack and writes the resulting  coordinates in a pointlist image. Depending on the dimensionality d of the labelmap and the number  of labels n, the pointlist image will have n*d pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.closeIndexGapsInLabelMap(ClearCLBuffer binary_input, ClearCLBuffer labeling_destination)";
        description = "<b>closeIndexGapsInLabelMap</b><br><br>Analyses a label map and if there are gaps in the indexing (e.g. label 5 is not present) all <br>subsequent labels will be relabelled. Thus, afterwards number of labels and maximum label index are equal.<br><br><br>Parameters:<br>ClearCLBuffer binary_input, ClearCLBuffer labeling_destination";
@@ -632,8 +635,8 @@ class CLIJxAutoComplete {
        headline = "clijx.readImageFromDisc(String arg1)";
        description = "<b>readImageFromDisc</b><br><br>Read an image from disc.<br><br>Parameters:<br>String arg1";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.readRawImageFromDisc(ClearCLBuffer arg1, String arg2)";
-       description = "<b>readRawImageFromDisc</b><br><br>Reads a raw file from disc and pushes it immediately to the GPU.<br><br>Parameters:<br>ClearCLBuffer arg1, String arg2";
+       headline = "clijx.readRawImageFromDisc(String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5)";
+       description = "<b>readRawImageFromDisc</b><br><br>Reads a raw file from disc and pushes it immediately to the GPU.<br><br>Parameters:<br>String arg1, Integer arg2, Integer arg3, Integer arg4, Integer arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.replaceIntensities(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>replaceIntensities</b><br><br>Replaces integer intensities specified in a vector image. The vector image must be 3D with size (m, 1, 1) where m corresponds to the maximum intensity in the original image. Assuming the vector image contains values (0, 1, 0, 2) means: <br> * All pixels with value 0 (first entry in the vector image) get value 0<br> * All pixels with value 1 get value 1<br> * All pixels with value 2 get value 0<br> * All pixels with value 3 get value 2<br><br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
@@ -821,8 +824,8 @@ class CLIJxAutoComplete {
        headline = "clijx.translate3D(ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5)";
        description = "<b>translate3D</b><br><br>Translate an image stack in X, Y and Z.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Float arg3, Float arg4, Float arg5";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.translationRegistration(ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3)";
-       description = "<b>translationRegistration</b><br><br>Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3";
+       headline = "clijx.translationRegistration(ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination)";
+       description = "<b>translationRegistration</b><br><br>Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.<br><br>Parameters:<br>ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.translationTimelapseRegistration(ClearCLBuffer input, ClearCLBuffer output)";
        description = "<b>translationTimelapseRegistration</b><br><br>Applies 2D translation registration to every pair of t, t+1 slices of a 2D+t image stack.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer output";
@@ -857,4 +860,4 @@ class CLIJxAutoComplete {
         return list;
     }
 }
-// 282 methods generated.
+// 283 methods generated.

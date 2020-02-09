@@ -38,8 +38,8 @@ class CLIJ2AutoComplete {
        headline = "clij2.argMaximumZProjection(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>argMaximumZProjection</b><br><br>Determines the maximum projection of an image stack along Z.<br>Furthermore, another 2D image is generated with pixels containing the z-index where the maximum was found (zero based).<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clij2.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3)";
-       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3";
+       headline = "clij2.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6)";
+       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.averageAngleBetweenAdjacentTriangles(ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination)";
        description = "<b>averageAngleBetweenAdjacentTriangles</b><br><br>Takes a pointlist and a touch matrix to determine the average angle of adjacent triangles in a surface mesh. For every point, the average angle of adjacent triangles is saved.<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination";
@@ -97,6 +97,9 @@ class CLIJ2AutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.centerOfMass(ClearCLBuffer source)";
        description = "<b>centerOfMass</b><br><br>Determines the center of mass of an image or image stack and writes the result in the results table<br>in the columns MassX, MassY and MassZ.<br><br>Parameters:<br>ClearCLBuffer source";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.centroidsOfLabels(ClearCLBuffer arg1, ClearCLBuffer arg2)";
+       description = "<b>centroidsOfLabels</b><br><br>Determines the centroids of all labels in a label image or image stack and writes the resulting  coordinates in a pointlist image. Depending on the dimensionality d of the labelmap and the number  of labels n, the pointlist image will have n*d pixels.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.closeIndexGapsInLabelMap(ClearCLBuffer binary_input, ClearCLBuffer labeling_destination)";
        description = "<b>closeIndexGapsInLabelMap</b><br><br>Analyses a label map and if there are gaps in the indexing (e.g. label 5 is not present) all <br>subsequent labels will be relabelled. Thus, afterwards number of labels and maximum label index are equal.<br><br><br>Parameters:<br>ClearCLBuffer binary_input, ClearCLBuffer labeling_destination";
@@ -734,4 +737,4 @@ class CLIJ2AutoComplete {
         return list;
     }
 }
-// 241 methods generated.
+// 242 methods generated.
