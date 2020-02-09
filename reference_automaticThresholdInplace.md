@@ -20,19 +20,21 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+input_and_destination = clij.create();
 ```
 
 ```
 // Execute operation on GPU
-clij2.automaticThresholdInplace(clij, arg1, arg2);
+clij2.automaticThresholdInplace(clij, input_and_destination, method);
 ```
 
 ```
 //show result
+input_and_destinationImagePlus = clij2.pull(input_and_destination);
+input_and_destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
+clij2.release(input_and_destination);
 ```
 
 

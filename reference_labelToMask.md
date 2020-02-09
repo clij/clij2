@@ -17,22 +17,24 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-float arg3 = 1.0;
+ClearCLBuffer label_map_source = clij2.push(label_map_sourceImagePlus);
+mask_destination = clij.create(label_map_source);
+float label_index = 1.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.labelToMask(clij, arg1, arg2, arg3);
+clij2.labelToMask(clij, label_map_source, mask_destination, label_index);
 ```
 
 ```
 //show result
+mask_destinationImagePlus = clij2.pull(mask_destination);
+mask_destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(label_map_source);
+clij2.release(mask_destination);
 ```
 
 

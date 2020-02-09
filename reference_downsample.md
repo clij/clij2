@@ -1,5 +1,5 @@
 ## downsample
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
 is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
@@ -18,23 +18,25 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-float arg3 = 1.0;
-float arg4 = 2.0;
+ClearCLBuffer source = clij2.push(sourceImagePlus);
+destination = clij.create(source);
+float factorX = 1.0;
+float factorY = 2.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.downsample(clij, arg1, arg2, arg3, arg4);
+clij2.downsample(clij, source, destination, factorX, factorY);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(source);
+clij2.release(destination);
 ```
 
 

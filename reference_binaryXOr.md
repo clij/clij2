@@ -21,23 +21,25 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
+ClearCLBuffer operand1 = clij2.push(operand1ImagePlus);
+ClearCLBuffer operand2 = clij2.push(operand2ImagePlus);
+destination = clij.create(operand1);
 ```
 
 ```
 // Execute operation on GPU
-clij2.binaryXOr(clij, arg1, arg2, arg3);
+clij2.binaryXOr(clij, operand1, operand2, destination);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
-clij2.release(arg3);
+clij2.release(operand1);
+clij2.release(operand2);
+clij2.release(destination);
 ```
 
 

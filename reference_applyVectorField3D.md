@@ -17,27 +17,29 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
-ClearCLBuffer arg4 = clij2.push(arg4ImagePlus);
-ClearCLBuffer arg5 = clij2.push(arg5ImagePlus);
+ClearCLBuffer source = clij2.push(sourceImagePlus);
+ClearCLBuffer vectorX = clij2.push(vectorXImagePlus);
+ClearCLBuffer vectorY = clij2.push(vectorYImagePlus);
+ClearCLBuffer vectorZ = clij2.push(vectorZImagePlus);
+destination = clij.create(source);
 ```
 
 ```
 // Execute operation on GPU
-clij2.applyVectorfield3D(clij, arg1, arg2, arg3, arg4, arg5);
+clij2.applyVectorfield3D(clij, source, vectorX, vectorY, vectorZ, destination);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
-clij2.release(arg3);
-clij2.release(arg4);
-clij2.release(arg5);
+clij2.release(source);
+clij2.release(vectorX);
+clij2.release(vectorY);
+clij2.release(vectorZ);
+clij2.release(destination);
 ```
 
 

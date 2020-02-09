@@ -17,27 +17,32 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
-ClearCLBuffer arg4 = clij2.push(arg4ImagePlus);
-ClearCLBuffer arg5 = clij2.push(arg5ImagePlus);
+ClearCLBuffer input1 = clij2.push(input1ImagePlus);
+ClearCLBuffer meanInput1 = clij2.push(meanInput1ImagePlus);
+ClearCLBuffer input2 = clij2.push(input2ImagePlus);
+ClearCLBuffer meanInput2 = clij2.push(meanInput2ImagePlus);
+destination = clij.create(input1);
+int radius = 10;
+int deltaPos = 20;
+int dimension = 30;
 ```
 
 ```
 // Execute operation on GPU
-clij2.crossCorrelation(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+clij2.crossCorrelation(clij, input1, meanInput1, input2, meanInput2, destination, radius, deltaPos, dimension);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
-clij2.release(arg3);
-clij2.release(arg4);
-clij2.release(arg5);
+clij2.release(input1);
+clij2.release(meanInput1);
+clij2.release(input2);
+clij2.release(meanInput2);
+clij2.release(destination);
 ```
 
 

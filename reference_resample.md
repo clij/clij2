@@ -17,24 +17,27 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-float arg3 = 1.0;
-float arg4 = 2.0;
-float arg5 = 3.0;
+ClearCLBuffer source = clij2.push(sourceImagePlus);
+destination = clij.create(source);
+float factorX = 1.0;
+float factorY = 2.0;
+float factorZ = 3.0;
+boolean linearInterpolation = true;
 ```
 
 ```
 // Execute operation on GPU
-clij2.resample(clij, arg1, arg2, arg3, arg4, arg5, arg6);
+clij2.resample(clij, source, destination, factorX, factorY, factorZ, linearInterpolation);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(source);
+clij2.release(destination);
 ```
 
 

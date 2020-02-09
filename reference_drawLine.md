@@ -5,7 +5,7 @@ Draws a line between two points with a given thickness. All pixels other than on
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_drawLine(Image destination, Number x1, Number y1, Number z1, Number x2, Number y2, Number z2, Number thickness);
+Ext.CLIJx_drawLine(Image destination, Number x1, Number y1, Number z1, Number x2, Number y2, Number z2, Number thickness, Number value);
 ```
 
 
@@ -17,26 +17,29 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-float arg2 = 1.0;
-float arg3 = 2.0;
-float arg4 = 3.0;
-float arg5 = 4.0;
-float arg6 = 5.0;
-float arg7 = 6.0;
-float arg8 = 7.0;
+destination = clij.create();
+float x1 = 1.0;
+float y1 = 2.0;
+float z1 = 3.0;
+float x2 = 4.0;
+float y2 = 5.0;
+float z2 = 6.0;
+float thickness = 7.0;
+float value = 8.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.drawLine(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+clij2.drawLine(clij, destination, x1, y1, z1, x2, y2, z2, thickness, value);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
+clij2.release(destination);
 ```
 
 

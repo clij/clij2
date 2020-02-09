@@ -5,7 +5,7 @@ Replaces a specific intensity in an image with a given new value.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_replaceIntensity(Image input, Image destination, Number oldValue, number newValue);
+Ext.CLIJx_replaceIntensity(Image input, Image destination, Number oldValue, Number newValue);
 ```
 
 
@@ -17,23 +17,25 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-float arg3 = 1.0;
-float arg4 = 2.0;
+ClearCLBuffer input = clij2.push(inputImagePlus);
+destination = clij.create(input);
+float oldValue = 1.0;
+float newValue = 2.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.replaceIntensity(clij, arg1, arg2, arg3, arg4);
+clij2.replaceIntensity(clij, input, destination, oldValue, newValue);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(input);
+clij2.release(destination);
 ```
 
 

@@ -17,23 +17,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
+ClearCLBuffer red = clij2.push(redImagePlus);
+ClearCLBuffer green = clij2.push(greenImagePlus);
+ClearCLBuffer blue = clij2.push(blueImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clij2.showRGB(clij, arg1, arg2, arg3, arg4);
+clij2.showRGB(clij, red, green, blue, title);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
-clij2.release(arg3);
+clij2.release(red);
+clij2.release(green);
+clij2.release(blue);
 ```
 
 

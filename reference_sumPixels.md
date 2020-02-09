@@ -18,12 +18,12 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer source = clij2.push(sourceImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double resultSumPixels = clij2.sumPixels(clij, arg1);
+double resultSumPixels = clij2.sumPixels(clij, source);
 ```
 
 ```
@@ -31,7 +31,7 @@ double resultSumPixels = clij2.sumPixels(clij, arg1);
 System.out.println(resultSumPixels);
 
 // cleanup memory on GPU
-clij2.release(arg1);
+clij2.release(source);
 ```
 
 

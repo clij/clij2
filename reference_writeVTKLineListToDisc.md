@@ -17,21 +17,21 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
+ClearCLBuffer pointlist = clij2.push(pointlistImagePlus);
+ClearCLBuffer touch_matrix = clij2.push(touch_matrixImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clij2.writeVTKLineListToDisc(clij, arg1, arg2, arg3);
+clij2.writeVTKLineListToDisc(clij, pointlist, touch_matrix, filename);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(pointlist);
+clij2.release(touch_matrix);
 ```
 
 

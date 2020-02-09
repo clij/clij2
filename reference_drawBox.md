@@ -5,7 +5,7 @@ Draws a box at a given start point with given size. All pixels other than in the
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_drawBox(Image destination, Number x, Number y, Number z, Number width, Number height, Number depth);
+Ext.CLIJx_drawBox(Image destination, Number x, Number y, Number z, Number width, Number height, Number depth, Number value);
 ```
 
 
@@ -17,23 +17,28 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-float arg2 = 1.0;
-float arg3 = 2.0;
-float arg4 = 3.0;
-float arg5 = 4.0;
+destination = clij.create();
+float x = 1.0;
+float y = 2.0;
+float z = 3.0;
+float width = 4.0;
+float height = 5.0;
+float depth = 6.0;
+float value = 7.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.drawBox(clij, arg1, arg2, arg3, arg4, arg5);
+clij2.drawBox(clij, destination, x, y, z, width, height, depth, value);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
+clij2.release(destination);
 ```
 
 

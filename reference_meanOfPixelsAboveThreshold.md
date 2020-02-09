@@ -17,13 +17,13 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-float arg2 = 1.0;
+ClearCLBuffer source = clij2.push(sourceImagePlus);
+float threshold = 1.0;
 ```
 
 ```
 // Execute operation on GPU
-double resultMeanOfPixelsAboveThreshold = clij2.meanOfPixelsAboveThreshold(clij, arg1, arg2);
+double resultMeanOfPixelsAboveThreshold = clij2.meanOfPixelsAboveThreshold(clij, source, threshold);
 ```
 
 ```
@@ -31,7 +31,7 @@ double resultMeanOfPixelsAboveThreshold = clij2.meanOfPixelsAboveThreshold(clij,
 System.out.println(resultMeanOfPixelsAboveThreshold);
 
 // cleanup memory on GPU
-clij2.release(arg1);
+clij2.release(source);
 ```
 
 

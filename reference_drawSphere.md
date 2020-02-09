@@ -5,7 +5,7 @@ Draws a sphere around a given point with given radii in x, y and z (if 3D). All 
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_drawSphere(Image destination, Number x, Number y, Number z, Number radius_x, Number radius_y, Number radius_z);
+Ext.CLIJx_drawSphere(Image destination, Number x, Number y, Number z, Number radius_x, Number radius_y, Number radius_z, Number value);
 ```
 
 
@@ -17,23 +17,28 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-float arg2 = 1.0;
-float arg3 = 2.0;
-float arg4 = 3.0;
-float arg5 = 4.0;
+destination = clij.create();
+float x = 1.0;
+float y = 2.0;
+float z = 3.0;
+float radius_x = 4.0;
+float radius_y = 5.0;
+float radius_z = 6.0;
+float value = 7.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.drawSphere(clij, arg1, arg2, arg3, arg4, arg5);
+clij2.drawSphere(clij, destination, x, y, z, radius_x, radius_y, radius_z, value);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
+clij2.release(destination);
 ```
 
 

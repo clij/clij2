@@ -19,25 +19,27 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
-float arg4 = 1.0;
-float arg5 = 2.0;
+ClearCLBuffer summand1 = clij2.push(summand1ImagePlus);
+ClearCLBuffer summand2 = clij2.push(summand2ImagePlus);
+destination = clij.create(summand1);
+float factor1 = 1.0;
+float factor2 = 2.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.addImagesWeighted(clij, arg1, arg2, arg3, arg4, arg5);
+clij2.addImagesWeighted(clij, summand1, summand2, destination, factor1, factor2);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
-clij2.release(arg3);
+clij2.release(summand1);
+clij2.release(summand2);
+clij2.release(destination);
 ```
 
 

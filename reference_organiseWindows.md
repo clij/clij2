@@ -17,11 +17,17 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
+int startX = 10;
+int startY = 20;
+int tilesX = 30;
+int tilesY = 40;
+int tileWidth = 50;
+int tileHeight = 60;
 ```
 
 ```
 // Execute operation on GPU
-clij2.organiseWindows(clij, arg1, arg2, arg3, arg4, arg5, arg6);
+clij2.organiseWindows(clij, startX, startY, tilesX, tilesY, tileWidth, tileHeight);
 ```
 
 ```

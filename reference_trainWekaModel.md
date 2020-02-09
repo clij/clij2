@@ -24,21 +24,21 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
+ClearCLBuffer featureStack3D = clij2.push(featureStack3DImagePlus);
+ClearCLBuffer groundTruth2D = clij2.push(groundTruth2DImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clij2.trainWekaModel(clij, arg1, arg2, arg3);
+clij2.trainWekaModel(clij, featureStack3D, groundTruth2D, saveModelFilename);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(featureStack3D);
+clij2.release(groundTruth2D);
 ```
 
 

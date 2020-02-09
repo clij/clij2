@@ -17,21 +17,23 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
+ClearCLBuffer source = clij2.push(sourceImagePlus);
+destination_sum = clij.create(new long[]{source.getWidth(), source.getHeight()}, source.getNativeType());
 ```
 
 ```
 // Execute operation on GPU
-clij2.minimumZProjection(clij, arg1, arg2);
+clij2.minimumZProjection(clij, source, destination_sum);
 ```
 
 ```
 //show result
+destination_sumImagePlus = clij2.pull(destination_sum);
+destination_sumImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(source);
+clij2.release(destination_sum);
 ```
 
 

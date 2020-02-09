@@ -17,23 +17,27 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
+ClearCLBuffer input1 = clij2.push(input1ImagePlus);
+ClearCLBuffer input2 = clij2.push(input2ImagePlus);
+destination = clij.create(input1);
+int maxDeltaX = 10;
+int maxDeltaY = 20;
 ```
 
 ```
 // Execute operation on GPU
-clij2.deformableRegistration2D(clij, arg1, arg2, arg3, arg4, arg5);
+clij2.deformableRegistration2D(clij, input1, input2, destination, maxDeltaX, maxDeltaY);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
-clij2.release(arg3);
+clij2.release(input1);
+clij2.release(input2);
+clij2.release(destination);
 ```
 
 

@@ -17,28 +17,30 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-float arg2 = 1.0;
-float arg3 = 2.0;
-float arg4 = 3.0;
-float arg5 = 4.0;
-float arg6 = 5.0;
-float arg7 = 6.0;
-float arg8 = 7.0;
-float arg9 = 8.0;
-float arg10 = 9.0;
+destination = clij.create();
+float x1 = 1.0;
+float y1 = 2.0;
+float z1 = 3.0;
+float x2 = 4.0;
+float y2 = 5.0;
+float z2 = 6.0;
+float thickness = 7.0;
+float value1 = 8.0;
+float destination0 = 9.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.drawTwoValueLine(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+clij2.drawTwoValueLine(clij, destination, x1, y1, z1, x2, y2, z2, thickness, value1, destination0);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
+clij2.release(destination);
 ```
 
 

@@ -19,20 +19,20 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-float arg2 = 1.0;
+ClearCLBuffer source = clij2.push(sourceImagePlus);
+float value = 1.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.set(clij, arg1, arg2);
+clij2.set(clij, source, value);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-clij2.release(arg1);
+clij2.release(source);
 ```
 
 
@@ -48,7 +48,6 @@ clij2.release(arg1);
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [interactiveCylinderProjection.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/interactiveCylinderProjection.py)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [interactiveSphereProjection.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/interactiveSphereProjection.py)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [jaccardIndex.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/jaccardIndex.py)  
-<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [multiply_images_test.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/multiply_images_test.py)  
 <a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [drawBinaryRectangle.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/drawBinaryRectangle.m)  
 <a href="https://github.com/clij/clatlab/blob/master/src/main/matlab/"><img src="images/language_matlab.png" height="20"/></a> [paste.m](https://github.com/clij/clatlab/blob/master/src/main/matlab/paste.m)  
 

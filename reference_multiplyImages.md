@@ -19,30 +19,31 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
+ClearCLBuffer factor1 = clij2.push(factor1ImagePlus);
+ClearCLBuffer factor2 = clij2.push(factor2ImagePlus);
+destination = clij.create(factor1);
 ```
 
 ```
 // Execute operation on GPU
-clij2.multiplyImages(clij, arg1, arg2, arg3);
+clij2.multiplyImages(clij, factor1, factor2, destination);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
-clij2.release(arg3);
+clij2.release(factor1);
+clij2.release(factor2);
+clij2.release(destination);
 ```
 
 
 
 
 ### Example scripts
-<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/"><img src="images/language_jython.png" height="20"/></a> [multiply_images_test.py](https://github.com/clij/clij-advanced-filters/blob/master/src/main/jython/multiply_images_test.py)  
 <a href="https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/"><img src="images/language_java.png" height="20"/></a> [BenchmarkingWorkflowDemo.java](https://github.com/clij/clij-docs/blob/master/src/main/java/net/haesleinhuepf/clij/examples/BenchmarkingWorkflowDemo.java)  
 
 

@@ -18,22 +18,24 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-int arg3 = 10;
+ClearCLBuffer distance_matrix = clij2.push(distance_matrixImagePlus);
+indexlist_destination = clij.create(distance_matrix);
+int nClosestPointsTofind = 10;
 ```
 
 ```
 // Execute operation on GPU
-clij2.averageDistanceOfNClosestPoints(clij, arg1, arg2, arg3);
+clij2.averageDistanceOfNClosestPoints(clij, distance_matrix, indexlist_destination, nClosestPointsTofind);
 ```
 
 ```
 //show result
+indexlist_destinationImagePlus = clij2.pull(indexlist_destination);
+indexlist_destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(distance_matrix);
+clij2.release(indexlist_destination);
 ```
 
 

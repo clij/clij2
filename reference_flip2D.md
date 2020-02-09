@@ -17,23 +17,25 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-boolean arg3 = true;
-boolean arg4 = false;
+ClearCLBuffer source = clij2.push(sourceImagePlus);
+destination = clij.create(source);
+boolean flipX = true;
+boolean flipY = false;
 ```
 
 ```
 // Execute operation on GPU
-clij2.flip2D(clij, arg1, arg2, arg3, arg4);
+clij2.flip2D(clij, source, destination, flipX, flipY);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(source);
+clij2.release(destination);
 ```
 
 

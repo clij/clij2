@@ -1,12 +1,12 @@
 ## matrixEqual
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
 
 Checks if all elements of a matrix are different by less than or equal to a given tolerance.
-The result will be put in the results table as 1 if yes and 0 otherwise.
+The result will be put in the results table in column "MatrixEqual" as 1 if yes and 0 otherwise.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_matrixEqual(Image input1, Image input2, Image destination);
+Ext.CLIJx_matrixEqual(Image input1, Image input2, Number tolerance);
 ```
 
 
@@ -18,22 +18,22 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-float arg3 = 1.0;
+ClearCLBuffer input1 = clij2.push(input1ImagePlus);
+ClearCLBuffer input2 = clij2.push(input2ImagePlus);
+float tolerance = 1.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.matrixEqual(clij, arg1, arg2, arg3);
+clij2.matrixEqual(clij, input1, input2, tolerance);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(input1);
+clij2.release(input2);
 ```
 
 

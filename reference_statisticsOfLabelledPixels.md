@@ -17,13 +17,13 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
+ClearCLBuffer input = clij2.push(inputImagePlus);
+ClearCLBuffer labelmap = clij2.push(labelmapImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-double[] resultStatisticsOfLabelledPixels = clij2.statisticsOfLabelledPixels(clij, arg1, arg2, arg3);
+double[][] resultStatisticsOfLabelledPixels = clij2.statisticsOfLabelledPixels(clij, input, labelmap);
 ```
 
 ```
@@ -31,8 +31,8 @@ double[] resultStatisticsOfLabelledPixels = clij2.statisticsOfLabelledPixels(cli
 System.out.println(resultStatisticsOfLabelledPixels);
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(input);
+clij2.release(labelmap);
 ```
 
 

@@ -17,19 +17,19 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer pointlist = clij2.push(pointlistImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clij2.writeXYZPointListToDisc(clij, arg1, arg2);
+clij2.writeXYZPointListToDisc(clij, pointlist, filename);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-clij2.release(arg1);
+clij2.release(pointlist);
 ```
 
 

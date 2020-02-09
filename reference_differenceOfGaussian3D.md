@@ -19,27 +19,29 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-float arg3 = 1.0;
-float arg4 = 2.0;
-float arg5 = 3.0;
-float arg6 = 4.0;
-float arg7 = 5.0;
-float arg8 = 6.0;
+ClearCLBuffer input = clij2.push(inputImagePlus);
+destination = clij.create(input);
+float sigma1x = 1.0;
+float sigma1y = 2.0;
+float sigma1z = 3.0;
+float sigma2x = 4.0;
+float sigma2y = 5.0;
+float sigma2z = 6.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.differenceOfGaussian3D(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+clij2.differenceOfGaussian3D(clij, input, destination, sigma1x, sigma1y, sigma1z, sigma2x, sigma2y, sigma2z);
 ```
 
 ```
 //show result
+destinationImagePlus = clij2.pull(destination);
+destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(input);
+clij2.release(destination);
 ```
 
 

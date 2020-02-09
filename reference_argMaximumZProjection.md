@@ -18,23 +18,27 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
+ClearCLBuffer source = clij2.push(sourceImagePlus);
+destination_max = clij.create(source);
+destination_arg_max = clij.create(source);
 ```
 
 ```
 // Execute operation on GPU
-clij2.argMaximumZProjection(clij, arg1, arg2, arg3);
+clij2.argMaximumZProjection(clij, source, destination_max, destination_arg_max);
 ```
 
 ```
 //show result
+destination_maxImagePlus = clij2.pull(destination_max);
+destination_maxImagePlus.show();
+destination_arg_maxImagePlus = clij2.pull(destination_arg_max);
+destination_arg_maxImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
-clij2.release(arg3);
+clij2.release(source);
+clij2.release(destination_max);
+clij2.release(destination_arg_max);
 ```
 
 

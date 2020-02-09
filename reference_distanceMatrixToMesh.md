@@ -17,24 +17,26 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
-float arg4 = 1.0;
+ClearCLBuffer pointlist = clij2.push(pointlistImagePlus);
+ClearCLBuffer distance_matrix = clij2.push(distance_matrixImagePlus);
+mesh_destination = clij.create(pointlist);
+float maximumDistance = 1.0;
 ```
 
 ```
 // Execute operation on GPU
-clij2.distanceMatrixToMesh(clij, arg1, arg2, arg3, arg4);
+clij2.distanceMatrixToMesh(clij, pointlist, distance_matrix, mesh_destination, maximumDistance);
 ```
 
 ```
 //show result
+mesh_destinationImagePlus = clij2.pull(mesh_destination);
+mesh_destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
-clij2.release(arg3);
+clij2.release(pointlist);
+clij2.release(distance_matrix);
+clij2.release(mesh_destination);
 ```
 
 

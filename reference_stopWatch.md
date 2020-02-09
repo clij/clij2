@@ -21,7 +21,7 @@ CLIJ2 clij2 = CLIJ2.getInstance();
 
 ```
 // Execute operation on GPU
-clij2.stopWatch(clij, arg1);
+clij2.stopWatch(clij, text);
 ```
 
 ```

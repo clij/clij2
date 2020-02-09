@@ -19,30 +19,37 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-ClearCLBuffer arg3 = clij2.push(arg3ImagePlus);
-ClearCLBuffer arg4 = clij2.push(arg4ImagePlus);
-ClearCLBuffer arg5 = clij2.push(arg5ImagePlus);
-int arg6 = 10;
-int arg7 = 20;
-int arg8 = 30;
+ClearCLBuffer source1 = clij2.push(source1ImagePlus);
+ClearCLBuffer source2 = clij2.push(source2ImagePlus);
+destinationDeltaX = clij.create(source1);
+destinationDeltaY = clij.create(source1);
+destinationDeltaZ = clij.create(source1);
+int maxDeltaX = 10;
+int maxDeltaY = 20;
+int maxDeltaZ = 30;
+boolean correctLocalShift = true;
 ```
 
 ```
 // Execute operation on GPU
-clij2.particleImageVelocimetry(clij, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+clij2.particleImageVelocimetry(clij, source1, source2, destinationDeltaX, destinationDeltaY, destinationDeltaZ, maxDeltaX, maxDeltaY, maxDeltaZ, correctLocalShift);
 ```
 
 ```
 //show result
+destinationDeltaXImagePlus = clij2.pull(destinationDeltaX);
+destinationDeltaXImagePlus.show();
+destinationDeltaYImagePlus = clij2.pull(destinationDeltaY);
+destinationDeltaYImagePlus.show();
+destinationDeltaZImagePlus = clij2.pull(destinationDeltaZ);
+destinationDeltaZImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
-clij2.release(arg3);
-clij2.release(arg4);
-clij2.release(arg5);
+clij2.release(source1);
+clij2.release(source2);
+clij2.release(destinationDeltaX);
+clij2.release(destinationDeltaY);
+clij2.release(destinationDeltaZ);
 ```
 
 
