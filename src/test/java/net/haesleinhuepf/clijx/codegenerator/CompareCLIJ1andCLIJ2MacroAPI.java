@@ -31,66 +31,77 @@ public class CompareCLIJ1andCLIJ2MacroAPI {
 
         methodListing.append("## CLIJ 1/2/x API comparison\n");
 
-        methodListing.append("# CLIJ2 methods not part of CLIJ1\n");
-
-        for (String clij2macroMethodName : allMethods) {
-            if (clij2macroMethodName.startsWith("CLIJ2_")) {
-                boolean methodFound = false;
-                for (String clij1macroMethodName : allMethods) {
-                    if (clij1macroMethodName.startsWith("CLIJ_")) {
-                        if (clij1macroMethodName.compareTo(clij2macroMethodName.replace("CLIJ2_", "CLIJ_")) == 0) {
-                            methodFound = true;
-                            break;
+        {
+            methodListing.append("# CLIJ1 methods not part of CLIJ2\n");
+            int count = 0;
+            for (String clij1macroMethodName : allMethods) {
+                if (clij1macroMethodName.startsWith("CLIJ_")) {
+                    boolean methodFound = false;
+                    for (String clij2macroMethodName : allMethods) {
+                        if (clij2macroMethodName.startsWith("CLIJ2_")) {
+                            if (clij1macroMethodName.compareTo(clij2macroMethodName.replace("CLIJ2_", "CLIJ_")) == 0) {
+                                methodFound = true;
+                                break;
+                            }
                         }
                     }
-                }
-                if (!methodFound) {
-                    System.out.println("clij2 method not found in clij1 api: " + clij2macroMethodName);
-                    methodListing.append("* " + clij2macroMethodName + "\n");
-                }
-            }
-        }
-
-        methodListing.append("# CLIJ1 methods not part of CLIJ2\n");
-
-        for (String clij1macroMethodName : allMethods) {
-            if (clij1macroMethodName.startsWith("CLIJ_")) {
-                boolean methodFound = false;
-                for (String clij2macroMethodName : allMethods) {
-                    if (clij2macroMethodName.startsWith("CLIJ2_")) {
-                        if (clij1macroMethodName.compareTo(clij2macroMethodName.replace("CLIJ2_", "CLIJ_")) == 0) {
-                            methodFound = true;
-                            break;
-                        }
+                    if (!methodFound) {
+                        System.out.println("clij1 method not found in clij2 api: " + clij1macroMethodName);
+                        methodListing.append("* " + clij1macroMethodName + "\n");
+                        count++;
                     }
                 }
-                if (!methodFound) {
-                    System.out.println("clij1 method not found in clij2 api: " + clij1macroMethodName);
-                    methodListing.append("* " + clij1macroMethodName + "\n");
-                }
             }
+            methodListing.append("\n" + count + " methods listed.\n");
         }
 
-        methodListing.append("# CLIJx methods not part of CLIJ2\n");
-
-        for (String clijxmacroMethodName : allMethods) {
-            if (clijxmacroMethodName.startsWith("CLIJx_")) {
-                boolean methodFound = false;
-                for (String clij1macroMethodName : allMethods) {
-                    if (clij1macroMethodName.startsWith("CLIJ2_")) {
-                        if (clij1macroMethodName.compareTo(clijxmacroMethodName.replace("CLIJx_", "CLIJ2_")) == 0) {
-                            methodFound = true;
-                            break;
+        {
+            methodListing.append("# CLIJ2 methods not part of CLIJ1\n");
+            int count = 0;
+            for (String clij2macroMethodName : allMethods) {
+                if (clij2macroMethodName.startsWith("CLIJ2_")) {
+                    boolean methodFound = false;
+                    for (String clij1macroMethodName : allMethods) {
+                        if (clij1macroMethodName.startsWith("CLIJ_")) {
+                            if (clij1macroMethodName.compareTo(clij2macroMethodName.replace("CLIJ2_", "CLIJ_")) == 0) {
+                                methodFound = true;
+                                break;
+                            }
                         }
                     }
-                }
-                if (!methodFound) {
-                    System.out.println("clijx method not found in clij2 api: " + clijxmacroMethodName);
-                    methodListing.append("* " + clijxmacroMethodName + "\n");
+                    if (!methodFound) {
+                        System.out.println("clij2 method not found in clij1 api: " + clij2macroMethodName);
+                        methodListing.append("* " + clij2macroMethodName + "\n");
+                        count++;
+                    }
                 }
             }
+            methodListing.append("\n" + count + " methods listed.\n");
         }
 
+        {
+            methodListing.append("# CLIJx methods not part of CLIJ2\n");
+            int count = 0;
+            for (String clijxmacroMethodName : allMethods) {
+                if (clijxmacroMethodName.startsWith("CLIJx_")) {
+                    boolean methodFound = false;
+                    for (String clij1macroMethodName : allMethods) {
+                        if (clij1macroMethodName.startsWith("CLIJ2_")) {
+                            if (clij1macroMethodName.compareTo(clijxmacroMethodName.replace("CLIJx_", "CLIJ2_")) == 0) {
+                                methodFound = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!methodFound) {
+                        System.out.println("clijx method not found in clij2 api: " + clijxmacroMethodName);
+                        methodListing.append("* " + clijxmacroMethodName + "\n");
+                        count++;
+                    }
+                }
+            }
+            methodListing.append("\n" + count + " methods listed.\n");
+        }
         String outputTarget = "clij12xAPIcomparison.md";
         try {
             FileWriter writer = new FileWriter(outputTarget);
