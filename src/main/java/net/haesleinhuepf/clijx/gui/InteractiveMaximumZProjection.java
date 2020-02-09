@@ -117,7 +117,7 @@ public class InteractiveMaximumZProjection implements PlugInFilter, ImageListene
                 } else if (projection.compareTo("Min") == 0) {
                     clijx.minimumZProjectionBounded(transformed, myMaxProjection, min_z, max_z);
                 } else if (projection.compareTo("Mean") == 0) {
-                    clijx.projectMeanZBounded(transformed, myMaxProjection, min_z, max_z);
+                    clijx.meanZProjectionBounded(transformed, myMaxProjection, min_z, max_z);
                 }
                 clijx.showGrey(myMaxProjection, window_title);
 

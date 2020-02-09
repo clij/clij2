@@ -38,7 +38,7 @@ public class CrossCorrelation extends AbstractCLIJPlugin implements CLIJMacroPlu
         return result;
     }
 
-    public static boolean crossCorrelation(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer meanSrc1, ClearCLBuffer src2, ClearCLBuffer meanSrc2, ClearCLBuffer dst, int radius, int deltaPos, int dimension) {
+    public static boolean crossCorrelation(CLIJ clij, ClearCLBuffer src1, ClearCLBuffer meanSrc1, ClearCLBuffer src2, ClearCLBuffer meanSrc2, ClearCLBuffer dst, Integer radius, Integer deltaPos, Integer dimension) {
         assertDifferent(src1, dst);
         assertDifferent(src2, dst);
         assertDifferent(meanSrc1, dst);
@@ -56,7 +56,7 @@ public class CrossCorrelation extends AbstractCLIJPlugin implements CLIJMacroPlu
         return clij.execute(CrossCorrelation.class, "cross_correlation.cl", "cross_correlation_3d", parameters);
     }
 
-    public static boolean crossCorrelation(CLIJ clij, ClearCLImage src1, ClearCLImage meanSrc1, ClearCLImage src2, ClearCLImage meanSrc2, ClearCLImage dst, int radius, int deltaPos, int dimension) {
+    public static boolean crossCorrelation(CLIJ clij, ClearCLImage src1, ClearCLImage meanSrc1, ClearCLImage src2, ClearCLImage meanSrc2, ClearCLImage dst, Integer radius, Integer deltaPos, Integer dimension) {
         assertDifferent(src1, dst);
         assertDifferent(src2, dst);
         assertDifferent(meanSrc1, dst);

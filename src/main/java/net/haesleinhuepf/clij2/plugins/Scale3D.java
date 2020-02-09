@@ -22,16 +22,17 @@ public class Scale3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
     @Override
     public boolean executeCL() {
-        float scaleFactor = asFloat(args[2]);
-        boolean scaleAroundCenter = asBoolean(args[3]);
+        float scaleFactorX = asFloat(args[2]);
+        float scaleFactorY = asFloat(args[3]);
+        float scaleFactorZ = asFloat(args[4]);
+        boolean scaleAroundCenter = asBoolean(args[5]);
 
         ClearCLBuffer input = ((ClearCLBuffer) args[0]);
         ClearCLBuffer output = ((ClearCLBuffer) args[1]);
         CLIJ2 clij2 = getCLIJ2();
 
-        return scale3D(clij2, input, output, scaleFactor, scaleFactor, scaleFactor, scaleAroundCenter);
+        return scale3D(clij2, input, output, scaleFactorX, scaleFactorY, scaleFactorZ, scaleAroundCenter);
     }
-
 
     public static boolean scale3D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY, Float factorZ) {
         return scale3D(clij2, input, output, factorX, factorY, factorZ, false);
@@ -71,7 +72,7 @@ public class Scale3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number scaling_factor, Boolean scale_to_center";
+        return "Image source, Image destination, Number scaling_factor_x, Number scaling_factor_y, Number scaling_factor_z,  Boolean scale_to_center";
     }
 
     @Override

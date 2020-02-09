@@ -30,7 +30,7 @@ public class SpotDistanceMeasurments {
         at.translate(1.0, 0, 0);
         clijx.affineTransform3D(detected, shiftedDetected, at);
 
-        double distance = MeanClosestSpotDistance.meanClosestSpotDistances(clijx, detected, shiftedDetected);
+        double distance = MeanClosestSpotDistance.meanClosestSpotDistance(clijx, detected, shiftedDetected);
         System.out.println("Dist: " + distance);
     }
 }

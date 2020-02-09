@@ -28,11 +28,11 @@ public class Mean3DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
         return mean3DBox(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), radiusX, radiusY, radiusZ);
     }
 
-    public static boolean mean3DBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, int radiusX, int radiusY, int radiusZ) {
+    public static boolean mean3DBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
         return meanBox(clij2, src, dst, radiusX, radiusY, radiusZ);
     }
 
-    public static boolean meanBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, int radiusX, int radiusY, int radiusZ) {
+    public static boolean meanBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
         return executeSeparableKernel(clij2, src, dst, Mean3DBox.class, "mean_separable_" + src.getDimension() + "d_x.cl", "mean_separable_" + src.getDimension() + "d", radiusToKernelSize(radiusX), radiusToKernelSize(radiusY), radiusToKernelSize(radiusZ), radiusX, radiusY, radiusZ, src.getDimension());
     }
 

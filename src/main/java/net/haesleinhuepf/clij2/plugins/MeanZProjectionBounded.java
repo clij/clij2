@@ -22,12 +22,12 @@ public class MeanZProjectionBounded extends AbstractCLIJPlugin implements CLIJMa
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = projectMeanZBounded(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
+        boolean result = meanZProjectionBounded(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
         releaseBuffers(args);
         return result;
     }
 
-    public static boolean projectMeanZBounded(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst_mean, Integer min_z, Integer max_z) {
+    public static boolean meanZProjectionBounded(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst_mean, Integer min_z, Integer max_z) {
         assertDifferent(src, dst_mean);
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);

@@ -25,7 +25,7 @@ public class ParticleImageVelocimetryTimelapse extends AbstractCLIJPlugin implem
         return result;
     }
 
-    public static boolean particleImageVelocimetryTimelapse(CLIJ clij, ClearCLBuffer input, ClearCLBuffer destinationDeltaX, ClearCLBuffer destinationDeltaY, ClearCLBuffer destinationDeltaZ, int maxDeltaX, int maxDeltaY, int maxDeltaZ, boolean correctLocalShift) {
+    public static boolean particleImageVelocimetryTimelapse(CLIJ clij, ClearCLBuffer input, ClearCLBuffer destinationDeltaX, ClearCLBuffer destinationDeltaY, ClearCLBuffer destinationDeltaZ, Integer maxDeltaX, Integer maxDeltaY, Integer maxDeltaZ, Boolean correctLocalShift) {
         ClearCLBuffer slice1 = clij.create(new long[] {input.getWidth(), input.getHeight()}, input.getNativeType());
         ClearCLBuffer slice2 = clij.create(slice1);
         ClearCLBuffer deltaXslice = clij.create(slice1);

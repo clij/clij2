@@ -26,12 +26,8 @@ public class RotateClockwise extends AbstractCLIJ2Plugin implements CLIJMacroPlu
         return rotateRight(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
-    public static boolean rotateRight(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {
-        return rotateClockwise(clij2, src, dst);
-    }
-
     @Deprecated
-    public static boolean rotatedRight(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {
+    public static boolean rotateRight(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {
         return rotateClockwise(clij2, src, dst);
     }
 

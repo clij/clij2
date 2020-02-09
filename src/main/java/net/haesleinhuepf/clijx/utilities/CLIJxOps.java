@@ -56,7 +56,7 @@ import net.haesleinhuepf.clij2.plugins.Image2DToResultsTable;
 import net.haesleinhuepf.clij2.plugins.WriteValuesToPositions;
 import net.haesleinhuepf.clij2.plugins.GetSize;
 import net.haesleinhuepf.clij2.plugins.MultiplyMatrix;
-import net.haesleinhuepf.clijx.plugins.MatrixEqual;
+import net.haesleinhuepf.clij2.plugins.MatrixEqual;
 import net.haesleinhuepf.clijx.plugins.PowerImages;
 import net.haesleinhuepf.clij2.plugins.Equal;
 import net.haesleinhuepf.clij2.plugins.GreaterOrEqual;
@@ -284,6 +284,26 @@ import net.haesleinhuepf.clij2.plugins.CentroidsOfLabels;
 import net.haesleinhuepf.clij2.plugins.SetRampX;
 import net.haesleinhuepf.clij2.plugins.SetRampY;
 import net.haesleinhuepf.clij2.plugins.SetRampZ;
+import net.haesleinhuepf.clij2.plugins.SubtractImageFromScalar;
+import net.haesleinhuepf.clij2.plugins.ThresholdDefault;
+import net.haesleinhuepf.clij2.plugins.ThresholdOtsu;
+import net.haesleinhuepf.clij2.plugins.ThresholdHuang;
+import net.haesleinhuepf.clij2.plugins.ThresholdIntermodes;
+import net.haesleinhuepf.clij2.plugins.ThresholdIsoData;
+import net.haesleinhuepf.clij2.plugins.ThresholdIJ_IsoData;
+import net.haesleinhuepf.clij2.plugins.ThresholdLi;
+import net.haesleinhuepf.clij2.plugins.ThresholdMaxEntropy;
+import net.haesleinhuepf.clij2.plugins.ThresholdMean;
+import net.haesleinhuepf.clij2.plugins.ThresholdMinError;
+import net.haesleinhuepf.clij2.plugins.ThresholdMinimum;
+import net.haesleinhuepf.clij2.plugins.ThresholdMoments;
+import net.haesleinhuepf.clij2.plugins.ThresholdPercentile;
+import net.haesleinhuepf.clij2.plugins.ThresholdRenyiEntropy;
+import net.haesleinhuepf.clij2.plugins.ThresholdShanbhag;
+import net.haesleinhuepf.clij2.plugins.ThresholdTriangle;
+import net.haesleinhuepf.clij2.plugins.ThresholdYen;
+import net.haesleinhuepf.clijx.plugins.ExcludeLabelsSubSurface;
+import net.haesleinhuepf.clij2.plugins.SetPlane;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJxOps {
    CLIJ getCLIJ();
@@ -296,57 +316,6 @@ public abstract interface CLIJxOps {
     /**
      * 
      */
-    default boolean detectOptima(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
-    }
-
-    /**
-     * 
-     */
-    default boolean detectOptima(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
-    }
-
-    /**
-     * 
-     */
-    default boolean detectOptimaSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
-    }
-
-    /**
-     * 
-     */
-    default boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
-    }
-
-    /**
-     * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
-     * 
-     * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
-     */
-    default boolean differenceOfGaussian(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.differenceOfGaussian(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * 
-     */
-    default double[] sumPixelsSliceBySlice(ClearCLBuffer arg1) {
-        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
-    }
-
-    /**
-     * 
-     */
-    default double[] sumPixelsSliceBySlice(ClearCLImage arg1) {
-        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
-    }
-
-    /**
-     * 
-     */
     default boolean convertToImageJBinary(ClearCLImage arg1, ClearCLImage arg2) {
         return Kernels.convertToImageJBinary(getCLIJ(), arg1, arg2);
     }
@@ -356,30 +325,6 @@ public abstract interface CLIJxOps {
      */
     default boolean convertToImageJBinary(ClearCLBuffer arg1, ClearCLBuffer arg2) {
         return Kernels.convertToImageJBinary(getCLIJ(), arg1, arg2);
-    }
-
-    /**
-     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
-     *  dimesions of the resulting image must be specified by the user according to its definition:
-     * X = 0
-     * Y = 1
-     * Z = 2
-     * 
-     */
-    default boolean maximumXYZProjection(ClearCLBuffer source, ClearCLBuffer destination_max, double dimensionX, double dimensionY, double projectedDimension) {
-        return Kernels.maximumXYZProjection(getCLIJ(), source, destination_max, new Double (dimensionX).intValue(), new Double (dimensionY).intValue(), new Double (projectedDimension).intValue());
-    }
-
-    /**
-     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
-     *  dimesions of the resulting image must be specified by the user according to its definition:
-     * X = 0
-     * Y = 1
-     * Z = 2
-     * 
-     */
-    default boolean maximumXYZProjection(ClearCLImage source, ClearCLImage destination_max, double dimensionX, double dimensionY, double projectedDimension) {
-        return Kernels.maximumXYZProjection(getCLIJ(), source, destination_max, new Double (dimensionX).intValue(), new Double (dimensionY).intValue(), new Double (projectedDimension).intValue());
     }
 
     /**
@@ -397,10 +342,85 @@ public abstract interface CLIJxOps {
     }
 
     /**
+     * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
+     * 
+     * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
+     */
+    default boolean differenceOfGaussian(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.differenceOfGaussian(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
+
+    /**
+     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
+     *  dimesions of the resulting image must be specified by the user according to its definition:
+     * X = 0
+     * Y = 1
+     * Z = 2
+     * 
+     */
+    default boolean maximumXYZProjection(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.maximumXYZProjection(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    }
+
+    /**
+     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
+     *  dimesions of the resulting image must be specified by the user according to its definition:
+     * X = 0
+     * Y = 1
+     * Z = 2
+     * 
+     */
+    default boolean maximumXYZProjection(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return Kernels.maximumXYZProjection(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    }
+
+    /**
      * 
      */
     default boolean differenceOfGaussianSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
         return Kernels.differenceOfGaussianSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
+
+    /**
+     * 
+     */
+    default double[] sumPixelsSliceBySlice(ClearCLImage arg1) {
+        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
+    }
+
+    /**
+     * 
+     */
+    default double[] sumPixelsSliceBySlice(ClearCLBuffer arg1) {
+        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
+    }
+
+    /**
+     * 
+     */
+    default boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+    /**
+     * 
+     */
+    default boolean detectOptimaSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+    /**
+     * 
+     */
+    default boolean detectOptima(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+    /**
+     * 
+     */
+    default boolean detectOptima(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
     }
 
 
@@ -409,15 +429,15 @@ public abstract interface CLIJxOps {
     /**
      * Performs cross correlation analysis between two images. The second image is shifted by deltaPos in the given dimension. The cross correlation coefficient is calculated for each pixel in a range around the given pixel with given radius in the given dimension. Together with the original images it is recommended to hand over mean filtered images using the same radius.  
      */
-    default boolean crossCorrelation(ClearCLImage arg1, ClearCLImage arg2, ClearCLImage arg3, ClearCLImage arg4, ClearCLImage arg5, int arg6, int arg7, int arg8) {
-        return CrossCorrelation.crossCorrelation(getCLIJ(), arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    default boolean crossCorrelation(ClearCLImage arg1, ClearCLImage arg2, ClearCLImage arg3, ClearCLImage arg4, ClearCLImage arg5, double arg6, double arg7, double arg8) {
+        return CrossCorrelation.crossCorrelation(getCLIJ(), arg1, arg2, arg3, arg4, arg5, new Double (arg6).intValue(), new Double (arg7).intValue(), new Double (arg8).intValue());
     }
 
     /**
      * Performs cross correlation analysis between two images. The second image is shifted by deltaPos in the given dimension. The cross correlation coefficient is calculated for each pixel in a range around the given pixel with given radius in the given dimension. Together with the original images it is recommended to hand over mean filtered images using the same radius.  
      */
-    default boolean crossCorrelation(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5, int arg6, int arg7, int arg8) {
-        return CrossCorrelation.crossCorrelation(getCLIJ(), arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    default boolean crossCorrelation(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, ClearCLBuffer arg5, double arg6, double arg7, double arg8) {
+        return CrossCorrelation.crossCorrelation(getCLIJ(), arg1, arg2, arg3, arg4, arg5, new Double (arg6).intValue(), new Double (arg7).intValue(), new Double (arg8).intValue());
     }
 
 
@@ -436,8 +456,8 @@ public abstract interface CLIJxOps {
     /**
      * Applies a local minimum and maximum filter. Afterwards, the value is returned which is more far from zero.
      */
-    default boolean localExtremaBox(ClearCLBuffer input, ClearCLBuffer destination, double radiusX, double radiusY, double radiusZ) {
-        return LocalExtremaBox.localExtremaBox(getCLIJ(), input, destination, new Double (radiusX).intValue(), new Double (radiusY).intValue(), new Double (radiusZ).intValue());
+    default boolean localExtremaBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return LocalExtremaBox.localExtremaBox(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
 
@@ -476,15 +496,15 @@ public abstract interface CLIJxOps {
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
      */
-    default boolean subtractBackground2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return SubtractBackground2D.subtractBackground2D(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+    default boolean subtractBackground(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return SubtractBackground2D.subtractBackground(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
 
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
      */
-    default boolean subtractBackground(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return SubtractBackground2D.subtractBackground(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+    default boolean subtractBackground2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return SubtractBackground2D.subtractBackground2D(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
 
 
@@ -493,15 +513,15 @@ public abstract interface CLIJxOps {
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
      */
-    default boolean subtractBackground3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return SubtractBackground3D.subtractBackground3D(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    default boolean subtractBackground(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return SubtractBackground3D.subtractBackground(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
      */
-    default boolean subtractBackground(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return SubtractBackground3D.subtractBackground(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    default boolean subtractBackground3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return SubtractBackground3D.subtractBackground3D(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
 
@@ -510,14 +530,14 @@ public abstract interface CLIJxOps {
     /**
      * 
      */
-    default boolean particleImageVelocimetry2D(ClearCLImage arg1, ClearCLImage arg2, ClearCLImage arg3, ClearCLImage arg4, double arg5) {
+    default boolean particleImageVelocimetry2D(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, double arg5) {
         return FastParticleImageVelocimetry.particleImageVelocimetry2D(getCLIJ(), arg1, arg2, arg3, arg4, new Double (arg5).intValue());
     }
 
     /**
      * 
      */
-    default boolean particleImageVelocimetry2D(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, double arg5) {
+    default boolean particleImageVelocimetry2D(ClearCLImage arg1, ClearCLImage arg2, ClearCLImage arg3, ClearCLImage arg4, double arg5) {
         return FastParticleImageVelocimetry.particleImageVelocimetry2D(getCLIJ(), arg1, arg2, arg3, arg4, new Double (arg5).intValue());
     }
 
@@ -539,8 +559,8 @@ public abstract interface CLIJxOps {
     /**
      * Run particle image velocimetry on a 2D+t timelapse.
      */
-    default boolean particleImageVelocimetryTimelapse(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, int arg5, int arg6, int arg7, boolean arg8) {
-        return ParticleImageVelocimetryTimelapse.particleImageVelocimetryTimelapse(getCLIJ(), arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    default boolean particleImageVelocimetryTimelapse(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, ClearCLBuffer arg4, double arg5, double arg6, double arg7, boolean arg8) {
+        return ParticleImageVelocimetryTimelapse.particleImageVelocimetryTimelapse(getCLIJ(), arg1, arg2, arg3, arg4, new Double (arg5).intValue(), new Double (arg6).intValue(), new Double (arg7).intValue(), arg8);
     }
 
 
@@ -549,8 +569,8 @@ public abstract interface CLIJxOps {
     /**
      * Applies particle image velocimetry to two images and registers them afterwards by warping input image 2 with a smoothed vector field.
      */
-    default boolean deformableRegistration2D(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, int arg4, int arg5) {
-        return DeformableRegistration2D.deformableRegistration2D(getCLIJ(), arg1, arg2, arg3, arg4, arg5);
+    default boolean deformableRegistration2D(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, double arg4, double arg5) {
+        return DeformableRegistration2D.deformableRegistration2D(getCLIJ(), arg1, arg2, arg3, new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
 
@@ -559,15 +579,15 @@ public abstract interface CLIJxOps {
     /**
      * Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.
      */
-    default boolean translationRegistration(ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3) {
-        return TranslationRegistration.translationRegistration(getCLIJ(), arg1, arg2, arg3);
+    default boolean translationRegistration(ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination) {
+        return TranslationRegistration.translationRegistration(getCLIJ(), input1, input2, destination);
     }
 
     /**
      * Measures center of mass of thresholded objects in the two input images and translates the second image so that it better fits to the first image.
      */
-    default boolean translationRegistration(ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination) {
-        return TranslationRegistration.translationRegistration(getCLIJ(), input1, input2, destination);
+    default boolean translationRegistration(ClearCLBuffer arg1, ClearCLBuffer arg2, double[] arg3) {
+        return TranslationRegistration.translationRegistration(getCLIJ(), arg1, arg2, arg3);
     }
 
 
@@ -578,17 +598,6 @@ public abstract interface CLIJxOps {
      */
     default boolean translationTimelapseRegistration(ClearCLBuffer input, ClearCLBuffer output) {
         return TranslationTimelapseRegistration.translationTimelapseRegistration(getCLIJ(), input, output);
-    }
-
-
-    // net.haesleinhuepf.clijx.plugins.MatrixEqual
-    //----------------------------------------------------
-    /**
-     * Checks if all elements of a matrix are different by less than or equal to a given tolerance.
-     * The result will be put in the results table as 1 if yes and 0 otherwise.
-     */
-    default boolean matrixEqual(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return MatrixEqual.matrixEqual(getCLIJ(), arg1, arg2, new Double (arg3).floatValue());
     }
 
 
@@ -617,15 +626,15 @@ public abstract interface CLIJxOps {
     /**
      * Reads a raw file from disc and pushes it immediately to the GPU.
      */
-    default boolean readRawImageFromDisc(ClearCLBuffer arg1, String arg2) {
-        return ReadRawImageFromDisc.readRawImageFromDisc(getCLIJ(), arg1, arg2);
+    default ClearCLBuffer readRawImageFromDisc(String arg1, double arg2, double arg3, double arg4, double arg5) {
+        return ReadRawImageFromDisc.readRawImageFromDisc(getCLIJ(), arg1, new Double (arg2).intValue(), new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
     /**
      * Reads a raw file from disc and pushes it immediately to the GPU.
      */
-    default ClearCLBuffer readRawImageFromDisc(String arg1, double arg2, double arg3, double arg4, double arg5) {
-        return ReadRawImageFromDisc.readRawImageFromDisc(getCLIJ(), arg1, new Double (arg2).intValue(), new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    default boolean readRawImageFromDisc(ClearCLBuffer arg1, String arg2) {
+        return ReadRawImageFromDisc.readRawImageFromDisc(getCLIJ(), arg1, arg2);
     }
 
 
@@ -636,8 +645,8 @@ public abstract interface CLIJxOps {
      * 
      *  It is assumed that all images have the same size. If this is not the case, call release(image) before  getting the second image.
      */
-    default ClearCLBuffer preloadFromDisc(ClearCLBuffer arg1, String arg2, String arg3, String arg4) {
-        return PreloadFromDisc.preloadFromDisc(getCLIJ(), arg1, arg2, arg3, arg4);
+    default ClearCLBuffer preloadFromDisc(ClearCLBuffer destination, String filename, String nextFilename, String loaderId) {
+        return PreloadFromDisc.preloadFromDisc(getCLIJ(), destination, filename, nextFilename, loaderId);
     }
 
 
@@ -667,8 +676,8 @@ public abstract interface CLIJxOps {
     /**
      * Measures time and outputs delay to last call.
      */
-    default boolean stopWatch(String arg1) {
-        return StopWatch.stopWatch(getCLIJ(), arg1);
+    default boolean stopWatch(String text) {
+        return StopWatch.stopWatch(getCLIJ(), text);
     }
 
 
@@ -677,8 +686,8 @@ public abstract interface CLIJxOps {
     /**
      * Draws a line between two points with a given thickness. Pixels close to point 1 are set to value1. Pixels closer to point 2 are set to value2 All pixels other than on the line are untouched. Consider using clij.set(buffer, 0); in advance.
      */
-    default boolean drawTwoValueLine(ClearCLBuffer destination, double x1, double y1, double z1, double x2, double y2, double z2, double thickness, double value1, double destination0) {
-        return DrawTwoValueLine.drawTwoValueLine(getCLIJx(), destination, new Double (x1).floatValue(), new Double (y1).floatValue(), new Double (z1).floatValue(), new Double (x2).floatValue(), new Double (y2).floatValue(), new Double (z2).floatValue(), new Double (thickness).floatValue(), new Double (value1).floatValue(), new Double (destination0).floatValue());
+    default boolean drawTwoValueLine(ClearCLBuffer arg1, double arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8, double arg9, double arg10) {
+        return DrawTwoValueLine.drawTwoValueLine(getCLIJx(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue(), new Double (arg9).floatValue(), new Double (arg10).floatValue());
     }
 
 
@@ -687,8 +696,8 @@ public abstract interface CLIJxOps {
     /**
      * Pulls an image from the GPU memory and saves it as TIF to disc.
      */
-    default boolean saveAsTIF(ClearCLBuffer arg1, String arg2) {
-        return SaveAsTIF.saveAsTIF(getCLIJ(), arg1, arg2);
+    default boolean saveAsTIF(ClearCLBuffer input, String filename) {
+        return SaveAsTIF.saveAsTIF(getCLIJ(), input, filename);
     }
 
 
@@ -710,8 +719,8 @@ public abstract interface CLIJxOps {
      * of these methods in the method text field:
      * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
      */
-    default boolean automaticThresholdInplace(ClearCLBuffer arg1, String arg2) {
-        return AutomaticThresholdInplace.automaticThresholdInplace(getCLIJx(), arg1, arg2);
+    default boolean automaticThresholdInplace(ClearCLBuffer input_and_destination, String method) {
+        return AutomaticThresholdInplace.automaticThresholdInplace(getCLIJx(), input_and_destination, method);
     }
 
 
@@ -722,8 +731,8 @@ public abstract interface CLIJxOps {
      * 
      * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
      */
-    default boolean differenceOfGaussianInplace3D(ClearCLBuffer input_and_destination, double sigma1x, double sigma1y, double sigma1z, double sigma2x, double sigma2y, double sigma2z) {
-        return DifferenceOfGaussianInplace3D.differenceOfGaussianInplace3D(getCLIJ(), input_and_destination, new Double (sigma1x).floatValue(), new Double (sigma1y).floatValue(), new Double (sigma1z).floatValue(), new Double (sigma2x).floatValue(), new Double (sigma2y).floatValue(), new Double (sigma2z).floatValue());
+    default boolean differenceOfGaussianInplace3D(ClearCLBuffer arg1, double arg2, double arg3, double arg4, double arg5, double arg6, double arg7) {
+        return DifferenceOfGaussianInplace3D.differenceOfGaussianInplace3D(getCLIJ(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue());
     }
 
 
@@ -745,8 +754,8 @@ public abstract interface CLIJxOps {
      * Determines correction factors for each z-slice so that the average intensity in all slices can be made the same and multiplies these factors with the slices.
      * This functionality is similar to the 'Simple Ratio Bleaching Correction' in Fiji.
      */
-    default boolean equalizeMeanIntensitiesOfSlices(ClearCLBuffer input, ClearCLBuffer destination, double referenceSlice) {
-        return EqualizeMeanIntensitiesOfSlices.equalizeMeanIntensitiesOfSlices(getCLIJ(), input, destination, new Double (referenceSlice).intValue());
+    default boolean equalizeMeanIntensitiesOfSlices(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        return EqualizeMeanIntensitiesOfSlices.equalizeMeanIntensitiesOfSlices(getCLIJ(), arg1, arg2, new Double (arg3).intValue());
     }
 
 
@@ -765,8 +774,8 @@ public abstract interface CLIJxOps {
     /**
      * Visualises three 2D images as one RGB image
      */
-    default boolean showRGB(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, String arg4) {
-        return ShowRGB.showRGB(getCLIJ(), arg1, arg2, arg3, arg4);
+    default boolean showRGB(ClearCLBuffer red, ClearCLBuffer green, ClearCLBuffer blue, String title) {
+        return ShowRGB.showRGB(getCLIJ(), red, green, blue, title);
     }
 
 
@@ -775,8 +784,8 @@ public abstract interface CLIJxOps {
     /**
      * Visualises a single 2D image.
      */
-    default boolean showGrey(ClearCLBuffer arg1, String arg2) {
-        return ShowGrey.showGrey(getCLIJ(), arg1, arg2);
+    default boolean showGrey(ClearCLBuffer input, String title) {
+        return ShowGrey.showGrey(getCLIJ(), input, title);
     }
 
 
@@ -785,8 +794,8 @@ public abstract interface CLIJxOps {
     /**
      * Organises windows on screen.
      */
-    default boolean organiseWindows(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-        return OrganiseWindows.organiseWindows(getCLIJ(), arg1, arg2, arg3, arg4, arg5, arg6);
+    default boolean organiseWindows(double arg1, double arg2, double arg3, double arg4, double arg5, double arg6) {
+        return OrganiseWindows.organiseWindows(getCLIJ(), new Double (arg1).intValue(), new Double (arg2).intValue(), new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue(), new Double (arg6).intValue());
     }
 
 
@@ -795,8 +804,8 @@ public abstract interface CLIJxOps {
     /**
      * Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations - 2 makes the filter result very similar to minimum sphere.
      */
-    default boolean topHatOctagon(ClearCLBuffer input, ClearCLBuffer destination, double iterations) {
-        return TopHatOctagon.topHatOctagon(getCLIJx(), input, destination, new Double (iterations).intValue());
+    default boolean topHatOctagon(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        return TopHatOctagon.topHatOctagon(getCLIJx(), arg1, arg2, new Double (arg3).intValue());
     }
 
 
@@ -805,8 +814,8 @@ public abstract interface CLIJxOps {
     /**
      * Visualises two 2D images as one RGB image. The first channel is shown in grey, the second with glasbey LUT.
      */
-    default boolean showGlasbeyOnGrey(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3) {
-        return ShowGlasbeyOnGrey.showGlasbeyOnGrey(getCLIJ(), arg1, arg2, arg3);
+    default boolean showGlasbeyOnGrey(ClearCLBuffer red, ClearCLBuffer labelling, String title) {
+        return ShowGlasbeyOnGrey.showGlasbeyOnGrey(getCLIJ(), red, labelling, title);
     }
 
 
@@ -816,8 +825,8 @@ public abstract interface CLIJxOps {
      * Applies a Weka model using functionality of Fijis Trainable Weka Segmentation plugin.
      * It takes a 3D feature stack (e.g. first plane original image, second plane blurred, third plane edge image)and applies a pre-trained a Weka model. Take care that the feature stack has been generated in the sameway as for training the model!
      */
-    default boolean applyWekaModel(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3) {
-        return ApplyWekaModel.applyWekaModel(getCLIJx(), arg1, arg2, arg3);
+    default boolean applyWekaModel(ClearCLBuffer featureStack3D, ClearCLBuffer prediction2D_destination, String loadModelFilename) {
+        return ApplyWekaModel.applyWekaModel(getCLIJx(), featureStack3D, prediction2D_destination, loadModelFilename);
     }
 
 
@@ -828,8 +837,8 @@ public abstract interface CLIJxOps {
      * It takes a 3D feature stack (e.g. first plane original image, second plane blurred, third plane edge image)and trains a Weka model. This model will be saved to disc.
      * The given groundTruth image is supposed to be a label map where pixels with value 1 represent class 1, pixels with value 2 represent class 2 and so on. Pixels with value 0 will be ignored for training.
      */
-    default boolean trainWekaModel(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3) {
-        return TrainWekaModel.trainWekaModel(getCLIJx(), arg1, arg2, arg3);
+    default boolean trainWekaModel(ClearCLBuffer featureStack3D, ClearCLBuffer groundTruth2D, String saveModelFilename) {
+        return TrainWekaModel.trainWekaModel(getCLIJx(), featureStack3D, groundTruth2D, saveModelFilename);
     }
 
 
@@ -867,8 +876,8 @@ public abstract interface CLIJxOps {
     /**
      * Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations - 2 makes the filter result very similar to minimum sphere.
      */
-    default boolean topHatOctagonSliceBySlice(ClearCLBuffer input, ClearCLBuffer destination, double iterations) {
-        return TopHatOctagonSliceBySlice.topHatOctagonSliceBySlice(getCLIJx(), input, destination, new Double (iterations).intValue());
+    default boolean topHatOctagonSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        return TopHatOctagonSliceBySlice.topHatOctagonSliceBySlice(getCLIJx(), arg1, arg2, new Double (arg3).intValue());
     }
 
 
@@ -877,8 +886,8 @@ public abstract interface CLIJxOps {
     /**
      * Takes a point list image representing n points (n*2 for 2D points, n*3 for 3D points) and a corresponding touch matrix , sized (n+1)*(n+1), and exports them in VTK format.
      */
-    default boolean writeVTKLineListToDisc(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3) {
-        return WriteVTKLineListToDisc.writeVTKLineListToDisc(getCLIJx(), arg1, arg2, arg3);
+    default boolean writeVTKLineListToDisc(ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, String filename) {
+        return WriteVTKLineListToDisc.writeVTKLineListToDisc(getCLIJx(), pointlist, touch_matrix, filename);
     }
 
 
@@ -887,8 +896,18 @@ public abstract interface CLIJxOps {
     /**
      * Takes a point list image representing n points (n*2 for 2D points, n*3 for 3D points) and exports them in XYZ format.
      */
-    default boolean writeXYZPointListToDisc(ClearCLBuffer arg1, String arg2) {
-        return WriteXYZPointListToDisc.writeXYZPointListToDisc(getCLIJx(), arg1, arg2);
+    default boolean writeXYZPointListToDisc(ClearCLBuffer pointlist, String filename) {
+        return WriteXYZPointListToDisc.writeXYZPointListToDisc(getCLIJx(), pointlist, filename);
+    }
+
+
+    // net.haesleinhuepf.clijx.plugins.ExcludeLabelsSubSurface
+    //----------------------------------------------------
+    /**
+     * This operation follows a ray from a given position towards a label (or opposite direction) and checks if  there is another label between the label an the image border. If yes, this label is eliminated from the label map.
+     */
+    default boolean excludeLabelsSubSurface(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, double arg4, double arg5, double arg6) {
+        return ExcludeLabelsSubSurface.excludeLabelsSubSurface(getCLIJx(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
     }
 
 }

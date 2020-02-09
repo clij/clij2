@@ -28,11 +28,11 @@ public class Minimum3DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
         return minimum3DBox(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), radiusX, radiusY, radiusZ);
     }
 
-    public static boolean minimum3DBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, int radiusX, int radiusY, int radiusZ) {
+    public static boolean minimum3DBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
         return minimumBox(clij2, src, dst, radiusX, radiusY, radiusZ);
     }
 
-    public static boolean minimumBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, int radiusX, int radiusY, int radiusZ) {
+    public static boolean minimumBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
         return executeSeparableKernel(clij2, src, dst, Minimum3DBox.class, "minimum_separable_" + src.getDimension() + "d_x.cl", "minimum_separable_" + src.getDimension() + "d", radiusToKernelSize(radiusX), radiusToKernelSize(radiusY), radiusToKernelSize(radiusZ), radiusX, radiusY, radiusZ, src.getDimension());
     }
 

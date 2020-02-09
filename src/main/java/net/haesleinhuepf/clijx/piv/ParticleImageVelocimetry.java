@@ -47,7 +47,7 @@ public class ParticleImageVelocimetry extends AbstractCLIJPlugin implements CLIJ
         return "2D";
     }
 
-    public static boolean particleImageVelocimetry(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer vfX, ClearCLBuffer vfY, ClearCLBuffer vfZ, Integer maxDeltaX, Integer maxDeltaY, Integer maxDeltaZ, boolean correctLocalShift) {
+    public static boolean particleImageVelocimetry(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer vfX, ClearCLBuffer vfY, ClearCLBuffer vfZ, Integer maxDeltaX, Integer maxDeltaY, Integer maxDeltaZ, Boolean correctLocalShift) {
         // prepare cross-correlation analysis
         int meanRangeX = 3;
         int scanRangeX = meanRangeX; // has influence on precision / correctness

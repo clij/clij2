@@ -24,11 +24,11 @@ public class Maximum2DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
         return maximum2DBox(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), radiusX, radiusY);
     }
 
-    public static boolean maximumBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, int radiusX, int radiusY) {
+    public static boolean maximumBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY) {
         return Maximum3DBox.maximumBox(clij2, src, dst, radiusX, radiusY, 0);
     }
 
-    public static boolean maximum2DBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, int radiusX, int radiusY) {
+    public static boolean maximum2DBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY) {
         return Maximum3DBox.maximumBox(clij2, src, dst, radiusX, radiusY, 0);
     }
 

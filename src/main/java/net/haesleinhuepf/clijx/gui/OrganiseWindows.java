@@ -34,7 +34,7 @@ public class OrganiseWindows extends AbstractCLIJPlugin implements CLIJMacroPlug
 
     }
 
-    public static boolean organiseWindows(CLIJ clij, int startX, int startY, int tilesX, int tilesY, int tileWidth, int tileHeight) {
+    public static boolean organiseWindows(CLIJ clij, Integer startX, Integer startY, Integer tilesX, Integer tilesY, Integer tileWidth, Integer tileHeight) {
         int xCount = 0;
         int yCount = 0;
         if (WindowManager.getIDList() == null) {

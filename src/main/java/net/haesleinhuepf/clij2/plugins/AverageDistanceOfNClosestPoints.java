@@ -28,6 +28,7 @@ public class AverageDistanceOfNClosestPoints extends AbstractCLIJ2Plugin impleme
         return result;
     }
 
+    @Deprecated
     public static boolean averageDistanceOfNClosestPoints(CLIJ2 clij2, ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination, Integer nPoints) {
         return averageDistanceOfClosestPoints(clij2, distance_matrix, indexlist_destination, nPoints);
     }

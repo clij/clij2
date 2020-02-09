@@ -24,7 +24,7 @@ public class Mean2DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
         return mean2DBox(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), radiusX, radiusY);
     }
 
-    public static boolean mean2DBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, int radiusX, int radiusY) {
+    public static boolean mean2DBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY) {
         return Mean3DBox.meanBox(clij2, src, dst, radiusX, radiusY, 0);
     }
 

@@ -26,7 +26,7 @@ public class DeformableRegistration2D extends AbstractCLIJPlugin implements CLIJ
         return result;
     }
 
-    public static boolean deformableRegistration2D(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer output, int maxDeltaX, int maxDeltaY) {
+    public static boolean deformableRegistration2D(CLIJ clij, ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer output, Integer maxDeltaX, Integer maxDeltaY) {
         ClearCLBuffer vectorfieldX = clij.create(input1.getDimensions(), NativeTypeEnum.Float);
         ClearCLBuffer vectorfieldY = clij.create(vectorfieldX);
         ClearCLBuffer tempX = clij.create(vectorfieldX);

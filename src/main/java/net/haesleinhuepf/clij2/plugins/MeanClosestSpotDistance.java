@@ -25,7 +25,7 @@ public class MeanClosestSpotDistance extends AbstractCLIJ2Plugin implements CLIJ
         ClearCLBuffer buffer2 = (ClearCLBuffer)( args[1]);
         Boolean bidirectional = asBoolean(args[2]);
 
-        double[] minimumDistances = meanClosestSpotDistances(getCLIJ2(), buffer1, buffer2, bidirectional);
+        double[] minimumDistances = meanClosestSpotDistance(getCLIJ2(), buffer1, buffer2, bidirectional);
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();
@@ -37,11 +37,11 @@ public class MeanClosestSpotDistance extends AbstractCLIJ2Plugin implements CLIJ
         return true;
     }
 
-    public static double meanClosestSpotDistances(CLIJ2 clij2, ClearCLBuffer spotsA, ClearCLBuffer spotsB) {
-        return meanClosestSpotDistances(clij2, spotsA, spotsB, false)[0];
+    public static double meanClosestSpotDistance(CLIJ2 clij2, ClearCLBuffer spotsA, ClearCLBuffer spotsB) {
+        return meanClosestSpotDistance(clij2, spotsA, spotsB, false)[0];
     }
 
-    public static double[] meanClosestSpotDistances(CLIJ2 clij2, ClearCLBuffer spotsA, ClearCLBuffer spotsB, Boolean bidirectional) {
+    public static double[] meanClosestSpotDistance(CLIJ2 clij2, ClearCLBuffer spotsA, ClearCLBuffer spotsB, Boolean bidirectional) {
         double[] meanDistances = new double[bidirectional?2:1];
 
         long numberOfSpots1 = (long) CountNonZeroPixels.countNonZeroPixels(clij2, spotsA);
