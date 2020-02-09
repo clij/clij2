@@ -1,4 +1,12 @@
 ## CLIJ 1/2/x API comparison
+# CLIJ1 methods not part of CLIJ2
+* CLIJ_maximumXYZProjection(Image source, Image destination_max, Number dimensionX, Number dimensionY, Number projectedDimension)
+* CLIJ_resliceRadial(Image source, Image destination, Number numberOfAngles, Number angleStepSize)
+* CLIJ_scale(Image source, Image destination, Number scaling_factor, Boolean scale_to_center)
+* CLIJ_scale2D(Image source, Image destination, Number scaling_factor, Boolean scale_to_center)
+* CLIJ_scale3D(Image source, Image destination, Number scaling_factor, Boolean scale_to_center)
+
+5 methods listed.
 # CLIJ2 methods not part of CLIJ1
 * CLIJ2_averageAngleBetweenAdjacentTriangles(Image pointlist, Image touch_matrix, Image average_distancelist_destination)
 * CLIJ2_averageDistanceOfNClosestPoints(Image distance_matrix, Image indexlist_destination, Number nClosestPointsTofind)
@@ -146,12 +154,8 @@
 * CLIJ2_varianceOfAllPixels(Image source)
 * CLIJ2_varianceOfMaskedPixels(Image source, Image mask)
 * CLIJ2_writeValuesToPositions(Image positionsAndValues, Image destination)
-# CLIJ1 methods not part of CLIJ2
-* CLIJ_maximumXYZProjection(Image source, Image destination_max, Number dimensionX, Number dimensionY, Number projectedDimension)
-* CLIJ_resliceRadial(Image source, Image destination, Number numberOfAngles, Number angleStepSize)
-* CLIJ_scale(Image source, Image destination, Number scaling_factor, Boolean scale_to_center)
-* CLIJ_scale2D(Image source, Image destination, Number scaling_factor, Boolean scale_to_center)
-* CLIJ_scale3D(Image source, Image destination, Number scaling_factor, Boolean scale_to_center)
+
+146 methods listed.
 # CLIJx methods not part of CLIJ2
 * CLIJx_absoluteInplace(Image source, Image destination)
 * CLIJx_applyWekaModel(Image featureStack3D, Image prediction2D_destination, String loadModelFilename)
@@ -220,3 +224,5 @@
 * CLIJx_watershed(Image binary_source, Image destination)
 * CLIJx_writeVTKLineListToDisc(Image pointlist, Image touch_matrix, String filename)
 * CLIJx_writeXYZPointListToDisc(Image pointlist, String filename)
+
+67 methods listed.
