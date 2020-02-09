@@ -1,8 +1,5 @@
-package net.haesleinhuepf.clij2.plugins;
+package net.haesleinhuepf.clijx.plugins;
 
-import ij.IJ;
-import ij.ImageJ;
-import ij.ImagePlus;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -11,6 +8,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clijx.CLIJx;
+import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
@@ -21,8 +19,8 @@ import java.util.HashMap;
  * Author: @haesleinhuepf
  * June 2019
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_excludeLabelsSubSurface")
-public class ExcludeLabelsSubSurface extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_excludeLabelsSubSurface")
+public class ExcludeLabelsSubSurface extends AbstractCLIJxPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
@@ -33,18 +31,18 @@ public class ExcludeLabelsSubSurface extends AbstractCLIJ2Plugin implements CLIJ
         float centerY = asFloat(args[4]);
         float centerZ = asFloat(args[5]);
 
-        return excludeLabelsSubSurface(getCLIJ2(), pointlist, label_map_in, label_map_out, centerX, centerY, centerZ);
+        return excludeLabelsSubSurface(getCLIJx(), pointlist, label_map_in, label_map_out, centerX, centerY, centerZ);
     }
 
-    public static boolean excludeLabelsSubSurface(CLIJ2 clij2, ClearCLBuffer pointlist, ClearCLBuffer label_map_in, ClearCLBuffer label_map_out, Float centerX, Float centerY, Float centerZ) {
+    public static boolean excludeLabelsSubSurface(CLIJx clijx, ClearCLBuffer pointlist, ClearCLBuffer label_map_in, ClearCLBuffer label_map_out, Float centerX, Float centerY, Float centerZ) {
         int max_label = (int)pointlist.getWidth();
         if (max_label == 0) {
-            clij2.set(label_map_out, 0f);
+            clijx.set(label_map_out, 0f);
             return true;
         }
 
-        ClearCLBuffer label_index_map = clij2.create(new long[]{max_label, 1, 1}, clij2.Float);
-        clij2.setRampX(label_index_map);
+        ClearCLBuffer label_index_map = clijx.create(new long[]{max_label, 1, 1}, clijx.Float);
+        clijx.setRampX(label_index_map);
 
 
 
@@ -59,7 +57,7 @@ public class ExcludeLabelsSubSurface extends AbstractCLIJ2Plugin implements CLIJ
         }
 
         long[] globalSizes = new long[]{pointlist.getWidth(), 1, 1};
-        clij2.execute(ExcludeLabelsSubSurface.class, "exclude_labels_sub_surface_" + label_map_in.getDimension() + "d_x.cl", "exclude_labels_sub_surface_" + label_map_in.getDimension() + "d", label_index_map.getDimensions(), globalSizes, parameters);
+        clijx.execute(ExcludeLabelsSubSurface.class, "exclude_labels_sub_surface_" + label_map_in.getDimension() + "d_x.cl", "exclude_labels_sub_surface_" + label_map_in.getDimension() + "d", label_index_map.getDimensions(), globalSizes, parameters);
 
         float[] label_indices = new float[(int) label_index_map.getWidth()];
         label_index_map.writeTo(FloatBuffer.wrap(label_indices), true);
@@ -74,7 +72,7 @@ public class ExcludeLabelsSubSurface extends AbstractCLIJ2Plugin implements CLIJ
 
         label_index_map.readFrom(FloatBuffer.wrap(label_indices), true);
 
-        clij2.replaceIntensities(label_map_in, label_index_map, label_map_out);
+        clijx.replaceIntensities(label_map_in, label_index_map, label_map_out);
 
         return true;
     }
@@ -99,6 +97,6 @@ public class ExcludeLabelsSubSurface extends AbstractCLIJ2Plugin implements CLIJ
 
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
-        return clij.create(input.getDimensions(), NativeTypeEnum.Float);
+        return getCLIJx().create(input.getDimensions(), NativeTypeEnum.Float);
     }
 }

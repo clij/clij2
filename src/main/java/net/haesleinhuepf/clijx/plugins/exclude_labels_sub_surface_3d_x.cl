@@ -15,7 +15,7 @@ __kernel void exclude_labels_sub_surface_3d (
   const float y = READ_src_pointlist_IMAGE(src_pointlist, intsampler, POS_src_pointlist_INSTANCE(label_id - 1, 1, 0, 0)).x;
   const float z = READ_src_pointlist_IMAGE(src_pointlist, intsampler, POS_src_pointlist_INSTANCE(label_id - 1, 2, 0, 0)).x;
 
-  float4 directionVector = (float2){x - centerX, y - centerY, z - centerZ, 0};
+  float4 directionVector = (float4){x - centerX, y - centerY, z - centerZ, 0};
   float len = length(directionVector);
   directionVector.x = directionVector.x / len;
   directionVector.y = directionVector.y / len;
