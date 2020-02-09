@@ -42,7 +42,7 @@ public class MaskStackWithPlane extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getParameterHelpText() {
-        return "Image source_3d, Image mask_2d, Image destination_3d";
+        return "Image source, Image mask, Image destination";
     }
 
     @Override
@@ -55,6 +55,6 @@ public class MaskStackWithPlane extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getAvailableForDimensions() {
-        return "3D / 2D -> 3D";
+        return "3D, 2D -> 3D";
     }
 }
