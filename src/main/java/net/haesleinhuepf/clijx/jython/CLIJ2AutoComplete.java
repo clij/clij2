@@ -38,8 +38,8 @@ class CLIJ2AutoComplete {
        headline = "clij2.argMaximumZProjection(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>argMaximumZProjection</b><br><br>Determines the maximum projection of an image stack along Z.<br>Furthermore, another 2D image is generated with pixels containing the z-index where the maximum was found (zero based).<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clij2.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6)";
-       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, Float arg4, Float arg5, Integer arg6";
+       headline = "clij2.automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3)";
+       description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.averageAngleBetweenAdjacentTriangles(ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination)";
        description = "<b>averageAngleBetweenAdjacentTriangles</b><br><br>Takes a pointlist and a touch matrix to determine the average angle of adjacent triangles in a surface mesh. For every point, the average angle of adjacent triangles is saved.<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination";
@@ -293,8 +293,8 @@ class CLIJ2AutoComplete {
        headline = "clij2.greater(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3)";
        description = "<b>greater</b><br><br>Determines if two images A and B greater pixel wise.<br><br>f(a, b) = 1 if a > b; 0 otherwise. <br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clij2.histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6, boolean arg7)";
-       description = "<b>histogram</b><br><br>Determines the histogram of a given image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6, boolean arg7";
+       headline = "clij2.histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6)";
+       description = "<b>histogram</b><br><br>Determines the histogram of a given image.<br><br>Parameters:<br>ClearCLBuffer arg1, ClearCLBuffer arg2, Integer arg3, Float arg4, Float arg5, Boolean arg6";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.image2DToResultsTable(ClearCLBuffer arg1, ResultsTable arg2)";
        description = "<b>image2DToResultsTable</b><br><br>Converts an image into a table.<br><br>Parameters:<br>ClearCLBuffer arg1, ResultsTable arg2";
@@ -626,6 +626,15 @@ class CLIJ2AutoComplete {
        headline = "clij2.setNonZeroPixelsToPixelIndex(ClearCLImageInterface arg1, ClearCLImageInterface arg2)";
        description = "<b>setNonZeroPixelsToPixelIndex</b><br><br>Sets all pixels in an image which are not zero to the index of the pixel. This can be used for Connected Components Analysis.<br><br>Parameters:<br>ClearCLImageInterface arg1, ClearCLImageInterface arg2";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.setRampX(ClearCLImageInterface arg1)";
+       description = "<b>setRampX</b><br><br>Sets all pixel values to their X coordinate<br><br>Parameters:<br>ClearCLImageInterface arg1";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.setRampY(ClearCLImageInterface arg1)";
+       description = "<b>setRampY</b><br><br>Sets all pixel values to their Y coordinate<br><br>Parameters:<br>ClearCLImageInterface arg1";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.setRampZ(ClearCLImageInterface arg1)";
+       description = "<b>setRampZ</b><br><br>Sets all pixel values to their Z coordinate<br><br>Parameters:<br>ClearCLImageInterface arg1";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.setRow(ClearCLImageInterface arg1, Integer arg2, Float arg3)";
        description = "<b>setRow</b><br><br>Sets all pixel values x of a given row in X to a constant value v.<br><br><pre>f(x) = v</pre><br><br>Parameters:<br>ClearCLImageInterface arg1, Integer arg2, Float arg3";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -737,4 +746,4 @@ class CLIJ2AutoComplete {
         return list;
     }
 }
-// 242 methods generated.
+// 245 methods generated.

@@ -145,6 +145,13 @@ public class CLIJ2 implements CLIJ2Ops {
         return result;
     }
 
+    public ClearCLBuffer create(long dimensionX, long dimensionY, long dimensionZ) {
+        return create(new long[]{dimensionX, dimensionY, dimensionZ}, NativeTypeEnum.Float);
+    }
+
+    public ClearCLBuffer create(long dimensionX, long dimensionY) {
+        return create(new long[]{dimensionX, dimensionY}, NativeTypeEnum.Float);
+    }
 
     public ClearCLBuffer create(long[] dimensions) {
         ClearCLBuffer buffer = create(dimensions, NativeTypeEnum.Float);

@@ -322,7 +322,10 @@ public interface CLIJxPlugins {
             AffineTransform.class,
             Scale.class,
             AverageAngleBetweenAdjacentTriangles.class,
-            CentroidsOfLabels.class
+            CentroidsOfLabels.class,
+            SetRampX.class,
+            SetRampY.class,
+            SetRampZ.class
     };
 
     public String blockList = ";" +
