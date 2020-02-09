@@ -2,7 +2,7 @@
 __kernel void set_plane_2d(
     IMAGE_dst_TYPE  dst,
     int plane,
-    float plane
+    float value
 )
 {
   const int x = get_global_id(0);
