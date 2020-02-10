@@ -59,8 +59,8 @@ public class DocumentationGenerator {
                             Modifier.isPublic(method.getModifiers()) &&
                             method.getParameterCount() > 0 &&
                             (method.getParameters()[0].getType() == CLIJ.class ||
-                                    method.getParameters()[0].getType() == CLIJ2.class||
-                                    method.getParameters()[0].getType() == CLIJx.class) &&
+                            method.getParameters()[0].getType() == CLIJ2.class||
+                            method.getParameters()[0].getType() == CLIJx.class) &&
                             OpGenerator.blockListOk(klass, method) &&
                             !processedNames.contains(";" + method.getName() + ";")
                     ) {
@@ -109,8 +109,6 @@ public class DocumentationGenerator {
                                 }
                             }
 
-                            //System.out.println(documentation);
-
                             item.klass = klass;
                             item.methodName = methodName;
                             item.parametersJava = parametersHeader;
@@ -119,15 +117,10 @@ public class DocumentationGenerator {
                             item.returnType = returnType;
 
                             methodMap.put(methodName + "_" + methodCount, item);
-                            //System.out.println("Collecting " + methodName + "(" + parametersCall + ");");
 
                             methodCount++;
                             processedNames = processedNames + method.getName() + ";";
-                        } else {
-                            //System.out.println("Ignoring  " + methodName + "(" + parametersCall + ");");
                         }
-                    } else {
-                        //System.out.println("Ignoring " + method.getName() + "(...);");
                     }
                 }
             }
@@ -153,17 +146,36 @@ public class DocumentationGenerator {
             if (item.klass == Kernels.class) {
                 builder.append("![Image](images/mini_clij1_logo.png)");
             }
-            if (item.klass.getPackage().toString().contains("clij2") || item.klass.getPackage().toString().contains("clijx")) {
-                // TODO: Check if it already existed in CLIJ1
-                if (service.getCLIJMacroPlugin("CLIJ_" + item.methodName) != null) {
-                    builder.append("![Image](images/mini_clij1_logo.png)");
+            else {
+                /*
+                if (item.klass.getPackage().toString().contains("clij2") || item.klass.getPackage().toString().contains("clijx")) {
+                    if (service.getCLIJMacroPlugin("CLIJ_" + item.methodName) != null) {
+                        builder.append("![Image](images/mini_clij1_logo.png)");
+                    }
+                    builder.append("![Image](images/mini_clij2_logo.png)");
+                    builder.append("![Image](images/mini_clijx_logo.png)");
                 }
-                builder.append("![Image](images/mini_clij2_logo.png)");
-                builder.append("![Image](images/mini_clijx_logo.png)");
+                if (item.klass.getPackage().toString().contains("clijx")) {
+                    builder.append("![Image](images/mini_clijx_logo.png)");
+                }*/
+                if (service.getCLIJMacroPlugin("CLIJ_" + item.methodName) != null) {
+                    builder.append("<img src=\"images/mini_clij1_logo.png\"/>");
+                } else {
+                    builder.append("<img src=\"images/mini_empty_logo.png\"/>");
+                }
+                if (service.getCLIJMacroPlugin("CLIJ2_" + item.methodName) != null) {
+                    builder.append("<img src=\"images/mini_clij2_logo.png\"/>");
+                } else {
+                    builder.append("<img src=\"images/mini_empty_logo.png\"/>");
+                }
+                if (service.getCLIJMacroPlugin("CLIJx_" + item.methodName) != null) {
+                    builder.append("<img src=\"images/mini_clijx_logo.png\"/>");
+                } else {
+                    builder.append("<img src=\"images/mini_empty_logo.png\"/>");
+                }
             }
-            if (item.klass.getPackage().toString().contains("clijx")) {
-                builder.append("![Image](images/mini_clijx_logo.png)");
-            }
+
+
             builder.append("\n\n");
             if (item.author != null && item.author.length() > 0) {
                 builder.append("By " + item.author + "\n\n");
@@ -321,12 +333,12 @@ public class DocumentationGenerator {
 
     private static void buildReference(ArrayList<String> names, HashMap<String, DocumentationItem> methodMap) throws IOException {
         StringBuilder builder = new StringBuilder();
-        builder.append("# CLIJ reference\n");
-        builder.append("This reference contains all methods currently available in CLIJx.\n\n");
-        builder.append("__Please note:__ CLIJx is under heavy construction. This list may change at any point.");
+        builder.append("# CLIJ 1/2/x reference\n");
+        builder.append("This reference contains all methods currently available in CLIJ2 and CLIJx. Read more about [CLIJs release cycle](https://clij.github.io/clij-docs/release_cycle) \n\n");
+        builder.append("__Please note:__ CLIJ2 and CLIJx are under heavy construction. This list may change at any point.");
         builder.append("\n\n");
         builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"18\" height=\"18\"/> Method is available in CLIJ (stable release)\n\n");
-        builder.append("<img src=\"images/mini_clij2_logo.png\" width=\"18\" height=\"18\"/> Method is available in CLIJ2 (upcoming alpha release)\n\n");
+        builder.append("<img src=\"images/mini_clij2_logo.png\" width=\"18\" height=\"18\"/> Method is available in CLIJ2 (alpha release, [read more](https://forum.image.sc/t/clij2-alpha-release/33821))\n\n");
         builder.append("<img src=\"images/mini_clijx_logo.png\" width=\"18\" height=\"18\"/> Method is available in CLIJx (experimental version)\n\n");
         builder.append("\n\n##ALPHABET##\n\n");
 
@@ -341,36 +353,46 @@ public class DocumentationGenerator {
                 listOfChars = listOfChars.replace(" " + firstChar, "<a href=\"#" + firstChar + "\">\\[" + firstChar + "\\]</a>");
             }
             DocumentationItem item = methodMap.get(sortedName);
-            builder.append(" * ");
 
+            StringBuilder itemBuilder = new StringBuilder();
+
+            boolean takeIt = false;
             if (item.klass == Kernels.class) {
-                builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"18\" height=\"18\"/>");
-                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
-                builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                itemBuilder.append("<img src=\"images/mini_clij1_logo.png\" width=\"18\" height=\"18\"/>");
+                itemBuilder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                itemBuilder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                takeIt = true;
             } else {
                 if (service.getCLIJMacroPlugin("CLIJ_" + item.methodName) != null) {
-                    builder.append("<img src=\"images/mini_clij1_logo.png\" width=\"18\" height=\"18\"/>");
+                    takeIt = true;
+                    itemBuilder.append("<img src=\"images/mini_clij1_logo.png\" width=\"18\" height=\"18\"/>");
                 } else {
-                    builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                    itemBuilder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
                 }
                 if (service.getCLIJMacroPlugin("CLIJ2_" + item.methodName) != null) {
-                    builder.append("<img src=\"images/mini_clij2_logo.png\" width=\"18\" height=\"18\"/>");
+                    takeIt = true;
+                    itemBuilder.append("<img src=\"images/mini_clij2_logo.png\" width=\"18\" height=\"18\"/>");
                 } else {
-                    builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                    itemBuilder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
                 }
                 if (service.getCLIJMacroPlugin("CLIJx_" + item.methodName) != null) {
-                    builder.append("<img src=\"images/mini_clijx_logo.png\" width=\"18\" height=\"18\"/>");
+                    takeIt = true;
+                    itemBuilder.append("<img src=\"images/mini_clijx_logo.png\" width=\"18\" height=\"18\"/>");
                 } else {
-                    builder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
+                    itemBuilder.append("<img src=\"images/mini_empty_logo.png\" width=\"18\" height=\"18\"/>");
                 }
             }
 
-            builder.append("<a href=\"" + HTTP_ROOT + "reference_" + item.methodName + "\">");
-            builder.append(item.methodName);
-            if (item.klass == Kernels.class) {
-                builder.append("'");
+            itemBuilder.append("<a href=\"" + HTTP_ROOT + "reference_" + item.methodName + "\">");
+            itemBuilder.append(item.methodName);
+            //if (item.klass == Kernels.class) {
+            //    builder.append("'");
+            //}
+            itemBuilder.append("</a>\n");
+
+            if (takeIt) {
+                builder.append(itemBuilder.toString());
             }
-            builder.append("</a>\n");
         }
 
 
@@ -451,7 +473,6 @@ public class DocumentationGenerator {
 
     protected static String searchForExampleScripts(String searchFor, String searchinFolder, String baseLink, String language) {
         StringBuilder result = new StringBuilder();
-        //System.out.println(searchinFolder);
         for (File file : new File(searchinFolder).listFiles()) {
             if (!file.isDirectory()) {
                 String content = readFile(file.getAbsolutePath());
@@ -464,7 +485,6 @@ public class DocumentationGenerator {
     }
 
     public static String readFile(String filename) {
-        //System.out.println("Reading " + filename);
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(filename));

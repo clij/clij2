@@ -130,12 +130,6 @@ public class OpGenerator {
                                 }
                             }
 
-                            String documentation = findDocumentation(service, methodName);
-                            //System.out.println(documentation);
-
-                            builder.append("    /**\n");
-                            builder.append("     * " + documentation.replace("\n", "\n     * ") + "\n");
-                            builder.append("     */\n");
 
                             boolean deprecated = false;
                             for (Annotation annotation : method.getDeclaredAnnotations()) {
@@ -143,9 +137,20 @@ public class OpGenerator {
                                     deprecated = true;
                                 }
                             }
+
+                            String documentation = findDocumentation(service, methodName, deprecated);
+                            //System.out.println(documentation);
+
+                            builder.append("    /**\n");
+                            builder.append("     * " + documentation.replace("\n", "\n     * ") + "\n");
+                            builder.append("     */\n");
+
+
                             if (deprecated) {
                                 builder.append("    @Deprecated\n");
                             }
+
+
 
                             builder.append("    default " + returnType + " " + methodName + "(");
                             builder.append(parametersHeader);
@@ -185,18 +190,18 @@ public class OpGenerator {
     public static String[] guessParameterNames(CLIJMacroPluginService service, String methodName, String[] parametersHeader) {
         CLIJMacroPlugin plugin = findPlugin(service, methodName);
 
-        if(methodName.contains("paste"))
-        {
-            System.out.println("P " + plugin + " " + Arrays.toString(parametersHeader));
-        }
+        //if(methodName.contains("paste"))
+        //{
+        //    System.out.println("P " + plugin + " " + Arrays.toString(parametersHeader));
+        //}
 
         if (plugin != null) {
             String[] parameters = plugin.getParameterHelpText().split(",");
             if (parameters.length != parametersHeader.length) {
-                if(methodName.contains("paste"))
-                {
-                    System.out.println("Leaving 1");
-                }
+          //      if(methodName.contains("paste"))
+            //    {
+              //      System.out.println("Leaving 1");
+                //}
                 return new String[0];
             }
             String[] parameterNames = new String[parametersHeader.length];
@@ -216,20 +221,20 @@ public class OpGenerator {
                 } else {
                     //if(methodName.contains("paste"))
                     //{
-                    System.out.println("Leaving because " + methodName + "  " + typeA + " != " + typeB);
+                    //System.out.println("Leaving because " + methodName + "  " + typeA + " != " + typeB);
                     //}
                     return new String[0];
                 }
 
             }
-            if(methodName.contains("paste")) {
-                System.out.println(Arrays.toString(parameterNames));
-            }
+//            if(methodName.contains("paste")) {
+//                System.out.println(Arrays.toString(parameterNames));
+//            }
             return parameterNames;
         }
-        if(methodName.contains("paste")) {
-            System.out.println("nothing");
-        }
+//        if(methodName.contains("paste")) {
+//            System.out.println("nothing");
+//        }
 
         return new String[0];
     }
@@ -289,7 +294,7 @@ public class OpGenerator {
         return null;
     }
 
-    static String findDocumentation(CLIJMacroPluginService service, String methodName) {
+    static String findDocumentation(CLIJMacroPluginService service, String methodName, boolean deprecated) {
         if (methodName.endsWith("IJ")) {
             return "This method is deprecated. Consider using " + methodName.replace("IJ", "Box") + " or " + methodName.replace("IJ", "Sphere") + " instead.";
         }
@@ -304,7 +309,7 @@ public class OpGenerator {
             }
         }
 
-        System.out.println("No documentation found for " + methodName);
+        System.out.println("No documentation found for " + methodName + (deprecated?" (deprecated)":""));
         return "";
     }
 

@@ -80,7 +80,7 @@ public class GenerateCLIJ1Wrappers {
                         }
                     }
 
-                    String documentation = findDocumentation(service, methodName);
+                    String documentation = findDocumentation(service, methodName, false);
 
                     generateWrapper(methodName, parametersHeader, parametersCall, returnType, documentation);
                 }

@@ -1,7 +1,7 @@
 package net.haesleinhuepf.clijx.codegenerator;
 
-import net.haesleinhuepf.clij2.legacyplugins.AffineTransform;
-import net.haesleinhuepf.clij2.legacyplugins.Scale;
+import net.haesleinhuepf.clij2.plugins.AffineTransform;
+import net.haesleinhuepf.clij2.plugins.Scale;
 import net.haesleinhuepf.clij2.plugins.*;
 import net.haesleinhuepf.clij2.plugins.Equal;
 import net.haesleinhuepf.clij2.plugins.EqualConstant;
@@ -36,8 +36,8 @@ import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
 import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
 import net.haesleinhuepf.clijx.registration.TranslationRegistration;
 import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
-import net.haesleinhuepf.clij2.legacyplugins.Downsample2D;
-import net.haesleinhuepf.clij2.legacyplugins.Downsample3D;
+import net.haesleinhuepf.clij2.plugins.Downsample2D;
+import net.haesleinhuepf.clij2.plugins.Downsample3D;
 import net.haesleinhuepf.clij2.plugins.DownsampleSliceBySliceHalfMedian;
 import net.haesleinhuepf.clij2.plugins.GradientX;
 import net.haesleinhuepf.clij2.plugins.GradientY;
@@ -45,7 +45,7 @@ import net.haesleinhuepf.clij2.plugins.GradientZ;
 import net.haesleinhuepf.clij2.plugins.LocalThreshold;
 import net.haesleinhuepf.clij2.plugins.GaussianBlur2D;
 import net.haesleinhuepf.clij2.plugins.GaussianBlur3D;
-import net.haesleinhuepf.clijx.plugins.Blur3DSliceBySlice;
+import net.haesleinhuepf.clijx.plugins.BlurSliceBySlice;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
 
@@ -272,7 +272,7 @@ public interface CLIJxPlugins {
             MultiplyImages.class,
             GaussianBlur2D.class,
             GaussianBlur3D.class,
-            Blur3DSliceBySlice.class,
+            BlurSliceBySlice.class,
             ResliceBottom.class,
             ResliceTop.class,
             ResliceLeft.class,
@@ -362,7 +362,7 @@ public interface CLIJxPlugins {
             "Kernels.affineTransform2D;" +
             "Kernels.affineTransform3D;" +
             "Kernels.threshold;" +
-            "Kernels.applyVectorfield;" +
+            "Kernels.applyVectorField;" +
             "Kernels.argMaximumZProjection;" +
             "Kernels.fillHistogram;" +
             "Kernels.histogram;" +
