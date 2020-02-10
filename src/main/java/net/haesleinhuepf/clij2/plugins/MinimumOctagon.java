@@ -61,6 +61,7 @@ public class MinimumOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         return true;
     }
 
+    @Deprecated
     public static ClearCLKernel minimumBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, ClearCLKernel kernel)
     {
         HashMap<String, Object> parameters = new HashMap<>();
@@ -69,6 +70,7 @@ public class MinimumOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         return clij2.executeSubsequently(MinimumOctagon.class, "minimum_octagon_box_" + src.getDimension() + "d_x.cl", "minimum_octagon_box_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters, kernel);
     }
 
+    @Deprecated
     public static ClearCLKernel minimumDiamond(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, ClearCLKernel kernel)
     {
         HashMap<String, Object> parameters = new HashMap<>();

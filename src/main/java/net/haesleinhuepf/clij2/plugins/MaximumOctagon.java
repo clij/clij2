@@ -61,6 +61,8 @@ public class MaximumOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         return true;
     }
 
+
+    @Deprecated
     public static ClearCLKernel maximumBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, ClearCLKernel kernel)
     {
         HashMap<String, Object> parameters = new HashMap<>();
@@ -69,6 +71,8 @@ public class MaximumOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         return clij2.executeSubsequently(MaximumOctagon.class, "maximum_octagon_box_" + src.getDimension() + "d_x.cl", "maximum_octagon_box_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters, kernel);
     }
 
+
+    @Deprecated
     public static ClearCLKernel maximumDiamond(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, ClearCLKernel kernel)
     {
         HashMap<String, Object> parameters = new HashMap<>();
