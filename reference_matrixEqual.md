@@ -1,5 +1,5 @@
 ## matrixEqual
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Checks if all elements of a matrix are different by less than or equal to a given tolerance.
 The result will be put in the results table in column "MatrixEqual" as 1 if yes and 0 otherwise.

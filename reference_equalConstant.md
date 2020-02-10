@@ -1,5 +1,5 @@
 ## equalConstant
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Determines if an image A and a constant b are equal.
 

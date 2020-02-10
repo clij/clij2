@@ -1,5 +1,5 @@
 ## minimum3DBox
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_clij1_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Computes the local minimum of a pixels cube neighborhood. The cubes size is specified by 
 its half-width, half-height and half-depth (radius).

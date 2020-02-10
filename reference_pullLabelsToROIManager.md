@@ -1,5 +1,5 @@
 ## pullLabelsToROIManager
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Pulls all labels in a label map as ROIs to the ROI manager.
 

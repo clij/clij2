@@ -1,5 +1,5 @@
 ## powerImages
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Calculates x to the power of y pixel wise of two images X and Y.
 

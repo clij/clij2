@@ -1,5 +1,5 @@
 ## meanOfPixelsAboveThreshold
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Determines the mean intensity in an image, but only in pixels which are above a given threshold.
 

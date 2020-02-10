@@ -1,5 +1,5 @@
 ## sorensenDiceCoefficient
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Determines the overlap of two binary images using the Sorensen-Dice coefficent.
 A value of 0 suggests no overlap, 1 means perfect overlap.

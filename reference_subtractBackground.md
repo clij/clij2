@@ -1,5 +1,5 @@
 ## subtractBackground
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/>
 
 Applies Gaussian blur to the input image and subtracts the result from the original image.
 

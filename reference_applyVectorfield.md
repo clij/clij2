@@ -1,11 +1,11 @@
 ## applyVectorfield
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+![Image](images/mini_clij1_logo.png)
 
 Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_applyVectorfield(Image source, Image vectorX, Image vectorY, Image destination);
+Ext.CLIJ_applyVectorfield(Image source, Image vectorX, Image vectorY, Image destination);
 ```
 
 

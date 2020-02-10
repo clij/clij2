@@ -1,5 +1,5 @@
 ## multiplyImageAndScalar
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_clij1_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Multiplies all pixels value x in a given image X with a constant scalar s.
 

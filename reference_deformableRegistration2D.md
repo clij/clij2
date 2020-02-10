@@ -1,5 +1,5 @@
 ## deformableRegistration2D
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Applies particle image velocimetry to two images and registers them afterwards by warping input image 2 with a smoothed vector field.
 

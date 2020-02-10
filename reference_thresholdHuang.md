@@ -1,5 +1,5 @@
 ## thresholdHuang
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 By Robert Haase based on work by G. Landini and W. Rasband
 

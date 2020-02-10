@@ -1,5 +1,5 @@
 ## topHatBox
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Applies a top-hat filter for background subtraction to the input image.
 

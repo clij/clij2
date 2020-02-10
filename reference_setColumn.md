@@ -1,5 +1,5 @@
 ## setColumn
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Sets all pixel values x of a given column in X to a constant value v.
 
@@ -35,6 +35,12 @@ clij2.setColumn(clij, source, columnIndex, value);
 // cleanup memory on GPU
 clij2.release(source);
 ```
+
+
+
+
+### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [rotating_sphere.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/rotating_sphere.ijm)  
 
 
 [Back to CLIJ documentation](https://clij.github.io/)

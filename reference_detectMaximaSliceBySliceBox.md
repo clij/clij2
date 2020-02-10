@@ -1,5 +1,5 @@
 ## detectMaximaSliceBySliceBox
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_clij1_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Detects local maxima in a given square neighborhood of an input image stack. The input image stack is 
 processed slice by slice. Pixels in the resulting image are set to 1 if there is no other pixel in a 

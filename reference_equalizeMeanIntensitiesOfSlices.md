@@ -1,5 +1,5 @@
 ## equalizeMeanIntensitiesOfSlices
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Determines correction factors for each z-slice so that the average intensity in all slices can be made the same and multiplies these factors with the slices.
 This functionality is similar to the 'Simple Ratio Bleaching Correction' in Fiji.

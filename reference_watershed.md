@@ -1,5 +1,5 @@
 ## watershed
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Apply a binary watershed to a binary image and introduces black pixels between objects.
 

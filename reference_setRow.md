@@ -1,5 +1,5 @@
 ## setRow
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Sets all pixel values x of a given row in X to a constant value v.
 

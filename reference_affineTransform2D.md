@@ -1,5 +1,5 @@
 ## affineTransform2D
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_clij1_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Applies an affine transform to a 2D image. Individual transforms must be separated by spaces.
 

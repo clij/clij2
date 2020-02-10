@@ -1,5 +1,5 @@
 ## showGlasbeyOnGrey
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Visualises two 2D images as one RGB image. The first channel is shown in grey, the second with glasbey LUT.
 

@@ -1,5 +1,5 @@
 ## pointIndexListToMesh
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Meshes all points in a given point list which are indiced in a corresponding index list. TODO: Explain better
 

@@ -1,5 +1,5 @@
 ## closingDiamond
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Apply a binary closing to the input image by calling n dilations and n erosions subsequenntly.
 

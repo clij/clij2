@@ -1,5 +1,5 @@
 ## multiplyImages
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_clij1_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Multiplies all pairs of pixel values x and y from two image X and Y.
 

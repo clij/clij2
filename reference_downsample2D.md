@@ -1,5 +1,5 @@
 ## downsample2D
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_clij1_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
 is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.

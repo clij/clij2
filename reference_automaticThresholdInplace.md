@@ -1,5 +1,5 @@
 ## automaticThresholdInplace
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on 
 the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one 

@@ -1,11 +1,11 @@
 ## setRampZ
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Sets all pixel values to their Z coordinate
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_setRampZ(Image source, Number value);
+Ext.CLIJx_setRampZ(Image source);
 ```
 
 
@@ -17,19 +17,19 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
+ClearCLBuffer source = clij2.push(sourceImagePlus);
 ```
 
 ```
 // Execute operation on GPU
-clij2.setRampZ(clij, arg1);
+clij2.setRampZ(clij, source);
 ```
 
 ```
 //show result
 
 // cleanup memory on GPU
-clij2.release(arg1);
+clij2.release(source);
 ```
 
 

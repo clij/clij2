@@ -1,5 +1,5 @@
 ## rotateCounterClockwise
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Rotates a given input image by 90 degrees counter-clockwise. For that, X and Y axis of an image stack
 are flipped. This operation is similar to ImageJs 'Reslice [/]' method but offers less flexibility 

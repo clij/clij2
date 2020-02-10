@@ -1,5 +1,5 @@
 ## maximum2DSphere
-![Image](images/mini_clij1_logo.png)![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_clij1_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Computes the local maximum of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
 its half-width and half-height (radius).

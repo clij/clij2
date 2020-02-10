@@ -1,5 +1,5 @@
 ## averageDistanceOfNClosestPoints
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Determine the n point indices with shortest distance for all points in a distance matrix.
 This corresponds to the n row indices with minimum values for each column of the distance matrix.

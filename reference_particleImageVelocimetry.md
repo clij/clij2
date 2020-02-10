@@ -1,5 +1,5 @@
 ## particleImageVelocimetry
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 For every pixel in source image 1, determine the pixel with the most similar intensity in 
  the local neighborhood with a given radius in source image 2. Write the distance in 

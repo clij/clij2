@@ -1,5 +1,5 @@
 ## localExtremaBox
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Applies a local minimum and maximum filter. Afterwards, the value is returned which is more far from zero.
 

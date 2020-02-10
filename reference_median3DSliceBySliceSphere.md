@@ -1,5 +1,5 @@
 ## median3DSliceBySliceSphere
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/>
 
 Computes the local median of a pixels ellipsoidal neighborhood. This is done slice-by-slice in a 3D 
 image stack. The ellipses size is specified by its half-width and half-height (radius).
