@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clij2.legacyplugins;
+package net.haesleinhuepf.clij2.plugins;
 
 import ij.IJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
