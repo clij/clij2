@@ -23,17 +23,17 @@ public class AverageDistanceOfNClosestPoints extends AbstractCLIJ2Plugin impleme
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = averageDistanceOfClosestPoints(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
+        boolean result = averageDistanceOfNClosestPoints(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
         releaseBuffers(args);
         return result;
     }
 
     @Deprecated
-    public static boolean averageDistanceOfNClosestPoints(CLIJ2 clij2, ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination, Integer nPoints) {
-        return averageDistanceOfClosestPoints(clij2, distance_matrix, indexlist_destination, nPoints);
+    public static boolean averageDistanceOfClosestPoints(CLIJ2 clij2, ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination, Integer nPoints) {
+        return averageDistanceOfNClosestPoints(clij2, distance_matrix, indexlist_destination, nPoints);
     }
 
-    public static boolean averageDistanceOfClosestPoints(CLIJ2 clij2, ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination, Integer nPoints) {
+    public static boolean averageDistanceOfNClosestPoints(CLIJ2 clij2, ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination, Integer nPoints) {
 
             //ClearCLBuffer temp = clij.create(new long[]{input.getWidth(), 1, input.getHeight()}, input.getNativeType());
 
