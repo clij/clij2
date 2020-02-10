@@ -35,7 +35,7 @@ public class SetRampZ extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Number value";
+        return "Image source";
     }
 
     @Override
