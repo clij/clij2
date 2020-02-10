@@ -26,14 +26,14 @@ class CLIJxAutoComplete {
        headline = "clijx.affineTransform3D(ClearCLBuffer source, ClearCLImageInterface destination, String transform)";
        description = "<b>affineTransform3D</b><br><br>Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.<br><br>Supported transforms:<br>* center: translate the coordinate origin to the center of the image<br>* -center: translate the coordinate origin back to the initial origin<br>* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees<br>* rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees<br>* rotateZ=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees<br>* scale=[factor]: isotropic scaling according to given zoom factor<br>* scaleX=[factor]: scaling along X-axis according to given zoom factor<br>* scaleY=[factor]: scaling along Y-axis according to given zoom factor<br>* scaleZ=[factor]: scaling along Z-axis according to given zoom factor<br>* shearXY=[factor]: shearing along X-axis in XY plane according to given factor<br>* shearXZ=[factor]: shearing along X-axis in XZ plane according to given factor<br>* shearYX=[factor]: shearing along Y-axis in XY plane according to given factor<br>* shearYZ=[factor]: shearing along Y-axis in YZ plane according to given factor<br>* shearZX=[factor]: shearing along Z-axis in XZ plane according to given factor<br>* shearZY=[factor]: shearing along Z-axis in YZ plane according to given factor<br>* translateX=[distance]: translate along X-axis by distance given in pixels<br>* translateY=[distance]: translate along X-axis by distance given in pixels<br>* translateZ=[distance]: translate along X-axis by distance given in pixels<br><br>Example transform:<br>transform = &quot;center scale=2 rotate=45 -center&quot;;<br><br>Parameters:<br>ClearCLBuffer source, ClearCLImageInterface destination, String transform";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.applyVectorfield2D(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination)";
-       description = "<b>applyVectorfield2D</b><br><br>Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. <br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination";
+       headline = "clijx.applyVectorField2D(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination)";
+       description = "<b>applyVectorField2D</b><br><br>Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. <br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.applyVectorfield3D(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface vectorZ, ClearCLImageInterface destination)";
-       description = "<b>applyVectorfield3D</b><br><br>Deforms an image stack according to distances provided in the given vector image stacks. It is recommended to use 32-bit image stacks for input, output and vector image stacks. <br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface vectorZ, ClearCLImageInterface destination";
+       headline = "clijx.applyVectorField3D(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface vectorZ, ClearCLImageInterface destination)";
+       description = "<b>applyVectorField3D</b><br><br>Deforms an image stack according to distances provided in the given vector image stacks. It is recommended to use 32-bit image stacks for input, output and vector image stacks. <br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface vectorZ, ClearCLImageInterface destination";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.applyVectorfield(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination)";
-       description = "<b>applyVectorfield</b><br><br>Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. <br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination";
+       headline = "clijx.applyVectorField(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination)";
+       description = "<b>applyVectorField</b><br><br>Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. <br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.applyWekaModel(ClearCLBuffer featureStack3D, ClearCLBuffer prediction2D_destination, String loadModelFilename)";
        description = "<b>applyWekaModel</b><br><br>Applies a Weka model using functionality of Fijis Trainable Weka Segmentation plugin.<br>It takes a 3D feature stack (e.g. first plane original image, second plane blurred, third plane edge image)and applies a pre-trained a Weka model. Take care that the feature stack has been generated in the sameway as for training the model!<br><br>Parameters:<br>ClearCLBuffer featureStack3D, ClearCLBuffer prediction2D_destination, String loadModelFilename";
@@ -611,6 +611,15 @@ class CLIJxAutoComplete {
        headline = "clijx.setPlane(ClearCLImageInterface source, Integer rowIndex, Float value)";
        description = "<b>setPlane</b><br><br>Sets all pixel values x of a given plane in X to a constant value v.<br><br><pre>f(x) = v</pre><br><br>Parameters:<br>ClearCLImageInterface source, Integer rowIndex, Float value";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.setRampX(ClearCLImageInterface source)";
+       description = "<b>setRampX</b><br><br>Sets all pixel values to their X coordinate<br><br>Parameters:<br>ClearCLImageInterface source";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.setRampY(ClearCLImageInterface source)";
+       description = "<b>setRampY</b><br><br>Sets all pixel values to their Y coordinate<br><br>Parameters:<br>ClearCLImageInterface source";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.setRampZ(ClearCLImageInterface source)";
+       description = "<b>setRampZ</b><br><br>Sets all pixel values to their Z coordinate<br><br>Parameters:<br>ClearCLImageInterface source";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.setRow(ClearCLImageInterface source, Integer rowIndex, Float value)";
        description = "<b>setRow</b><br><br>Sets all pixel values x of a given row in X to a constant value v.<br><br><pre>f(x) = v</pre><br><br>Parameters:<br>ClearCLImageInterface source, Integer rowIndex, Float value";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -821,4 +830,4 @@ class CLIJxAutoComplete {
         return list;
     }
 }
-// 270 methods generated.
+// 273 methods generated.
