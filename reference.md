@@ -3,12 +3,9 @@ This reference contains all methods currently available in CLIJ2 and CLIJx. Read
 
 __Please note:__ CLIJ2 and CLIJx are under heavy construction. This list may change at any point.
 
-<img src="images/mini_clij1_logo.png" width="18" height="18"/> Method is available in CLIJ (stable release)
-
-<img src="images/mini_clij2_logo.png" width="18" height="18"/> Method is available in CLIJ2 (alpha release, [read more](https://forum.image.sc/t/clij2-alpha-release/33821))
-
-<img src="images/mini_clijx_logo.png" width="18" height="18"/> Method is available in CLIJx (experimental version)
-
+<img src="images/mini_clij1_logo.png" width="18" height="18"/> Method is available in CLIJ (stable release)  
+<img src="images/mini_clij2_logo.png" width="18" height="18"/> Method is available in CLIJ2 (alpha release, [read more](https://forum.image.sc/t/clij2-alpha-release/33821))  
+<img src="images/mini_clijx_logo.png" width="18" height="18"/> Method is available in CLIJx (experimental version)  
 
 
 <a href="#A">\[A\]</a>,<a href="#B">\[B\]</a>,<a href="#C">\[C\]</a>,<a href="#D">\[D\]</a>,<a href="#E">\[E\]</a>,<a href="#F">\[F\]</a>,<a href="#G">\[G\]</a>,<a href="#H">\[H\]</a>,<a href="#I">\[I\]</a>,<a href="#J">\[J\]</a>, K,<a href="#L">\[L\]</a>,<a href="#M">\[M\]</a>,<a href="#N">\[N\]</a>,<a href="#O">\[O\]</a>,<a href="#P">\[P\]</a>, Q,<a href="#R">\[R\]</a>,<a href="#S">\[S\]</a>,<a href="#T">\[T\]</a>, U,<a href="#V">\[V\]</a>,<a href="#W">\[W\]</a>, X, Y, Z
