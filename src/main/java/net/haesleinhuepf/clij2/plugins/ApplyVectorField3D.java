@@ -30,7 +30,7 @@ public class ApplyVectorField3D extends AbstractCLIJ2Plugin implements CLIJMacro
             ClearCLImage input = getCLIJ2().create(inputBuffer.getDimensions(), CLIJUtilities.nativeToChannelType(inputBuffer.getNativeType()));
             getCLIJ2().copy(inputBuffer, input);
 
-            applyVectorfield(getCLIJ2(),
+            applyVectorField(getCLIJ2(),
                     input,
                     (ClearCLBuffer)( args[1]),
                     (ClearCLBuffer)( args[2]),
@@ -40,7 +40,7 @@ public class ApplyVectorField3D extends AbstractCLIJ2Plugin implements CLIJMacro
 
             getCLIJ2().release(input);
         } else {
-            applyVectorfield(getCLIJ2(),
+            applyVectorField(getCLIJ2(),
                     (ClearCLBuffer)( args[0]),
                     (ClearCLBuffer)( args[1]),
                     (ClearCLBuffer)( args[2]),
@@ -53,11 +53,11 @@ public class ApplyVectorField3D extends AbstractCLIJ2Plugin implements CLIJMacro
     }
 
 
-    public static boolean applyVectorfield3D(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface vectorZ, ClearCLImageInterface dst) {
-        return applyVectorfield(clij2, src, vectorX, vectorY, vectorZ, dst);
+    public static boolean applyVectorField3D(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface vectorZ, ClearCLImageInterface dst) {
+        return applyVectorField(clij2, src, vectorX, vectorY, vectorZ, dst);
     }
 
-    public static boolean applyVectorfield(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface vectorZ, ClearCLImageInterface dst) {
+    public static boolean applyVectorField(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface vectorZ, ClearCLImageInterface dst) {
         assertDifferent(src, dst);
         assertDifferent(vectorX, dst);
         assertDifferent(vectorY, dst);

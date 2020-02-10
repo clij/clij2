@@ -30,7 +30,7 @@ public class ApplyVectorField2D extends AbstractCLIJ2Plugin implements CLIJMacro
             ClearCLImage input = getCLIJ2().create(inputBuffer.getDimensions(), CLIJUtilities.nativeToChannelType(inputBuffer.getNativeType()));
             getCLIJ2().copy(inputBuffer, input);
 
-            applyVectorfield(getCLIJ2(),
+            applyVectorField(getCLIJ2(),
                     input,
                     (ClearCLBuffer)( args[1]),
                     (ClearCLBuffer)( args[2]),
@@ -39,7 +39,7 @@ public class ApplyVectorField2D extends AbstractCLIJ2Plugin implements CLIJMacro
 
             getCLIJ2().release(input);
         } else {
-            applyVectorfield(getCLIJ2(),
+            applyVectorField(getCLIJ2(),
                     (ClearCLBuffer)( args[0]),
                     (ClearCLBuffer)( args[1]),
                     (ClearCLBuffer)( args[2]),
@@ -49,12 +49,12 @@ public class ApplyVectorField2D extends AbstractCLIJ2Plugin implements CLIJMacro
         return true;
     }
 
-    public static boolean applyVectorfield2D(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface dst) {
-        return applyVectorfield(clij2, src, vectorX, vectorY, dst);
+    public static boolean applyVectorField2D(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface dst) {
+        return applyVectorField(clij2, src, vectorX, vectorY, dst);
     }
 
 
-    public static boolean applyVectorfield(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface dst) {
+    public static boolean applyVectorField(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface dst) {
         assertDifferent(src, dst);
         assertDifferent(vectorX, dst);
         assertDifferent(vectorY, dst);
