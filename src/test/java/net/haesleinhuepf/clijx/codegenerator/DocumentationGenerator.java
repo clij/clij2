@@ -388,7 +388,7 @@ public class DocumentationGenerator {
             //if (item.klass == Kernels.class) {
             //    builder.append("'");
             //}
-            itemBuilder.append("</a>\n");
+            itemBuilder.append("</a>  \n");
 
             if (takeIt) {
                 builder.append(itemBuilder.toString());
