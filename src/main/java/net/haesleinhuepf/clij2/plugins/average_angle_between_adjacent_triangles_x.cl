@@ -171,7 +171,6 @@ __kernel void average_angle_between_adjacent_triangles (
   if (count > 0) {
     average = sum / count;
   }
-  average = count;
   WRITE_dst_average_angle_list_IMAGE(dst_average_angle_list, (POS_dst_average_angle_list_INSTANCE(label_id, 0, 0, 0)), CONVERT_dst_average_angle_list_PIXEL_TYPE(average));
 }
 
