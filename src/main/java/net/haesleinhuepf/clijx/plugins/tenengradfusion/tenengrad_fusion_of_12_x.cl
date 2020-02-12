@@ -15,9 +15,9 @@ __kernel void tenengrad_fusion_with_provided_weights_12_images(
 )
 {
   const int i = get_global_id(0), j = get_global_id(1), k = get_global_id(2);
-  const int4 coord = (int4)(i,j,k,0);
+  const POS_src0_TYPE coord = POS_src0_INSTANCE(i,j,k,0);
 
-  const float4 coord_weight = (float4)((i+0.5f)/factor,(j+0.5f)/factor,k+0.5f,0);
+  const POS_weight0_TYPE coord_weight = POS_weight0_INSTANCE((i+0.5f)/factor,(j+0.5f)/factor,k+0.5f,0);
   const sampler_t sampler_weight = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_LINEAR;
 
   float w0 = READ_weight0_IMAGE(weight0,sampler_weight,coord_weight).x;

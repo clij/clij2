@@ -13,7 +13,7 @@ __kernel void tenengrad_weight_unnormalized_slice_wise(
   const int y = get_global_id(1); 
   const int z = get_global_id(2);
   
-  const int4 coord = (int4)(x,y,z,0);
+  const POS_dst_TYPE coord = POS_dst_INSTANCE(x,y,z,0);
   
   float Gx = 0.0f, Gy = 0.0f;
   for (int i = 0; i < 3; ++i) {
@@ -21,7 +21,7 @@ __kernel void tenengrad_weight_unnormalized_slice_wise(
       for (int k = 0; k < 3; ++k) {
         const int dx = i-1, dy = j-1, dz = k-1;
         const int ind = i + 3*j + 3*3*k;
-        const float pix = (float)READ_src_IMAGE(src,sampler,(int4)(x + dx,y + dy, z + dz,0)).x;
+        const float pix = (float)READ_src_IMAGE(src,sampler,POS_src_INSTANCE(x + dx,y + dy, z + dz,0)).x;
         Gx += hx[ind]*pix;
         Gy += hy[ind]*pix;
       }

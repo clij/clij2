@@ -5,10 +5,10 @@ __constant float hy[] = {-1,-2,-1,0,0,0,1,2,1,-2,-4,-2,0,0,0,2,4,2,-1,-2,-1,0,0,
 __constant float hz[] = {-1,0,1,-2,0,2,-1,0,1,-2,0,2,-4,0,4,-2,0,2,-1,0,1,-2,0,2,-1,0,1};
 
 
-__kernel void tenengrad_fusion_with_provided_weights_4_images(
+__kernel void tenengrad_fusion_with_provided_weights_2_images(
   IMAGE_dst_TYPE dst, const int factor,
-  IMAGE_src0_TYPE src0, IMAGE_src1_TYPE src1, IMAGE_src2_TYPE src2, IMAGE_src3_TYPE src3,
-  IMAGE_weight0_TYPE weight0, IMAGE_weight1_TYPE weight1, IMAGE_weight2_TYPE weight2, IMAGE_weight3_TYPE weight3
+  IMAGE_src0_TYPE src0, IMAGE_src1_TYPE src1,
+  IMAGE_weight0_TYPE weight0, IMAGE_weight1_TYPE weight1
 )
 {
   const int i = get_global_id(0), j = get_global_id(1), k = get_global_id(2);
@@ -19,20 +19,14 @@ __kernel void tenengrad_fusion_with_provided_weights_4_images(
 
   float w0 = READ_weight0_IMAGE(weight0,sampler_weight,coord_weight).x;
   float w1 = READ_weight1_IMAGE(weight1,sampler_weight,coord_weight).x;
-  float w2 = READ_weight2_IMAGE(weight2,sampler_weight,coord_weight).x;
-  float w3 = READ_weight3_IMAGE(weight3,sampler_weight,coord_weight).x;
 
-  const float wsum = w0 + w1 + w2 + w3 + 1e-30f; // add small epsilon to avoid wsum = 0
+  const float wsum = w0 + w1 + 1e-30f; // add small epsilon to avoid wsum = 0
   w0 /= wsum;
   w1 /= wsum;
-  w2 /= wsum;
-  w3 /= wsum;
 
   const float  v0 = (float)READ_src0_IMAGE(src0,sampler,coord).x;
   const float  v1 = (float)READ_src1_IMAGE(src1,sampler,coord).x;
-  const float  v2 = (float)READ_src2_IMAGE(src2,sampler,coord).x;
-  const float  v3 = (float)READ_src3_IMAGE(src3,sampler,coord).x;
-  const float res = w0 * v0 + w1 * v1 + w2 * v2 + w3 * v3;
+  const float res = w0 * v0 + w1 * v1;
 
   WRITE_dst_IMAGE(dst,coord, CONVERT_dst_PIXEL_TYPE(res));
 }
