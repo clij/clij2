@@ -242,6 +242,9 @@ class CLIJxAutoComplete {
        headline = "clijx.excludeLabelsOnEdges(ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination)";
        description = "<b>excludeLabelsOnEdges</b><br><br>Removes all labels from a label map which touch the edges of the image (in X, Y and Z if the image is 3D). Remaining label elements are renumbered afterwards.<br><br>Parameters:<br>ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.excludeLabelsOnSurface(ClearCLBuffer pointlist, ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination, Float centerX, Float centerY, Float centerZ)";
+       description = "<b>excludeLabelsOnSurface</b><br><br>This operation follows a ray from a given position towards a label (or opposite direction) and checks if  there is another label between the label an the image border. If yes, this label is eliminated from the label map.<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination, Float centerX, Float centerY, Float centerZ";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.excludeLabelsSubSurface(ClearCLBuffer pointlist, ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination, Float centerX, Float centerY, Float centerZ)";
        description = "<b>excludeLabelsSubSurface</b><br><br>This operation follows a ray from a given position towards a label (or opposite direction) and checks if  there is another label between the label an the image border. If yes, this label is eliminated from the label map.<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination, Float centerX, Float centerY, Float centerZ";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -716,6 +719,9 @@ class CLIJxAutoComplete {
        headline = "clijx.sumZProjection(ClearCLImageInterface source, ClearCLImageInterface destination_sum)";
        description = "<b>sumZProjection</b><br><br>Determines the sum projection of an image along Z.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination_sum";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.tenengradFusion(ClearCLBuffer input, ClearCLBuffer destination, Integer number_of_substacks, Float sigmaX, Float sigmaY, Float sigmaZ, Float exponent)";
+       description = "<b>tenengradFusion</b><br><br>Fuses #n# image stacks using Tenengrads algorithm.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination, Integer number_of_substacks, Float sigmaX, Float sigmaY, Float sigmaZ, Float exponent";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.thresholdDefault(ClearCLBuffer input, ClearCLBuffer destination)";
        description = "<b>thresholdDefault</b><br><br>The automatic thresholder utilizes the Default threshold method implemented in ImageJ using a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -830,4 +836,4 @@ class CLIJxAutoComplete {
         return list;
     }
 }
-// 273 methods generated.
+// 275 methods generated.

@@ -33,6 +33,7 @@ import net.haesleinhuepf.clijx.plugins.DrawTwoValueLine;
 import net.haesleinhuepf.clijx.piv.FastParticleImageVelocimetry;
 import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetry;
 import net.haesleinhuepf.clijx.piv.ParticleImageVelocimetryTimelapse;
+import net.haesleinhuepf.clijx.plugins.tenengradfusion.TenengradFusion;
 import net.haesleinhuepf.clijx.registration.DeformableRegistration2D;
 import net.haesleinhuepf.clijx.registration.TranslationRegistration;
 import net.haesleinhuepf.clijx.registration.TranslationTimelapseRegistration;
@@ -224,7 +225,6 @@ public interface CLIJxPlugins {
             MeanZProjection.class,
             MinimumZProjection.class,
             Power.class,
-            AbstractTenengradFusion.class,
             DivideImages.class,
             MaximumImages.class,
             MaximumImageAndScalar.class,
@@ -345,7 +345,9 @@ public interface CLIJxPlugins {
             ThresholdTriangle.class,
             ThresholdYen.class,
             ExcludeLabelsSubSurface.class,
-            SetPlane.class
+            ExcludeLabelsOnSurface.class,
+            SetPlane.class,
+            TenengradFusion.class
     };
 
     public String blockList = ";" +
