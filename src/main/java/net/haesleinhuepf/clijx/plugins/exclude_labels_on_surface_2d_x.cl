@@ -1,4 +1,4 @@
-__kernel void exclude_labels_on_surface_2d (
+__kernel void exclude_labels_sub_surface_2d (
     IMAGE_src_pointlist_TYPE src_pointlist,
     IMAGE_src_label_map_TYPE src_label_map,
     IMAGE_label_index_dst_TYPE label_index_dst,
@@ -58,7 +58,7 @@ __kernel void exclude_labels_on_surface_2d (
       }
   }
 
-  if (foundAnother) {
+  if (!foundAnother) {
     //printf("%d eliminate\n", label_id);
     WRITE_label_index_dst_IMAGE (label_index_dst, POS_label_index_dst_INSTANCE(label_id,0,0,0), 0);
   } else {
