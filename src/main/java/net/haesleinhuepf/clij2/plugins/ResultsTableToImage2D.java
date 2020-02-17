@@ -68,7 +68,7 @@ public class ResultsTableToImage2D extends AbstractCLIJ2Plugin implements CLIJMa
             int c = 0;
             for (int y = 0; y < rows; y++) {
                 for (int x = 0; x < cols; x++ ) {
-                    array[c] = (byte) table.getValueAsDouble(x, y);
+                    array[c] = (float) table.getValueAsDouble(x, y);
                     c++;
                 }
             }
