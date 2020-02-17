@@ -68,11 +68,11 @@ __kernel void affine_transform_2d(
   if (x2 >= 0 && y2 >= 0 &&
         x2 < GET_IMAGE_WIDTH(input) && y2 < GET_IMAGE_HEIGHT(input)
     ) {
-    pix = (float)(READ_input_IMAGE(input, sampler, coord_norm).x);
+    pix = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x2, y2, 0, 0)).x);
   }
 
   int2 pos = (int2){i, j};
 
-  WRITE_output_IMAGE(output, pos, CONVERT_output_PIXEL_TYPE(pix));
+  WRITE_output_IMAGE(output, POS_output_INSTANCE(i, j, 0, 0), CONVERT_output_PIXEL_TYPE(pix));
   
 }

@@ -114,11 +114,18 @@ public class Resample extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
         float factorY = asFloat(args[3]);
         float factorZ = asFloat(args[4]);
 
-        return clij.create(new long[]{
-                (long) (input.getWidth() * factorX),
-                (long) (input.getHeight() * factorY),
-                (long) (input.getDepth() * factorZ)
-        }, input.getNativeType());
+        if (input.getDimension() == 2 ) {
+            return clij.create(new long[]{
+                    (long) (input.getWidth() * factorX),
+                    (long) (input.getHeight() * factorY)
+            }, input.getNativeType());
+        } else {
+            return clij.create(new long[]{
+                    (long) (input.getWidth() * factorX),
+                    (long) (input.getHeight() * factorY),
+                    (long) (input.getDepth() * factorZ)
+            }, input.getNativeType());
+        }
     }
 
     @Override
