@@ -9,7 +9,7 @@ zero.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_maskStackWithPlane(Image source, Image mask, Image destination);
+Ext.CLIJx_maskStackWithPlane(Image source_3d, Image mask_2d, Image destination_3d);
 ```
 
 
@@ -21,25 +21,25 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer source = clij2.push(sourceImagePlus);
-ClearCLBuffer mask = clij2.push(maskImagePlus);
-destination = clij.create(source);
+ClearCLBuffer source_3d = clij2.push(source_3dImagePlus);
+ClearCLBuffer mask_2d = clij2.push(mask_2dImagePlus);
+destination_3d = clij.create(source_3d);
 ```
 
 ```
 // Execute operation on GPU
-clij2.maskStackWithPlane(clij, source, mask, destination);
+clij2.maskStackWithPlane(clij, source_3d, mask_2d, destination_3d);
 ```
 
 ```
 //show result
-destinationImagePlus = clij2.pull(destination);
-destinationImagePlus.show();
+destination_3dImagePlus = clij2.pull(destination_3d);
+destination_3dImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(source);
-clij2.release(mask);
-clij2.release(destination);
+clij2.release(source_3d);
+clij2.release(mask_2d);
+clij2.release(destination_3d);
 ```
 
 

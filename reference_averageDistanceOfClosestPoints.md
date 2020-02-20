@@ -1,11 +1,12 @@
 ## averageDistanceOfClosestPoints
-![Image](images/mini_clij2_logo.png)![Image](images/mini_clijx_logo.png)
+<img src="images/mini_empty_logo.png"/><img src="images/mini_empty_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
-null
+Determine the n point indices with shortest distance for all points in a distance matrix.
+This corresponds to the n row indices with minimum values for each column of the distance matrix.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_averageDistanceOfClosestPoints(null);
+Ext.CLIJx_averageDistanceOfClosestPoints(Image distance_matrix, Image indexlist_destination, Number nClosestPointsTofind);
 ```
 
 
@@ -17,22 +18,24 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer arg1 = clij2.push(arg1ImagePlus);
-ClearCLBuffer arg2 = clij2.push(arg2ImagePlus);
-int arg3 = 10;
+ClearCLBuffer distance_matrix = clij2.push(distance_matrixImagePlus);
+indexlist_destination = clij.create(distance_matrix);
+int nClosestPointsTofind = 10;
 ```
 
 ```
 // Execute operation on GPU
-clij2.averageDistanceOfClosestPoints(clij, arg1, arg2, arg3);
+clij2.averageDistanceOfClosestPoints(clij, distance_matrix, indexlist_destination, nClosestPointsTofind);
 ```
 
 ```
 //show result
+indexlist_destinationImagePlus = clij2.pull(indexlist_destination);
+indexlist_destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(arg1);
-clij2.release(arg2);
+clij2.release(distance_matrix);
+clij2.release(indexlist_destination);
 ```
 
 
