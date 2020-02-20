@@ -2,8 +2,8 @@ __constant sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_T
 
 __kernel void sobel_3d
 (
-  IMAGE_dst_IMAGE dst,
-  IMAGE_src_IMAGE src
+  IMAGE_dst_TYPE dst,
+  IMAGE_src_TYPE src
 )
 {
 
