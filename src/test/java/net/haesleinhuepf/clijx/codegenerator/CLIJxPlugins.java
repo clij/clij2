@@ -47,6 +47,7 @@ import net.haesleinhuepf.clij2.plugins.LocalThreshold;
 import net.haesleinhuepf.clij2.plugins.GaussianBlur2D;
 import net.haesleinhuepf.clij2.plugins.GaussianBlur3D;
 import net.haesleinhuepf.clijx.plugins.BlurSliceBySlice;
+import net.haesleinhuepf.clijx.weka.ApplyOCLWekaModel;
 import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
 import net.haesleinhuepf.clijx.weka.TrainWekaModel;
 
@@ -348,7 +349,8 @@ public interface CLIJxPlugins {
             ExcludeLabelsOnSurface.class,
             SetPlane.class,
             TenengradFusion.class,
-            ImageToStack.class
+            ImageToStack.class,
+            ApplyOCLWekaModel.class
     };
 
     public String blockList = ";" +

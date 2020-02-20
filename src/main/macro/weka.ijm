@@ -77,9 +77,21 @@ Ext.CLIJx_trainWekaModel(feature_stack, ground_truth, "test4.model");
 
 // apply classifier
 result = "result";
+time = getTime();
 Ext.CLIJx_applyWekaModel(feature_stack, result, "test4.model");
+print("Apply weka model took " + (getTime() - time) + " msec");
 
 Ext.CLIJ_pull(result);
+
+
+result1 = "result1";
+
+time = getTime();
+Ext.CLIJx_applyOCLWekaModel(feature_stack, result1, "test4.model");
+print("Apply ocl weka model took " + (getTime() - time) + " msec");
+
+
+Ext.CLIJ_pull(result1);
 run("glasbey on dark");
 
 // clean up by the end

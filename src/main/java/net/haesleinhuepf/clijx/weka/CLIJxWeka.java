@@ -1,6 +1,6 @@
 package net.haesleinhuepf.clijx.weka;
 
-import hr.irb.fastRandomForest.FastRandomForest;
+import hr.irb.fastRandomForest.MyFastRandomForest;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.Prefs;
@@ -15,8 +15,6 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.filters.Filter;
-import weka.filters.supervised.instance.Resample;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -60,9 +58,11 @@ public class CLIJxWeka {
 
     private AbstractClassifier classifier;
     private Integer numberOfClasses;
+    private Integer numberOfFeatures;
     private CLIJx clijx;
     private ClearCLBuffer featureStack;
     private ClearCLBuffer classification;
+    private String oclCode;
 
     public CLIJxWeka(CLIJx clijx, ClearCLBuffer featureStack, ClearCLBuffer classification) {
         this.clijx = clijx;
@@ -75,6 +75,7 @@ public class CLIJxWeka {
         this.featureStack = featureStack;
         this.classifier = classifier;
         this.numberOfClasses = numberOfClasses;
+        numberOfFeatures = Math.toIntExact(featureStack.getDepth());
     }
 
     public CLIJxWeka(CLIJx clijx, ClearCLBuffer featureStack, String classifierFilename) {
@@ -93,9 +94,9 @@ public class CLIJxWeka {
             return;
         }
 
-        int numberOfClasses = (int) clijx.maximumOfAllPixels(classification); // background 0 doesn't count as class
-
-        ArrayList<Attribute> attributes = makeAttributes(numberOfClasses, (int)featureStack.getDepth());
+        numberOfClasses = (int) clijx.maximumOfAllPixels(classification); // background 0 doesn't count as class
+        numberOfFeatures = (int)featureStack.getDepth();
+        ArrayList<Attribute> attributes = makeAttributes(numberOfClasses, numberOfFeatures);
 
         System.out.println("att size" + attributes.size());
 
@@ -120,7 +121,7 @@ public class CLIJxWeka {
         int randomFeatures = 2;
 
         // Initialization of Fast Random Forest classifier
-        FastRandomForest classifier = new FastRandomForest();
+        MyFastRandomForest classifier = new MyFastRandomForest();
         classifier.setNumTrees(numOfTrees);
         //this is the default that Breiman suggests
         //rf.setNumFeatures((int) Math.round(Math.sqrt(featureStack.getSize())));
@@ -148,6 +149,8 @@ public class CLIJxWeka {
             e.printStackTrace();
         }
 
+        oclCode = classifier.translateToOcl(numberOfClasses, numberOfFeatures);
+
         // Print classifier information
         IJ.log( classifier.toString() );
 
@@ -172,7 +175,6 @@ public class CLIJxWeka {
         this.classifier = classifier;
         this.numberOfClasses = numberOfClasses;
     }
-
 
     private static ArrayList<Attribute> makeAttributes(int numberOfClasses, int numberOfFeatures) {
         System.out.println("Number of classes: " + numberOfClasses);
@@ -332,6 +334,16 @@ public class CLIJxWeka {
         if (new File(filename).getParentFile() != null) {
             new File(filename).getParentFile().mkdirs();
         }
+
+        File outputTarget = new File(filename + ".cl");
+        try {
+            FileWriter writer  = new FileWriter(outputTarget);
+            writer.write(oclCode);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         try {
             File sFile = new File(filename);
             OutputStream os = new FileOutputStream(sFile);
@@ -342,6 +354,7 @@ public class CLIJxWeka {
             ObjectOutputStream oos = new ObjectOutputStream(os);
             oos.writeObject(classifier);
             oos.writeObject(numberOfClasses);
+            oos.writeObject(numberOfFeatures);
             oos.flush();
             oos.close();
         }
@@ -362,6 +375,10 @@ public class CLIJxWeka {
 
             classifier = (AbstractClassifier) ois.readObject();
             numberOfClasses = (Integer) ois.readObject();
+            numberOfFeatures = (Integer) ois.readObject();
+
+
+            oclCode = ((MyFastRandomForest)classifier).translateToOcl(numberOfClasses, numberOfFeatures);
 
             ois.close();
         } catch (IOException e) {
@@ -430,4 +447,7 @@ public class CLIJxWeka {
     }
 
 
+    public String getOCL() {
+        return oclCode;
+    }
 }

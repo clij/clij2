@@ -179,6 +179,11 @@ public class CLIJ2 implements CLIJ2Ops {
         return image;
     }
 
+    public void execute(String programFilename, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants) {
+        ClearCLKernel kernel = executeSubsequently(null, programFilename, kernelname,  dimensions, globalsizes, parameters, constants, null);
+        kernel.close();
+    }
+
     public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants) {
         ClearCLKernel kernel = executeSubsequently(anchorClass, programFilename, kernelname,  dimensions, globalsizes, parameters, constants, null);
         kernel.close();
