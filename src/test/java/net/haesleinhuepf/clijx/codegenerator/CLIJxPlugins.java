@@ -347,7 +347,8 @@ public interface CLIJxPlugins {
             ExcludeLabelsSubSurface.class,
             ExcludeLabelsOnSurface.class,
             SetPlane.class,
-            TenengradFusion.class
+            TenengradFusion.class,
+            ImageToStack.class
     };
 
     public String blockList = ";" +

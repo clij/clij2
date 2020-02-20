@@ -269,6 +269,9 @@ class CLIJ2AutoComplete {
        headline = "clij2.histogram(ClearCLBuffer source, ClearCLBuffer destination, Integer numberOfBins, Float minimumGreyValue, Float maximumGreyValue, Boolean determineMinAndMax)";
        description = "<b>histogram</b><br><br>Determines the histogram of a given image.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination, Integer numberOfBins, Float minimumGreyValue, Float maximumGreyValue, Boolean determineMinAndMax";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.imageToStack(ClearCLBuffer source, ClearCLBuffer destination, Integer num_slices)";
+       description = "<b>imageToStack</b><br><br>Copies a single slice into a stack a given number of times.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination, Integer num_slices";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.invert(ClearCLImageInterface source, ClearCLImageInterface destination)";
        description = "<b>invert</b><br><br>Computes the negative value of all pixels in a given image. It is recommended to convert images to <br>32-bit float before applying this operation.<br><br><pre>f(x) = - x</pre><br><br>For binary images, use binaryNot.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -719,4 +722,4 @@ class CLIJ2AutoComplete {
         return list;
     }
 }
-// 236 methods generated.
+// 237 methods generated.

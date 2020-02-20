@@ -132,6 +132,7 @@ __Please note:__ CLIJ2 and CLIJx are under heavy construction. This list may cha
 <a name="I"></a>
 
 ## I
+<img src="images/mini_empty_logo.png" width="18" height="18"/><img src="images/mini_clij2_logo.png" width="18" height="18"/><img src="images/mini_empty_logo.png" width="18" height="18"/><a href="https://clij.github.io/clij-advanced-filters/reference_imageToStack">imageToStack</a>  
 <img src="images/mini_clij1_logo.png" width="18" height="18"/><img src="images/mini_clij2_logo.png" width="18" height="18"/><img src="images/mini_clijx_logo.png" width="18" height="18"/><a href="https://clij.github.io/clij-advanced-filters/reference_invert">invert</a>  
 <a name="J"></a>
 
