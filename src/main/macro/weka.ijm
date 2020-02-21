@@ -42,8 +42,15 @@ run("Add...", "value=2");
 // false pixels
 makeRectangle(101 * scaleFactor,37 * scaleFactor,20 * scaleFactor,16 * scaleFactor);
 run("Add...", "value=1");
+
+// edges
+makeRectangle(176 * scaleFactor, 88 * scaleFactor, 12 * scaleFactor, 2 * scaleFactor);
+run("Add...", "value=3");
+
 run("Select None");
 Ext.CLIJ_push(ground_truth);
+
+
 
 
 // -------------------------------------------------------------------
