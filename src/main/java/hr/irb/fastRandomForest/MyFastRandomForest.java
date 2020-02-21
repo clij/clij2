@@ -10,15 +10,15 @@ public class MyFastRandomForest extends FastRandomForest {
     public String translateToOcl(int numClasses, int numFeatures) {
 
         StringBuilder oclCode = new StringBuilder();
-        //oclCode.append(
-        //        "__kernel void classify_feature_stack(\n" +
-        //        "    IMAGE_dst_TYPE dst,\n" +
-        //        "    IMAGE_src_TYPE src_featureStack) {\n");
-
         oclCode.append(
                 "__kernel void classify_feature_stack(\n" +
-                        "    DTYPE_IMAGE_OUT_2D dst,\n" +
-                        "    DTYPE_IMAGE_OUT_3D src_featureStack) {\n");
+                "    IMAGE_dst_TYPE dst,\n" +
+                "    IMAGE_src_featureStack_TYPE src_featureStack) {\n");
+
+        //oclCode.append(
+        //       "__kernel void classify_feature_stack(\n" +
+        //                "    DTYPE_IMAGE_OUT_2D dst,\n" +
+        //                "    DTYPE_IMAGE_OUT_3D src_featureStack) {\n");
 
 
         oclCode.append("    const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;\n");
@@ -26,12 +26,12 @@ public class MyFastRandomForest extends FastRandomForest {
         oclCode.append("    int y = get_global_id(1);\n");
 
         for (int c = 0; c < numClasses; c++) {
-            oclCode.append("    double sum" + c + " = 0;\n");
+            oclCode.append("    float sum" + c + " = 0;\n");
         }
 
         for (int f = 0; f < numFeatures; f++) {
-            // oclCode.append("    double featureValue" + f + " = READ_src_featureStack_IMAGE(src_featureStack, sampler, POS_src_featureStack_INSTANCE(x, y, " + f + ", 0)).x;\n");
-            oclCode.append("    double featureValue" + f + " = READ_IMAGE_3D(src_featureStack, sampler, (int4)(x, y, " + f + ", 0)).x;\n");
+            oclCode.append("    float featureValue" + f + " = READ_src_featureStack_IMAGE(src_featureStack, sampler, POS_src_featureStack_INSTANCE(x, y, " + f + ", 0)).x;\n");
+            //oclCode.append("    double featureValue" + f + " = READ_IMAGE_3D(src_featureStack, sampler, (int4)(x, y, " + f + ", 0)).x;\n");
         }
 
         int countTrees = 0;
@@ -51,8 +51,8 @@ public class MyFastRandomForest extends FastRandomForest {
             oclCode.append("    }\n");
         }
         oclCode.append("    int2 pos = (int2)(x, y);\n");
-        oclCode.append("    WRITE_IMAGE_2D(dst, pos, (DTYPE_OUT)class);\n");
-        //oclCode.append("    WRITE_dst_IMAGE(dst, sampler, POS_dst_INSTANCE(x, y, 0, 0), CONVERT_dst_PIXEL_TYPE(class));\n");
+        //oclCode.append("    WRITE_IMAGE_2D(dst, pos, (DTYPE_OUT)class);\n");
+        oclCode.append("    WRITE_dst_IMAGE(dst, POS_dst_INSTANCE(x, y, 0, 0), CONVERT_dst_PIXEL_TYPE(class));\n");
         oclCode.append("};");
 
         System.out.println(oclCode.toString());
