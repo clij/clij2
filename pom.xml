@@ -14,7 +14,7 @@
 
 	<groupId>net.haesleinhuepf</groupId>
 	<artifactId>clij-advanced-filters_</artifactId>
-	<version>0.21.6</version>
+	<version>0.21.7</version>
 
 	<name>clij-advanced-filters_</name>
 	<description>clij-advanced-filters</description>
@@ -102,8 +102,8 @@
 		</dependency>
 		<dependency>
 			<groupId>sc.fiji</groupId>
-			<artifactId>Trainable_Segmentation</artifactId>
-			<version>3.2.34-SNAPSHOT</version>
+			<artifactId>Trainable_Segmentation_clijed</artifactId>
+			<version>3.2.34-clijed</version>
 		</dependency>
 	</dependencies>
 
