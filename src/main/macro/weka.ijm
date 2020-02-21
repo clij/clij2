@@ -7,10 +7,12 @@
 // January 2020
 // ---------------------------------------------
 
+scaleFactor = 4;
+
 run("Close All");
 
 // init GPU
-run("CLIJ Macro Extensions", "cl_device=");
+run("CLIJ Macro Extensions", "cl_device=2060");
 Ext.CLIJ_clear();
 
 // -------------------------------------------------------------------
@@ -20,10 +22,13 @@ run("Blobs (25K)");
 
 
 run("32-bit"); // interplation works better with float images
-original = getTitle();
-rename(original);
+
+getDimensions(width, height, channels, slices, frames);
+run("Scale...", "x=" + scaleFactor + " y=" + scaleFactor + " width=" + width * scaleFactor + " height=" + height * scaleFactor + " interpolation=Bilinear average create");
 
 // push images to GPU
+original = "original";
+rename(original);
 Ext.CLIJ_push(original);
 
 // -------------------------------------------------------------------
@@ -32,10 +37,10 @@ ground_truth = "ground_truth";
 getDimensions(width, height, channels, slices, frames)
 newImage(ground_truth, "32-bit black", width, height, 1);
 // true pixels
-makeRectangle(21,51,17,13);
+makeRectangle(21 * scaleFactor,51 * scaleFactor,17 * scaleFactor,13 * scaleFactor);
 run("Add...", "value=2");
 // false pixels
-makeRectangle(101,37,20,16);
+makeRectangle(101 * scaleFactor,37 * scaleFactor,20 * scaleFactor,16 * scaleFactor);
 run("Add...", "value=1");
 run("Select None");
 Ext.CLIJ_push(ground_truth);
@@ -82,6 +87,8 @@ Ext.CLIJx_applyWekaModel(feature_stack, result, "test4.model");
 print("Apply weka model took " + (getTime() - time) + " msec");
 
 Ext.CLIJ_pull(result);
+run("glasbey on dark");
+
 
 
 result1 = "result1";
