@@ -43,8 +43,10 @@ public class MyFastRandomForest extends FastRandomForest {
 
         oclCode.append("    int class = 0;\n");
         oclCode.append("    float maxProb = sum0 / " + countTrees + ";\n");
+        oclCode.append("    float value;\n");
+
         for (int c = 1; c < numClasses; c++) {
-            oclCode.append("    float value = sum" + c + " / " + countTrees + ";\n");
+            oclCode.append("    value = sum" + c + " / " + countTrees + ";\n");
             oclCode.append("    if(maxProb < value) {\n");
             oclCode.append("        maxProb = value;\n");
             oclCode.append("        class = " + c + ";\n");
