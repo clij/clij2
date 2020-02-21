@@ -52,7 +52,7 @@ clij2.release(groundTruth2D);
 
 
 ### License terms
-Parts of the code here were copied over from the Trainable_Segmentation repository (link above). Thus,  
+Parts of the code CLIJ Weka were copied over from the Trainable_Segmentation repository (link above). Thus,  
  this code is licensed GPL2 as well.  
   
   License: GPL  

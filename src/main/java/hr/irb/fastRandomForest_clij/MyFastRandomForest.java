@@ -1,7 +1,8 @@
-package hr.irb.fastRandomForest;
+package hr.irb.fastRandomForest_clij;
 
-import hr.irb.fastRandomForest.FastRandomForest;
-import hr.irb.fastRandomForest.FastRfBagging;
+import hr.irb.fastRandomForest_clij.FastRandomForest;
+import hr.irb.fastRandomForest_clij.FastRandomTree;
+import hr.irb.fastRandomForest_clij.FastRfBagging;
 import weka.classifiers.Classifier;
 
 import java.util.Arrays;

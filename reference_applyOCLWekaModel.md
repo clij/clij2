@@ -45,8 +45,14 @@ clij2.release(prediction2D_destination);
 
 
 
+### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [weka.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/weka.ijm)  
+
+
+
+
 ### License terms
-Parts of the code here were copied over from the Trainable_Segmentation repository (link above). Thus,  
+Parts of the code of CLIJ Weka were copied over from the Trainable_Segmentation repository (link above). Thus,  
  this code is licensed GPL2 as well.  
   
   License: GPL  

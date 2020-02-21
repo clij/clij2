@@ -7,12 +7,12 @@
 // January 2020
 // ---------------------------------------------
 
-scaleFactor = 4;
+scaleFactor = 2;
 
 run("Close All");
 
 // init GPU
-run("CLIJ Macro Extensions", "cl_device=2060");
+run("CLIJ Macro Extensions", "cl_device=");
 Ext.CLIJ_clear();
 
 // -------------------------------------------------------------------

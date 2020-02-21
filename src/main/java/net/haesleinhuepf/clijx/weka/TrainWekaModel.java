@@ -58,7 +58,7 @@ public class TrainWekaModel extends AbstractCLIJxPlugin implements CLIJMacroPlug
 
     @Override
     public String getLicense() {
-        return "Parts of the code here were copied over from the Trainable_Segmentation repository (link above). Thus,\n" +
+        return "Parts of the code CLIJ Weka were copied over from the Trainable_Segmentation repository (link above). Thus,\n" +
                 " this code is licensed GPL2 as well.\n" +
                 "\n" +
                 "  License: GPL\n" +
