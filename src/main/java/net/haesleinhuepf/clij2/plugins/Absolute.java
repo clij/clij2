@@ -54,6 +54,6 @@ public class Absolute extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getAvailableForDimensions() {
-        return "2D, 3D";
+        return "2D, 3D, 4D";
     }
 }
