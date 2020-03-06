@@ -3,6 +3,7 @@ package net.haesleinhuepf.clij2.plugins;
 import ij.ImageJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clijx.plugins.AverageAngleBetweenAdjacentTriangles;
 import net.imglib2.img.array.ArrayImgs;
 
 public class averageAngleBetweenAdjacentTrianglesTest {
