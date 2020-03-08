@@ -1,7 +1,8 @@
 
-__kernel void set_where_x_greater_than_y_2d(IMAGE_dst_TYPE  dst,
-                  float value
-                     )
+__kernel void set_where_x_greater_than_y_2d(
+    IMAGE_dst_TYPE  dst,
+    float value
+)
 {
   const int x = get_global_id(0);
   const int y = get_global_id(1);
