@@ -4,9 +4,8 @@ import ij.IJ;
 import ij.ImageJ;
 import ij.ImagePlus;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij2.plugins.ExcludeLabelsOnSurface;
 import net.haesleinhuepf.clijx.CLIJx;
-
-import static org.junit.Assert.*;
 
 public class ExcludeLabelsOnSurfaceTest {
     public static void main(String... args) {

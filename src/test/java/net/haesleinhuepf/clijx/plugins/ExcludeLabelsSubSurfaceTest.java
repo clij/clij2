@@ -6,7 +6,7 @@ import ij.ImagePlus;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 
 import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.plugins.ExcludeLabelsSubSurface;
+import net.haesleinhuepf.clij2.plugins.ExcludeLabelsSubSurface;
 
 public class ExcludeLabelsSubSurfaceTest {
     public static void main(String... args) {
