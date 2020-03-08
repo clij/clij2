@@ -563,6 +563,9 @@ class CLIJxAutoComplete {
        headline = "clijx.presign(ClearCLBuffer input, ClearCLBuffer destination)";
        description = "<b>presign</b><br><br>Determines the extrema of pixel values: f(x) = x / abs(x).<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.print(ClearCLImageInterface input)";
+       description = "<b>print</b><br><br>Visualises an image on standard out (console).<br><br>Parameters:<br>ClearCLImageInterface input";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.pullAsROI(ClearCLBuffer binary_input)";
        description = "<b>pullAsROI</b><br><br>Pulls a binary image from the GPU memory and puts it on the currently active ImageJ window.<br><br>Parameters:<br>ClearCLBuffer binary_input";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -719,6 +722,9 @@ class CLIJxAutoComplete {
        headline = "clijx.sumPixels(ClearCLImageInterface source)";
        description = "<b>sumPixels</b><br><br>Determines the sum of all pixels in a given image. It will be stored in a new row of ImageJs<br>Results table in the column 'Sum'.<br><br>Parameters:<br>ClearCLImageInterface source";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.sumXProjection(ClearCLImageInterface source, ClearCLImageInterface destination)";
+       description = "<b>sumXProjection</b><br><br>Determines the sum intensity projection of an image along Z.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.sumYProjection(ClearCLImageInterface source, ClearCLImageInterface destination)";
        description = "<b>sumYProjection</b><br><br>Determines the sum intensity projection of an image along Z.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -842,4 +848,4 @@ class CLIJxAutoComplete {
         return list;
     }
 }
-// 277 methods generated.
+// 279 methods generated.

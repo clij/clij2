@@ -1,12 +1,11 @@
-## equalizeMeanIntensitiesOfSlices
+## sumXProjection
 <img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
-Determines correction factors for each z-slice so that the average intensity in all slices can be made the same and multiplies these factors with the slices.
-This functionality is similar to the 'Simple Ratio Bleaching Correction' in Fiji.
+Determines the sum intensity projection of an image along Z.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_equalizeMeanIntensitiesOfSlices(Image input, Image destination, Number referenceSlice);
+Ext.CLIJx_sumXProjection(Image source, Image destination);
 ```
 
 
@@ -18,14 +17,13 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 CLIJ2 clij2 = CLIJ2.getInstance();
 
 // get input parameters
-ClearCLBuffer input = clij2.push(inputImagePlus);
-destination = clij.create(input);
-int referenceSlice = 10;
+ClearCLBuffer source = clij2.push(sourceImagePlus);
+destination = clij.create(source);
 ```
 
 ```
 // Execute operation on GPU
-clij2.equalizeMeanIntensitiesOfSlices(clij, input, destination, referenceSlice);
+clij2.sumXProjection(clij, source, destination);
 ```
 
 ```
@@ -34,7 +32,7 @@ destinationImagePlus = clij2.pull(destination);
 destinationImagePlus.show();
 
 // cleanup memory on GPU
-clij2.release(input);
+clij2.release(source);
 clij2.release(destination);
 ```
 

@@ -112,7 +112,7 @@ import net.haesleinhuepf.clijx.plugins.AutomaticThresholdInplace;
 import net.haesleinhuepf.clijx.plugins.DifferenceOfGaussianInplace3D;
 import net.haesleinhuepf.clijx.plugins.AbsoluteInplace;
 import net.haesleinhuepf.clij2.plugins.Resample;
-import net.haesleinhuepf.clijx.plugins.EqualizeMeanIntensitiesOfSlices;
+import net.haesleinhuepf.clij2.plugins.EqualizeMeanIntensitiesOfSlices;
 import net.haesleinhuepf.clijx.plugins.Watershed;
 import net.haesleinhuepf.clij2.plugins.ResliceRadial;
 import net.haesleinhuepf.clijx.plugins.ShowRGB;
@@ -278,7 +278,7 @@ import net.haesleinhuepf.clij2.plugins.SetNonZeroPixelsToPixelIndex;
 import net.haesleinhuepf.clij2.plugins.CloseIndexGapsInLabelMap;
 import net.haesleinhuepf.clij2.plugins.AffineTransform;
 import net.haesleinhuepf.clij2.plugins.Scale;
-import net.haesleinhuepf.clij2.plugins.AverageAngleBetweenAdjacentTriangles;
+import net.haesleinhuepf.clijx.plugins.AverageAngleBetweenAdjacentTriangles;
 import net.haesleinhuepf.clij2.plugins.CentroidsOfLabels;
 import net.haesleinhuepf.clij2.plugins.SetRampX;
 import net.haesleinhuepf.clij2.plugins.SetRampY;
@@ -301,12 +301,16 @@ import net.haesleinhuepf.clij2.plugins.ThresholdRenyiEntropy;
 import net.haesleinhuepf.clij2.plugins.ThresholdShanbhag;
 import net.haesleinhuepf.clij2.plugins.ThresholdTriangle;
 import net.haesleinhuepf.clij2.plugins.ThresholdYen;
-import net.haesleinhuepf.clijx.plugins.ExcludeLabelsSubSurface;
-import net.haesleinhuepf.clijx.plugins.ExcludeLabelsOnSurface;
+import net.haesleinhuepf.clij2.plugins.ExcludeLabelsSubSurface;
+import net.haesleinhuepf.clij2.plugins.ExcludeLabelsOnSurface;
 import net.haesleinhuepf.clij2.plugins.SetPlane;
 import net.haesleinhuepf.clijx.plugins.tenengradfusion.TenengradFusion;
 import net.haesleinhuepf.clij2.plugins.ImageToStack;
 import net.haesleinhuepf.clijx.weka.ApplyOCLWekaModel;
+import net.haesleinhuepf.clij2.plugins.SumXProjection;
+import net.haesleinhuepf.clij2.plugins.SumImageSliceBySlice;
+import net.haesleinhuepf.clij2.plugins.MultiplyImageStackWithScalars;
+import net.haesleinhuepf.clij2.plugins.Print;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJxOps {
    CLIJ getCLIJ();
@@ -319,111 +323,15 @@ public abstract interface CLIJxOps {
     /**
      * 
      */
-    default boolean convertToImageJBinary(ClearCLImage arg1, ClearCLImage arg2) {
-        return Kernels.convertToImageJBinary(getCLIJ(), arg1, arg2);
+    default boolean detectOptima(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
     }
 
     /**
      * 
      */
-    default boolean convertToImageJBinary(ClearCLBuffer arg1, ClearCLBuffer arg2) {
-        return Kernels.convertToImageJBinary(getCLIJ(), arg1, arg2);
-    }
-
-    /**
-     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
-     *  dimesions of the resulting image must be specified by the user according to its definition:
-     * X = 0
-     * Y = 1
-     * Z = 2
-     * 
-     */
-    default boolean maximumXYZProjection(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Kernels.maximumXYZProjection(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
-    }
-
-    /**
-     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
-     *  dimesions of the resulting image must be specified by the user according to its definition:
-     * X = 0
-     * Y = 1
-     * Z = 2
-     * 
-     */
-    default boolean maximumXYZProjection(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.maximumXYZProjection(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
-    }
-
-    /**
-     * 
-     */
-    default boolean detectOptimaSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
-    }
-
-    /**
-     * 
-     */
-    default boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
-    }
-
-    /**
-     * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
-     * 
-     * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
-     */
-    default boolean differenceOfGaussian(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.differenceOfGaussian(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * 
-     */
-    default double[] sumPixelsSliceBySlice(ClearCLBuffer arg1) {
-        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
-    }
-
-    /**
-     * 
-     */
-    default double[] sumPixelsSliceBySlice(ClearCLImage arg1) {
-        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
-    }
-
-    /**
-     * 
-     */
-    default boolean multiplySliceBySliceWithScalars(ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3) {
-        return Kernels.multiplySliceBySliceWithScalars(getCLIJ(), arg1, arg2, arg3);
-    }
-
-    /**
-     * 
-     */
-    default boolean multiplySliceBySliceWithScalars(ClearCLImage arg1, ClearCLImage arg2, float[] arg3) {
-        return Kernels.multiplySliceBySliceWithScalars(getCLIJ(), arg1, arg2, arg3);
-    }
-
-    /**
-     * 
-     */
-    default boolean differenceOfGaussianSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
-        return Kernels.differenceOfGaussianSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
-     */
-    default boolean applyVectorfield(ClearCLBuffer source, ClearCLBuffer vectorX, ClearCLBuffer vectorY, ClearCLBuffer destination) {
-        return Kernels.applyVectorfield(getCLIJ(), source, vectorX, vectorY, destination);
-    }
-
-    /**
-     * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
-     */
-    default boolean applyVectorfield(ClearCLImage source, ClearCLImage vectorX, ClearCLImage vectorY, ClearCLImage destination) {
-        return Kernels.applyVectorfield(getCLIJ(), source, vectorX, vectorY, destination);
+    default boolean detectOptima(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
     }
 
     /**
@@ -441,17 +349,113 @@ public abstract interface CLIJxOps {
     }
 
     /**
-     * 
+     * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
      */
-    default boolean detectOptima(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    default boolean applyVectorfield(ClearCLImage source, ClearCLImage vectorX, ClearCLImage vectorY, ClearCLImage destination) {
+        return Kernels.applyVectorfield(getCLIJ(), source, vectorX, vectorY, destination);
+    }
+
+    /**
+     * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
+     */
+    default boolean applyVectorfield(ClearCLBuffer source, ClearCLBuffer vectorX, ClearCLBuffer vectorY, ClearCLBuffer destination) {
+        return Kernels.applyVectorfield(getCLIJ(), source, vectorX, vectorY, destination);
     }
 
     /**
      * 
      */
-    default boolean detectOptima(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
-        return Kernels.detectOptima(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    default boolean convertToImageJBinary(ClearCLImage arg1, ClearCLImage arg2) {
+        return Kernels.convertToImageJBinary(getCLIJ(), arg1, arg2);
+    }
+
+    /**
+     * 
+     */
+    default boolean convertToImageJBinary(ClearCLBuffer arg1, ClearCLBuffer arg2) {
+        return Kernels.convertToImageJBinary(getCLIJ(), arg1, arg2);
+    }
+
+    /**
+     * 
+     */
+    default boolean detectOptimaSliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+    /**
+     * 
+     */
+    default boolean detectOptimaSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, boolean arg4) {
+        return Kernels.detectOptimaSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), arg4);
+    }
+
+    /**
+     * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
+     * 
+     * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
+     */
+    default boolean differenceOfGaussian(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.differenceOfGaussian(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
+
+    /**
+     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
+     *  dimesions of the resulting image must be specified by the user according to its definition:
+     * X = 0
+     * Y = 1
+     * Z = 2
+     * 
+     */
+    default boolean maximumXYZProjection(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.maximumXYZProjection(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    }
+
+    /**
+     * Determines the maximum projection of an image along a given dimension. Furthermore, the X and Y
+     *  dimesions of the resulting image must be specified by the user according to its definition:
+     * X = 0
+     * Y = 1
+     * Z = 2
+     * 
+     */
+    default boolean maximumXYZProjection(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        return Kernels.maximumXYZProjection(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    }
+
+    /**
+     * 
+     */
+    default double[] sumPixelsSliceBySlice(ClearCLImage arg1) {
+        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
+    }
+
+    /**
+     * 
+     */
+    default double[] sumPixelsSliceBySlice(ClearCLBuffer arg1) {
+        return Kernels.sumPixelsSliceBySlice(getCLIJ(), arg1);
+    }
+
+    /**
+     * 
+     */
+    default boolean differenceOfGaussianSliceBySlice(ClearCLImage arg1, ClearCLImage arg2, double arg3, double arg4, double arg5) {
+        return Kernels.differenceOfGaussianSliceBySlice(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
+
+    /**
+     * 
+     */
+    default boolean multiplySliceBySliceWithScalars(ClearCLBuffer arg1, ClearCLBuffer arg2, float[] arg3) {
+        return Kernels.multiplySliceBySliceWithScalars(getCLIJ(), arg1, arg2, arg3);
+    }
+
+    /**
+     * 
+     */
+    default boolean multiplySliceBySliceWithScalars(ClearCLImage arg1, ClearCLImage arg2, float[] arg3) {
+        return Kernels.multiplySliceBySliceWithScalars(getCLIJ(), arg1, arg2, arg3);
     }
 
 
@@ -527,15 +531,15 @@ public abstract interface CLIJxOps {
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
      */
-    default boolean subtractBackground(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return SubtractBackground2D.subtractBackground(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+    default boolean subtractBackground2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return SubtractBackground2D.subtractBackground2D(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
 
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
      */
-    default boolean subtractBackground2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return SubtractBackground2D.subtractBackground2D(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+    default boolean subtractBackground(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return SubtractBackground2D.subtractBackground(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
     }
 
 
@@ -544,15 +548,15 @@ public abstract interface CLIJxOps {
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
      */
-    default boolean subtractBackground(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return SubtractBackground3D.subtractBackground(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    default boolean subtractBackground3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return SubtractBackground3D.subtractBackground3D(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
     /**
      * Applies Gaussian blur to the input image and subtracts the result from the original image.
      */
-    default boolean subtractBackground3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return SubtractBackground3D.subtractBackground3D(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    default boolean subtractBackground(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return SubtractBackground3D.subtractBackground(getCLIJx(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
 
@@ -779,17 +783,6 @@ public abstract interface CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.plugins.EqualizeMeanIntensitiesOfSlices
-    //----------------------------------------------------
-    /**
-     * Determines correction factors for each z-slice so that the average intensity in all slices can be made the same and multiplies these factors with the slices.
-     * This functionality is similar to the 'Simple Ratio Bleaching Correction' in Fiji.
-     */
-    default boolean equalizeMeanIntensitiesOfSlices(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return EqualizeMeanIntensitiesOfSlices.equalizeMeanIntensitiesOfSlices(getCLIJ(), arg1, arg2, new Double (arg3).intValue());
-    }
-
-
     // net.haesleinhuepf.clijx.plugins.Watershed
     //----------------------------------------------------
     /**
@@ -929,23 +922,13 @@ public abstract interface CLIJxOps {
     }
 
 
-    // net.haesleinhuepf.clijx.plugins.ExcludeLabelsSubSurface
+    // net.haesleinhuepf.clijx.plugins.AverageAngleBetweenAdjacentTriangles
     //----------------------------------------------------
     /**
-     * This operation follows a ray from a given position towards a label (or opposite direction) and checks if  there is another label between the label an the image border. If yes, this label is eliminated from the label map.
+     * Takes a pointlist and a touch matrix to determine the average angle of adjacent triangles in a surface mesh. For every point, the average angle of adjacent triangles is saved.
      */
-    default boolean excludeLabelsSubSurface(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, double arg4, double arg5, double arg6) {
-        return ExcludeLabelsSubSurface.excludeLabelsSubSurface(getCLIJx(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
-    }
-
-
-    // net.haesleinhuepf.clijx.plugins.ExcludeLabelsOnSurface
-    //----------------------------------------------------
-    /**
-     * This operation follows a ray from a given position towards a label (or opposite direction) and checks if  there is another label between the label an the image border. If yes, this label is eliminated from the label map.
-     */
-    default boolean excludeLabelsOnSurface(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, double arg4, double arg5, double arg6) {
-        return ExcludeLabelsOnSurface.excludeLabelsOnSurface(getCLIJx(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+    default boolean averageAngleBetweenAdjacentTriangles(ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination) {
+        return AverageAngleBetweenAdjacentTriangles.averageAngleBetweenAdjacentTriangles(getCLIJx(), pointlist, touch_matrix, average_distancelist_destination);
     }
 
 
@@ -977,4 +960,4 @@ public abstract interface CLIJxOps {
     }
 
 }
-// 69 methods generated.
+// 67 methods generated.

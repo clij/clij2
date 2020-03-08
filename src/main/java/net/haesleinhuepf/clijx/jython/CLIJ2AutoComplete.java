@@ -41,9 +41,6 @@ class CLIJ2AutoComplete {
        headline = "clij2.automaticThreshold(ClearCLBuffer input, ClearCLBuffer destination, String method)";
        description = "<b>automaticThreshold</b><br><br>The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on <br>the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one <br>of these methods in the method text field:<br>[Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination, String method";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clij2.averageAngleBetweenAdjacentTriangles(ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination)";
-       description = "<b>averageAngleBetweenAdjacentTriangles</b><br><br>Takes a pointlist and a touch matrix to determine the average angle of adjacent triangles in a surface mesh. For every point, the average angle of adjacent triangles is saved.<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination";
-       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.averageDistanceOfClosestPoints(ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination, Integer nClosestPointsTofind)";
        description = "<b>averageDistanceOfClosestPoints</b><br><br>Determine the n point indices with shortest distance for all points in a distance matrix.<br>This corresponds to the n row indices with minimum values for each column of the distance matrix.<br><br>Parameters:<br>ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination, Integer nClosestPointsTofind";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -203,6 +200,9 @@ class CLIJ2AutoComplete {
        headline = "clij2.equal(ClearCLImageInterface source1, ClearCLImageInterface source2, ClearCLImageInterface destination)";
        description = "<b>equal</b><br><br>Determines if two images A and B equal pixel wise.<br><br>f(a, b) = 1 if a == b; 0 otherwise. <br><br>Parameters:<br>ClearCLImageInterface source1, ClearCLImageInterface source2, ClearCLImageInterface destination";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.equalizeMeanIntensitiesOfSlices(ClearCLBuffer input, ClearCLBuffer destination, Integer referenceSlice)";
+       description = "<b>equalizeMeanIntensitiesOfSlices</b><br><br>Determines correction factors for each z-slice so that the average intensity in all slices can be made the same and multiplies these factors with the slices.<br>This functionality is similar to the 'Simple Ratio Bleaching Correction' in Fiji.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination, Integer referenceSlice";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.erodeBoxSliceBySlice(ClearCLImageInterface source, ClearCLImageInterface destination)";
        description = "<b>erodeBoxSliceBySlice</b><br><br>Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.<br>The erosion takes the Moore-neighborhood (8 pixels in 2D and 26 pixels in 3d) into account.<br>The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.<br><br>This method is comparable to the 'Erode' menu in ImageJ in case it is applied to a 2D image. The only<br>difference is that the output image contains values 0 and 1 instead of 0 and 255.<br><br>This filter is applied slice by slice in 2D.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -217,6 +217,12 @@ class CLIJ2AutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.excludeLabelsOnEdges(ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination)";
        description = "<b>excludeLabelsOnEdges</b><br><br>Removes all labels from a label map which touch the edges of the image (in X, Y and Z if the image is 3D). Remaining label elements are renumbered afterwards.<br><br>Parameters:<br>ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.excludeLabelsOnSurface(ClearCLBuffer pointlist, ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination, Float centerX, Float centerY, Float centerZ)";
+       description = "<b>excludeLabelsOnSurface</b><br><br>This operation follows a ray from a given position towards a label (or opposite direction) and checks if  there is another label between the label an the image border. If yes, this label is eliminated from the label map.<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination, Float centerX, Float centerY, Float centerZ";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.excludeLabelsSubSurface(ClearCLBuffer pointlist, ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination, Float centerX, Float centerY, Float centerZ)";
+       description = "<b>excludeLabelsSubSurface</b><br><br>This operation follows a ray from a given position towards a label (or opposite direction) and checks if  there is another label between the label an the image border. If yes, this label is eliminated from the label map.<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination, Float centerX, Float centerY, Float centerZ";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.exponential(ClearCLImageInterface source, ClearCLImageInterface destination)";
        description = "<b>exponential</b><br><br>Computes base exponential of all pixels values.<br><br>f(x) = exp(x)<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
@@ -497,6 +503,9 @@ class CLIJ2AutoComplete {
        headline = "clij2.power(ClearCLImageInterface source, ClearCLImageInterface destination, Float exponent)";
        description = "<b>power</b><br><br>Computes all pixels value x to the power of a given exponent a.<br><br><pre>f(x, a) = x ^ a</pre><br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination, Float exponent";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.print(ClearCLImageInterface input)";
+       description = "<b>print</b><br><br>Visualises an image on standard out (console).<br><br>Parameters:<br>ClearCLImageInterface input";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.pullAsROI(ClearCLBuffer binary_input)";
        description = "<b>pullAsROI</b><br><br>Pulls a binary image from the GPU memory and puts it on the currently active ImageJ window.<br><br>Parameters:<br>ClearCLBuffer binary_input";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -626,6 +635,9 @@ class CLIJ2AutoComplete {
        headline = "clij2.sumPixels(ClearCLImageInterface source)";
        description = "<b>sumPixels</b><br><br>Determines the sum of all pixels in a given image. It will be stored in a new row of ImageJs<br>Results table in the column 'Sum'.<br><br>Parameters:<br>ClearCLImageInterface source";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.sumXProjection(ClearCLImageInterface source, ClearCLImageInterface destination)";
+       description = "<b>sumXProjection</b><br><br>Determines the sum intensity projection of an image along Z.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.sumYProjection(ClearCLImageInterface source, ClearCLImageInterface destination)";
        description = "<b>sumYProjection</b><br><br>Determines the sum intensity projection of an image along Z.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -722,4 +734,4 @@ class CLIJ2AutoComplete {
         return list;
     }
 }
-// 237 methods generated.
+// 241 methods generated.

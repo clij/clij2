@@ -22,7 +22,6 @@ import net.haesleinhuepf.clij2.plugins.MinimumDistanceOfTouchingNeighbors;
 import net.haesleinhuepf.clij2.plugins.SpotsToPointList;
 import net.haesleinhuepf.clijx.plugins.*;
 import net.haesleinhuepf.clijx.plugins.splitstack.AbstractSplitStack;
-import net.haesleinhuepf.clijx.plugins.tenengradfusion.AbstractTenengradFusion;
 import net.haesleinhuepf.clijx.gui.OrganiseWindows;
 import net.haesleinhuepf.clijx.io.*;
 import net.haesleinhuepf.clij.kernels.Kernels;
@@ -350,7 +349,11 @@ public interface CLIJxPlugins {
             SetPlane.class,
             TenengradFusion.class,
             ImageToStack.class,
-            ApplyOCLWekaModel.class
+            ApplyOCLWekaModel.class,
+            SumXProjection.class,
+            SumImageSliceBySlice.class,
+            MultiplyImageStackWithScalars.class,
+            Print.class
     };
 
     public String blockList = ";" +

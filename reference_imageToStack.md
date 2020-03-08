@@ -1,5 +1,5 @@
 ## imageToStack
-<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_empty_logo.png"/>
+<img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
 Copies a single slice into a stack a given number of times.
 
