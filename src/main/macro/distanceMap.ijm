@@ -33,7 +33,8 @@ distance_map = "distance_map";
 Ext.CLIJx_distanceMap(mask, distance_map);
 
 
+Ext.CLIJx_pullBinary(mask);
 Ext.CLIJx_pull(distance_map);
-run("Fire");
+//run("Fire");
 run("Enhance Contrast", "saturated=0.35");
 
