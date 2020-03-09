@@ -13,7 +13,8 @@ __kernel void onlyzero_overwrite_maximum_box_3d
 
   const int4 pos = (int4){x,y,z,0};
 
-  float foundMaximum = READ_src_IMAGE(src, sampler, pos).x;
+  float originalValue = READ_src_IMAGE(src, sampler, pos).x;
+  float foundMaximum = original;
   if (foundMaximum == 0) {
     for (int x = -1; x <= 1; x++) {
       for (int y = -1; y <= 1; y++) {
@@ -26,5 +27,9 @@ __kernel void onlyzero_overwrite_maximum_box_3d
       }
     }
   }
+  if (foundMaximum != originalValue) {
+    WRITE_flag_dst_IMAGE(flag_dst,(int4)(0,0,0,0),1);
+  }
+
   WRITE_dst_IMAGE(dst, pos, CONVERT_dst_PIXEL_TYPE(foundMaximum));
 }

@@ -128,8 +128,8 @@ class CLIJ2AutoComplete {
        headline = "clij2.countTouchingNeighbors(ClearCLBuffer touch_matrix, ClearCLBuffer touching_neighbors_count_destination)";
        description = "<b>countTouchingNeighbors</b><br><br>Takes a touching-neighbors-matrix as input and delivers a vector with number of touching neighbors per label as a vector.<br><br>Parameters:<br>ClearCLBuffer touch_matrix, ClearCLBuffer touching_neighbors_count_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clij2.detectLabelEdges(ClearCLBuffer label_map, ClearCLBuffer edge_image_destination)";
-       description = "<b>detectLabelEdges</b><br><br>Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.<br><br>Parameters:<br>ClearCLBuffer label_map, ClearCLBuffer edge_image_destination";
+       headline = "clij2.detectLabelEdges(ClearCLImageInterface label_map, ClearCLBuffer edge_image_destination)";
+       description = "<b>detectLabelEdges</b><br><br>Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.<br><br>Parameters:<br>ClearCLImageInterface label_map, ClearCLBuffer edge_image_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.detectMaximaBox(ClearCLImageInterface source, ClearCLImageInterface destination, Integer radius)";
        description = "<b>detectMaximaBox</b><br><br>Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if<br>there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination, Integer radius";

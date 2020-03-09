@@ -6,6 +6,7 @@ import ij.ImagePlus;
 import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -48,10 +49,10 @@ public class CloseIndexGapsInLabelMap extends AbstractCLIJ2Plugin implements CLI
         return closeIndexGapsInLabelMap(clij2, input, output);
     }
 
-    public static boolean closeIndexGapsInLabelMap(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output) {
+    public static boolean closeIndexGapsInLabelMap(CLIJ2 clij2, ClearCLBuffer input, ClearCLImageInterface output) {
 
         //clij2.stopWatch("");
-        int maximum = (int) clij2.maximumOfAllPixels((ClearCLBuffer) input);
+        int maximum = (int) clij2.maximumOfAllPixels(input);
         final float[] allNewIndices = new float[maximum + 1];
         //clij2.stopWatch("max " + maximum);
 

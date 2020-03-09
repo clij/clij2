@@ -353,7 +353,8 @@ public interface CLIJxPlugins {
             SumXProjection.class,
             SumImageSliceBySlice.class,
             MultiplyImageStackWithScalars.class,
-            Print.class
+            Print.class,
+            VoronoiOctagon.class
     };
 
     public String blockList = ";" +

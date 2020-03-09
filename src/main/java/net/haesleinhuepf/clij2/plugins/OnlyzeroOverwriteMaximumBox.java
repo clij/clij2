@@ -2,6 +2,7 @@ package net.haesleinhuepf.clij2.plugins;
 
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -31,15 +32,20 @@ public class OnlyzeroOverwriteMaximumBox extends AbstractCLIJ2Plugin implements 
         return result;
     }
 
-
-    public static boolean onlyzeroOverwriteMaximumBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface flag, ClearCLImageInterface dst) {
+    public static ClearCLKernel onlyzeroOverwriteMaximumBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface flag, ClearCLImageInterface dst, ClearCLKernel kernel) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("flag_dst", flag);
         parameters.put("dst", dst);
         //ElapsedTime.measureForceOutput("diamondmin", () -> {
-            clij2.execute(OnlyzeroOverwriteMaximumBox.class, "onlyzero_overwrite_maximum_box_" + dst.getDimension() +  "d_x.cl", "onlyzero_overwrite_maximum_box_" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        kernel = clij2.executeSubsequently(OnlyzeroOverwriteMaximumBox.class, "onlyzero_overwrite_maximum_box_" + dst.getDimension() +  "d_x.cl", "onlyzero_overwrite_maximum_box_" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters, kernel);
         //});
+        return kernel;
+    }
+
+    public static boolean onlyzeroOverwriteMaximumBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface flag, ClearCLImageInterface dst) {
+        ClearCLKernel kernel = onlyzeroOverwriteMaximumBox(clij2, src, flag, dst, null);
+        kernel.close();
         return true;
     }
 

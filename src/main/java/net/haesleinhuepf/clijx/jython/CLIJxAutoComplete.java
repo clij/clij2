@@ -152,8 +152,8 @@ class CLIJxAutoComplete {
        headline = "clijx.deformableRegistration2D(ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination, Integer maxDeltaX, Integer maxDeltaY)";
        description = "<b>deformableRegistration2D</b><br><br>Applies particle image velocimetry to two images and registers them afterwards by warping input image 2 with a smoothed vector field.<br><br>Parameters:<br>ClearCLBuffer input1, ClearCLBuffer input2, ClearCLBuffer destination, Integer maxDeltaX, Integer maxDeltaY";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clijx.detectLabelEdges(ClearCLBuffer label_map, ClearCLBuffer edge_image_destination)";
-       description = "<b>detectLabelEdges</b><br><br>Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.<br><br>Parameters:<br>ClearCLBuffer label_map, ClearCLBuffer edge_image_destination";
+       headline = "clijx.detectLabelEdges(ClearCLImageInterface label_map, ClearCLBuffer edge_image_destination)";
+       description = "<b>detectLabelEdges</b><br><br>Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.<br><br>Parameters:<br>ClearCLImageInterface label_map, ClearCLBuffer edge_image_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.detectMaximaBox(ClearCLImageInterface source, ClearCLImageInterface destination, Integer radius)";
        description = "<b>detectMaximaBox</b><br><br>Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if<br>there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination, Integer radius";

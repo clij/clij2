@@ -1,6 +1,7 @@
 package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -22,7 +23,7 @@ public class DetectLabelEdges extends AbstractCLIJ2Plugin implements CLIJMacroPl
         return detectLabelEdges(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
-    public static boolean detectLabelEdges(CLIJ2 clij2, ClearCLBuffer src_label_map, ClearCLBuffer dst_edge_image) {
+    public static boolean detectLabelEdges(CLIJ2 clij2, ClearCLImageInterface src_label_map, ClearCLBuffer dst_edge_image) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src_label_map", src_label_map);
         parameters.put("dst_edge_image", dst_edge_image);

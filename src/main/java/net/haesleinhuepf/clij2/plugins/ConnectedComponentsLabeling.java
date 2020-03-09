@@ -6,6 +6,7 @@ import ij.ImagePlus;
 import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -43,7 +44,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements 
         return result;
     }
 
-    public static boolean connectedComponentsLabeling(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output) {
+    public static boolean connectedComponentsLabeling(CLIJ2 clij2, ClearCLImageInterface input, ClearCLImageInterface output) {
         //ClearCLImage temp1 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
         //ClearCLImage temp2 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
 
