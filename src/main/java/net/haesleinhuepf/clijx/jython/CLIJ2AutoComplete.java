@@ -500,6 +500,9 @@ class CLIJ2AutoComplete {
        headline = "clij2.pointIndexListToMesh(ClearCLBuffer pointlist, ClearCLBuffer indexList, ClearCLBuffer Mesh)";
        description = "<b>pointIndexListToMesh</b><br><br>Meshes all points in a given point list which are indiced in a corresponding index list. TODO: Explain better<br><br>Parameters:<br>ClearCLBuffer pointlist, ClearCLBuffer indexList, ClearCLBuffer Mesh";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.powerImages(ClearCLBuffer input, ClearCLBuffer exponent, ClearCLBuffer destination)";
+       description = "<b>powerImages</b><br><br>Calculates x to the power of y pixel wise of two images X and Y.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer exponent, ClearCLBuffer destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.power(ClearCLImageInterface source, ClearCLImageInterface destination, Float exponent)";
        description = "<b>power</b><br><br>Computes all pixels value x to the power of a given exponent a.<br><br><pre>f(x, a) = x ^ a</pre><br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination, Float exponent";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -734,4 +737,4 @@ class CLIJ2AutoComplete {
         return list;
     }
 }
-// 241 methods generated.
+// 242 methods generated.
