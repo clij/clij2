@@ -1176,13 +1176,6 @@ public abstract interface CLIJ2Ops {
         return DistanceMap.distanceMap(getCLIJ2(), source, destination);
     }
 
-    /**
-     * 
-     */
-    default boolean localPositiveMinimum(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
-        return DistanceMap.localPositiveMinimum(getCLIJ2(), arg1, arg2, arg3);
-    }
-
 
     // net.haesleinhuepf.clij2.plugins.PullAsROI
     //----------------------------------------------------
