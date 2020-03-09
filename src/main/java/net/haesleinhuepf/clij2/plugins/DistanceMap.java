@@ -2,6 +2,7 @@ package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
+import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -35,12 +36,13 @@ public class DistanceMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
         ClearCLBuffer flag = clij2.create(new long[]{1,1,1});
         float[] flagValue = {1};
 
-        ClearCLBuffer temp1 = clij2.create(dst);
-        ClearCLBuffer temp2 = clij2.create(dst);
-        ClearCLBuffer temp3 = clij2.create(dst);
+        ClearCLBuffer temp1 = clij2.create(dst.getDimensions(), NativeTypeEnum.Float);
+        ClearCLBuffer temp2 = clij2.create(dst.getDimensions(), NativeTypeEnum.Float);
+        ClearCLBuffer temp3 = clij2.create(dst.getDimensions(), NativeTypeEnum.Float);
+        ClearCLBuffer temp4 = clij2.create(dst.getDimensions(), NativeTypeEnum.Float);
 
-        clij2.copy(src, temp1);
-        clij2.copy(src, temp3);
+        clij2.greaterConstant(src, temp1, 0);
+        clij2.copy(temp1, temp3);
 
         int iteration = 0;
         while (flagValue[0] > 0) {
@@ -49,10 +51,10 @@ public class DistanceMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
             if (iteration % 2 == 0 ) {
                 localPositiveMinimum(clij2, temp1, temp2, flag);
-                clij2.addImages(temp3, temp2, dst);
+                clij2.addImages(temp3, temp2, temp4);
             } else {
                 localPositiveMinimum(clij2, temp2, temp1, flag);
-                clij2.addImages(dst, temp1, temp3);
+                clij2.addImages(temp4, temp1, temp3);
             }
 
             flag.writeTo(FloatBuffer.wrap(flagValue), true);
@@ -60,16 +62,20 @@ public class DistanceMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
         }
         if (iteration % 2 != 0 ) {
             clij2.copy(temp3, dst);
+        } else {
+            clij2.copy(temp4, dst);
         }
-        temp1.close();
-        temp2.close();
-        temp3.close();
-        flag.close();
+
+        clij2.release(temp1);
+        clij2.release(temp2);
+        clij2.release(temp3);
+        clij2.release(temp4);
+        clij2.release(flag);
 
         return true;
     }
 
-    public static boolean localPositiveMinimum(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, ClearCLImageInterface flag_dst) {
+    private static boolean localPositiveMinimum(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, ClearCLImageInterface flag_dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
