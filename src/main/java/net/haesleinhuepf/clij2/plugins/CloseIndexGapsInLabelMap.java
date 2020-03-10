@@ -52,10 +52,8 @@ public class CloseIndexGapsInLabelMap extends AbstractCLIJ2Plugin implements CLI
 
     public static boolean closeIndexGapsInLabelMap(CLIJ2 clij2, ClearCLBuffer input, ClearCLImageInterface output) {
 
-        //clij2.stopWatch("");
         int maximum = (int) clij2.maximumOfAllPixels(input);
         final float[] allNewIndices = new float[maximum + 1];
-        //clij2.stopWatch("max " + maximum);
 
         float[] count = {1};
 /*
@@ -152,6 +150,7 @@ public class CloseIndexGapsInLabelMap extends AbstractCLIJ2Plugin implements CLI
             float[] slice = new float[(int) number_of_pixels];
             FloatBuffer buffer = FloatBuffer.wrap(slice);
 
+            input.writeTo(buffer, true);
             for (int i = 0; i < slice.length; i++) {
                 int key = (int) slice[i];
                 if (key > 0 && allNewIndices[key] == 0) {
