@@ -14,7 +14,7 @@ __kernel void onlyzero_overwrite_maximum_box_3d
   const int4 pos = (int4){x,y,z,0};
 
   float originalValue = READ_src_IMAGE(src, sampler, pos).x;
-  float foundMaximum = original;
+  float foundMaximum = originalValue;
   if (foundMaximum == 0) {
     for (int x = -1; x <= 1; x++) {
       for (int y = -1; y <= 1; y++) {
