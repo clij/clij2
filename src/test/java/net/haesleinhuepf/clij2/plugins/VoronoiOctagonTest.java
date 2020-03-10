@@ -34,6 +34,24 @@ public class VoronoiOctagonTest {
     }
 
     @Test
+    public void testVoronoiOctagon3D(){
+        ImagePlus imagePlus = IJ.openImage("src/test/resources/miniBlobs.tif");
+
+        CLIJ2 clij2 = CLIJ2.getInstance();
+        ClearCLBuffer bufferIn = clij2.push(imagePlus);
+        ClearCLBuffer bufferOut = clij2.create(bufferIn);
+        ClearCLBuffer temp = clij2.create(bufferIn);
+
+        clij2.thresholdOtsu(bufferIn, temp);
+
+        VoronoiOctagon.voronoiOctagon(clij2, temp, bufferOut);
+
+        clij2.print(bufferOut);
+
+        clij2.clear();
+    }
+
+    @Test
     public void testLargeImage(){
         CLIJ2 clij2 = CLIJ2.getInstance();
 

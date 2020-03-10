@@ -10,7 +10,7 @@
 
 // Get test data
 //run("Blobs (25K)");
-//open("C:/structure/data/blobs.gif");
+open("https://github.com/clij/clij-advanced-filters/raw/master/src/test/resources/miniBlobs.tif");
 getDimensions(width, height, channels, slices, frames);
 input = getTitle();
 
