@@ -85,8 +85,8 @@ public class Skeletonize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
                 if (flag_arr[0] == 0) {
                     unchangedBorders++;
                 }
-                clij2.print(dst);
-                System.out.println("---");
+                //clij2.print(dst);
+                //System.out.println("---");
             }
         }
 
