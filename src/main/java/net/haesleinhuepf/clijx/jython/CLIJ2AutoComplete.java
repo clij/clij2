@@ -95,8 +95,8 @@ class CLIJ2AutoComplete {
        headline = "clij2.centerOfMass(ClearCLBuffer source)";
        description = "<b>centerOfMass</b><br><br>Determines the center of mass of an image or image stack and writes the result in the results table<br>in the columns MassX, MassY and MassZ.<br><br>Parameters:<br>ClearCLBuffer source";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clij2.closeIndexGapsInLabelMap(ClearCLBuffer binary_input, ClearCLBuffer labeling_destination)";
-       description = "<b>closeIndexGapsInLabelMap</b><br><br>Analyses a label map and if there are gaps in the indexing (e.g. label 5 is not present) all <br>subsequent labels will be relabelled. Thus, afterwards number of labels and maximum label index are equal.<br><br><br>Parameters:<br>ClearCLBuffer binary_input, ClearCLBuffer labeling_destination";
+       headline = "clij2.closeIndexGapsInLabelMap(ClearCLBuffer binary_input, ClearCLImageInterface labeling_destination)";
+       description = "<b>closeIndexGapsInLabelMap</b><br><br>Analyses a label map and if there are gaps in the indexing (e.g. label 5 is not present) all <br>subsequent labels will be relabelled. Thus, afterwards number of labels and maximum label index are equal.<br><br><br>Parameters:<br>ClearCLBuffer binary_input, ClearCLImageInterface labeling_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.closingBox(ClearCLBuffer input, ClearCLBuffer destination, Integer number_of_dilations_and_erosions)";
        description = "<b>closingBox</b><br><br>Apply a binary closing to the input image by calling n dilations and n erosions subsequenntly.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination, Integer number_of_dilations_and_erosions";
@@ -104,8 +104,8 @@ class CLIJ2AutoComplete {
        headline = "clij2.closingDiamond(ClearCLBuffer input, ClearCLBuffer destination, Integer number_of_dilations_and_erotions)";
        description = "<b>closingDiamond</b><br><br>Apply a binary closing to the input image by calling n dilations and n erosions subsequenntly.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination, Integer number_of_dilations_and_erotions";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clij2.connectedComponentsLabeling(ClearCLBuffer binary_input, ClearCLBuffer labeling_destination)";
-       description = "<b>connectedComponentsLabeling</b><br><br>Performs connected components analysis to a binary image and generates a label map.<br><br>Parameters:<br>ClearCLBuffer binary_input, ClearCLBuffer labeling_destination";
+       headline = "clij2.connectedComponentsLabeling(ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination)";
+       description = "<b>connectedComponentsLabeling</b><br><br>Performs connected components analysis to a binary image and generates a label map.<br><br>Parameters:<br>ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.copySlice(ClearCLImageInterface source, ClearCLImageInterface destination, Integer sliceIndex)";
        description = "<b>copySlice</b><br><br>This method has two purposes: <br>It copies a 2D image to a given slice z position in a 3D image stack or <br>It copies a given slice at position z in an image stack to a 2D image.<br><br>The first case is only available via ImageJ macro. If you are using it, it is recommended that the <br>target 3D image already pre-exists in GPU memory before calling this method. Otherwise, CLIJ create <br>the image stack with z planes.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination, Integer sliceIndex";
@@ -557,6 +557,9 @@ class CLIJ2AutoComplete {
        headline = "clij2.setColumn(ClearCLImageInterface source, Integer columnIndex, Float value)";
        description = "<b>setColumn</b><br><br>Sets all pixel values x of a given column in X to a constant value v.<br><br><pre>f(x) = v</pre><br><br>Parameters:<br>ClearCLImageInterface source, Integer columnIndex, Float value";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.setImageBorders(ClearCLImageInterface destination, Float value)";
+       description = "<b>setImageBorders</b><br><br>Sets all pixel values at the image border to a given value.<br><br>Parameters:<br>ClearCLImageInterface destination, Float value";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.setNonZeroPixelsToPixelIndex(ClearCLImageInterface source, ClearCLImageInterface destination)";
        description = "<b>setNonZeroPixelsToPixelIndex</b><br><br>Sets all pixels in an image which are not zero to the index of the pixel. This can be used for Connected Components Analysis.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -589,6 +592,9 @@ class CLIJ2AutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.shortestDistances(ClearCLBuffer distance_matrix, ClearCLBuffer destination_minimum_distances)";
        description = "<b>shortestDistances</b><br><br>Determine the shortest distance from a distance matrix. This corresponds to the minimum in a matrix for each individial column.<br><br>Parameters:<br>ClearCLBuffer distance_matrix, ClearCLBuffer destination_minimum_distances";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.skeletonize(ClearCLBuffer source, ClearCLBuffer destination)";
+       description = "<b>skeletonize</b><br><br>Erodes a binary image until just its skeleton is left. The result is similar to Skeletonize3D in Fiji.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.smallerConstant(ClearCLBuffer source, ClearCLBuffer destination, Float constant)";
        description = "<b>smallerConstant</b><br><br>Determines if two images A and B smaller pixel wise.<br><br>f(a, b) = 1 if a < b; 0 otherwise. <br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination, Float constant";
@@ -731,10 +737,13 @@ class CLIJ2AutoComplete {
        headline = "clij2.varianceOfMaskedPixels(ClearCLBuffer source, ClearCLBuffer mask)";
        description = "<b>varianceOfMaskedPixels</b><br><br>Determines the variance in an image, but only in pixels which have non-zero values in another binary mask image. The result is put in the results table as new column named 'Masked_variance'.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer mask";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.voronoiOctagon(ClearCLBuffer input, ClearCLBuffer destination)";
+       description = "<b>voronoiOctagon</b><br><br>Takes a binary image and dilates the regions using a octagon shape until the touch. The pixels where  the regions touched are afterwards returned as binary image which cooresponds to the Voronoi diagram.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.writeValuesToPositions(ClearCLBuffer positionsAndValues, ClearCLBuffer destination)";
        description = "<b>writeValuesToPositions</b><br><br>Takes an image with three/four rows (2D: height = 3; 3D: height = 4): x, y [, z] and v and target image. The value v will be written at position x/y[/z] in the target image.<br><br>Parameters:<br>ClearCLBuffer positionsAndValues, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
         return list;
     }
 }
-// 242 methods generated.
+// 245 methods generated.

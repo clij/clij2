@@ -1,14 +1,11 @@
-## thresholdOtsu
+## voronoiOctagon
 <img src="images/mini_empty_logo.png"/><img src="images/mini_clij2_logo.png"/><img src="images/mini_clijx_logo.png"/>
 
-By Robert Haase based on work by G. Landini and W. Rasband
-
-The automatic thresholder utilizes the Otsu threshold method implemented in ImageJ using a histogram determined on 
-the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
+Takes a binary image and dilates the regions using a octagon shape until the touch. The pixels where  the regions touched are afterwards returned as binary image which cooresponds to the Voronoi diagram.
 
 ### Usage in ImageJ macro
 ```
-Ext.CLIJx_thresholdOtsu(Image input, Image destination);
+Ext.CLIJx_voronoiOctagon(Image input, Image destination);
 ```
 
 
@@ -26,7 +23,7 @@ destination = clij.create(input);
 
 ```
 // Execute operation on GPU
-clij2.thresholdOtsu(clij, input, destination);
+clij2.voronoiOctagon(clij, input, destination);
 ```
 
 ```
@@ -45,13 +42,6 @@ clij2.release(destination);
 ### Example scripts
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [voronoi.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/voronoi.ijm)  
 
-
-
-
-### License terms
-The code for the automatic thresholding methods originates from https://github.com/imagej/imagej1/blob/master/ij/process/AutoThresholder.java  
-  
-Detailed documentation on the implemented methods can be found online: https://imagej.net/Auto_Threshold
 
 [Back to CLIJ documentation](https://clij.github.io/)
 
