@@ -9,7 +9,7 @@
 
 
 // Get test data
-open("https://github.com/clij/clij-advanced-filters/raw/master/src/main/resources/skeleton_test.tif");
+open("https://github.com/clij/clij-advanced-filters/raw/master/src/test/resources/skeleton_test.tif");
 input = getTitle();
 
 skeleton = "skeleton";
@@ -25,7 +25,7 @@ Ext.CLIJ2_push(input);
 run("Close All");
 
 // skeletonize
-Ext.CLIJ2_skeletonize(input, skeleton);
+Ext.CLIJx_skeletonize(input, skeleton);
 
 // show result
 Ext.CLIJ2_pullBinary(input);

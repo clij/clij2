@@ -22,7 +22,7 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
  * Author: @haesleinhuepf
  *         March 2020
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_skeletonize")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_skeletonize")
 public class Skeletonize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
 
     @Override
