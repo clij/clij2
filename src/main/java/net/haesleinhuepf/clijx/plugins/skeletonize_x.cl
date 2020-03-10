@@ -74,19 +74,19 @@ __constant sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_T
 inline char indexOctantNEB(float neighbors[]) {
     char n;
     n = 1;
-    if( neighbors[2]==1 )
+    if( neighbors[2] != 0 )
       n |= 128;
-    if( neighbors[1]==1 )
+    if( neighbors[1] != 0 )
       n |=  64;
-    if( neighbors[11]==1 )
+    if( neighbors[11] != 0 )
       n |=  32;
-    if( neighbors[10]==1 )
+    if( neighbors[10] != 0 )
       n |=  16;
-    if( neighbors[5]==1 )
+    if( neighbors[5] != 0 )
       n |=   8;
-    if( neighbors[4]==1 )
+    if( neighbors[4] != 0 )
       n |=   4;
-    if( neighbors[14]==1 )
+    if( neighbors[14] != 0 )
       n |=   2;
     return n;
   }
@@ -94,19 +94,19 @@ inline char indexOctantNEB(float neighbors[]) {
 inline char indexOctantNWB(float neighbors[]) {
     char n;
     n = 1;
-    if( neighbors[0]==1 )
+    if( neighbors[0] != 0 )
       n |= 128;
-    if( neighbors[9]==1 )
+    if( neighbors[9] != 0 )
       n |=  64;
-    if( neighbors[3]==1 )
+    if( neighbors[3] != 0 )
       n |=  32;
-    if( neighbors[12]==1 )
+    if( neighbors[12] != 0 )
       n |=  16;
-    if( neighbors[1]==1 )
+    if( neighbors[1] != 0 )
       n |=   8;
-    if( neighbors[10]==1 )
+    if( neighbors[10] != 0 )
       n |=   4;
-    if( neighbors[4]==1 )
+    if( neighbors[4] != 0 )
       n |=   2;
     return n;
   }
@@ -114,19 +114,19 @@ inline char indexOctantNWB(float neighbors[]) {
 inline char indextOctantSEB(float neighbors[]) {
     char n;
     n = 1;
-    if( neighbors[8]==1 )
+    if( neighbors[8] != 0 )
       n |= 128;
-    if( neighbors[7]==1 )
+    if( neighbors[7] != 0 )
       n |=  64;
-    if( neighbors[17]==1 )
+    if( neighbors[17] != 0 )
       n |=  32;
-    if( neighbors[16]==1 )
+    if( neighbors[16] != 0 )
       n |=  16;
-    if( neighbors[5]==1 )
+    if( neighbors[5] != 0 )
       n |=   8;
-    if( neighbors[4]==1 )
+    if( neighbors[4] != 0 )
       n |=   4;
-    if( neighbors[14]==1 )
+    if( neighbors[14] != 0 )
       n |=   2;
     return n;
   }
@@ -134,19 +134,19 @@ inline char indextOctantSEB(float neighbors[]) {
 inline char indexOctantSWB(float neighbors[]) {
     char n;
     n = 1;
-    if( neighbors[6]==1 )
+    if( neighbors[6] != 0 )
       n |= 128;
-    if( neighbors[15]==1 )
+    if( neighbors[15] != 0 )
       n |=  64;
-    if( neighbors[7]==1 )
+    if( neighbors[7] != 0 )
       n |=  32;
-    if( neighbors[16]==1 )
+    if( neighbors[16] != 0 )
       n |=  16;
-    if( neighbors[3]==1 )
+    if( neighbors[3] != 0 )
       n |=   8;
-    if( neighbors[12]==1 )
+    if( neighbors[12] != 0 )
       n |=   4;
-    if( neighbors[4]==1 )
+    if( neighbors[4] != 0 )
       n |=   2;
     return n;
   }
@@ -154,19 +154,19 @@ inline char indexOctantSWB(float neighbors[]) {
 inline char indexOctantNEU(float neighbors[]) {
     char n;
     n = 1;
-    if( neighbors[20]==1 )
+    if( neighbors[20] != 0 )
       n |= 128;
-    if( neighbors[23]==1 )
+    if( neighbors[23] != 0 )
       n |=  64;
-    if( neighbors[19]==1 )
+    if( neighbors[19] != 0 )
       n |=  32;
-    if( neighbors[22]==1 )
+    if( neighbors[22] != 0 )
       n |=  16;
-    if( neighbors[11]==1 )
+    if( neighbors[11] != 0 )
       n |=   8;
-    if( neighbors[14]==1 )
+    if( neighbors[14] != 0 )
       n |=   4;
-    if( neighbors[10]==1 )
+    if( neighbors[10] != 0 )
       n |=   2;
     return n;
   }
@@ -174,19 +174,19 @@ inline char indexOctantNEU(float neighbors[]) {
 inline char indexOctantNWU(float neighbors[]) {
     char n;
     n = 1;
-    if( neighbors[18]==1 )
+    if( neighbors[18] != 0 )
       n |= 128;
-    if( neighbors[21]==1 )
+    if( neighbors[21] != 0 )
       n |=  64;
-    if( neighbors[9]==1 )
+    if( neighbors[9] != 0 )
       n |=  32;
-    if( neighbors[12]==1 )
+    if( neighbors[12] != 0 )
       n |=  16;
-    if( neighbors[19]==1 )
+    if( neighbors[19] != 0 )
       n |=   8;
-    if( neighbors[22]==1 )
+    if( neighbors[22] != 0 )
       n |=   4;
-    if( neighbors[10]==1 )
+    if( neighbors[10] != 0 )
       n |=   2;
     return n;
   }
@@ -194,19 +194,19 @@ inline char indexOctantNWU(float neighbors[]) {
 inline char indexOctantSEU(float neighbors[]) {
     char n;
     n = 1;
-    if( neighbors[26]==1 )
+    if( neighbors[26] != 0 )
       n |= 128;
-    if( neighbors[23]==1 )
+    if( neighbors[23] != 0 )
       n |=  64;
-    if( neighbors[17]==1 )
+    if( neighbors[17] != 0 )
       n |=  32;
-    if( neighbors[14]==1 )
+    if( neighbors[14] != 0 )
       n |=  16;
-    if( neighbors[25]==1 )
+    if( neighbors[25] != 0 )
       n |=   8;
-    if( neighbors[22]==1 )
+    if( neighbors[22] != 0 )
       n |=   4;
-    if( neighbors[16]==1 )
+    if( neighbors[16] != 0 )
       n |=   2;
     return n;
   }
@@ -214,19 +214,19 @@ inline char indexOctantSEU(float neighbors[]) {
 inline char indexOctantSWU(float neighbors[]) {
     char n;
     n = 1;
-    if( neighbors[24]==1 )
+    if( neighbors[24] != 0  )
       n |= 128;
-    if( neighbors[25]==1 )
+    if( neighbors[25] != 0 )
       n |=  64;
-    if( neighbors[15]==1 )
+    if( neighbors[15] != 0 )
       n |=  32;
-    if( neighbors[16]==1 )
+    if( neighbors[16] != 0 )
       n |=  16;
-    if( neighbors[21]==1 )
+    if( neighbors[21] != 0 )
       n |=   8;
-    if( neighbors[22]==1 )
+    if( neighbors[22] != 0 )
       n |=   4;
-    if( neighbors[12]==1 )
+    if( neighbors[12] != 0 )
       n |=   2;
     return n;
   }
@@ -305,31 +305,30 @@ __kernel void skeletonize(
   int isBorderPoint = 0;
 
   // North
-  if( direction == 1 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(-1, 0, 0, 0)).x <= 0 ) {
+  if( direction == 1 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(-1, 0, 0, 0)).x == 0 ) {
     isBorderPoint = 1;
   }
   // South
-  else if( direction == 2 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(1, 0, 0, 0)).x <= 0 ) {
+  else if( direction == 2 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(1, 0, 0, 0)).x == 0 ) {
     isBorderPoint = 1;
   }
   // East
-  else if( direction == 3 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, -1, 0, 0)).x <= 0 ) {
+  else if( direction == 3 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, -1, 0, 0)).x == 0 ) {
     isBorderPoint = 1;
   }
   // West
-  else if( direction == 4 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 1, 0, 0)).x <= 0 ) {
+  else if( direction == 4 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 1, 0, 0)).x == 0 ) {
     isBorderPoint = 1;
   }
-  if (dimension == 3) {
-      // Lower
-      if( direction == 5 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 0, -1, 0)).x <= 0 ) {
-        isBorderPoint = 1;
-      }
-      // Upper
-      else if( direction == 6 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 0, 1, 0)).x <= 0 ) {
-        isBorderPoint = 1;
-      }
+  // Lower
+  else if( direction == 5 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 0, -1, 0)).x == 0 ) {
+    isBorderPoint = 1;
   }
+  // Upper
+  else if( direction == 6 && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 0, 1, 0)).x == 0 ) {
+    isBorderPoint = 1;
+  }
+
 
   if(isBorderPoint == 0) {
     WRITE_IMAGE (dst, pos, CONVERT_dst_PIXEL_TYPE(pixel));

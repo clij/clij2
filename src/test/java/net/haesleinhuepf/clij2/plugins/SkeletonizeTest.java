@@ -1,12 +1,15 @@
 package net.haesleinhuepf.clij2.plugins;
 
+import ij.IJ;
+import ij.ImageJ;
+import ij.ImagePlus;
+import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.test.TestUtilities;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clijx.plugins.Skeletonize;
 import net.imglib2.img.array.ArrayImgs;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class SkeletonizeTest {
     @Test
@@ -53,5 +56,29 @@ public class SkeletonizeTest {
 
         clij2.clear();
     }
+
+    @Test
+    public void testSkeletonize3D() {
+        CLIJ2 clij2 = CLIJ2.getInstance();
+
+        ImagePlus imp = IJ.openImage("src/test/resources/skeleton_3d_test.tif");
+
+        ClearCLBuffer binary_image = clij2.push(imp);
+
+        ClearCLBuffer skeleton = clij2.create(binary_image);
+
+        Skeletonize.skeletonize(clij2, binary_image, skeleton);
+
+        System.out.println("Result: ");
+        //clij2.print(skeleton);
+
+        new ImageJ();
+        clij2.show(skeleton, "skel");
+        new WaitForUserDialog("").show();
+
+        clij2.clear();
+    }
+
+
 
 }

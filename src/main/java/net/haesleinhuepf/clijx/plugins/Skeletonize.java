@@ -1,18 +1,15 @@
-package net.haesleinhuepf.clij2.plugins;
+package net.haesleinhuepf.clijx.plugins;
 
-import net.haesleinhuepf.clij.clearcl.ClearCL;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
-import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
-import net.haesleinhuepf.clij.test.TestUtilities;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.plugins.SetImageBorders;
 import net.haesleinhuepf.clij2.utilities.HasAuthor;
 import net.haesleinhuepf.clij2.utilities.HasLicense;
-import net.imglib2.img.array.ArrayImgs;
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
@@ -56,12 +53,15 @@ public class Skeletonize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
             dimension = 3;
         }
 
+        int i = 0;
+        int maxDirection = dimension==2?4:6;
+
         boolean flipFlag = true;
         int unchangedBorders = 0;
-        while (unchangedBorders < 4 ){
+        while (unchangedBorders < maxDirection ){
             unchangedBorders = 0;
 
-            for (int direction = 1; direction <= 4; direction++) {
+            for (int direction = 1; direction <= maxDirection; direction++) {
                 HashMap<String, Object> parameters = new HashMap<>();
                 if (flipFlag) {
                     parameters.put("src", temp);
@@ -79,10 +79,13 @@ public class Skeletonize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
                 parameters.put("direction", direction);
                 parameters.put("dimension", dimension);
 
+                i++;
+                System.out.println("iter " + i);
                 kernel = clij2.executeSubsequently(Skeletonize.class, "skeletonize_x.cl", "skeletonize", dst.getDimensions(), dst.getDimensions(), parameters, kernel);
 
                 flag.writeTo(floatBuffer, true);
                 if (flag_arr[0] == 0) {
+                    System.out.println("unchanged");
                     unchangedBorders++;
                 }
                 //clij2.print(dst);
