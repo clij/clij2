@@ -605,9 +605,6 @@ class CLIJ2AutoComplete {
        headline = "clij2.shortestDistances(ClearCLBuffer distance_matrix, ClearCLBuffer destination_minimum_distances)";
        description = "<b>shortestDistances</b><br><br>Determine the shortest distance from a distance matrix. This corresponds to the minimum in a matrix for each individial column.<br><br>Parameters:<br>ClearCLBuffer distance_matrix, ClearCLBuffer destination_minimum_distances";
        list.add(new BasicCompletion(provider, headline, null, description));
-       headline = "clij2.skeletonize(ClearCLBuffer source, ClearCLBuffer destination)";
-       description = "<b>skeletonize</b><br><br>Erodes a binary image until just its skeleton is left. The result is similar to Skeletonize3D in Fiji.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination";
-       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.smallerConstant(ClearCLBuffer source, ClearCLBuffer destination, Float constant)";
        description = "<b>smallerConstant</b><br><br>Determines if two images A and B smaller pixel wise.<br><br>f(a, b) = 1 if a < b; 0 otherwise. <br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination, Float constant";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -758,4 +755,4 @@ class CLIJ2AutoComplete {
         return list;
     }
 }
-// 249 methods generated.
+// 248 methods generated.
