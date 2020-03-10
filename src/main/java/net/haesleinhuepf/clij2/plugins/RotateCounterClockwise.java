@@ -39,7 +39,7 @@ public class RotateCounterClockwise extends AbstractCLIJ2Plugin implements CLIJM
         parameters.put("src", src);
         parameters.put("dst", dst);
 
-        clij2.execute(RotateCounterClockwise.class, "rotate_left_" + dst.getDimension() + "d_x.cl", "rotate_left_" + dst.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(RotateCounterClockwise.class, "rotate_counter_clockwise_" + dst.getDimension() + "d_x.cl", "rotate_left_" + dst.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 

@@ -57,7 +57,7 @@ public class BlurSliceBySlice extends AbstractCLIJxPlugin implements CLIJMacroPl
      */
     @Deprecated
     public static boolean blurSliceBySlice(CLIJx clijx, ClearCLImageInterface src, ClearCLImageInterface dst, Integer kernelSizeX, Integer kernelSizeY, Float blurSigmaX, Float blurSigmaY) {
-        return executeSeparableKernel(clijx, src, dst, GaussianBlur3D.class, "blur_separable_" + src.getDimension() + "d_x.cl", "blur_separable_" + src.getDimension() + "d", sigmaToKernelSize(blurSigmaX), sigmaToKernelSize(blurSigmaY), sigmaToKernelSize(0), blurSigmaX, blurSigmaY, 0, src.getDimension());
+        return executeSeparableKernel(clijx, src, dst, GaussianBlur3D.class, "gaussian_blur_separable_" + src.getDimension() + "d_x.cl", "blur_separable_" + src.getDimension() + "d", sigmaToKernelSize(blurSigmaX), sigmaToKernelSize(blurSigmaY), sigmaToKernelSize(0), blurSigmaX, blurSigmaY, 0, src.getDimension());
     }
 
         @Override

@@ -51,7 +51,7 @@ public class MinimumOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMa
             parameters.put("mask", mask);
             parameters.put("dst_min", clReducedImage);
             parameters.put("dst_mask", clReducedMask);
-            clij2.execute(MinimumOfMaskedPixels.class, "minimum_of_masked_pixels_3d_2d_x.cl", "minimum_of_masked_pixels", clImage.getDimensions(), clImage.getDimensions(), parameters);
+            clij2.execute(MinimumOfMaskedPixels.class, "minimum_of_masked_pixels_3d_2d_x.cl", "minimum_of_masked_pixels_3d_2d", clImage.getDimensions(), clImage.getDimensions(), parameters);
         }
 
         RandomAccessibleInterval rai = clij2.convert(clReducedImage, RandomAccessibleInterval.class);

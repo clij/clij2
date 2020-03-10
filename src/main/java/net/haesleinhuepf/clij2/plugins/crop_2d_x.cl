@@ -12,8 +12,9 @@ __kernel void crop_2d(
   const int sx = start_x + dx;
   const int sy = start_y + dy;
 
-  const int2 dpos = (int2){dx,dy};
-  const int2 spos = (int2){sx,sy};
+
+  const POS_dst_TYPE dpos = POS_dst_INSTANCE(dx, dy, 0, 0);
+  const POS_src_TYPE spos = POS_src_INSTANCE(sx, sy, 0, 0);
 
   const float out = READ_src_IMAGE(src,sampler,spos).x;
   WRITE_dst_IMAGE(dst,dpos, CONVERT_dst_PIXEL_TYPE(out));

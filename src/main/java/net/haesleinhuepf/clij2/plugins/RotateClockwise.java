@@ -38,7 +38,7 @@ public class RotateClockwise extends AbstractCLIJ2Plugin implements CLIJMacroPlu
         parameters.put("src", src);
         parameters.put("dst", dst);
 
-        clij2.execute(RotateClockwise.class, "rotate_right_" + dst.getDimension() + "d_x.cl", "rotate_right_" + dst.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(RotateClockwise.class, "rotate_clockwise_" + dst.getDimension() + "d_x.cl", "rotate_right_" + dst.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 

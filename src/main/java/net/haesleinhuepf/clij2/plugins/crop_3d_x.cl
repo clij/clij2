@@ -17,8 +17,8 @@ __kernel void crop_3d(
   const int sy = start_y + dy;
   const int sz = start_z + dz;
 
-  const int4 dpos = (int4){dx,dy,dz,0};
-  const int4 spos = (int4){sx,sy,sz,0};
+  const POS_dst_TYPE dpos = POS_dst_INSTANCE(dx, dy, dz, 0);
+  const POS_src_TYPE spos = POS_src_INSTANCE(sx, sy, sy, 0);
 
   const float out = READ_src_IMAGE(src,sampler,spos).x;
   WRITE_dst_IMAGE(dst,dpos, CONVERT_dst_PIXEL_TYPE(out));
