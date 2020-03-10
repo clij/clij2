@@ -1,5 +1,5 @@
 
-__kernel void set_image_borders_2d(
+__kernel void set_image_borders_3d(
     IMAGE_dst_TYPE dst,
     float value
 )
