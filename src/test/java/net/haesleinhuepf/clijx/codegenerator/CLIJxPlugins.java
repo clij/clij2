@@ -46,9 +46,6 @@ import net.haesleinhuepf.clij2.plugins.LocalThreshold;
 import net.haesleinhuepf.clij2.plugins.GaussianBlur2D;
 import net.haesleinhuepf.clij2.plugins.GaussianBlur3D;
 import net.haesleinhuepf.clijx.plugins.BlurSliceBySlice;
-import net.haesleinhuepf.clijx.weka.ApplyOCLWekaModel;
-import net.haesleinhuepf.clijx.weka.ApplyWekaModel;
-import net.haesleinhuepf.clijx.weka.TrainWekaModel;
 
 public interface CLIJxPlugins {
     public Class[] classes = {
@@ -188,8 +185,6 @@ public interface CLIJxPlugins {
             AddImagesWeighted.class,
             SubtractImages.class,
             ShowGlasbeyOnGrey.class,
-            ApplyWekaModel.class,
-            TrainWekaModel.class,
             AffineTransform2D.class,
             AffineTransform3D.class,
             ApplyVectorField2D.class,
@@ -349,7 +344,6 @@ public interface CLIJxPlugins {
             SetPlane.class,
             TenengradFusion.class,
             ImageToStack.class,
-            ApplyOCLWekaModel.class,
             SumXProjection.class,
             SumImageSliceBySlice.class,
             MultiplyImageStackWithScalars.class,
