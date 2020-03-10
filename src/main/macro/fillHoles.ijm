@@ -9,7 +9,7 @@
 
 
 // Get test data
-open("https://github.com/clij/clij-advanced-filters/raw/master/src/main/resources/skeleton_test.tif");
+open("https://github.com/clij/clij-advanced-filters/raw/master/src/test/resources/skeleton_test.tif");
 input = getTitle();
 
 filled_holes = "filled_holes";
