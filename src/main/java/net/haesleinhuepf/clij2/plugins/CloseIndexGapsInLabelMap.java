@@ -5,6 +5,7 @@ import ij.ImageJ;
 import ij.ImagePlus;
 import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
@@ -151,7 +152,6 @@ public class CloseIndexGapsInLabelMap extends AbstractCLIJ2Plugin implements CLI
             float[] slice = new float[(int) number_of_pixels];
             FloatBuffer buffer = FloatBuffer.wrap(slice);
 
-            input.writeTo(buffer, true);
             for (int i = 0; i < slice.length; i++) {
                 int key = (int) slice[i];
                 if (key > 0 && allNewIndices[key] == 0) {

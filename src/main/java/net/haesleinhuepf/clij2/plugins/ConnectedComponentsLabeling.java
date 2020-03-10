@@ -5,6 +5,7 @@ import ij.ImageJ;
 import ij.ImagePlus;
 import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
@@ -13,6 +14,8 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
+import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
+//import net.haesleinhuepf.clijx.CLIJx;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.numeric.RealType;
@@ -30,6 +33,7 @@ import java.nio.FloatBuffer;
  * Author: @haesleinhuepf
  * 06 2019
  */
+@Deprecated // use ConnectedComponentsLabellingBox or -Diamond
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_connectedComponentsLabeling")
 public class ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
@@ -44,9 +48,14 @@ public class ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements 
         return result;
     }
 
+    @Deprecated // use connectedComponentsLabelingBox or -Diamond
     public static boolean connectedComponentsLabeling(CLIJ2 clij2, ClearCLImageInterface input, ClearCLImageInterface output) {
-        //ClearCLImage temp1 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
-        //ClearCLImage temp2 = clij.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
+        return connectedComponentsLabeling_internal(clij2, input, output, true, true);
+    }
+
+    protected static boolean connectedComponentsLabeling_internal(CLIJ2 clij2, ClearCLImageInterface input, ClearCLImageInterface output, boolean forceContinousLabeling, boolean useBoxNeighborhood) {
+        //ClearCLImage temp1 = clij2.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
+        //ClearCLImage temp2 = clij2.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
 
         ClearCLBuffer temp1 = clij2.create(output.getDimensions());
         ClearCLBuffer temp2 = clij2.create(output.getDimensions());
@@ -68,19 +77,28 @@ public class ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements 
         ClearCLKernel flipkernel = null;
         ClearCLKernel flopkernel = null;
 
+        //CLIJx.getInstance().stopWatch("");
         while (flagValue > 0) {
             if (iterationCount[0] % 2 == 0) {
                 //NonzeroMinimumBox.nonzeroMinimumBox(clij2, temp1, flag, temp2, null).close();
                 if (flipkernel == null) {
-                    flipkernel = NonzeroMinimumDiamond.nonzeroMinimumDiamond(clij2, temp1, flag, temp2, flipkernel);
+                    if (useBoxNeighborhood) {
+                        flipkernel = NonzeroMinimumBox.nonzeroMinimumBox(clij2, temp1, flag, temp2, flipkernel);
+                    } else {
+                        flipkernel = NonzeroMinimumDiamond.nonzeroMinimumDiamond(clij2, temp1, flag, temp2, flipkernel);
+                    }
                 } else {
                     flipkernel.run(true);
                 }
             } else {
-                NonzeroMinimumBox.nonzeroMinimumBox(clij2, temp2, flag, temp1, null).close();
+                //NonzeroMinimumBox.nonzeroMinimumBox(clij2, temp2, flag, temp1, null).close();
 
                 if (flopkernel == null) {
-                    flopkernel = NonzeroMinimumDiamond.nonzeroMinimumDiamond(clij2, temp2, flag, temp1, flopkernel);
+                    if (useBoxNeighborhood) {
+                        flopkernel = NonzeroMinimumBox.nonzeroMinimumBox(clij2, temp2, flag, temp1, flopkernel);
+                    } else {
+                        flopkernel = NonzeroMinimumDiamond.nonzeroMinimumDiamond(clij2, temp2, flag, temp1, flopkernel);
+                    }
                 } else {
                     flopkernel.run(true);
                 }
@@ -91,6 +109,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements 
             flag.readFrom(aByteBufferWithAZero, true);
             iterationCount[0] = iterationCount[0] + 1;
         }
+        //CLIJx.getInstance().stopWatch("cca loop " + iterationCount[0]);
 
         if (iterationCount[0] % 2 == 0) {
             clij2.copy(temp1, temp3);
@@ -104,7 +123,11 @@ public class ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements 
             flopkernel.close();
         }
 
-        CloseIndexGapsInLabelMap.closeIndexGapsInLabelMap(clij2, temp3, output);
+        if (forceContinousLabeling) {
+            CloseIndexGapsInLabelMap.closeIndexGapsInLabelMap(clij2, temp3, output);
+        } else {
+            clij2.copy(temp3, output);
+        }
         //shiftIntensitiesToCloseGaps(clij2, temp3, output);
 
         clij2.release(temp1);
@@ -116,48 +139,6 @@ public class ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements 
     }
 
 
-    public static void main(String[] args) {
-        new ImageJ();
-        ImagePlus imp = IJ.openImage("src/test/resources/miniBlobs.tif");
-        imp.show();
-
-        CLIJ2 clij2 = CLIJ2.getInstance();
-
-        int size = 20;
-
-        ClearCLBuffer miniBlobs = clij2.push(imp);
-        ClearCLBuffer input = clij2.create(new long[]{miniBlobs.getWidth() * size, miniBlobs.getHeight() * size, miniBlobs.getDepth() * size}, miniBlobs.getNativeType());
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                for (int z = 0; z < size; z++) {
-                    Paste3D.paste(clij2, miniBlobs, input, (int)(x * miniBlobs.getWidth()), (int)(y * miniBlobs.getHeight()), (int)(z * miniBlobs.getDepth()));
-                }
-            }
-        }
-        clij2.show(input, "input");
-
-        ClearCLBuffer thresholded = clij2.create(input);
-        ClearCLBuffer output = clij2.create(input.getDimensions(), NativeTypeEnum.Float);
-
-        clij2.threshold(input, thresholded, 7f);
-        clij2.show(thresholded, "thresholded");
-
-        for (int i = 0; i < 3; i++) {
-            connectedComponentsLabeling(clij2, thresholded, output);
-
-
-            //assertEquals(375.0, clij.op().maximumOfAllPixels(output), 0.1);
-        }
-        clij2.show(output, "result");
-
-        new WaitForUserDialog("wait").show();
-
-
-        input.close();
-        output.close();
-        thresholded.close();
-
-    }
 
 
 /*
