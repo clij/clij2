@@ -1,21 +1,10 @@
 package net.haesleinhuepf.clij2.plugins;
 
-import ij.IJ;
-import ij.ImageJ;
-import ij.ImagePlus;
-import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
-import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
-import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
-import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
-import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import org.scijava.plugin.Plugin;
-
-import java.nio.ByteBuffer;
 
 //import net.haesleinhuepf.clijx.CLIJx;
 

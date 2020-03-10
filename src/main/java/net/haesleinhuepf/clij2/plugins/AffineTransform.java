@@ -1,6 +1,5 @@
 package net.haesleinhuepf.clij2.plugins;
 
-import ij.IJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
@@ -9,10 +8,6 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
-import net.haesleinhuepf.clij2.plugins.AffineTransform2D;
-import net.haesleinhuepf.clij2.plugins.AffineTransform3D;
-import net.haesleinhuepf.clij2.utilities.HasAuthor;
-import net.haesleinhuepf.clij2.utilities.HasLicense;
 import org.scijava.plugin.Plugin;
 
 /**

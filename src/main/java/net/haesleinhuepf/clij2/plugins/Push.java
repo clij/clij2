@@ -1,10 +1,6 @@
 package net.haesleinhuepf.clij2.plugins;
 
-import fiji.util.gui.GenericDialogPlus;
-import ij.IJ;
-import ij.Macro;
 import ij.WindowManager;
-import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJHandler;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;

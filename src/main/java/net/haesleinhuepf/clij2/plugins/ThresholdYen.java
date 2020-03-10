@@ -1,8 +1,6 @@
 package net.haesleinhuepf.clij2.plugins;
 
-import ij.ImagePlus;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -11,10 +9,6 @@ import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.HasAuthor;
 import net.haesleinhuepf.clij2.utilities.HasLicense;
 import org.scijava.plugin.Plugin;
-
-import java.util.Arrays;
-
-import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
 
 /**
  * ThresholdYen

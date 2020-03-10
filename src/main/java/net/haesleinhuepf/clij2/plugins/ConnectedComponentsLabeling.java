@@ -1,29 +1,20 @@
 package net.haesleinhuepf.clij2.plugins;
 
-import ij.IJ;
-import ij.ImageJ;
 import ij.ImagePlus;
-import ij.gui.WaitForUserDialog;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
-import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
-import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
-//import net.haesleinhuepf.clijx.CLIJx;
-import net.imglib2.Cursor;
-import net.imglib2.RandomAccessibleInterval;
-import net.imglib2.type.numeric.RealType;
-import net.imglib2.view.Views;
+import net.haesleinhuepf.clij2.CLIJ2;
 import org.scijava.plugin.Plugin;
 
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
+
+//import net.haesleinhuepf.clijx.CLIJx;
 
 /**
  * ConnectedComponentsLabeling
