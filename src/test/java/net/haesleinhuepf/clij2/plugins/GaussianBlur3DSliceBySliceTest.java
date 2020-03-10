@@ -7,6 +7,7 @@ import ij.plugin.Duplicator;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.test.TestUtilities;
+import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clijx.CLIJx;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ public class GaussianBlur3DSliceBySliceTest {
 
     @Test
     public void blurSliceBySlice() {
-        CLIJx clijx = CLIJx.getInstance();
+        CLIJ2 clij2 = CLIJ2.getInstance();
         ImagePlus testFlyBrain3D = IJ.openImage("src/test/resources/flybrain.tif");
 
         // do operation with ImageJ
@@ -24,23 +25,23 @@ public class GaussianBlur3DSliceBySliceTest {
         IJ.run(gauss, "Gaussian Blur...", "sigma=2 stack");
 
         // do operation with ClearCL
-        ClearCLImage src = clijx.convert(testFlyBrain3D, ClearCLImage.class);;
-        ClearCLImage dst = clijx.create(src);
+        ClearCLImage src = clij2.convert(testFlyBrain3D, ClearCLImage.class);;
+        ClearCLImage dst = clij2.create(src);
 
-        clijx.blurSliceBySlice(src, dst, 15, 15, 2f, 2f);
-        ImagePlus gaussFromCL = clijx.convert(dst, ImagePlus.class);
+        clij2.gaussianBlur3D(src, dst, 2, 2, 0);
+        ImagePlus gaussFromCL = clij2.convert(dst, ImagePlus.class);
 
         assertTrue(TestUtilities.compareImages(gauss, gaussFromCL, 2));
 
         src.close();
         dst.close();
         IJ.exit();
-        clijx.clear();
+        clij2.clear();
     }
 
     @Test public void blurSliceBySlice_Buffers()
     {
-        CLIJx clijx = CLIJx.getInstance();
+        CLIJ2 clij2 = CLIJ2.getInstance();
         ImagePlus testFlyBrain3D = IJ.openImage("src/test/resources/flybrain.tif");
 
         // do operation with ImageJ
@@ -48,11 +49,11 @@ public class GaussianBlur3DSliceBySliceTest {
         IJ.run(gauss, "Gaussian Blur...", "sigma=2 stack");
 
         // do operation with ClearCL
-        ClearCLBuffer src = clijx.convert(testFlyBrain3D, ClearCLBuffer.class);
-        ClearCLBuffer dst = clijx.create(src);
+        ClearCLBuffer src = clij2.convert(testFlyBrain3D, ClearCLBuffer.class);
+        ClearCLBuffer dst = clij2.create(src);
 
-        clijx.blurSliceBySlice(src, dst, 15, 15, 2, 2);
-        ImagePlus gaussFromCL = clijx.convert(dst, ImagePlus.class);
+        clij2.gaussianBlur3D(src, dst, 2, 2, 0);
+        ImagePlus gaussFromCL = clij2.convert(dst, ImagePlus.class);
 
         // ignore borders
         gauss.setRoi(new Roi(2, 2, gauss.getWidth() - 4, gauss.getHeight() - 4));
@@ -65,7 +66,7 @@ public class GaussianBlur3DSliceBySliceTest {
         src.close();
         dst.close();
         IJ.exit();
-        clijx.clear();
+        clij2.clear();
     }
 
 }

@@ -14,13 +14,13 @@ import static org.junit.Assert.*;
 public class ConnectedComponentsLabelingDiamondTest {
     @Test
     public void testCCAD() {
-        new ImageJ();
+        //new ImageJ();
         ImagePlus imp = IJ.openImage("src/test/resources/miniBlobs.tif");
-        imp.show();
+        //imp.show();
 
         CLIJ2 clij2 = CLIJ2.getInstance();
 
-        int size = 20;
+        int size = 5;
 
         ClearCLBuffer miniBlobs = clij2.push(imp);
         ClearCLBuffer input = clij2.create(new long[]{miniBlobs.getWidth() * size, miniBlobs.getHeight() * size, miniBlobs.getDepth() * size}, miniBlobs.getNativeType());
@@ -31,29 +31,30 @@ public class ConnectedComponentsLabelingDiamondTest {
                 }
             }
         }
-        clij2.show(input, "input");
+        //clij2.show(input, "input");
 
         ClearCLBuffer thresholded = clij2.create(input);
         ClearCLBuffer output = clij2.create(input.getDimensions(), NativeTypeEnum.Float);
 
         clij2.threshold(input, thresholded, 7f);
-        clij2.show(thresholded, "thresholded");
+        //clij2.show(thresholded, "thresholded");
 
         for (int i = 0; i < 3; i++) {
-            ConnectedComponentsLabelingDiamond.connectedComponentsLabelingDiamond(clij2, thresholded, output);
+            clij2.connectedComponentsLabelingDiamond( thresholded, output);
 
 
             //assertEquals(375.0, clij.op().maximumOfAllPixels(output), 0.1);
         }
-        clij2.show(output, "result");
+        //clij2.show(output, "result");
 
-        new WaitForUserDialog("wait").show();
+        //new WaitForUserDialog("wait").show();
 
 
-        input.close();
-        output.close();
-        thresholded.close();
+        clij2.release(input);
+        clij2.release(output);
+        clij2.release(thresholded);
 
+        clij2.clear();
     }
 
 
