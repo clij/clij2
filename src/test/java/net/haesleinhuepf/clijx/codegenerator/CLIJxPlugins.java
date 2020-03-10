@@ -356,7 +356,9 @@ public interface CLIJxPlugins {
             Print.class,
             VoronoiOctagon.class,
             SetImageBorders.class,
-            Skeletonize.class
+            Skeletonize.class,
+            FloodFillDiamond.class,
+            BinaryFillHoles.class
     };
 
     public String blockList = ";" +

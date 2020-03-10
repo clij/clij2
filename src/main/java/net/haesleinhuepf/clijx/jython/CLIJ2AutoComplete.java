@@ -56,6 +56,9 @@ class CLIJ2AutoComplete {
        headline = "clij2.binaryEdgeDetection(ClearCLImageInterface source, ClearCLImageInterface destination)";
        description = "<b>binaryEdgeDetection</b><br><br>Determines pixels/voxels which are on the surface of a binary objects and sets only them to 1 in the destination image. All other pixels are set to 0.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.binaryFillHoles(ClearCLImageInterface source, ClearCLImageInterface destination)";
+       description = "<b>binaryFillHoles</b><br><br>Fills holes in a binary image.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.binaryIntersection(ClearCLBuffer operand1, ClearCLBuffer operand2, ClearCLBuffer destination)";
        description = "<b>binaryIntersection</b><br><br>Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of<br>pixels x and y with the binary intersection operator &.<br>All pixel values except 0 in the input images are interpreted as 1.<br><br><pre>f(x, y) = x & y</pre><br><br>Parameters:<br>ClearCLBuffer operand1, ClearCLBuffer operand2, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -235,6 +238,9 @@ class CLIJ2AutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.flip(ClearCLImageInterface source, ClearCLImageInterface destination, Boolean flipX, Boolean flipY)";
        description = "<b>flip</b><br><br>Flips an image in X and/or Y direction depending on boolean flags.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination, Boolean flipX, Boolean flipY";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.floodFillDiamond(ClearCLBuffer source, ClearCLBuffer destination, Float value_to_replace, Float value_replacement)";
+       description = "<b>floodFillDiamond</b><br><br>Replaces recursively all pixels of value a with value b if the pixels have a neighbor with value b.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination, Float value_to_replace, Float value_replacement";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.gaussianBlur2D(ClearCLImageInterface source, ClearCLImageInterface destination, Float sigmaX, Float sigmaY)";
        description = "<b>gaussianBlur2D</b><br><br>Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.<br><br>The implementation is done separable. In case a sigma equals zero, the direction is not blurred.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination, Float sigmaX, Float sigmaY";
@@ -746,4 +752,4 @@ class CLIJ2AutoComplete {
         return list;
     }
 }
-// 245 methods generated.
+// 247 methods generated.

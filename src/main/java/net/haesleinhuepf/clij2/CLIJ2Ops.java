@@ -314,6 +314,8 @@ import net.haesleinhuepf.clij2.plugins.Print;
 import net.haesleinhuepf.clij2.plugins.VoronoiOctagon;
 import net.haesleinhuepf.clij2.plugins.SetImageBorders;
 import net.haesleinhuepf.clij2.plugins.Skeletonize;
+import net.haesleinhuepf.clij2.plugins.FloodFillDiamond;
+import net.haesleinhuepf.clij2.plugins.BinaryFillHoles;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
@@ -1308,17 +1310,17 @@ public abstract interface CLIJ2Ops {
      * Determine the n point indices with shortest distance for all points in a distance matrix.
      * This corresponds to the n row indices with minimum values for each column of the distance matrix.
      */
-    @Deprecated
-    default boolean averageDistanceOfClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return AverageDistanceOfNClosestPoints.averageDistanceOfClosestPoints(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+    default boolean averageDistanceOfNClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        return AverageDistanceOfNClosestPoints.averageDistanceOfNClosestPoints(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
     }
 
     /**
      * Determine the n point indices with shortest distance for all points in a distance matrix.
      * This corresponds to the n row indices with minimum values for each column of the distance matrix.
      */
-    default boolean averageDistanceOfNClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return AverageDistanceOfNClosestPoints.averageDistanceOfNClosestPoints(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+    @Deprecated
+    default boolean averageDistanceOfClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        return AverageDistanceOfNClosestPoints.averageDistanceOfClosestPoints(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
     }
 
 
@@ -1335,18 +1337,18 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Resample
     //----------------------------------------------------
     /**
-     * 
-     */
-    default boolean resample3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5, boolean arg6) {
-        return Resample.resample3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
-    }
-
-    /**
      * Resamples an image with given size factors using an affine transform.
      */
     @Deprecated
     default boolean resample(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5, boolean arg6) {
         return Resample.resample(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+    }
+
+    /**
+     * 
+     */
+    default boolean resample3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5, boolean arg6) {
+        return Resample.resample3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
     }
 
     /**
@@ -1631,18 +1633,18 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
+     * Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter result very similar to minimum sphere. Approximately:radius = iterations - 2
+     */
+    default boolean minimumOctagon(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        return MinimumOctagon.minimumOctagon(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+    }
+
+    /**
      * 
      */
     @Deprecated
     default ClearCLKernel minimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3) {
         return MinimumOctagon.minimumDiamond(getCLIJ2(), arg1, arg2, arg3);
-    }
-
-    /**
-     * Applies a minimum filter with kernel size 3x3 n times to an image iteratively. Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter result very similar to minimum sphere. Approximately:radius = iterations - 2
-     */
-    default boolean minimumOctagon(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return MinimumOctagon.minimumOctagon(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
     }
 
 
@@ -1990,32 +1992,32 @@ public abstract interface CLIJ2Ops {
     /**
      * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
      */
-    default boolean applyVectorField(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination) {
-        return ApplyVectorField2D.applyVectorField(getCLIJ2(), source, vectorX, vectorY, destination);
+    default boolean applyVectorField2D(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination) {
+        return ApplyVectorField2D.applyVectorField2D(getCLIJ2(), source, vectorX, vectorY, destination);
     }
 
     /**
      * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
      */
-    default boolean applyVectorField2D(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination) {
-        return ApplyVectorField2D.applyVectorField2D(getCLIJ2(), source, vectorX, vectorY, destination);
+    default boolean applyVectorField(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination) {
+        return ApplyVectorField2D.applyVectorField(getCLIJ2(), source, vectorX, vectorY, destination);
     }
 
 
     // net.haesleinhuepf.clij2.plugins.ApplyVectorField3D
     //----------------------------------------------------
     /**
-     * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
-     */
-    default boolean applyVectorField(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLImageInterface arg4, ClearCLImageInterface arg5) {
-        return ApplyVectorField3D.applyVectorField(getCLIJ2(), arg1, arg2, arg3, arg4, arg5);
-    }
-
-    /**
      * Deforms an image stack according to distances provided in the given vector image stacks. It is recommended to use 32-bit image stacks for input, output and vector image stacks. 
      */
     default boolean applyVectorField3D(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface vectorZ, ClearCLImageInterface destination) {
         return ApplyVectorField3D.applyVectorField3D(getCLIJ2(), source, vectorX, vectorY, vectorZ, destination);
+    }
+
+    /**
+     * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
+     */
+    default boolean applyVectorField(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLImageInterface arg4, ClearCLImageInterface arg5) {
+        return ApplyVectorField3D.applyVectorField(getCLIJ2(), arg1, arg2, arg3, arg4, arg5);
     }
 
 
@@ -2084,8 +2086,8 @@ public abstract interface CLIJ2Ops {
      * of these methods in the method text field:
      * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
      */
-    default boolean automaticThreshold(ClearCLBuffer input, ClearCLBuffer destination, String method) {
-        return AutomaticThreshold.automaticThreshold(getCLIJ2(), input, destination, method);
+    default boolean automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, double arg4, double arg5, double arg6) {
+        return AutomaticThreshold.automaticThreshold(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).intValue());
     }
 
     /**
@@ -2094,8 +2096,8 @@ public abstract interface CLIJ2Ops {
      * of these methods in the method text field:
      * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
      */
-    default boolean automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, double arg4, double arg5, double arg6) {
-        return AutomaticThreshold.automaticThreshold(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).intValue());
+    default boolean automaticThreshold(ClearCLBuffer input, ClearCLBuffer destination, String method) {
+        return AutomaticThreshold.automaticThreshold(getCLIJ2(), input, destination, method);
     }
 
 
@@ -2319,8 +2321,8 @@ public abstract interface CLIJ2Ops {
      * 
      * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
      */
-    default boolean crop2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Crop2D.crop2D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    default boolean crop(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return Crop2D.crop(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
     }
 
     /**
@@ -2328,22 +2330,13 @@ public abstract interface CLIJ2Ops {
      * 
      * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
      */
-    default boolean crop(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Crop2D.crop(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    default boolean crop2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        return Crop2D.crop2D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
     }
 
 
     // net.haesleinhuepf.clij2.plugins.Crop3D
     //----------------------------------------------------
-    /**
-     * Crops a given sub-stack out of a given image stack.
-     * 
-     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
-     */
-    default boolean crop3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Crop3D.crop3D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
-    }
-
     /**
      * Crops a given rectangle out of a given image.
      * 
@@ -2351,6 +2344,15 @@ public abstract interface CLIJ2Ops {
      */
     default boolean crop(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
         return Crop3D.crop(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+    }
+
+    /**
+     * Crops a given sub-stack out of a given image stack.
+     * 
+     * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
+     */
+    default boolean crop3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return Crop3D.crop3D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
     }
 
 
@@ -2620,18 +2622,18 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.CountNonZeroPixelsSliceBySliceSphere
     //----------------------------------------------------
     /**
+     * Counts non-zero pixels in a sphere around every pixel slice by slice in a stack and puts the resulting number in the destination image stack.
+     */
+    default boolean countNonZeroPixelsSliceBySliceSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        return CountNonZeroPixelsSliceBySliceSphere.countNonZeroPixelsSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+    }
+
+    /**
      * 
      */
     @Deprecated
     default boolean countNonZeroPixelsLocallySliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
         return CountNonZeroPixelsSliceBySliceSphere.countNonZeroPixelsLocallySliceBySlice(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
-    }
-
-    /**
-     * Counts non-zero pixels in a sphere around every pixel slice by slice in a stack and puts the resulting number in the destination image stack.
-     */
-    default boolean countNonZeroPixelsSliceBySliceSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return CountNonZeroPixelsSliceBySliceSphere.countNonZeroPixelsSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
     }
 
 
@@ -3189,6 +3191,15 @@ public abstract interface CLIJ2Ops {
      * 
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
+    default boolean gaussianBlur3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        return GaussianBlur3D.gaussianBlur3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+    }
+
+    /**
+     * Computes the Gaussian blurred image of an image given two sigma values in X, Y and Z. Thus, the filterkernel can have non-isotropic shape.
+     * 
+     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
+     */
     @Deprecated
     default boolean blur3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
         return GaussianBlur3D.blur3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
@@ -3201,15 +3212,6 @@ public abstract interface CLIJ2Ops {
      */
     default boolean gaussianBlur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
         return GaussianBlur3D.gaussianBlur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
-    }
-
-    /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X, Y and Z. Thus, the filterkernel can have non-isotropic shape.
-     * 
-     * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
-     */
-    default boolean gaussianBlur3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return GaussianBlur3D.gaussianBlur3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
     }
 
 
@@ -3912,14 +3914,6 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.SumImageSliceBySlice
     //----------------------------------------------------
     /**
-     * 
-     */
-    @Deprecated
-    default double[] sumPixelsSliceByslice(ClearCLImageInterface arg1) {
-        return SumImageSliceBySlice.sumPixelsSliceByslice(getCLIJ2(), arg1);
-    }
-
-    /**
      * Sums all pixels slice by slice and returns them in an array.
      */
     default boolean sumImageSliceBySlice(ClearCLImageInterface arg1, ClearCLImageInterface arg2) {
@@ -3933,17 +3927,17 @@ public abstract interface CLIJ2Ops {
         return SumImageSliceBySlice.sumImageSliceBySlice(getCLIJ2(), arg1);
     }
 
-
-    // net.haesleinhuepf.clij2.plugins.MultiplyImageStackWithScalars
-    //----------------------------------------------------
     /**
      * 
      */
     @Deprecated
-    default boolean multiplySliceBySliceWithScalars(ClearCLImageInterface arg1, ClearCLImageInterface arg2, float[] arg3) {
-        return MultiplyImageStackWithScalars.multiplySliceBySliceWithScalars(getCLIJ2(), arg1, arg2, arg3);
+    default double[] sumPixelsSliceByslice(ClearCLImageInterface arg1) {
+        return SumImageSliceBySlice.sumPixelsSliceByslice(getCLIJ2(), arg1);
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.MultiplyImageStackWithScalars
+    //----------------------------------------------------
     /**
      * Multiplies all pixels value x in a given image X with a constant scalar s from a list of scalars.
      * 
@@ -3960,6 +3954,14 @@ public abstract interface CLIJ2Ops {
      */
     default boolean multiplyImageStackWithScalars(ClearCLImageInterface arg1, ClearCLImageInterface arg2, float[] arg3) {
         return MultiplyImageStackWithScalars.multiplyImageStackWithScalars(getCLIJ2(), arg1, arg2, arg3);
+    }
+
+    /**
+     * 
+     */
+    @Deprecated
+    default boolean multiplySliceBySliceWithScalars(ClearCLImageInterface arg1, ClearCLImageInterface arg2, float[] arg3) {
+        return MultiplyImageStackWithScalars.multiplySliceBySliceWithScalars(getCLIJ2(), arg1, arg2, arg3);
     }
 
 
@@ -4002,5 +4004,25 @@ public abstract interface CLIJ2Ops {
         return Skeletonize.skeletonize(getCLIJ2(), source, destination);
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.FloodFillDiamond
+    //----------------------------------------------------
+    /**
+     * Replaces recursively all pixels of value a with value b if the pixels have a neighbor with value b.
+     */
+    default boolean floodFillDiamond(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        return FloodFillDiamond.floodFillDiamond(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.BinaryFillHoles
+    //----------------------------------------------------
+    /**
+     * Fills holes in a binary image.
+     */
+    default boolean binaryFillHoles(ClearCLImageInterface source, ClearCLImageInterface destination) {
+        return BinaryFillHoles.binaryFillHoles(getCLIJ2(), source, destination);
+    }
+
 }
-// 333 methods generated.
+// 335 methods generated.

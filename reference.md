@@ -36,6 +36,7 @@ __Please note:__ CLIJ2 and CLIJx are under heavy construction. This list may cha
 ## B
 <img src="images/mini_clij1_logo.png" width="18" height="18"/><img src="images/mini_clij2_logo.png" width="18" height="18"/><img src="images/mini_clijx_logo.png" width="18" height="18"/><a href="https://clij.github.io/clij-advanced-filters/reference_binaryAnd">binaryAnd</a>  
 <img src="images/mini_empty_logo.png" width="18" height="18"/><img src="images/mini_clij2_logo.png" width="18" height="18"/><img src="images/mini_clijx_logo.png" width="18" height="18"/><a href="https://clij.github.io/clij-advanced-filters/reference_binaryEdgeDetection">binaryEdgeDetection</a>  
+<img src="images/mini_empty_logo.png" width="18" height="18"/><img src="images/mini_clij2_logo.png" width="18" height="18"/><img src="images/mini_clijx_logo.png" width="18" height="18"/><a href="https://clij.github.io/clij-advanced-filters/reference_binaryFillHoles">binaryFillHoles</a>  
 <img src="images/mini_empty_logo.png" width="18" height="18"/><img src="images/mini_clij2_logo.png" width="18" height="18"/><img src="images/mini_clijx_logo.png" width="18" height="18"/><a href="https://clij.github.io/clij-advanced-filters/reference_binaryIntersection">binaryIntersection</a>  
 <img src="images/mini_clij1_logo.png" width="18" height="18"/><img src="images/mini_clij2_logo.png" width="18" height="18"/><img src="images/mini_clijx_logo.png" width="18" height="18"/><a href="https://clij.github.io/clij-advanced-filters/reference_binaryNot">binaryNot</a>  
 <img src="images/mini_clij1_logo.png" width="18" height="18"/><img src="images/mini_clij2_logo.png" width="18" height="18"/><img src="images/mini_clijx_logo.png" width="18" height="18"/><a href="https://clij.github.io/clij-advanced-filters/reference_binaryOr">binaryOr</a>  
@@ -111,6 +112,7 @@ __Please note:__ CLIJ2 and CLIJx are under heavy construction. This list may cha
 ## F
 <img src="images/mini_clij1_logo.png" width="18" height="18"/><img src="images/mini_clij2_logo.png" width="18" height="18"/><img src="images/mini_clijx_logo.png" width="18" height="18"/><a href="https://clij.github.io/clij-advanced-filters/reference_flip2D">flip2D</a>  
 <img src="images/mini_clij1_logo.png" width="18" height="18"/><img src="images/mini_clij2_logo.png" width="18" height="18"/><img src="images/mini_clijx_logo.png" width="18" height="18"/><a href="https://clij.github.io/clij-advanced-filters/reference_flip3D">flip3D</a>  
+<img src="images/mini_empty_logo.png" width="18" height="18"/><img src="images/mini_clij2_logo.png" width="18" height="18"/><img src="images/mini_clijx_logo.png" width="18" height="18"/><a href="https://clij.github.io/clij-advanced-filters/reference_floodFillDiamond">floodFillDiamond</a>  
 <a name="G"></a>
 
 ## G

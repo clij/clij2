@@ -68,6 +68,9 @@ class CLIJxAutoComplete {
        headline = "clijx.binaryEdgeDetection(ClearCLImageInterface source, ClearCLImageInterface destination)";
        description = "<b>binaryEdgeDetection</b><br><br>Determines pixels/voxels which are on the surface of a binary objects and sets only them to 1 in the destination image. All other pixels are set to 0.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.binaryFillHoles(ClearCLImageInterface source, ClearCLImageInterface destination)";
+       description = "<b>binaryFillHoles</b><br><br>Fills holes in a binary image.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.binaryIntersection(ClearCLBuffer operand1, ClearCLBuffer operand2, ClearCLBuffer destination)";
        description = "<b>binaryIntersection</b><br><br>Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of<br>pixels x and y with the binary intersection operator &.<br>All pixel values except 0 in the input images are interpreted as 1.<br><br><pre>f(x, y) = x & y</pre><br><br>Parameters:<br>ClearCLBuffer operand1, ClearCLBuffer operand2, ClearCLBuffer destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -268,6 +271,9 @@ class CLIJxAutoComplete {
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.flip(ClearCLImageInterface source, ClearCLImageInterface destination, Boolean flipX, Boolean flipY)";
        description = "<b>flip</b><br><br>Flips an image in X and/or Y direction depending on boolean flags.<br><br>Parameters:<br>ClearCLImageInterface source, ClearCLImageInterface destination, Boolean flipX, Boolean flipY";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.floodFillDiamond(ClearCLBuffer source, ClearCLBuffer destination, Float value_to_replace, Float value_replacement)";
+       description = "<b>floodFillDiamond</b><br><br>Replaces recursively all pixels of value a with value b if the pixels have a neighbor with value b.<br><br>Parameters:<br>ClearCLBuffer source, ClearCLBuffer destination, Float value_to_replace, Float value_replacement";
        list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.gaussJordan(ClearCLBuffer A_matrix, ClearCLBuffer B_result_vector, ClearCLBuffer solution_destination)";
        description = "<b>gaussJordan</b><br><br>Gauss Jordan elimination algorithm for solving linear equation systems. Ent the equation coefficients as an n*n sized image A and an n*1 sized image B:<br><pre>a(1,1)*x + a(2,1)*y + a(3,1)+z = b(1)<br>a(2,1)*x + a(2,2)*y + a(3,2)+z = b(2)<br>a(3,1)*x + a(3,2)*y + a(3,3)+z = b(3)<br></pre><br>The results will then be given in an n*1 image with values [x, y, z].<br><br>Adapted from: <br>https://github.com/qbunia/rodinia/blob/master/opencl/gaussian/gaussianElim_kernels.cl<br>L.G. Szafaryn, K. Skadron and J. Saucerman. &quot;Experiences Accelerating MATLAB Systems<br>//Biology Applications.&quot; in Workshop on Biomedicine in Computing (BiC) at the International<br>//Symposium on Computer Architecture (ISCA), June 2009.<br><br>Parameters:<br>ClearCLBuffer A_matrix, ClearCLBuffer B_result_vector, ClearCLBuffer solution_destination";
@@ -857,4 +863,4 @@ class CLIJxAutoComplete {
         return list;
     }
 }
-// 282 methods generated.
+// 284 methods generated.
