@@ -23,7 +23,7 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
 
 /**
  * Author: @haesleinhuepf
- * December 2018
+ *         March 2020
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_skeletonize")
 public class Skeletonize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
@@ -35,6 +35,10 @@ public class Skeletonize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     public static boolean skeletonize(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst) {
         assertDifferent(src, dst);
+        if (!checkDimensions(src.getDimension(), src.getDimension(), dst.getDimension())) {
+            throw new IllegalArgumentException("Error: number of dimensions don't match! (skeletonize)");
+        }
+
         ClearCLBuffer flag = clij2.create(1,1,1);
         ClearCLBuffer temp = clij2.create(dst);
 
@@ -75,9 +79,6 @@ public class Skeletonize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
                 parameters.put("direction", direction);
                 parameters.put("dimension", dimension);
 
-                if (!checkDimensions(src.getDimension(), src.getDimension(), dst.getDimension())) {
-                    throw new IllegalArgumentException("Error: number of dimensions don't match! (minimumImageAndScalar)");
-                }
                 kernel = clij2.executeSubsequently(Skeletonize.class, "skeletonize_x.cl", "skeletonize", dst.getDimensions(), dst.getDimensions(), parameters, kernel);
 
                 flag.writeTo(floatBuffer, true);
