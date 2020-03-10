@@ -57,7 +57,7 @@ public class Scale2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
             at.translate(-input.getWidth() / 2, -input.getHeight() / 2, -input.getDepth() / 2);
         }
 
-        at.scale(factorX, factorY);
+        at.scale(1.0 / factorX, 1.0 / factorY);
 
         if (scaleAroundCenter) {
             at.translate(input.getWidth() / 2, input.getHeight() / 2, input.getDepth() / 2);
