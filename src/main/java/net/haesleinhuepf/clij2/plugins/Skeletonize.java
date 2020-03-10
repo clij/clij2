@@ -1,11 +1,13 @@
 package net.haesleinhuepf.clij2.plugins;
 
+import net.haesleinhuepf.clij.clearcl.ClearCL;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij.test.TestUtilities;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.HasAuthor;
@@ -42,9 +44,19 @@ public class Skeletonize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
         ClearCLKernel kernel = null;
 
         clij2.copy(src, temp);
+        SetImageBorders.setImageBorders(clij2, temp, 0f);
+
+
+        int dimension = 2;
+        if (dst.getDimension() == 3 && dst.getDepth() > 1) {
+            dimension = 3;
+        }
 
         boolean flipFlag = true;
-        for (int i = 0; i < 2; i++) {
+        int unchangedBorders = 0;
+        while (unchangedBorders < 4 ){
+            unchangedBorders = 0;
+
             for (int direction = 1; direction <= 4; direction++) {
                 HashMap<String, Object> parameters = new HashMap<>();
                 if (flipFlag) {
@@ -56,18 +68,25 @@ public class Skeletonize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
                 }
                 flipFlag = !flipFlag;
 
+                flag_arr[0] = 0;
+                flag.readFrom(floatBuffer, true);
+
                 parameters.put("flag_dst", flag);
                 parameters.put("direction", direction);
+                parameters.put("dimension", dimension);
 
                 if (!checkDimensions(src.getDimension(), src.getDimension(), dst.getDimension())) {
                     throw new IllegalArgumentException("Error: number of dimensions don't match! (minimumImageAndScalar)");
                 }
-                kernel = clij2.executeSubsequently(Skeletonize.class, "skeletonize_" + src.getDimension() + "d_x.cl", "skeletonize_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters, kernel);
+                kernel = clij2.executeSubsequently(Skeletonize.class, "skeletonize_x.cl", "skeletonize", dst.getDimensions(), dst.getDimensions(), parameters, kernel);
 
+                flag.writeTo(floatBuffer, true);
+                if (flag_arr[0] == 0) {
+                    unchangedBorders++;
+                }
                 clij2.print(dst);
-                break;
+                System.out.println("---");
             }
-            break;
         }
 
         if (flipFlag) {
@@ -80,36 +99,6 @@ public class Skeletonize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
         return true;
     }
 
-
-    public static void main(String... args) {
-        CLIJ2 clij2 = CLIJ2.getInstance();
-
-        ClearCLBuffer binary_image = clij2.push(ArrayImgs.floats(new float[]{
-                1, 1, 1, 0, 0, 0, 0, 0, 0, 0,
-                1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-                1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
-                0, 0, 0, 1, 1, 1, 1, 0, 0, 0,
-                0, 0, 0, 0, 1, 1, 1, 0, 0, 0,
-
-                0, 0, 0, 0, 1, 1, 1, 1, 0, 0,
-                0, 0, 0, 0, 1, 1, 1, 1, 1, 0,
-                0, 0, 0, 0, 1, 1, 1, 1, 1, 0,
-                0, 0, 0, 0, 1, 1, 1, 1, 1, 0,
-                0, 0, 0, 0, 1, 1, 1, 1, 1, 0,
-            }, new long[]{10, 10}
-        ));
-
-        ClearCLBuffer skeleton = clij2.create(binary_image);
-
-        Skeletonize.skeletonize(clij2, binary_image, skeleton);
-
-        System.out.println("Result: ");
-        clij2.print(skeleton);
-
-        clij2.clear();
-    }
-
-
     @Override
     public String getParameterHelpText() {
         return "Image source, Image destination";
@@ -117,7 +106,7 @@ public class Skeletonize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public String getDescription() {
-        return "Erodes a binary image until just its skeleton is left.";
+        return "Erodes a binary image until just its skeleton is left. The result is similar to Skeletonize3D in Fiji.";
     }
 
     @Override
