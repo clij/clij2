@@ -78,8 +78,8 @@ public class FloodFillDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
             flag.writeTo(floatBuffer, true);
 
-            clij2.print(dst);
-            System.out.println("---");
+            //clij2.print(dst);
+            //System.out.println("---");
         }
 
         if (flipFlag) {
