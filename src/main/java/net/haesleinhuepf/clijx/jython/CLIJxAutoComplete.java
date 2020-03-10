@@ -122,6 +122,12 @@ class CLIJxAutoComplete {
        headline = "clijx.closingDiamond(ClearCLBuffer input, ClearCLBuffer destination, Integer number_of_dilations_and_erotions)";
        description = "<b>closingDiamond</b><br><br>Apply a binary closing to the input image by calling n dilations and n erosions subsequenntly.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination, Integer number_of_dilations_and_erotions";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.connectedComponentsLabelingBox(ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination)";
+       description = "<b>connectedComponentsLabelingBox</b><br><br>Performs connected components analysis to a binary image and generates a label map.<br><br>Parameters:<br>ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clijx.connectedComponentsLabelingDiamond(ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination)";
+       description = "<b>connectedComponentsLabelingDiamond</b><br><br>Performs connected components analysis to a binary image and generates a label map.<br><br>Parameters:<br>ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clijx.connectedComponentsLabelingInplace(ClearCLBuffer binary_source_labeling_destination)";
        description = "<b>connectedComponentsLabelingInplace</b><br><br>Performs connected components analysis to a binary image and generates a label map.<br><br>Parameters:<br>ClearCLBuffer binary_source_labeling_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -863,4 +869,4 @@ class CLIJxAutoComplete {
         return list;
     }
 }
-// 284 methods generated.
+// 286 methods generated.

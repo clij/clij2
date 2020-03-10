@@ -358,7 +358,9 @@ public interface CLIJxPlugins {
             SetImageBorders.class,
             Skeletonize.class,
             FloodFillDiamond.class,
-            BinaryFillHoles.class
+            BinaryFillHoles.class,
+            ConnectedComponentsLabelingDiamond.class,
+            ConnectedComponentsLabelingBox.class
     };
 
     public String blockList = ";" +
@@ -366,6 +368,8 @@ public interface CLIJxPlugins {
             "BinaryUnion.binaryOr;" +
             "AffineTransform.affineTransform3D;"+
             "Scale.scale3D;"+
+            "ConnectedComponentsLabelingBox.connectedComponentsLabeling;" +
+            "ConnectedComponentsLabelingDiamond.connectedComponentsLabeling;" +
             "Kernels.absolute;" +
             "Kernels.addImagesWeighted;" +
             "Kernels.addImages;" +

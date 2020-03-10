@@ -107,6 +107,12 @@ class CLIJ2AutoComplete {
        headline = "clij2.closingDiamond(ClearCLBuffer input, ClearCLBuffer destination, Integer number_of_dilations_and_erotions)";
        description = "<b>closingDiamond</b><br><br>Apply a binary closing to the input image by calling n dilations and n erosions subsequenntly.<br><br>Parameters:<br>ClearCLBuffer input, ClearCLBuffer destination, Integer number_of_dilations_and_erotions";
        list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.connectedComponentsLabelingBox(ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination)";
+       description = "<b>connectedComponentsLabelingBox</b><br><br>Performs connected components analysis to a binary image and generates a label map.<br><br>Parameters:<br>ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
+       headline = "clij2.connectedComponentsLabelingDiamond(ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination)";
+       description = "<b>connectedComponentsLabelingDiamond</b><br><br>Performs connected components analysis to a binary image and generates a label map.<br><br>Parameters:<br>ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination";
+       list.add(new BasicCompletion(provider, headline, null, description));
        headline = "clij2.connectedComponentsLabeling(ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination)";
        description = "<b>connectedComponentsLabeling</b><br><br>Performs connected components analysis to a binary image and generates a label map.<br><br>Parameters:<br>ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination";
        list.add(new BasicCompletion(provider, headline, null, description));
@@ -752,4 +758,4 @@ class CLIJ2AutoComplete {
         return list;
     }
 }
-// 247 methods generated.
+// 249 methods generated.

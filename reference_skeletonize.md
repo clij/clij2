@@ -42,6 +42,7 @@ clij2.release(destination);
 
 
 ### Example scripts
+<a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [benchmarkSkeletonize.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/benchmarkSkeletonize.ijm)  
 <a href="https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/"><img src="images/language_macro.png" height="20"/></a> [skeleton.ijm](https://github.com/clij/clij-advanced-filters/blob/master/src/main/macro/skeleton.ijm)  
 
 
