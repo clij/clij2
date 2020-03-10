@@ -11,6 +11,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
+
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
@@ -29,15 +30,18 @@ public class VoronoiOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlug
     }
 
     public static boolean voronoiOctagon(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst) {
+        //CLIJx.getInstance().stopWatch("");
 
         ClearCLImage flip = clij2.create(dst.getDimensions(), ImageChannelDataType.Float);
         ClearCLImage flop = clij2.create(flip);
+        //CLIJx.getInstance().stopWatch("alloc");
 
         ClearCLKernel flipKernel = null;
         ClearCLKernel flopKernel = null;
 
         //clij2.copy(src, flip);
-        clij2.connectedComponentsLabeling(src, flip);
+        ConnectedComponentsLabelingBox.connectedComponentsLabelingBox(clij2, src, flip, false);
+        //CLIJx.getInstance().stopWatch("cca");
 
         ClearCLBuffer flag = clij2.create(1,1,1);
         float[] flagBool = new float[1];
@@ -46,7 +50,9 @@ public class VoronoiOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         FloatBuffer buffer = FloatBuffer.wrap(flagBool);
 
         int i = 0;
+        //CLIJx.getInstance().stopWatch("");
         while (flagBool[0] != 0) {
+            //CLIJx.getInstance().stopWatch("h " + i);
             //System.out.println(i);
 
             flagBool[0] = 0;
@@ -62,11 +68,14 @@ public class VoronoiOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlug
             flag.writeTo(buffer, true);
             //System.out.println(flagBool[0]);
         }
+        //CLIJx.getInstance().stopWatch("h " + i);
+
         if (i % 2 == 0) {
             clij2.detectLabelEdges(flip, dst);
         } else {
             clij2.detectLabelEdges(flop, dst);
         }
+        //CLIJx.getInstance().stopWatch("edges");
 
         if (flipKernel != null) {
             flipKernel.close();
