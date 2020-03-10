@@ -238,7 +238,7 @@ __constant sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_T
    * @param neighbors neighbor pixels of the point
    * @return true or false if the point is Euler invariant or not
    */
-  int isEulerInvariant(float neighbors[])
+  bool isEulerInvariant(float neighbors[])
   {
     // Calculate Euler characteristic for each octant and sum up
     int eulerChar = 0;
@@ -275,7 +275,7 @@ __constant sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_T
     n = indexOctantNEB(neighbors);
     eulerChar += LUT[n];
 
-    return eulerChar == 0 ? 1 : 0;
+    return eulerChar == 0;
 }
 
 
