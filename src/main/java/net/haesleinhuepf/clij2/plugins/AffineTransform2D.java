@@ -45,11 +45,17 @@ public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroP
             String[] commandParts = transformCommand.split("=");
             //System.out.print("Command: " + commandParts[0]);
             if (commandParts[0].compareTo("center") == 0) {
-                at.translate(-input.getWidth() / 2, -input.getHeight() / 2);
+                net.imglib2.realtransform.AffineTransform2D translateTransform = new net.imglib2.realtransform.AffineTransform2D();
+                translateTransform.translate(-input.getWidth() / 2, -input.getHeight() / 2);
+                at.concatenate(translateTransform);
             } else if (commandParts[0].compareTo("-center") == 0) {
-                at.translate(input.getWidth() / 2, input.getHeight() / 2);
+                net.imglib2.realtransform.AffineTransform2D translateTransform = new net.imglib2.realtransform.AffineTransform2D();
+                translateTransform.translate(input.getWidth() / 2, input.getHeight() / 2);
+                at.concatenate(translateTransform);
             } else if (commandParts[0].compareTo("scale") == 0) {
-                at.scale(1.0 / Double.parseDouble(commandParts[1]));
+                net.imglib2.realtransform.AffineTransform2D scaleTransform = new net.imglib2.realtransform.AffineTransform2D();
+                scaleTransform.scale(1.0 / Double.parseDouble(commandParts[1]));
+                at.concatenate(scaleTransform);
             } else if (commandParts[0].compareTo("scalex") == 0) {
                 net.imglib2.realtransform.AffineTransform2D scaleTransform = new net.imglib2.realtransform.AffineTransform2D();
                 scaleTransform.set(1.0 / Double.parseDouble(commandParts[1]),0,0);
@@ -61,12 +67,18 @@ public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroP
                 scaleTransform.set(1.0  / Double.parseDouble(commandParts[1]) , 1, 1);
                 at.concatenate(scaleTransform);
             } else if (commandParts[0].compareTo("rotate") == 0 || commandParts[0].compareTo("rotate") == 0) {
+                net.imglib2.realtransform.AffineTransform2D rotateTransform = new net.imglib2.realtransform.AffineTransform2D();
                 float angle = (float)(-asFloat(commandParts[1]) / 180.0f * Math.PI);
-                at.rotate(angle);
+                rotateTransform.rotate(angle);
+                at.concatenate(rotateTransform);
             } else if (commandParts[0].compareTo("translatex") == 0) {
-                at.translate(Double.parseDouble(commandParts[1]), 0, 0);
+                net.imglib2.realtransform.AffineTransform2D translateTransform = new net.imglib2.realtransform.AffineTransform2D();
+                translateTransform.translate(Double.parseDouble(commandParts[1]), 0, 0);
+                at.concatenate(translateTransform);
             } else if (commandParts[0].compareTo("translatey") == 0) {
-                at.translate(0,Double.parseDouble(commandParts[1]), 0);
+                net.imglib2.realtransform.AffineTransform2D translateTransform = new net.imglib2.realtransform.AffineTransform2D();
+                translateTransform.translate(0,Double.parseDouble(commandParts[1]), 0);
+                at.concatenate(translateTransform);
             } else if (commandParts[0].compareTo("shearxy") == 0) {
                 double shear = Double.parseDouble(commandParts[1]);
                 net.imglib2.realtransform.AffineTransform2D shearTransform = new net.imglib2.realtransform.AffineTransform2D();
