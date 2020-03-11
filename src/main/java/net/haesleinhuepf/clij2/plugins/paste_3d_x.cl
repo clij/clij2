@@ -18,7 +18,7 @@ __kernel void paste_3d(
 
 
   const POS_dst_TYPE dpos = POS_dst_INSTANCE(dx, dy, dz, 0);
-  const POS_src_TYPE spos = POS_src_INSTANCE(sx, sy, sy, 0);
+  const POS_src_TYPE spos = POS_src_INSTANCE(sx, sy, sz, 0);
 
   const float out = READ_src_IMAGE(src, sampler, spos).x;
   WRITE_dst_IMAGE(dst, dpos, CONVERT_dst_PIXEL_TYPE(out));
