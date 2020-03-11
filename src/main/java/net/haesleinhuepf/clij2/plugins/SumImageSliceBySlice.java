@@ -57,6 +57,7 @@ public class SumImageSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMac
         clij2.sumXProjection(src, temp1);
 
         //System.out.println("temp1");
+        //clij2.show(temp1, "temp1");
         //clij2.print(temp1);
 
         clij2.sumYProjection(temp1, dst);
@@ -69,8 +70,13 @@ public class SumImageSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMac
     }
 
     @Override
+    public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
+        return getCLIJ2().create(input.getDepth(), 1,1);
+    }
+
+    @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number scalar";
+        return "Image source, Image destination";
     }
 
     @Override
