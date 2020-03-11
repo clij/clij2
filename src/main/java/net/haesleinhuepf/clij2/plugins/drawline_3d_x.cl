@@ -31,6 +31,6 @@ __kernel void draw_line_3D   (IMAGE_dst_TYPE dst,
 
   if (distance < radius) {
     int4 ipos = (int4){x,y,z,0};
-    WRITE_dst_IMAGE (dst, ipos, 1);
+    WRITE_dst_IMAGE (dst, ipos, CONVERT_dst_PIXEL_TYPE(value));
   }
 }

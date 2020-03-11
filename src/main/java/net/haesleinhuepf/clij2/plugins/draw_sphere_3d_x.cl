@@ -32,6 +32,6 @@ __kernel void draw_sphere_3d   (
 
   if ((xSquared / rxsq + ySquared / rysq + zSquared / rzsq) <= 1.0) {
       int4 ipos = (int4){x,y,z,0};
-      WRITE_dst_IMAGE (dst, ipos, 1);
+      WRITE_dst_IMAGE (dst, ipos, CONVERT_dst_PIXEL_TYPE(value));
   }
 }

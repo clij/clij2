@@ -25,6 +25,6 @@ __kernel void draw_line_2D   (IMAGE_dst_TYPE dst,
 
   if (distance < radius) {
     int2 ipos = (int2){x,y};
-    WRITE_dst_IMAGE (dst, ipos, 1);
+    WRITE_dst_IMAGE (dst, ipos, CONVERT_dst_PIXEL_TYPE(value));
   }
 }
