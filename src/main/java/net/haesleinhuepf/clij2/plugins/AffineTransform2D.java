@@ -129,7 +129,7 @@ public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroP
     public static boolean affineTransform2D(CLIJ2 clij2, ClearCLBuffer src, ClearCLImageInterface dst, net.imglib2.realtransform.AffineTransform2D at) {
         assertDifferent(src, dst);
 
-        at = at.inverse();
+        //at = at.inverse();
         float[] matrix = AffineTransform.matrixToFloatArray2D(at);
         return affineTransform2D(clij2, src, dst, matrix);
     }
