@@ -2,8 +2,8 @@ __constant sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_T
 
 __kernel void replace_intensity
 (
-  IMAGE_dst_OUT dst,
-  IMAGE_src_IN src,
+  IMAGE_dst_TYPE dst,
+  IMAGE_src_TYPE src,
   const float in,
   const float out
 )
@@ -17,11 +17,11 @@ __kernel void replace_intensity
   const int d = GET_IMAGE_DEPTH(src);
 
   float pixelindex = i * h * d + j * d + k;
-  float value = (float)(READ_src_IMAGE(src,sampler,(int4)(i,j,k,0)).x);
-  if (fabs(value - in) < 0.1) {
-    WRITE_dst_IMAGE(dst, (int4)(i,j,k,0), CONVERT_dst_PIXEL_TYPE(out));
+  float value = (float)(READ_src_IMAGE(src,sampler, POS_src_INSTANCE(i,j,k,0)).x);
+  if (value == in) {
+    WRITE_dst_IMAGE(dst, POS_dst_INSTANCE(i,j,k,0), CONVERT_dst_PIXEL_TYPE(out));
   } else {
-    WRITE_dst_IMAGE(dst, (int4)(i,j,k,0), CONVERT_dst_PIXEL_TYPE(value));
+    WRITE_dst_IMAGE(dst, POS_dst_INSTANCE(i,j,k,0), CONVERT_dst_PIXEL_TYPE(value));
   }
 }
 

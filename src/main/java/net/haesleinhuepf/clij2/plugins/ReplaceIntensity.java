@@ -33,7 +33,7 @@ public class ReplaceIntensity extends AbstractCLIJ2Plugin implements CLIJMacroPl
         parameters.put("dst", dst);
         parameters.put("in", in);
         parameters.put("out", out);
-        clij2.execute(ReplaceIntensity.class, "replace_intensity_x.cl", "replace", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(ReplaceIntensity.class, "replace_intensity_x.cl", "replace_intensity", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 
