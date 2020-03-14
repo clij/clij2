@@ -8,13 +8,13 @@
 	<parent>
 		<groupId>net.haesleinhuepf</groupId>
 		<artifactId>clij-parent-pom</artifactId>
-		<version>1.4.6</version>
+		<version>1.4.7</version>
 		<relativePath />
 	</parent>
 
 	<groupId>net.haesleinhuepf</groupId>
 	<artifactId>clij2_</artifactId>
-	<version>0.24.0</version>
+	<version>0.25.0</version>
 
 	<name>clij2_</name>
 	<description>clij2</description>
@@ -109,7 +109,7 @@
 		<repository>
 			<id>bintray-haesleinhuepf-snapshots</id>
 			<name>bintray-snapshots</name>
-			<url>https://api.bintray.com/maven/haesleinhuepf/clij/clij-advanced-filters/;publish=1</url>
+			<url>https://api.bintray.com/maven/haesleinhuepf/clij/clij2_/;publish=1</url>
 		</repository>
 	</distributionManagement>
 
