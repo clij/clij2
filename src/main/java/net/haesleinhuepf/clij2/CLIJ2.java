@@ -369,4 +369,8 @@ public class CLIJ2 implements CLIJ2Ops {
         return clij.pullBinary(input);
     }
 
+    public void invalidateKernelCahe() {
+        mCLKernelExecutor.close();
+    }
+
 }
