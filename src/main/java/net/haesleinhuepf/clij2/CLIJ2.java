@@ -235,6 +235,60 @@ public class CLIJ2 implements CLIJ2Ops {
         return result[0];
     }
 
+
+
+    public void executeCode(String sourceCode, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants) {
+        ClearCLKernel kernel = executeCodeSubsequently(sourceCode, kernelname,  dimensions, globalsizes, parameters, constants, null);
+        kernel.close();
+    }
+
+    public void executeCode(String sourceCode, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters) {
+        ClearCLKernel kernel = executeCodeSubsequently(sourceCode, kernelname,  dimensions, globalsizes, parameters, null);
+        kernel.close();
+    }
+
+    public void executeCode(String sourceCode, String kernelname, long[] dimensions, long[] globalsizes, long[] localSizes, HashMap<String, Object> parameters) {
+        ClearCLKernel kernel = executeCodeSubsequently(sourceCode, kernelname,  dimensions, globalsizes, localSizes, parameters, null,null);
+        kernel.close();
+    }
+
+    public ClearCLKernel executeCodeSubsequently(String sourceCode, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, ClearCLKernel kernel) {
+        return executeCodeSubsequently(sourceCode, pKernelname, dimensions, globalsizes, parameters, null, kernel);
+    }
+
+
+    public ClearCLKernel executeCodeSubsequently(String sourceCode, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants, ClearCLKernel kernel) {
+        return executeCodeSubsequently(sourceCode, pKernelname, dimensions, globalsizes, null, parameters, constants, kernel);
+    }
+
+
+    public ClearCLKernel executeCodeSubsequently(String sourceCode, String pKernelname, long[] dimensions, long[] globalsizes, long[] localSizes, HashMap<String, Object> parameters, HashMap<String, Object> constants, ClearCLKernel kernel) {
+
+        final ClearCLKernel[] result = {kernel};
+
+        if (CLIJ.debug) {
+            for (String key : parameters.keySet()) {
+                System.out.println(key + " = " + parameters.get(key));
+            }
+        }
+
+        ElapsedTime.measure("kernel + build " + pKernelname, () -> {
+            mCLKernelExecutor.setProgramSourceCode(sourceCode);
+            mCLKernelExecutor.setKernelName(pKernelname);
+            mCLKernelExecutor.setAnchorClass(Object.class);
+            mCLKernelExecutor.setParameterMap(parameters);
+            mCLKernelExecutor.setConstantsMap(constants);
+            mCLKernelExecutor.setGlobalSizes(globalsizes);
+            mCLKernelExecutor.setLocalSizes(localSizes);
+
+            result[0] = mCLKernelExecutor.enqueue(true, kernel);
+
+            mCLKernelExecutor.setImageSizeIndependentCompilation(false);
+        });
+
+        return result[0];
+    }
+
     public boolean isSizeIndependentKernelCompilation() {
         return mCLKernelExecutor.isImageSizeIndependentCompilation();
     }
