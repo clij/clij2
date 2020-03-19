@@ -15,8 +15,8 @@ public class Byte1ToClearCLBufferConverter extends AbstractCLIJConverter<Byte1, 
     @Override
     public ClearCLBuffer convert(Byte1 source) {
         long[] dimensions = new long[]{
-                1,
-                source.data.length
+                source.data.length,
+                1
         };
 
         int numberOfPixelsPerSlice = (int)(dimensions[0] * dimensions[1]);

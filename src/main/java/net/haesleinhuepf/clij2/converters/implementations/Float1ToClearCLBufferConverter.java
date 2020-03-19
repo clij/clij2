@@ -16,8 +16,8 @@ public class Float1ToClearCLBufferConverter extends AbstractCLIJConverter<Float1
     @Override
     public ClearCLBuffer convert(Float1 source) {
         long[] dimensions = new long[]{
-                1,
-                source.data.length
+                source.data.length,
+                1
         };
 
         ClearCLBuffer target = clij.createCLBuffer(dimensions, NativeTypeEnum.Float);

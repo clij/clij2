@@ -15,8 +15,8 @@ public class Double1ToClearCLBufferConverter extends AbstractCLIJConverter<Doubl
     @Override
     public ClearCLBuffer convert(Double1 source) {
         long[] dimensions = new long[]{
-                1,
-                source.data.length
+                source.data.length,
+                1
         };
 
         int numberOfPixelsPerSlice = (int)(dimensions[0] * dimensions[1]);
