@@ -37,6 +37,7 @@ public class Crop2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
         parameters.put("dst", dst);
         parameters.put("start_x", startX);
         parameters.put("start_y", startY);
+        clij2.activateSizeIndependentKernelCompilation();
         clij2.execute(Crop2D.class, "crop_2d_x.cl", "crop_2d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }

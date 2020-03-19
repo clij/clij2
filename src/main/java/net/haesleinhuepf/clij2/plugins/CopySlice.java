@@ -32,6 +32,7 @@ public class CopySlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
         parameters.put("src", src);
         parameters.put("dst", dst);
         parameters.put("slice", planeIndex);
+        clij2.activateSizeIndependentKernelCompilation();
         //return clij.execute(Kernels.class, "duplication.cl", "copySlice", parameters);
         if (src.getDimension() == 2 && dst.getDimension() == 3) {
             clij2.execute(CopySlice.class, "copy_slice_to_3d_x.cl", "copy_slice_to_3d", src.getDimensions(), src.getDimensions(), parameters);

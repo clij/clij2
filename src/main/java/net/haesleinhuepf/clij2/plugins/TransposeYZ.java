@@ -28,6 +28,7 @@ public class TransposeYZ extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
         HashMap<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("src", input);
         parameters.put("dst", output);
+        clij2.activateSizeIndependentKernelCompilation();
         clij2.execute(TransposeXY.class, "transpose_yz_3d_x.cl", "transpose_yz_3d", output.getDimensions(), output.getDimensions(), parameters);
         return true;
     }

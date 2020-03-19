@@ -36,6 +36,7 @@ public class Copy extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOp
         if (!checkDimensions(src.getDimension(), dst.getDimension())) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (copy)");
         }
+        clij2.activateSizeIndependentKernelCompilation();
         clij2.execute(Copy.class, "copy_" + dst.getDimension() + "d_x.cl", "copy_" + dst.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }

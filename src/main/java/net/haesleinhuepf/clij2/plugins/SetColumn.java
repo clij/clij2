@@ -33,6 +33,7 @@ public class SetColumn extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
         long[] dimensions = Arrays.copyOf(clImage.getDimensions(), clImage.getDimensions().length);
         dimensions[0] = 1;
 
+        clij2.activateSizeIndependentKernelCompilation();
         clij2.execute(SetColumn.class, "set_column_" + clImage.getDimension() + "d_x.cl", "set_column_" + clImage.getDimension() + "d", clImage.getDimensions(), dimensions, parameters);
         return true;
     }

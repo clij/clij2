@@ -30,6 +30,7 @@ public class SetWhereXequalsY extends AbstractCLIJ2Plugin implements CLIJMacroPl
         parameters.put("dst", clImage);
         parameters.put("value", value);
 
+        clij2.activateSizeIndependentKernelCompilation();
         clij2.execute(SetWhereXequalsY.class, "setWhereXequalsY_" + clImage.getDimension() + "d_x.cl", "set_where_x_equals_y_" + clImage.getDimension() + "d", clImage.getDimensions(), clImage.getDimensions(),  parameters);
         return true;
     }

@@ -33,6 +33,7 @@ public class SetRow extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
         long[] dimensions = Arrays.copyOf(clImage.getDimensions(), clImage.getDimensions().length);
         dimensions[1] = 1;
 
+        clij2.activateSizeIndependentKernelCompilation();
         clij2.execute(SetRow.class, "set_row_" + clImage.getDimension() + "d_x.cl", "set_row_" + clImage.getDimension() + "d", clImage.getDimensions(), dimensions, parameters);
         return true;
     }
