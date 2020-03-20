@@ -27,7 +27,7 @@ public class Double1ToClearCLBufferConverter extends AbstractCLIJConverter<Doubl
         float[] inputArray = new float[(int)numberOfPixels];
 
         int count = 0;
-        for (int x = 0; x < dimensions[1]; x++) {
+        for (int x = 0; x < dimensions[0]; x++) {
             inputArray[count] = (float)source.data[x];
             count++;
         }

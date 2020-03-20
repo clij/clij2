@@ -27,7 +27,7 @@ public class Byte1ToClearCLBufferConverter extends AbstractCLIJConverter<Byte1, 
         byte[] inputArray = new byte[(int)numberOfPixels];
 
         int count = 0;
-        for (int x = 0; x < dimensions[1]; x++) {
+        for (int x = 0; x < dimensions[0]; x++) {
             inputArray[count] = source.data[x];
             count++;
         }
