@@ -30,15 +30,19 @@ public class ResultsTableToImage2D extends AbstractCLIJ2Plugin implements CLIJMa
     }
 
     public static boolean resultsTableToImage2D(CLIJ2 clij2, ClearCLBuffer buffer, ResultsTable table) {
+
+        int rows = table.getCounter();
+        String[] headings = table.getHeadings();
+        int cols = headings.length;
+        int c = 0;
+
         if (buffer.getNativeType() == NativeTypeEnum.UnsignedByte) {
             byte[] array = new byte[(int) (buffer.getWidth() * buffer.getHeight())];
 
-            int rows = table.getCounter();
-            int cols = table.getHeadings().length;
-            int c = 0;
             for (int y = 0; y < rows; y++) {
                 for (int x = 0; x < cols; x++ ) {
-                    array[c] = (byte) table.getValueAsDouble(x, y);
+                    int realX = table.getColumnIndex(headings[x]);
+                    array[c] = (byte) table.getValueAsDouble(realX, y);
                     c++;
                 }
             }
@@ -47,12 +51,10 @@ public class ResultsTableToImage2D extends AbstractCLIJ2Plugin implements CLIJMa
         } else if (buffer.getNativeType() == NativeTypeEnum.UnsignedShort) {
             char[] array = new char[(int) (buffer.getWidth() * buffer.getHeight())];
 
-            int rows = table.getCounter();
-            int cols = table.getHeadings().length;
-            int c = 0;
             for (int y = 0; y < rows; y++) {
                 for (int x = 0; x < cols; x++ ) {
-                    array[c] = (char) table.getValueAsDouble(x, y);
+                    int realX = table.getColumnIndex(headings[x]);
+                    array[c] = (char) table.getValueAsDouble(realX, y);
                     c++;
                 }
             }
@@ -61,12 +63,10 @@ public class ResultsTableToImage2D extends AbstractCLIJ2Plugin implements CLIJMa
         } else {
             float[] array = new float[(int) (buffer.getWidth() * buffer.getHeight())];
 
-            int rows = table.getCounter();
-            int cols = table.getHeadings().length;
-            int c = 0;
             for (int y = 0; y < rows; y++) {
                 for (int x = 0; x < cols; x++ ) {
-                    array[c] = (float) table.getValueAsDouble(x, y);
+                    int realX = table.getColumnIndex(headings[x]);
+                    array[c] = (float) table.getValueAsDouble(realX, y);
                     c++;
                 }
             }
