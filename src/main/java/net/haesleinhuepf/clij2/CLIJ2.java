@@ -208,7 +208,7 @@ public class CLIJ2 implements CLIJ2Ops {
         return executeSubsequently(anchorClass, pProgramFilename, pKernelname, dimensions, globalsizes, null, parameters, constants, kernel);
     }
 
-    public ClearCLKernel executeSubsequently(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, long[] localSizes, HashMap<String, Object> parameters, HashMap<String, Object> constants, ClearCLKernel kernel) {
+    public synchronized ClearCLKernel executeSubsequently(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, long[] localSizes, HashMap<String, Object> parameters, HashMap<String, Object> constants, ClearCLKernel kernel) {
 
         final ClearCLKernel[] result = {kernel};
 
