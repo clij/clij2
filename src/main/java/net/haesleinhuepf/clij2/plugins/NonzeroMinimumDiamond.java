@@ -18,7 +18,7 @@ public class NonzeroMinimumDiamond extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image destination";
+        return "Image input, ByRef Image destination";
     }
 
     @Override

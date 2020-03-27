@@ -38,7 +38,7 @@ public class MultiplyStackWithPlane extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getParameterHelpText() {
-        return "Image sourceStack, Image sourcePlane, Image destination";
+        return "Image sourceStack, Image sourcePlane, ByRef Image destination";
     }
 
     @Override

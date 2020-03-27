@@ -47,7 +47,7 @@ public class MultiplyImages extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getParameterHelpText() {
-        return "Image factor1, Image factor2, Image destination";
+        return "Image factor1, Image factor2, ByRef Image destination";
     }
 
 

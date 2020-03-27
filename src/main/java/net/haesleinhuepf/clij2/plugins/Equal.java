@@ -39,7 +39,7 @@ public class Equal extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJO
 
     @Override
     public String getParameterHelpText() {
-        return "Image source1, Image source2, Image destination";
+        return "Image source1, Image source2, ByRef Image destination";
     }
 
     @Override

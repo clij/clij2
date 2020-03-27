@@ -17,7 +17,7 @@ public class AverageDistanceOfTouchingNeighbors extends AbstractCLIJ2Plugin impl
 
     @Override
     public String getParameterHelpText() {
-        return "Image distance_matrix, Image touch_matrix, Image average_distancelist_destination";
+        return "Image distance_matrix, Image touch_matrix, ByRef Image average_distancelist_destination";
     }
 
     @Override

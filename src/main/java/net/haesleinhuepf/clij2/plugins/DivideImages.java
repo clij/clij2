@@ -47,7 +47,7 @@ public class DivideImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getParameterHelpText() {
-        return "Image divident, Image divisor, Image destination";
+        return "Image divident, Image divisor, ByRef Image destination";
     }
 
     @Override

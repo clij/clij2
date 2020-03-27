@@ -47,7 +47,7 @@ public class Flip2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Boolean flipX, Boolean flipY";
+        return "Image source, ByRef Image destination, Boolean flipX, Boolean flipY";
     }
 
     @Override

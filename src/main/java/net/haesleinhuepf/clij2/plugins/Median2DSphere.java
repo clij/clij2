@@ -51,7 +51,7 @@ public class Median2DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number radiusX, Number radiusY";
+        return "Image source, ByRef Image destination, Number radiusX, Number radiusY";
     }
 
     @Override

@@ -44,7 +44,7 @@ public class SubtractImageFromScalar extends AbstractCLIJ2Plugin implements CLIJ
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image destination, Number scalar";
+        return "Image input, ByRef Image destination, Number scalar";
     }
 
     @Override

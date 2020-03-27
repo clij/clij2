@@ -14,7 +14,7 @@ public class OpeningBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image destination, Number number_of_erotions_and_dilations";
+        return "Image input, ByRef Image destination, Number number_of_erotions_and_dilations";
     }
 
     @Override

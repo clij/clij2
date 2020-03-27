@@ -15,7 +15,7 @@ public class SpotsToPointList extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public String getParameterHelpText() {
-        return "Image input_spots, Image destination_pointlist";
+        return "Image input_spots, ByRef Image destination_pointlist";
     }
 
     @Override

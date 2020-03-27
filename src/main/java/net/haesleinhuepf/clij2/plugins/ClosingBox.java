@@ -14,7 +14,7 @@ public class ClosingBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image destination, Number number_of_dilations_and_erosions";
+        return "Image input, ByRef Image destination, Number number_of_dilations_and_erosions";
     }
 
     @Override

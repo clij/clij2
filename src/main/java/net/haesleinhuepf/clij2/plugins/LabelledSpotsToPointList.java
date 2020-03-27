@@ -17,7 +17,7 @@ public class LabelledSpotsToPointList extends AbstractCLIJ2Plugin implements CLI
 
     @Override
     public String getParameterHelpText() {
-        return "Image input_labelled_spots, Image destination_pointlist";
+        return "Image input_labelled_spots, ByRef Image destination_pointlist";
     }
 
     @Override

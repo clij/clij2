@@ -14,7 +14,7 @@ public class ClosingDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image destination, Number number_of_dilations_and_erotions";
+        return "Image input, ByRef Image destination, Number number_of_dilations_and_erotions";
     }
 
     @Override

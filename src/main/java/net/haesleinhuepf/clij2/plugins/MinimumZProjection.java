@@ -40,7 +40,7 @@ public class MinimumZProjection extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination_sum";
+        return "Image source, ByRef Image destination_sum";
     }
 
     @Override

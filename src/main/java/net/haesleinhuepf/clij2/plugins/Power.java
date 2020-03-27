@@ -35,7 +35,7 @@ public class Power extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJO
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number exponent";
+        return "Image source, ByRef Image destination, Number exponent";
     }
 
     @Override

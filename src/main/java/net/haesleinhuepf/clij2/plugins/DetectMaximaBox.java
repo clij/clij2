@@ -42,7 +42,7 @@ public class DetectMaximaBox extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number radius";
+        return "Image source, ByRef Image destination, Number radius";
     }
 
     @Override

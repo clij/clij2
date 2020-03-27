@@ -41,7 +41,7 @@ public class GenerateTouchMatrix extends AbstractCLIJ2Plugin implements CLIJMacr
 
     @Override
     public String getParameterHelpText() {
-        return "Image label_map, Image touch_matrix_destination";
+        return "Image label_map, ByRef Image touch_matrix_destination";
     }
 
     @Override

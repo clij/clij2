@@ -30,7 +30,7 @@ public class ConvertUInt16 extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination";
+        return "Image source, ByRef Image destination";
     }
 
     @Override

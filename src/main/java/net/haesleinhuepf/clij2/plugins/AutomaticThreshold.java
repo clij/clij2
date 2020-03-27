@@ -52,60 +52,10 @@ public class AutomaticThreshold extends AbstractCLIJ2Plugin implements CLIJMacro
         return automaticThreshold(clij2, src, dst, userSelectedMethod, minimumGreyValue, maximumGreyValue, 256);
     }
 
+
     public static boolean automaticThreshold(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, String userSelectedMethod, Float minimumGreyValue, Float maximumGreyValue, Integer numberOfBins) {
-        assertDifferent(src, dst);
-
-        if (minimumGreyValue == null)
-        {
-            minimumGreyValue = new Double(clij2.minimumOfAllPixels(src)).floatValue();
-        }
-
-        if (maximumGreyValue == null)
-        {
-            maximumGreyValue = new Double(clij2.maximumOfAllPixels(src)).floatValue();
-        }
-
-
-        ClearCLBuffer histogram = clij2.create(new long[]{numberOfBins,1,1}, clij2.Float);
-        Histogram.fillHistogram(clij2, src, histogram, minimumGreyValue, maximumGreyValue);
-        //releaseBuffers(args);
-
-        //System.out.println("CL sum " + clij.op().sumPixels(histogram));
-
-        // the histogram is written in args[1] which is supposed to be a one-dimensional image
-        ImagePlus histogramImp = clij2.convert(histogram, ImagePlus.class);
-        clij2.release(histogram);
-
-        // convert histogram
-        float[] determinedHistogram = (float[])(histogramImp.getProcessor().getPixels());
-        int[] convertedHistogram = new int[determinedHistogram.length];
-
-        long sum = 0;
-        for (int i = 0; i < determinedHistogram.length; i++) {
-            convertedHistogram[i] = (int)determinedHistogram[i];
-            sum += convertedHistogram[i];
-        }
-        //System.out.println("Sum: " + sum);
-
-
-        String method = "Default";
-
-        for (String choice : AutoThresholderImageJ1.getMethods()) {
-            if (choice.toLowerCase().compareTo(userSelectedMethod.toLowerCase()) == 0) {
-                method = choice;
-            }
-        }
-        //System.out.println("Method: " + method);
-
-        float threshold = new AutoThresholderImageJ1().getThreshold(method, convertedHistogram);
-
-        // math source https://github.com/imagej/ImageJA/blob/master/src/main/java/ij/process/ImageProcessor.java#L692
-        threshold = minimumGreyValue + ((threshold + 1.0f)/255.0f)*(maximumGreyValue-minimumGreyValue);
-
-        //System.out.println("Threshold: " + threshold);
-
-        Threshold.threshold(clij2, src, dst, threshold);
-
+        double threshold = GetAutomaticThreshold.getAutomaticThreshold(clij2, src, userSelectedMethod, minimumGreyValue, maximumGreyValue, numberOfBins);
+        clij2.threshold(src, dst, threshold);
         return true;
     }
 
@@ -119,10 +69,9 @@ public class AutomaticThreshold extends AbstractCLIJ2Plugin implements CLIJMacro
         return doc.toString();
     }
 
-
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image destination, String method";
+        return "Image input, ByRef Image destination, String method";
     }
 
     @Override

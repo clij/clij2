@@ -41,7 +41,7 @@ public class MinimumZProjectionThresholdedBounded extends AbstractCLIJ2Plugin im
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination_min, Number min_z, Number max_z";
+        return "Image source, ByRef Image destination_min, Number min_z, Number max_z";
     }
 
     @Override

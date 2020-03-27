@@ -40,7 +40,7 @@ public class CountTouchingNeighbors extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getParameterHelpText() {
-        return "Image touch_matrix, Image touching_neighbors_count_destination";
+        return "Image touch_matrix, ByRef Image touching_neighbors_count_destination";
     }
 
     @Override

@@ -39,7 +39,7 @@ public class SmallerOrEqualConstant extends AbstractCLIJ2Plugin implements CLIJM
     
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number constant";
+        return "Image source, ByRef Image destination, Number constant";
     }
 
     @Override

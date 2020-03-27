@@ -43,7 +43,7 @@ public class AddImageAndScalar extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number scalar";
+        return "Image source, ByRef Image destination, Number scalar";
     }
 
     @Override

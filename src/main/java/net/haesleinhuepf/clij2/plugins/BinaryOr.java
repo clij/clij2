@@ -43,7 +43,7 @@ public class BinaryOr extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getParameterHelpText() {
-        return "Image operand1, Image operand2, Image destination";
+        return "Image operand1, Image operand2, ByRef Image destination";
     }
 
     @Override

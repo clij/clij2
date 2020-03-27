@@ -46,7 +46,7 @@ public class MinimumImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public String getParameterHelpText() {
-        return "Image source1, Image source2, Image destination";
+        return "Image source1, Image source2, ByRef Image destination";
     }
 
     @Override

@@ -28,7 +28,7 @@ public class LabelToMask extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public String getParameterHelpText() {
-        return "Image label_map_source, Image mask_destination, Number label_index";
+        return "Image label_map_source, ByRef Image mask_destination, Number label_index";
     }
 
     @Override

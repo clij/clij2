@@ -48,7 +48,7 @@ public class Downsample2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number factorX, Number factorY";
+        return "Image source, ByRef Image destination, Number factorX, Number factorY";
     }
 
     @Override

@@ -44,7 +44,7 @@ public class Maximum2DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number radiusX, Number radiusY";
+        return "Image source, ByRef Image destination, Number radiusX, Number radiusY";
     }
 
     @Override

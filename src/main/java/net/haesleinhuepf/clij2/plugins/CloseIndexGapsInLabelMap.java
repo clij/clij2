@@ -272,7 +272,7 @@ public class CloseIndexGapsInLabelMap extends AbstractCLIJ2Plugin implements CLI
 */
     @Override
     public String getParameterHelpText() {
-        return "Image labeling_input, Image labeling_destination";
+        return "Image labeling_input, ByRef Image labeling_destination";
     }
 
     @Override

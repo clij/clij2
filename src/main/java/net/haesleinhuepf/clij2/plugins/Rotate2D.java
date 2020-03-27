@@ -66,7 +66,7 @@ public class Rotate2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number angle, Boolean rotateAroundCenter";
+        return "Image source, ByRef Image destination, Number angle, Boolean rotateAroundCenter";
     }
 
     @Override

@@ -14,7 +14,7 @@ public class EqualizeMeanIntensitiesOfSlices extends AbstractCLIJ2Plugin impleme
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image destination, Number referenceSlice";
+        return "Image input, ByRef Image destination, Number referenceSlice";
     }
 
     @Override

@@ -85,7 +85,7 @@ public class ResultsTableToImage2D extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getParameterHelpText() {
-        return "Image destination";
+        return "ByRef Image destination";
     }
 
     @Override

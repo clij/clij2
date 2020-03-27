@@ -26,7 +26,7 @@ public class Threshold extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number threshold";
+        return "Image source, ByRef Image destination, Number threshold";
     }
 
     @Override

@@ -45,7 +45,7 @@ public class BinarySubtract extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getParameterHelpText() {
-        return "Image minuend, Image subtrahend, Image destination";
+        return "Image minuend, Image subtrahend, ByRef Image destination";
     }
 
     @Override

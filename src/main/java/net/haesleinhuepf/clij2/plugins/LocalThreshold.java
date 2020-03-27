@@ -33,7 +33,7 @@ public class LocalThreshold extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image localThreshold, Image destination";
+        return "Image source, Image localThreshold, ByRef Image destination";
     }
 
     @Override

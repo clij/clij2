@@ -55,7 +55,7 @@ public class Translate2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number translateX, Number translateY";
+        return "Image source, ByRef Image destination, Number translateX, Number translateY";
     }
 
     @Override

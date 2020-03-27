@@ -39,7 +39,7 @@ public class ConcatenateStacks extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getParameterHelpText() {
-        return "Image stack1, Image stack2, Image destination";
+        return "Image stack1, Image stack2, ByRef Image destination";
     }
 
     @Override

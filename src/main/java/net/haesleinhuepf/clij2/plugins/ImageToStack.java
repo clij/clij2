@@ -50,7 +50,7 @@ public class ImageToStack extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number num_slices";
+        return "Image source, ByRef Image destination, Number num_slices";
     }
 
     @Override

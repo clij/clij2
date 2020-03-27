@@ -46,7 +46,7 @@ public class RotateCounterClockwise extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination";
+        return "Image source, ByRef Image destination";
     }
 
     @Override

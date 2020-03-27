@@ -33,7 +33,7 @@ public class DetectLabelEdges extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public String getParameterHelpText() {
-        return "Image label_map, Image edge_image_destination";
+        return "Image label_map, ByRef Image edge_image_destination";
     }
 
     @Override

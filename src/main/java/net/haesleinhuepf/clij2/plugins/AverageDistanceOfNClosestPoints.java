@@ -17,7 +17,7 @@ public class AverageDistanceOfNClosestPoints extends AbstractCLIJ2Plugin impleme
 
     @Override
     public String getParameterHelpText() {
-        return "Image distance_matrix, Image indexlist_destination, Number nClosestPointsTofind";
+        return "Image distance_matrix, ByRef Image indexlist_destination, Number nClosestPointsTofind";
     }
 
     @Override

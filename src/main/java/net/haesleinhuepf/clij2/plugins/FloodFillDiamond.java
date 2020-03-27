@@ -92,7 +92,7 @@ public class FloodFillDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number value_to_replace, Number value_replacement";
+        return "Image source, ByRef Image destination, Number value_to_replace, Number value_replacement";
     }
 
     @Override

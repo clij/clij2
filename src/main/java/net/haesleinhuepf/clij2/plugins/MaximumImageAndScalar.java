@@ -45,7 +45,7 @@ public class MaximumImageAndScalar extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number scalar";
+        return "Image source, ByRef Image destination, Number scalar";
     }
 
 

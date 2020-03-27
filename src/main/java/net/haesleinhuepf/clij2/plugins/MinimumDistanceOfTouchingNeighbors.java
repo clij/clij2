@@ -17,7 +17,7 @@ public class MinimumDistanceOfTouchingNeighbors extends AbstractCLIJ2Plugin impl
 
     @Override
     public String getParameterHelpText() {
-        return "Image distance_matrix, Image touch_matrix, Image minimum_distancelist_destination";
+        return "Image distance_matrix, Image touch_matrix, ByRef Image minimum_distancelist_destination";
     }
 
     @Override

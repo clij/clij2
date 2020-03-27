@@ -60,7 +60,7 @@ public class Translate3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number translateX, Number translateY, Number translateZ";
+        return "Image source, ByRef Image destination, Number translateX, Number translateY, Number translateZ";
     }
 
     @Override

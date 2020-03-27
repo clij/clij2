@@ -75,7 +75,7 @@ public class ApplyVectorField2D extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image vectorX, Image vectorY, Image destination";
+        return "Image source, Image vectorX, Image vectorY, ByRef Image destination";
     }
 
     @Override

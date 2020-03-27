@@ -72,7 +72,7 @@ public class Scale3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number scaling_factor_x, Number scaling_factor_y, Number scaling_factor_z,  Boolean scale_to_center";
+        return "Image source, ByRef Image destination, Number scaling_factor_x, Number scaling_factor_y, Number scaling_factor_z,  Boolean scale_to_center";
     }
 
     @Override

@@ -29,7 +29,7 @@ public class AddImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getParameterHelpText() {
-        return "Image summand1, Image summand2, Image destination";
+        return "Image summand1, Image summand2, ByRef Image destination";
     }
 
     @Override

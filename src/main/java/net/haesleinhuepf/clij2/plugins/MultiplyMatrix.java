@@ -39,7 +39,7 @@ public class MultiplyMatrix extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getParameterHelpText() {
-        return "Image matrix1, Image matrix2, Image matrix_destination";
+        return "Image matrix1, Image matrix2, ByRef Image matrix_destination";
     }
 
     @Override

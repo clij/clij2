@@ -165,7 +165,7 @@ public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, String transform";
+        return "Image source, ByRef Image destination, String transform";
     }
 
     @Override

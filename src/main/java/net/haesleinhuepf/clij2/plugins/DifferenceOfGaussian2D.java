@@ -14,7 +14,7 @@ public class DifferenceOfGaussian2D extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image destination, Number sigma1x, Number sigma1y, Number sigma2x, Number sigma2y";
+        return "Image input, ByRef Image destination, Number sigma1x, Number sigma1y, Number sigma2x, Number sigma2y";
     }
 
     @Override

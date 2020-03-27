@@ -38,7 +38,7 @@ public class MinimumZProjectionBounded extends AbstractCLIJ2Plugin implements CL
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination_min, Number min_z, Number max_z";
+        return "Image source, ByRef Image destination_min, Number min_z, Number max_z";
     }
 
     @Override

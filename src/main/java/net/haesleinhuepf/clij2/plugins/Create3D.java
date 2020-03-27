@@ -27,7 +27,7 @@ public class Create3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getParameterHelpText() {
-        return "Image destination, Number width, Number height, Number depth, Number bitDepth";
+        return "ByRef Image destination, Number width, Number height, Number depth, Number bitDepth";
     }
 
     @Override

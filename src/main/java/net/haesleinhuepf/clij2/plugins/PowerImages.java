@@ -36,7 +36,7 @@ public class PowerImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image exponent, Image destination";
+        return "Image input, Image exponent, ByRef Image destination";
     }
 
     @Override

@@ -42,7 +42,7 @@ public class NotEqualConstant extends AbstractCLIJ2Plugin implements CLIJMacroPl
     
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number constant";
+        return "Image source, ByRef Image destination, Number constant";
     }
 
     @Override

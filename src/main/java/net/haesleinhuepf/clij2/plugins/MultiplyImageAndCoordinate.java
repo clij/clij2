@@ -42,7 +42,7 @@ public class MultiplyImageAndCoordinate extends AbstractCLIJ2Plugin implements C
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number dimension";
+        return "Image source, ByRef Image destination, Number dimension";
     }
 
     @Override

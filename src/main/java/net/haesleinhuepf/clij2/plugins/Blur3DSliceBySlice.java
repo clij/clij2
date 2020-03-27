@@ -38,7 +38,7 @@ public class Blur3DSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number sigmaX, Number sigmaY";
+        return "Image source, ByRef Image destination, Number sigmaX, Number sigmaY";
     }
 
 

@@ -40,7 +40,7 @@ public class ArgMaximumZProjection extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination_max, Image destination_arg_max";
+        return "Image source, ByRef Image destination_max, ByRef Image destination_arg_max";
     }
 
     @Override

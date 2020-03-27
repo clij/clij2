@@ -39,7 +39,7 @@ public class MeanZProjectionBounded extends AbstractCLIJPlugin implements CLIJMa
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination_mean, Number min_z, Number max_z";
+        return "Image source, ByRef Image destination_mean, Number min_z, Number max_z";
     }
 
     @Override

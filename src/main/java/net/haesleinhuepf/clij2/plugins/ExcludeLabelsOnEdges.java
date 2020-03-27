@@ -76,7 +76,7 @@ public class ExcludeLabelsOnEdges extends AbstractCLIJ2Plugin implements CLIJMac
 
     @Override
     public String getParameterHelpText() {
-        return "Image label_map_input, Image label_map_destination";
+        return "Image label_map_input, ByRef Image label_map_destination";
     }
 
     @Override

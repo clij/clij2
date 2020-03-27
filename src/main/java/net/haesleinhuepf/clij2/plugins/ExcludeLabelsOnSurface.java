@@ -78,7 +78,7 @@ public class ExcludeLabelsOnSurface extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getParameterHelpText() {
-        return "Image pointlist, Image label_map_input, Image label_map_destination, Number centerX, Number centerY, Number centerZ";
+        return "Image pointlist, Image label_map_input, ByRef Image label_map_destination, Number centerX, Number centerY, Number centerZ";
     }
 
     @Override

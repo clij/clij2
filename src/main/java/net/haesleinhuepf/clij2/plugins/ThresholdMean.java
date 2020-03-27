@@ -43,7 +43,7 @@ public class ThresholdMean extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image destination";
+        return "Image input, ByRef Image destination";
     }
 
     @Override

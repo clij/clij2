@@ -45,7 +45,7 @@ public class Mask extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOp
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image mask, Image destination";
+        return "Image source, Image mask, ByRef Image destination";
     }
 
     @Override

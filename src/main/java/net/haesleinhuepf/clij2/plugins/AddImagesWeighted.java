@@ -45,7 +45,7 @@ public class AddImagesWeighted extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getParameterHelpText() {
-        return "Image summand1, Image summand2, Image destination, Number factor1, Number factor2";
+        return "Image summand1, Image summand2, ByRef Image destination, Number factor1, Number factor2";
     }
 
     @Override

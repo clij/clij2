@@ -24,7 +24,7 @@ public class DrawLine extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getParameterHelpText() {
-        return "Image destination, Number x1, Number y1, Number z1, Number x2, Number y2, Number z2, Number thickness, Number value";
+        return "ByRef Image destination, Number x1, Number y1, Number z1, Number x2, Number y2, Number z2, Number thickness, Number value";
     }
 
     @Override

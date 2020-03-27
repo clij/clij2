@@ -36,7 +36,7 @@ public class MaximumXProjection extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination_max";
+        return "Image source, ByRef Image destination_max";
     }
 
     @Override

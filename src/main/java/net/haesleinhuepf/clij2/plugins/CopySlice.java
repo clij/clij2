@@ -47,7 +47,7 @@ public class CopySlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number sliceIndex";
+        return "Image source, ByRef Image destination, Number sliceIndex";
     }
 
     @Override

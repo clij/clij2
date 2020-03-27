@@ -44,6 +44,10 @@ public class PullLabelsToROIManager extends AbstractCLIJ2Plugin implements CLIJM
         for (int i = 1; i < numberOfLabels; i++) {
             EqualConstant.equalConstant(clij2, labelMap, binary, new Float(i));
             Roi roi = PullAsROI.pullAsROI(clij2, binary);
+            if (roi == null) {
+                System.out.println("Warning: Empty ROI (label = " + i + ") detected (pullLabelsToROIManager).");
+                continue;
+            }
             roiManager.addRoi(roi);
         }
         clij2.release(binary);

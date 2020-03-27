@@ -39,7 +39,7 @@ public class SumZProjection extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination_sum";
+        return "Image source, ByRef Image destination_sum";
     }
 
     @Override

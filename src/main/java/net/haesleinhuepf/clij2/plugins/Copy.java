@@ -43,7 +43,7 @@ public class Copy extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOp
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination";
+        return "Image source, ByRef Image destination";
     }
 
     @Override

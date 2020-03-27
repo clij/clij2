@@ -24,7 +24,7 @@ public class DrawSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
 
     @Override
     public String getParameterHelpText() {
-        return "Image destination, Number x, Number y, Number z, Number radius_x, Number radius_y, Number radius_z, Number value";
+        return "ByRef Image destination, Number x, Number y, Number z, Number radius_x, Number radius_y, Number radius_z, Number value";
     }
 
     @Override

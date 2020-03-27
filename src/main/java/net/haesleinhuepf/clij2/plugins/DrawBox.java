@@ -24,7 +24,7 @@ public class DrawBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
     @Override
     public String getParameterHelpText() {
-        return "Image destination, Number x, Number y, Number z, Number width, Number height, Number depth, Number value";
+        return "ByRef Image destination, Number x, Number y, Number z, Number width, Number height, Number depth, Number value";
     }
 
     @Override

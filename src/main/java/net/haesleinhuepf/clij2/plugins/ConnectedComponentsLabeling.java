@@ -225,7 +225,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements 
 */
     @Override
     public String getParameterHelpText() {
-        return "Image binary_input, Image labeling_destination";
+        return "Image binary_input, ByRef Image labeling_destination";
     }
 
     @Override

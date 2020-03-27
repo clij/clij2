@@ -14,7 +14,7 @@ public class LabelSpots extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
 
     @Override
     public String getParameterHelpText() {
-        return "Image input_spots, Image labelled_spots_destination";
+        return "Image input_spots, ByRef Image labelled_spots_destination";
     }
 
     @Override

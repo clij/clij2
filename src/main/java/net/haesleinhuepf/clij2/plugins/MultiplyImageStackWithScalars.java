@@ -68,7 +68,7 @@ public class MultiplyImageStackWithScalars extends AbstractCLIJ2Plugin implement
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Array scalars";
+        return "Image source, ByRef Image destination, Array scalars";
     }
 
     @Override

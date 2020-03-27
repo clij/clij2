@@ -43,7 +43,7 @@ public class ThresholdDefault extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image destination";
+        return "Image input, ByRef Image destination";
     }
 
     @Override

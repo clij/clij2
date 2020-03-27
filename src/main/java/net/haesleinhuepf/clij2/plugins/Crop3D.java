@@ -47,7 +47,7 @@ public class Crop3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination, Number startX, Number startY, Number startZ, Number width, Number height, Number depth";
+        return "Image source, ByRef Image destination, Number startX, Number startY, Number startZ, Number width, Number height, Number depth";
     }
 
 

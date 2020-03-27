@@ -15,7 +15,7 @@ public class ShortestDistances extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getParameterHelpText() {
-        return "Image distance_matrix, Image destination_minimum_distances";
+        return "Image distance_matrix, ByRef Image destination_minimum_distances";
     }
 
     @Override

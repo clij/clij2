@@ -18,7 +18,7 @@ public class NonzeroMinimumBox extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, Image destination";
+        return "Image input, ByRef Image destination";
     }
 
     @Override

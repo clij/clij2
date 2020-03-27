@@ -41,7 +41,7 @@ public class GenerateDistanceMatrix extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getParameterHelpText() {
-        return "Image coordinate_list1, Image coordinate_list2, Image distance_matrix_destination";
+        return "Image coordinate_list1, Image coordinate_list2, ByRef Image distance_matrix_destination";
     }
 
     @Override

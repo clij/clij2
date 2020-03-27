@@ -43,7 +43,7 @@ public class DilateBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image destination";
+        return "Image source, ByRef Image destination";
     }
 
     @Override
