@@ -23,11 +23,11 @@ public class GetDimensions extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
         long[] dimensions = getDimensions(getCLIJ2(), buffer);
 
         ((Double[])args[1])[0] = (double)dimensions[0];
-        ((Double[])args[1])[1] = (double)dimensions[1];
+        ((Double[])args[2])[0] = (double)dimensions[1];
         if (buffer.getDimension() > 2) {
-            ((Double[])args[1])[2] = (double)dimensions[2];
+            ((Double[])args[3])[0] = (double)dimensions[2];
         } else {
-            ((Double[])args[1])[2] = 1.0;
+            ((Double[])args[3])[0] = 1.0;
         }
         return true;
     }
