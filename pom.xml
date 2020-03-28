@@ -51,6 +51,11 @@
 			<name>Ruth Whelan-Jeans</name>
 			<properties><id>ruthwj</id></properties>
 		</contributor>
+		<contributor>
+			<properties><id>maarzt</id></properties>
+			<name>Matthias Arzt</name>
+			<url>https://imagej.net/User:Maarzt</url>
+		</contributor>
 	</contributors>
 
 	<mailingLists>
