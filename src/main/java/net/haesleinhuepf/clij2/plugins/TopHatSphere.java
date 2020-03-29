@@ -7,10 +7,11 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.ProcessableInTiles;
 import org.scijava.plugin.Plugin;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_topHatSphere")
-public class TopHatSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class TopHatSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, ProcessableInTiles {
 
     @Override
     public String getParameterHelpText() {
