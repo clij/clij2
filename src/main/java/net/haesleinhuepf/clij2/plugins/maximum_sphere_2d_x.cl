@@ -15,6 +15,12 @@ __kernel void maximum_sphere_2d
     IMAGE_dst_PIXEL_TYPE maximumValue = CONVERT_dst_PIXEL_TYPE(READ_src_IMAGE(src,sampler,coord).x);
     float aSquared = e.x * e.x;
     float bSquared = e.y * e.y;
+    if (aSquared == 0) {
+        aSquared = FLT_MIN;
+    }
+    if (bSquared == 0) {
+        bSquared = FLT_MIN;
+    }
 
     int count = 0;
 

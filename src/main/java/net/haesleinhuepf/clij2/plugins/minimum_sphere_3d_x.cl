@@ -17,6 +17,15 @@ __kernel void minimum_sphere_3d
     float aSquared = e.x * e.x;
     float bSquared = e.y * e.y;
     float cSquared = e.z * e.z;
+    if (aSquared == 0) {
+        aSquared = FLT_MIN;
+    }
+    if (bSquared == 0) {
+        bSquared = FLT_MIN;
+    }
+    if (cSquared == 0) {
+        cSquared = FLT_MIN;
+    }
 
     for (int x = -e.x; x <= e.x; x++) {
         float xSquared = x * x;

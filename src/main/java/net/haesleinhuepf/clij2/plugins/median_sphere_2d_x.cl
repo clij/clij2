@@ -38,6 +38,12 @@ __kernel void median_sphere_2d
 
   float aSquared = e.x * e.x;
   float bSquared = e.y * e.y;
+    if (aSquared == 0) {
+        aSquared = FLT_MIN;
+    }
+    if (bSquared == 0) {
+        bSquared = FLT_MIN;
+    }
 
   int count = 0;
 

@@ -16,6 +16,12 @@ __kernel void minimum_slice_by_slice_sphere_3d
     IMAGE_dst_PIXEL_TYPE minimumValue = CONVERT_dst_PIXEL_TYPE(READ_src_IMAGE(src,sampler,coord).x);
     float aSquared = e.x * e.x;
     float bSquared = e.y * e.y;
+    if (aSquared == 0) {
+        aSquared = FLT_MIN;
+    }
+    if (bSquared == 0) {
+        bSquared = FLT_MIN;
+    }
 
     for (int x = -e.x; x <= e.x; x++) {
         float xSquared = x * x;

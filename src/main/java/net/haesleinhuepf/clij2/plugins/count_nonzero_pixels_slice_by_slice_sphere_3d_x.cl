@@ -15,7 +15,12 @@ __kernel void count_nonzero_pixels_slice_by_slice_sphere_3d
 
     float aSquared = e.x * e.x;
     float bSquared = e.y * e.y;
-
+    if (aSquared == 0) {
+        aSquared = FLT_MIN;
+    }
+    if (bSquared == 0) {
+        bSquared = FLT_MIN;
+    }
     int count = 0;
 
     for (int x = -e.x; x <= e.x; x++) {
