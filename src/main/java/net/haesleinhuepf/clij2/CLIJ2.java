@@ -16,6 +16,7 @@ import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.numeric.RealType;
 import net.imglib2.view.Views;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -432,4 +433,18 @@ public class CLIJ2 implements CLIJ2Ops {
         mCLKernelExecutor.close();
     }
 
+    /**
+     * Transfer a buffer from a different OpenCLDevice
+     * @param input
+     * @return
+     */
+    public ClearCLBuffer transfer(ClearCLBuffer input) {
+        ClearCLBuffer output = create(input);
+        //System.out.println("Transfer from: " + input);
+        //System.out.println("Transfer to: " + output);
+        ByteBuffer buffer = ByteBuffer.allocate((int) input.getSizeInBytes());
+        input.writeTo(buffer, true);
+        output.readFrom(buffer, true);
+        return output;
+    }
 }
