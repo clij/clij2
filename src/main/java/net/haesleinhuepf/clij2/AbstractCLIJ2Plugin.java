@@ -25,6 +25,9 @@ public abstract class AbstractCLIJ2Plugin extends AbstractCLIJPlugin {
     }
 
     public CLIJ2 getCLIJ2() {
+        if (clij2 == null) {
+            clij2 = CLIJ2.getInstance();
+        }
         return clij2;
     }
 
