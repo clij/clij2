@@ -314,11 +314,11 @@ public class CLIJ2 implements CLIJ2Ops {
     }
 
     public void clear() {
-        getCLIJ().getClearCLContext().releaseImagesAndBuffers();
+        getCLIJ().getClearCLContext().releaseImages();
     }
 
     public String reportMemory() {
-        return getCLIJ().getClearCLContext().reportAboutAllocatedImageAndBuffers();
+        return getCLIJ().getClearCLContext().reportAboutAllocatedImages();
     }
 
 
