@@ -40,7 +40,7 @@ IMAGE_dst_indexlist_TYPE dst_indexlist, int nPoints) {
 
   float sum = 0;
   int count = 0;
-  for (int i = 1; i < initialized_values; i++) {
+  for (int i = 0; i < initialized_values; i++) {
     sum = sum + distances[i];
     count++;
   }
