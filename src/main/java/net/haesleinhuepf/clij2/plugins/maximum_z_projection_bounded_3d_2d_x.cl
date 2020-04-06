@@ -23,10 +23,10 @@ __kernel void maximum_z_projection_bounded(
 
   for(int z = start; z <= end; z++)
   {
-    float value = READ_src_IMAGE(src,sampler,(int4)(x,y,z,0)).x;
+    float value = READ_IMAGE(src,sampler,(int4)(x,y,z,0)).x;
     if (value > max || z == start) {
       max = value;
     }
   }
-  WRITE_dst_max_IMAGE(dst_max,(int2)(x,y), CONVERT_dst_max_TYPE(max));
+  WRITE_IMAGE(dst_max,(int2)(x,y), CONVERT_dst_max_PIXEL_TYPE(max));
 }
