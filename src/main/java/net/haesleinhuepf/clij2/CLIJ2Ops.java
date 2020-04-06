@@ -1489,7 +1489,7 @@ public abstract interface CLIJ2Ops {
     /**
      * Determines the maximum projection of an image along Z within a given z range.
      */
-    default boolean maximumZProjectionBounded(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+    default boolean maximumZProjectionBounded(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
         return MaximumZProjectionBounded.maximumZProjectionBounded(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
     }
 
@@ -1499,7 +1499,7 @@ public abstract interface CLIJ2Ops {
     /**
      * Determines the minimum projection of an image along Z within a given z range.
      */
-    default boolean minimumZProjectionBounded(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+    default boolean minimumZProjectionBounded(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
         return MinimumZProjectionBounded.minimumZProjectionBounded(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
     }
 
@@ -1509,7 +1509,7 @@ public abstract interface CLIJ2Ops {
     /**
      * Determines the mean projection of an image along Z within a given z range.
      */
-    default boolean meanZProjectionBounded(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+    default boolean meanZProjectionBounded(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
         return MeanZProjectionBounded.meanZProjectionBounded(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
     }
 

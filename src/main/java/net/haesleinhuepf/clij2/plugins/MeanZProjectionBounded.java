@@ -2,6 +2,7 @@ package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.CLIJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.AbstractCLIJPlugin;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -27,7 +28,7 @@ public class MeanZProjectionBounded extends AbstractCLIJPlugin implements CLIJMa
         return result;
     }
 
-    public static boolean meanZProjectionBounded(CLIJ clij, ClearCLBuffer src, ClearCLBuffer dst_mean, Integer min_z, Integer max_z) {
+    public static boolean meanZProjectionBounded(CLIJ clij, ClearCLImageInterface src, ClearCLImageInterface dst_mean, Integer min_z, Integer max_z) {
         assertDifferent(src, dst_mean);
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
