@@ -49,7 +49,7 @@ public class GenerateDistanceMatrix extends AbstractCLIJ2Plugin implements CLIJM
     {
         ClearCLBuffer input1 = (ClearCLBuffer) args[0];
         ClearCLBuffer input2 = (ClearCLBuffer) args[1];
-        return clij.createCLBuffer(new long[]{input1.getWidth(), input2.getWidth()}, NativeTypeEnum.Float);
+        return clij.createCLBuffer(new long[]{input1.getWidth() + 1, input2.getWidth() + 1}, NativeTypeEnum.Float);
     }
 
     @Override
