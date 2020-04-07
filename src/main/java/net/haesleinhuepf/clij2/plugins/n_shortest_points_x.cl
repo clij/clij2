@@ -1,7 +1,6 @@
 
 __kernel void find_n_closest_points(
     IMAGE_src_distancematrix_TYPE src_distancematrix,
-    IMAGE_dst_distancelist_TYPE dst_distancelist,
     IMAGE_dst_indexlist_TYPE dst_indexlist
 ) {
   const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
@@ -45,7 +44,6 @@ __kernel void find_n_closest_points(
   }
 
   for (int i = 0; i < initialized_values; i++) {
-    WRITE_dst_distancelist_IMAGE(dst_distancelist, POS_dst_distancelist_INSTANCE(pointIndex, i, 0, 0), CONVERT_dst_distancelist_PIXEL_TYPE(distances[i]));
     WRITE_dst_indexlist_IMAGE(dst_indexlist, POS_dst_indexlist_INSTANCE(pointIndex, i, 0, 0), CONVERT_dst_indexlist_PIXEL_TYPE(indices[i]));
   }
 }
