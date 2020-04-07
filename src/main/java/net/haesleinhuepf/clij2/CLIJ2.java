@@ -83,26 +83,22 @@ public class CLIJ2 implements CLIJ2Ops {
 
     public ClearCLBuffer push(Object object) {
         ClearCLBuffer buffer = clij.convert(object, ClearCLBuffer.class);
-        registerReference(buffer);
         return buffer;
     }
 
     public ClearCLBuffer pushCurrentZStack(ImagePlus imp) {
         ClearCLBuffer buffer = clij.pushCurrentZStack(imp);
-        registerReference(buffer);
         return buffer;
     }
 
     public ClearCLBuffer pushCurrentSlice(ImagePlus imp) {
         ClearCLBuffer buffer = clij.pushCurrentSlice(imp);
-        registerReference(buffer);
         return buffer;
     }
 
     public ClearCLBuffer pushCurrentSelection(ImagePlus imp) {
         imp = new Duplicator().run(imp);
         ClearCLBuffer buffer = clij.pushCurrentSlice(imp);
-        registerReference(buffer);
         return buffer;
     }
 
@@ -136,13 +132,11 @@ public class CLIJ2 implements CLIJ2Ops {
 
     public ClearCLBuffer create(ClearCLBuffer buffer) {
         ClearCLBuffer result = clij.create(buffer);
-        registerReference(result);
         return result;
     }
 
     public ClearCLImage create(ClearCLImage image) {
         ClearCLImage result = clij.create(image);
-        registerReference(result);
         return result;
     }
 
@@ -170,13 +164,11 @@ public class CLIJ2 implements CLIJ2Ops {
 
     public ClearCLBuffer create(long[] dimensions, NativeTypeEnum typeEnum) {
         ClearCLBuffer buffer = clij.create(dimensions, typeEnum);
-        registerReference(buffer);
         return buffer;
     }
 
     public ClearCLImage create(long[] dimensions, ImageChannelDataType typeEnum) {
         ClearCLImage image = clij.create(dimensions, typeEnum);
-        registerReference(image);
         return image;
     }
 
@@ -308,95 +300,27 @@ public class CLIJ2 implements CLIJ2Ops {
         return clij;
     }
 
-    private boolean keepReferences = true;
-
     /**
      * This method is for debugging purposes only
      * @param keepReferences
      */
     @Deprecated
     public void setKeepReferences(boolean keepReferences) {
-        this.keepReferences = keepReferences;
-    }
-
-    ArrayList<ClearCLImageInterface> references = new ArrayList<>();
-    private void registerReference(ClearCLImageInterface image) {
-        if (keepReferences) {
-            references.add(image);
-            for (int i = references.size() - 1; i >= 0; i--) {
-                ClearCLImageInterface buffer = references.get(i);
-                if (buffer instanceof ClearCLImage && ((ClearCLImage) buffer).getPeerPointer() == null) {
-                    references.remove(i);
-                } else if (buffer instanceof ClearCLBuffer && ((ClearCLBuffer) buffer).getPeerPointer() == null) {
-                    references.remove(i);
-                }
-            }
-        }
+        System.out.println("CLIJ2.setKeepReferences is obsolete.");
     }
 
     public void release(ClearCLImageInterface image) {
-        references.remove(image);
-        if (image instanceof ClearCLImage) {
-            ((ClearCLImage) image).close();
-        } else if (image instanceof ClearCLBuffer) {
-            ((ClearCLBuffer) image).close();
-        }
+        image.close();
     }
 
     public void clear() {
-        for (ClearCLImageInterface image : references) {
-            if (image instanceof ClearCLImage) {
-                ((ClearCLImage) image).close();
-            } else if (image instanceof ClearCLBuffer) {
-                ((ClearCLBuffer) image).close();
-            }
-        }
-        references.clear();
+        getCLIJ().getClearCLContext().releaseImages();
     }
 
     public String reportMemory() {
-        StringBuilder stringBuilder = new StringBuilder();
-        long bytesSum = 0;
-        stringBuilder.append("GPU contains " + (references.size() )+ " images.\n");
-        boolean wasClosedAlready = false;
-        for (ClearCLImageInterface buffer : references) {
-            String star = "";
-            if (buffer instanceof ClearCLImage && ((ClearCLImage) buffer).getPeerPointer() == null) {
-                star = "*";
-                wasClosedAlready = true;
-            } else if (buffer instanceof ClearCLBuffer && ((ClearCLBuffer) buffer).getPeerPointer() == null) {
-                star = "*";
-                wasClosedAlready = true;
-            } else {
-                bytesSum = bytesSum + buffer.getSizeInBytes();
-            }
-
-            stringBuilder.append("- " + buffer.getName() + star + " " + humanReadableBytes(buffer.getSizeInBytes()) + " [" + buffer.toString() + "] " + humanReadableBytes(buffer.getSizeInBytes()) + "\n");
-        }
-        stringBuilder.append("= " + humanReadableBytes(bytesSum) +"\n");
-        if (wasClosedAlready) {
-            stringBuilder.append("  * Some images/buffers were closed already.\n");
-        }
-        return stringBuilder.toString();
+        return getCLIJ().getClearCLContext().reportAboutAllocatedImages();
     }
 
-    private String humanReadableBytes(double bytesSum) {
-        if (bytesSum > 1024) {
-            bytesSum = bytesSum / 1024;
-            if (bytesSum > 1024) {
-                bytesSum = bytesSum / 1024;
-                if (bytesSum > 1024) {
-                    bytesSum = bytesSum / 1024;
-                    return (Math.round(bytesSum * 10.0) / 10.0 + " Gb");
-                } else {
-                    return (Math.round(bytesSum * 10.0) / 10.0 + " Mb");
-                }
-            } else {
-                return (Math.round(bytesSum * 10.0) / 10.0 + " kb");
-            }
-        }
-        return Math.round(bytesSum * 10.0) / 10.0 + " b";
-    }
 
     public void close() {
         clear();
