@@ -17,7 +17,6 @@ import net.imglib2.type.numeric.RealType;
 import net.imglib2.view.Views;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -31,6 +30,8 @@ public class CLIJ2 implements CLIJ2Ops {
     private static CLIJ2 instance;
 
     protected CLIJ clij;
+
+    protected boolean waitForKernelFinish = true;
 
 
     public CLIJ getCLIJ() {
@@ -225,7 +226,7 @@ public class CLIJ2 implements CLIJ2Ops {
             mCLKernelExecutor.setGlobalSizes(globalsizes);
             mCLKernelExecutor.setLocalSizes(localSizes);
 
-            result[0] = mCLKernelExecutor.enqueue(true, kernel);
+            result[0] = mCLKernelExecutor.enqueue(waitForKernelFinish, kernel);
 
             mCLKernelExecutor.setImageSizeIndependentCompilation(false);
         });
@@ -294,6 +295,10 @@ public class CLIJ2 implements CLIJ2Ops {
     public void activateSizeIndependentKernelCompilation() {
         mCLKernelExecutor.setImageSizeIndependentCompilation(true);
     }
+    public void setWaitForKernelFinish(boolean waitForKernelFinish) {
+        this.waitForKernelFinish = waitForKernelFinish;
+    }
+
 
     @Deprecated
     public CLIJ getClij() {
