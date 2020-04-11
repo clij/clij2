@@ -16,7 +16,7 @@ public class PullLabelsToROIManager extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getParameterHelpText() {
-        return "Image binary_input";
+        return "Image labelmap_input";
     }
 
     @Override
@@ -41,13 +41,17 @@ public class PullLabelsToROIManager extends AbstractCLIJ2Plugin implements CLIJM
 
         ClearCLBuffer binary = clij2.create(labelMap);
         int numberOfLabels = (int) clij2.maximumOfAllPixels(labelMap);
-        for (int i = 1; i < numberOfLabels; i++) {
+        for (int i = 1; i <= numberOfLabels; i++) {
             EqualConstant.equalConstant(clij2, labelMap, binary, new Float(i));
             Roi roi = PullAsROI.pullAsROI(clij2, binary);
             if (roi == null) {
                 System.out.println("Warning: Empty ROI (label = " + i + ") detected (pullLabelsToROIManager).");
                 continue;
             }
+            if (roi == null) {
+                roi = new Roi(0,0,0,0);
+            }
+            roi.setName("Label_" + i);
             roiManager.addRoi(roi);
         }
         clij2.release(binary);
