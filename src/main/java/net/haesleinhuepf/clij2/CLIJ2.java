@@ -280,7 +280,7 @@ public class CLIJ2 implements CLIJ2Ops {
             mCLKernelExecutor.setGlobalSizes(globalsizes);
             mCLKernelExecutor.setLocalSizes(localSizes);
 
-            result[0] = mCLKernelExecutor.enqueue(true, kernel);
+            result[0] = mCLKernelExecutor.enqueue(waitForKernelFinish, kernel);
 
             mCLKernelExecutor.setImageSizeIndependentCompilation(false);
         });
@@ -315,7 +315,9 @@ public class CLIJ2 implements CLIJ2Ops {
     }
 
     public void release(ClearCLImageInterface image) {
-        image.close();
+        if (image != null) {
+            image.close();
+        }
     }
 
     public void clear() {
