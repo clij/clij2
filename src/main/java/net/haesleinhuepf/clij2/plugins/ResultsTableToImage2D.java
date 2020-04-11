@@ -90,7 +90,7 @@ public class ResultsTableToImage2D extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Converts a table to an image.";
+        return "Converts a table to an image. Rows stay rows, columns stay columns.";
     }
 
     @Override
