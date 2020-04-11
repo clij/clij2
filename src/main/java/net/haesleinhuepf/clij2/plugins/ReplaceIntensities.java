@@ -36,7 +36,7 @@ public class ReplaceIntensities extends AbstractCLIJ2Plugin implements CLIJMacro
         long[] dims = dst.getDimensions();
 
         clij2.activateSizeIndependentKernelCompilation();
-        clij2.execute(ReplaceIntensities.class, "replace_intensities_" + dst.getDimension() +  "d_x.cl", "replace_intensities_"  +dst.getDimension() + "d", dims, dims, parameters);
+        clij2.execute(ReplaceIntensities.class, "replace_intensities_x.cl", "replace_intensities", dims, dims, parameters);
         return true;
     }
 
