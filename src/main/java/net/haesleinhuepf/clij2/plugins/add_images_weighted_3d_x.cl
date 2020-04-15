@@ -12,9 +12,13 @@ float factor1
   const int y = get_global_id(1);
   const int z = get_global_id(2);
 
-  const int4 pos = (int4){x,y,z,0};
+  const int4 pos = (int4)(x,y,z,0);
 
-  const IMAGE_dst_PIXEL_TYPE value = CONVERT_dst_PIXEL_TYPE(READ_src_IMAGE(src, sampler, pos).x * factor + READ_src1_IMAGE(src1, sampler, pos).x * factor1);
+  // multiplying by 2 and dividing by 2 makes it run corrctly on AMD vega 56; this is a workaround until we find a better solution
+  const float value1 = 2.0 * factor * ((float)(READ_IMAGE(src, sampler, pos).x));
+  const float value2 = 2.0 * factor1 * ((float)(READ_IMAGE(src1, sampler, pos).x));
 
-  WRITE_dst_IMAGE (dst, pos, value);
+  float value = (value1 + value2) / 2.0;
+
+  WRITE_IMAGE (dst, pos, CONVERT_dst_PIXEL_TYPE( value));
 }
