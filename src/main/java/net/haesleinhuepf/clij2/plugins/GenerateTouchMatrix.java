@@ -24,13 +24,13 @@ public class GenerateTouchMatrix extends AbstractCLIJ2Plugin implements CLIJMacr
         return result;
     }
 
-    public static boolean generateTouchMatrix(CLIJ2 clij2, ClearCLBuffer src_label_map, ClearCLBuffer dst_distance_matrix) {
+    public static boolean generateTouchMatrix(CLIJ2 clij2, ClearCLBuffer src_label_map, ClearCLBuffer dst_touch_matrix) {
 
-        clij2.set(dst_distance_matrix, 0f);
+        clij2.set(dst_touch_matrix, 0f);
 
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src_label_map", src_label_map);
-        parameters.put("dst_matrix", dst_distance_matrix);
+        parameters.put("dst_matrix", dst_touch_matrix);
 
         long[] globalSizes = src_label_map.getDimensions();
 
