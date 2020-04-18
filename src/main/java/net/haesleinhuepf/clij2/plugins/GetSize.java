@@ -13,6 +13,7 @@ import org.scijava.plugin.Plugin;
  * Author: @haesleinhuepf
  * June 2019
  */
+@Deprecated
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_getSize")
 public class GetSize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
@@ -31,6 +32,7 @@ public class GetSize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
         return true;
     }
 
+    @Deprecated
     public static long[] getSize(CLIJ2 clij2, ClearCLBuffer buffer) {
         if (buffer.getDimension() == 3) {
             return new long[]{buffer.getWidth(), buffer.getHeight(), buffer.getDepth()};
@@ -49,7 +51,8 @@ public class GetSize extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
     @Override
     public String getDescription() {
         return "Reads out the size of an image [stack] and writes it to the" +
-                " results table in the columns 'Width', 'Height' and 'Depth'.";
+                " results table in the columns 'Width', 'Height' and 'Depth'.\n\n" +
+                "DEPRECATED: Thie method is deprecated. Use getDimensions instead.";
     }
 
     @Override
