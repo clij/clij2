@@ -26,23 +26,7 @@ public class Print extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJO
     }
 
     public static boolean print(CLIJ2 clij2, ClearCLImageInterface input) {
-        ImagePlus imp = clij2.pull(input);
-
-        for (int z = 0; z < imp.getNSlices(); z++) {
-            imp.setZ(z + 1);
-            if (imp.getNSlices() > 1) {
-                System.out.print("z = " + z + ":\n");
-            }
-            ImageProcessor ip = imp.getProcessor();
-            for (int y = 0; y < ip.getHeight(); y++) {
-                for (int x = 0; x < ip.getWidth(); x++) {
-                    System.out.print(ip.getf(x, y) + " ");
-                }
-                System.out.print("\n");
-            }
-        }
-
-
+        System.out.println(GetAsString.getAsString(clij2, input));
         return true;
     }
 
