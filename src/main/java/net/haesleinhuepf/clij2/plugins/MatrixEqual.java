@@ -11,7 +11,7 @@ import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_matrixEqual")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_matrixEqual")
 public class MatrixEqual extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
