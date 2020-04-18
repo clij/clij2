@@ -50,7 +50,7 @@ public class CountNonZeroVoxels3DSphere extends AbstractCLIJ2Plugin implements C
 
     @Override
     public String getDescription() {
-        return "Counts non-zero voxels in a sphere around every voxel." +
+        return "Counts non-zero voxels in a sphere around every voxel. \n\n" +
                 "Put the number in the result image.";
     }
 

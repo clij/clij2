@@ -77,7 +77,7 @@ public class MinimumOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Determines the minimum intensity in an image, but only in pixels which have non-zero values in another" +
+        return "Determines the minimum intensity in a masked image. \n\nBut only in pixels which have non-zero values in another" +
                 " mask image.";
     }
 

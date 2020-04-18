@@ -68,7 +68,7 @@ public class MinimumOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getDescription() {
-        return "Determines the minimum of all pixels in a given image. It will be stored in a new row of ImageJs\n" +
+        return "Determines the minimum of all pixels in a given image. \n\nIt will be stored in a new row of ImageJs\n" +
                 "Results table in the column 'Min'.";
     }
 

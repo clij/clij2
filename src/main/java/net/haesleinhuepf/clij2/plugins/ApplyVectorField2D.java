@@ -80,7 +80,7 @@ public class ApplyVectorField2D extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getDescription() {
-        return "Deforms an image according to distances provided in the given vector images. " +
+        return "Deforms an image according to distances provided in the given vector images.\n\n " +
                 "It is recommended to use 32-bit images for input, output and vector images. ";
     }
 

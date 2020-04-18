@@ -50,7 +50,7 @@ public class Mean2DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getDescription() {
-        return "Computes the local mean average of a pixels ellipsoidal neighborhood. The ellipses size is specified by \n" +
+        return "Computes the local mean average of a pixels ellipsoidal neighborhood. \n\nThe ellipses size is specified by \n" +
                 "its half-width and half-height (radius).";
     }
 

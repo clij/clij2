@@ -50,7 +50,7 @@ public class CountNonZeroPixels2DSphere extends AbstractCLIJ2Plugin implements C
 
     @Override
     public String getDescription() {
-        return "Counts non-zero pixels in a sphere around every pixel." +
+        return "Counts non-zero pixels in a sphere around every pixel. \n\n" +
                 "Put the number in the result image.";
     }
 

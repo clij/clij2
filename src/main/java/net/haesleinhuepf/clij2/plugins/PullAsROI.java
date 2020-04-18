@@ -42,7 +42,7 @@ public class PullAsROI extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getDescription() {
-        return "Pulls a binary image from the GPU memory and puts it on the currently active ImageJ window.";
+        return "Pulls a binary image from the GPU memory and puts it on the currently active ImageJ window as region of interest.";
     }
 
     @Override

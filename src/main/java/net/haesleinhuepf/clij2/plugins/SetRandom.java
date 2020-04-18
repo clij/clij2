@@ -120,7 +120,7 @@ public class SetRandom extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getDescription() {
-        return "Fills an image or image stack with uniformly distributed random numbers between given minimum and maximum values.\n" +
+        return "Fills an image or image stack with uniformly distributed random numbers between given minimum and maximum values. \n\n" +
                 "Recommendation: For the seed, use getTime().";
     }
 

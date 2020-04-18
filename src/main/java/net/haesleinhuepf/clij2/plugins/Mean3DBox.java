@@ -45,7 +45,7 @@ public class Mean3DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getDescription() {
-        return "Computes the local mean average of a pixels cube neighborhood. The cubes size is specified by \n" +
+        return "Computes the local mean average of a pixels cube neighborhood. \n\nThe cubes size is specified by \n" +
                 "its half-width, half-height and half-depth (radius).";
     }
 

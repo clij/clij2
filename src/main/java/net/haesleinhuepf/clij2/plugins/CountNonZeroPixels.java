@@ -73,7 +73,7 @@ public class CountNonZeroPixels extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getDescription() {
-        return "Determines the number of all pixels in a given image which are not equal to 0. It will be stored in a new row of ImageJs\n" +
+        return "Determines the number of all pixels in a given image which are not equal to 0. \n\nIt will be stored in a new row of ImageJs\n" +
                 "Results table in the column 'CountNonZero'.";
     }
 

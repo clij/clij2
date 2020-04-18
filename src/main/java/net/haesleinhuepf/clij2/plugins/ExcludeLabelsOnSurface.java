@@ -84,7 +84,7 @@ public class ExcludeLabelsOnSurface extends AbstractCLIJ2Plugin implements CLIJM
     @Override
     public String getDescription() {
         return "This operation follows a ray from a given position towards a label (or opposite direction) and checks if " +
-                " there is another label between the label an the image border. If yes, this label is eliminated from" +
+                " there is another label between the label an the image border. \n\nIf yes, this label is eliminated from" +
                 " the label map.";
     }
 

@@ -55,7 +55,7 @@ public class Median3DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public String getDescription() {
-        return "Computes the local median of a pixels cuboid neighborhood. The cuboid size is specified by \n" +
+        return "Computes the local median of a pixels cuboid neighborhood. \n\nThe cuboid size is specified by \n" +
                 "its half-width, half-height and half-depth (radius).\n\n" +
                 "For technical reasons, the volume of the cuboid must contain less than 1000 voxels.";
     }

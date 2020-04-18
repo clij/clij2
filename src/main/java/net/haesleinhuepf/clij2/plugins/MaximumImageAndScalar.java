@@ -51,7 +51,7 @@ public class MaximumImageAndScalar extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Computes the maximum of a constant scalar s and each pixel value x in a given image X.\n\n<pre>f(x, s) = max(x, s)</pre>";
+        return "Computes the maximum of a constant scalar s and each pixel value x in a given image X. \n\n<pre>f(x, s) = max(x, s)</pre>";
     }
 
     @Override

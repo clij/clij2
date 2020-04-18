@@ -45,7 +45,7 @@ public class EqualConstant extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public String getDescription() {
-        return "Determines if an image A and a constant b are equal.\n\nf(a, b) = 1 if a == b; 0 otherwise. ";
+        return "Determines if an image A and a constant b are equal.\n\n<pre>f(a, b) = 1 if a == b; 0 otherwise.</pre> ";
     }
     
     @Override

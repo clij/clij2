@@ -38,4 +38,8 @@ public class ConnectedComponentsLabelingDiamond extends ConnectedComponentsLabel
         return connectedComponentsLabeling_internal(clij2, input, output, true, forceContinousLabeling);
     }
 
+    @Override
+    public String getDescription() {
+        return "Performs connected components analysis inspecting the diamond neighborhood of every pixel to a binary image and generates a label map.";
+    }
 }

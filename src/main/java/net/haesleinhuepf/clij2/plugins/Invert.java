@@ -34,7 +34,7 @@ public class Invert extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getDescription() {
-        return "Computes the negative value of all pixels in a given image. It is recommended to convert images to \n" +
+        return "Computes the negative value of all pixels in a given image. \n\nIt is recommended to convert images to \n" +
                 "32-bit float before applying this operation.\n\n" +
                 "<pre>f(x) = - x</pre>\n\n" +
                 "For binary images, use binaryNot.";

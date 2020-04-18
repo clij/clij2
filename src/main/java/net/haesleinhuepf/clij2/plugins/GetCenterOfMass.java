@@ -45,7 +45,7 @@ public class GetCenterOfMass extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getDescription() {
-        return "Determines the center of mass of an image or image stack and writes the result in the variables\n" +
+        return "Determines the center of mass of an image or image stack.\n\n It writes the result in the variables\n" +
                 " centerOfMassX, centerOfMassY and centerOfMassZ.";
     }
 

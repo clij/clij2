@@ -29,7 +29,7 @@ public class InvalidateKernelCache extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Invalidated all cached OpenCL programs and kernels.";
+        return "Invalidates all cached OpenCL programs and kernels.";
     }
 
     @Override

@@ -80,7 +80,7 @@ public class VarianceOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacr
 
     @Override
     public String getDescription() {
-        return "Determines the variance of all pixels in an image. The value will be stored in a new row of ImageJs\n" +
+        return "Determines the variance of all pixels in an image. \n\nThe value will be stored in a new row of ImageJs\n" +
                 "Results table in the column 'Variance'.";
     }
 

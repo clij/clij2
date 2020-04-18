@@ -74,7 +74,7 @@ public class PointIndexListToMesh extends AbstractCLIJ2Plugin implements CLIJMac
 
     @Override
     public String getDescription() {
-        return "Meshes all points in a given point list which are indiced in a corresponding index list. TODO: Explain better";
+        return "Meshes all points in a given point list which are indiced in a corresponding index list.";
     }
 
     @Override

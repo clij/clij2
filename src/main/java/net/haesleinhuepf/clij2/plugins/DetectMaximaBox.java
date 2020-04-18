@@ -47,8 +47,9 @@ public class DetectMaximaBox extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getDescription() {
-        return "Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if\n" +
-                "there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.";
+        return "Detects local maxima in a given square/cubic neighborhood. \n\n" +
+                "Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a \n" +
+                "higher intensity, and to 0 otherwise.";
     }
 
     @Override

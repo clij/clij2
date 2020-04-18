@@ -51,7 +51,8 @@ public class StandardDeviationOfMaskedPixels extends AbstractCLIJ2Plugin impleme
 
     @Override
     public String getDescription() {
-        return "Determines the standard deviation of all pixels in an image which have non-zero value in a corresponding mask image. The value will be stored in a new row of ImageJs\n" +
+        return "Determines the standard deviation of all pixels in an image which have non-zero value in a corresponding mask image. \n\n" +
+                "The value will be stored in a new row of ImageJs\n" +
                 "Results table in the column 'Masked_standard_deviation'.";
     }
 

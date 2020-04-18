@@ -44,7 +44,7 @@ public class ShortestDistances extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getDescription() {
-        return "Determine the shortest distance from a distance matrix. This corresponds to the minimum for each individial column.";
+        return "Determine the shortest distance from a distance matrix. \n\nThis corresponds to the minimum for each individial column.";
     }
 
     @Override

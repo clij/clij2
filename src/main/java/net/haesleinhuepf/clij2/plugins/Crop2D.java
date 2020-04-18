@@ -59,7 +59,7 @@ public class Crop2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getDescription() {
-        return "Crops a given rectangle out of a given image.\n\n" +
+        return "Crops a given rectangle out of a given image. \n\n" +
                 "Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.";
     }
 

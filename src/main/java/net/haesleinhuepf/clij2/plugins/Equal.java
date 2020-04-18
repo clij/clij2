@@ -44,7 +44,8 @@ public class Equal extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJO
 
     @Override
     public String getDescription() {
-        return "Determines if two images A and B equal pixel wise.\n\nf(a, b) = 1 if a == b; 0 otherwise. ";
+        return "Determines if two images A and B equal pixel wise. \n\n" +
+                "<pre>f(a, b) = 1 if a == b; 0 otherwise.</pre> ";
     }
     
     @Override

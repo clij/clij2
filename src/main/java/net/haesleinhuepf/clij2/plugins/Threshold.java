@@ -31,7 +31,7 @@ public class Threshold extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getDescription() {
-        return "Computes a binary image with pixel values 0 and 1. All pixel values x of a given input image with \n" +
+        return "Computes a binary image with pixel values 0 and 1. \n\nAll pixel values x of a given input image with \n" +
                 "value larger or equal to a given threshold t will be set to 1.\n\n" +
                 "f(x,t) = (1 if (x >= t); (0 otherwise))\n\n" +
                 "This plugin is comparable to setting a raw threshold in ImageJ and using the 'Convert to Mask' menu.";

@@ -69,7 +69,8 @@ public class DrawBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
         @Override
     public String getDescription() {
-        return "Draws a box at a given start point with given size. All pixels other than in the box are untouched. Consider using clij.op.set(buffer, 0); in advance.";
+        return "Draws a box at a given start point with given size. \n" +
+                "All pixels other than in the box are untouched. Consider using `set(buffer, 0);` in advance.";
     }
 
     @Override

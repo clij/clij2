@@ -47,9 +47,9 @@ public class DetectMaximaSliceBySliceBox extends AbstractCLIJ2Plugin implements 
 
     @Override
     public String getDescription() {
-        return "Detects local maxima in a given square neighborhood of an input image stack. The input image stack is \n" +
-                "processed slice by slice. Pixels in the resulting image are set to 1 if there is no other pixel in a \n" +
-                "given radius which has a higher intensity, and to 0 otherwise.";
+        return "Detects local maxima in a given square neighborhood of an input image stack. \n\n" +
+                "The input image stack is processed slice by slice. Pixels in the resulting image are set to 1 if \n" +
+                "there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.";
     }
 
     @Override

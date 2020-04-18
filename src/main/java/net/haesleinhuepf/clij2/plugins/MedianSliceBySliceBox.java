@@ -54,7 +54,7 @@ public class MedianSliceBySliceBox extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Computes the local median of a pixels rectangular neighborhood. This is done slice-by-slice in a 3D \n" +
+        return "Computes the local median of a pixels rectangular neighborhood. \n\nThis is done slice-by-slice in a 3D \n" +
                 "image stack. The rectangle is specified by its half-width and half-height (radius).\n\n" +
                 "For technical reasons, the area of the rectangle must have less than 1000 pixels.";
     }

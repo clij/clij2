@@ -392,8 +392,8 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
 
     @Override
     public String getDescription() {
-        return "Determines bounding box, area (in pixels/voxels), min, max and mean intensity " +
-                " of labelled objects in a label map and corresponding pixels in the original image." +
+        return "Determines bounding box, area (in pixels/voxels), min, max and mean intensity \n" +
+                " of labelled objects in a label map and corresponding pixels in the original image. \n\n" +
                 "Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.";
     }
 

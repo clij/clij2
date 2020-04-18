@@ -58,7 +58,7 @@ public class MeanOfTouchingNeighbors extends AbstractCLIJ2Plugin implements CLIJ
 
     @Override
     public String getDescription() {
-        return "Takes a touch matrix and a vector of values to determine the mean value among touching neighbors for every object.\n" +
+        return "Takes a touch matrix and a vector of values to determine the mean value among touching neighbors for every object. \n\n" +
                 "TODO: This only works for values between 0 and 255 for now.";
     }
 

@@ -54,7 +54,7 @@ public class GenerateDistanceMatrix extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getDescription() {
-        return "Takes two images containing coordinates and builds up a matrix containing distance between the points. Convention: image width represents number of points, height represents dimensionality (2D, 3D, ... 10D). The result image has width the first input image and height equals to the width of the second input image.";
+        return "Takes two images containing coordinates and builds up a matrix containing distance between the points. \n\nConvention: image width represents number of points, height represents dimensionality (2D, 3D, ... 10D). The result image has width the first input image and height equals to the width of the second input image.";
     }
 
     @Override

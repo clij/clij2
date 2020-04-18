@@ -278,7 +278,7 @@ public class CloseIndexGapsInLabelMap extends AbstractCLIJ2Plugin implements CLI
     @Override
     public String getDescription() {
         return "Analyses a label map and if there are gaps in the indexing (e.g. label 5 is not present) all \n" +
-                "subsequent labels will be relabelled. Thus, afterwards number of labels and maximum label index are equal.\n";
+                "subsequent labels will be relabelled. \n\nThus, afterwards number of labels and maximum label index are equal.\n";
     }
 
     @Override

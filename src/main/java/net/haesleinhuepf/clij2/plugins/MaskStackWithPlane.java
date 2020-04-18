@@ -47,7 +47,7 @@ public class MaskStackWithPlane extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getDescription() {
-        return "Computes a masked image by applying a 2D mask to an image stack. All pixel values x of image X will be copied\n" +
+        return "Computes a masked image by applying a 2D mask to an image stack. \n\nAll pixel values x of image X will be copied\n" +
                 "to the destination image in case pixel value m at the same spatial position in the mask image is not equal to \n" +
                 "zero.\n\n" +
                 "<pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>";

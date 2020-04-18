@@ -55,7 +55,8 @@ public class LabelSpots extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
 
     @Override
     public String getDescription() {
-        return "Transforms a spots image as resulting from maximum/minimum detection in an image of the same size where every spot has " +
+        return "Transforms a binary image with single pixles set to 1 to a labelled spots image. \n\n" +
+                "Transforms a spots image as resulting from maximum/minimum detection in an image of the same size where every spot has " +
                 "a number 1, 2, ... n.";
     }
 

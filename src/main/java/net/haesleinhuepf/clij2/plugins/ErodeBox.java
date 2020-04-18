@@ -50,7 +50,7 @@ public class ErodeBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getDescription() {
-        return "Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.\n" +
+        return "Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image. \n\n" +
                 "The erosion takes the Moore-neighborhood (8 pixels in 2D and 26 pixels in 3d) into account.\n" +
                 "The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.\n\n" +
                 "This method is comparable to the 'Erode' menu in ImageJ in case it is applied to a 2D image. The only\n" +

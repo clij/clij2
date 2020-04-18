@@ -55,7 +55,7 @@ public class Median3DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getDescription() {
-        return "Computes the local median of a pixels spherical neighborhood. The spheres size is specified by \n" +
+        return "Computes the local median of a pixels spherical neighborhood. \n\nThe spheres size is specified by \n" +
                 "its half-width, half-height and half-depth (radius).\n\n" +
                 "For technical reasons, the volume of the sphere must contain less than 1000 voxels.";
     }

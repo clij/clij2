@@ -58,7 +58,7 @@ public class ResultsTableColumnToImage extends AbstractCLIJ2Plugin implements CL
 
     @Override
     public String getDescription() {
-        return "Converts a table column to an image. The values are stored in x dimension.";
+        return "Converts a table column to an image. \n\nThe values are stored in x dimension.";
     }
 
     @Override

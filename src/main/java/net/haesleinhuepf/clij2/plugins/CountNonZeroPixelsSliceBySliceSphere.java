@@ -50,7 +50,7 @@ public class CountNonZeroPixelsSliceBySliceSphere extends AbstractCLIJ2Plugin im
 
     @Override
     public String getDescription() {
-        return "Counts non-zero pixels in a sphere around every pixel slice by slice in a stack and puts the resulting number in the destination image stack.";
+        return "Counts non-zero pixels in a sphere around every pixel slice by slice in a stack. \n\n It puts the resulting number in the destination image stack.";
     }
 
     @Override

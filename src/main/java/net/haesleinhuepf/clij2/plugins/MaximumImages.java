@@ -51,7 +51,7 @@ public class MaximumImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public String getDescription() {
-        return "Computes the maximum of a pair of pixel values x, y from two given images X and Y.\n\n<pre>f(x, y) = max(x, y)</pre>";
+        return "Computes the maximum of a pair of pixel values x, y from two given images X and Y. \n\n<pre>f(x, y) = max(x, y)</pre>";
     }
 
     @Override

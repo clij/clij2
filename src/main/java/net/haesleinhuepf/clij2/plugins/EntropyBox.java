@@ -64,7 +64,7 @@ public class EntropyBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
 
     @Override
     public String getDescription() {
-        return "Determines the local entropy in a given radius around every pixel.";
+        return "Determines the local entropy in a box with a given radius around every pixel.";
     }
 
     @Override

@@ -69,7 +69,7 @@ public class BoundingBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public String getDescription() {
-        return "Determines the bounding box of all non-zero pixels in a binary image. If called from macro, the " +
+        return "Determines the bounding box of all non-zero pixels in a binary image. \n\nIf called from macro, the " +
                 "positions will be stored in a new row of ImageJs Results table in the columns 'BoundingBoxX', " +
                 "'BoundingBoxY', 'BoundingBoxZ', 'BoundingBoxWidth', 'BoundingBoxHeight' 'BoundingBoxDepth'." +
                 "In case of 2D images Z and depth will be zero.";

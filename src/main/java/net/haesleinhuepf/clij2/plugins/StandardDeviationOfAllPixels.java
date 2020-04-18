@@ -48,7 +48,7 @@ public class StandardDeviationOfAllPixels extends AbstractCLIJ2Plugin implements
 
     @Override
     public String getDescription() {
-        return "Determines the standard deviation of all pixels in an image. The value will be stored in a new row of ImageJs\n" +
+        return "Determines the standard deviation of all pixels in an image. \n\nThe value will be stored in a new row of ImageJs\n" +
                 "Results table in the column 'Standard_deviation'.";
     }
 

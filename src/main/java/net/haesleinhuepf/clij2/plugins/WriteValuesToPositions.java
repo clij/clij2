@@ -42,7 +42,7 @@ public class WriteValuesToPositions extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getDescription() {
-        return "Takes an image with three/four rows (2D: height = 3; 3D: height = 4): x, y [, z] and v and target image. " +
+        return "Takes an image with three/four rows (2D: height = 3; 3D: height = 4): x, y [, z] and v and target image. \n\n" +
                 "The value v will be written at position x/y[/z] in the target image.";
     }
 

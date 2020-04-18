@@ -62,7 +62,7 @@ public class Downsample2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getDescription() {
-        return "Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method\n" +
+        return "Scales an image using given scaling factors for X and Y dimensions. \n\nThe nearest-neighbor method\n" +
                 "is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.";
     }
 

@@ -35,7 +35,7 @@ public class ConvertFloat extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getDescription() {
-        return "Convert the input image to a float image with 32 bits per pixel.\n" +
+        return "Convert the input image to a float image with 32 bits per pixel.\n\n" +
                 "The target image should not exist with a different type before this \n" +
                 "method is called.";
     }

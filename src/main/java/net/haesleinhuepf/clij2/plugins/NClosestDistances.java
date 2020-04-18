@@ -56,7 +56,7 @@ public class NClosestDistances extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getDescription() {
-        return "Determine the n point indices with shortest distance for all points in a distance matrix. " +
+        return "Determine the n point indices with shortest distance for all points in a distance matrix. \n\n" +
                 "This corresponds to the n row indices with minimum values for each column of the distance matrix." +
                 "Returns the n shortest distances in one image and the point indices in another image.";
     }

@@ -47,7 +47,9 @@ public class LabelledSpotsToPointList extends AbstractCLIJ2Plugin implements CLI
 
     @Override
     public String getDescription() {
-        return "Transforms a labelmap of spots (single pixels with values 1, 2, ..., n for n spots) as resulting from connected components analysis in an image where every column contains d \n" +
+        return "Generates a coordinate list of points in a labelled spot image. \n\n" +
+                "Transforms a labelmap of spots (single pixels with values 1, 2, ..., n for n spots) as resulting \n" +
+                "from connected components analysis in an image where every column contains d \n" +
                 "pixels (with d = dimensionality of the original image) with the coordinates of the maxima/minima.";
     }
 

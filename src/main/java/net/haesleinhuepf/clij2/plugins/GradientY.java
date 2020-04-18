@@ -47,7 +47,7 @@ public class GradientY extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getDescription() {
-        return "Computes the gradient of gray values along Y. Assuming a, b and c are three adjacent\n " +
+        return "Computes the gradient of gray values along Y. \n\nAssuming a, b and c are three adjacent\n " +
                 "pixels in Y direction. In the target image will be saved as: " +
                 "<pre>b' = c - a;</pre>";
     }

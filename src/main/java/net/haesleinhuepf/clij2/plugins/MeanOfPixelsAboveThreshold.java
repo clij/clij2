@@ -48,7 +48,7 @@ public class MeanOfPixelsAboveThreshold extends AbstractCLIJ2Plugin implements C
 
     @Override
     public String getDescription() {
-        return "Determines the mean intensity in an image, but only in pixels which are above a given threshold.";
+        return "Determines the mean intensity in a threshleded image. \n\nBut only in pixels which are above a given threshold.";
     }
 
     @Override

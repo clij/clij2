@@ -81,7 +81,7 @@ public class ExcludeLabelsOnEdges extends AbstractCLIJ2Plugin implements CLIJMac
 
     @Override
     public String getDescription() {
-        return "Removes all labels from a label map which touch the edges of the image (in X, Y and Z if the image is 3D). " +
+        return "Removes all labels from a label map which touch the edges of the image (in X, Y and Z if the image is 3D). \n\n" +
                 "Remaining label elements are renumbered afterwards.";
     }
 

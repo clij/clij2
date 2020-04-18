@@ -49,7 +49,7 @@ public class BinaryXOr extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
     @Override
     public String getDescription() {
         return "Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of\n" +
-                "pixels x and y with the binary operators AND &, OR | and NOT ! implementing the XOR operator.\n" +
+                "pixels x and y with the binary operators AND &, OR | and NOT ! implementing the XOR operator.\n\n" +
                 "All pixel values except 0 in the input images are interpreted as 1.\n\n" +
                 "<pre>f(x, y) = (x & !y) | (!x & y)</pre>";
     }

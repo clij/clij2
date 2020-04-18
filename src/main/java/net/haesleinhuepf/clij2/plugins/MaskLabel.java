@@ -46,7 +46,7 @@ public class MaskLabel extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getDescription() {
-        return "Computes a masked image by applying a label mask to an image. All pixel values x of image X will be copied\n" +
+        return "Computes a masked image by applying a label mask to an image. \n\nAll pixel values x of image X will be copied\n" +
                 "to the destination image in case pixel value m at the same position in the label_map image has the right index value i.\n\n" +
                 "f(x,m,i) = (x if (m == i); (0 otherwise))";
     }

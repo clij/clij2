@@ -72,7 +72,7 @@ public class BinaryFillHoles extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getDescription() {
-        return "Fills holes in a binary image.";
+        return "Fills holes (pixels with value 0 surrounded by pixels with value 1) in a binary image.";
     }
 
     @Override

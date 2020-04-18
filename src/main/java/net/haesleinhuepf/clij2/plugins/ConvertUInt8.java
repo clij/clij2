@@ -36,7 +36,7 @@ public class ConvertUInt8 extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getDescription() {
-        return "Convert the input image to a unsigned integer image with 8 bits per pixel.\n" +
+        return "Convert the input image to a unsigned integer image with 8 bits per pixel.\n\n" +
                 "Pixel values are copied as they are. Use multiplyImageWithScalar in order to scale" +
                 "pixel values when reducing bit-depth to prevent cutting-off intensity ranges.\n" +
                 "The target image should not exist with a different type before this \n" +

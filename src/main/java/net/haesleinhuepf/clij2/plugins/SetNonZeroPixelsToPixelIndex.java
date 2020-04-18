@@ -42,7 +42,7 @@ public class SetNonZeroPixelsToPixelIndex extends AbstractCLIJ2Plugin implements
 
     @Override
     public String getDescription() {
-        return "Sets all pixels in an image which are not zero to the index of the pixel. This can be used for Connected Components Analysis.";
+        return "Sets all pixels in an image which are not zero to the index of the pixel. \n\nThis can be used for Connected Components Analysis.";
     }
 
     @Override

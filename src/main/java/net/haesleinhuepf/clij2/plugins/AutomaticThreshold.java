@@ -63,7 +63,7 @@ public class AutomaticThreshold extends AbstractCLIJ2Plugin implements CLIJMacro
     public String getDescription() {
         StringBuilder doc = new StringBuilder();
         doc.append("The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on \n" +
-                "the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one \n" +
+                "the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.\n\n Enter one \n" +
                 "of these methods in the method text field:\n" +
                 Arrays.toString(AutoThresholderImageJ1.getMethods()) );
         return doc.toString();

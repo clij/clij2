@@ -47,7 +47,7 @@ public class GreaterConstant extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getDescription() {
-        return "Determines if two images A and B greater pixel wise.\n\nf(a, b) = 1 if a > b; 0 otherwise. ";
+        return "Determines if two images A and B greater pixel wise. \n\nf(a, b) = 1 if a > b; 0 otherwise. ";
     }
     
     @Override

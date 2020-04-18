@@ -48,7 +48,8 @@ public class DistanceMatrixToMesh extends AbstractCLIJ2Plugin implements CLIJMac
 
     @Override
     public String getDescription() {
-        return "Takes a pointlist with dimensions n*d with n point coordinates in d dimensions and a distance matrix of " +
+        return "Generates a mesh from a distance matric and a list of point coordinates.\n\n" +
+                "Takes a pointlist with dimensions n*d with n point coordinates in d dimensions and a distance matrix of " +
                 "size n*n to draw lines from all points to points if the corresponding pixel in the distance matrix is " +
                 "smaller than a given distance threshold.";
     }

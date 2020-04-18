@@ -48,7 +48,7 @@ public class SorensenDiceCoefficient extends AbstractCLIJ2Plugin implements CLIJ
 
     @Override
     public String getDescription() {
-        return "Determines the overlap of two binary images using the Sorensen-Dice coefficent.\n" +
+        return "Determines the overlap of two binary images using the Sorensen-Dice coefficent. \n\n" +
                 "A value of 0 suggests no overlap, 1 means perfect overlap.\n" +
                 "The Sorensen-Dice coefficient is saved in the colum 'Sorensen_Dice_coefficient'.\n" +
                 "Note that the Sorensen-Dice coefficient s can be calculated from the Jaccard index j using this formula:\n" +

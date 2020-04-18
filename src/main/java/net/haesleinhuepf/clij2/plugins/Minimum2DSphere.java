@@ -49,7 +49,7 @@ public class Minimum2DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getDescription() {
-        return "Computes the local minimum of a pixels ellipsoidal neighborhood. The ellipses size is specified by \n" +
+        return "Computes the local minimum of a pixels ellipsoidal neighborhood. \n\nThe ellipses size is specified by \n" +
                 "its half-width and half-height (radius).";
     }
 

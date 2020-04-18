@@ -47,7 +47,7 @@ public class GreaterOrEqual extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getDescription() {
-        return "Determines if two images A and B greater or equal pixel wise.\n\nf(a, b) = 1 if a >= b; 0 otherwise. ";
+        return "Determines if two images A and B greater or equal pixel wise. \n\nf(a, b) = 1 if a >= b; 0 otherwise. ";
     }
     
     @Override

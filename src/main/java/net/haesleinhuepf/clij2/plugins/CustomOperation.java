@@ -84,7 +84,7 @@ public class CustomOperation extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getDescription() {
-        return "Executes a custom operation on a custom list of images.\n" +
+        return "Executes a custom operation wirtten in OpenCL on a custom list of images. \n\n" +
                 "All images must be created before calling this method. Image parameters should be handed over as an array with parameter names and image names alternating, e.g." +
                 "\n\n" +
                 "Ext.CLIJ2_customOperation(..., ..., newArray(\"image1\", \"blobs.gif\", \"image2\", \"Processed_blobs.gif\"))" +

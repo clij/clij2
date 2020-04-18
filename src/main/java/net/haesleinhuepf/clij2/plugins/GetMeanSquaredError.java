@@ -41,7 +41,7 @@ public class GetMeanSquaredError extends AbstractCLIJ2Plugin implements CLIJMacr
 
     @Override
     public String getDescription() {
-        return "Determines the mean squared error (MSE) between two images. The MSE will be stored in the variable mean_squared_error.";
+        return "Determines the mean squared error (MSE) between two images. \n\nThe MSE will be stored in the variable mean_squared_error.";
     }
 
     @Override

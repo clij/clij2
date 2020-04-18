@@ -37,4 +37,9 @@ public class ConnectedComponentsLabelingBox extends ConnectedComponentsLabeling 
         return connectedComponentsLabeling_internal(clij2, input, output, true, forceContinousLabeling);
     }
 
+    @Override
+    public String getDescription() {
+        return "Performs connected components analysis inspecting the box neighborhood of every pixel to a binary image and generates a label map.";
+    }
+
 }

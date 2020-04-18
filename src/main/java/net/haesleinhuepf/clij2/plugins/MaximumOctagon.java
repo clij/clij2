@@ -89,9 +89,9 @@ public class MaximumOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getDescription() {
-        return "Applies a maximum filter with kernel size 3x3 n times to an image iteratively. " +
-                "Odd iterations are done with box neighborhood, even iterations with a diamond. " +
-                "Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter " +
+        return "Applies a maximum filter with kernel size 3x3 n times to an image iteratively. \n\n" +
+                "Odd iterations are done with box neighborhood, even iterations with a diamond. \n" +
+                "Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter \n" +
                 "result very similar to minimum sphere. Approximately:" +
                 "radius = iterations - 2";
     }

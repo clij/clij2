@@ -65,7 +65,8 @@ public class PullLabelsToROIList extends AbstractCLIJ2Plugin implements CLIJMacr
 
     @Override
     public String getDescription() {
-        return "Pulls all labels in a label map as ROIs to a list.";
+        return "Pulls all labels in a label map as ROIs to a list. \n\nFrom ImageJ macro this list is written to the log \n" +
+                "window. From ImageJ macro conside using pullLabelsToROIManager.";
     }
 
     @Override

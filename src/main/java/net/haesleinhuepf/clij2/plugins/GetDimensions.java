@@ -50,7 +50,7 @@ public class GetDimensions extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
     @Override
     public String getDescription() {
         return "Reads out the size of an image [stack] and writes it to the" +
-                " parameters 'width', 'height' and 'depth'.";
+                " variables 'width', 'height' and 'depth'.";
     }
 
     @Override

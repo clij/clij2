@@ -51,7 +51,7 @@ public class OnlyzeroOverwriteMaximumBox extends AbstractCLIJ2Plugin implements 
 
     @Override
     public String getDescription() {
-        return "TODO";
+        return "Apply a local maximum filter to an image which only overwrites pixels with value 0.";
     }
 
     @Override

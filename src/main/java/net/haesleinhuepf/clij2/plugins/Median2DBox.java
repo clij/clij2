@@ -56,7 +56,7 @@ public class Median2DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public String getDescription() {
-        return "Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by \n" +
+        return "Computes the local median of a pixels rectangular neighborhood. \n\nThe rectangle is specified by \n" +
                 "its half-width and half-height (radius).\n\n" +
                 "For technical reasons, the area of the rectangle must have less than 1000 pixels.";
     }

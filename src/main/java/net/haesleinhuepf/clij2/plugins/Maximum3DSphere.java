@@ -57,7 +57,7 @@ public class Maximum3DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getDescription() {
-        return "Computes the local maximum of a pixels spherical neighborhood. The spheres size is specified by \n" +
+        return "Computes the local maximum of a pixels spherical neighborhood. \n\nThe spheres size is specified by \n" +
                 "its half-width, half-height and half-depth (radius).";
     }
 

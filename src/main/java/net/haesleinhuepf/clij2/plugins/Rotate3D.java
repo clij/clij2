@@ -76,7 +76,7 @@ public class Rotate3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getDescription() {
-        return "Rotates an image stack in 3D. All angles are entered in degrees. If the image is not rotated around \n" +
+        return "Rotates an image stack in 3D. \n\nAll angles are entered in degrees. If the image is not rotated around \n" +
                 "the center, it is rotated around the coordinate origin.\n\n" +
                 "It is recommended to apply the rotation to an isotropic image stack.";
     }

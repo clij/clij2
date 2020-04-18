@@ -108,7 +108,7 @@ public class GetAutomaticThreshold extends AbstractCLIJ2Plugin implements CLIJMa
     public String getDescription() {
         StringBuilder doc = new StringBuilder();
         doc.append("The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on \n" +
-                "the GPU to determine a threshold value as similar as possible to ImageJ 'Apply Threshold' method. Enter one \n" +
+                "the GPU to determine a threshold value as similar as possible to ImageJ 'Apply Threshold' method. \n\nEnter one \n" +
                 "of these methods in the method text field:\n" +
                 Arrays.toString(AutoThresholderImageJ1.getMethods()) );
         return doc.toString();

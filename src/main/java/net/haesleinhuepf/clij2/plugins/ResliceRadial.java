@@ -86,7 +86,7 @@ public class ResliceRadial extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public String getDescription() {
-        return "Computes a radial projection of an image stack. Starting point for the line is the given point in any \n" +
+        return "Computes a radial projection of an image stack. \n\nStarting point for the line is the given point in any \n" +
                 "X/Y-plane of a given input image stack. Furthermore, radius of the resulting projection must be given " +
                 "and scaling factors in X and Y in case pixels are not isotropic." +
                 "This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.";

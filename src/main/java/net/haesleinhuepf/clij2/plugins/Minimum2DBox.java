@@ -39,7 +39,7 @@ public class Minimum2DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getDescription() {
-        return "Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by \n" +
+        return "Computes the local minimum of a pixels rectangular neighborhood. \n\nThe rectangles size is specified by \n" +
                 "its half-width and half-height (radius).";
     }
 

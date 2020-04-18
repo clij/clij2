@@ -52,7 +52,7 @@ public class CountTouchingNeighbors extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getDescription() {
-        return "Takes a touching-neighbors-matrix as input and delivers a vector with number of touching neighbors per label as a vector.";
+        return "Takes a touch matrix as input and delivers a vector with number of touching neighbors per label as a vector.";
     }
 
     @Override

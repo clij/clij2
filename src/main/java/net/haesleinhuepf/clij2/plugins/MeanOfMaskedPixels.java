@@ -48,7 +48,7 @@ public class MeanOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getDescription() {
-        return "Determines the mean intensity in an image, but only in pixels which have non-zero values in another" +
+        return "Determines the mean intensity in a masked image. \n\nOnly in pixels which have non-zero values in another" +
                 " binary mask image.";
     }
 

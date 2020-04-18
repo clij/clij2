@@ -81,7 +81,8 @@ public class DrawLine extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getDescription() {
-        return "Draws a line between two points with a given thickness. All pixels other than on the line are untouched. Consider using clij.op.set(buffer, 0); in advance.";
+        return "Draws a line between two points with a given thickness. \n\n" +
+                "All pixels other than on the line are untouched. Consider using `set(buffer, 0);` in advance.";
     }
 
     @Override

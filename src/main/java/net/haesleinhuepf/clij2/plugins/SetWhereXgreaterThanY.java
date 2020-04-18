@@ -42,7 +42,7 @@ public class SetWhereXgreaterThanY extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Sets all pixel values a of a given image A to a constant value v in case its coordinates x > y. " +
+        return "Sets all pixel values a of a given image A to a constant value v in case its coordinates x > y. \n\n" +
                 "Otherwise the pixel is not overwritten.\nIf you want to initialize an identity transfrom matrix, set all pixels to 0 first.\n\n" +
                 "<pre>f(a) = v</pre>";
     }

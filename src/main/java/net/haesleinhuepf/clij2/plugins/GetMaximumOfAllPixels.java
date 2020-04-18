@@ -40,7 +40,7 @@ public class GetMaximumOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Determines the maximum of all pixels in a given image. It will be stored in the variable maximum_of_all_pixels";
+        return "Determines the maximum of all pixels in a given image. \n\nIt will be stored in the variable maximum_of_all_pixels.";
     }
 
     @Override

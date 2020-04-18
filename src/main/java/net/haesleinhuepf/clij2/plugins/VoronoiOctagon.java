@@ -93,7 +93,7 @@ public class VoronoiOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getDescription() {
-        return "Takes a binary image and dilates the regions using a octagon shape until they touch. The pixels where " +
+        return "Takes a binary image and dilates the regions using a octagon shape until they touch. \n\nThe pixels where " +
                 " the regions touched are afterwards returned as binary image which corresponds to the Voronoi diagram.";
     }
 

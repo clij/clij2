@@ -76,7 +76,8 @@ public class DrawSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
 
     @Override
     public String getDescription() {
-        return "Draws a sphere around a given point with given radii in x, y and z (if 3D). All pixels other than in the sphere are untouched. Consider using clij.op.set(buffer, 0); in advance.";
+        return "Draws a sphere around a given point with given radii in x, y and z (if 3D). \n\n" +
+                " All pixels other than in the sphere are untouched. Consider using `set(buffer, 0);` in advance.";
     }
 
     @Override

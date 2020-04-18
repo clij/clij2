@@ -52,7 +52,7 @@ public class ArgMaximumZProjection extends AbstractCLIJ2Plugin implements CLIJMa
     @Override
     public String getDescription() {
         return "Determines the maximum projection of an image stack along Z." +
-                "\nFurthermore, another 2D image is generated with pixels containing the z-index where the maximum was found (zero based).";
+                "\n\nFurthermore, another 2D image is generated with pixels containing the z-index where the maximum was found (zero based).";
     }
 
     @Override

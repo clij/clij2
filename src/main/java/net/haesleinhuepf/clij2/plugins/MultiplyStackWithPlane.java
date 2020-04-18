@@ -43,7 +43,7 @@ public class MultiplyStackWithPlane extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getDescription() {
-        return "Multiplies all pairs of pixel values x and y from an image stack X and a 2D image Y. x and y are at \n" +
+        return "Multiplies all pairs of pixel values x and y from an image stack X and a 2D image Y. \n\nx and y are at \n" +
                 "the same spatial position within a plane.\n\n<pre>f(x, y) = x * y</pre>";
     }
 

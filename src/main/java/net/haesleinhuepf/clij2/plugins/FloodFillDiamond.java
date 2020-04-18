@@ -114,6 +114,8 @@ public class FloodFillDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPl
     @Override
     public String getLicense() {
         return "\n" +
+                "Code was translated from " +
+                " \n\n" +
                 " Skeletonize3D plugin for ImageJ(C).\n" +
                 " Copyright (C) 2008 Ignacio Arganda-Carreras \n" +
                 " \n" +

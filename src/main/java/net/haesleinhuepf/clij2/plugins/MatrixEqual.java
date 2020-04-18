@@ -55,7 +55,7 @@ public class MatrixEqual extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public String getDescription() {
-        return "Checks if all elements of a matrix are different by less than or equal to a given tolerance.\n" +
+        return "Checks if all elements of a matrix are different by less than or equal to a given tolerance. \n\n" +
                 "The result will be put in the results table in column \"MatrixEqual\" as 1 if yes and 0 otherwise.";
     }
 

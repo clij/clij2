@@ -63,7 +63,7 @@ public class Crop3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getDescription() {
-        return "Crops a given sub-stack out of a given image stack.\n\n" +
+        return "Crops a given sub-stack out of a given image stack. \n\n" +
                 "Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.";
     }
 

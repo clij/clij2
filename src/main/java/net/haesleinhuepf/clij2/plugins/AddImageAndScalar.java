@@ -48,7 +48,8 @@ public class AddImageAndScalar extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getDescription() {
-        return "Adds a scalar value s to all pixels x of a given image X.\n\n<pre>f(x, s) = x + s</pre>";
+        return "Adds a scalar value s to all pixels x of a given image X.\n\n" +
+                "<pre>f(x, s) = x + s</pre>";
     }
 
     @Override

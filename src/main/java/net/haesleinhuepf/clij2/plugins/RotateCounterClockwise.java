@@ -61,7 +61,7 @@ public class RotateCounterClockwise extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getDescription() {
-        return "Rotates a given input image by 90 degrees counter-clockwise. For that, X and Y axis of an image stack\n" +
+        return "Rotates a given input image by 90 degrees counter-clockwise. \n\nFor that, X and Y axis of an image stack\n" +
                 "are flipped. This operation is similar to ImageJs 'Reslice [/]' method but offers less flexibility \n" +
                 "such as interpolation.";
     }

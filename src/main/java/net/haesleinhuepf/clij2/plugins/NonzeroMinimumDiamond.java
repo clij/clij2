@@ -53,7 +53,7 @@ public class NonzeroMinimumDiamond extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Apply a minimum filter (diamond shape) to the input image. The radius is fixed to 1 and pixels with value 0 are ignored.";
+        return "Apply a minimum filter (diamond shape) to the input image. \n\nThe radius is fixed to 1 and pixels with value 0 are ignored.";
     }
 
     @Override

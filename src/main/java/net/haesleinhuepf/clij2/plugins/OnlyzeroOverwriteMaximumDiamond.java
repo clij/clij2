@@ -52,7 +52,7 @@ public class OnlyzeroOverwriteMaximumDiamond extends AbstractCLIJ2Plugin impleme
 
     @Override
     public String getDescription() {
-        return "TODO";
+        return "Apply a local maximum filter to an image which only overwrites pixels with value 0.";
     }
 
     @Override

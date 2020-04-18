@@ -56,7 +56,7 @@ public class JaccardIndex extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getDescription() {
-        return "Determines the overlap of two binary images using the Jaccard index.\n" +
+        return "Determines the overlap of two binary images using the Jaccard index. \n\n" +
                 "A value of 0 suggests no overlap, 1 means perfect overlap.\n" +
                 "The resulting Jaccard index is saved to the results table in the 'Jaccard_Index' column.\n" +
                 "Note that the Sorensen-Dice coefficient can be calculated from the Jaccard index j using this formula:\n" +

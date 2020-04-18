@@ -47,7 +47,7 @@ public class MultiplyImageAndCoordinate extends AbstractCLIJ2Plugin implements C
 
     @Override
     public String getDescription() {
-        return "Multiplies all pixel intensities with the x, y or z coordinate, depending on specified dimension.</pre>";
+        return "Multiplies all pixel intensities with the x, y or z coordinate, depending on specified dimension.";
     }
 
     @Override

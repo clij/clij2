@@ -58,7 +58,7 @@ public class MeanSquaredError extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public String getDescription() {
-        return "Determines the mean squared error (MSE) between two images. The MSE will be stored in a new row of ImageJs\n" +
+        return "Determines the mean squared error (MSE) between two images. \n\nThe MSE will be stored in a new row of ImageJs\n" +
                 "Results table in the column 'MSE'.";
     }
 
