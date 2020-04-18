@@ -61,8 +61,8 @@ public class AverageDistanceOfNClosestPoints extends AbstractCLIJ2Plugin impleme
 
     @Override
     public String getDescription() {
-        return "Determine the n point indices with shortest distance for all points in a distance matrix.\n" +
-                "This corresponds to the n row indices with minimum values for each column of the distance matrix.";
+        return "Determines the average of the n closest points for every point in a distance matrix.\n" +
+                "This corresponds to the average of the n minimum values (rows) for each column of the distance matrix.";
     }
 
     @Override

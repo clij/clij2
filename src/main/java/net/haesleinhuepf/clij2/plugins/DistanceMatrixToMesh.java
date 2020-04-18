@@ -19,7 +19,7 @@ public class DistanceMatrixToMesh extends AbstractCLIJ2Plugin implements CLIJMac
 
     @Override
     public String getParameterHelpText() {
-        return "Image pointlist, Image distance_matrix, ByRef Image mesh_destination, Number maximumDistance";
+        return "Image pointlist, Image distance_matrix, ByRef Image mesh_destination, Number maximum_distance";
     }
 
     @Override

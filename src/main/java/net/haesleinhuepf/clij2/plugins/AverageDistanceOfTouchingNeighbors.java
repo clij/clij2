@@ -50,7 +50,8 @@ public class AverageDistanceOfTouchingNeighbors extends AbstractCLIJ2Plugin impl
 
     @Override
     public String getDescription() {
-        return "Takes a touch matrix and a distance matrix to determine the average distance of touching neighbors for every object.";
+        return "Takes a touch matrix and a distance matrix to determine the average distance of touching neighbors \n " +
+                "for every object.";
     }
 
     @Override

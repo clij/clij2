@@ -44,7 +44,7 @@ public class ConcatenateStacks extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getDescription() {
-        return "Concatenates two stacks";
+        return "Concatenates two stacks in Z.";
     }
 
     @Override

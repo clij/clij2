@@ -230,7 +230,8 @@ public class ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements 
 
     @Override
     public String getDescription() {
-        return "Performs connected components analysis to a binary image and generates a label map.";
+        return "Performs connected components analysis to a binary image and generates a label map.\n\n" +
+                "DEPRECATED: This method is deprecated. Use ConnectedComponentsLabellingBox (or Diamond) instead.";
     }
 
     @Override

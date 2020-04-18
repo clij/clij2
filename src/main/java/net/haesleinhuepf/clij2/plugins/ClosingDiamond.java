@@ -53,7 +53,7 @@ public class ClosingDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getDescription() {
-        return "Apply a binary closing to the input image by calling n dilations and n erosions subsequenntly.";
+        return "Apply a binary closing to the input image by calling n dilations and n erosions subsequently.";
     }
 
     @Override

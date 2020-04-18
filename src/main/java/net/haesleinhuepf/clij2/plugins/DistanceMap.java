@@ -94,7 +94,8 @@ public class DistanceMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
     @Override
     public String getDescription() {
         return "Generates a distance map from a binary image. Pixels with non-zero value in the binary image are set to a number " +
-                "representing the distance to the closest zero-value pixel.";
+                "representing the distance to the closest zero-value pixel.\n\n" +
+                "Note: This is not a distance matrix. See generateDistanceMatrix for details.";
     }
 
     @Override
