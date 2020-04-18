@@ -49,11 +49,11 @@ public class DrawBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("x1", x);
         parameters.put("y1", y);
-        parameters.put("x2", x + width - 1);
-        parameters.put("y2", y + height - 1);
+        parameters.put("x2", x + width);
+        parameters.put("y2", y + height);
         if (output.getDimension() > 2) {
             parameters.put("z1", z);
-            parameters.put("z2", z + depth - 1);
+            parameters.put("z2", z + depth);
         }
         parameters.put("dst", output);
         parameters.put("value", value);
