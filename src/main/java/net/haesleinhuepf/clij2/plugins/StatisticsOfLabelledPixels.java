@@ -166,7 +166,7 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
             int y = 0;
             for (int i = 0; i < pixels.length; i++) {
                 int index = (int) labels[i];
-                if (index > 0) {
+                if (index >= startLabelIndex) {
 
                     int targetIndex = index - startLabelIndex;
                     double value = pixels[i];
@@ -273,7 +273,8 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
 
             for (int i = 0; i < pixels.length; i ++) {
                 int index = (int) labels[i];
-                if (index > 0) {
+
+                if (index >= startLabelIndex) {
 
                     int targetIndex = index - startLabelIndex;
                     double value = pixels[i];
