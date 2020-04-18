@@ -60,8 +60,11 @@ public class SetRandom extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
         ClearCLBuffer buffer = clij2.push(imp);
 
-        clij2.copy(buffer, target);
-
+        if (buffer.getDimension() != target.getDimension()) {
+            clij2.copySlice(buffer, target, 0);
+        } else {
+            clij2.copy(buffer, target);
+        }
         clij2.release(buffer);
         return true;
 
