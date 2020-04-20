@@ -9,8 +9,11 @@ __kernel void count_nonzero_voxels_sphere_3d
   const int Nz
 )
 {
-  const int i = get_global_id(0), j = get_global_id(1), k = get_global_id(2);
-  const int4 coord = (int4){i,j,k,0};
+  const int i = get_global_id(0);
+  const int j = get_global_id(1);
+  const int k = get_global_id(2);
+
+  const POS_dst_TYPE coord = POS_dst_INSTANCE(i,j,k,0);
 
     const int4   e = (int4)  {(Nx-1)/2, (Ny-1)/2, (Nz-1)/2, 0 };
     int count = 0;
@@ -39,7 +42,7 @@ __kernel void count_nonzero_voxels_sphere_3d
                     int x1 = coord.x + x;
                     int x2 = coord.y + y;
                     int x3 = coord.z + z;
-                    const int4 pos = (int4){x1,x2,x3,0};
+                    const POS_src_TYPE pos = POS_src_INSTANCE(x1,x2,x3,0);
                     float value_res = (float)READ_src_IMAGE(src,sampler,pos).x;
                     if (value_res != 0) {
                         count++;
