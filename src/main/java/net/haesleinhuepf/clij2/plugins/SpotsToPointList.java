@@ -26,7 +26,7 @@ public class SpotsToPointList extends AbstractCLIJ2Plugin implements CLIJMacroPl
     public static boolean spotsToPointList(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output) {
         ClearCLBuffer temp1 = clij2.create(input.getDimensions(), NativeTypeEnum.Float);
 
-        clij2.connectedComponentsLabeling(input, temp1);
+        clij2.labelSpots(input, temp1);
         //clij2.setNonZeroPixelsToPixelIndex(input, temp1);
         clij2.labelledSpotsToPointList(temp1, output);
 
