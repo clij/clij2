@@ -35,7 +35,7 @@ public class Translate2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
     public static boolean translate2D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float translateX, Float translateY) {
         AffineTransform2D at = new AffineTransform2D();
 
-        at.translate(translateX, translateY);
+        at.translate(-translateX, -translateY);
         if (!clij2.hasImageSupport()) {
             return clij2.affineTransform2D(input, output, AffineTransform.matrixToFloatArray2D(at));
         } else {

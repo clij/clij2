@@ -39,7 +39,7 @@ public class Translate3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
         AffineTransform3D at = new AffineTransform3D();
 
-        at.translate(translateX, translateY, translateZ);
+        at.translate(-translateX, -translateY, -translateZ);
         if (!clij2.hasImageSupport()) {
             return clij2.affineTransform3D(input, output, AffineTransform.matrixToFloatArray(at));
         } else {
