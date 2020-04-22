@@ -9,6 +9,7 @@ import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import org.scijava.plugin.Plugin;
 
+import java.awt.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.FloatBuffer;
@@ -67,6 +68,13 @@ public class PushArray extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
         return true;
     }
 
+    public static ClearCLBuffer pushArray(CLIJ2 clij2, float[] array, int width, int height, int depth) {
+        ClearCLBuffer buffer = clij2.create(width, height, depth);
+        FloatBuffer floatBuffer = FloatBuffer.wrap(array);
+        buffer.readFrom(floatBuffer, true);
+        return buffer;
+    }
+
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
         int width = asInteger(args[2]);
@@ -77,7 +85,7 @@ public class PushArray extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getParameterHelpText() {
-        return "Image destination, Array input, Number width, Number height, Number depth";
+        return "ByRef Image destination, Array input, Number width, Number height, Number depth";
     }
 
     @Override
