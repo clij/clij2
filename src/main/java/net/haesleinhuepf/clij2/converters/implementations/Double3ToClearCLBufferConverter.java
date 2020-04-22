@@ -15,9 +15,9 @@ public class Double3ToClearCLBufferConverter extends AbstractCLIJConverter<Doubl
     @Override
     public ClearCLBuffer convert(Double3 source) {
         long[] dimensions = new long[]{
-                source.data[0][0].length,
+                source.data.length,
                 source.data[0].length,
-                source.data.length
+                source.data[0][0].length
         };
 
         int numberOfPixelsPerSlice = (int)(dimensions[0] * dimensions[1]);
@@ -28,9 +28,9 @@ public class Double3ToClearCLBufferConverter extends AbstractCLIJConverter<Doubl
         float[] inputArray = new float[(int)numberOfPixels];
 
         int count = 0;
-        for (int x = 0; x < dimensions[0]; x++) {
+        for (int z = 0; z < dimensions[2]; z++) {
             for (int y = 0; y < dimensions[1]; y++) {
-                for (int z = 0; z < dimensions[2]; z++) {
+                for (int x = 0; x < dimensions[0]; x++) {
                     inputArray[count] = (float)source.data[x][y][z];
                     count++;
                 }

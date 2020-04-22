@@ -1,19 +1,21 @@
 package net.haesleinhuepf.clij2.converters.implementations;
 
-import net.haesleinhuepf.clij2.converters.helptypes.Byte3;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.converters.AbstractCLIJConverter;
 import net.haesleinhuepf.clij.converters.CLIJConverterPlugin;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
+import net.haesleinhuepf.clij2.converters.helptypes.Byte3;
+import net.haesleinhuepf.clij2.converters.helptypes.Char3;
 import org.scijava.plugin.Plugin;
 
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 
 @Plugin(type = CLIJConverterPlugin.class)
-public class Byte3ToClearCLBufferConverter extends AbstractCLIJConverter<Byte3, ClearCLBuffer> {
+public class Char3ToClearCLBufferConverter extends AbstractCLIJConverter<Char3, ClearCLBuffer> {
 
     @Override
-    public ClearCLBuffer convert(Byte3 source) {
+    public ClearCLBuffer convert(Char3 source) {
         long[] dimensions = new long[]{
                 source.data.length,
                 source.data[0].length,
@@ -24,8 +26,8 @@ public class Byte3ToClearCLBufferConverter extends AbstractCLIJConverter<Byte3, 
         long numberOfPixels = numberOfPixelsPerSlice * dimensions[2];
 
 
-        ClearCLBuffer target = clij.createCLBuffer(dimensions, NativeTypeEnum.UnsignedByte);
-        byte[] inputArray = new byte[(int)numberOfPixels];
+        ClearCLBuffer target = clij.createCLBuffer(dimensions, NativeTypeEnum.UnsignedShort);
+        char[] inputArray = new char[(int)numberOfPixels];
 
         int count = 0;
         for (int z = 0; z < dimensions[2]; z++) {
@@ -36,14 +38,14 @@ public class Byte3ToClearCLBufferConverter extends AbstractCLIJConverter<Byte3, 
                 }
             }
         }
-        ByteBuffer byteBuffer = ByteBuffer.wrap(inputArray);
-        target.readFrom(byteBuffer, true);
+        CharBuffer charBuffer = CharBuffer.wrap(inputArray);
+        target.readFrom(charBuffer, true);
         return target;
     }
 
     @Override
-    public Class<Byte3> getSourceType() {
-        return Byte3.class;
+    public Class<Char3> getSourceType() {
+        return Char3.class;
     }
 
     @Override
