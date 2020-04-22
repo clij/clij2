@@ -301,6 +301,17 @@ import net.haesleinhuepf.clij2.plugins.GetMeanOfAllPixels;
 import net.haesleinhuepf.clij2.plugins.GetJaccardIndex;
 import net.haesleinhuepf.clij2.plugins.GetCenterOfMass;
 import net.haesleinhuepf.clij2.plugins.GetBoundingBox;
+import net.haesleinhuepf.clij2.plugins.PushArray;
+import net.haesleinhuepf.clij2.plugins.PullString;
+import net.haesleinhuepf.clij2.plugins.PushString;
+import net.haesleinhuepf.clij2.plugins.MedianOfTouchingNeighbors;
+import net.haesleinhuepf.clij2.plugins.PushResultsTableColumn;
+import net.haesleinhuepf.clij2.plugins.PushResultsTable;
+import net.haesleinhuepf.clij2.plugins.PullToResultsTable;
+import net.haesleinhuepf.clij2.plugins.LabelVoronoiOctagon;
+import net.haesleinhuepf.clij2.plugins.TouchMatrixToAdjacencyMatrix;
+import net.haesleinhuepf.clij2.plugins.AdjacencyMatrixToTouchMatrix;
+import net.haesleinhuepf.clij2.plugins.PointlistToLabelledSpots;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
@@ -695,6 +706,7 @@ public abstract interface CLIJ2Ops {
     /**
      * Converts an image into a table.
      */
+    @Deprecated
     default ResultsTable image2DToResultsTable(ClearCLBuffer arg1, ResultsTable arg2) {
         return Image2DToResultsTable.image2DToResultsTable(getCLIJ2(), arg1, arg2);
     }
@@ -702,6 +714,7 @@ public abstract interface CLIJ2Ops {
     /**
      * Converts an image into a table.
      */
+    @Deprecated
     default ResultsTable image2DToResultsTable(ClearCLImage arg1, ResultsTable arg2) {
         return Image2DToResultsTable.image2DToResultsTable(getCLIJ2(), arg1, arg2);
     }
@@ -2213,7 +2226,7 @@ public abstract interface CLIJ2Ops {
      * 
      * This plugin is comparable to setting a raw threshold in ImageJ and using the 'Convert to Mask' menu.
      */
-    default boolean threshold(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+    default boolean threshold(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
         return Threshold.threshold(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
     }
 
@@ -4250,6 +4263,7 @@ public abstract interface CLIJ2Ops {
      * 
      * Rows stay rows, columns stay columns.
      */
+    @Deprecated
     default boolean resultsTableToImage2D(ClearCLBuffer arg1, ResultsTable arg2) {
         return ResultsTableToImage2D.resultsTableToImage2D(getCLIJ2(), arg1, arg2);
     }
@@ -4508,5 +4522,169 @@ public abstract interface CLIJ2Ops {
         return GetBoundingBox.getBoundingBox(getCLIJ2(), arg1);
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.PushArray
+    //----------------------------------------------------
+    /**
+     * Converts an array to an image.
+     */
+    default boolean pushArray(ClearCLBuffer arg1, Object arg2) {
+        return PushArray.pushArray(getCLIJ2(), arg1, arg2);
+    }
+
+    /**
+     * Converts an array to an image.
+     */
+    default ClearCLBuffer pushArray(float[] arg1, int arg2, int arg3, int arg4) {
+        return PushArray.pushArray(getCLIJ2(), arg1, arg2, arg3, arg4);
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.PullString
+    //----------------------------------------------------
+    /**
+     * 
+     */
+    default String pullString(ClearCLImageInterface arg1) {
+        return PullString.pullString(getCLIJ2(), arg1);
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.PushString
+    //----------------------------------------------------
+    /**
+     * Converts an string to an image. 
+     * 
+     * The formatting works with double line breaks for slice switches, single line breaks for y swithces and 
+     * spaces for x. For example this string is converted to an image with width=4, height=3 and depth=2:
+     * 
+     * 1 2 3 4
+     * 5 6 7 8
+     * 9 0 1 2
+     * 
+     * 3 4 5 6
+     * 7 8 9 0
+     * 1 2 3 4
+     * 
+     */
+    default boolean pushString(ClearCLBuffer arg1, String arg2) {
+        return PushString.pushString(getCLIJ2(), arg1, arg2);
+    }
+
+    /**
+     * Converts an string to an image. 
+     * 
+     * The formatting works with double line breaks for slice switches, single line breaks for y swithces and 
+     * spaces for x. For example this string is converted to an image with width=4, height=3 and depth=2:
+     * 
+     * 1 2 3 4
+     * 5 6 7 8
+     * 9 0 1 2
+     * 
+     * 3 4 5 6
+     * 7 8 9 0
+     * 1 2 3 4
+     * 
+     */
+    default ClearCLBuffer pushString(String arg1) {
+        return PushString.pushString(getCLIJ2(), arg1);
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.MedianOfTouchingNeighbors
+    //----------------------------------------------------
+    /**
+     * Takes a touch matrix and a vector of values to determine the mean value among touching neighbors for every object. 
+     * 
+     * TODO: This only works for values between 0 and 255 for now.
+     */
+    default boolean medianOfTouchingNeighbors(ClearCLBuffer values, ClearCLBuffer touch_matrix, ClearCLBuffer mean_values_destination) {
+        return MedianOfTouchingNeighbors.medianOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, mean_values_destination);
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.PushResultsTableColumn
+    //----------------------------------------------------
+    /**
+     * Converts a table column to an image. 
+     * 
+     * The values are stored in x dimension.
+     */
+    default boolean pushResultsTableColumn(ClearCLBuffer arg1, ResultsTable arg2, String arg3) {
+        return PushResultsTableColumn.pushResultsTableColumn(getCLIJ2(), arg1, arg2, arg3);
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.PushResultsTable
+    //----------------------------------------------------
+    /**
+     * Converts a table to an image. 
+     * 
+     * Rows stay rows, columns stay columns.
+     */
+    default boolean pushResultsTable(ClearCLBuffer arg1, ResultsTable arg2) {
+        return PushResultsTable.pushResultsTable(getCLIJ2(), arg1, arg2);
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.PullToResultsTable
+    //----------------------------------------------------
+    /**
+     * 
+     */
+    default ResultsTable pullResultsTable(ClearCLBuffer arg1, ResultsTable arg2) {
+        return PullToResultsTable.pullResultsTable(getCLIJ2(), arg1, arg2);
+    }
+
+    /**
+     * 
+     */
+    default ResultsTable pullResultsTable(ClearCLImage arg1, ResultsTable arg2) {
+        return PullToResultsTable.pullResultsTable(getCLIJ2(), arg1, arg2);
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.LabelVoronoiOctagon
+    //----------------------------------------------------
+    /**
+     * Takes a binary image and dilates the regions using a octagon shape until they touch. 
+     * 
+     * The pixels where  the regions touched are afterwards returned as binary image which corresponds to the Voronoi diagram.
+     */
+    default boolean labelVoronoiOctagon(ClearCLBuffer input, ClearCLBuffer destination) {
+        return LabelVoronoiOctagon.labelVoronoiOctagon(getCLIJ2(), input, destination);
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.TouchMatrixToAdjacencyMatrix
+    //----------------------------------------------------
+    /**
+     * Converts a touch matrix in an adjacency matrix
+     */
+    default boolean touchMatrixToAdjacencyMatrix(ClearCLBuffer touch_matrix, ClearCLBuffer adjacency_matrix) {
+        return TouchMatrixToAdjacencyMatrix.touchMatrixToAdjacencyMatrix(getCLIJ2(), touch_matrix, adjacency_matrix);
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.AdjacencyMatrixToTouchMatrix
+    //----------------------------------------------------
+    /**
+     * Converts a adjacency matrix in a touch matrix
+     */
+    default boolean adjacencyMatrixToTouchMatrix(ClearCLBuffer adjacency_matrix, ClearCLBuffer touch_matrix) {
+        return AdjacencyMatrixToTouchMatrix.adjacencyMatrixToTouchMatrix(getCLIJ2(), adjacency_matrix, touch_matrix);
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.PointlistToLabelledSpots
+    //----------------------------------------------------
+    /**
+     * Takes a pointlist with dimensions n*d with n point coordinates in d dimensions and a touch matrix of 
+     * size n*n to draw lines from all points to points if the corresponding pixel in the touch matrix is 1.
+     */
+    default boolean pointlistToLabelledSpots(ClearCLBuffer pointlist, ClearCLBuffer spots_destination) {
+        return PointlistToLabelledSpots.pointlistToLabelledSpots(getCLIJ2(), pointlist, spots_destination);
+    }
+
 }
-// 363 methods generated.
+// 377 methods generated.
