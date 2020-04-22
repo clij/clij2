@@ -116,14 +116,14 @@ public class Resample extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
         if (input.getDimension() == 2 ) {
             return clij.create(new long[]{
-                    (long) (input.getWidth() * factorX),
-                    (long) (input.getHeight() * factorY)
+                    (long) (input.getWidth() / factorX),
+                    (long) (input.getHeight() / factorY)
             }, input.getNativeType());
         } else {
             return clij.create(new long[]{
-                    (long) (input.getWidth() * factorX),
-                    (long) (input.getHeight() * factorY),
-                    (long) (input.getDepth() * factorZ)
+                    (long) (input.getWidth() / factorX),
+                    (long) (input.getHeight() / factorY),
+                    (long) (input.getDepth() / factorZ)
             }, input.getNativeType());
         }
     }
