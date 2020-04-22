@@ -31,7 +31,7 @@ public class WriteValuesToPositions extends AbstractCLIJ2Plugin implements CLIJM
         parameters.put("dst", dst);
 
         long[] size = new long[] { positionsAndValues.getWidth(), 1, 1};
-        clij2.execute(WriteValuesToPositions.class, "write_values_to_positions_3d_x.cl", "write_values_to_positions_" + dst.getDimension() + "d", size, size, parameters);
+        clij2.execute(WriteValuesToPositions.class, "write_values_to_positions_" +  dst.getDimension() + "d_x.cl", "write_values_to_positions_" + dst.getDimension() + "d", size, size, parameters);
         return true;
     }
 
