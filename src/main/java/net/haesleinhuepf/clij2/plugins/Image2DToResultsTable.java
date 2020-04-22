@@ -16,6 +16,7 @@ import org.scijava.plugin.Plugin;
  * Author: @haesleinhuepf
  * June 2019
  */
+@Deprecated
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_image2DToResultsTable")
 public class Image2DToResultsTable extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
@@ -28,18 +29,22 @@ public class Image2DToResultsTable extends AbstractCLIJ2Plugin implements CLIJMa
         return true;
     }
 
+    @Deprecated
     public static ResultsTable image2DToResultsTable(CLIJ2 clij2, ClearCLBuffer buffer, ResultsTable table) {
         ImagePlus converted = clij2.pull(buffer);
         ImageProcessor ip = converted.getProcessor();
         return image2DToResultsTable(ip, table);
     }
+
+    @Deprecated
     public static ResultsTable image2DToResultsTable(CLIJ2 clij2, ClearCLImage image, ResultsTable table) {
         ImagePlus converted = clij2.convert(image, ImagePlus.class);
         ImageProcessor ip = converted.getProcessor();
         return image2DToResultsTable(ip, table);
     }
 
-    private static ResultsTable image2DToResultsTable(ImageProcessor ip, ResultsTable table) {
+    @Deprecated
+    static ResultsTable image2DToResultsTable(ImageProcessor ip, ResultsTable table) {
         if (table == null) {
             table = ResultsTable.getResultsTable();
         }
