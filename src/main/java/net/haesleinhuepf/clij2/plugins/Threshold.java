@@ -1,6 +1,7 @@
 package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -20,7 +21,7 @@ public class Threshold extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
          return threshold(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
     }
 
-    public static boolean threshold(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float threshold) {
+    public static boolean threshold(CLIJ2 clij2, ClearCLImageInterface input, ClearCLImageInterface output, Float threshold) {
         return clij2.greaterOrEqualConstant(input, output, threshold);
     }
 
