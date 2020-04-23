@@ -21,7 +21,7 @@ public class ConcatenateStacks extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public boolean executeCL() {
-        return concatenateStacks(getCLIJ2(), (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), (ClearCLImageInterface)(args[2]));
+        return getCLIJ2().concatenateStacks((ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), (ClearCLImageInterface)(args[2]));
     }
 
     public static boolean concatenateStacks(CLIJ2 clij2, ClearCLImageInterface stack1, ClearCLImageInterface stack2, ClearCLImageInterface dst) {

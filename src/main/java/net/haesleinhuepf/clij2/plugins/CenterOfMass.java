@@ -26,7 +26,7 @@ public class CenterOfMass extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
         ClearCLBuffer input = (ClearCLBuffer)( args[0]);
 
-        double[] center = centerOfMass(getCLIJ2(), input);
+        double[] center = getCLIJ2().centerOfMass(input);
 
         table.addValue("MassX", center[0]);
         table.addValue("MassY", center[1]);

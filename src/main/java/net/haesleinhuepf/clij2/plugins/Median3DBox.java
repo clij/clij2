@@ -24,7 +24,7 @@ public class Median3DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public boolean executeCL() {
-        return median3DBox(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
+        return getCLIJ2().median3DBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
     }
 
     public static boolean median3DBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {

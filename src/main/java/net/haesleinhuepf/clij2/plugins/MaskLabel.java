@@ -20,7 +20,7 @@ public class MaskLabel extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public boolean executeCL() {
-        boolean result = maskLabel(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]), asFloat(args[3]));
+        boolean result = getCLIJ2().maskLabel((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]), asFloat(args[3]));
         return result;
     }
 

@@ -32,7 +32,7 @@ public class MultiplyImageStackWithScalars extends AbstractCLIJ2Plugin implement
             scalars[i] = asFloat(array[i]);
         }
 
-        return multiplyImageStackWithScalars(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), scalars);
+        return getCLIJ2().multiplyImageStackWithScalars((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), scalars);
     }
 
     @Deprecated

@@ -20,7 +20,7 @@ public class Smaller extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
     @Override
     public boolean executeCL() {
-        boolean result = smaller(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = getCLIJ2().smaller((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         return result;
     }
 

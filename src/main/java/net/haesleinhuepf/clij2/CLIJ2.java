@@ -23,6 +23,7 @@ import net.imglib2.view.Views;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.HashMap;
+import java.util.Stack;
 
 
 /**
@@ -33,6 +34,7 @@ import java.util.HashMap;
  */
 public class CLIJ2 implements CLIJ2Ops {
     private static CLIJ2 instance;
+    private boolean doTimeTracing = false;
 
     protected CLIJ clij;
 
@@ -546,11 +548,72 @@ public class CLIJ2 implements CLIJ2Ops {
      */
     public ClearCLBuffer transfer(ClearCLBuffer input) {
         ClearCLBuffer output = create(input);
+        transferTo(input, output);
+        return output;
+    }
+
+    /**
+     * Transfer a buffer between different OpenCLDevices
+     * @param input
+     * @param output
+     * @return
+     */
+    public void transferTo(ClearCLBuffer input, ClearCLBuffer output) {
         //System.out.println("Transfer from: " + input);
         //System.out.println("Transfer to: " + output);
         ByteBuffer buffer = ByteBuffer.allocate((int) input.getSizeInBytes());
         input.writeTo(buffer, true);
         output.readFrom(buffer, true);
-        return output;
+
+    }
+
+    public boolean doTimeTracing() {
+        return doTimeTracing;
+    }
+
+    public void setDoTimeTracing(boolean doTimeTracing) {
+        this.doTimeTracing = doTimeTracing;
+        if (doTimeTracing) {
+            resetTimeTraces();
+            recordMethodStart("timeTracing");
+        } else {
+            recordMethodEnd("timeTracing");
+        }
+    }
+
+    public String getTimeTraces() {
+        return timeTraces.toString();
+    }
+
+    Stack<Long> times;
+    public void recordMethodStart(String method) {
+        for (int i = 0; i < times.size(); i++) {
+            timeTraces.append(" ");
+        }
+        timeTraces.append("> " + method + "\n");
+        times.push(System.nanoTime());
+
+    }
+
+    StringBuilder timeTraces = new StringBuilder();
+    public void recordMethodEnd(String method) {
+        double duration = (double)(System.nanoTime() - times.pop()) / 1000000;
+        int charCount = 0;
+        for (int i = 0; i < times.size(); i++) {
+            timeTraces.append(" ");
+            charCount++;
+        }
+        timeTraces.append("< " + method);
+        charCount += method.length();
+        for (int i = charCount; i < 60; i++) {
+            timeTraces.append(" ");
+        }
+        timeTraces.append("" + duration + " ms");
+        timeTraces.append("\n");
+    }
+
+    public void resetTimeTraces() {
+        timeTraces = new StringBuilder();
+        times = new Stack<Long>();
     }
 }

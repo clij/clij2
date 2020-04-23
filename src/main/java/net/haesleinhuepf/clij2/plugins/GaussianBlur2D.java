@@ -31,10 +31,10 @@ public class GaussianBlur2D extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         if (clij2.hasImageSupport()) {
             ClearCLImage image = clij2.create(input.getDimensions(), CLIJUtilities.nativeToChannelType(input.getNativeType()));
             clij2.copy(input, image);
-            gaussianBlur2D(clij2, image, output, sigmaX, sigmaY);
+            clij2.gaussianBlur2D(image, output, sigmaX, sigmaY);
             clij2.release(image);
         } else {
-            gaussianBlur2D(clij2, input, output, sigmaX, sigmaY);
+            clij2.gaussianBlur2D(input, output, sigmaX, sigmaY);
         }
         return true;
     }

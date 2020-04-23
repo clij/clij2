@@ -23,7 +23,7 @@ public class BinaryOr extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public boolean executeCL() {
-        binaryOr(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        getCLIJ2().binaryOr((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         return true;
     }
 

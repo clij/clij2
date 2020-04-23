@@ -26,7 +26,7 @@ public class MinimumSliceBySliceSphere extends AbstractCLIJ2Plugin implements CL
         int radiusX = asInteger(args[2]);
         int radiusY = asInteger(args[3]);
 
-        return minimum3DSliceBySliceSphere(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
+        return getCLIJ2().minimum3DSliceBySliceSphere((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
     }
 
     public static boolean minimum3DSliceBySliceSphere(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY) {

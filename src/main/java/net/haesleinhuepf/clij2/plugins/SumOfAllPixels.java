@@ -26,7 +26,7 @@ public class SumOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public boolean executeCL() {
-        double sum = sumPixels(getCLIJ2(), (ClearCLBuffer)( args[0]));
+        double sum = getCLIJ2().sumOfAllPixels((ClearCLBuffer)( args[0]));
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();

@@ -27,7 +27,7 @@ public class PushArray extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
         ClearCLBuffer buffer = (ClearCLBuffer)( args[0]);
         Object array = args[1];
 
-        pushArray(getCLIJ2(), buffer, array);
+        getCLIJ2().pushArray(buffer, array);
         return true;
     }
 

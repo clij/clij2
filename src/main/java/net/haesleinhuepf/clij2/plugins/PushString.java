@@ -31,7 +31,7 @@ public class PushString extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
         ClearCLBuffer buffer = (ClearCLBuffer)( args[0]);
         String image = (String)args[1];
 
-        pushString(getCLIJ2(), buffer, image);
+        getCLIJ2().pushString(buffer, image);
         return true;
     }
 

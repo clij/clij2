@@ -22,9 +22,7 @@ public class MeanOfTouchingNeighbors extends AbstractCLIJ2Plugin implements CLIJ
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        boolean result = meanOfTouchingNeighbors(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
-        releaseBuffers(args);
+        boolean result = getCLIJ2().meanOfTouchingNeighbors((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
         return result;
     }
 

@@ -23,7 +23,7 @@ public class SubtractImageFromScalar extends AbstractCLIJ2Plugin implements CLIJ
 
     @Override
     public boolean executeCL() {
-        return subtractImageFromScalar(getCLIJ2(), (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), asFloat(args[2]));
+        return getCLIJ2().subtractImageFromScalar((ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), asFloat(args[2]));
     }
 
     public static boolean subtractImageFromScalar(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Float scalar) {

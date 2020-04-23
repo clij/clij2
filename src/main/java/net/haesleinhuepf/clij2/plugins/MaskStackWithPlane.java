@@ -23,7 +23,7 @@ public class MaskStackWithPlane extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public boolean executeCL() {
-        return maskStackWithPlane(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        return getCLIJ2().maskStackWithPlane((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
     }
 
 

@@ -19,9 +19,7 @@ public class PowerImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        boolean result = powerImages(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
-        releaseBuffers(args);
+        boolean result = getCLIJ2().powerImages((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         return result;
     }
 

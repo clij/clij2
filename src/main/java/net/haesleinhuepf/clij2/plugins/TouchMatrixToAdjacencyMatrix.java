@@ -29,7 +29,7 @@ public class TouchMatrixToAdjacencyMatrix extends AbstractCLIJ2Plugin implements
         ClearCLBuffer touch_matrix = (ClearCLBuffer) args[0];
         ClearCLBuffer adjacency_matrix = (ClearCLBuffer) args[1];
 
-        return touchMatrixToAdjacencyMatrix(getCLIJ2(), touch_matrix, adjacency_matrix);
+        return getCLIJ2().touchMatrixToAdjacencyMatrix(touch_matrix, adjacency_matrix);
     }
 
     public static boolean touchMatrixToAdjacencyMatrix(CLIJ2 clij2, ClearCLBuffer touch_matrix, ClearCLBuffer adjacency_matrix) {

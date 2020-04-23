@@ -23,7 +23,7 @@ public class AverageDistanceOfNClosestPoints extends AbstractCLIJ2Plugin impleme
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = averageDistanceOfNClosestPoints(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
+        boolean result = getCLIJ2().averageDistanceOfNClosestPoints((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
         releaseBuffers(args);
         return result;
     }

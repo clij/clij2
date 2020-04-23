@@ -30,7 +30,7 @@ public class VarianceOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacr
 
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
 
-        variance = varianceOfAllPixels(getCLIJ2(), buffer1);
+        variance = getCLIJ2().varianceOfAllPixels(buffer1);
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();

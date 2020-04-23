@@ -20,7 +20,7 @@ public class SetImageBorders extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-        boolean result = setImageBorders(getCLIJ2(), (ClearCLBuffer)( args[0]), asFloat(args[1]));
+        boolean result = getCLIJ2().setImageBorders((ClearCLBuffer)( args[0]), asFloat(args[1]));
         return result;
     }
 

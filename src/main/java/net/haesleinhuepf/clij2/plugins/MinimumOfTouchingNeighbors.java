@@ -27,7 +27,7 @@ public class MinimumOfTouchingNeighbors extends AbstractCLIJ2Plugin implements C
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = minimumOfTouchingNeighbors(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
+        boolean result = getCLIJ2().minimumOfTouchingNeighbors((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
         releaseBuffers(args);
         return result;
     }

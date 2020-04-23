@@ -22,7 +22,7 @@ public class AddImagesWeighted extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public boolean executeCL() {
-        return addImagesWeighted(getCLIJ2(), (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), (ClearCLImageInterface)(args[2]), asFloat(args[3]), asFloat(args[4]));
+        return getCLIJ2().addImagesWeighted((ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), (ClearCLImageInterface)(args[2]), asFloat(args[3]), asFloat(args[4]));
     }
 
     public static boolean addImagesWeighted(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface src1, ClearCLImageInterface dst, Float factor, Float factor1) {

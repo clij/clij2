@@ -24,7 +24,7 @@ public class ErodeSphereSliceBySlice extends AbstractCLIJ2Plugin implements CLIJ
 
     @Override
     public boolean executeCL() {
-        return erodeSphereSliceBySlice(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().erodeSphereSliceBySlice((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean erodeSphereSliceBySlice(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {

@@ -34,7 +34,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements 
         ClearCLBuffer input = (ClearCLBuffer) args[0];
         ClearCLBuffer output = (ClearCLBuffer) args[1];
 
-        boolean result = connectedComponentsLabeling(getCLIJ2(), input, output);
+        boolean result = getCLIJ2().connectedComponentsLabeling(input, output);
         releaseBuffers(args);
         return result;
     }

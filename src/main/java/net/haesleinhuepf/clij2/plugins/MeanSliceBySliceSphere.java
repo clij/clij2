@@ -26,7 +26,7 @@ public class MeanSliceBySliceSphere extends AbstractCLIJ2Plugin implements CLIJM
         int radiusX = asInteger(args[2]);
         int radiusY = asInteger(args[3]);
 
-        return meanSliceBySliceSphere(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
+        return getCLIJ2().meanSliceBySliceSphere((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
     }
 
     public static boolean meanSliceBySliceSphere(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY) {

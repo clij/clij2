@@ -22,7 +22,7 @@ public class SumYProjection extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public boolean executeCL() {
-        return sumYProjection(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().sumYProjection((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean sumYProjection(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {

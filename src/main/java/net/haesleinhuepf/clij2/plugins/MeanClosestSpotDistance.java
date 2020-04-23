@@ -24,7 +24,7 @@ public class MeanClosestSpotDistance extends AbstractCLIJ2Plugin implements CLIJ
         ClearCLBuffer buffer2 = (ClearCLBuffer)( args[1]);
         Boolean bidirectional = asBoolean(args[2]);
 
-        double[] minimumDistances = meanClosestSpotDistance(getCLIJ2(), buffer1, buffer2, bidirectional);
+        double[] minimumDistances = getCLIJ2().meanClosestSpotDistance(buffer1, buffer2, bidirectional);
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();

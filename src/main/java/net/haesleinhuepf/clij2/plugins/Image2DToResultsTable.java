@@ -24,7 +24,7 @@ public class Image2DToResultsTable extends AbstractCLIJ2Plugin implements CLIJMa
     public boolean executeCL() {
         ClearCLBuffer buffer = (ClearCLBuffer)( args[0]);
         ResultsTable table = ResultsTable.getResultsTable();
-        image2DToResultsTable(getCLIJ2(), buffer, table);
+        getCLIJ2().image2DToResultsTable(buffer, table);
         table.show("Results");
         return true;
     }

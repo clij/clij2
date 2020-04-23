@@ -24,7 +24,7 @@ public class DivideImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public boolean executeCL() {
-        return divideImages(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        return getCLIJ2().divideImages((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
     }
 
     public static boolean divideImages(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface src1, ClearCLImageInterface dst) {

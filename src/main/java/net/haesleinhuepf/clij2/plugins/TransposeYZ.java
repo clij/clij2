@@ -21,7 +21,7 @@ public class TransposeYZ extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public boolean executeCL() {
-        return transposeYZ(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
+        return getCLIJ2().transposeYZ((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
     }
 
     public static boolean transposeYZ(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output) {

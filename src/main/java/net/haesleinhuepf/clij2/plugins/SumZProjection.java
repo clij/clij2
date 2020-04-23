@@ -22,7 +22,7 @@ public class SumZProjection extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public boolean executeCL() {
-        return sumZProjection(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().sumZProjection((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean sumZProjection(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {

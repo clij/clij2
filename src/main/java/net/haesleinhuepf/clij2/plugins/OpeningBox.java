@@ -19,7 +19,7 @@ public class OpeningBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
 
     @Override
     public boolean executeCL() {
-        boolean result = openingBox(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
+        boolean result = getCLIJ2().openingBox((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
         return result;
     }
 

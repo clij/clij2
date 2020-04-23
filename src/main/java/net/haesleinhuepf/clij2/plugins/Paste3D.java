@@ -20,7 +20,7 @@ public class Paste3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
     @Override
     public boolean executeCL() {
-        boolean result = paste(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
+        boolean result = getCLIJ2().paste((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
         return result;
     }
 

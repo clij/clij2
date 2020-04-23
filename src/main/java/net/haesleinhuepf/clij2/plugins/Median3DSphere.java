@@ -24,7 +24,7 @@ public class Median3DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public boolean executeCL() {
-        return median3DSphere(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
+        return getCLIJ2().median3DSphere((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
     }
 
     public static boolean median3DSphere(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {

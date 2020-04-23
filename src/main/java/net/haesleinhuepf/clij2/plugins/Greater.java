@@ -21,7 +21,7 @@ public class Greater extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
     @Override
     public boolean executeCL() {
-        boolean result = greater(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = getCLIJ2().greater((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         return result;
     }
 

@@ -21,7 +21,7 @@ public class BottomHatSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlu
     public boolean executeCL() {
 
         Object[] args = openCLBufferArgs();
-        boolean result = bottomHatSphere(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
+        boolean result = getCLIJ2().bottomHatSphere((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
         releaseBuffers(args);
         return result;
     }

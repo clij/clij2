@@ -20,7 +20,7 @@ public class SmallerOrEqual extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public boolean executeCL() {
-        boolean result = smallerOrEqual(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = getCLIJ2().smallerOrEqual((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         return result;
     }
 

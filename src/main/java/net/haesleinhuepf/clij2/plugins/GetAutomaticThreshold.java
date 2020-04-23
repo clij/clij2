@@ -30,7 +30,7 @@ public class GetAutomaticThreshold extends AbstractCLIJ2Plugin implements CLIJMa
         ClearCLBuffer src = (ClearCLBuffer) (args[0]);
         String userSelectedMethod = (String)args[1];
 
-        double threshold = getAutomaticThreshold(getCLIJ2(), src, userSelectedMethod);
+        double threshold = getCLIJ2().getAutomaticThreshold(src, userSelectedMethod);
         ((Double[])args[2])[0] = threshold;
         return true;
     }

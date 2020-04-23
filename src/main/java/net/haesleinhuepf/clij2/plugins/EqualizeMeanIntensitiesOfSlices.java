@@ -20,7 +20,7 @@ public class EqualizeMeanIntensitiesOfSlices extends AbstractCLIJ2Plugin impleme
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = equalizeMeanIntensitiesOfSlices(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
+        boolean result = getCLIJ2().equalizeMeanIntensitiesOfSlices((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
         releaseBuffers(args);
         return result;
     }

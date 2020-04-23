@@ -21,7 +21,7 @@ public class TransposeXY extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public boolean executeCL() {
-        return transposeXY(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
+        return getCLIJ2().transposeXY((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
     }
 
     public static boolean transposeXY(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output) {

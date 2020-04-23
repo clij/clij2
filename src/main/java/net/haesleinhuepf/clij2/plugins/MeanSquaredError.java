@@ -21,11 +21,9 @@ public class MeanSquaredError extends AbstractCLIJ2Plugin implements CLIJMacroPl
     public boolean executeCL() {
         double meanSquaredError = 0;
 
-        Object[] args = openCLBufferArgs();
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
         ClearCLBuffer buffer2 = (ClearCLBuffer)( args[1]);
-        meanSquaredError = meanSquaredError(getCLIJ2(), buffer1, buffer2);
-        releaseBuffers(args);
+        meanSquaredError = getCLIJ2().meanSquaredError(buffer1, buffer2);
 
 
         ResultsTable table = ResultsTable.getResultsTable();

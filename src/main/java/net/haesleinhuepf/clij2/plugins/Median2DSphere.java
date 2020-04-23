@@ -27,7 +27,7 @@ public class Median2DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         int radiusX = (asInteger(args[2]));
         int radiusY = (asInteger(args[3]));
 
-        return median2DSphere(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
+        return getCLIJ2().median2DSphere((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
     }
 
     public static boolean median2DSphere(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY) {

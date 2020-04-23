@@ -36,10 +36,10 @@ public class GaussianBlur3D extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         if (clij2.hasImageSupport()) {
             ClearCLImage image = clij2.create(input.getDimensions(), CLIJUtilities.nativeToChannelType(input.getNativeType()));
             clij2.copy(input, image);
-            gaussianBlur3D(clij2, image, output, sigmaX, sigmaY, sigmaZ);
+            clij2.gaussianBlur3D(image, output, sigmaX, sigmaY, sigmaZ);
             clij2.release(image);
         } else {
-            gaussianBlur3D(clij2, input, output, sigmaX, sigmaY, sigmaZ);
+            clij2.gaussianBlur3D(input, output, sigmaX, sigmaY, sigmaZ);
         }
         return true;
     }

@@ -21,7 +21,7 @@ public class MatrixEqual extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public boolean executeCL() {
-        boolean result = matrixEqual(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asFloat(args[2]));
+        boolean result = getCLIJ2().matrixEqual((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asFloat(args[2]));
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();
         table.addValue("MatrixEqual", result?1:0);

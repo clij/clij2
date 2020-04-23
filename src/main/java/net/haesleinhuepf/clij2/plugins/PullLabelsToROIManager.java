@@ -21,8 +21,7 @@ public class PullLabelsToROIManager extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public boolean executeCL() {
-        CLIJ2 clij2 = getCLIJ2();
-        return pullLabelsToROIManager(clij2, (ClearCLBuffer) args[0]);
+        return getCLIJ2().pullLabelsToROIManager((ClearCLBuffer) args[0]);
     }
 
 

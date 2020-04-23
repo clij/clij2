@@ -24,7 +24,7 @@ public class MaximumImageAndScalar extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public boolean executeCL() {
-        return maximumImageAndScalar(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        return getCLIJ2().maximumImageAndScalar((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
     }
 
 

@@ -22,7 +22,7 @@ public class LabelledSpotsToPointList extends AbstractCLIJ2Plugin implements CLI
 
     @Override
     public boolean executeCL() {
-        return labelledSpotsToPointList(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
+        return getCLIJ2().labelledSpotsToPointList((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
     }
 
     public static boolean labelledSpotsToPointList(CLIJ2 clij2, ClearCLBuffer input_labelmap, ClearCLBuffer output) {

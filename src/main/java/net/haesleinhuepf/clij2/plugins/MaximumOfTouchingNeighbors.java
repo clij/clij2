@@ -23,7 +23,7 @@ public class MaximumOfTouchingNeighbors extends AbstractCLIJ2Plugin implements C
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = maximumOfTouchingNeighbors(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
+        boolean result = getCLIJ2().maximumOfTouchingNeighbors((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
         releaseBuffers(args);
         return result;
     }

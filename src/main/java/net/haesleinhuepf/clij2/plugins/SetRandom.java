@@ -37,7 +37,7 @@ public class SetRandom extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
             seed = asFloat(args[3]);
         }
 
-        setRandom(getCLIJ2(), buffer, minimumValue, maximumValue, seed);
+        getCLIJ2().setRandom(buffer, minimumValue, maximumValue, seed);
 
         return true;
     }

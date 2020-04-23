@@ -21,7 +21,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
 public class MultiplyStackWithPlane extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
     @Override
     public boolean executeCL() {
-        return multiplyStackWithPlane(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        return getCLIJ2().multiplyStackWithPlane((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
     }
 
     public static boolean multiplyStackWithPlane(CLIJ2 clij2, ClearCLImageInterface input3d, ClearCLImageInterface input2d, ClearCLImageInterface output3d) {

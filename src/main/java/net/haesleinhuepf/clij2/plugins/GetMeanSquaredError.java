@@ -23,7 +23,7 @@ public class GetMeanSquaredError extends AbstractCLIJ2Plugin implements CLIJMacr
 
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
         ClearCLBuffer buffer2 = (ClearCLBuffer)( args[1]);
-        meanSquaredError = getMeanSquaredError(getCLIJ2(), buffer1, buffer2);
+        meanSquaredError = getCLIJ2().meanSquaredError(buffer1, buffer2);
 
         ((Double[]) args[2])[0] = meanSquaredError;
 

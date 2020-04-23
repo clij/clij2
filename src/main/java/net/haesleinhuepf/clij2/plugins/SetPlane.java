@@ -21,7 +21,7 @@ public class SetPlane extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public boolean executeCL() {
-        return setPlane(getCLIJ2(), (ClearCLBuffer)( args[0]), asInteger(args[1]), asFloat(args[2]));
+        return getCLIJ2().setPlane((ClearCLBuffer)( args[0]), asInteger(args[1]), asFloat(args[2]));
     }
 
     public static boolean setPlane(CLIJ2 clij2, ClearCLImageInterface clImage, Integer plane, Float value) {

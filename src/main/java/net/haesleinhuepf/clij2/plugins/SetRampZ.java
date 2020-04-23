@@ -20,7 +20,7 @@ public class SetRampZ extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public boolean executeCL() {
-        boolean result = setRampZ(getCLIJ2(), (ClearCLBuffer)( args[0]));
+        boolean result = getCLIJ2().setRampZ((ClearCLBuffer)( args[0]));
         return result;
     }
 

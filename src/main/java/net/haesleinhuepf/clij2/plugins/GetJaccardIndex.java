@@ -23,7 +23,7 @@ public class GetJaccardIndex extends AbstractCLIJ2Plugin implements CLIJMacroPlu
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
         ClearCLBuffer buffer2 = (ClearCLBuffer)( args[1]);
 
-        double jaccardIndex = getJaccardIndex(getCLIJ2(), buffer1, buffer2);
+        double jaccardIndex = getCLIJ2().getJaccardIndex(buffer1, buffer2);
 
         ((Double[])args[2])[0] = jaccardIndex;
 

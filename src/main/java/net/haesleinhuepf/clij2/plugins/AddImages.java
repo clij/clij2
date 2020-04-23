@@ -21,7 +21,7 @@ public class AddImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public boolean executeCL() {
-        return addImages(getCLIJ2(), (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), (ClearCLImageInterface)(args[2]));
+        return getCLIJ2().addImages( (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), (ClearCLImageInterface)(args[2]));
     }
 
     public static boolean addImages(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface src1, ClearCLImageInterface dst) {

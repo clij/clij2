@@ -20,7 +20,7 @@ public class SetWhereXequalsY extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public boolean executeCL() {
-        boolean result = setWhereXequalsY(getCLIJ2(), (ClearCLBuffer)( args[0]),  asFloat(args[1]));
+        boolean result = getCLIJ2().setWhereXequalsY((ClearCLBuffer)( args[0]),  asFloat(args[1]));
         return result;
     }
 

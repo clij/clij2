@@ -23,7 +23,7 @@ public class DetectMinimaBox extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-        return detectMinimaBox(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return getCLIJ2().detectMinimaBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
     }
 
     public static boolean detectMinimaBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radius) {

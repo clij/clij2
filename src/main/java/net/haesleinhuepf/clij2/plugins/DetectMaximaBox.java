@@ -23,7 +23,7 @@ public class DetectMaximaBox extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-        return detectMaximaBox(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return getCLIJ2().detectMaximaBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
     }
 
     public static boolean detectMaximaBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radius) {

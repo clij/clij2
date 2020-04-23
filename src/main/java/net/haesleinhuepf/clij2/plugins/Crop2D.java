@@ -22,7 +22,7 @@ public class Crop2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public boolean executeCL() {
-        return crop(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
+        return getCLIJ2().crop((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
     }
 
     public static boolean crop2D(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer startX, Integer startY) {

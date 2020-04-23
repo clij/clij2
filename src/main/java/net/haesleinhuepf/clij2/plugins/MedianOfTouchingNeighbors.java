@@ -22,9 +22,7 @@ public class MedianOfTouchingNeighbors extends AbstractCLIJ2Plugin implements CL
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        boolean result = medianOfTouchingNeighbors(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
-        releaseBuffers(args);
+        boolean result = getCLIJ2().medianOfTouchingNeighbors((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
         return result;
     }
 

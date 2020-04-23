@@ -20,7 +20,7 @@ public class SpotsToPointList extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public boolean executeCL() {
-        return spotsToPointList(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
+        return getCLIJ2().spotsToPointList((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
     }
 
     public static boolean spotsToPointList(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output) {

@@ -18,7 +18,7 @@ public class Threshold extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public boolean executeCL() {
-         return threshold(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+         return getCLIJ2().threshold((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
     }
 
     public static boolean threshold(CLIJ2 clij2, ClearCLImageInterface input, ClearCLImageInterface output, Float threshold) {

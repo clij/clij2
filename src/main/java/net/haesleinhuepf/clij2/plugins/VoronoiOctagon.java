@@ -22,7 +22,7 @@ public class VoronoiOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public boolean executeCL() {
-        return voronoiOctagon(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().voronoiOctagon((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean voronoiOctagon(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst) {

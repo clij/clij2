@@ -29,7 +29,7 @@ public class PointlistToLabelledSpots extends AbstractCLIJ2Plugin implements CLI
         ClearCLBuffer pointlist = (ClearCLBuffer) args[0];
         ClearCLBuffer labelledSpots = (ClearCLBuffer) args[1];
 
-        return pointlistToLabelledSpots(getCLIJ2(), pointlist, labelledSpots);
+        return getCLIJ2().pointlistToLabelledSpots(pointlist, labelledSpots);
     }
 
     public static boolean pointlistToLabelledSpots(CLIJ2 clij2, ClearCLBuffer pointlist, ClearCLBuffer labelledSpots) {

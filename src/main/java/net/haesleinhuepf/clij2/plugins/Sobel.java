@@ -22,7 +22,7 @@ public class Sobel extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJO
 
     @Override
     public boolean executeCL() {
-        boolean result = sobel(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        boolean result = getCLIJ2().sobel((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return result;
     }
 

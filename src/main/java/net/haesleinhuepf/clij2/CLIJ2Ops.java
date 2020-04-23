@@ -312,10 +312,15 @@ import net.haesleinhuepf.clij2.plugins.LabelVoronoiOctagon;
 import net.haesleinhuepf.clij2.plugins.TouchMatrixToAdjacencyMatrix;
 import net.haesleinhuepf.clij2.plugins.AdjacencyMatrixToTouchMatrix;
 import net.haesleinhuepf.clij2.plugins.PointlistToLabelledSpots;
+import net.haesleinhuepf.clij2.plugins.StatisticsOfImage;
+import net.haesleinhuepf.clij2.plugins.NClosestDistances;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
    CLIJ2 getCLIJ2();
+   boolean doTimeTracing();
+   void recordMethodStart(String method);
+   void recordMethodEnd(String method);
    
 
     // net.haesleinhuepf.clij2.plugins.BinaryUnion
@@ -327,7 +332,10 @@ public abstract interface CLIJ2Ops {
      * All pixel values except 0 in the input images are interpreted as 1.<pre>f(x, y) = x | y</pre>
      */
     default boolean binaryUnion(ClearCLBuffer operand1, ClearCLBuffer operand2, ClearCLBuffer destination) {
-        return BinaryUnion.binaryUnion(getCLIJ2(), operand1, operand2, destination);
+        if (doTimeTracing()) {recordMethodStart("BinaryUnion");}
+        boolean result = BinaryUnion.binaryUnion(getCLIJ2(), operand1, operand2, destination);
+        if (doTimeTracing()) {recordMethodEnd("BinaryUnion");}
+        return result;
     }
 
 
@@ -341,7 +349,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, y) = x & y</pre>
      */
     default boolean binaryIntersection(ClearCLBuffer operand1, ClearCLBuffer operand2, ClearCLBuffer destination) {
-        return BinaryIntersection.binaryIntersection(getCLIJ2(), operand1, operand2, destination);
+        if (doTimeTracing()) {recordMethodStart("BinaryIntersection");}
+        boolean result = BinaryIntersection.binaryIntersection(getCLIJ2(), operand1, operand2, destination);
+        if (doTimeTracing()) {recordMethodEnd("BinaryIntersection");}
+        return result;
     }
 
 
@@ -354,7 +365,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean connectedComponentsLabeling(ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination) {
-        return ConnectedComponentsLabeling.connectedComponentsLabeling(getCLIJ2(), binary_input, labeling_destination);
+        if (doTimeTracing()) {recordMethodStart("ConnectedComponentsLabeling");}
+        boolean result = ConnectedComponentsLabeling.connectedComponentsLabeling(getCLIJ2(), binary_input, labeling_destination);
+        if (doTimeTracing()) {recordMethodEnd("ConnectedComponentsLabeling");}
+        return result;
     }
 
 
@@ -367,7 +381,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'CountNonZero'.
      */
     default double countNonZeroPixels(ClearCLBuffer source) {
-        return CountNonZeroPixels.countNonZeroPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("CountNonZeroPixels");}
+        double result = CountNonZeroPixels.countNonZeroPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("CountNonZeroPixels");}
+        return result;
     }
 
 
@@ -379,7 +396,10 @@ public abstract interface CLIJ2Ops {
      * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
      */
     default boolean differenceOfGaussian(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, double arg6) {
-        return DifferenceOfGaussian2D.differenceOfGaussian(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DifferenceOfGaussian2D");}
+        boolean result = DifferenceOfGaussian2D.differenceOfGaussian(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DifferenceOfGaussian2D");}
+        return result;
     }
 
     /**
@@ -388,7 +408,10 @@ public abstract interface CLIJ2Ops {
      * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
      */
     default boolean differenceOfGaussian2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, double arg6) {
-        return DifferenceOfGaussian2D.differenceOfGaussian2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DifferenceOfGaussian2D");}
+        boolean result = DifferenceOfGaussian2D.differenceOfGaussian2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DifferenceOfGaussian2D");}
+        return result;
     }
 
 
@@ -400,7 +423,10 @@ public abstract interface CLIJ2Ops {
      * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
      */
     default boolean differenceOfGaussian(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8) {
-        return DifferenceOfGaussian3D.differenceOfGaussian(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DifferenceOfGaussian3D");}
+        boolean result = DifferenceOfGaussian3D.differenceOfGaussian(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DifferenceOfGaussian3D");}
+        return result;
     }
 
     /**
@@ -409,7 +435,10 @@ public abstract interface CLIJ2Ops {
      * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
      */
     default boolean differenceOfGaussian3D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8) {
-        return DifferenceOfGaussian3D.differenceOfGaussian3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DifferenceOfGaussian3D");}
+        boolean result = DifferenceOfGaussian3D.differenceOfGaussian3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DifferenceOfGaussian3D");}
+        return result;
     }
 
 
@@ -424,7 +453,10 @@ public abstract interface CLIJ2Ops {
      * f(x,m,i) = (x if (m == i); (0 otherwise))
      */
     default boolean maskLabel(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, double arg4) {
-        return MaskLabel.maskLabel(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("MaskLabel");}
+        boolean result = MaskLabel.maskLabel(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("MaskLabel");}
+        return result;
     }
 
 
@@ -436,7 +468,10 @@ public abstract interface CLIJ2Ops {
      * Takes two binary images A and B with marked spots and determines for each spot in image A the closest spot in image B. Afterwards, it saves the average shortest distances from image A to image B as 'mean_closest_spot_distance_A_B' and from image B to image A as 'mean_closest_spot_distance_B_A' to the results table. The distance between B and A is only determined if the `bidirectional` checkbox is checked.
      */
     default double meanClosestSpotDistance(ClearCLBuffer arg1, ClearCLBuffer arg2) {
-        return MeanClosestSpotDistance.meanClosestSpotDistance(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("MeanClosestSpotDistance");}
+        double result = MeanClosestSpotDistance.meanClosestSpotDistance(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("MeanClosestSpotDistance");}
+        return result;
     }
 
     /**
@@ -445,7 +480,10 @@ public abstract interface CLIJ2Ops {
      * Takes two binary images A and B with marked spots and determines for each spot in image A the closest spot in image B. Afterwards, it saves the average shortest distances from image A to image B as 'mean_closest_spot_distance_A_B' and from image B to image A as 'mean_closest_spot_distance_B_A' to the results table. The distance between B and A is only determined if the `bidirectional` checkbox is checked.
      */
     default double[] meanClosestSpotDistance(ClearCLBuffer arg1, ClearCLBuffer arg2, boolean arg3) {
-        return MeanClosestSpotDistance.meanClosestSpotDistance(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("MeanClosestSpotDistance");}
+        double[] result = MeanClosestSpotDistance.meanClosestSpotDistance(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("MeanClosestSpotDistance");}
+        return result;
     }
 
 
@@ -458,7 +496,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'MSE'.
      */
     default double meanSquaredError(ClearCLBuffer source1, ClearCLBuffer source2) {
-        return MeanSquaredError.meanSquaredError(getCLIJ2(), source1, source2);
+        if (doTimeTracing()) {recordMethodStart("MeanSquaredError");}
+        double result = MeanSquaredError.meanSquaredError(getCLIJ2(), source1, source2);
+        if (doTimeTracing()) {recordMethodEnd("MeanSquaredError");}
+        return result;
     }
 
 
@@ -468,7 +509,10 @@ public abstract interface CLIJ2Ops {
      * Determines the median projection of an image stack along Z.
      */
     default boolean medianZProjection(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return MedianZProjection.medianZProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("MedianZProjection");}
+        boolean result = MedianZProjection.medianZProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("MedianZProjection");}
+        return result;
     }
 
 
@@ -480,7 +524,10 @@ public abstract interface CLIJ2Ops {
      * The radius is fixed to 1 and pixels with value 0 are ignored.
      */
     default boolean nonzeroMinimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
-        return NonzeroMinimumDiamond.nonzeroMinimumDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("NonzeroMinimumDiamond");}
+        boolean result = NonzeroMinimumDiamond.nonzeroMinimumDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMinimumDiamond");}
+        return result;
     }
 
     /**
@@ -489,7 +536,10 @@ public abstract interface CLIJ2Ops {
      * The radius is fixed to 1 and pixels with value 0 are ignored.
      */
     default ClearCLKernel nonzeroMinimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLKernel arg4) {
-        return NonzeroMinimumDiamond.nonzeroMinimumDiamond(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodStart("NonzeroMinimumDiamond");}
+        ClearCLKernel result = NonzeroMinimumDiamond.nonzeroMinimumDiamond(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMinimumDiamond");}
+        return result;
     }
 
 
@@ -499,14 +549,20 @@ public abstract interface CLIJ2Ops {
      * Pastes an image into another image at a given position.
      */
     default boolean paste(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Paste2D.paste(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Paste2D");}
+        boolean result = Paste2D.paste(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Paste2D");}
+        return result;
     }
 
     /**
      * Pastes an image into another image at a given position.
      */
     default boolean paste2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Paste2D.paste2D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Paste2D");}
+        boolean result = Paste2D.paste2D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Paste2D");}
+        return result;
     }
 
 
@@ -516,14 +572,20 @@ public abstract interface CLIJ2Ops {
      * Pastes an image into another image at a given position.
      */
     default boolean paste(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Paste3D.paste(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Paste3D");}
+        boolean result = Paste3D.paste(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Paste3D");}
+        return result;
     }
 
     /**
      * Pastes an image into another image at a given position.
      */
     default boolean paste3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Paste3D.paste3D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Paste3D");}
+        boolean result = Paste3D.paste3D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Paste3D");}
+        return result;
     }
 
 
@@ -538,7 +600,10 @@ public abstract interface CLIJ2Ops {
      * <pre>s = f(j) = 2 j / (j + 1)</pre>
      */
     default double jaccardIndex(ClearCLBuffer source1, ClearCLBuffer source2) {
-        return JaccardIndex.jaccardIndex(getCLIJ2(), source1, source2);
+        if (doTimeTracing()) {recordMethodStart("JaccardIndex");}
+        double result = JaccardIndex.jaccardIndex(getCLIJ2(), source1, source2);
+        if (doTimeTracing()) {recordMethodEnd("JaccardIndex");}
+        return result;
     }
 
 
@@ -553,7 +618,10 @@ public abstract interface CLIJ2Ops {
      * <pre>s = f(j) = 2 j / (j + 1)</pre>
      */
     default double sorensenDiceCoefficient(ClearCLBuffer source1, ClearCLBuffer source2) {
-        return SorensenDiceCoefficient.sorensenDiceCoefficient(getCLIJ2(), source1, source2);
+        if (doTimeTracing()) {recordMethodStart("SorensenDiceCoefficient");}
+        double result = SorensenDiceCoefficient.sorensenDiceCoefficient(getCLIJ2(), source1, source2);
+        if (doTimeTracing()) {recordMethodEnd("SorensenDiceCoefficient");}
+        return result;
     }
 
 
@@ -563,7 +631,10 @@ public abstract interface CLIJ2Ops {
      * Determines the standard deviation projection of an image stack along Z.
      */
     default boolean standardDeviationZProjection(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return StandardDeviationZProjection.standardDeviationZProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("StandardDeviationZProjection");}
+        boolean result = StandardDeviationZProjection.standardDeviationZProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("StandardDeviationZProjection");}
+        return result;
     }
 
 
@@ -573,7 +644,10 @@ public abstract interface CLIJ2Ops {
      * Applies a top-hat filter for background subtraction to the input image.
      */
     default boolean topHatBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return TopHatBox.topHatBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("TopHatBox");}
+        boolean result = TopHatBox.topHatBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("TopHatBox");}
+        return result;
     }
 
 
@@ -583,7 +657,10 @@ public abstract interface CLIJ2Ops {
      * Applies a top-hat filter for background subtraction to the input image.
      */
     default boolean topHatSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return TopHatSphere.topHatSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("TopHatSphere");}
+        boolean result = TopHatSphere.topHatSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("TopHatSphere");}
+        return result;
     }
 
 
@@ -595,7 +672,10 @@ public abstract interface CLIJ2Ops {
      * f(x) = exp(x)
      */
     default boolean exponential(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return Exponential.exponential(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("Exponential");}
+        boolean result = Exponential.exponential(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("Exponential");}
+        return result;
     }
 
 
@@ -607,7 +687,10 @@ public abstract interface CLIJ2Ops {
      * f(x) = log(x)
      */
     default boolean logarithm(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return Logarithm.logarithm(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("Logarithm");}
+        boolean result = Logarithm.logarithm(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("Logarithm");}
+        return result;
     }
 
 
@@ -619,7 +702,10 @@ public abstract interface CLIJ2Ops {
      * Convention: image width represents number of points, height represents dimensionality (2D, 3D, ... 10D). The result image has width the first input image and height equals to the width of the second input image.
      */
     default boolean generateDistanceMatrix(ClearCLBuffer coordinate_list1, ClearCLBuffer coordinate_list2, ClearCLBuffer distance_matrix_destination) {
-        return GenerateDistanceMatrix.generateDistanceMatrix(getCLIJ2(), coordinate_list1, coordinate_list2, distance_matrix_destination);
+        if (doTimeTracing()) {recordMethodStart("GenerateDistanceMatrix");}
+        boolean result = GenerateDistanceMatrix.generateDistanceMatrix(getCLIJ2(), coordinate_list1, coordinate_list2, distance_matrix_destination);
+        if (doTimeTracing()) {recordMethodEnd("GenerateDistanceMatrix");}
+        return result;
     }
 
 
@@ -631,7 +717,10 @@ public abstract interface CLIJ2Ops {
      * This corresponds to the minimum for each individial column.
      */
     default boolean shortestDistances(ClearCLBuffer distance_matrix, ClearCLBuffer destination_minimum_distances) {
-        return ShortestDistances.shortestDistances(getCLIJ2(), distance_matrix, destination_minimum_distances);
+        if (doTimeTracing()) {recordMethodStart("ShortestDistances");}
+        boolean result = ShortestDistances.shortestDistances(getCLIJ2(), distance_matrix, destination_minimum_distances);
+        if (doTimeTracing()) {recordMethodEnd("ShortestDistances");}
+        return result;
     }
 
 
@@ -642,7 +731,10 @@ public abstract interface CLIJ2Ops {
      * pixels (with d = dimensionality of the original image) with the coordinates of the maxima/minima.
      */
     default boolean spotsToPointList(ClearCLBuffer input_spots, ClearCLBuffer destination_pointlist) {
-        return SpotsToPointList.spotsToPointList(getCLIJ2(), input_spots, destination_pointlist);
+        if (doTimeTracing()) {recordMethodStart("SpotsToPointList");}
+        boolean result = SpotsToPointList.spotsToPointList(getCLIJ2(), input_spots, destination_pointlist);
+        if (doTimeTracing()) {recordMethodEnd("SpotsToPointList");}
+        return result;
     }
 
 
@@ -652,7 +744,10 @@ public abstract interface CLIJ2Ops {
      * Transpose X and Y axes of an image.
      */
     default boolean transposeXY(ClearCLBuffer input, ClearCLBuffer destination) {
-        return TransposeXY.transposeXY(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("TransposeXY");}
+        boolean result = TransposeXY.transposeXY(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("TransposeXY");}
+        return result;
     }
 
 
@@ -662,7 +757,10 @@ public abstract interface CLIJ2Ops {
      * Transpose X and Z axes of an image.
      */
     default boolean transposeXZ(ClearCLBuffer input, ClearCLBuffer destination) {
-        return TransposeXZ.transposeXZ(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("TransposeXZ");}
+        boolean result = TransposeXZ.transposeXZ(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("TransposeXZ");}
+        return result;
     }
 
 
@@ -672,7 +770,10 @@ public abstract interface CLIJ2Ops {
      * Transpose Y and Z axes of an image.
      */
     default boolean transposeYZ(ClearCLBuffer input, ClearCLBuffer destination) {
-        return TransposeYZ.transposeYZ(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("TransposeYZ");}
+        boolean result = TransposeYZ.transposeYZ(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("TransposeYZ");}
+        return result;
     }
 
 
@@ -687,7 +788,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(a) = v</pre>
      */
     default boolean setWhereXequalsY(ClearCLImageInterface arg1, double arg2) {
-        return SetWhereXequalsY.setWhereXequalsY(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SetWhereXequalsY");}
+        boolean result = SetWhereXequalsY.setWhereXequalsY(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SetWhereXequalsY");}
+        return result;
     }
 
 
@@ -697,7 +801,10 @@ public abstract interface CLIJ2Ops {
      * Applies the Laplace operator (Diamond neighborhood) to an image.
      */
     default boolean laplaceSphere(ClearCLBuffer input, ClearCLBuffer destination) {
-        return LaplaceDiamond.laplaceSphere(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("LaplaceDiamond");}
+        boolean result = LaplaceDiamond.laplaceSphere(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("LaplaceDiamond");}
+        return result;
     }
 
 
@@ -708,7 +815,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ResultsTable image2DToResultsTable(ClearCLBuffer arg1, ResultsTable arg2) {
-        return Image2DToResultsTable.image2DToResultsTable(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("Image2DToResultsTable");}
+        ResultsTable result = Image2DToResultsTable.image2DToResultsTable(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("Image2DToResultsTable");}
+        return result;
     }
 
     /**
@@ -716,7 +826,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ResultsTable image2DToResultsTable(ClearCLImage arg1, ResultsTable arg2) {
-        return Image2DToResultsTable.image2DToResultsTable(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("Image2DToResultsTable");}
+        ResultsTable result = Image2DToResultsTable.image2DToResultsTable(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("Image2DToResultsTable");}
+        return result;
     }
 
 
@@ -728,7 +841,10 @@ public abstract interface CLIJ2Ops {
      * The value v will be written at position x/y[/z] in the target image.
      */
     default boolean writeValuesToPositions(ClearCLBuffer positionsAndValues, ClearCLBuffer destination) {
-        return WriteValuesToPositions.writeValuesToPositions(getCLIJ2(), positionsAndValues, destination);
+        if (doTimeTracing()) {recordMethodStart("WriteValuesToPositions");}
+        boolean result = WriteValuesToPositions.writeValuesToPositions(getCLIJ2(), positionsAndValues, destination);
+        if (doTimeTracing()) {recordMethodEnd("WriteValuesToPositions");}
+        return result;
     }
 
 
@@ -741,7 +857,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default long[] getSize(ClearCLBuffer source) {
-        return GetSize.getSize(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("GetSize");}
+        long[] result = GetSize.getSize(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("GetSize");}
+        return result;
     }
 
 
@@ -751,7 +870,10 @@ public abstract interface CLIJ2Ops {
      * Multiplies two matrices with each other.
      */
     default boolean multiplyMatrix(ClearCLBuffer matrix1, ClearCLBuffer matrix2, ClearCLBuffer matrix_destination) {
-        return MultiplyMatrix.multiplyMatrix(getCLIJ2(), matrix1, matrix2, matrix_destination);
+        if (doTimeTracing()) {recordMethodStart("MultiplyMatrix");}
+        boolean result = MultiplyMatrix.multiplyMatrix(getCLIJ2(), matrix1, matrix2, matrix_destination);
+        if (doTimeTracing()) {recordMethodEnd("MultiplyMatrix");}
+        return result;
     }
 
 
@@ -763,7 +885,10 @@ public abstract interface CLIJ2Ops {
      * The result will be put in the results table in column "MatrixEqual" as 1 if yes and 0 otherwise.
      */
     default boolean matrixEqual(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return MatrixEqual.matrixEqual(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("MatrixEqual");}
+        boolean result = MatrixEqual.matrixEqual(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("MatrixEqual");}
+        return result;
     }
 
 
@@ -773,7 +898,10 @@ public abstract interface CLIJ2Ops {
      * Calculates x to the power of y pixel wise of two images X and Y.
      */
     default boolean powerImages(ClearCLBuffer input, ClearCLBuffer exponent, ClearCLBuffer destination) {
-        return PowerImages.powerImages(getCLIJ2(), input, exponent, destination);
+        if (doTimeTracing()) {recordMethodStart("PowerImages");}
+        boolean result = PowerImages.powerImages(getCLIJ2(), input, exponent, destination);
+        if (doTimeTracing()) {recordMethodEnd("PowerImages");}
+        return result;
     }
 
 
@@ -785,7 +913,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(a, b) = 1 if a == b; 0 otherwise.</pre> 
      */
     default boolean equal(ClearCLImageInterface source1, ClearCLImageInterface source2, ClearCLImageInterface destination) {
-        return Equal.equal(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodStart("Equal");}
+        boolean result = Equal.equal(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodEnd("Equal");}
+        return result;
     }
 
 
@@ -797,7 +928,10 @@ public abstract interface CLIJ2Ops {
      * f(a, b) = 1 if a >= b; 0 otherwise. 
      */
     default boolean greaterOrEqual(ClearCLImageInterface source1, ClearCLImageInterface source2, ClearCLImageInterface destination) {
-        return GreaterOrEqual.greaterOrEqual(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodStart("GreaterOrEqual");}
+        boolean result = GreaterOrEqual.greaterOrEqual(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodEnd("GreaterOrEqual");}
+        return result;
     }
 
 
@@ -809,7 +943,10 @@ public abstract interface CLIJ2Ops {
      * f(a, b) = 1 if a > b; 0 otherwise. 
      */
     default boolean greater(ClearCLImageInterface source1, ClearCLImageInterface source2, ClearCLImageInterface destination) {
-        return Greater.greater(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodStart("Greater");}
+        boolean result = Greater.greater(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodEnd("Greater");}
+        return result;
     }
 
 
@@ -821,7 +958,10 @@ public abstract interface CLIJ2Ops {
      * f(a, b) = 1 if a < b; 0 otherwise. 
      */
     default boolean smaller(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
-        return Smaller.smaller(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodStart("Smaller");}
+        boolean result = Smaller.smaller(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodEnd("Smaller");}
+        return result;
     }
 
 
@@ -833,7 +973,10 @@ public abstract interface CLIJ2Ops {
      * f(a, b) = 1 if a <= b; 0 otherwise. 
      */
     default boolean smallerOrEqual(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
-        return SmallerOrEqual.smallerOrEqual(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodStart("SmallerOrEqual");}
+        boolean result = SmallerOrEqual.smallerOrEqual(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodEnd("SmallerOrEqual");}
+        return result;
     }
 
 
@@ -845,7 +988,10 @@ public abstract interface CLIJ2Ops {
      * f(a, b) = 1 if a != b; 0 otherwise. 
      */
     default boolean notEqual(ClearCLImageInterface source1, ClearCLImageInterface source2, ClearCLBuffer destination) {
-        return NotEqual.notEqual(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodStart("NotEqual");}
+        boolean result = NotEqual.notEqual(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodEnd("NotEqual");}
+        return result;
     }
 
 
@@ -857,7 +1003,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(a, b) = 1 if a == b; 0 otherwise.</pre> 
      */
     default boolean equalConstant(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return EqualConstant.equalConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("EqualConstant");}
+        boolean result = EqualConstant.equalConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("EqualConstant");}
+        return result;
     }
 
 
@@ -869,7 +1018,10 @@ public abstract interface CLIJ2Ops {
      * f(a, b) = 1 if a >= b; 0 otherwise. 
      */
     default boolean greaterOrEqualConstant(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return GreaterOrEqualConstant.greaterOrEqualConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("GreaterOrEqualConstant");}
+        boolean result = GreaterOrEqualConstant.greaterOrEqualConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("GreaterOrEqualConstant");}
+        return result;
     }
 
 
@@ -881,7 +1033,10 @@ public abstract interface CLIJ2Ops {
      * f(a, b) = 1 if a > b; 0 otherwise. 
      */
     default boolean greaterConstant(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return GreaterConstant.greaterConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("GreaterConstant");}
+        boolean result = GreaterConstant.greaterConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("GreaterConstant");}
+        return result;
     }
 
 
@@ -893,7 +1048,10 @@ public abstract interface CLIJ2Ops {
      * f(a, b) = 1 if a < b; 0 otherwise. 
      */
     default boolean smallerConstant(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return SmallerConstant.smallerConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SmallerConstant");}
+        boolean result = SmallerConstant.smallerConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SmallerConstant");}
+        return result;
     }
 
 
@@ -905,7 +1063,10 @@ public abstract interface CLIJ2Ops {
      * f(a, b) = 1 if a <= b; 0 otherwise. 
      */
     default boolean smallerOrEqualConstant(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return SmallerOrEqualConstant.smallerOrEqualConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SmallerOrEqualConstant");}
+        boolean result = SmallerOrEqualConstant.smallerOrEqualConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SmallerOrEqualConstant");}
+        return result;
     }
 
 
@@ -917,7 +1078,10 @@ public abstract interface CLIJ2Ops {
      * f(a, b) = 1 if a != b; 0 otherwise. 
      */
     default boolean notEqualConstant(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return NotEqualConstant.notEqualConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("NotEqualConstant");}
+        boolean result = NotEqualConstant.notEqualConstant(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("NotEqualConstant");}
+        return result;
     }
 
 
@@ -928,7 +1092,10 @@ public abstract interface CLIJ2Ops {
      * All pixels other than in the box are untouched. Consider using `set(buffer, 0);` in advance.
      */
     default boolean drawBox(ClearCLImageInterface arg1, double arg2, double arg3, double arg4, double arg5) {
-        return DrawBox.drawBox(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DrawBox");}
+        boolean result = DrawBox.drawBox(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DrawBox");}
+        return result;
     }
 
     /**
@@ -936,7 +1103,10 @@ public abstract interface CLIJ2Ops {
      * All pixels other than in the box are untouched. Consider using `set(buffer, 0);` in advance.
      */
     default boolean drawBox(ClearCLImageInterface arg1, double arg2, double arg3, double arg4, double arg5, double arg6, double arg7) {
-        return DrawBox.drawBox(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DrawBox");}
+        boolean result = DrawBox.drawBox(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DrawBox");}
+        return result;
     }
 
     /**
@@ -944,7 +1114,10 @@ public abstract interface CLIJ2Ops {
      * All pixels other than in the box are untouched. Consider using `set(buffer, 0);` in advance.
      */
     default boolean drawBox(ClearCLImageInterface arg1, double arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8) {
-        return DrawBox.drawBox(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DrawBox");}
+        boolean result = DrawBox.drawBox(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DrawBox");}
+        return result;
     }
 
 
@@ -956,7 +1129,10 @@ public abstract interface CLIJ2Ops {
      * All pixels other than on the line are untouched. Consider using `set(buffer, 0);` in advance.
      */
     default boolean drawLine(ClearCLImageInterface arg1, double arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8) {
-        return DrawLine.drawLine(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DrawLine");}
+        boolean result = DrawLine.drawLine(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DrawLine");}
+        return result;
     }
 
     /**
@@ -965,7 +1141,10 @@ public abstract interface CLIJ2Ops {
      * All pixels other than on the line are untouched. Consider using `set(buffer, 0);` in advance.
      */
     default boolean drawLine(ClearCLImageInterface arg1, double arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8, double arg9) {
-        return DrawLine.drawLine(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue(), new Double (arg9).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DrawLine");}
+        boolean result = DrawLine.drawLine(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue(), new Double (arg9).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DrawLine");}
+        return result;
     }
 
 
@@ -977,7 +1156,10 @@ public abstract interface CLIJ2Ops {
      *  All pixels other than in the sphere are untouched. Consider using `set(buffer, 0);` in advance.
      */
     default boolean drawSphere(ClearCLImageInterface arg1, double arg2, double arg3, double arg4, double arg5) {
-        return DrawSphere.drawSphere(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DrawSphere");}
+        boolean result = DrawSphere.drawSphere(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DrawSphere");}
+        return result;
     }
 
     /**
@@ -986,7 +1168,10 @@ public abstract interface CLIJ2Ops {
      *  All pixels other than in the sphere are untouched. Consider using `set(buffer, 0);` in advance.
      */
     default boolean drawSphere(ClearCLImageInterface arg1, double arg2, double arg3, double arg4, double arg5, double arg6) {
-        return DrawSphere.drawSphere(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DrawSphere");}
+        boolean result = DrawSphere.drawSphere(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DrawSphere");}
+        return result;
     }
 
     /**
@@ -995,7 +1180,10 @@ public abstract interface CLIJ2Ops {
      *  All pixels other than in the sphere are untouched. Consider using `set(buffer, 0);` in advance.
      */
     default boolean drawSphere(ClearCLImageInterface arg1, double arg2, double arg3, double arg4, double arg5, double arg6, double arg7) {
-        return DrawSphere.drawSphere(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DrawSphere");}
+        boolean result = DrawSphere.drawSphere(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DrawSphere");}
+        return result;
     }
 
     /**
@@ -1004,7 +1192,10 @@ public abstract interface CLIJ2Ops {
      *  All pixels other than in the sphere are untouched. Consider using `set(buffer, 0);` in advance.
      */
     default boolean drawSphere(ClearCLImageInterface arg1, double arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8) {
-        return DrawSphere.drawSphere(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DrawSphere");}
+        boolean result = DrawSphere.drawSphere(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DrawSphere");}
+        return result;
     }
 
 
@@ -1014,7 +1205,10 @@ public abstract interface CLIJ2Ops {
      * Replaces a specific intensity in an image with a given new value.
      */
     default boolean replaceIntensity(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return ReplaceIntensity.replaceIntensity(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("ReplaceIntensity");}
+        boolean result = ReplaceIntensity.replaceIntensity(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("ReplaceIntensity");}
+        return result;
     }
 
 
@@ -1026,7 +1220,10 @@ public abstract interface CLIJ2Ops {
      * If called from macro, the positions will be stored in a new row of ImageJs Results table in the columns 'BoundingBoxX', 'BoundingBoxY', 'BoundingBoxZ', 'BoundingBoxWidth', 'BoundingBoxHeight' 'BoundingBoxDepth'.In case of 2D images Z and depth will be zero.
      */
     default double[] boundingBox(ClearCLBuffer source) {
-        return BoundingBox.boundingBox(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("BoundingBox");}
+        double[] result = BoundingBox.boundingBox(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("BoundingBox");}
+        return result;
     }
 
 
@@ -1038,7 +1235,10 @@ public abstract interface CLIJ2Ops {
      * But only in pixels which have non-zero values in another mask image.
      */
     default double minimumOfMaskedPixels(ClearCLBuffer source, ClearCLBuffer mask) {
-        return MinimumOfMaskedPixels.minimumOfMaskedPixels(getCLIJ2(), source, mask);
+        if (doTimeTracing()) {recordMethodStart("MinimumOfMaskedPixels");}
+        double result = MinimumOfMaskedPixels.minimumOfMaskedPixels(getCLIJ2(), source, mask);
+        if (doTimeTracing()) {recordMethodEnd("MinimumOfMaskedPixels");}
+        return result;
     }
 
 
@@ -1048,7 +1248,10 @@ public abstract interface CLIJ2Ops {
      * Determines the maximum intensity in an image, but only in pixels which have non-zero values in another mask image.
      */
     default double maximumOfMaskedPixels(ClearCLBuffer source, ClearCLBuffer mask) {
-        return MaximumOfMaskedPixels.maximumOfMaskedPixels(getCLIJ2(), source, mask);
+        if (doTimeTracing()) {recordMethodStart("MaximumOfMaskedPixels");}
+        double result = MaximumOfMaskedPixels.maximumOfMaskedPixels(getCLIJ2(), source, mask);
+        if (doTimeTracing()) {recordMethodEnd("MaximumOfMaskedPixels");}
+        return result;
     }
 
 
@@ -1060,7 +1263,10 @@ public abstract interface CLIJ2Ops {
      * Only in pixels which have non-zero values in another binary mask image.
      */
     default double meanOfMaskedPixels(ClearCLBuffer source, ClearCLBuffer mask) {
-        return MeanOfMaskedPixels.meanOfMaskedPixels(getCLIJ2(), source, mask);
+        if (doTimeTracing()) {recordMethodStart("MeanOfMaskedPixels");}
+        double result = MeanOfMaskedPixels.meanOfMaskedPixels(getCLIJ2(), source, mask);
+        if (doTimeTracing()) {recordMethodEnd("MeanOfMaskedPixels");}
+        return result;
     }
 
 
@@ -1072,7 +1278,10 @@ public abstract interface CLIJ2Ops {
      * Sets all pixels in the target image to 1, where the given label index was present in the label map. Other pixels are set to 0.
      */
     default boolean labelToMask(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return LabelToMask.labelToMask(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("LabelToMask");}
+        boolean result = LabelToMask.labelToMask(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("LabelToMask");}
+        return result;
     }
 
 
@@ -1084,7 +1293,10 @@ public abstract interface CLIJ2Ops {
      * This corresponds to the n row indices with minimum values for each column of the distance matrix.
      */
     default boolean nClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2) {
-        return NClosestPoints.nClosestPoints(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("NClosestPoints");}
+        boolean result = NClosestPoints.nClosestPoints(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("NClosestPoints");}
+        return result;
     }
 
 
@@ -1095,9 +1307,14 @@ public abstract interface CLIJ2Ops {
      *  of labelled objects in a label map and corresponding pixels in the original image. 
      * 
      * Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
+     * 
+     * This method is executed on the CPU and not on the GPU/OpenCL device.
      */
     default double[] statisticsOfLabelledPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3) {
-        return StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("StatisticsOfLabelledPixels");}
+        double[] result = StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("StatisticsOfLabelledPixels");}
+        return result;
     }
 
     /**
@@ -1105,9 +1322,14 @@ public abstract interface CLIJ2Ops {
      *  of labelled objects in a label map and corresponding pixels in the original image. 
      * 
      * Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
+     * 
+     * This method is executed on the CPU and not on the GPU/OpenCL device.
      */
     default double[][] statisticsOfLabelledPixels(ClearCLBuffer input, ClearCLBuffer labelmap) {
-        return StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), input, labelmap);
+        if (doTimeTracing()) {recordMethodStart("StatisticsOfLabelledPixels");}
+        double[][] result = StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), input, labelmap);
+        if (doTimeTracing()) {recordMethodEnd("StatisticsOfLabelledPixels");}
+        return result;
     }
 
     /**
@@ -1115,9 +1337,24 @@ public abstract interface CLIJ2Ops {
      *  of labelled objects in a label map and corresponding pixels in the original image. 
      * 
      * Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
+     * 
+     * This method is executed on the CPU and not on the GPU/OpenCL device.
      */
     default double[][] statisticsOfLabelledPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4) {
-        return StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodStart("StatisticsOfLabelledPixels");}
+        double[][] result = StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("StatisticsOfLabelledPixels");}
+        return result;
+    }
+
+    /**
+     * 
+     */
+    default double[][] statisticsOfLabelledPixels_single_threaded(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4) {
+        if (doTimeTracing()) {recordMethodStart("StatisticsOfLabelledPixels");}
+        double[][] result = StatisticsOfLabelledPixels.statisticsOfLabelledPixels_single_threaded(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("StatisticsOfLabelledPixels");}
+        return result;
     }
 
     /**
@@ -1125,9 +1362,14 @@ public abstract interface CLIJ2Ops {
      *  of labelled objects in a label map and corresponding pixels in the original image. 
      * 
      * Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
+     * 
+     * This method is executed on the CPU and not on the GPU/OpenCL device.
      */
     default ResultsTable statisticsOfLabelledPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, ResultsTable arg3) {
-        return StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("StatisticsOfLabelledPixels");}
+        ResultsTable result = StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("StatisticsOfLabelledPixels");}
+        return result;
     }
 
 
@@ -1140,7 +1382,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'Variance'.
      */
     default double varianceOfAllPixels(ClearCLBuffer source) {
-        return VarianceOfAllPixels.varianceOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("VarianceOfAllPixels");}
+        double result = VarianceOfAllPixels.varianceOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("VarianceOfAllPixels");}
+        return result;
     }
 
     /**
@@ -1150,7 +1395,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'Variance'.
      */
     default double varianceOfAllPixels(ClearCLImageInterface arg1, double arg2) {
-        return VarianceOfAllPixels.varianceOfAllPixels(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodStart("VarianceOfAllPixels");}
+        double result = VarianceOfAllPixels.varianceOfAllPixels(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("VarianceOfAllPixels");}
+        return result;
     }
 
 
@@ -1163,7 +1411,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'Standard_deviation'.
      */
     default double standardDeviationOfAllPixels(ClearCLImageInterface source) {
-        return StandardDeviationOfAllPixels.standardDeviationOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("StandardDeviationOfAllPixels");}
+        double result = StandardDeviationOfAllPixels.standardDeviationOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("StandardDeviationOfAllPixels");}
+        return result;
     }
 
     /**
@@ -1173,7 +1424,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'Standard_deviation'.
      */
     default double standardDeviationOfAllPixels(ClearCLImageInterface arg1, double arg2) {
-        return StandardDeviationOfAllPixels.standardDeviationOfAllPixels(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodStart("StandardDeviationOfAllPixels");}
+        double result = StandardDeviationOfAllPixels.standardDeviationOfAllPixels(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("StandardDeviationOfAllPixels");}
+        return result;
     }
 
 
@@ -1185,7 +1439,10 @@ public abstract interface CLIJ2Ops {
      * The result is put in the results table as new column named 'Masked_variance'.
      */
     default double varianceOfMaskedPixels(ClearCLBuffer source, ClearCLBuffer mask) {
-        return VarianceOfMaskedPixels.varianceOfMaskedPixels(getCLIJ2(), source, mask);
+        if (doTimeTracing()) {recordMethodStart("VarianceOfMaskedPixels");}
+        double result = VarianceOfMaskedPixels.varianceOfMaskedPixels(getCLIJ2(), source, mask);
+        if (doTimeTracing()) {recordMethodEnd("VarianceOfMaskedPixels");}
+        return result;
     }
 
     /**
@@ -1194,7 +1451,10 @@ public abstract interface CLIJ2Ops {
      * The result is put in the results table as new column named 'Masked_variance'.
      */
     default double varianceOfMaskedPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return VarianceOfMaskedPixels.varianceOfMaskedPixels(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("VarianceOfMaskedPixels");}
+        double result = VarianceOfMaskedPixels.varianceOfMaskedPixels(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("VarianceOfMaskedPixels");}
+        return result;
     }
 
 
@@ -1207,7 +1467,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'Masked_standard_deviation'.
      */
     default double standardDeviationOfMaskedPixels(ClearCLBuffer source, ClearCLBuffer mask) {
-        return StandardDeviationOfMaskedPixels.standardDeviationOfMaskedPixels(getCLIJ2(), source, mask);
+        if (doTimeTracing()) {recordMethodStart("StandardDeviationOfMaskedPixels");}
+        double result = StandardDeviationOfMaskedPixels.standardDeviationOfMaskedPixels(getCLIJ2(), source, mask);
+        if (doTimeTracing()) {recordMethodEnd("StandardDeviationOfMaskedPixels");}
+        return result;
     }
 
     /**
@@ -1217,7 +1480,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'Masked_standard_deviation'.
      */
     default double standardDeviationOfMaskedPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return StandardDeviationOfMaskedPixels.standardDeviationOfMaskedPixels(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("StandardDeviationOfMaskedPixels");}
+        double result = StandardDeviationOfMaskedPixels.standardDeviationOfMaskedPixels(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("StandardDeviationOfMaskedPixels");}
+        return result;
     }
 
 
@@ -1229,7 +1495,10 @@ public abstract interface CLIJ2Ops {
      * Remaining label elements are renumbered afterwards.
      */
     default boolean excludeLabelsOnEdges(ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination) {
-        return ExcludeLabelsOnEdges.excludeLabelsOnEdges(getCLIJ2(), label_map_input, label_map_destination);
+        if (doTimeTracing()) {recordMethodStart("ExcludeLabelsOnEdges");}
+        boolean result = ExcludeLabelsOnEdges.excludeLabelsOnEdges(getCLIJ2(), label_map_input, label_map_destination);
+        if (doTimeTracing()) {recordMethodEnd("ExcludeLabelsOnEdges");}
+        return result;
     }
 
 
@@ -1239,7 +1508,10 @@ public abstract interface CLIJ2Ops {
      * Subtracts one binary image from another.
      */
     default boolean binarySubtract(ClearCLImageInterface minuend, ClearCLImageInterface subtrahend, ClearCLImageInterface destination) {
-        return BinarySubtract.binarySubtract(getCLIJ2(), minuend, subtrahend, destination);
+        if (doTimeTracing()) {recordMethodStart("BinarySubtract");}
+        boolean result = BinarySubtract.binarySubtract(getCLIJ2(), minuend, subtrahend, destination);
+        if (doTimeTracing()) {recordMethodEnd("BinarySubtract");}
+        return result;
     }
 
 
@@ -1250,7 +1522,10 @@ public abstract interface CLIJ2Ops {
      * destination image. All other pixels are set to 0.
      */
     default boolean binaryEdgeDetection(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return BinaryEdgeDetection.binaryEdgeDetection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("BinaryEdgeDetection");}
+        boolean result = BinaryEdgeDetection.binaryEdgeDetection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("BinaryEdgeDetection");}
+        return result;
     }
 
 
@@ -1264,7 +1539,10 @@ public abstract interface CLIJ2Ops {
      * Note: This is not a distance matrix. See generateDistanceMatrix for details.
      */
     default boolean distanceMap(ClearCLBuffer source, ClearCLBuffer destination) {
-        return DistanceMap.distanceMap(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("DistanceMap");}
+        boolean result = DistanceMap.distanceMap(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("DistanceMap");}
+        return result;
     }
 
 
@@ -1274,7 +1552,10 @@ public abstract interface CLIJ2Ops {
      * Pulls a binary image from the GPU memory and puts it on the currently active ImageJ window as region of interest.
      */
     default Roi pullAsROI(ClearCLBuffer binary_input) {
-        return PullAsROI.pullAsROI(getCLIJ2(), binary_input);
+        if (doTimeTracing()) {recordMethodStart("PullAsROI");}
+        Roi result = PullAsROI.pullAsROI(getCLIJ2(), binary_input);
+        if (doTimeTracing()) {recordMethodEnd("PullAsROI");}
+        return result;
     }
 
 
@@ -1284,14 +1565,20 @@ public abstract interface CLIJ2Ops {
      * Pulls all labels in a label map as ROIs to the ROI manager.
      */
     default boolean pullLabelsToROIManager(ClearCLBuffer labelmap_input) {
-        return PullLabelsToROIManager.pullLabelsToROIManager(getCLIJ2(), labelmap_input);
+        if (doTimeTracing()) {recordMethodStart("PullLabelsToROIManager");}
+        boolean result = PullLabelsToROIManager.pullLabelsToROIManager(getCLIJ2(), labelmap_input);
+        if (doTimeTracing()) {recordMethodEnd("PullLabelsToROIManager");}
+        return result;
     }
 
     /**
      * Pulls all labels in a label map as ROIs to the ROI manager.
      */
     default boolean pullLabelsToROIManager(ClearCLBuffer arg1, RoiManager arg2) {
-        return PullLabelsToROIManager.pullLabelsToROIManager(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("PullLabelsToROIManager");}
+        boolean result = PullLabelsToROIManager.pullLabelsToROIManager(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("PullLabelsToROIManager");}
+        return result;
     }
 
 
@@ -1303,7 +1590,10 @@ public abstract interface CLIJ2Ops {
      * The radius is fixed to 1 and pixels with value 0 are ignored.
      */
     default boolean nonzeroMaximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
-        return NonzeroMaximumDiamond.nonzeroMaximumDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("NonzeroMaximumDiamond");}
+        boolean result = NonzeroMaximumDiamond.nonzeroMaximumDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMaximumDiamond");}
+        return result;
     }
 
     /**
@@ -1312,7 +1602,10 @@ public abstract interface CLIJ2Ops {
      * The radius is fixed to 1 and pixels with value 0 are ignored.
      */
     default ClearCLKernel nonzeroMaximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLKernel arg4) {
-        return NonzeroMaximumDiamond.nonzeroMaximumDiamond(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodStart("NonzeroMaximumDiamond");}
+        ClearCLKernel result = NonzeroMaximumDiamond.nonzeroMaximumDiamond(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMaximumDiamond");}
+        return result;
     }
 
 
@@ -1322,14 +1615,20 @@ public abstract interface CLIJ2Ops {
      * Apply a local maximum filter to an image which only overwrites pixels with value 0.
      */
     default boolean onlyzeroOverwriteMaximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
-        return OnlyzeroOverwriteMaximumDiamond.onlyzeroOverwriteMaximumDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("OnlyzeroOverwriteMaximumDiamond");}
+        boolean result = OnlyzeroOverwriteMaximumDiamond.onlyzeroOverwriteMaximumDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("OnlyzeroOverwriteMaximumDiamond");}
+        return result;
     }
 
     /**
      * Apply a local maximum filter to an image which only overwrites pixels with value 0.
      */
     default ClearCLKernel onlyzeroOverwriteMaximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLKernel arg4) {
-        return OnlyzeroOverwriteMaximumDiamond.onlyzeroOverwriteMaximumDiamond(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodStart("OnlyzeroOverwriteMaximumDiamond");}
+        ClearCLKernel result = OnlyzeroOverwriteMaximumDiamond.onlyzeroOverwriteMaximumDiamond(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("OnlyzeroOverwriteMaximumDiamond");}
+        return result;
     }
 
 
@@ -1339,14 +1638,20 @@ public abstract interface CLIJ2Ops {
      * Apply a local maximum filter to an image which only overwrites pixels with value 0.
      */
     default boolean onlyzeroOverwriteMaximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
-        return OnlyzeroOverwriteMaximumBox.onlyzeroOverwriteMaximumBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("OnlyzeroOverwriteMaximumBox");}
+        boolean result = OnlyzeroOverwriteMaximumBox.onlyzeroOverwriteMaximumBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("OnlyzeroOverwriteMaximumBox");}
+        return result;
     }
 
     /**
      * Apply a local maximum filter to an image which only overwrites pixels with value 0.
      */
     default ClearCLKernel onlyzeroOverwriteMaximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLKernel arg4) {
-        return OnlyzeroOverwriteMaximumBox.onlyzeroOverwriteMaximumBox(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodStart("OnlyzeroOverwriteMaximumBox");}
+        ClearCLKernel result = OnlyzeroOverwriteMaximumBox.onlyzeroOverwriteMaximumBox(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("OnlyzeroOverwriteMaximumBox");}
+        return result;
     }
 
 
@@ -1358,7 +1663,10 @@ public abstract interface CLIJ2Ops {
      * Only half of the matrix is filled (with x < y). For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.
      */
     default boolean generateTouchMatrix(ClearCLBuffer label_map, ClearCLBuffer touch_matrix_destination) {
-        return GenerateTouchMatrix.generateTouchMatrix(getCLIJ2(), label_map, touch_matrix_destination);
+        if (doTimeTracing()) {recordMethodStart("GenerateTouchMatrix");}
+        boolean result = GenerateTouchMatrix.generateTouchMatrix(getCLIJ2(), label_map, touch_matrix_destination);
+        if (doTimeTracing()) {recordMethodEnd("GenerateTouchMatrix");}
+        return result;
     }
 
 
@@ -1368,7 +1676,10 @@ public abstract interface CLIJ2Ops {
      * Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.
      */
     default boolean detectLabelEdges(ClearCLImageInterface label_map, ClearCLBuffer edge_image_destination) {
-        return DetectLabelEdges.detectLabelEdges(getCLIJ2(), label_map, edge_image_destination);
+        if (doTimeTracing()) {recordMethodStart("DetectLabelEdges");}
+        boolean result = DetectLabelEdges.detectLabelEdges(getCLIJ2(), label_map, edge_image_destination);
+        if (doTimeTracing()) {recordMethodEnd("DetectLabelEdges");}
+        return result;
     }
 
 
@@ -1378,7 +1689,10 @@ public abstract interface CLIJ2Ops {
      * Takes a touch matrix as input and delivers a vector with number of touching neighbors per label as a vector.
      */
     default boolean countTouchingNeighbors(ClearCLBuffer touch_matrix, ClearCLBuffer touching_neighbors_count_destination) {
-        return CountTouchingNeighbors.countTouchingNeighbors(getCLIJ2(), touch_matrix, touching_neighbors_count_destination);
+        if (doTimeTracing()) {recordMethodStart("CountTouchingNeighbors");}
+        boolean result = CountTouchingNeighbors.countTouchingNeighbors(getCLIJ2(), touch_matrix, touching_neighbors_count_destination);
+        if (doTimeTracing()) {recordMethodEnd("CountTouchingNeighbors");}
+        return result;
     }
 
 
@@ -1395,7 +1709,10 @@ public abstract interface CLIJ2Ops {
      * 
      */
     default boolean replaceIntensities(ClearCLImageInterface input, ClearCLImageInterface new_values_vector, ClearCLImageInterface destination) {
-        return ReplaceIntensities.replaceIntensities(getCLIJ2(), input, new_values_vector, destination);
+        if (doTimeTracing()) {recordMethodStart("ReplaceIntensities");}
+        boolean result = ReplaceIntensities.replaceIntensities(getCLIJ2(), input, new_values_vector, destination);
+        if (doTimeTracing()) {recordMethodEnd("ReplaceIntensities");}
+        return result;
     }
 
 
@@ -1406,7 +1723,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean averageDistanceOfClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return AverageDistanceOfNClosestPoints.averageDistanceOfClosestPoints(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("AverageDistanceOfNClosestPoints");}
+        boolean result = AverageDistanceOfNClosestPoints.averageDistanceOfClosestPoints(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("AverageDistanceOfNClosestPoints");}
+        return result;
     }
 
     /**
@@ -1415,7 +1735,10 @@ public abstract interface CLIJ2Ops {
      * This corresponds to the average of the n minimum values (rows) for each column of the distance matrix.
      */
     default boolean averageDistanceOfNClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return AverageDistanceOfNClosestPoints.averageDistanceOfNClosestPoints(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("AverageDistanceOfNClosestPoints");}
+        boolean result = AverageDistanceOfNClosestPoints.averageDistanceOfNClosestPoints(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("AverageDistanceOfNClosestPoints");}
+        return result;
     }
 
 
@@ -1426,7 +1749,10 @@ public abstract interface CLIJ2Ops {
      * size n*n to draw lines from all points to points if the corresponding pixel in the touch matrix is 1.
      */
     default boolean touchMatrixToMesh(ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer mesh_destination) {
-        return TouchMatrixToMesh.touchMatrixToMesh(getCLIJ2(), pointlist, touch_matrix, mesh_destination);
+        if (doTimeTracing()) {recordMethodStart("TouchMatrixToMesh");}
+        boolean result = TouchMatrixToMesh.touchMatrixToMesh(getCLIJ2(), pointlist, touch_matrix, mesh_destination);
+        if (doTimeTracing()) {recordMethodEnd("TouchMatrixToMesh");}
+        return result;
     }
 
 
@@ -1437,21 +1763,30 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean resample(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5, boolean arg6) {
-        return Resample.resample(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+        if (doTimeTracing()) {recordMethodStart("Resample");}
+        boolean result = Resample.resample(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+        if (doTimeTracing()) {recordMethodEnd("Resample");}
+        return result;
     }
 
     /**
      * 
      */
     default boolean resample2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, boolean arg5) {
-        return Resample.resample2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), arg5);
+        if (doTimeTracing()) {recordMethodStart("Resample");}
+        boolean result = Resample.resample2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), arg5);
+        if (doTimeTracing()) {recordMethodEnd("Resample");}
+        return result;
     }
 
     /**
      * 
      */
     default boolean resample3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5, boolean arg6) {
-        return Resample.resample3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+        if (doTimeTracing()) {recordMethodStart("Resample");}
+        boolean result = Resample.resample3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+        if (doTimeTracing()) {recordMethodEnd("Resample");}
+        return result;
     }
 
 
@@ -1463,7 +1798,10 @@ public abstract interface CLIJ2Ops {
      * This functionality is similar to the 'Simple Ratio Bleaching Correction' in Fiji.
      */
     default boolean equalizeMeanIntensitiesOfSlices(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return EqualizeMeanIntensitiesOfSlices.equalizeMeanIntensitiesOfSlices(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("EqualizeMeanIntensitiesOfSlices");}
+        boolean result = EqualizeMeanIntensitiesOfSlices.equalizeMeanIntensitiesOfSlices(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("EqualizeMeanIntensitiesOfSlices");}
+        return result;
     }
 
 
@@ -1474,7 +1812,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean radialProjection(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return ResliceRadial.radialProjection(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("ResliceRadial");}
+        boolean result = ResliceRadial.radialProjection(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("ResliceRadial");}
+        return result;
     }
 
     /**
@@ -1482,7 +1823,10 @@ public abstract interface CLIJ2Ops {
      * X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
      */
     default boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return ResliceRadial.resliceRadial(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("ResliceRadial");}
+        boolean result = ResliceRadial.resliceRadial(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("ResliceRadial");}
+        return result;
     }
 
     /**
@@ -1490,7 +1834,10 @@ public abstract interface CLIJ2Ops {
      * X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
      */
     default boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return ResliceRadial.resliceRadial(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("ResliceRadial");}
+        boolean result = ResliceRadial.resliceRadial(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("ResliceRadial");}
+        return result;
     }
 
     /**
@@ -1498,7 +1845,10 @@ public abstract interface CLIJ2Ops {
      * X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
      */
     default boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8) {
-        return ResliceRadial.resliceRadial(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodStart("ResliceRadial");}
+        boolean result = ResliceRadial.resliceRadial(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue(), new Double (arg8).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("ResliceRadial");}
+        return result;
     }
 
 
@@ -1508,7 +1858,10 @@ public abstract interface CLIJ2Ops {
      * Convolve the image with the Sobel kernel.
      */
     default boolean sobel(ClearCLBuffer source, ClearCLBuffer destination) {
-        return Sobel.sobel(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("Sobel");}
+        boolean result = Sobel.sobel(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("Sobel");}
+        return result;
     }
 
 
@@ -1520,7 +1873,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x) = |x| </pre>
      */
     default boolean absolute(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return Absolute.absolute(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("Absolute");}
+        boolean result = Absolute.absolute(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("Absolute");}
+        return result;
     }
 
 
@@ -1530,7 +1886,10 @@ public abstract interface CLIJ2Ops {
      * Applies the Laplace operator (Box neighborhood) to an image.
      */
     default boolean laplaceBox(ClearCLBuffer input, ClearCLBuffer destination) {
-        return LaplaceBox.laplaceBox(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("LaplaceBox");}
+        boolean result = LaplaceBox.laplaceBox(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("LaplaceBox");}
+        return result;
     }
 
 
@@ -1540,7 +1899,10 @@ public abstract interface CLIJ2Ops {
      * Apply a bottom-hat filter for background subtraction to the input image.
      */
     default boolean bottomHatBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return BottomHatBox.bottomHatBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("BottomHatBox");}
+        boolean result = BottomHatBox.bottomHatBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("BottomHatBox");}
+        return result;
     }
 
 
@@ -1550,7 +1912,10 @@ public abstract interface CLIJ2Ops {
      * Applies a bottom-hat filter for background subtraction to the input image.
      */
     default boolean bottomHatSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return BottomHatSphere.bottomHatSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("BottomHatSphere");}
+        boolean result = BottomHatSphere.bottomHatSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("BottomHatSphere");}
+        return result;
     }
 
 
@@ -1560,7 +1925,10 @@ public abstract interface CLIJ2Ops {
      * Apply a binary closing to the input image by calling n dilations and n erosions subsequenntly.
      */
     default boolean closingBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return ClosingBox.closingBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("ClosingBox");}
+        boolean result = ClosingBox.closingBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("ClosingBox");}
+        return result;
     }
 
 
@@ -1570,7 +1938,10 @@ public abstract interface CLIJ2Ops {
      * Apply a binary closing to the input image by calling n dilations and n erosions subsequently.
      */
     default boolean closingDiamond(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return ClosingDiamond.closingDiamond(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("ClosingDiamond");}
+        boolean result = ClosingDiamond.closingDiamond(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("ClosingDiamond");}
+        return result;
     }
 
 
@@ -1580,7 +1951,10 @@ public abstract interface CLIJ2Ops {
      * Apply a binary opening to the input image by calling n erosions and n dilations subsequenntly.
      */
     default boolean openingBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return OpeningBox.openingBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("OpeningBox");}
+        boolean result = OpeningBox.openingBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("OpeningBox");}
+        return result;
     }
 
 
@@ -1590,7 +1964,10 @@ public abstract interface CLIJ2Ops {
      * Apply a binary opening to the input image by calling n erosions and n dilations subsequenntly.
      */
     default boolean openingDiamond(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return OpeningDiamond.openingDiamond(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("OpeningDiamond");}
+        boolean result = OpeningDiamond.openingDiamond(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("OpeningDiamond");}
+        return result;
     }
 
 
@@ -1600,7 +1977,10 @@ public abstract interface CLIJ2Ops {
      * Determines the maximum projection of an image along X.
      */
     default boolean maximumXProjection(ClearCLImageInterface source, ClearCLImageInterface destination_max) {
-        return MaximumXProjection.maximumXProjection(getCLIJ2(), source, destination_max);
+        if (doTimeTracing()) {recordMethodStart("MaximumXProjection");}
+        boolean result = MaximumXProjection.maximumXProjection(getCLIJ2(), source, destination_max);
+        if (doTimeTracing()) {recordMethodEnd("MaximumXProjection");}
+        return result;
     }
 
 
@@ -1610,7 +1990,10 @@ public abstract interface CLIJ2Ops {
      * Determines the maximum projection of an image along X.
      */
     default boolean maximumYProjection(ClearCLImageInterface source, ClearCLImageInterface destination_max) {
-        return MaximumYProjection.maximumYProjection(getCLIJ2(), source, destination_max);
+        if (doTimeTracing()) {recordMethodStart("MaximumYProjection");}
+        boolean result = MaximumYProjection.maximumYProjection(getCLIJ2(), source, destination_max);
+        if (doTimeTracing()) {recordMethodEnd("MaximumYProjection");}
+        return result;
     }
 
 
@@ -1620,7 +2003,10 @@ public abstract interface CLIJ2Ops {
      * Determines the maximum projection of an image along Z within a given z range.
      */
     default boolean maximumZProjectionBounded(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return MaximumZProjectionBounded.maximumZProjectionBounded(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("MaximumZProjectionBounded");}
+        boolean result = MaximumZProjectionBounded.maximumZProjectionBounded(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MaximumZProjectionBounded");}
+        return result;
     }
 
 
@@ -1630,7 +2016,10 @@ public abstract interface CLIJ2Ops {
      * Determines the minimum projection of an image along Z within a given z range.
      */
     default boolean minimumZProjectionBounded(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return MinimumZProjectionBounded.minimumZProjectionBounded(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("MinimumZProjectionBounded");}
+        boolean result = MinimumZProjectionBounded.minimumZProjectionBounded(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MinimumZProjectionBounded");}
+        return result;
     }
 
 
@@ -1640,7 +2029,10 @@ public abstract interface CLIJ2Ops {
      * Determines the mean projection of an image along Z within a given z range.
      */
     default boolean meanZProjectionBounded(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return MeanZProjectionBounded.meanZProjectionBounded(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("MeanZProjectionBounded");}
+        boolean result = MeanZProjectionBounded.meanZProjectionBounded(getCLIJ(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MeanZProjectionBounded");}
+        return result;
     }
 
 
@@ -1652,7 +2044,10 @@ public abstract interface CLIJ2Ops {
      * The radius is fixed to 1 and pixels with value 0 are ignored.
      */
     default boolean nonzeroMaximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
-        return NonzeroMaximumBox.nonzeroMaximumBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("NonzeroMaximumBox");}
+        boolean result = NonzeroMaximumBox.nonzeroMaximumBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMaximumBox");}
+        return result;
     }
 
     /**
@@ -1661,7 +2056,10 @@ public abstract interface CLIJ2Ops {
      * The radius is fixed to 1 and pixels with value 0 are ignored.
      */
     default ClearCLKernel nonzeroMaximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLKernel arg4) {
-        return NonzeroMaximumBox.nonzeroMaximumBox(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodStart("NonzeroMaximumBox");}
+        ClearCLKernel result = NonzeroMaximumBox.nonzeroMaximumBox(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMaximumBox");}
+        return result;
     }
 
 
@@ -1673,7 +2071,10 @@ public abstract interface CLIJ2Ops {
      * The radius is fixed to 1 and pixels with value 0 are ignored.
      */
     default boolean nonzeroMinimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
-        return NonzeroMinimumBox.nonzeroMinimumBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("NonzeroMinimumBox");}
+        boolean result = NonzeroMinimumBox.nonzeroMinimumBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMinimumBox");}
+        return result;
     }
 
     /**
@@ -1682,7 +2083,10 @@ public abstract interface CLIJ2Ops {
      * The radius is fixed to 1 and pixels with value 0 are ignored.
      */
     default ClearCLKernel nonzeroMinimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLKernel arg4) {
-        return NonzeroMinimumBox.nonzeroMinimumBox(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodStart("NonzeroMinimumBox");}
+        ClearCLKernel result = NonzeroMinimumBox.nonzeroMinimumBox(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMinimumBox");}
+        return result;
     }
 
 
@@ -1692,7 +2096,10 @@ public abstract interface CLIJ2Ops {
      * Determines the minimum projection of all pixels in an image above a given threshold along Z within a given z range.
      */
     default boolean minimumZProjectionThresholdedBounded(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return MinimumZProjectionThresholdedBounded.minimumZProjectionThresholdedBounded(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("MinimumZProjectionThresholdedBounded");}
+        boolean result = MinimumZProjectionThresholdedBounded.minimumZProjectionThresholdedBounded(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MinimumZProjectionThresholdedBounded");}
+        return result;
     }
 
 
@@ -1704,7 +2111,10 @@ public abstract interface CLIJ2Ops {
      * But only in pixels which are above a given threshold.
      */
     default double meanOfPixelsAboveThreshold(ClearCLBuffer arg1, double arg2) {
-        return MeanOfPixelsAboveThreshold.meanOfPixelsAboveThreshold(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodStart("MeanOfPixelsAboveThreshold");}
+        double result = MeanOfPixelsAboveThreshold.meanOfPixelsAboveThreshold(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("MeanOfPixelsAboveThreshold");}
+        return result;
     }
 
 
@@ -1716,7 +2126,10 @@ public abstract interface CLIJ2Ops {
      * Takes a pointlist with dimensions n*d with n point coordinates in d dimensions and a distance matrix of size n*n to draw lines from all points to points if the corresponding pixel in the distance matrix is smaller than a given distance threshold.
      */
     default boolean distanceMatrixToMesh(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, double arg4) {
-        return DistanceMatrixToMesh.distanceMatrixToMesh(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("DistanceMatrixToMesh");}
+        boolean result = DistanceMatrixToMesh.distanceMatrixToMesh(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DistanceMatrixToMesh");}
+        return result;
     }
 
 
@@ -1726,7 +2139,10 @@ public abstract interface CLIJ2Ops {
      * Meshes all points in a given point list which are indiced in a corresponding index list.
      */
     default boolean pointIndexListToMesh(ClearCLBuffer pointlist, ClearCLBuffer indexList, ClearCLBuffer mesh_destination) {
-        return PointIndexListToMesh.pointIndexListToMesh(getCLIJ2(), pointlist, indexList, mesh_destination);
+        if (doTimeTracing()) {recordMethodStart("PointIndexListToMesh");}
+        boolean result = PointIndexListToMesh.pointIndexListToMesh(getCLIJ2(), pointlist, indexList, mesh_destination);
+        if (doTimeTracing()) {recordMethodEnd("PointIndexListToMesh");}
+        return result;
     }
 
 
@@ -1738,7 +2154,10 @@ public abstract interface CLIJ2Ops {
      * Odd iterations are done with box neighborhood, even iterations with a diamond. Thus, with n > 2, the filter shape is an octagon. The given number of iterations makes the filter result very similar to minimum sphere. Approximately:radius = iterations - 2
      */
     default boolean minimumOctagon(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return MinimumOctagon.minimumOctagon(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("MinimumOctagon");}
+        boolean result = MinimumOctagon.minimumOctagon(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MinimumOctagon");}
+        return result;
     }
 
     /**
@@ -1747,7 +2166,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ClearCLKernel minimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3) {
-        return MinimumOctagon.minimumBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("MinimumOctagon");}
+        ClearCLKernel result = MinimumOctagon.minimumBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("MinimumOctagon");}
+        return result;
     }
 
     /**
@@ -1755,7 +2177,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ClearCLKernel minimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3) {
-        return MinimumOctagon.minimumDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("MinimumOctagon");}
+        ClearCLKernel result = MinimumOctagon.minimumDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("MinimumOctagon");}
+        return result;
     }
 
 
@@ -1769,7 +2194,10 @@ public abstract interface CLIJ2Ops {
      * result very similar to minimum sphere. Approximately:radius = iterations - 2
      */
     default boolean maximumOctagon(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return MaximumOctagon.maximumOctagon(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("MaximumOctagon");}
+        boolean result = MaximumOctagon.maximumOctagon(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MaximumOctagon");}
+        return result;
     }
 
     /**
@@ -1778,7 +2206,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ClearCLKernel maximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3) {
-        return MaximumOctagon.maximumBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("MaximumOctagon");}
+        ClearCLKernel result = MaximumOctagon.maximumBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("MaximumOctagon");}
+        return result;
     }
 
     /**
@@ -1786,7 +2217,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ClearCLKernel maximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3) {
-        return MaximumOctagon.maximumDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("MaximumOctagon");}
+        ClearCLKernel result = MaximumOctagon.maximumDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("MaximumOctagon");}
+        return result;
     }
 
 
@@ -1798,7 +2232,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, y) = x + y</pre>
      */
     default boolean addImages(ClearCLImageInterface summand1, ClearCLImageInterface summand2, ClearCLImageInterface destination) {
-        return AddImages.addImages(getCLIJ2(), summand1, summand2, destination);
+        if (doTimeTracing()) {recordMethodStart("AddImages");}
+        boolean result = AddImages.addImages(getCLIJ2(), summand1, summand2, destination);
+        if (doTimeTracing()) {recordMethodEnd("AddImages");}
+        return result;
     }
 
 
@@ -1810,7 +2247,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, y, a, b) = x * a + y * b</pre>
      */
     default boolean addImagesWeighted(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, double arg4, double arg5) {
-        return AddImagesWeighted.addImagesWeighted(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("AddImagesWeighted");}
+        boolean result = AddImagesWeighted.addImagesWeighted(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("AddImagesWeighted");}
+        return result;
     }
 
 
@@ -1823,7 +2263,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean subtract(ClearCLImageInterface subtrahend, ClearCLImageInterface minuend, ClearCLImageInterface destination) {
-        return SubtractImages.subtract(getCLIJ2(), subtrahend, minuend, destination);
+        if (doTimeTracing()) {recordMethodStart("SubtractImages");}
+        boolean result = SubtractImages.subtract(getCLIJ2(), subtrahend, minuend, destination);
+        if (doTimeTracing()) {recordMethodEnd("SubtractImages");}
+        return result;
     }
 
     /**
@@ -1832,7 +2275,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, y) = x - y</pre>
      */
     default boolean subtractImages(ClearCLImageInterface subtrahend, ClearCLImageInterface minuend, ClearCLImageInterface destination) {
-        return SubtractImages.subtractImages(getCLIJ2(), subtrahend, minuend, destination);
+        if (doTimeTracing()) {recordMethodStart("SubtractImages");}
+        boolean result = SubtractImages.subtractImages(getCLIJ2(), subtrahend, minuend, destination);
+        if (doTimeTracing()) {recordMethodEnd("SubtractImages");}
+        return result;
     }
 
 
@@ -1856,7 +2302,10 @@ public abstract interface CLIJ2Ops {
      * transform = "center scale=2 rotate=45 -center";
      */
     default boolean affineTransform2D(ClearCLBuffer arg1, ClearCLImageInterface arg2, float[] arg3) {
-        return AffineTransform2D.affineTransform2D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("AffineTransform2D");}
+        boolean result = AffineTransform2D.affineTransform2D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("AffineTransform2D");}
+        return result;
     }
 
     /**
@@ -1877,7 +2326,10 @@ public abstract interface CLIJ2Ops {
      * transform = "center scale=2 rotate=45 -center";
      */
     default boolean affineTransform2D(ClearCLBuffer source, ClearCLImageInterface destination, String transform) {
-        return AffineTransform2D.affineTransform2D(getCLIJ2(), source, destination, transform);
+        if (doTimeTracing()) {recordMethodStart("AffineTransform2D");}
+        boolean result = AffineTransform2D.affineTransform2D(getCLIJ2(), source, destination, transform);
+        if (doTimeTracing()) {recordMethodEnd("AffineTransform2D");}
+        return result;
     }
 
     /**
@@ -1898,7 +2350,10 @@ public abstract interface CLIJ2Ops {
      * transform = "center scale=2 rotate=45 -center";
      */
     default boolean affineTransform2D(ClearCLBuffer arg1, ClearCLImageInterface arg2, net.imglib2.realtransform.AffineTransform2D arg3) {
-        return AffineTransform2D.affineTransform2D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("AffineTransform2D");}
+        boolean result = AffineTransform2D.affineTransform2D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("AffineTransform2D");}
+        return result;
     }
 
     /**
@@ -1919,7 +2374,10 @@ public abstract interface CLIJ2Ops {
      * transform = "center scale=2 rotate=45 -center";
      */
     default boolean affineTransform2D(ClearCLImage arg1, ClearCLImageInterface arg2, float[] arg3) {
-        return AffineTransform2D.affineTransform2D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("AffineTransform2D");}
+        boolean result = AffineTransform2D.affineTransform2D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("AffineTransform2D");}
+        return result;
     }
 
     /**
@@ -1940,7 +2398,10 @@ public abstract interface CLIJ2Ops {
      * transform = "center scale=2 rotate=45 -center";
      */
     default boolean affineTransform2D(ClearCLImage arg1, ClearCLImageInterface arg2, net.imglib2.realtransform.AffineTransform2D arg3) {
-        return AffineTransform2D.affineTransform2D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("AffineTransform2D");}
+        boolean result = AffineTransform2D.affineTransform2D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("AffineTransform2D");}
+        return result;
     }
 
 
@@ -1974,7 +2435,10 @@ public abstract interface CLIJ2Ops {
      * transform = "center scale=2 rotate=45 -center";
      */
     default boolean affineTransform3D(ClearCLBuffer arg1, ClearCLImageInterface arg2, float[] arg3) {
-        return AffineTransform3D.affineTransform3D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("AffineTransform3D");}
+        boolean result = AffineTransform3D.affineTransform3D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("AffineTransform3D");}
+        return result;
     }
 
     /**
@@ -2005,7 +2469,10 @@ public abstract interface CLIJ2Ops {
      * transform = "center scale=2 rotate=45 -center";
      */
     default boolean affineTransform3D(ClearCLBuffer source, ClearCLImageInterface destination, String transform) {
-        return AffineTransform3D.affineTransform3D(getCLIJ2(), source, destination, transform);
+        if (doTimeTracing()) {recordMethodStart("AffineTransform3D");}
+        boolean result = AffineTransform3D.affineTransform3D(getCLIJ2(), source, destination, transform);
+        if (doTimeTracing()) {recordMethodEnd("AffineTransform3D");}
+        return result;
     }
 
     /**
@@ -2036,7 +2503,10 @@ public abstract interface CLIJ2Ops {
      * transform = "center scale=2 rotate=45 -center";
      */
     default boolean affineTransform3D(ClearCLBuffer arg1, ClearCLImageInterface arg2, net.imglib2.realtransform.AffineTransform3D arg3) {
-        return AffineTransform3D.affineTransform3D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("AffineTransform3D");}
+        boolean result = AffineTransform3D.affineTransform3D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("AffineTransform3D");}
+        return result;
     }
 
     /**
@@ -2067,7 +2537,10 @@ public abstract interface CLIJ2Ops {
      * transform = "center scale=2 rotate=45 -center";
      */
     default boolean affineTransform3D(ClearCLImage arg1, ClearCLImageInterface arg2, float[] arg3) {
-        return AffineTransform3D.affineTransform3D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("AffineTransform3D");}
+        boolean result = AffineTransform3D.affineTransform3D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("AffineTransform3D");}
+        return result;
     }
 
     /**
@@ -2098,7 +2571,10 @@ public abstract interface CLIJ2Ops {
      * transform = "center scale=2 rotate=45 -center";
      */
     default boolean affineTransform3D(ClearCLImage arg1, ClearCLImageInterface arg2, net.imglib2.realtransform.AffineTransform3D arg3) {
-        return AffineTransform3D.affineTransform3D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("AffineTransform3D");}
+        boolean result = AffineTransform3D.affineTransform3D(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("AffineTransform3D");}
+        return result;
     }
 
 
@@ -2108,14 +2584,20 @@ public abstract interface CLIJ2Ops {
      * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
      */
     default boolean applyVectorField(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination) {
-        return ApplyVectorField2D.applyVectorField(getCLIJ2(), source, vectorX, vectorY, destination);
+        if (doTimeTracing()) {recordMethodStart("ApplyVectorField2D");}
+        boolean result = ApplyVectorField2D.applyVectorField(getCLIJ2(), source, vectorX, vectorY, destination);
+        if (doTimeTracing()) {recordMethodEnd("ApplyVectorField2D");}
+        return result;
     }
 
     /**
      * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
      */
     default boolean applyVectorField2D(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination) {
-        return ApplyVectorField2D.applyVectorField2D(getCLIJ2(), source, vectorX, vectorY, destination);
+        if (doTimeTracing()) {recordMethodStart("ApplyVectorField2D");}
+        boolean result = ApplyVectorField2D.applyVectorField2D(getCLIJ2(), source, vectorX, vectorY, destination);
+        if (doTimeTracing()) {recordMethodEnd("ApplyVectorField2D");}
+        return result;
     }
 
 
@@ -2125,14 +2607,20 @@ public abstract interface CLIJ2Ops {
      * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
      */
     default boolean applyVectorField(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLImageInterface arg4, ClearCLImageInterface arg5) {
-        return ApplyVectorField3D.applyVectorField(getCLIJ2(), arg1, arg2, arg3, arg4, arg5);
+        if (doTimeTracing()) {recordMethodStart("ApplyVectorField3D");}
+        boolean result = ApplyVectorField3D.applyVectorField(getCLIJ2(), arg1, arg2, arg3, arg4, arg5);
+        if (doTimeTracing()) {recordMethodEnd("ApplyVectorField3D");}
+        return result;
     }
 
     /**
      * Deforms an image stack according to distances provided in the given vector image stacks. It is recommended to use 32-bit image stacks for input, output and vector image stacks. 
      */
     default boolean applyVectorField3D(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface vectorZ, ClearCLImageInterface destination) {
-        return ApplyVectorField3D.applyVectorField3D(getCLIJ2(), source, vectorX, vectorY, vectorZ, destination);
+        if (doTimeTracing()) {recordMethodStart("ApplyVectorField3D");}
+        boolean result = ApplyVectorField3D.applyVectorField3D(getCLIJ2(), source, vectorX, vectorY, vectorZ, destination);
+        if (doTimeTracing()) {recordMethodEnd("ApplyVectorField3D");}
+        return result;
     }
 
 
@@ -2143,7 +2631,10 @@ public abstract interface CLIJ2Ops {
      * Furthermore, another 2D image is generated with pixels containing the z-index where the maximum was found (zero based).
      */
     default boolean argMaximumZProjection(ClearCLImageInterface source, ClearCLImageInterface destination_max, ClearCLImageInterface destination_arg_max) {
-        return ArgMaximumZProjection.argMaximumZProjection(getCLIJ2(), source, destination_max, destination_arg_max);
+        if (doTimeTracing()) {recordMethodStart("ArgMaximumZProjection");}
+        boolean result = ArgMaximumZProjection.argMaximumZProjection(getCLIJ2(), source, destination_max, destination_arg_max);
+        if (doTimeTracing()) {recordMethodEnd("ArgMaximumZProjection");}
+        return result;
     }
 
 
@@ -2154,42 +2645,60 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean fillHistogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return Histogram.fillHistogram(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Histogram");}
+        boolean result = Histogram.fillHistogram(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Histogram");}
+        return result;
     }
 
     /**
      * Determines the histogram of a given image.
      */
     default boolean histogram(ClearCLBuffer arg1, ClearCLBuffer arg2) {
-        return Histogram.histogram(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("Histogram");}
+        boolean result = Histogram.histogram(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("Histogram");}
+        return result;
     }
 
     /**
      * Determines the histogram of a given image.
      */
     default boolean histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, boolean arg6) {
-        return Histogram.histogram(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+        if (doTimeTracing()) {recordMethodStart("Histogram");}
+        boolean result = Histogram.histogram(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+        if (doTimeTracing()) {recordMethodEnd("Histogram");}
+        return result;
     }
 
     /**
      * Determines the histogram of a given image.
      */
     default boolean histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, boolean arg6, boolean arg7) {
-        return Histogram.histogram(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6, arg7);
+        if (doTimeTracing()) {recordMethodStart("Histogram");}
+        boolean result = Histogram.histogram(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6, arg7);
+        if (doTimeTracing()) {recordMethodEnd("Histogram");}
+        return result;
     }
 
     /**
      * Determines the histogram of a given image.
      */
     default float[] histogram(ClearCLBuffer arg1, double arg2, double arg3, double arg4) {
-        return Histogram.histogram(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Histogram");}
+        float[] result = Histogram.histogram(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Histogram");}
+        return result;
     }
 
     /**
      * Determines the histogram of a given image.
      */
     default ClearCLBuffer histogram(ClearCLBuffer arg1) {
-        return Histogram.histogram(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("Histogram");}
+        ClearCLBuffer result = Histogram.histogram(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("Histogram");}
+        return result;
     }
 
 
@@ -2202,7 +2711,10 @@ public abstract interface CLIJ2Ops {
      * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
      */
     default boolean automaticThreshold(ClearCLBuffer input, ClearCLBuffer destination, String method) {
-        return AutomaticThreshold.automaticThreshold(getCLIJ2(), input, destination, method);
+        if (doTimeTracing()) {recordMethodStart("AutomaticThreshold");}
+        boolean result = AutomaticThreshold.automaticThreshold(getCLIJ2(), input, destination, method);
+        if (doTimeTracing()) {recordMethodEnd("AutomaticThreshold");}
+        return result;
     }
 
     /**
@@ -2212,7 +2724,10 @@ public abstract interface CLIJ2Ops {
      * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
      */
     default boolean automaticThreshold(ClearCLBuffer arg1, ClearCLBuffer arg2, String arg3, double arg4, double arg5, double arg6) {
-        return AutomaticThreshold.automaticThreshold(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).intValue());
+        if (doTimeTracing()) {recordMethodStart("AutomaticThreshold");}
+        boolean result = AutomaticThreshold.automaticThreshold(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).intValue());
+        if (doTimeTracing()) {recordMethodEnd("AutomaticThreshold");}
+        return result;
     }
 
 
@@ -2227,7 +2742,10 @@ public abstract interface CLIJ2Ops {
      * This plugin is comparable to setting a raw threshold in ImageJ and using the 'Convert to Mask' menu.
      */
     default boolean threshold(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return Threshold.threshold(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Threshold");}
+        boolean result = Threshold.threshold(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Threshold");}
+        return result;
     }
 
 
@@ -2239,7 +2757,10 @@ public abstract interface CLIJ2Ops {
      * All pixel values except 0 in the input images are interpreted as 1.<pre>f(x, y) = x | y</pre>
      */
     default boolean binaryOr(ClearCLImageInterface operand1, ClearCLImageInterface operand2, ClearCLImageInterface destination) {
-        return BinaryOr.binaryOr(getCLIJ2(), operand1, operand2, destination);
+        if (doTimeTracing()) {recordMethodStart("BinaryOr");}
+        boolean result = BinaryOr.binaryOr(getCLIJ2(), operand1, operand2, destination);
+        if (doTimeTracing()) {recordMethodEnd("BinaryOr");}
+        return result;
     }
 
 
@@ -2253,7 +2774,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, y) = x & y</pre>
      */
     default boolean binaryAnd(ClearCLImageInterface operand1, ClearCLImageInterface operand2, ClearCLImageInterface destination) {
-        return BinaryAnd.binaryAnd(getCLIJ2(), operand1, operand2, destination);
+        if (doTimeTracing()) {recordMethodStart("BinaryAnd");}
+        boolean result = BinaryAnd.binaryAnd(getCLIJ2(), operand1, operand2, destination);
+        if (doTimeTracing()) {recordMethodEnd("BinaryAnd");}
+        return result;
     }
 
 
@@ -2267,7 +2791,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, y) = (x & !y) | (!x & y)</pre>
      */
     default boolean binaryXOr(ClearCLImageInterface operand1, ClearCLImageInterface operand2, ClearCLImageInterface destination) {
-        return BinaryXOr.binaryXOr(getCLIJ2(), operand1, operand2, destination);
+        if (doTimeTracing()) {recordMethodStart("BinaryXOr");}
+        boolean result = BinaryXOr.binaryXOr(getCLIJ2(), operand1, operand2, destination);
+        if (doTimeTracing()) {recordMethodEnd("BinaryXOr");}
+        return result;
     }
 
 
@@ -2281,7 +2808,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x) = !x</pre>
      */
     default boolean binaryNot(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return BinaryNot.binaryNot(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("BinaryNot");}
+        boolean result = BinaryNot.binaryNot(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("BinaryNot");}
+        return result;
     }
 
 
@@ -2293,7 +2823,10 @@ public abstract interface CLIJ2Ops {
      * The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
      */
     default boolean erodeSphere(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return ErodeSphere.erodeSphere(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("ErodeSphere");}
+        boolean result = ErodeSphere.erodeSphere(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("ErodeSphere");}
+        return result;
     }
 
 
@@ -2308,7 +2841,10 @@ public abstract interface CLIJ2Ops {
      * difference is that the output image contains values 0 and 1 instead of 0 and 255.
      */
     default boolean erodeBox(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return ErodeBox.erodeBox(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("ErodeBox");}
+        boolean result = ErodeBox.erodeBox(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("ErodeBox");}
+        return result;
     }
 
 
@@ -2322,7 +2858,10 @@ public abstract interface CLIJ2Ops {
      * This filter is applied slice by slice in 2D.
      */
     default boolean erodeSphereSliceBySlice(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return ErodeSphereSliceBySlice.erodeSphereSliceBySlice(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("ErodeSphereSliceBySlice");}
+        boolean result = ErodeSphereSliceBySlice.erodeSphereSliceBySlice(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("ErodeSphereSliceBySlice");}
+        return result;
     }
 
 
@@ -2339,7 +2878,10 @@ public abstract interface CLIJ2Ops {
      * This filter is applied slice by slice in 2D.
      */
     default boolean erodeBoxSliceBySlice(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return ErodeBoxSliceBySlice.erodeBoxSliceBySlice(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("ErodeBoxSliceBySlice");}
+        boolean result = ErodeBoxSliceBySlice.erodeBoxSliceBySlice(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("ErodeBoxSliceBySlice");}
+        return result;
     }
 
 
@@ -2351,7 +2893,10 @@ public abstract interface CLIJ2Ops {
      * The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
      */
     default boolean dilateSphere(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return DilateSphere.dilateSphere(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("DilateSphere");}
+        boolean result = DilateSphere.dilateSphere(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("DilateSphere");}
+        return result;
     }
 
 
@@ -2366,7 +2911,10 @@ public abstract interface CLIJ2Ops {
      * difference is that the output image contains values 0 and 1 instead of 0 and 255.
      */
     default boolean dilateBox(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return DilateBox.dilateBox(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("DilateBox");}
+        boolean result = DilateBox.dilateBox(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("DilateBox");}
+        return result;
     }
 
 
@@ -2380,7 +2928,10 @@ public abstract interface CLIJ2Ops {
      * This filter is applied slice by slice in 2D.
      */
     default boolean dilateSphereSliceBySlice(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return DilateSphereSliceBySlice.dilateSphereSliceBySlice(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("DilateSphereSliceBySlice");}
+        boolean result = DilateSphereSliceBySlice.dilateSphereSliceBySlice(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("DilateSphereSliceBySlice");}
+        return result;
     }
 
 
@@ -2397,7 +2948,10 @@ public abstract interface CLIJ2Ops {
      * This filter is applied slice by slice in 2D.
      */
     default boolean dilateBoxSliceBySlice(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return DilateBoxSliceBySlice.dilateBoxSliceBySlice(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("DilateBoxSliceBySlice");}
+        boolean result = DilateBoxSliceBySlice.dilateBoxSliceBySlice(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("DilateBoxSliceBySlice");}
+        return result;
     }
 
 
@@ -2409,7 +2963,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x) = x</pre>
      */
     default boolean copy(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return Copy.copy(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("Copy");}
+        boolean result = Copy.copy(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("Copy");}
+        return result;
     }
 
 
@@ -2425,7 +2982,10 @@ public abstract interface CLIJ2Ops {
      * the image stack with z planes.
      */
     default boolean copySlice(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return CopySlice.copySlice(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("CopySlice");}
+        boolean result = CopySlice.copySlice(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("CopySlice");}
+        return result;
     }
 
 
@@ -2437,7 +2997,10 @@ public abstract interface CLIJ2Ops {
      * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
      */
     default boolean crop(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Crop2D.crop(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Crop2D");}
+        boolean result = Crop2D.crop(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Crop2D");}
+        return result;
     }
 
     /**
@@ -2446,7 +3009,10 @@ public abstract interface CLIJ2Ops {
      * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
      */
     default boolean crop2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Crop2D.crop2D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Crop2D");}
+        boolean result = Crop2D.crop2D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Crop2D");}
+        return result;
     }
 
 
@@ -2458,7 +3024,10 @@ public abstract interface CLIJ2Ops {
      * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
      */
     default boolean crop(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Crop3D.crop(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Crop3D");}
+        boolean result = Crop3D.crop(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Crop3D");}
+        return result;
     }
 
     /**
@@ -2467,7 +3036,10 @@ public abstract interface CLIJ2Ops {
      * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
      */
     default boolean crop3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Crop3D.crop3D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Crop3D");}
+        boolean result = Crop3D.crop3D(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Crop3D");}
+        return result;
     }
 
 
@@ -2479,7 +3051,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x) = v</pre>
      */
     default boolean set(ClearCLImageInterface arg1, double arg2) {
-        return Set.set(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Set");}
+        boolean result = Set.set(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Set");}
+        return result;
     }
 
 
@@ -2489,14 +3064,20 @@ public abstract interface CLIJ2Ops {
      * Flips an image in X and/or Y direction depending on boolean flags.
      */
     default boolean flip(ClearCLImageInterface arg1, ClearCLImageInterface arg2, boolean arg3, boolean arg4) {
-        return Flip2D.flip(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodStart("Flip2D");}
+        boolean result = Flip2D.flip(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("Flip2D");}
+        return result;
     }
 
     /**
      * Flips an image in X and/or Y direction depending on boolean flags.
      */
     default boolean flip2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, boolean arg3, boolean arg4) {
-        return Flip2D.flip2D(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodStart("Flip2D");}
+        boolean result = Flip2D.flip2D(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("Flip2D");}
+        return result;
     }
 
 
@@ -2506,14 +3087,20 @@ public abstract interface CLIJ2Ops {
      * Flips an image in X and/or Y direction depending on boolean flags.
      */
     default boolean flip(ClearCLImageInterface arg1, ClearCLImageInterface arg2, boolean arg3, boolean arg4, boolean arg5) {
-        return Flip3D.flip(getCLIJ2(), arg1, arg2, arg3, arg4, arg5);
+        if (doTimeTracing()) {recordMethodStart("Flip3D");}
+        boolean result = Flip3D.flip(getCLIJ2(), arg1, arg2, arg3, arg4, arg5);
+        if (doTimeTracing()) {recordMethodEnd("Flip3D");}
+        return result;
     }
 
     /**
      * Flips an image in X, Y and/or Z direction depending on boolean flags.
      */
     default boolean flip3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, boolean arg3, boolean arg4, boolean arg5) {
-        return Flip3D.flip3D(getCLIJ2(), arg1, arg2, arg3, arg4, arg5);
+        if (doTimeTracing()) {recordMethodStart("Flip3D");}
+        boolean result = Flip3D.flip3D(getCLIJ2(), arg1, arg2, arg3, arg4, arg5);
+        if (doTimeTracing()) {recordMethodEnd("Flip3D");}
+        return result;
     }
 
 
@@ -2527,7 +3114,10 @@ public abstract interface CLIJ2Ops {
      * such as interpolation.
      */
     default boolean rotateCounterClockwise(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return RotateCounterClockwise.rotateCounterClockwise(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("RotateCounterClockwise");}
+        boolean result = RotateCounterClockwise.rotateCounterClockwise(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("RotateCounterClockwise");}
+        return result;
     }
 
     /**
@@ -2537,7 +3127,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean rotateLeft(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return RotateCounterClockwise.rotateLeft(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("RotateCounterClockwise");}
+        boolean result = RotateCounterClockwise.rotateLeft(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("RotateCounterClockwise");}
+        return result;
     }
 
 
@@ -2551,7 +3144,10 @@ public abstract interface CLIJ2Ops {
      * such as interpolation.
      */
     default boolean rotateClockwise(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return RotateClockwise.rotateClockwise(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("RotateClockwise");}
+        boolean result = RotateClockwise.rotateClockwise(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("RotateClockwise");}
+        return result;
     }
 
     /**
@@ -2561,7 +3157,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean rotateRight(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return RotateClockwise.rotateRight(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("RotateClockwise");}
+        boolean result = RotateClockwise.rotateRight(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("RotateClockwise");}
+        return result;
     }
 
 
@@ -2575,7 +3174,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>
      */
     default boolean mask(ClearCLImageInterface source, ClearCLImageInterface mask, ClearCLImageInterface destination) {
-        return Mask.mask(getCLIJ2(), source, mask, destination);
+        if (doTimeTracing()) {recordMethodStart("Mask");}
+        boolean result = Mask.mask(getCLIJ2(), source, mask, destination);
+        if (doTimeTracing()) {recordMethodEnd("Mask");}
+        return result;
     }
 
 
@@ -2589,7 +3191,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>
      */
     default boolean maskStackWithPlane(ClearCLImageInterface source, ClearCLImageInterface mask, ClearCLImageInterface destination) {
-        return MaskStackWithPlane.maskStackWithPlane(getCLIJ2(), source, mask, destination);
+        if (doTimeTracing()) {recordMethodStart("MaskStackWithPlane");}
+        boolean result = MaskStackWithPlane.maskStackWithPlane(getCLIJ2(), source, mask, destination);
+        if (doTimeTracing()) {recordMethodEnd("MaskStackWithPlane");}
+        return result;
     }
 
 
@@ -2599,7 +3204,10 @@ public abstract interface CLIJ2Ops {
      * Determines the maximum projection of an image along Z.
      */
     default boolean maximumZProjection(ClearCLImageInterface source, ClearCLImageInterface destination_max) {
-        return MaximumZProjection.maximumZProjection(getCLIJ2(), source, destination_max);
+        if (doTimeTracing()) {recordMethodStart("MaximumZProjection");}
+        boolean result = MaximumZProjection.maximumZProjection(getCLIJ2(), source, destination_max);
+        if (doTimeTracing()) {recordMethodEnd("MaximumZProjection");}
+        return result;
     }
 
 
@@ -2609,7 +3217,10 @@ public abstract interface CLIJ2Ops {
      * Determines the mean average projection of an image along Z.
      */
     default boolean meanZProjection(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return MeanZProjection.meanZProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("MeanZProjection");}
+        boolean result = MeanZProjection.meanZProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("MeanZProjection");}
+        return result;
     }
 
 
@@ -2619,7 +3230,10 @@ public abstract interface CLIJ2Ops {
      * Determines the minimum projection of an image along Z.
      */
     default boolean minimumZProjection(ClearCLImageInterface source, ClearCLImageInterface destination_sum) {
-        return MinimumZProjection.minimumZProjection(getCLIJ2(), source, destination_sum);
+        if (doTimeTracing()) {recordMethodStart("MinimumZProjection");}
+        boolean result = MinimumZProjection.minimumZProjection(getCLIJ2(), source, destination_sum);
+        if (doTimeTracing()) {recordMethodEnd("MinimumZProjection");}
+        return result;
     }
 
 
@@ -2631,7 +3245,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, a) = x ^ a</pre>
      */
     default boolean power(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return Power.power(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Power");}
+        boolean result = Power.power(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Power");}
+        return result;
     }
 
 
@@ -2643,7 +3260,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, y) = x / y</pre>
      */
     default boolean divideImages(ClearCLImageInterface divident, ClearCLImageInterface divisor, ClearCLImageInterface destination) {
-        return DivideImages.divideImages(getCLIJ2(), divident, divisor, destination);
+        if (doTimeTracing()) {recordMethodStart("DivideImages");}
+        boolean result = DivideImages.divideImages(getCLIJ2(), divident, divisor, destination);
+        if (doTimeTracing()) {recordMethodEnd("DivideImages");}
+        return result;
     }
 
 
@@ -2655,7 +3275,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, y) = max(x, y)</pre>
      */
     default boolean maximumImages(ClearCLImageInterface source1, ClearCLImageInterface source2, ClearCLImageInterface destination) {
-        return MaximumImages.maximumImages(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodStart("MaximumImages");}
+        boolean result = MaximumImages.maximumImages(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodEnd("MaximumImages");}
+        return result;
     }
 
 
@@ -2667,7 +3290,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, s) = max(x, s)</pre>
      */
     default boolean maximumImageAndScalar(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return MaximumImageAndScalar.maximumImageAndScalar(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("MaximumImageAndScalar");}
+        boolean result = MaximumImageAndScalar.maximumImageAndScalar(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("MaximumImageAndScalar");}
+        return result;
     }
 
 
@@ -2679,7 +3305,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, y) = min(x, y)</pre>
      */
     default boolean minimumImages(ClearCLImageInterface source1, ClearCLImageInterface source2, ClearCLImageInterface destination) {
-        return MinimumImages.minimumImages(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodStart("MinimumImages");}
+        boolean result = MinimumImages.minimumImages(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodEnd("MinimumImages");}
+        return result;
     }
 
 
@@ -2691,7 +3320,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, s) = min(x, s)</pre>
      */
     default boolean minimumImageAndScalar(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return MinimumImageAndScalar.minimumImageAndScalar(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("MinimumImageAndScalar");}
+        boolean result = MinimumImageAndScalar.minimumImageAndScalar(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("MinimumImageAndScalar");}
+        return result;
     }
 
 
@@ -2703,7 +3335,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, s) = x * s</pre>
      */
     default boolean multiplyImageAndScalar(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return MultiplyImageAndScalar.multiplyImageAndScalar(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("MultiplyImageAndScalar");}
+        boolean result = MultiplyImageAndScalar.multiplyImageAndScalar(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("MultiplyImageAndScalar");}
+        return result;
     }
 
 
@@ -2716,7 +3351,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, y) = x * y</pre>
      */
     default boolean multiplyStackWithPlane(ClearCLImageInterface sourceStack, ClearCLImageInterface sourcePlane, ClearCLImageInterface destination) {
-        return MultiplyStackWithPlane.multiplyStackWithPlane(getCLIJ2(), sourceStack, sourcePlane, destination);
+        if (doTimeTracing()) {recordMethodStart("MultiplyStackWithPlane");}
+        boolean result = MultiplyStackWithPlane.multiplyStackWithPlane(getCLIJ2(), sourceStack, sourcePlane, destination);
+        if (doTimeTracing()) {recordMethodEnd("MultiplyStackWithPlane");}
+        return result;
     }
 
 
@@ -2726,7 +3364,10 @@ public abstract interface CLIJ2Ops {
      * Counts non-zero pixels in a sphere around every pixel.Put the number in the result image.
      */
     default boolean countNonZeroPixels2DSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return CountNonZeroPixels2DSphere.countNonZeroPixels2DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("CountNonZeroPixels2DSphere");}
+        boolean result = CountNonZeroPixels2DSphere.countNonZeroPixels2DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("CountNonZeroPixels2DSphere");}
+        return result;
     }
 
     /**
@@ -2734,7 +3375,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean countNonZeroPixelsLocally(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return CountNonZeroPixels2DSphere.countNonZeroPixelsLocally(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("CountNonZeroPixels2DSphere");}
+        boolean result = CountNonZeroPixels2DSphere.countNonZeroPixelsLocally(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("CountNonZeroPixels2DSphere");}
+        return result;
     }
 
 
@@ -2745,14 +3389,20 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean countNonZeroPixelsLocallySliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return CountNonZeroPixelsSliceBySliceSphere.countNonZeroPixelsLocallySliceBySlice(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("CountNonZeroPixelsSliceBySliceSphere");}
+        boolean result = CountNonZeroPixelsSliceBySliceSphere.countNonZeroPixelsLocallySliceBySlice(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("CountNonZeroPixelsSliceBySliceSphere");}
+        return result;
     }
 
     /**
      * Counts non-zero pixels in a sphere around every pixel slice by slice in a stack and puts the resulting number in the destination image stack.
      */
     default boolean countNonZeroPixelsSliceBySliceSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return CountNonZeroPixelsSliceBySliceSphere.countNonZeroPixelsSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("CountNonZeroPixelsSliceBySliceSphere");}
+        boolean result = CountNonZeroPixelsSliceBySliceSphere.countNonZeroPixelsSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("CountNonZeroPixelsSliceBySliceSphere");}
+        return result;
     }
 
 
@@ -2762,7 +3412,10 @@ public abstract interface CLIJ2Ops {
      * Counts non-zero voxels in a sphere around every voxel.Put the number in the result image.
      */
     default boolean countNonZeroVoxels3DSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return CountNonZeroVoxels3DSphere.countNonZeroVoxels3DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("CountNonZeroVoxels3DSphere");}
+        boolean result = CountNonZeroVoxels3DSphere.countNonZeroVoxels3DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("CountNonZeroVoxels3DSphere");}
+        return result;
     }
 
     /**
@@ -2770,7 +3423,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean countNonZeroVoxelsLocally(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return CountNonZeroVoxels3DSphere.countNonZeroVoxelsLocally(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("CountNonZeroVoxels3DSphere");}
+        boolean result = CountNonZeroVoxels3DSphere.countNonZeroVoxelsLocally(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("CountNonZeroVoxels3DSphere");}
+        return result;
     }
 
 
@@ -2780,7 +3436,10 @@ public abstract interface CLIJ2Ops {
      * Determines the sum projection of an image along Z.
      */
     default boolean sumZProjection(ClearCLImageInterface source, ClearCLImageInterface destination_sum) {
-        return SumZProjection.sumZProjection(getCLIJ2(), source, destination_sum);
+        if (doTimeTracing()) {recordMethodStart("SumZProjection");}
+        boolean result = SumZProjection.sumZProjection(getCLIJ2(), source, destination_sum);
+        if (doTimeTracing()) {recordMethodEnd("SumZProjection");}
+        return result;
     }
 
 
@@ -2791,7 +3450,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'Sum'.
      */
     default double sumOfAllPixels(ClearCLImageInterface source) {
-        return SumOfAllPixels.sumOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("SumOfAllPixels");}
+        double result = SumOfAllPixels.sumOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("SumOfAllPixels");}
+        return result;
     }
 
     /**
@@ -2800,7 +3462,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default double sumPixels(ClearCLImageInterface source) {
-        return SumOfAllPixels.sumPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("SumOfAllPixels");}
+        double result = SumOfAllPixels.sumPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("SumOfAllPixels");}
+        return result;
     }
 
 
@@ -2811,7 +3476,10 @@ public abstract interface CLIJ2Ops {
      * in the columns MassX, MassY and MassZ.
      */
     default double[] centerOfMass(ClearCLBuffer source) {
-        return CenterOfMass.centerOfMass(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("CenterOfMass");}
+        double[] result = CenterOfMass.centerOfMass(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("CenterOfMass");}
+        return result;
     }
 
 
@@ -2826,7 +3494,10 @@ public abstract interface CLIJ2Ops {
      * For binary images, use binaryNot.
      */
     default boolean invert(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return Invert.invert(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("Invert");}
+        boolean result = Invert.invert(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("Invert");}
+        return result;
     }
 
 
@@ -2838,7 +3509,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean downsample(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Downsample2D.downsample(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Downsample2D");}
+        boolean result = Downsample2D.downsample(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Downsample2D");}
+        return result;
     }
 
     /**
@@ -2847,7 +3521,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean downsample2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Downsample2D.downsample2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Downsample2D");}
+        boolean result = Downsample2D.downsample2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Downsample2D");}
+        return result;
     }
 
 
@@ -2859,7 +3536,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean downsample(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Downsample3D.downsample(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Downsample3D");}
+        boolean result = Downsample3D.downsample(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Downsample3D");}
+        return result;
     }
 
     /**
@@ -2868,7 +3548,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean downsample3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Downsample3D.downsample3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Downsample3D");}
+        boolean result = Downsample3D.downsample3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Downsample3D");}
+        return result;
     }
 
 
@@ -2880,7 +3563,10 @@ public abstract interface CLIJ2Ops {
      * four corresponding pixels in the source image.
      */
     default boolean downsampleSliceBySliceHalfMedian(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return DownsampleSliceBySliceHalfMedian.downsampleSliceBySliceHalfMedian(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("DownsampleSliceBySliceHalfMedian");}
+        boolean result = DownsampleSliceBySliceHalfMedian.downsampleSliceBySliceHalfMedian(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("DownsampleSliceBySliceHalfMedian");}
+        return result;
     }
 
 
@@ -2893,7 +3579,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x) = (1 if (x >=  m)); (0 otherwise)</pre>
      */
     default boolean localThreshold(ClearCLImageInterface source, ClearCLImageInterface localThreshold, ClearCLImageInterface destination) {
-        return LocalThreshold.localThreshold(getCLIJ2(), source, localThreshold, destination);
+        if (doTimeTracing()) {recordMethodStart("LocalThreshold");}
+        boolean result = LocalThreshold.localThreshold(getCLIJ2(), source, localThreshold, destination);
+        if (doTimeTracing()) {recordMethodEnd("LocalThreshold");}
+        return result;
     }
 
 
@@ -2904,7 +3593,10 @@ public abstract interface CLIJ2Ops {
      *  pixels in X direction. In the target image will be saved as: <pre>b' = c - a;</pre>
      */
     default boolean gradientX(ClearCLBuffer source, ClearCLBuffer destination) {
-        return GradientX.gradientX(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("GradientX");}
+        boolean result = GradientX.gradientX(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("GradientX");}
+        return result;
     }
 
 
@@ -2915,7 +3607,10 @@ public abstract interface CLIJ2Ops {
      *  pixels in Y direction. In the target image will be saved as: <pre>b' = c - a;</pre>
      */
     default boolean gradientY(ClearCLBuffer source, ClearCLBuffer destination) {
-        return GradientY.gradientY(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("GradientY");}
+        boolean result = GradientY.gradientY(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("GradientY");}
+        return result;
     }
 
 
@@ -2926,7 +3621,10 @@ public abstract interface CLIJ2Ops {
      *  pixels in Z direction. In the target image will be saved as: <pre>b' = c - a;</pre>
      */
     default boolean gradientZ(ClearCLBuffer source, ClearCLBuffer destination) {
-        return GradientZ.gradientZ(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("GradientZ");}
+        boolean result = GradientZ.gradientZ(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("GradientZ");}
+        return result;
     }
 
 
@@ -2936,7 +3634,10 @@ public abstract interface CLIJ2Ops {
      * Multiplies all pixel intensities with the x, y or z coordinate, depending on specified dimension.
      */
     default boolean multiplyImageAndCoordinate(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return MultiplyImageAndCoordinate.multiplyImageAndCoordinate(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("MultiplyImageAndCoordinate");}
+        boolean result = MultiplyImageAndCoordinate.multiplyImageAndCoordinate(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MultiplyImageAndCoordinate");}
+        return result;
     }
 
 
@@ -2947,7 +3648,10 @@ public abstract interface CLIJ2Ops {
      * its half-width and half-height (radius).
      */
     default boolean mean2DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Mean2DBox.mean2DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Mean2DBox");}
+        boolean result = Mean2DBox.mean2DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Mean2DBox");}
+        return result;
     }
 
 
@@ -2958,7 +3662,10 @@ public abstract interface CLIJ2Ops {
      * its half-width and half-height (radius).
      */
     default boolean mean2DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Mean2DSphere.mean2DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Mean2DSphere");}
+        boolean result = Mean2DSphere.mean2DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Mean2DSphere");}
+        return result;
     }
 
 
@@ -2969,7 +3676,10 @@ public abstract interface CLIJ2Ops {
      * its half-width, half-height and half-depth (radius).
      */
     default boolean mean3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Mean3DBox.mean3DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Mean3DBox");}
+        boolean result = Mean3DBox.mean3DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Mean3DBox");}
+        return result;
     }
 
     /**
@@ -2977,7 +3687,10 @@ public abstract interface CLIJ2Ops {
      * its half-width and half-height (radius).
      */
     default boolean meanBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Mean3DBox.meanBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Mean3DBox");}
+        boolean result = Mean3DBox.meanBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Mean3DBox");}
+        return result;
     }
 
 
@@ -2988,7 +3701,10 @@ public abstract interface CLIJ2Ops {
      * its half-width, half-height and half-depth (radius).
      */
     default boolean mean3DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Mean3DSphere.mean3DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Mean3DSphere");}
+        boolean result = Mean3DSphere.mean3DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Mean3DSphere");}
+        return result;
     }
 
 
@@ -3001,7 +3717,10 @@ public abstract interface CLIJ2Ops {
      * This filter is applied slice by slice in 2D.
      */
     default boolean meanSliceBySliceSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return MeanSliceBySliceSphere.meanSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("MeanSliceBySliceSphere");}
+        boolean result = MeanSliceBySliceSphere.meanSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MeanSliceBySliceSphere");}
+        return result;
     }
 
 
@@ -3012,7 +3731,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'Mean'.
      */
     default double meanOfAllPixels(ClearCLImageInterface source) {
-        return MeanOfAllPixels.meanOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("MeanOfAllPixels");}
+        double result = MeanOfAllPixels.meanOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("MeanOfAllPixels");}
+        return result;
     }
 
 
@@ -3025,7 +3747,10 @@ public abstract interface CLIJ2Ops {
      * For technical reasons, the area of the rectangle must have less than 1000 pixels.
      */
     default boolean median2DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Median2DBox.median2DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Median2DBox");}
+        boolean result = Median2DBox.median2DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Median2DBox");}
+        return result;
     }
 
 
@@ -3038,7 +3763,10 @@ public abstract interface CLIJ2Ops {
      * For technical reasons, the area of the ellipse must have less than 1000 pixels.
      */
     default boolean median2DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Median2DSphere.median2DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Median2DSphere");}
+        boolean result = Median2DSphere.median2DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Median2DSphere");}
+        return result;
     }
 
 
@@ -3051,7 +3779,10 @@ public abstract interface CLIJ2Ops {
      * For technical reasons, the volume of the cuboid must contain less than 1000 voxels.
      */
     default boolean median3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Median3DBox.median3DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Median3DBox");}
+        boolean result = Median3DBox.median3DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Median3DBox");}
+        return result;
     }
 
 
@@ -3064,7 +3795,10 @@ public abstract interface CLIJ2Ops {
      * For technical reasons, the volume of the sphere must contain less than 1000 voxels.
      */
     default boolean median3DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Median3DSphere.median3DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Median3DSphere");}
+        boolean result = Median3DSphere.median3DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Median3DSphere");}
+        return result;
     }
 
 
@@ -3079,7 +3813,10 @@ public abstract interface CLIJ2Ops {
      * For technical reasons, the area of the rectangle must have less than 1000 pixels.
      */
     default boolean median3DSliceBySliceBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return MedianSliceBySliceBox.median3DSliceBySliceBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("MedianSliceBySliceBox");}
+        boolean result = MedianSliceBySliceBox.median3DSliceBySliceBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MedianSliceBySliceBox");}
+        return result;
     }
 
 
@@ -3094,7 +3831,10 @@ public abstract interface CLIJ2Ops {
      * For technical reasons, the area of the ellipse must have less than 1000 pixels.
      */
     default boolean median3DSliceBySliceSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return MedianSliceBySliceSphere.median3DSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("MedianSliceBySliceSphere");}
+        boolean result = MedianSliceBySliceSphere.median3DSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MedianSliceBySliceSphere");}
+        return result;
     }
 
 
@@ -3105,7 +3845,10 @@ public abstract interface CLIJ2Ops {
      * its half-width and half-height (radius).
      */
     default boolean maximum2DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Maximum2DSphere.maximum2DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Maximum2DSphere");}
+        boolean result = Maximum2DSphere.maximum2DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Maximum2DSphere");}
+        return result;
     }
 
 
@@ -3116,7 +3859,10 @@ public abstract interface CLIJ2Ops {
      * its half-width, half-height and half-depth (radius).
      */
     default boolean maximum3DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Maximum3DSphere.maximum3DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Maximum3DSphere");}
+        boolean result = Maximum3DSphere.maximum3DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Maximum3DSphere");}
+        return result;
     }
 
 
@@ -3127,7 +3873,10 @@ public abstract interface CLIJ2Ops {
      * its half-width and half-height (radius).
      */
     default boolean maximum2DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Maximum2DBox.maximum2DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Maximum2DBox");}
+        boolean result = Maximum2DBox.maximum2DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Maximum2DBox");}
+        return result;
     }
 
     /**
@@ -3135,7 +3884,10 @@ public abstract interface CLIJ2Ops {
      * its half-width and half-height (radius).
      */
     default boolean maximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Maximum2DBox.maximumBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Maximum2DBox");}
+        boolean result = Maximum2DBox.maximumBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Maximum2DBox");}
+        return result;
     }
 
 
@@ -3146,7 +3898,10 @@ public abstract interface CLIJ2Ops {
      * its half-width, half-height and half-depth (radius).
      */
     default boolean maximum3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Maximum3DBox.maximum3DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Maximum3DBox");}
+        boolean result = Maximum3DBox.maximum3DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Maximum3DBox");}
+        return result;
     }
 
     /**
@@ -3154,7 +3909,10 @@ public abstract interface CLIJ2Ops {
      * its half-width and half-height (radius).
      */
     default boolean maximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Maximum3DBox.maximumBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Maximum3DBox");}
+        boolean result = Maximum3DBox.maximumBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Maximum3DBox");}
+        return result;
     }
 
 
@@ -3168,7 +3926,10 @@ public abstract interface CLIJ2Ops {
      * This filter is applied slice by slice in 2D.
      */
     default boolean maximum3DSliceBySliceSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return MaximumSliceBySliceSphere.maximum3DSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("MaximumSliceBySliceSphere");}
+        boolean result = MaximumSliceBySliceSphere.maximum3DSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MaximumSliceBySliceSphere");}
+        return result;
     }
 
 
@@ -3179,7 +3940,10 @@ public abstract interface CLIJ2Ops {
      * its half-width and half-height (radius).
      */
     default boolean minimum2DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Minimum2DSphere.minimum2DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Minimum2DSphere");}
+        boolean result = Minimum2DSphere.minimum2DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Minimum2DSphere");}
+        return result;
     }
 
 
@@ -3190,7 +3954,10 @@ public abstract interface CLIJ2Ops {
      * its half-width, half-height and half-depth (radius).
      */
     default boolean minimum3DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Minimum3DSphere.minimum3DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Minimum3DSphere");}
+        boolean result = Minimum3DSphere.minimum3DSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Minimum3DSphere");}
+        return result;
     }
 
 
@@ -3201,7 +3968,10 @@ public abstract interface CLIJ2Ops {
      * its half-width and half-height (radius).
      */
     default boolean minimum2DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Minimum2DBox.minimum2DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Minimum2DBox");}
+        boolean result = Minimum2DBox.minimum2DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Minimum2DBox");}
+        return result;
     }
 
     /**
@@ -3209,7 +3979,10 @@ public abstract interface CLIJ2Ops {
      * its half-width and half-height (radius).
      */
     default boolean minimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return Minimum2DBox.minimumBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("Minimum2DBox");}
+        boolean result = Minimum2DBox.minimumBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Minimum2DBox");}
+        return result;
     }
 
 
@@ -3220,7 +3993,10 @@ public abstract interface CLIJ2Ops {
      * its half-width, half-height and half-depth (radius).
      */
     default boolean minimum3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Minimum3DBox.minimum3DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Minimum3DBox");}
+        boolean result = Minimum3DBox.minimum3DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Minimum3DBox");}
+        return result;
     }
 
     /**
@@ -3228,7 +4004,10 @@ public abstract interface CLIJ2Ops {
      * its half-width and half-height (radius).
      */
     default boolean minimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return Minimum3DBox.minimumBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("Minimum3DBox");}
+        boolean result = Minimum3DBox.minimumBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("Minimum3DBox");}
+        return result;
     }
 
 
@@ -3243,7 +4022,10 @@ public abstract interface CLIJ2Ops {
      * This filter is applied slice by slice in 2D.
      */
     default boolean minimum3DSliceBySliceSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return MinimumSliceBySliceSphere.minimum3DSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodStart("MinimumSliceBySliceSphere");}
+        boolean result = MinimumSliceBySliceSphere.minimum3DSliceBySliceSphere(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("MinimumSliceBySliceSphere");}
+        return result;
     }
 
 
@@ -3255,7 +4037,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, y) = x * y</pre>
      */
     default boolean multiplyImages(ClearCLImageInterface factor1, ClearCLImageInterface factor2, ClearCLImageInterface destination) {
-        return MultiplyImages.multiplyImages(getCLIJ2(), factor1, factor2, destination);
+        if (doTimeTracing()) {recordMethodStart("MultiplyImages");}
+        boolean result = MultiplyImages.multiplyImages(getCLIJ2(), factor1, factor2, destination);
+        if (doTimeTracing()) {recordMethodEnd("MultiplyImages");}
+        return result;
     }
 
 
@@ -3268,7 +4053,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean blur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return GaussianBlur2D.blur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("GaussianBlur2D");}
+        boolean result = GaussianBlur2D.blur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("GaussianBlur2D");}
+        return result;
     }
 
     /**
@@ -3278,7 +4066,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean blur2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return GaussianBlur2D.blur2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("GaussianBlur2D");}
+        boolean result = GaussianBlur2D.blur2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("GaussianBlur2D");}
+        return result;
     }
 
     /**
@@ -3289,7 +4080,10 @@ public abstract interface CLIJ2Ops {
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
     default boolean gaussianBlur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return GaussianBlur2D.gaussianBlur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("GaussianBlur2D");}
+        boolean result = GaussianBlur2D.gaussianBlur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("GaussianBlur2D");}
+        return result;
     }
 
     /**
@@ -3300,7 +4094,10 @@ public abstract interface CLIJ2Ops {
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
     default boolean gaussianBlur2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
-        return GaussianBlur2D.gaussianBlur2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("GaussianBlur2D");}
+        boolean result = GaussianBlur2D.gaussianBlur2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("GaussianBlur2D");}
+        return result;
     }
 
 
@@ -3313,7 +4110,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean blur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return GaussianBlur3D.blur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("GaussianBlur3D");}
+        boolean result = GaussianBlur3D.blur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("GaussianBlur3D");}
+        return result;
     }
 
     /**
@@ -3323,7 +4123,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean blur3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return GaussianBlur3D.blur3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("GaussianBlur3D");}
+        boolean result = GaussianBlur3D.blur3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("GaussianBlur3D");}
+        return result;
     }
 
     /**
@@ -3334,7 +4137,10 @@ public abstract interface CLIJ2Ops {
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
     default boolean gaussianBlur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return GaussianBlur3D.gaussianBlur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("GaussianBlur3D");}
+        boolean result = GaussianBlur3D.gaussianBlur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("GaussianBlur3D");}
+        return result;
     }
 
     /**
@@ -3345,7 +4151,10 @@ public abstract interface CLIJ2Ops {
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
      */
     default boolean gaussianBlur3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
-        return GaussianBlur3D.gaussianBlur3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("GaussianBlur3D");}
+        boolean result = GaussianBlur3D.gaussianBlur3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("GaussianBlur3D");}
+        return result;
     }
 
 
@@ -3356,7 +4165,10 @@ public abstract interface CLIJ2Ops {
      * offers less flexibility such as interpolation.
      */
     default boolean resliceBottom(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return ResliceBottom.resliceBottom(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("ResliceBottom");}
+        boolean result = ResliceBottom.resliceBottom(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("ResliceBottom");}
+        return result;
     }
 
 
@@ -3367,7 +4179,10 @@ public abstract interface CLIJ2Ops {
      * offers less flexibility such as interpolation.
      */
     default boolean resliceTop(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return ResliceTop.resliceTop(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("ResliceTop");}
+        boolean result = ResliceTop.resliceTop(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("ResliceTop");}
+        return result;
     }
 
 
@@ -3378,7 +4193,10 @@ public abstract interface CLIJ2Ops {
      *  but offers less flexibility such as interpolation.
      */
     default boolean resliceLeft(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return ResliceLeft.resliceLeft(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("ResliceLeft");}
+        boolean result = ResliceLeft.resliceLeft(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("ResliceLeft");}
+        return result;
     }
 
 
@@ -3389,7 +4207,10 @@ public abstract interface CLIJ2Ops {
      *  but offers less flexibility such as interpolation.
      */
     default boolean resliceRight(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return ResliceRight.resliceRight(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("ResliceRight");}
+        boolean result = ResliceRight.resliceRight(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("ResliceRight");}
+        return result;
     }
 
 
@@ -3402,7 +4223,10 @@ public abstract interface CLIJ2Ops {
      * It is recommended to apply the rotation to an isotropic image.
      */
     default boolean rotate2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, boolean arg4) {
-        return Rotate2D.rotate2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), arg4);
+        if (doTimeTracing()) {recordMethodStart("Rotate2D");}
+        boolean result = Rotate2D.rotate2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), arg4);
+        if (doTimeTracing()) {recordMethodEnd("Rotate2D");}
+        return result;
     }
 
 
@@ -3415,7 +4239,10 @@ public abstract interface CLIJ2Ops {
      * It is recommended to apply the rotation to an isotropic image stack.
      */
     default boolean rotate3D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, boolean arg6) {
-        return Rotate3D.rotate3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+        if (doTimeTracing()) {recordMethodStart("Rotate3D");}
+        boolean result = Rotate3D.rotate3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+        if (doTimeTracing()) {recordMethodEnd("Rotate3D");}
+        return result;
     }
 
 
@@ -3425,28 +4252,40 @@ public abstract interface CLIJ2Ops {
      * DEPRECATED: CLIJ scale() is deprecated. Use scale2D or scale3D instead!
      */
     default boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return Scale2D.scale(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Scale2D");}
+        boolean result = Scale2D.scale(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Scale2D");}
+        return result;
     }
 
     /**
      * DEPRECATED: CLIJ scale() is deprecated. Use scale2D or scale3D instead!
      */
     default boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return Scale2D.scale(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Scale2D");}
+        boolean result = Scale2D.scale(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Scale2D");}
+        return result;
     }
 
     /**
      * Scales an image with a given factor.
      */
     default boolean scale2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return Scale2D.scale2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Scale2D");}
+        boolean result = Scale2D.scale2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Scale2D");}
+        return result;
     }
 
     /**
      * Scales an image with a given factor.
      */
     default boolean scale2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, boolean arg5) {
-        return Scale2D.scale2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), arg5);
+        if (doTimeTracing()) {recordMethodStart("Scale2D");}
+        boolean result = Scale2D.scale2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), arg5);
+        if (doTimeTracing()) {recordMethodEnd("Scale2D");}
+        return result;
     }
 
 
@@ -3456,14 +4295,20 @@ public abstract interface CLIJ2Ops {
      * Scales an image with a given factor.
      */
     default boolean scale3D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Scale3D.scale3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Scale3D");}
+        boolean result = Scale3D.scale3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Scale3D");}
+        return result;
     }
 
     /**
      * Scales an image with a given factor.
      */
     default boolean scale3D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, boolean arg6) {
-        return Scale3D.scale3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+        if (doTimeTracing()) {recordMethodStart("Scale3D");}
+        boolean result = Scale3D.scale3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
+        if (doTimeTracing()) {recordMethodEnd("Scale3D");}
+        return result;
     }
 
 
@@ -3473,7 +4318,10 @@ public abstract interface CLIJ2Ops {
      * Translate an image stack in X and Y.
      */
     default boolean translate2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return Translate2D.translate2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Translate2D");}
+        boolean result = Translate2D.translate2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Translate2D");}
+        return result;
     }
 
 
@@ -3483,7 +4331,10 @@ public abstract interface CLIJ2Ops {
      * Translate an image stack in X, Y and Z.
      */
     default boolean translate3D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Translate3D.translate3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Translate3D");}
+        boolean result = Translate3D.translate3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Translate3D");}
+        return result;
     }
 
 
@@ -3534,7 +4385,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, s) = x + s</pre>
      */
     default boolean addImageAndScalar(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return AddImageAndScalar.addImageAndScalar(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("AddImageAndScalar");}
+        boolean result = AddImageAndScalar.addImageAndScalar(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("AddImageAndScalar");}
+        return result;
     }
 
 
@@ -3545,7 +4399,10 @@ public abstract interface CLIJ2Ops {
      * there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
      */
     default boolean detectMinimaBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return DetectMinimaBox.detectMinimaBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("DetectMinimaBox");}
+        boolean result = DetectMinimaBox.detectMinimaBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("DetectMinimaBox");}
+        return result;
     }
 
 
@@ -3556,7 +4413,10 @@ public abstract interface CLIJ2Ops {
      * there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
      */
     default boolean detectMaximaBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return DetectMaximaBox.detectMaximaBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("DetectMaximaBox");}
+        boolean result = DetectMaximaBox.detectMaximaBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("DetectMaximaBox");}
+        return result;
     }
 
 
@@ -3568,7 +4428,10 @@ public abstract interface CLIJ2Ops {
      * given radius which has a higher intensity, and to 0 otherwise.
      */
     default boolean detectMaximaSliceBySliceBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return DetectMaximaSliceBySliceBox.detectMaximaSliceBySliceBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("DetectMaximaSliceBySliceBox");}
+        boolean result = DetectMaximaSliceBySliceBox.detectMaximaSliceBySliceBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("DetectMaximaSliceBySliceBox");}
+        return result;
     }
 
 
@@ -3580,7 +4443,10 @@ public abstract interface CLIJ2Ops {
      * given radius which has a lower intensity, and to 0 otherwise.
      */
     default boolean detectMinimaSliceBySliceBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return DetectMinimaSliceBySliceBox.detectMinimaSliceBySliceBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("DetectMinimaSliceBySliceBox");}
+        boolean result = DetectMinimaSliceBySliceBox.detectMinimaSliceBySliceBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("DetectMinimaSliceBySliceBox");}
+        return result;
     }
 
 
@@ -3591,7 +4457,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'Max'.
      */
     default double maximumOfAllPixels(ClearCLImageInterface source) {
-        return MaximumOfAllPixels.maximumOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("MaximumOfAllPixels");}
+        double result = MaximumOfAllPixels.maximumOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("MaximumOfAllPixels");}
+        return result;
     }
 
 
@@ -3602,7 +4471,10 @@ public abstract interface CLIJ2Ops {
      * Results table in the column 'Min'.
      */
     default double minimumOfAllPixels(ClearCLImageInterface source) {
-        return MinimumOfAllPixels.minimumOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("MinimumOfAllPixels");}
+        double result = MinimumOfAllPixels.minimumOfAllPixels(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("MinimumOfAllPixels");}
+        return result;
     }
 
 
@@ -3617,7 +4489,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x) = v</pre>
      */
     default boolean setColumn(ClearCLImageInterface arg1, double arg2, double arg3) {
-        return SetColumn.setColumn(getCLIJ2(), arg1, new Double (arg2).intValue(), new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SetColumn");}
+        boolean result = SetColumn.setColumn(getCLIJ2(), arg1, new Double (arg2).intValue(), new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SetColumn");}
+        return result;
     }
 
 
@@ -3629,7 +4504,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x) = v</pre>
      */
     default boolean setRow(ClearCLImageInterface arg1, double arg2, double arg3) {
-        return SetRow.setRow(getCLIJ2(), arg1, new Double (arg2).intValue(), new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SetRow");}
+        boolean result = SetRow.setRow(getCLIJ2(), arg1, new Double (arg2).intValue(), new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SetRow");}
+        return result;
     }
 
 
@@ -3639,7 +4517,10 @@ public abstract interface CLIJ2Ops {
      * Determines the sum intensity projection of an image along Z.
      */
     default boolean sumYProjection(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return SumYProjection.sumYProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("SumYProjection");}
+        boolean result = SumYProjection.sumYProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("SumYProjection");}
+        return result;
     }
 
 
@@ -3650,7 +4531,10 @@ public abstract interface CLIJ2Ops {
      *  for every object.
      */
     default boolean averageDistanceOfTouchingNeighbors(ClearCLBuffer distance_matrix, ClearCLBuffer touch_matrix, ClearCLBuffer average_distancelist_destination) {
-        return AverageDistanceOfTouchingNeighbors.averageDistanceOfTouchingNeighbors(getCLIJ2(), distance_matrix, touch_matrix, average_distancelist_destination);
+        if (doTimeTracing()) {recordMethodStart("AverageDistanceOfTouchingNeighbors");}
+        boolean result = AverageDistanceOfTouchingNeighbors.averageDistanceOfTouchingNeighbors(getCLIJ2(), distance_matrix, touch_matrix, average_distancelist_destination);
+        if (doTimeTracing()) {recordMethodEnd("AverageDistanceOfTouchingNeighbors");}
+        return result;
     }
 
 
@@ -3664,7 +4548,10 @@ public abstract interface CLIJ2Ops {
      * pixels (with d = dimensionality of the original image) with the coordinates of the maxima/minima.
      */
     default boolean labelledSpotsToPointList(ClearCLBuffer input_labelled_spots, ClearCLBuffer destination_pointlist) {
-        return LabelledSpotsToPointList.labelledSpotsToPointList(getCLIJ2(), input_labelled_spots, destination_pointlist);
+        if (doTimeTracing()) {recordMethodStart("LabelledSpotsToPointList");}
+        boolean result = LabelledSpotsToPointList.labelledSpotsToPointList(getCLIJ2(), input_labelled_spots, destination_pointlist);
+        if (doTimeTracing()) {recordMethodEnd("LabelledSpotsToPointList");}
+        return result;
     }
 
 
@@ -3676,7 +4563,10 @@ public abstract interface CLIJ2Ops {
      * Transforms a spots image as resulting from maximum/minimum detection in an image of the same size where every spot has a number 1, 2, ... n.
      */
     default boolean labelSpots(ClearCLBuffer input_spots, ClearCLBuffer labelled_spots_destination) {
-        return LabelSpots.labelSpots(getCLIJ2(), input_spots, labelled_spots_destination);
+        if (doTimeTracing()) {recordMethodStart("LabelSpots");}
+        boolean result = LabelSpots.labelSpots(getCLIJ2(), input_spots, labelled_spots_destination);
+        if (doTimeTracing()) {recordMethodEnd("LabelSpots");}
+        return result;
     }
 
 
@@ -3686,7 +4576,10 @@ public abstract interface CLIJ2Ops {
      * Takes a touch matrix and a distance matrix to determine the shortest distance of touching neighbors for every object.
      */
     default boolean minimumDistanceOfTouchingNeighbors(ClearCLBuffer distance_matrix, ClearCLBuffer touch_matrix, ClearCLBuffer minimum_distancelist_destination) {
-        return MinimumDistanceOfTouchingNeighbors.minimumDistanceOfTouchingNeighbors(getCLIJ2(), distance_matrix, touch_matrix, minimum_distancelist_destination);
+        if (doTimeTracing()) {recordMethodStart("MinimumDistanceOfTouchingNeighbors");}
+        boolean result = MinimumDistanceOfTouchingNeighbors.minimumDistanceOfTouchingNeighbors(getCLIJ2(), distance_matrix, touch_matrix, minimum_distancelist_destination);
+        if (doTimeTracing()) {recordMethodEnd("MinimumDistanceOfTouchingNeighbors");}
+        return result;
     }
 
 
@@ -3701,7 +4594,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(a) = v</pre>
      */
     default boolean setWhereXgreaterThanY(ClearCLImageInterface arg1, double arg2) {
-        return SetWhereXgreaterThanY.setWhereXgreaterThanY(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SetWhereXgreaterThanY");}
+        boolean result = SetWhereXgreaterThanY.setWhereXgreaterThanY(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SetWhereXgreaterThanY");}
+        return result;
     }
 
 
@@ -3716,7 +4612,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(a) = v</pre>
      */
     default boolean setWhereXsmallerThanY(ClearCLImageInterface arg1, double arg2) {
-        return SetWhereXsmallerThanY.setWhereXsmallerThanY(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SetWhereXsmallerThanY");}
+        boolean result = SetWhereXsmallerThanY.setWhereXsmallerThanY(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SetWhereXsmallerThanY");}
+        return result;
     }
 
 
@@ -3728,7 +4627,10 @@ public abstract interface CLIJ2Ops {
      * This can be used for Connected Components Analysis.
      */
     default boolean setNonZeroPixelsToPixelIndex(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return SetNonZeroPixelsToPixelIndex.setNonZeroPixelsToPixelIndex(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("SetNonZeroPixelsToPixelIndex");}
+        boolean result = SetNonZeroPixelsToPixelIndex.setNonZeroPixelsToPixelIndex(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("SetNonZeroPixelsToPixelIndex");}
+        return result;
     }
 
 
@@ -3739,10 +4641,13 @@ public abstract interface CLIJ2Ops {
      * subsequent labels will be relabelled. 
      * 
      * Thus, afterwards number of labels and maximum label index are equal.
-     * 
+     * This operation is mostly performed on the CPU.
      */
     default boolean closeIndexGapsInLabelMap(ClearCLBuffer labeling_input, ClearCLImageInterface labeling_destination) {
-        return CloseIndexGapsInLabelMap.closeIndexGapsInLabelMap(getCLIJ2(), labeling_input, labeling_destination);
+        if (doTimeTracing()) {recordMethodStart("CloseIndexGapsInLabelMap");}
+        boolean result = CloseIndexGapsInLabelMap.closeIndexGapsInLabelMap(getCLIJ2(), labeling_input, labeling_destination);
+        if (doTimeTracing()) {recordMethodEnd("CloseIndexGapsInLabelMap");}
+        return result;
     }
 
     /**
@@ -3750,7 +4655,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean shiftIntensitiesToCloseGaps(ClearCLBuffer arg1, ClearCLBuffer arg2) {
-        return CloseIndexGapsInLabelMap.shiftIntensitiesToCloseGaps(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("CloseIndexGapsInLabelMap");}
+        boolean result = CloseIndexGapsInLabelMap.shiftIntensitiesToCloseGaps(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("CloseIndexGapsInLabelMap");}
+        return result;
     }
 
 
@@ -3764,7 +4672,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return Scale.scale(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodStart("Scale");}
+        boolean result = Scale.scale(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("Scale");}
+        return result;
     }
 
 
@@ -3776,7 +4687,10 @@ public abstract interface CLIJ2Ops {
      * It writes the resulting  coordinates in a pointlist image. Depending on the dimensionality d of the labelmap and the number  of labels n, the pointlist image will have n*d pixels.
      */
     default boolean centroidsOfLabels(ClearCLBuffer arg1, ClearCLBuffer arg2) {
-        return CentroidsOfLabels.centroidsOfLabels(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("CentroidsOfLabels");}
+        boolean result = CentroidsOfLabels.centroidsOfLabels(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("CentroidsOfLabels");}
+        return result;
     }
 
 
@@ -3786,7 +4700,10 @@ public abstract interface CLIJ2Ops {
      * Sets all pixel values to their X coordinate
      */
     default boolean setRampX(ClearCLImageInterface source) {
-        return SetRampX.setRampX(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("SetRampX");}
+        boolean result = SetRampX.setRampX(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("SetRampX");}
+        return result;
     }
 
 
@@ -3796,7 +4713,10 @@ public abstract interface CLIJ2Ops {
      * Sets all pixel values to their Y coordinate
      */
     default boolean setRampY(ClearCLImageInterface source) {
-        return SetRampY.setRampY(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("SetRampY");}
+        boolean result = SetRampY.setRampY(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("SetRampY");}
+        return result;
     }
 
 
@@ -3806,7 +4726,10 @@ public abstract interface CLIJ2Ops {
      * Sets all pixel values to their Z coordinate
      */
     default boolean setRampZ(ClearCLImageInterface source) {
-        return SetRampZ.setRampZ(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodStart("SetRampZ");}
+        boolean result = SetRampZ.setRampZ(getCLIJ2(), source);
+        if (doTimeTracing()) {recordMethodEnd("SetRampZ");}
+        return result;
     }
 
 
@@ -3818,7 +4741,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, s) = s - x</pre>
      */
     default boolean subtractImageFromScalar(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
-        return SubtractImageFromScalar.subtractImageFromScalar(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SubtractImageFromScalar");}
+        boolean result = SubtractImageFromScalar.subtractImageFromScalar(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SubtractImageFromScalar");}
+        return result;
     }
 
 
@@ -3829,7 +4755,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdDefault(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdDefault.thresholdDefault(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdDefault");}
+        boolean result = ThresholdDefault.thresholdDefault(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdDefault");}
+        return result;
     }
 
 
@@ -3840,7 +4769,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdOtsu(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdOtsu.thresholdOtsu(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdOtsu");}
+        boolean result = ThresholdOtsu.thresholdOtsu(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdOtsu");}
+        return result;
     }
 
 
@@ -3851,7 +4783,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdHuang(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdHuang.thresholdHuang(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdHuang");}
+        boolean result = ThresholdHuang.thresholdHuang(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdHuang");}
+        return result;
     }
 
 
@@ -3862,7 +4797,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdIntermodes(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdIntermodes.thresholdIntermodes(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdIntermodes");}
+        boolean result = ThresholdIntermodes.thresholdIntermodes(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdIntermodes");}
+        return result;
     }
 
 
@@ -3873,7 +4811,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdIsoData(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdIsoData.thresholdIsoData(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdIsoData");}
+        boolean result = ThresholdIsoData.thresholdIsoData(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdIsoData");}
+        return result;
     }
 
 
@@ -3884,7 +4825,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdIJ_IsoData(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdIJ_IsoData.thresholdIJ_IsoData(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdIJ_IsoData");}
+        boolean result = ThresholdIJ_IsoData.thresholdIJ_IsoData(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdIJ_IsoData");}
+        return result;
     }
 
 
@@ -3895,7 +4839,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdLi(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdLi.thresholdLi(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdLi");}
+        boolean result = ThresholdLi.thresholdLi(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdLi");}
+        return result;
     }
 
 
@@ -3906,7 +4853,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdMaxEntropy(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdMaxEntropy.thresholdMaxEntropy(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdMaxEntropy");}
+        boolean result = ThresholdMaxEntropy.thresholdMaxEntropy(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdMaxEntropy");}
+        return result;
     }
 
 
@@ -3917,7 +4867,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdMean(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdMean.thresholdMean(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdMean");}
+        boolean result = ThresholdMean.thresholdMean(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdMean");}
+        return result;
     }
 
 
@@ -3928,7 +4881,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdMinError(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdMinError.thresholdMinError(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdMinError");}
+        boolean result = ThresholdMinError.thresholdMinError(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdMinError");}
+        return result;
     }
 
 
@@ -3939,7 +4895,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdMinimum(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdMinimum.thresholdMinimum(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdMinimum");}
+        boolean result = ThresholdMinimum.thresholdMinimum(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdMinimum");}
+        return result;
     }
 
 
@@ -3950,7 +4909,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdMoments(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdMoments.thresholdMoments(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdMoments");}
+        boolean result = ThresholdMoments.thresholdMoments(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdMoments");}
+        return result;
     }
 
 
@@ -3961,7 +4923,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdPercentile(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdPercentile.thresholdPercentile(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdPercentile");}
+        boolean result = ThresholdPercentile.thresholdPercentile(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdPercentile");}
+        return result;
     }
 
 
@@ -3972,7 +4937,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdRenyiEntropy(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdRenyiEntropy.thresholdRenyiEntropy(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdRenyiEntropy");}
+        boolean result = ThresholdRenyiEntropy.thresholdRenyiEntropy(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdRenyiEntropy");}
+        return result;
     }
 
 
@@ -3983,7 +4951,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdShanbhag(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdShanbhag.thresholdShanbhag(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdShanbhag");}
+        boolean result = ThresholdShanbhag.thresholdShanbhag(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdShanbhag");}
+        return result;
     }
 
 
@@ -3994,7 +4965,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdTriangle(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdTriangle.thresholdTriangle(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdTriangle");}
+        boolean result = ThresholdTriangle.thresholdTriangle(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdTriangle");}
+        return result;
     }
 
 
@@ -4005,7 +4979,10 @@ public abstract interface CLIJ2Ops {
      * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
      */
     default boolean thresholdYen(ClearCLBuffer input, ClearCLBuffer destination) {
-        return ThresholdYen.thresholdYen(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("ThresholdYen");}
+        boolean result = ThresholdYen.thresholdYen(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ThresholdYen");}
+        return result;
     }
 
 
@@ -4017,7 +4994,10 @@ public abstract interface CLIJ2Ops {
      * If yes, this label is eliminated from the label map.
      */
     default boolean excludeLabelsSubSurface(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, double arg4, double arg5, double arg6) {
-        return ExcludeLabelsSubSurface.excludeLabelsSubSurface(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+        if (doTimeTracing()) {recordMethodStart("ExcludeLabelsSubSurface");}
+        boolean result = ExcludeLabelsSubSurface.excludeLabelsSubSurface(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("ExcludeLabelsSubSurface");}
+        return result;
     }
 
 
@@ -4029,7 +5009,10 @@ public abstract interface CLIJ2Ops {
      * If yes, this label is eliminated from the label map.
      */
     default boolean excludeLabelsOnSurface(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, double arg4, double arg5, double arg6) {
-        return ExcludeLabelsOnSurface.excludeLabelsOnSurface(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+        if (doTimeTracing()) {recordMethodStart("ExcludeLabelsOnSurface");}
+        boolean result = ExcludeLabelsOnSurface.excludeLabelsOnSurface(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue(), new Double (arg6).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("ExcludeLabelsOnSurface");}
+        return result;
     }
 
 
@@ -4041,7 +5024,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x) = v</pre>
      */
     default boolean setPlane(ClearCLImageInterface arg1, double arg2, double arg3) {
-        return SetPlane.setPlane(getCLIJ2(), arg1, new Double (arg2).intValue(), new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SetPlane");}
+        boolean result = SetPlane.setPlane(getCLIJ2(), arg1, new Double (arg2).intValue(), new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SetPlane");}
+        return result;
     }
 
 
@@ -4051,7 +5037,10 @@ public abstract interface CLIJ2Ops {
      * Copies a single slice into a stack a given number of times.
      */
     default boolean imageToStack(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
-        return ImageToStack.imageToStack(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodStart("ImageToStack");}
+        boolean result = ImageToStack.imageToStack(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("ImageToStack");}
+        return result;
     }
 
 
@@ -4061,7 +5050,10 @@ public abstract interface CLIJ2Ops {
      * Determines the sum intensity projection of an image along Z.
      */
     default boolean sumXProjection(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return SumXProjection.sumXProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("SumXProjection");}
+        boolean result = SumXProjection.sumXProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("SumXProjection");}
+        return result;
     }
 
 
@@ -4071,14 +5063,20 @@ public abstract interface CLIJ2Ops {
      * Sums all pixels slice by slice and returns them in an array.
      */
     default boolean sumImageSliceBySlice(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return SumImageSliceBySlice.sumImageSliceBySlice(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("SumImageSliceBySlice");}
+        boolean result = SumImageSliceBySlice.sumImageSliceBySlice(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("SumImageSliceBySlice");}
+        return result;
     }
 
     /**
      * Sums all pixels slice by slice and returns them in an array.
      */
     default double[] sumImageSliceBySlice(ClearCLImageInterface arg1) {
-        return SumImageSliceBySlice.sumImageSliceBySlice(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("SumImageSliceBySlice");}
+        double[] result = SumImageSliceBySlice.sumImageSliceBySlice(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("SumImageSliceBySlice");}
+        return result;
     }
 
     /**
@@ -4086,7 +5084,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default double[] sumPixelsSliceByslice(ClearCLImageInterface arg1) {
-        return SumImageSliceBySlice.sumPixelsSliceByslice(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("SumImageSliceBySlice");}
+        double[] result = SumImageSliceBySlice.sumPixelsSliceByslice(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("SumImageSliceBySlice");}
+        return result;
     }
 
 
@@ -4098,7 +5099,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, s) = x * s</pre>
      */
     default boolean multiplyImageStackWithScalars(ClearCLImageInterface arg1, ClearCLImageInterface arg2, float[] arg3) {
-        return MultiplyImageStackWithScalars.multiplyImageStackWithScalars(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("MultiplyImageStackWithScalars");}
+        boolean result = MultiplyImageStackWithScalars.multiplyImageStackWithScalars(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("MultiplyImageStackWithScalars");}
+        return result;
     }
 
     /**
@@ -4107,7 +5111,10 @@ public abstract interface CLIJ2Ops {
      * <pre>f(x, s) = x * s</pre>
      */
     default boolean multiplyImageStackWithScalars(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLBuffer arg3) {
-        return MultiplyImageStackWithScalars.multiplyImageStackWithScalars(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("MultiplyImageStackWithScalars");}
+        boolean result = MultiplyImageStackWithScalars.multiplyImageStackWithScalars(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("MultiplyImageStackWithScalars");}
+        return result;
     }
 
     /**
@@ -4115,7 +5122,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean multiplySliceBySliceWithScalars(ClearCLImageInterface arg1, ClearCLImageInterface arg2, float[] arg3) {
-        return MultiplyImageStackWithScalars.multiplySliceBySliceWithScalars(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("MultiplyImageStackWithScalars");}
+        boolean result = MultiplyImageStackWithScalars.multiplySliceBySliceWithScalars(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("MultiplyImageStackWithScalars");}
+        return result;
     }
 
 
@@ -4125,7 +5135,10 @@ public abstract interface CLIJ2Ops {
      * Visualises an image on standard out (console).
      */
     default boolean print(ClearCLImageInterface input) {
-        return Print.print(getCLIJ2(), input);
+        if (doTimeTracing()) {recordMethodStart("Print");}
+        boolean result = Print.print(getCLIJ2(), input);
+        if (doTimeTracing()) {recordMethodEnd("Print");}
+        return result;
     }
 
 
@@ -4137,7 +5150,10 @@ public abstract interface CLIJ2Ops {
      * The pixels where  the regions touched are afterwards returned as binary image which corresponds to the Voronoi diagram.
      */
     default boolean voronoiOctagon(ClearCLBuffer input, ClearCLBuffer destination) {
-        return VoronoiOctagon.voronoiOctagon(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodStart("VoronoiOctagon");}
+        boolean result = VoronoiOctagon.voronoiOctagon(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("VoronoiOctagon");}
+        return result;
     }
 
 
@@ -4147,7 +5163,10 @@ public abstract interface CLIJ2Ops {
      * Sets all pixel values at the image border to a given value.
      */
     default boolean setImageBorders(ClearCLImageInterface arg1, double arg2) {
-        return SetImageBorders.setImageBorders(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SetImageBorders");}
+        boolean result = SetImageBorders.setImageBorders(getCLIJ2(), arg1, new Double (arg2).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SetImageBorders");}
+        return result;
     }
 
 
@@ -4157,7 +5176,10 @@ public abstract interface CLIJ2Ops {
      * Replaces recursively all pixels of value a with value b if the pixels have a neighbor with value b.
      */
     default boolean floodFillDiamond(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
-        return FloodFillDiamond.floodFillDiamond(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("FloodFillDiamond");}
+        boolean result = FloodFillDiamond.floodFillDiamond(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("FloodFillDiamond");}
+        return result;
     }
 
 
@@ -4167,7 +5189,10 @@ public abstract interface CLIJ2Ops {
      * Fills holes (pixels with value 0 surrounded by pixels with value 1) in a binary image.
      */
     default boolean binaryFillHoles(ClearCLImageInterface source, ClearCLImageInterface destination) {
-        return BinaryFillHoles.binaryFillHoles(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodStart("BinaryFillHoles");}
+        boolean result = BinaryFillHoles.binaryFillHoles(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("BinaryFillHoles");}
+        return result;
     }
 
 
@@ -4177,14 +5202,20 @@ public abstract interface CLIJ2Ops {
      * Performs connected components analysis inspecting the diamond neighborhood of every pixel to a binary image and generates a label map.
      */
     default boolean connectedComponentsLabelingDiamond(ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination) {
-        return ConnectedComponentsLabelingDiamond.connectedComponentsLabelingDiamond(getCLIJ2(), binary_input, labeling_destination);
+        if (doTimeTracing()) {recordMethodStart("ConnectedComponentsLabelingDiamond");}
+        boolean result = ConnectedComponentsLabelingDiamond.connectedComponentsLabelingDiamond(getCLIJ2(), binary_input, labeling_destination);
+        if (doTimeTracing()) {recordMethodEnd("ConnectedComponentsLabelingDiamond");}
+        return result;
     }
 
     /**
      * Performs connected components analysis inspecting the diamond neighborhood of every pixel to a binary image and generates a label map.
      */
     default boolean connectedComponentsLabelingDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, boolean arg3) {
-        return ConnectedComponentsLabelingDiamond.connectedComponentsLabelingDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("ConnectedComponentsLabelingDiamond");}
+        boolean result = ConnectedComponentsLabelingDiamond.connectedComponentsLabelingDiamond(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("ConnectedComponentsLabelingDiamond");}
+        return result;
     }
 
 
@@ -4194,14 +5225,20 @@ public abstract interface CLIJ2Ops {
      * Performs connected components analysis inspecting the box neighborhood of every pixel to a binary image and generates a label map.
      */
     default boolean connectedComponentsLabelingBox(ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination) {
-        return ConnectedComponentsLabelingBox.connectedComponentsLabelingBox(getCLIJ2(), binary_input, labeling_destination);
+        if (doTimeTracing()) {recordMethodStart("ConnectedComponentsLabelingBox");}
+        boolean result = ConnectedComponentsLabelingBox.connectedComponentsLabelingBox(getCLIJ2(), binary_input, labeling_destination);
+        if (doTimeTracing()) {recordMethodEnd("ConnectedComponentsLabelingBox");}
+        return result;
     }
 
     /**
      * Performs connected components analysis inspecting the box neighborhood of every pixel to a binary image and generates a label map.
      */
     default boolean connectedComponentsLabelingBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, boolean arg3) {
-        return ConnectedComponentsLabelingBox.connectedComponentsLabelingBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("ConnectedComponentsLabelingBox");}
+        boolean result = ConnectedComponentsLabelingBox.connectedComponentsLabelingBox(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("ConnectedComponentsLabelingBox");}
+        return result;
     }
 
 
@@ -4213,7 +5250,10 @@ public abstract interface CLIJ2Ops {
      * Recommendation: For the seed, use getTime().
      */
     default boolean setRandom(ClearCLBuffer arg1, double arg2, double arg3) {
-        return SetRandom.setRandom(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SetRandom");}
+        boolean result = SetRandom.setRandom(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SetRandom");}
+        return result;
     }
 
     /**
@@ -4222,7 +5262,10 @@ public abstract interface CLIJ2Ops {
      * Recommendation: For the seed, use getTime().
      */
     default boolean setRandom(ClearCLBuffer arg1, double arg2, double arg3, double arg4) {
-        return SetRandom.setRandom(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodStart("SetRandom");}
+        boolean result = SetRandom.setRandom(getCLIJ2(), arg1, new Double (arg2).floatValue(), new Double (arg3).floatValue(), new Double (arg4).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("SetRandom");}
+        return result;
     }
 
 
@@ -4235,14 +5278,20 @@ public abstract interface CLIJ2Ops {
      * Determines the local entropy in a box with a given radius around every pixel.
      */
     default boolean entropyBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
-        return EntropyBox.entropyBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("EntropyBox");}
+        boolean result = EntropyBox.entropyBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("EntropyBox");}
+        return result;
     }
 
     /**
      * Determines the local entropy in a box with a given radius around every pixel.
      */
     default boolean entropyBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, double arg6, double arg7) {
-        return EntropyBox.entropyBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue());
+        if (doTimeTracing()) {recordMethodStart("EntropyBox");}
+        boolean result = EntropyBox.entropyBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue(), new Double (arg6).floatValue(), new Double (arg7).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("EntropyBox");}
+        return result;
     }
 
 
@@ -4252,7 +5301,10 @@ public abstract interface CLIJ2Ops {
      * Concatenates two stacks in Z.
      */
     default boolean concatenateStacks(ClearCLImageInterface stack1, ClearCLImageInterface stack2, ClearCLImageInterface destination) {
-        return ConcatenateStacks.concatenateStacks(getCLIJ2(), stack1, stack2, destination);
+        if (doTimeTracing()) {recordMethodStart("ConcatenateStacks");}
+        boolean result = ConcatenateStacks.concatenateStacks(getCLIJ2(), stack1, stack2, destination);
+        if (doTimeTracing()) {recordMethodEnd("ConcatenateStacks");}
+        return result;
     }
 
 
@@ -4265,7 +5317,10 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean resultsTableToImage2D(ClearCLBuffer arg1, ResultsTable arg2) {
-        return ResultsTableToImage2D.resultsTableToImage2D(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("ResultsTableToImage2D");}
+        boolean result = ResultsTableToImage2D.resultsTableToImage2D(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("ResultsTableToImage2D");}
+        return result;
     }
 
 
@@ -4280,7 +5335,10 @@ public abstract interface CLIJ2Ops {
      * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
      */
     default double getAutomaticThreshold(ClearCLBuffer arg1, String arg2) {
-        return GetAutomaticThreshold.getAutomaticThreshold(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("GetAutomaticThreshold");}
+        double result = GetAutomaticThreshold.getAutomaticThreshold(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("GetAutomaticThreshold");}
+        return result;
     }
 
     /**
@@ -4292,7 +5350,10 @@ public abstract interface CLIJ2Ops {
      * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
      */
     default double getAutomaticThreshold(ClearCLBuffer arg1, String arg2, double arg3, double arg4, double arg5) {
-        return GetAutomaticThreshold.getAutomaticThreshold(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodStart("GetAutomaticThreshold");}
+        double result = GetAutomaticThreshold.getAutomaticThreshold(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("GetAutomaticThreshold");}
+        return result;
     }
 
 
@@ -4302,7 +5363,10 @@ public abstract interface CLIJ2Ops {
      * Reads out the size of an image [stack] and writes it to the variables 'width', 'height' and 'depth'.
      */
     default long[] getDimensions(ClearCLBuffer arg1) {
-        return GetDimensions.getDimensions(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("GetDimensions");}
+        long[] result = GetDimensions.getDimensions(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("GetDimensions");}
+        return result;
     }
 
 
@@ -4329,7 +5393,10 @@ public abstract interface CLIJ2Ops {
      * 
      */
     default boolean customOperation(String arg1, String arg2, HashMap arg3) {
-        return CustomOperation.customOperation(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("CustomOperation");}
+        boolean result = CustomOperation.customOperation(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("CustomOperation");}
+        return result;
     }
 
 
@@ -4342,7 +5409,10 @@ public abstract interface CLIJ2Ops {
      * window. From ImageJ macro conside using pullLabelsToROIManager.
      */
     default boolean pullLabelsToROIList(ClearCLBuffer arg1, List arg2) {
-        return PullLabelsToROIList.pullLabelsToROIList(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("PullLabelsToROIList");}
+        boolean result = PullLabelsToROIList.pullLabelsToROIList(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("PullLabelsToROIList");}
+        return result;
     }
 
     /**
@@ -4352,7 +5422,10 @@ public abstract interface CLIJ2Ops {
      * window. From ImageJ macro conside using pullLabelsToROIManager.
      */
     default ArrayList pullLabelsToROIList(ClearCLBuffer labelmap_input) {
-        return PullLabelsToROIList.pullLabelsToROIList(getCLIJ2(), labelmap_input);
+        if (doTimeTracing()) {recordMethodStart("PullLabelsToROIList");}
+        ArrayList result = PullLabelsToROIList.pullLabelsToROIList(getCLIJ2(), labelmap_input);
+        if (doTimeTracing()) {recordMethodEnd("PullLabelsToROIList");}
+        return result;
     }
 
 
@@ -4361,10 +5434,13 @@ public abstract interface CLIJ2Ops {
     /**
      * Takes a touch matrix and a vector of values to determine the mean value among touching neighbors for every object. 
      * 
-     * TODO: This only works for values between 0 and 255 for now.
+     * 
      */
     default boolean meanOfTouchingNeighbors(ClearCLBuffer values, ClearCLBuffer touch_matrix, ClearCLBuffer mean_values_destination) {
-        return MeanOfTouchingNeighbors.meanOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, mean_values_destination);
+        if (doTimeTracing()) {recordMethodStart("MeanOfTouchingNeighbors");}
+        boolean result = MeanOfTouchingNeighbors.meanOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, mean_values_destination);
+        if (doTimeTracing()) {recordMethodEnd("MeanOfTouchingNeighbors");}
+        return result;
     }
 
 
@@ -4373,10 +5449,13 @@ public abstract interface CLIJ2Ops {
     /**
      * Takes a touch matrix and a vector of values to determine the minimum value among touching neighbors for every object. 
      * 
-     * TODO: This only works for values between 0 and 255 for now.
+     * 
      */
     default boolean minimumOfTouchingNeighbors(ClearCLBuffer values, ClearCLBuffer touch_matrix, ClearCLBuffer minimum_values_destination) {
-        return MinimumOfTouchingNeighbors.minimumOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, minimum_values_destination);
+        if (doTimeTracing()) {recordMethodStart("MinimumOfTouchingNeighbors");}
+        boolean result = MinimumOfTouchingNeighbors.minimumOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, minimum_values_destination);
+        if (doTimeTracing()) {recordMethodEnd("MinimumOfTouchingNeighbors");}
+        return result;
     }
 
 
@@ -4385,10 +5464,13 @@ public abstract interface CLIJ2Ops {
     /**
      * Takes a touch matrix and a vector of values to determine the maximum value among touching neighbors for every object. 
      * 
-     * TODO: This only works for values between 0 and 255 for now.
+     * 
      */
     default boolean maximumOfTouchingNeighbors(ClearCLBuffer values, ClearCLBuffer touch_matrix, ClearCLBuffer maximum_values_destination) {
-        return MaximumOfTouchingNeighbors.maximumOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, maximum_values_destination);
+        if (doTimeTracing()) {recordMethodStart("MaximumOfTouchingNeighbors");}
+        boolean result = MaximumOfTouchingNeighbors.maximumOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, maximum_values_destination);
+        if (doTimeTracing()) {recordMethodEnd("MaximumOfTouchingNeighbors");}
+        return result;
     }
 
 
@@ -4400,7 +5482,10 @@ public abstract interface CLIJ2Ops {
      * The values are stored in x dimension.
      */
     default boolean resultsTableColumnToImage(ClearCLBuffer arg1, ResultsTable arg2, String arg3) {
-        return ResultsTableColumnToImage.resultsTableColumnToImage(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("ResultsTableColumnToImage");}
+        boolean result = ResultsTableColumnToImage.resultsTableColumnToImage(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("ResultsTableColumnToImage");}
+        return result;
     }
 
 
@@ -4411,9 +5496,14 @@ public abstract interface CLIJ2Ops {
      *  of background and labelled objects in a label map and corresponding pixels in the original image.
      * 
      * Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
+     * 
+     * This method is executed on the CPU and not on the GPU/OpenCL device.
      */
     default ResultsTable statisticsOfBackgroundAndLabelledPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, ResultsTable arg3) {
-        return StatisticsOfBackgroundAndLabelledPixels.statisticsOfBackgroundAndLabelledPixels(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("StatisticsOfBackgroundAndLabelledPixels");}
+        ResultsTable result = StatisticsOfBackgroundAndLabelledPixels.statisticsOfBackgroundAndLabelledPixels(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("StatisticsOfBackgroundAndLabelledPixels");}
+        return result;
     }
 
 
@@ -4428,7 +5518,10 @@ public abstract interface CLIJ2Ops {
      * It will be stored in the variable sum_of_all_pixels.
      */
     default double getSumOfAllPixels(ClearCLImageInterface arg1) {
-        return GetSumOfAllPixels.getSumOfAllPixels(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("GetSumOfAllPixels");}
+        double result = GetSumOfAllPixels.getSumOfAllPixels(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("GetSumOfAllPixels");}
+        return result;
     }
 
 
@@ -4443,7 +5536,10 @@ public abstract interface CLIJ2Ops {
      * <pre>s = f(j) = 2 j / (j + 1)</pre>
      */
     default double getSorensenDiceCoefficient(ClearCLBuffer arg1, ClearCLBuffer arg2) {
-        return GetSorensenDiceCoefficient.getSorensenDiceCoefficient(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("GetSorensenDiceCoefficient");}
+        double result = GetSorensenDiceCoefficient.getSorensenDiceCoefficient(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("GetSorensenDiceCoefficient");}
+        return result;
     }
 
 
@@ -4455,7 +5551,10 @@ public abstract interface CLIJ2Ops {
      * It will be stored in the variable minimum_of_all_pixels.
      */
     default double getMinimumOfAllPixels(ClearCLImageInterface arg1) {
-        return GetMinimumOfAllPixels.getMinimumOfAllPixels(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("GetMinimumOfAllPixels");}
+        double result = GetMinimumOfAllPixels.getMinimumOfAllPixels(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("GetMinimumOfAllPixels");}
+        return result;
     }
 
 
@@ -4467,7 +5566,10 @@ public abstract interface CLIJ2Ops {
      * It will be stored in the variable maximum_of_all_pixels.
      */
     default double getMaximumOfAllPixels(ClearCLImageInterface arg1) {
-        return GetMaximumOfAllPixels.getMaximumOfAllPixels(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("GetMaximumOfAllPixels");}
+        double result = GetMaximumOfAllPixels.getMaximumOfAllPixels(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("GetMaximumOfAllPixels");}
+        return result;
     }
 
 
@@ -4479,7 +5581,10 @@ public abstract interface CLIJ2Ops {
      * It will be stored in the variable mean_of_all_pixels.
      */
     default double getMeanOfAllPixels(ClearCLImageInterface arg1) {
-        return GetMeanOfAllPixels.getMeanOfAllPixels(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("GetMeanOfAllPixels");}
+        double result = GetMeanOfAllPixels.getMeanOfAllPixels(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("GetMeanOfAllPixels");}
+        return result;
     }
 
 
@@ -4494,7 +5599,10 @@ public abstract interface CLIJ2Ops {
      * <pre>s = f(j) = 2 j / (j + 1)</pre>
      */
     default double getJaccardIndex(ClearCLBuffer arg1, ClearCLBuffer arg2) {
-        return GetJaccardIndex.getJaccardIndex(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("GetJaccardIndex");}
+        double result = GetJaccardIndex.getJaccardIndex(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("GetJaccardIndex");}
+        return result;
     }
 
 
@@ -4507,7 +5615,10 @@ public abstract interface CLIJ2Ops {
      *  centerOfMassX, centerOfMassY and centerOfMassZ.
      */
     default double[] getCenterOfMass(ClearCLBuffer arg1) {
-        return GetCenterOfMass.getCenterOfMass(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("GetCenterOfMass");}
+        double[] result = GetCenterOfMass.getCenterOfMass(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("GetCenterOfMass");}
+        return result;
     }
 
 
@@ -4519,7 +5630,10 @@ public abstract interface CLIJ2Ops {
      * If called from macro, the positions will be stored in the variables 'boundingBoxX', 'boundingBoxY', 'boundingBoxZ', 'boundingBoxWidth', 'boundingBoxHeight' and 'boundingBoxDepth'.In case of 2D images Z and depth will be zero.
      */
     default double[] getBoundingBox(ClearCLBuffer arg1) {
-        return GetBoundingBox.getBoundingBox(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("GetBoundingBox");}
+        double[] result = GetBoundingBox.getBoundingBox(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("GetBoundingBox");}
+        return result;
     }
 
 
@@ -4529,24 +5643,33 @@ public abstract interface CLIJ2Ops {
      * Converts an array to an image.
      */
     default boolean pushArray(ClearCLBuffer arg1, Object arg2) {
-        return PushArray.pushArray(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("PushArray");}
+        boolean result = PushArray.pushArray(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("PushArray");}
+        return result;
     }
 
     /**
      * Converts an array to an image.
      */
     default ClearCLBuffer pushArray(float[] arg1, int arg2, int arg3, int arg4) {
-        return PushArray.pushArray(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodStart("PushArray");}
+        ClearCLBuffer result = PushArray.pushArray(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("PushArray");}
+        return result;
     }
 
 
     // net.haesleinhuepf.clij2.plugins.PullString
     //----------------------------------------------------
     /**
-     * 
+     * Writes an image into a string.
      */
     default String pullString(ClearCLImageInterface arg1) {
-        return PullString.pullString(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("PullString");}
+        String result = PullString.pullString(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("PullString");}
+        return result;
     }
 
 
@@ -4568,7 +5691,10 @@ public abstract interface CLIJ2Ops {
      * 
      */
     default boolean pushString(ClearCLBuffer arg1, String arg2) {
-        return PushString.pushString(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("PushString");}
+        boolean result = PushString.pushString(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("PushString");}
+        return result;
     }
 
     /**
@@ -4587,19 +5713,25 @@ public abstract interface CLIJ2Ops {
      * 
      */
     default ClearCLBuffer pushString(String arg1) {
-        return PushString.pushString(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodStart("PushString");}
+        ClearCLBuffer result = PushString.pushString(getCLIJ2(), arg1);
+        if (doTimeTracing()) {recordMethodEnd("PushString");}
+        return result;
     }
 
 
     // net.haesleinhuepf.clij2.plugins.MedianOfTouchingNeighbors
     //----------------------------------------------------
     /**
-     * Takes a touch matrix and a vector of values to determine the mean value among touching neighbors for every object. 
+     * Takes a touch matrix and a vector of values to determine the median value among touching neighbors for every object. 
      * 
-     * TODO: This only works for values between 0 and 255 for now.
+     * 
      */
     default boolean medianOfTouchingNeighbors(ClearCLBuffer values, ClearCLBuffer touch_matrix, ClearCLBuffer mean_values_destination) {
-        return MedianOfTouchingNeighbors.medianOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, mean_values_destination);
+        if (doTimeTracing()) {recordMethodStart("MedianOfTouchingNeighbors");}
+        boolean result = MedianOfTouchingNeighbors.medianOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, mean_values_destination);
+        if (doTimeTracing()) {recordMethodEnd("MedianOfTouchingNeighbors");}
+        return result;
     }
 
 
@@ -4611,7 +5743,10 @@ public abstract interface CLIJ2Ops {
      * The values are stored in x dimension.
      */
     default boolean pushResultsTableColumn(ClearCLBuffer arg1, ResultsTable arg2, String arg3) {
-        return PushResultsTableColumn.pushResultsTableColumn(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodStart("PushResultsTableColumn");}
+        boolean result = PushResultsTableColumn.pushResultsTableColumn(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("PushResultsTableColumn");}
+        return result;
     }
 
 
@@ -4623,36 +5758,48 @@ public abstract interface CLIJ2Ops {
      * Rows stay rows, columns stay columns.
      */
     default boolean pushResultsTable(ClearCLBuffer arg1, ResultsTable arg2) {
-        return PushResultsTable.pushResultsTable(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodStart("PushResultsTable");}
+        boolean result = PushResultsTable.pushResultsTable(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("PushResultsTable");}
+        return result;
     }
 
 
     // net.haesleinhuepf.clij2.plugins.PullToResultsTable
     //----------------------------------------------------
     /**
-     * 
+     * Converts an image into a table.
      */
-    default ResultsTable pullResultsTable(ClearCLBuffer arg1, ResultsTable arg2) {
-        return PullToResultsTable.pullResultsTable(getCLIJ2(), arg1, arg2);
+    default ResultsTable pullToResultsTable(ClearCLBuffer arg1, ResultsTable arg2) {
+        if (doTimeTracing()) {recordMethodStart("PullToResultsTable");}
+        ResultsTable result = PullToResultsTable.pullToResultsTable(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("PullToResultsTable");}
+        return result;
     }
 
     /**
-     * 
+     * Converts an image into a table.
      */
-    default ResultsTable pullResultsTable(ClearCLImage arg1, ResultsTable arg2) {
-        return PullToResultsTable.pullResultsTable(getCLIJ2(), arg1, arg2);
+    default ResultsTable pullToResultsTable(ClearCLImage arg1, ResultsTable arg2) {
+        if (doTimeTracing()) {recordMethodStart("PullToResultsTable");}
+        ResultsTable result = PullToResultsTable.pullToResultsTable(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("PullToResultsTable");}
+        return result;
     }
 
 
     // net.haesleinhuepf.clij2.plugins.LabelVoronoiOctagon
     //----------------------------------------------------
     /**
-     * Takes a binary image and dilates the regions using a octagon shape until they touch. 
+     * Takes a labelled image and dilates the labels using a octagon shape until they touch. 
      * 
      * The pixels where  the regions touched are afterwards returned as binary image which corresponds to the Voronoi diagram.
      */
-    default boolean labelVoronoiOctagon(ClearCLBuffer input, ClearCLBuffer destination) {
-        return LabelVoronoiOctagon.labelVoronoiOctagon(getCLIJ2(), input, destination);
+    default boolean labelVoronoiOctagon(ClearCLBuffer label_map, ClearCLBuffer label_voronoi_destination) {
+        if (doTimeTracing()) {recordMethodStart("LabelVoronoiOctagon");}
+        boolean result = LabelVoronoiOctagon.labelVoronoiOctagon(getCLIJ2(), label_map, label_voronoi_destination);
+        if (doTimeTracing()) {recordMethodEnd("LabelVoronoiOctagon");}
+        return result;
     }
 
 
@@ -4662,7 +5809,10 @@ public abstract interface CLIJ2Ops {
      * Converts a touch matrix in an adjacency matrix
      */
     default boolean touchMatrixToAdjacencyMatrix(ClearCLBuffer touch_matrix, ClearCLBuffer adjacency_matrix) {
-        return TouchMatrixToAdjacencyMatrix.touchMatrixToAdjacencyMatrix(getCLIJ2(), touch_matrix, adjacency_matrix);
+        if (doTimeTracing()) {recordMethodStart("TouchMatrixToAdjacencyMatrix");}
+        boolean result = TouchMatrixToAdjacencyMatrix.touchMatrixToAdjacencyMatrix(getCLIJ2(), touch_matrix, adjacency_matrix);
+        if (doTimeTracing()) {recordMethodEnd("TouchMatrixToAdjacencyMatrix");}
+        return result;
     }
 
 
@@ -4672,7 +5822,10 @@ public abstract interface CLIJ2Ops {
      * Converts a adjacency matrix in a touch matrix
      */
     default boolean adjacencyMatrixToTouchMatrix(ClearCLBuffer adjacency_matrix, ClearCLBuffer touch_matrix) {
-        return AdjacencyMatrixToTouchMatrix.adjacencyMatrixToTouchMatrix(getCLIJ2(), adjacency_matrix, touch_matrix);
+        if (doTimeTracing()) {recordMethodStart("AdjacencyMatrixToTouchMatrix");}
+        boolean result = AdjacencyMatrixToTouchMatrix.adjacencyMatrixToTouchMatrix(getCLIJ2(), adjacency_matrix, touch_matrix);
+        if (doTimeTracing()) {recordMethodEnd("AdjacencyMatrixToTouchMatrix");}
+        return result;
     }
 
 
@@ -4683,8 +5836,42 @@ public abstract interface CLIJ2Ops {
      * size n*n to draw lines from all points to points if the corresponding pixel in the touch matrix is 1.
      */
     default boolean pointlistToLabelledSpots(ClearCLBuffer pointlist, ClearCLBuffer spots_destination) {
-        return PointlistToLabelledSpots.pointlistToLabelledSpots(getCLIJ2(), pointlist, spots_destination);
+        if (doTimeTracing()) {recordMethodStart("PointlistToLabelledSpots");}
+        boolean result = PointlistToLabelledSpots.pointlistToLabelledSpots(getCLIJ2(), pointlist, spots_destination);
+        if (doTimeTracing()) {recordMethodEnd("PointlistToLabelledSpots");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.StatisticsOfImage
+    //----------------------------------------------------
+    /**
+     * Determines image size (bounding box), area (in pixels/voxels), min, max and mean intensity 
+     *  of all pixels in the original image.
+     * 
+     * This method is executed on the CPU and not on the GPU/OpenCL device.
+     */
+    default ResultsTable statisticsOfImage(ClearCLBuffer arg1, ResultsTable arg2) {
+        if (doTimeTracing()) {recordMethodStart("StatisticsOfImage");}
+        ResultsTable result = StatisticsOfImage.statisticsOfImage(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("StatisticsOfImage");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.NClosestDistances
+    //----------------------------------------------------
+    /**
+     * Determine the n point indices with shortest distance for all points in a distance matrix. 
+     * 
+     * This corresponds to the n row indices with minimum values for each column of the distance matrix.Returns the n shortest distances in one image and the point indices in another image.
+     */
+    default boolean nClosestDistances(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3) {
+        if (doTimeTracing()) {recordMethodStart("NClosestDistances");}
+        boolean result = NClosestDistances.nClosestDistances(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("NClosestDistances");}
+        return result;
     }
 
 }
-// 377 methods generated.
+// 380 methods generated.

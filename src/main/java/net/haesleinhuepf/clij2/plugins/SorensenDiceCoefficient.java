@@ -22,7 +22,7 @@ public class SorensenDiceCoefficient extends AbstractCLIJ2Plugin implements CLIJ
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
         ClearCLBuffer buffer2 = (ClearCLBuffer)( args[1]);
 
-        double jaccardIndex = JaccardIndex.jaccardIndex(getCLIJ2(), buffer1, buffer2);
+        double jaccardIndex = getCLIJ2().getJaccardIndex(buffer1, buffer2);
         double sorensenDiceCoefficient = sorensenDiceCoefficient(jaccardIndex);
 
         ResultsTable table = ResultsTable.getResultsTable();

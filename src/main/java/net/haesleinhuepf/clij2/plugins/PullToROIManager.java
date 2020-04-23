@@ -20,7 +20,7 @@ public class PullToROIManager extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public boolean executeCL() {
-        Roi result = PullAsROI.pullAsROI(getCLIJ2(), (ClearCLBuffer) (args[0]));
+        Roi result = getCLIJ2().pullAsROI((ClearCLBuffer) (args[0]));
 
         RoiManager rm = RoiManager.getInstance();
         if (rm == null) {

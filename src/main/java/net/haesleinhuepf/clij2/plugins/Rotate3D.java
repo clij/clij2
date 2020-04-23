@@ -31,10 +31,8 @@ public class Rotate3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
         ClearCLBuffer input = ((ClearCLBuffer) args[0]);
         ClearCLBuffer output = ((ClearCLBuffer) args[1]);
-        CLIJ2 clij2 = getCLIJ2();
 
-
-        return rotate3D(clij2, input, output, angleX, angleY, angleZ, rotateAroundCenter);
+        return getCLIJ2().rotate3D(input, output, angleX, angleY, angleZ, rotateAroundCenter);
     }
 
 

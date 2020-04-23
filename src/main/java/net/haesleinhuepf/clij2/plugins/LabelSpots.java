@@ -24,7 +24,7 @@ public class LabelSpots extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
 
     @Override
     public boolean executeCL() {
-        return labelSpots(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
+        return getCLIJ2().labelSpots((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
     }
 
     public static boolean labelSpots(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output) {

@@ -23,7 +23,7 @@ public class AddImageAndScalar extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public boolean executeCL() {
-        return addImageAndScalar(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        return getCLIJ2().addImageAndScalar((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
     }
 
     public static boolean addImageAndScalar(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Float scalar) {

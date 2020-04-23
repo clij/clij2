@@ -22,7 +22,7 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
 public class MultiplyImageAndCoordinate extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
     @Override
     public boolean executeCL() {
-        return multiplyImageAndCoordinate(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return getCLIJ2().multiplyImageAndCoordinate((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
     }
 
 

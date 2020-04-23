@@ -21,7 +21,7 @@ public class SetNonZeroPixelsToPixelIndex extends AbstractCLIJ2Plugin implements
 
     @Override
     public boolean executeCL() {
-        return setNonZeroPixelsToPixelIndex(getCLIJ2(), (ClearCLBuffer)args[0], (ClearCLBuffer)args[1]);
+        return getCLIJ2().setNonZeroPixelsToPixelIndex((ClearCLBuffer)args[0], (ClearCLBuffer)args[1]);
     }
 
 

@@ -22,7 +22,7 @@ public class WriteValuesToPositions extends AbstractCLIJ2Plugin implements CLIJM
         ClearCLBuffer positionsAndValues = (ClearCLBuffer)( args[0]);
         ClearCLBuffer buffer = (ClearCLBuffer)( args[1]);
 
-        return writeValuesToPositions(getCLIJ2(), positionsAndValues, buffer);
+        return getCLIJ2().writeValuesToPositions(positionsAndValues, buffer);
     }
 
     public static boolean writeValuesToPositions(CLIJ2 clij2, ClearCLBuffer positionsAndValues, ClearCLBuffer dst) {

@@ -21,7 +21,7 @@ public class CountTouchingNeighbors extends AbstractCLIJ2Plugin implements CLIJM
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = countTouchingNeighbors(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        boolean result = getCLIJ2().countTouchingNeighbors((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         releaseBuffers(args);
         return result;
     }

@@ -23,7 +23,7 @@ public class MaximumZProjectionBounded extends AbstractCLIJ2Plugin implements CL
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = maximumZProjectionBounded(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
+        boolean result = getCLIJ2().maximumZProjectionBounded((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
         releaseBuffers(args);
         return result;
     }

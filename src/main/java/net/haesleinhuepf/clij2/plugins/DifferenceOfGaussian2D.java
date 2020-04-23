@@ -19,7 +19,7 @@ public class DifferenceOfGaussian2D extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public boolean executeCL() {
-        boolean result = differenceOfGaussian(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asFloat(args[2]), asFloat(args[3]), asFloat(args[4]), asFloat(args[5]));
+        boolean result = getCLIJ2().differenceOfGaussian((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asFloat(args[2]), asFloat(args[3]), asFloat(args[4]), asFloat(args[5]));
         return result;
     }
 

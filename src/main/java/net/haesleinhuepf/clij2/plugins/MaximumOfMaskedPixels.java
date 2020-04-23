@@ -25,7 +25,7 @@ public class MaximumOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public boolean executeCL() {
-        double maxVal = maximumOfMaskedPixels(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        double maxVal = getCLIJ2().maximumOfMaskedPixels((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
 
 
         ResultsTable table = ResultsTable.getResultsTable();

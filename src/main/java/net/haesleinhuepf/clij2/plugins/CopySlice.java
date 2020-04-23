@@ -22,7 +22,7 @@ public class CopySlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public boolean executeCL() {
-        return copySlice(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return getCLIJ2().copySlice((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
     }
 
     public static boolean copySlice(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer planeIndex) {

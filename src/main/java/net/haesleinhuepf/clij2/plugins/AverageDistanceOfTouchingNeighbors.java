@@ -23,7 +23,7 @@ public class AverageDistanceOfTouchingNeighbors extends AbstractCLIJ2Plugin impl
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = averageDistanceOfTouchingNeighbors(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
+        boolean result = getCLIJ2().averageDistanceOfTouchingNeighbors((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
         releaseBuffers(args);
         return result;
     }

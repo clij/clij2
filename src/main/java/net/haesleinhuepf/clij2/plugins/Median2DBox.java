@@ -27,7 +27,7 @@ public class Median2DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
         int radiusX = asInteger(args[2]);
         int radiusY = asInteger(args[3]);
 
-        return median2DBox(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
+        return getCLIJ2().median2DBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
     }
 
     public static boolean median2DBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY) {

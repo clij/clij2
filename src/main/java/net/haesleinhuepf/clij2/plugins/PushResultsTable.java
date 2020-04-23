@@ -25,7 +25,7 @@ public class PushResultsTable extends AbstractCLIJ2Plugin implements CLIJMacroPl
     public boolean executeCL() {
         ClearCLBuffer buffer = (ClearCLBuffer)( args[0]);
         ResultsTable table = ResultsTable.getResultsTable();
-        pushResultsTable(getCLIJ2(), buffer, table);
+        getCLIJ2().pushResultsTable(buffer, table);
         return true;
     }
 

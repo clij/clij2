@@ -21,7 +21,7 @@ public class SetRow extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public boolean executeCL() {
-        return setRow(getCLIJ2(), (ClearCLBuffer)( args[0]), asInteger(args[1]), asFloat(args[2]));
+        return getCLIJ2().setRow((ClearCLBuffer)( args[0]), asInteger(args[1]), asFloat(args[2]));
     }
 
     public static boolean setRow(CLIJ2 clij2, ClearCLImageInterface clImage, Integer row, Float value) {

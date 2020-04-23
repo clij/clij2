@@ -30,7 +30,7 @@ public class TouchMatrixToMesh extends AbstractCLIJ2Plugin implements CLIJMacroP
         ClearCLBuffer touch_matrix = (ClearCLBuffer) args[1];
         ClearCLBuffer mesh = (ClearCLBuffer) args[2];
 
-        return touchMatrixToMesh(getCLIJ2(), pointlist, touch_matrix, mesh);
+        return getCLIJ2().touchMatrixToMesh(pointlist, touch_matrix, mesh);
     }
 
     public static boolean touchMatrixToMesh(CLIJ2 clij2, ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer mesh) {

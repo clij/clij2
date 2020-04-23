@@ -11,6 +11,7 @@ import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import org.scijava.plugin.Plugin;
 
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
 /**
@@ -69,7 +70,7 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
 
         ResultsTable resultsTable = ResultsTable.getResultsTable();
 
-        statisticsOfLabelledPixels(getCLIJ2(), inputImage, inputLabelMap, resultsTable);
+        getCLIJ2().statisticsOfLabelledPixels(inputImage, inputLabelMap, resultsTable);
 
         resultsTable.show("Results");
         return true;
@@ -163,8 +164,8 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         public void run() {
             boolean[] initializedFlags = new boolean[statistics.length];
 
-            ImagePlus imp = null;
-            ImagePlus lab = null;
+            //ImagePlus imp = null;
+            //ImagePlus lab = null;
 
             synchronized (clij2) {
                 ClearCLBuffer image = clij2.create(inputImage.getWidth(), inputImage.getHeight());
@@ -187,22 +188,30 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
                     //}
                 }
 
-                imp = clij2.pull(image);
-                lab = inputLabelMap != null ? clij2.pull(labelMap) : null;
+                pixels = new float[(int) (image.getWidth() * image.getHeight())];
+                image.writeTo(FloatBuffer.wrap(pixels), true);
                 image.close();
+
                 if (labelMap != null) {
+                    labels = new float[(int) (labelMap.getWidth() * labelMap.getHeight())];
+                    labelMap.writeTo(FloatBuffer.wrap(labels), true);
+  //              };
+                //imp = clij2.pull(image);
+                //lab = inputLabelMap != null ? clij2.pull(labelMap) : null;
+
+//                if (labelMap != null) {
                     labelMap.close();
                 }
             }
-            int width = imp.getWidth();
+            int width = (int) inputImage.getWidth();
             //for (int z = 0; z < imp.getNSlices(); z++) {
             //    imp.setZ(z + 1);
             //    if (lab != null) {
             //        lab.setZ(z + 1);
             //    }
 
-                pixels = (float[]) imp.getProcessor().getPixels();
-                labels = lab!=null?(float[]) lab.getProcessor().getPixels():null;
+                //pixels = (float[]) imp.getProcessor().getPixels();
+                //labels = lab!=null?(float[]) lab.getProcessor().getPixels():null;
 
                 int x = 0;
                 int y = 0;

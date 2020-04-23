@@ -22,9 +22,7 @@ public class NClosestDistances extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        boolean result = nClosestDistances(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), (ClearCLBuffer) (args[2]));
-        releaseBuffers(args);
+        boolean result = getCLIJ2().nClosestDistances((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), (ClearCLBuffer) (args[2]));
         return result;
     }
 

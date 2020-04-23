@@ -22,7 +22,7 @@ public class MinimumZProjectionBounded extends AbstractCLIJ2Plugin implements CL
 
     @Override
     public boolean executeCL() {
-        boolean result = minimumZProjectionBounded(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
+        boolean result = getCLIJ2().minimumZProjectionBounded((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
         return result;
     }
 

@@ -16,12 +16,12 @@ import org.scijava.plugin.Plugin;
  *         April 2020
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_getAsString")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_pullString")
 public class PullString extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        String result = pullString(getCLIJ2(), (ClearCLBuffer) args[0]);
+        String result = getCLIJ2().pullString((ClearCLBuffer) args[0]);
         ((String[])args[0])[0] = result;
         return true;
 

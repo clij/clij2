@@ -26,7 +26,7 @@ public class BinarySubtract extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         ClearCLBuffer src2  = (ClearCLBuffer)( args[1]);
         ClearCLBuffer dst = (ClearCLBuffer)( args[2]);
 
-        binarySubtract(getCLIJ2(), src1, src2, dst);
+        getCLIJ2().binarySubtract(src1, src2, dst);
 
         return true;
     }

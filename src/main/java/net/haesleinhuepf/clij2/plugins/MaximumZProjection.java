@@ -22,7 +22,7 @@ public class MaximumZProjection extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public boolean executeCL() {
-        return maximumZProjection(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().maximumZProjection((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean maximumZProjection(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst_max) {

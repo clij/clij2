@@ -26,7 +26,7 @@ public class VarianceOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public boolean executeCL() {
-        double minVal = varianceOfMaskedPixels(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        double minVal = getCLIJ2().varianceOfMaskedPixels((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();

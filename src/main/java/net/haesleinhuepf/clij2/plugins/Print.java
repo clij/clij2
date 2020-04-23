@@ -20,7 +20,7 @@ public class Print extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJO
     @Override
     public boolean executeCL() {
 
-        return print(getCLIJ2(), (ClearCLBuffer) args[0]);
+        return getCLIJ2().print((ClearCLBuffer) args[0]);
     }
 
     public static boolean print(CLIJ2 clij2, ClearCLImageInterface input) {

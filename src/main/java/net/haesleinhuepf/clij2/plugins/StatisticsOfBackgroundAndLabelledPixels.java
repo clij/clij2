@@ -30,7 +30,7 @@ public class StatisticsOfBackgroundAndLabelledPixels extends AbstractCLIJ2Plugin
         ResultsTable resultsTable = ResultsTable.getResultsTable();
 
 
-        statisticsOfBackgroundAndLabelledPixels(getCLIJ2(), inputImage, inputLabelMap, resultsTable);
+        getCLIJ2().statisticsOfBackgroundAndLabelledPixels(inputImage, inputLabelMap, resultsTable);
 
         resultsTable.show("Results");
         return true;

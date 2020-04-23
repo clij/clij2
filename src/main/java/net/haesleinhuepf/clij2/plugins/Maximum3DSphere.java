@@ -27,7 +27,7 @@ public class Maximum3DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlu
         int radiusY = asInteger(args[3]);
         int radiusZ = asInteger(args[4]);
 
-        return maximum3DSphere(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY, radiusZ);
+        return getCLIJ2().maximum3DSphere((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY, radiusZ);
     }
 
 

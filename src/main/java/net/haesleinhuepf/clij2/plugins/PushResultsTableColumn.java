@@ -24,7 +24,7 @@ public class PushResultsTableColumn extends AbstractCLIJ2Plugin implements CLIJM
         ClearCLBuffer buffer = (ClearCLBuffer)( args[0]);
         String column = (String)( args[1]);
         ResultsTable table = ResultsTable.getResultsTable();
-        pushResultsTableColumn(getCLIJ2(), buffer, table, column);
+        getCLIJ2().pushResultsTableColumn(buffer, table, column);
         return true;
     }
 

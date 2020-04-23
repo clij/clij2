@@ -22,9 +22,7 @@ public class NClosestPoints extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        boolean result = nClosestPoints(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
-        releaseBuffers(args);
+        boolean result = getCLIJ2().nClosestPoints((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
         return result;
     }
 

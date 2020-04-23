@@ -25,7 +25,7 @@ public class StatisticsOfImage extends AbstractCLIJ2Plugin implements CLIJMacroP
         ResultsTable resultsTable = ResultsTable.getResultsTable();
 
 
-        statisticsOfImage(getCLIJ2(), inputImage, resultsTable);
+        getCLIJ2().statisticsOfImage(inputImage, resultsTable);
 
         resultsTable.show("Results");
         return true;

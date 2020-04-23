@@ -25,7 +25,7 @@ public class Flip2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
         Boolean flipX = asBoolean(args[2]);
         Boolean flipY = asBoolean(args[3]);
 
-        return flip(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), flipX, flipY);
+        return getCLIJ2().flip((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), flipX, flipY);
     }
 
     public static boolean flip2D(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Boolean flipx, Boolean flipy) {

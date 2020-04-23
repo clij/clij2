@@ -21,7 +21,7 @@ public class BinaryFillHoles extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-        binaryFillHoles(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        getCLIJ2().binaryFillHoles((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return true;
     }
 

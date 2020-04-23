@@ -29,9 +29,8 @@ public class Scale3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
         ClearCLBuffer input = ((ClearCLBuffer) args[0]);
         ClearCLBuffer output = ((ClearCLBuffer) args[1]);
-        CLIJ2 clij2 = getCLIJ2();
 
-        return scale3D(clij2, input, output, scaleFactorX, scaleFactorY, scaleFactorZ, scaleAroundCenter);
+        return getCLIJ2().scale3D(input, output, scaleFactorX, scaleFactorY, scaleFactorZ, scaleAroundCenter);
     }
 
     public static boolean scale3D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float factorX, Float factorY, Float factorZ) {

@@ -26,7 +26,7 @@ public class ResultsTableColumnToImage extends AbstractCLIJ2Plugin implements CL
         ClearCLBuffer buffer = (ClearCLBuffer)( args[0]);
         String column = (String)( args[1]);
         ResultsTable table = ResultsTable.getResultsTable();
-        resultsTableColumnToImage(getCLIJ2(), buffer, table, column);
+        getCLIJ2().resultsTableColumnToImage(buffer, table, column);
         return true;
     }
 

@@ -22,10 +22,10 @@ public class SetWhereXsmallerThanY extends AbstractCLIJ2Plugin implements CLIJMa
     @Override
     public boolean executeCL() {
         if (containsCLImageArguments()) {
-            return setWhereXsmallerThanY(getCLIJ2(), (ClearCLImage)( args[0]), asFloat(args[1]));
+            return getCLIJ2().setWhereXsmallerThanY((ClearCLImage)( args[0]), asFloat(args[1]));
         } else {
             Object[] args = openCLBufferArgs();
-            boolean result = setWhereXsmallerThanY(getCLIJ2(), (ClearCLBuffer)( args[0]),  asFloat(args[1]));
+            boolean result = getCLIJ2().setWhereXsmallerThanY((ClearCLBuffer)( args[0]),  asFloat(args[1]));
             releaseBuffers(args);
             return result;
         }

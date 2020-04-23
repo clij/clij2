@@ -27,7 +27,7 @@ public class Minimum3DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlu
         int radiusY = asInteger(args[3]);
         int radiusZ = asInteger(args[4]);
 
-        return minimum3DSphere(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY, radiusZ);
+        return getCLIJ2().minimum3DSphere((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY, radiusZ);
     }
 
     public static boolean minimum3DSphere(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {

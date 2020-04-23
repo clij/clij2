@@ -20,7 +20,7 @@ public class Power extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJO
 
     @Override
     public boolean executeCL() {
-        return power(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        return getCLIJ2().power((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
     }
 
     public static boolean power(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Float exponent) {

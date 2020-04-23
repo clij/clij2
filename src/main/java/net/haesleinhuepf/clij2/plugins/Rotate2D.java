@@ -28,9 +28,8 @@ public class Rotate2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
         ClearCLBuffer input = ((ClearCLBuffer) args[0]);
         ClearCLBuffer output = ((ClearCLBuffer) args[1]);
-        CLIJ2 clij2 = getCLIJ2();
 
-        return rotate2D(clij2, input, output, angle, rotateAroundCenter);
+        return getCLIJ2().rotate2D(input, output, angle, rotateAroundCenter);
     }
 
     public static boolean rotate2D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float angle, Boolean rotateAroundCenter) {

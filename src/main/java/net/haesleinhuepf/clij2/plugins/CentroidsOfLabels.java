@@ -27,7 +27,7 @@ public class CentroidsOfLabels extends AbstractCLIJ2Plugin implements CLIJMacroP
         ClearCLBuffer labelmap = (ClearCLBuffer)( args[0]);
         ClearCLBuffer pointlist = (ClearCLBuffer)( args[0]);
 
-        centroidsOfLabels(getCLIJ2(), labelmap, pointlist);
+        getCLIJ2().centroidsOfLabels(labelmap, pointlist);
 
         return true;
     }

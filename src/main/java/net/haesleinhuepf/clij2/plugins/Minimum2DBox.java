@@ -21,7 +21,7 @@ public class Minimum2DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
         int radiusX = asInteger(args[2]);
         int radiusY = asInteger(args[3]);
 
-        return minimum2DBox(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), radiusX, radiusY);
+        return getCLIJ2().minimum2DBox((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), radiusX, radiusY);
     }
 
     public static boolean minimumBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY) {

@@ -29,7 +29,7 @@ public class Blur3DSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMacro
         ClearCLBuffer input = (ClearCLBuffer) args[0];
         ClearCLBuffer output = (ClearCLBuffer) args[1];
 
-        return blur3DSliceBySlice(getCLIJ2(), input, output, sigmaX, sigmaY);
+        return getCLIJ2().gaussianBlur3D(input, output, sigmaX, sigmaY, 0);
     }
 
     @Deprecated

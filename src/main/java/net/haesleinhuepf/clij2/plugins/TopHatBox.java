@@ -20,10 +20,7 @@ public class TopHatBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public boolean executeCL() {
-
-        Object[] args = openCLBufferArgs();
-        boolean result = topHatBox(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
-        releaseBuffers(args);
+        boolean result = getCLIJ2().topHatBox((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
         return result;
     }
 

@@ -31,7 +31,7 @@ public class AutomaticThreshold extends AbstractCLIJ2Plugin implements CLIJMacro
         ClearCLBuffer dst = (ClearCLBuffer) (args[1]);
         String userSelectedMethod = (String)args[2];
 
-        return automaticThreshold(getCLIJ2(), src, dst, userSelectedMethod);
+        return getCLIJ2().automaticThreshold(src, dst, userSelectedMethod);
     }
 
     public static boolean automaticThreshold(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, String userSelectedMethod) {

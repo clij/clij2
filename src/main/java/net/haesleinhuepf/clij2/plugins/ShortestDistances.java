@@ -20,7 +20,7 @@ public class ShortestDistances extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public boolean executeCL() {
-        boolean result = shortestDistances(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
+        boolean result = getCLIJ2().shortestDistances((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
         return result;
     }
 

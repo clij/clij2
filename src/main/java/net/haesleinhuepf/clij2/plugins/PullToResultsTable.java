@@ -25,17 +25,17 @@ public class PullToResultsTable extends AbstractCLIJ2Plugin implements CLIJMacro
     public boolean executeCL() {
         ClearCLBuffer buffer = (ClearCLBuffer)( args[0]);
         ResultsTable table = ResultsTable.getResultsTable();
-        pullResultsTable(getCLIJ2(), buffer, table);
+        getCLIJ2().pullToResultsTable(buffer, table);
         table.show("Results");
         return true;
     }
 
-    public static ResultsTable pullResultsTable(CLIJ2 clij2, ClearCLBuffer buffer, ResultsTable table) {
+    public static ResultsTable pullToResultsTable(CLIJ2 clij2, ClearCLBuffer buffer, ResultsTable table) {
         ImagePlus converted = clij2.pull(buffer);
         ImageProcessor ip = converted.getProcessor();
         return image2DToResultsTable(ip, table);
     }
-    public static ResultsTable pullResultsTable(CLIJ2 clij2, ClearCLImage image, ResultsTable table) {
+    public static ResultsTable pullToResultsTable(CLIJ2 clij2, ClearCLImage image, ResultsTable table) {
         ImagePlus converted = clij2.convert(image, ImagePlus.class);
         ImageProcessor ip = converted.getProcessor();
         return image2DToResultsTable(ip, table);
