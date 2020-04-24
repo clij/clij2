@@ -38,7 +38,7 @@ public class DrawBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
         Float depth = asFloat(args[6]);
         Float value = asFloat(args[7]);
 
-        return drawBox(getCLIJ2(), input, x, y, z, width, height, depth, value);
+        return getCLIJ2().drawBox(input, x, y, z, width, height, depth, value);
     }
 
     public static boolean drawBox(CLIJ2 clij2, ClearCLImageInterface output, Float x, Float y, Float z, Float width, Float height, Float depth) {

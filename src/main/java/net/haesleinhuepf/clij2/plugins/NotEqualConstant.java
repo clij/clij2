@@ -20,7 +20,7 @@ public class NotEqualConstant extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public boolean executeCL() {
-        boolean result = notEqualConstant(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        boolean result = getCLIJ2().notEqualConstant((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
         return result;
     }
 

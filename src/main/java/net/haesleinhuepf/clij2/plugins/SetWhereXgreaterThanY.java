@@ -20,7 +20,7 @@ public class SetWhereXgreaterThanY extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public boolean executeCL() {
-        boolean result = setWhereXgreaterThanY(getCLIJ2(), (ClearCLBuffer)( args[0]),  asFloat(args[1]));
+        boolean result = getCLIJ2().setWhereXgreaterThanY((ClearCLBuffer)( args[0]),  asFloat(args[1]));
         return result;
     }
 

@@ -26,7 +26,7 @@ public class LaplaceDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         ClearCLBuffer input = (ClearCLBuffer) (args[0]);
         ClearCLBuffer output = (ClearCLBuffer) (args[1]);
 
-        boolean result = laplaceSphere(getCLIJ2(), input, output);
+        boolean result = getCLIJ2().laplaceSphere(input, output);
         return result;
     }
 

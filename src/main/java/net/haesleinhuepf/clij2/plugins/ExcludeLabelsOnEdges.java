@@ -25,7 +25,7 @@ public class ExcludeLabelsOnEdges extends AbstractCLIJ2Plugin implements CLIJMac
         ClearCLBuffer label_map_in = (ClearCLBuffer)( args[0]);
         ClearCLBuffer label_map_out = (ClearCLBuffer)( args[1]);
 
-        return excludeLabelsOnEdges(getCLIJ2(), label_map_in, label_map_out);
+        return getCLIJ2().excludeLabelsOnEdges(label_map_in, label_map_out);
     }
 
     public static boolean excludeLabelsOnEdges(CLIJ2 clij2, ClearCLBuffer label_map_in, ClearCLBuffer label_map_out) {

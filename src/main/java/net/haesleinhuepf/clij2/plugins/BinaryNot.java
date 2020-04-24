@@ -23,7 +23,7 @@ public class BinaryNot extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public boolean executeCL() {
-        binaryNot(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        getCLIJ2().binaryNot((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return true;
     }
 

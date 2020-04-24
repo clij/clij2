@@ -25,7 +25,7 @@ public class MinimumOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public boolean executeCL() {
-        double minimumGreyValue = minimumOfAllPixels(getCLIJ2(), (ClearCLBuffer)( args[0]));
+        double minimumGreyValue = getCLIJ2().minimumOfAllPixels((ClearCLBuffer)( args[0]));
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();

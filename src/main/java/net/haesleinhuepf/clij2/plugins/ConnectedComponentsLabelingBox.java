@@ -25,7 +25,7 @@ public class ConnectedComponentsLabelingBox extends ConnectedComponentsLabeling 
         ClearCLBuffer input = (ClearCLBuffer) args[0];
         ClearCLBuffer output = (ClearCLBuffer) args[1];
 
-        boolean result = connectedComponentsLabelingBox(getCLIJ2(), input, output);
+        boolean result = getCLIJ2().connectedComponentsLabelingBox(input, output);
         releaseBuffers(args);
         return result;
     }

@@ -23,7 +23,7 @@ public class RotateCounterClockwise extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public boolean executeCL() {
-        return rotateCounterClockwise(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().rotateCounterClockwise((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     @Deprecated

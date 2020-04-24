@@ -6,7 +6,7 @@
 #define SAMPLER_ADDRESS CLK_ADDRESS_CLAMP
 #endif
 
-__kernel void radialProjection3d(
+__kernel void reslice_radial(
     IMAGE_dst_TYPE dst,
     IMAGE_src_TYPE src,
     float deltaAngle,

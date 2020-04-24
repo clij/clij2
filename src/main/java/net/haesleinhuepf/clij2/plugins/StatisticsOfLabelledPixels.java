@@ -11,6 +11,7 @@ import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import org.scijava.plugin.Plugin;
 
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
 /**
@@ -69,7 +70,7 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
 
         ResultsTable resultsTable = ResultsTable.getResultsTable();
 
-        statisticsOfLabelledPixels(getCLIJ2(), inputImage, inputLabelMap, resultsTable);
+        getCLIJ2().statisticsOfLabelledPixels(inputImage, inputLabelMap, resultsTable);
 
         resultsTable.show("Results");
         return true;
@@ -134,8 +135,342 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         return statisticsOfLabelledPixels(clij2, inputImage, inputLabelMap, labelIndex, labelIndex)[0];
     }
 
+    private static class Statistician implements Runnable{
+
+
+        private double[][] statistics;
+        private final ClearCLBuffer inputImage;
+        private final ClearCLBuffer inputLabelMap;
+        private final int startLabelIndex;
+        private final int endLabelIndex;
+        private final int zPlane;
+        private final CLIJ2 clij2;
+
+        float[] pixels;
+        float[] labels;
+
+        Statistician(double[][] statistics, CLIJ2 clij2, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, int startLabelIndex, int endLabelIndex, int zPlane) {
+
+            this.statistics = statistics;
+            this.inputImage = inputImage;
+            this.inputLabelMap = inputLabelMap;
+            this.startLabelIndex = startLabelIndex;
+            this.endLabelIndex = endLabelIndex;
+            this.zPlane = zPlane;
+            this.clij2 = clij2;
+        }
+
+        @Override
+        public void run() {
+            boolean[] initializedFlags = new boolean[statistics.length];
+
+            //ImagePlus imp = null;
+            //ImagePlus lab = null;
+
+            synchronized (clij2) {
+                ClearCLBuffer image = clij2.create(inputImage.getWidth(), inputImage.getHeight());
+                clij2.copySlice(inputImage, image, zPlane);
+                //inputImage;
+                ClearCLBuffer labelMap = null;
+                //inputLabelMap;
+
+                //if (inputImage.getNativeType() != NativeTypeEnum.Float) {
+                //    image = clij2.create(inputImage.getDimensions(), NativeTypeEnum.Float);
+                //    clij2.copy(inputImage, image);
+                //}
+
+                if (inputLabelMap != null) {
+                    labelMap = clij2.create(inputLabelMap.getWidth(), inputLabelMap.getHeight());
+                    clij2.copySlice(inputLabelMap, labelMap, zPlane);
+                    //if (inputLabelMap.getNativeType() != NativeTypeEnum.Float) {
+                    //    labelMap = clij2.create(inputLabelMap.getDimensions(), NativeTypeEnum.Float);
+                    //    clij2.copy(inputLabelMap, labelMap);
+                    //}
+                }
+
+                pixels = new float[(int) (image.getWidth() * image.getHeight())];
+                image.writeTo(FloatBuffer.wrap(pixels), true);
+                image.close();
+
+                if (labelMap != null) {
+                    labels = new float[(int) (labelMap.getWidth() * labelMap.getHeight())];
+                    labelMap.writeTo(FloatBuffer.wrap(labels), true);
+  //              };
+                //imp = clij2.pull(image);
+                //lab = inputLabelMap != null ? clij2.pull(labelMap) : null;
+
+//                if (labelMap != null) {
+                    labelMap.close();
+                }
+            }
+            int width = (int) inputImage.getWidth();
+            //for (int z = 0; z < imp.getNSlices(); z++) {
+            //    imp.setZ(z + 1);
+            //    if (lab != null) {
+            //        lab.setZ(z + 1);
+            //    }
+
+                //pixels = (float[]) imp.getProcessor().getPixels();
+                //labels = lab!=null?(float[]) lab.getProcessor().getPixels():null;
+
+                int x = 0;
+                int y = 0;
+                for (int i = 0; i < pixels.length; i++) {
+
+                    int index = labels!=null?(int) labels[i]:0;
+                    if (index >= startLabelIndex) {
+
+                        int targetIndex = index - startLabelIndex;
+                        double value = pixels[i];
+
+                        boolean initialized = initializedFlags[targetIndex];
+
+                        if (x < statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_X.value] || !initialized) {
+                            statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_X.value] = x;
+                        }
+                        if (y < statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_Y.value] || !initialized) {
+                            statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_Y.value] = y;
+                        }
+                        if (zPlane < statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_Z.value] || !initialized) {
+                            statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_Z.value] = zPlane;
+                        }
+                        if (x > statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_END_X.value] || !initialized) {
+                            statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_END_X.value] = x;
+                        }
+                        if (y > statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_END_Y.value] || !initialized) {
+                            statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_END_Y.value] = y;
+                        }
+                        if (zPlane > statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_END_Z.value] || !initialized) {
+                            statistics[targetIndex][STATISTICS_ENTRY.BOUNDING_BOX_END_Z.value] = zPlane;
+                        }
+
+                        if (value > statistics[targetIndex][STATISTICS_ENTRY.MAXIMUM_INTENSITY.value] || !initialized) {
+                            statistics[targetIndex][STATISTICS_ENTRY.MAXIMUM_INTENSITY.value] = value;
+                        }
+                        if (value < statistics[targetIndex][STATISTICS_ENTRY.MINIMUM_INTENSITY.value] || !initialized) {
+                            statistics[targetIndex][STATISTICS_ENTRY.MINIMUM_INTENSITY.value] = value;
+                        }
+                        statistics[targetIndex][STATISTICS_ENTRY.SUM_INTENSITY.value] += value;
+
+                        statistics[targetIndex][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_X.value] += value * x;
+                        statistics[targetIndex][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Y.value] += value * y;
+                        statistics[targetIndex][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Z.value] += value * zPlane;
+
+                        statistics[targetIndex][STATISTICS_ENTRY.SUM_X.value] += x;
+                        statistics[targetIndex][STATISTICS_ENTRY.SUM_Y.value] += y;
+                        statistics[targetIndex][STATISTICS_ENTRY.SUM_Z.value] += zPlane;
+
+                        statistics[targetIndex][STATISTICS_ENTRY.PIXEL_COUNT.value] += 1;
+
+                        initializedFlags[targetIndex] = true;
+                    }
+
+                    x++;
+                    if (x >= width) {
+                        x = 0;
+                        y++;
+                    }
+                }
+            //}
+        }
+    }
+
+
+    private static class SecondOrderStatistician implements Runnable {
+        private final float[] pixels;
+        private final float[] labels;
+        private final int startLabelIndex;
+        private final double[][] statistics;
+        private final double[] squaredDifferencesFromMean;
+
+        SecondOrderStatistician(float[] pixels, float[] labels, int startLabelIndex, double[][] statistics, double[] squaredDifferencesFromMean) {
+            this.pixels = pixels;
+            this.labels = labels;
+            this.startLabelIndex = startLabelIndex;
+            this.statistics = statistics;
+            this.squaredDifferencesFromMean = squaredDifferencesFromMean;
+        }
+
+        @Override
+        public void run() {
+            //for (int z = 0; z < imp.getNSlices(); z++) {
+              //  imp.setZ(z + 1);
+                //if(lab != null) {
+                  //  lab.setZ(z + 1);
+                //}
+
+                //float[] pixels = (float[]) imp.getProcessor().getPixels();
+                //float[] labels = lab!=null?(float[]) lab.getProcessor().getPixels():null;
+
+                for (int i = 0; i < pixels.length; i ++) {
+
+                    int index = labels!=null?(int) labels[i]:0;
+                    if (index >= startLabelIndex) {
+
+                        int targetIndex = index - startLabelIndex;
+                        double value = pixels[i];
+
+                        squaredDifferencesFromMean[targetIndex] += Math.pow(value - statistics[targetIndex][STATISTICS_ENTRY.MEAN_INTENSITY.value], 2);
+                    }
+                }
+           // }
+
+        }
+    }
+
     // as it's super slow on the GPU, let's do it on the CPU
     public static double[][] statisticsOfLabelledPixels(CLIJ2 clij2, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, int startLabelIndex, int endLabelIndex) {
+        int num_threads = (int) inputImage.getDepth();
+
+        double[][][] statistics = new double[num_threads + 1][endLabelIndex - startLabelIndex + 1][STATISTICS_ENTRY.NUMBER_OF_ENTRIES];
+
+        Thread[] threads = new Thread[num_threads];
+        Statistician[] statisticians = new Statistician[num_threads];
+        for (int i = 0; i < num_threads; i++) {
+            statisticians[i] = new Statistician(statistics[i + 1], clij2, inputImage, inputLabelMap, startLabelIndex, endLabelIndex, i);
+            threads[i] = new Thread(statisticians[i]);
+            threads[i].start();
+        }
+        for (int i = 0; i < num_threads; i++) {
+            try {
+                threads[i].join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        STATISTICS_ENTRY[] indices_to_min_collect = {
+                STATISTICS_ENTRY.BOUNDING_BOX_X,
+                STATISTICS_ENTRY.BOUNDING_BOX_Y,
+                STATISTICS_ENTRY.BOUNDING_BOX_Z,
+                STATISTICS_ENTRY.MINIMUM_INTENSITY
+        };
+        STATISTICS_ENTRY[] indices_to_max_collect = {
+                STATISTICS_ENTRY.BOUNDING_BOX_END_X,
+                STATISTICS_ENTRY.BOUNDING_BOX_END_Y,
+                STATISTICS_ENTRY.BOUNDING_BOX_END_Z,
+                STATISTICS_ENTRY.MAXIMUM_INTENSITY
+        };
+        STATISTICS_ENTRY[] indices_to_sum_collect = {
+                STATISTICS_ENTRY.SUM_INTENSITY,
+                STATISTICS_ENTRY.PIXEL_COUNT,
+                STATISTICS_ENTRY.SUM_INTENSITY_TIMES_X,
+                STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Y,
+                STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Z,
+                STATISTICS_ENTRY.SUM_X,
+                STATISTICS_ENTRY.SUM_Y,
+                STATISTICS_ENTRY.SUM_Z
+        };
+
+        for (int t = 0; t < num_threads; t++) {
+            for (int j = 0; j < statistics[0].length; j++) {
+                for (STATISTICS_ENTRY entry : indices_to_max_collect) {
+                    if (t == 0) {
+                        statistics[0][j][entry.value] = statistics[t + 1][j][entry.value];
+                    } else {
+                        statistics[0][j][entry.value] = Math.max(statistics[0][j][entry.value], statistics[t + 1][j][entry.value]);
+                    }
+                }
+                for (STATISTICS_ENTRY entry : indices_to_min_collect) {
+                    if (t == 0) {
+                        statistics[0][j][entry.value] = statistics[t + 1][j][entry.value];
+                    } else {
+                        statistics[0][j][entry.value] = Math.min(statistics[0][j][entry.value], statistics[t + 1][j][entry.value]);
+                    }
+                }
+                for (STATISTICS_ENTRY entry : indices_to_sum_collect) {
+                    statistics[0][j][entry.value] += statistics[t + 1][j][entry.value];
+                }
+            }
+        }
+
+        for (int j = 0; j < statistics[0].length; j++) {
+            statistics[0][j][STATISTICS_ENTRY.MEAN_INTENSITY.value] =
+                    statistics[0][j][STATISTICS_ENTRY.SUM_INTENSITY.value] /
+                    statistics[0][j][STATISTICS_ENTRY.PIXEL_COUNT.value];
+
+            statistics[0][j][STATISTICS_ENTRY.BOUNDING_BOX_WIDTH.value] =
+                    statistics[0][j][STATISTICS_ENTRY.BOUNDING_BOX_END_X.value] -
+                    statistics[0][j][STATISTICS_ENTRY.BOUNDING_BOX_X.value] + 1;
+            statistics[0][j][STATISTICS_ENTRY.BOUNDING_BOX_HEIGHT.value] =
+                    statistics[0][j][STATISTICS_ENTRY.BOUNDING_BOX_END_Y.value] -
+                    statistics[0][j][STATISTICS_ENTRY.BOUNDING_BOX_Y.value] + 1;
+            statistics[0][j][STATISTICS_ENTRY.BOUNDING_BOX_DEPTH.value] =
+                    statistics[0][j][STATISTICS_ENTRY.BOUNDING_BOX_END_Z.value] -
+                    statistics[0][j][STATISTICS_ENTRY.BOUNDING_BOX_Z.value] + 1;
+
+            statistics[0][j][STATISTICS_ENTRY.IDENTIFIER.value] = j + startLabelIndex;
+
+            statistics[0][j][STATISTICS_ENTRY.MASS_CENTER_X.value] =
+                    statistics[0][j][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_X.value] /
+                    statistics[0][j][STATISTICS_ENTRY.SUM_INTENSITY.value];
+            statistics[0][j][STATISTICS_ENTRY.MASS_CENTER_Y.value] =
+                    statistics[0][j][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Y.value] /
+                    statistics[0][j][STATISTICS_ENTRY.SUM_INTENSITY.value];
+            statistics[0][j][STATISTICS_ENTRY.MASS_CENTER_Z.value] =
+                    statistics[0][j][STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Z.value] /
+                    statistics[0][j][STATISTICS_ENTRY.SUM_INTENSITY.value];
+
+            statistics[0][j][STATISTICS_ENTRY.CENTROID_X.value] =
+                    statistics[0][j][STATISTICS_ENTRY.SUM_X.value] /
+                    statistics[0][j][STATISTICS_ENTRY.PIXEL_COUNT.value];
+            statistics[0][j][STATISTICS_ENTRY.CENTROID_Y.value] =
+                    statistics[0][j][STATISTICS_ENTRY.SUM_Y.value] /
+                    statistics[0][j][STATISTICS_ENTRY.PIXEL_COUNT.value];
+            statistics[0][j][STATISTICS_ENTRY.CENTROID_Z.value] =
+                    statistics[0][j][STATISTICS_ENTRY.SUM_Z.value] /
+                    statistics[0][j][STATISTICS_ENTRY.PIXEL_COUNT.value];
+        }
+
+        for (int t = 0; t < num_threads; t++) {
+            for (int j = 0; j < statistics[0].length; j++) {
+                statistics[t+1][j][STATISTICS_ENTRY.MEAN_INTENSITY.value] = statistics[0][j][STATISTICS_ENTRY.MEAN_INTENSITY.value];
+            }
+        }
+
+        double[][] squaredDifferencesFromMean = new double[num_threads + 1][statistics[0].length];
+
+        Thread[] followUpThreads = new Thread[num_threads];
+        for (int t = 0; t < num_threads; t++) {
+            followUpThreads[t] = new Thread(new SecondOrderStatistician(
+                    statisticians[t].pixels,
+                    statisticians[t].labels,
+                    startLabelIndex,
+                    statistics[t + 1],
+                    squaredDifferencesFromMean[t + 1]
+            ));
+            followUpThreads[t].start();
+        }
+        for (int t = 0; t < num_threads; t++) {
+            try {
+                followUpThreads[t].join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+//        if (inputImage != image) {
+//            image.close();
+//        }
+//        if (inputLabelMap != labelMap && labelMap != null) {
+//            labelMap.close();
+//        }
+
+        for (int t = 0; t < num_threads; t++) {
+            for (int j = 0; j < statistics[0].length; j++) {
+                squaredDifferencesFromMean[0][j] += squaredDifferencesFromMean[t+1][j];
+            }
+        }
+
+        for (int j = 0; j < statistics[0].length; j++) {
+            statistics[0][j][STATISTICS_ENTRY.STANDARD_DEVIATION_INTENSITY.value] =
+                    Math.sqrt(squaredDifferencesFromMean[0][j] /
+                            statistics[0][j][STATISTICS_ENTRY.PIXEL_COUNT.value]);
+        }
+
+        return statistics[0];
+    }
+
+    public static double[][] statisticsOfLabelledPixels_single_threaded(CLIJ2 clij2, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, int startLabelIndex, int endLabelIndex) {
         double[][] statistics = new double[endLabelIndex - startLabelIndex + 1][STATISTICS_ENTRY.NUMBER_OF_ENTRIES];
         boolean[] initializedFlags = new boolean[statistics.length];
 
@@ -147,25 +482,30 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
             clij2.copy(inputImage, image);
         }
 
-        if (inputLabelMap.getNativeType() != NativeTypeEnum.Float) {
-            labelMap = clij2.create(inputLabelMap.getDimensions(), NativeTypeEnum.Float);
-            clij2.copy(inputLabelMap, labelMap);
+        if (inputLabelMap != null) {
+            if (inputLabelMap.getNativeType() != NativeTypeEnum.Float) {
+                labelMap = clij2.create(inputLabelMap.getDimensions(), NativeTypeEnum.Float);
+                clij2.copy(inputLabelMap, labelMap);
+            }
         }
 
         ImagePlus imp = clij2.pull(image);
-        ImagePlus lab = clij2.pull(labelMap);
+        ImagePlus lab = inputLabelMap!=null?clij2.pull(labelMap):null;
         int width = imp.getWidth();
         for (int z = 0; z < imp.getNSlices(); z++) {
             imp.setZ(z + 1);
-            lab.setZ(z + 1);
+            if (lab != null) {
+                lab.setZ(z + 1);
+            }
 
             float[] pixels = (float[]) imp.getProcessor().getPixels();
-            float[] labels = (float[]) lab.getProcessor().getPixels();
+            float[] labels = lab!=null?(float[]) lab.getProcessor().getPixels():null;
 
             int x = 0;
             int y = 0;
             for (int i = 0; i < pixels.length; i++) {
-                int index = (int) labels[i];
+
+                int index = labels!=null?(int) labels[i]:0;
                 if (index >= startLabelIndex) {
 
                     int targetIndex = index - startLabelIndex;
@@ -225,7 +565,7 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         for (int j = 0; j < statistics.length; j++) {
             statistics[j][STATISTICS_ENTRY.MEAN_INTENSITY.value] =
                     statistics[j][STATISTICS_ENTRY.SUM_INTENSITY.value] /
-                    statistics[j][STATISTICS_ENTRY.PIXEL_COUNT.value];
+                            statistics[j][STATISTICS_ENTRY.PIXEL_COUNT.value];
 
             statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_WIDTH.value] =
                     statistics[j][STATISTICS_ENTRY.BOUNDING_BOX_END_X.value] -
@@ -266,14 +606,16 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         double[] squaredDifferencesFromMean = new double[statistics.length];
         for (int z = 0; z < imp.getNSlices(); z++) {
             imp.setZ(z + 1);
-            lab.setZ(z + 1);
+            if(lab != null) {
+                lab.setZ(z + 1);
+            }
 
             float[] pixels = (float[]) imp.getProcessor().getPixels();
-            float[] labels = (float[]) lab.getProcessor().getPixels();
+            float[] labels = lab!=null?(float[]) lab.getProcessor().getPixels():null;
 
             for (int i = 0; i < pixels.length; i ++) {
-                int index = (int) labels[i];
 
+                int index = labels!=null?(int) labels[i]:0;
                 if (index >= startLabelIndex) {
 
                     int targetIndex = index - startLabelIndex;
@@ -293,12 +635,13 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         if (inputImage != image) {
             image.close();
         }
-        if (inputLabelMap != labelMap) {
+        if (inputLabelMap != labelMap && labelMap != null) {
             labelMap.close();
         }
 
         return statistics;
     }
+
     /*
     public static double[][] statisticsOfLabelledPixels(CLIJ clij, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, int startLabelIndex, int endLabelIndex) {
         if (endLabelIndex - startLabelIndex > 10) {
@@ -394,7 +737,8 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
     public String getDescription() {
         return "Determines bounding box, area (in pixels/voxels), min, max and mean intensity \n" +
                 " of labelled objects in a label map and corresponding pixels in the original image. \n\n" +
-                "Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.";
+                "Instead of a label map, you can also use a binary image as a binary image is a label map with just one label." +
+                "\n\nThis method is executed on the CPU and not on the GPU/OpenCL device.";
     }
 
     @Override

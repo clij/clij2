@@ -24,7 +24,7 @@ public class MaximumImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public boolean executeCL() {
-        return maximumImages(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        return getCLIJ2().maximumImages((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
     }
 
     public static boolean maximumImages(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface src1, ClearCLImageInterface dst) {

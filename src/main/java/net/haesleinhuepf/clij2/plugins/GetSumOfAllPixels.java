@@ -18,7 +18,7 @@ public class GetSumOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public boolean executeCL() {
-        double sumGreyValue = getSumOfAllPixels(getCLIJ2(), (ClearCLBuffer)( args[0]));
+        double sumGreyValue = getCLIJ2().getSumOfAllPixels((ClearCLBuffer)( args[0]));
 
         ((Double[])args[1])[0] = sumGreyValue;
 

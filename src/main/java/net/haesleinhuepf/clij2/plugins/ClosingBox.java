@@ -21,7 +21,7 @@ public class ClosingBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
     public boolean executeCL() {
 
         Object[] args = openCLBufferArgs();
-        boolean result = closingBox(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
+        boolean result = getCLIJ2().closingBox((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
         releaseBuffers(args);
         return result;
     }

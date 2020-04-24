@@ -19,7 +19,7 @@ public class MeanOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public boolean executeCL() {
-        double minVal = meanOfMaskedPixels(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        double minVal = getCLIJ2().meanOfMaskedPixels((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();

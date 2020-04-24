@@ -21,7 +21,7 @@ public class ClosingDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPlug
     public boolean executeCL() {
 
         Object[] args = openCLBufferArgs();
-        boolean result = closingDiamond(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
+        boolean result = getCLIJ2().closingDiamond((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
         releaseBuffers(args);
         return result;
     }

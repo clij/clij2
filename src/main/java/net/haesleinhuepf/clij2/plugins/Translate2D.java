@@ -27,15 +27,14 @@ public class Translate2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
         ClearCLBuffer input = ((ClearCLBuffer) args[0]);
         ClearCLBuffer output = ((ClearCLBuffer) args[1]);
-        CLIJ2 clij2 = getCLIJ2();
 
-        return translate2D(clij2, input, output, translateX, translateY);
+        return getCLIJ2().translate2D(input, output, translateX, translateY);
     }
 
     public static boolean translate2D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float translateX, Float translateY) {
         AffineTransform2D at = new AffineTransform2D();
 
-        at.translate(translateX, translateY);
+        at.translate(-translateX, -translateY);
         if (!clij2.hasImageSupport()) {
             return clij2.affineTransform2D(input, output, AffineTransform.matrixToFloatArray2D(at));
         } else {

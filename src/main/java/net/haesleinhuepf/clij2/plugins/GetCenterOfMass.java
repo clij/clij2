@@ -26,7 +26,7 @@ public class GetCenterOfMass extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
         ClearCLBuffer input = (ClearCLBuffer)( args[0]);
 
-        double[] center = getCenterOfMass(getCLIJ2(), input);
+        double[] center = getCLIJ2().getCenterOfMass(input);
         for (int v = 0; v < 6; v++) {
             ((Double[]) args[v + 1])[0] = center[v];
         }

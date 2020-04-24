@@ -21,7 +21,7 @@ public class GenerateDistanceMatrix extends AbstractCLIJ2Plugin implements CLIJM
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = generateDistanceMatrix(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = getCLIJ2().generateDistanceMatrix((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         releaseBuffers(args);
         return result;
     }

@@ -21,7 +21,7 @@ public class BottomHatBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
     public boolean executeCL() {
 
         Object[] args = openCLBufferArgs();
-        boolean result = bottomHatBox(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
+        boolean result = getCLIJ2().bottomHatBox((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
         releaseBuffers(args);
         return result;
     }

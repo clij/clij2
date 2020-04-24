@@ -26,7 +26,7 @@ public class MaximumSliceBySliceSphere extends AbstractCLIJ2Plugin implements CL
         int radiusX = asInteger(args[2]);
         int radiusY = asInteger(args[3]);
 
-        return maximum3DSliceBySliceSphere(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
+        return getCLIJ2().maximum3DSliceBySliceSphere((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
     }
 
 

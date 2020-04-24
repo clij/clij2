@@ -24,7 +24,7 @@ public class MedianSliceBySliceBox extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public boolean executeCL() {
-        return median3DSliceBySliceBox(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
+        return getCLIJ2().median3DSliceBySliceBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
     }
 
     public static boolean median3DSliceBySliceBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY) {

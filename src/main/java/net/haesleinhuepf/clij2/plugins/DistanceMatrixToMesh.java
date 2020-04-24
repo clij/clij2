@@ -29,7 +29,7 @@ public class DistanceMatrixToMesh extends AbstractCLIJ2Plugin implements CLIJMac
         ClearCLBuffer mesh = (ClearCLBuffer) args[2];
         Float distanceThreshold = asFloat(args[3]);
 
-        return distanceMatrixToMesh(getCLIJ2(), pointlist, touch_matrix, mesh, distanceThreshold);
+        return getCLIJ2().distanceMatrixToMesh(pointlist, touch_matrix, mesh, distanceThreshold);
     }
 
     public static boolean distanceMatrixToMesh(CLIJ2 clij2, ClearCLBuffer pointlist, ClearCLBuffer distance_matrix, ClearCLBuffer mesh, Float distanceThreshold) {

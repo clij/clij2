@@ -27,7 +27,7 @@ public class NonzeroMinimumDiamond extends AbstractCLIJ2Plugin implements CLIJMa
         ClearCLBuffer output = (ClearCLBuffer) (args[1]);
 
         ClearCLBuffer flag = clij.create(new long[]{1,1,1}, output.getNativeType());
-        boolean result = nonzeroMinimumDiamond(getCLIJ2(), input, flag, output);
+        boolean result = getCLIJ2().nonzeroMinimumDiamond(input, flag, output);
         flag.close();
         return result;
     }

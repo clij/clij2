@@ -35,7 +35,7 @@ public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroP
         ClearCLBuffer output = (ClearCLBuffer) args[1];
         String transform = (String) args[2];
 
-        return affineTransform2D(getCLIJ2(), input, output, transform);
+        return getCLIJ2().affineTransform2D(input, output, transform);
     }
 
     public static boolean affineTransform2D(CLIJ2 clij2, ClearCLBuffer input, ClearCLImageInterface output, String transform) {

@@ -26,12 +26,10 @@ public class Translate3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
         float translateY = -asFloat(args[3]);
         float translateZ = -asFloat(args[4]);
 
-
         ClearCLBuffer input = ((ClearCLBuffer) args[0]);
         ClearCLBuffer output = ((ClearCLBuffer) args[1]);
-        CLIJ2 clij2 = getCLIJ2();
 
-        return translate3D(clij2, input, output, translateX, translateY, translateZ);
+        return getCLIJ2().translate3D(input, output, translateX, translateY, translateZ);
     }
 
 
@@ -39,7 +37,7 @@ public class Translate3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
         AffineTransform3D at = new AffineTransform3D();
 
-        at.translate(translateX, translateY, translateZ);
+        at.translate(-translateX, -translateY, -translateZ);
         if (!clij2.hasImageSupport()) {
             return clij2.affineTransform3D(input, output, AffineTransform.matrixToFloatArray(at));
         } else {

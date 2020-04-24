@@ -20,7 +20,7 @@ public class SmallerOrEqualConstant extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public boolean executeCL() {
-        boolean result = smallerOrEqualConstant(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        boolean result = getCLIJ2().smallerOrEqualConstant((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
         return result;
     }
 

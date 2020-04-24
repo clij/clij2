@@ -19,10 +19,7 @@ public class OpeningDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public boolean executeCL() {
-
-        Object[] args = openCLBufferArgs();
-        boolean result = openingDiamond(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
-        releaseBuffers(args);
+        boolean result = getCLIJ2().openingDiamond((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asInteger(args[2]));
         return result;
     }
 

@@ -19,7 +19,7 @@ public class BoundingBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
     @Override
     public boolean executeCL() {
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
-        double[] boundingBox = boundingBox(getCLIJ2(), buffer1);
+        double[] boundingBox = getCLIJ2().boundingBox(buffer1);
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();

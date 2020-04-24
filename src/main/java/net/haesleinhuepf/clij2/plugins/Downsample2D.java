@@ -25,7 +25,7 @@ public class Downsample2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
         float downsampleX = asFloat(args[2]);
         float downsampleY = asFloat(args[3]);
 
-        return downsample(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), downsampleX, downsampleY);
+        return getCLIJ2().downsample((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), downsampleX, downsampleY);
     }
 
     @Deprecated

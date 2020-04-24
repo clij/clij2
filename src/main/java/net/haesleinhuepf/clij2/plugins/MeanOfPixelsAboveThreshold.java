@@ -19,7 +19,7 @@ public class MeanOfPixelsAboveThreshold extends AbstractCLIJ2Plugin implements C
 
     @Override
     public boolean executeCL() {
-        double minVal = meanOfPixelsAboveThreshold(getCLIJ2(), (ClearCLBuffer)( args[0]), asFloat(args[1]));
+        double minVal = getCLIJ2().meanOfPixelsAboveThreshold((ClearCLBuffer)( args[0]), asFloat(args[1]));
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();

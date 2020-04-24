@@ -22,7 +22,7 @@ public class ReplaceIntensity extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public boolean executeCL() {
-        boolean result = replaceIntensity(getCLIJ2(), (ClearCLBuffer) (args[0]),(ClearCLBuffer) (args[1]), asFloat(args[2]), asFloat(args[3]));
+        boolean result = getCLIJ2().replaceIntensity((ClearCLBuffer) (args[0]),(ClearCLBuffer) (args[1]), asFloat(args[2]), asFloat(args[3]));
         return result;
     }
 

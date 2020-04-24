@@ -23,7 +23,7 @@ public class PullAsROI extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public boolean executeCL() {
-        Roi result = pullAsROI(getCLIJ2(), (ClearCLBuffer) (args[0]));
+        Roi result = getCLIJ2().pullAsROI((ClearCLBuffer) (args[0]));
         ImagePlus imp = IJ.getImage();
         if (imp != null) {
             imp.setRoi(result);

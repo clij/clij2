@@ -28,7 +28,7 @@ public class CountNonZeroPixels extends AbstractCLIJ2Plugin implements CLIJMacro
         double sum = 0;
 
         ClearCLBuffer buffer = (ClearCLBuffer)( args[0]);
-        sum = countNonZeroPixels(getCLIJ2(), buffer);
+        sum = getCLIJ2().countNonZeroPixels(buffer);
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();

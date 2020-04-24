@@ -26,7 +26,7 @@ public class PullLabelsToROIList extends AbstractCLIJ2Plugin implements CLIJMacr
     @Override
     public boolean executeCL() {
         CLIJ2 clij2 = getCLIJ2();
-        ArrayList<Roi> list = pullLabelsToROIList(clij2, (ClearCLBuffer) args[0]);
+        ArrayList<Roi> list = getCLIJ2().pullLabelsToROIList((ClearCLBuffer) args[0]);
         for (Roi roi : list) {
             IJ.log("" + roi);
         }

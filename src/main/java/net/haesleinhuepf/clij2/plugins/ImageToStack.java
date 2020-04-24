@@ -19,7 +19,7 @@ public class ImageToStack extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public boolean executeCL() {
-        return imageToStack(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return getCLIJ2().imageToStack((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
     }
 
     public static boolean imageToStack(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Integer numSlices) {

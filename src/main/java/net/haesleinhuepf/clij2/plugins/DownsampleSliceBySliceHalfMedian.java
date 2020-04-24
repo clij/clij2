@@ -23,7 +23,7 @@ public class DownsampleSliceBySliceHalfMedian extends AbstractCLIJ2Plugin implem
 
     @Override
     public boolean executeCL() {
-        return downsampleSliceBySliceHalfMedian(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().downsampleSliceBySliceHalfMedian((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     //

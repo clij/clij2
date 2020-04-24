@@ -21,7 +21,7 @@ public class GetMaximumOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public boolean executeCL() {
-        double maximumGreyValue = getMaximumOfAllPixels(getCLIJ2(), (ClearCLBuffer)( args[0]));
+        double maximumGreyValue = getCLIJ2().getMaximumOfAllPixels((ClearCLBuffer)( args[0]));
 
         ((Double[])args[1])[0] = maximumGreyValue;
 

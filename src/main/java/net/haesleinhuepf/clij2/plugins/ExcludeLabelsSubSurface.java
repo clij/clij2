@@ -29,7 +29,7 @@ public class ExcludeLabelsSubSurface extends AbstractCLIJ2Plugin implements CLIJ
         float centerY = asFloat(args[4]);
         float centerZ = asFloat(args[5]);
 
-        return excludeLabelsSubSurface(getCLIJ2(), pointlist, label_map_in, label_map_out, centerX, centerY, centerZ);
+        return getCLIJ2().excludeLabelsSubSurface(pointlist, label_map_in, label_map_out, centerX, centerY, centerZ);
     }
 
     public static boolean excludeLabelsSubSurface(CLIJ2 clij2, ClearCLBuffer pointlist, ClearCLBuffer label_map_in, ClearCLBuffer label_map_out, Float centerX, Float centerY, Float centerZ) {

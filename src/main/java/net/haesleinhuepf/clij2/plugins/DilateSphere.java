@@ -24,7 +24,7 @@ public class DilateSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public boolean executeCL() {
-        return dilateSphere(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().dilateSphere((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean dilateSphere(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {

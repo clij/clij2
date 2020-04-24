@@ -19,7 +19,7 @@ public class MeanOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-        double mean = meanOfAllPixels(getCLIJ2(), (ClearCLBuffer) args[0]);
+        double mean = getCLIJ2().meanOfAllPixels((ClearCLBuffer) args[0]);
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();

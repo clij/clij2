@@ -16,33 +16,38 @@ import org.scijava.plugin.Plugin;
  *         April 2020
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_getAsString")
-public class GetAsString extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_pullString")
+public class PullString extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        String result = getAsString(getCLIJ2(), (ClearCLBuffer) args[0]);
+        String result = getCLIJ2().pullString((ClearCLBuffer) args[0]);
         ((String[])args[0])[0] = result;
         return true;
 
     }
 
-    public static String getAsString(CLIJ2 clij2, ClearCLImageInterface input) {
+    public static String pullString(CLIJ2 clij2, ClearCLImageInterface input) {
         ImagePlus imp = clij2.pull(input);
 
         StringBuilder builder = new StringBuilder();
 
         for (int z = 0; z < imp.getNSlices(); z++) {
             imp.setZ(z + 1);
-            if (imp.getNSlices() > 1) {
-                builder.append("z = " + z + ":\n");
+            if (z > 0) {
+                builder.append("\n\n");
             }
             ImageProcessor ip = imp.getProcessor();
             for (int y = 0; y < ip.getHeight(); y++) {
                 for (int x = 0; x < ip.getWidth(); x++) {
-                    builder.append(ip.getf(x, y) + " ");
+                    builder.append(ip.getf(x, y));
+                    if (x < ip.getWidth() - 1 ) {
+                        builder.append(" ");
+                    }
                 }
-                builder.append("\n");
+                if (y < ip.getHeight() - 1 ) {
+                    builder.append("\n");
+                }
             }
         }
 

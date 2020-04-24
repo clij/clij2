@@ -18,6 +18,7 @@ import java.nio.FloatBuffer;
  * Author: @haesleinhuepf
  *         September 2019
  */
+@Deprecated
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_resultsTableToImage2D")
 public class ResultsTableToImage2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
@@ -25,10 +26,11 @@ public class ResultsTableToImage2D extends AbstractCLIJ2Plugin implements CLIJMa
     public boolean executeCL() {
         ClearCLBuffer buffer = (ClearCLBuffer)( args[0]);
         ResultsTable table = ResultsTable.getResultsTable();
-        resultsTableToImage2D(getCLIJ2(), buffer, table);
+        getCLIJ2().resultsTableToImage2D(buffer, table);
         return true;
     }
 
+    @Deprecated
     public static boolean resultsTableToImage2D(CLIJ2 clij2, ClearCLBuffer buffer, ResultsTable table) {
 
         int rows = table.getCounter();

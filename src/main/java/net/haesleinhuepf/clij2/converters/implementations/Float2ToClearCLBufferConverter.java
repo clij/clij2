@@ -16,8 +16,8 @@ public class Float2ToClearCLBufferConverter extends AbstractCLIJConverter<Float2
     @Override
     public ClearCLBuffer convert(Float2 source) {
         long[] dimensions = new long[]{
-                source.data[0].length,
-                source.data.length
+                source.data.length,
+                source.data[0].length
         };
 
         int numberOfPixelsPerSlice = (int)(dimensions[0] * dimensions[1]);
@@ -28,8 +28,8 @@ public class Float2ToClearCLBufferConverter extends AbstractCLIJConverter<Float2
         float[] inputArray = new float[(int)numberOfPixels];
 
         int count = 0;
-        for (int x = 0; x < dimensions[0]; x++) {
-            for (int y = 0; y < dimensions[1]; y++) {
+        for (int y = 0; y < dimensions[1]; y++) {
+            for (int x = 0; x < dimensions[0]; x++) {
                 inputArray[count] = (float)source.data[x][y];
                 count++;
             }

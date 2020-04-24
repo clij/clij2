@@ -38,7 +38,7 @@ public class DrawSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
         Float rZ = asFloat(args[6]);
         Float value = asFloat(args[7]);
 
-        return drawSphere(getCLIJ2(), input, x, y, z, rX, rY, rZ);
+        return getCLIJ2().drawSphere(input, x, y, z, rX, rY, rZ, value);
     }
 
     public static boolean drawSphere(CLIJ2 clij2, ClearCLImageInterface output, Float x, Float y, Float z, Float rx, Float ry, Float rz) {
@@ -61,6 +61,7 @@ public class DrawSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
             parameters.put("rzsq", new Float(Math.pow(rz, 2)));
         }
         parameters.put("dst", output);
+        parameters.put("value", value);
 
         clij2.execute(DrawSphere.class, "draw_sphere_" + output.getDimension() + "d_x.cl", "draw_sphere_" + output.getDimension() + "d", output.getDimensions(), output.getDimensions(), parameters);
         return true;

@@ -29,7 +29,7 @@ public class Logarithm extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public boolean executeCL() {
-        boolean result = logarithm(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        boolean result = getCLIJ2().logarithm((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return result;
     }
 

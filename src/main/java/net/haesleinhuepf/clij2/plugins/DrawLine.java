@@ -39,7 +39,7 @@ public class DrawLine extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
         Float thickness = asFloat(args[7]);
         Float value = asFloat(args[8]);
 
-        return drawLine(getCLIJ2(), input, x1, y1, z1, x2, y2, z2, thickness, value);
+        return getCLIJ2().drawLine(input, x1, y1, z1, x2, y2, z2, thickness, value);
     }
 
 

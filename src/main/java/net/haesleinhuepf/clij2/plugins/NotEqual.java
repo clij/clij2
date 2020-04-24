@@ -21,7 +21,7 @@ public class NotEqual extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public boolean executeCL() {
-        boolean result = notEqual(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = getCLIJ2().notEqual((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         return result;
     }
 

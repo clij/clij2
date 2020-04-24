@@ -23,9 +23,7 @@ public class SumImageSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMac
 
     @Override
     public boolean executeCL() {
-
-
-        return sumImageSliceBySlice(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().sumImageSliceBySlice((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     @Deprecated

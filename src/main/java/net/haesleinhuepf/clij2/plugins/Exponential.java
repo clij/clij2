@@ -29,7 +29,7 @@ public class Exponential extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public boolean executeCL() {
-         return exponential(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+         return getCLIJ2().exponential((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
 

@@ -24,7 +24,7 @@ public class StandardDeviationOfMaskedPixels extends AbstractCLIJ2Plugin impleme
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
         ClearCLBuffer mask = (ClearCLBuffer)( args[1]);
 
-        variance = standardDeviationOfMaskedPixels(getCLIJ2(), buffer1, mask);
+        variance = getCLIJ2().standardDeviationOfMaskedPixels(buffer1, mask);
         releaseBuffers(args);
 
 

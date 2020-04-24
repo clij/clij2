@@ -34,7 +34,7 @@ public class PointIndexListToMesh extends AbstractCLIJ2Plugin implements CLIJMac
         ClearCLBuffer indexList = (ClearCLBuffer) args[1];
         ClearCLBuffer mesh = (ClearCLBuffer) args[2];
 
-        return pointIndexListToMesh(getCLIJ2(), pointlist, indexList, mesh);
+        return getCLIJ2().pointIndexListToMesh(pointlist, indexList, mesh);
     }
 
     public static boolean pointIndexListToMesh(CLIJ2 clij2, ClearCLBuffer pointlist, ClearCLBuffer indexlist, ClearCLBuffer mesh) {

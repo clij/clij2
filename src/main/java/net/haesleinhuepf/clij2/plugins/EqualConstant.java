@@ -21,7 +21,7 @@ public class EqualConstant extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public boolean executeCL() {
-        boolean result = equalConstant(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        boolean result = getCLIJ2().equalConstant((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
         return result;
     }
 

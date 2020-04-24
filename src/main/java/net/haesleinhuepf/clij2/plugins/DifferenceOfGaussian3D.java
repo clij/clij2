@@ -21,7 +21,7 @@ public class DifferenceOfGaussian3D extends AbstractCLIJ2Plugin implements CLIJM
     public boolean executeCL() {
 
         Object[] args = openCLBufferArgs();
-        boolean result = differenceOfGaussian(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asFloat(args[2]), asFloat(args[3]), asFloat(args[4]), asFloat(args[5]), asFloat(args[6]), asFloat(args[7]));
+        boolean result = getCLIJ2().differenceOfGaussian((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asFloat(args[2]), asFloat(args[3]), asFloat(args[4]), asFloat(args[5]), asFloat(args[6]), asFloat(args[7]));
         releaseBuffers(args);
         return result;
     }

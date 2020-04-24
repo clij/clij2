@@ -26,7 +26,7 @@ public class Maximum3DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
         int radiusY = asInteger(args[3]);
         int radiusZ = asInteger(args[4]);
 
-        return maximum3DBox(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), radiusX, radiusY, radiusZ);
+        return getCLIJ2().maximum3DBox((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), radiusX, radiusY, radiusZ);
     }
 
     public static boolean maximum3DBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {

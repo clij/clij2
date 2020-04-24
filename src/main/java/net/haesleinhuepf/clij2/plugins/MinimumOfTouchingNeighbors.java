@@ -27,7 +27,7 @@ public class MinimumOfTouchingNeighbors extends AbstractCLIJ2Plugin implements C
     @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
-        boolean result = minimumOfTouchingNeighbors(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
+        boolean result = getCLIJ2().minimumOfTouchingNeighbors((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
         releaseBuffers(args);
         return result;
     }
@@ -65,7 +65,7 @@ public class MinimumOfTouchingNeighbors extends AbstractCLIJ2Plugin implements C
     @Override
     public String getDescription() {
         return "Takes a touch matrix and a vector of values to determine the minimum value among touching neighbors for every object. \n\n" +
-                "TODO: This only works for values between 0 and 255 for now.";
+                "";
     }
 
     @Override

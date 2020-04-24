@@ -23,7 +23,7 @@ public class GradientY extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public boolean executeCL() {
-        return gradientY(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().gradientY((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
 

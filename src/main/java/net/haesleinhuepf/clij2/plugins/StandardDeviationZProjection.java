@@ -20,7 +20,7 @@ public class StandardDeviationZProjection extends AbstractCLIJ2Plugin implements
 
     @Override
     public boolean executeCL() {
-        boolean result = standardDeviationZProjection(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        boolean result = getCLIJ2().standardDeviationZProjection((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return result;
     }
 

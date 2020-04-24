@@ -18,7 +18,7 @@ public class GetMeanOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public boolean executeCL() {
-        double meanGreyValue = getMeanOfAllPixels(getCLIJ2(), (ClearCLBuffer)( args[0]));
+        double meanGreyValue = getCLIJ2().getMeanOfAllPixels((ClearCLBuffer)( args[0]));
 
         ((Double[])args[1])[0] = meanGreyValue;
 

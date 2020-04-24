@@ -22,7 +22,7 @@ public class CopySlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public boolean executeCL() {
-        return copySlice(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return getCLIJ2().copySlice((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
     }
 
     public static boolean copySlice(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer planeIndex) {
@@ -39,7 +39,8 @@ public class CopySlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
         } else if (src.getDimension() == 3 && dst.getDimension() == 2) {
             clij2.execute(CopySlice.class, "copy_slice_from_3d_x.cl", "copy_slice_from_3d", dst.getDimensions(), dst.getDimensions(), parameters);
         } else {
-            throw new IllegalArgumentException("Images have wrong dimension. Must be 3D->2D or 2D->3D.");
+            System.out.println("Warning: Images have wrong dimension. Must be 3D->2D or 2D->3D.");
+            clij2.copy(src, dst);
         }
         return true;
     }

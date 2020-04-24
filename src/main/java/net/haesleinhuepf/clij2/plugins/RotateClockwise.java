@@ -23,7 +23,7 @@ public class RotateClockwise extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-        return rotateRight(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().rotateClockwise((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     @Deprecated

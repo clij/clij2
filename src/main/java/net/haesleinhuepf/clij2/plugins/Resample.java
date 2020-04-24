@@ -28,7 +28,7 @@ public class Resample extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
         boolean linearInterpolation = asBoolean(args[5]);
 
 
-        boolean result = resample(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), factorX, factorY, factorZ, linearInterpolation);
+        boolean result = getCLIJ2().resample((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), factorX, factorY, factorZ, linearInterpolation);
         return result;
     }
 
@@ -116,14 +116,14 @@ public class Resample extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
         if (input.getDimension() == 2 ) {
             return clij.create(new long[]{
-                    (long) (input.getWidth() * factorX),
-                    (long) (input.getHeight() * factorY)
+                    (long) (input.getWidth() / factorX),
+                    (long) (input.getHeight() / factorY)
             }, input.getNativeType());
         } else {
             return clij.create(new long[]{
-                    (long) (input.getWidth() * factorX),
-                    (long) (input.getHeight() * factorY),
-                    (long) (input.getDepth() * factorZ)
+                    (long) (input.getWidth() / factorX),
+                    (long) (input.getHeight() / factorY),
+                    (long) (input.getDepth() / factorZ)
             }, input.getNativeType());
         }
     }

@@ -24,7 +24,7 @@ public class DilateBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public boolean executeCL() {
-        dilateBox(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        getCLIJ2().dilateBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return true;
     }
 

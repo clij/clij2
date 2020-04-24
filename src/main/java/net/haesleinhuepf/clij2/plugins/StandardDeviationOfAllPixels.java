@@ -23,7 +23,7 @@ public class StandardDeviationOfAllPixels extends AbstractCLIJ2Plugin implements
 
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
 
-        stdDev = standardDeviationOfAllPixels(getCLIJ2(), buffer1);
+        stdDev = getCLIJ2().standardDeviationOfAllPixels(buffer1);
 
         ResultsTable table = ResultsTable.getResultsTable();
         table.incrementCounter();

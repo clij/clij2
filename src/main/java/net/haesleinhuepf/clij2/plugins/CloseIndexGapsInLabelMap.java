@@ -33,7 +33,7 @@ public class CloseIndexGapsInLabelMap extends AbstractCLIJ2Plugin implements CLI
         ClearCLBuffer input = (ClearCLBuffer) args[0];
         ClearCLBuffer output = (ClearCLBuffer) args[1];
 
-        boolean result = closeIndexGapsInLabelMap(getCLIJ2(), input, output);
+        boolean result = getCLIJ2().closeIndexGapsInLabelMap(input, output);
         releaseBuffers(args);
         return result;
     }
@@ -278,7 +278,8 @@ public class CloseIndexGapsInLabelMap extends AbstractCLIJ2Plugin implements CLI
     @Override
     public String getDescription() {
         return "Analyses a label map and if there are gaps in the indexing (e.g. label 5 is not present) all \n" +
-                "subsequent labels will be relabelled. \n\nThus, afterwards number of labels and maximum label index are equal.\n";
+                "subsequent labels will be relabelled. \n\nThus, afterwards number of labels and maximum label index are equal.\n" +
+                "This operation is mostly performed on the CPU.";
     }
 
     @Override

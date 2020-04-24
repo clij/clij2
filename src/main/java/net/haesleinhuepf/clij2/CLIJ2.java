@@ -3,6 +3,7 @@ package net.haesleinhuepf.clij2;
 import ij.ImagePlus;
 import ij.plugin.Duplicator;
 import net.haesleinhuepf.clij.CLIJ;
+import net.haesleinhuepf.clij.clearcl.ClearCL;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
@@ -11,13 +12,18 @@ import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.clearcl.util.ElapsedTime;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.clearcl.util.CLKernelExecutor;
+import net.haesleinhuepf.clij2.converters.helptypes.*;
+import net.haesleinhuepf.clij2.converters.implementations.*;
+import net.haesleinhuepf.clij2.plugins.Clear;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.numeric.RealType;
 import net.imglib2.view.Views;
 
 import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import java.util.HashMap;
+import java.util.Stack;
 
 
 /**
@@ -28,6 +34,7 @@ import java.util.HashMap;
  */
 public class CLIJ2 implements CLIJ2Ops {
     private static CLIJ2 instance;
+    private boolean doTimeTracing = false;
 
     protected CLIJ clij;
 
@@ -109,6 +116,176 @@ public class CLIJ2 implements CLIJ2Ops {
 
     public RandomAccessibleInterval pullRAI(Object object) {
         return clij.convert(object, RandomAccessibleInterval.class);
+    }
+
+    public ClearCLBuffer pushMatXYZ(Object object) {
+        if (object instanceof ClearCLBuffer) {
+            return (ClearCLBuffer) object;
+        }
+
+        ClearCLBuffer result = null;
+        if (object instanceof double[][][]) {
+            Double3 double3 = new Double3((double[][][]) object);
+            //System.out.println("d3 size: " + double3.data.length + "/" + double3.data[0].length + "/" + double3.data[0][0].length);
+            Double3ToClearCLBufferConverter converter = new Double3ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(double3);
+        } else if (object instanceof double[][]) {
+            Double2 double2 = new Double2((double[][]) object);
+            ///System.out.println("d2 size: " + double2.data.length + "/" + double2.data[0].length);
+            Double2ToClearCLBufferConverter converter = new Double2ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(double2);
+        } else if (object instanceof double[]) {
+            Double1 double1 = new Double1((double[]) object);
+            //System.out.println("d1 size: " + double1.data.length);
+            Double1ToClearCLBufferConverter converter = new Double1ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(double1);
+        } else if (object instanceof float[][][]) {
+            Float3 double3 = new Float3((float[][][]) object);
+            //System.out.println("d3 size: " + double3.data.length + "/" + double3.data[0].length + "/" + double3.data[0][0].length);
+            Float3ToClearCLBufferConverter converter = new Float3ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(double3);
+        } else if (object instanceof float[][]) {
+            Float2 float2 = new Float2((float[][]) object);
+            //System.out.println("d2 size: " + float2.data.length + "/" + float2.data[0].length);
+            Float2ToClearCLBufferConverter converter = new Float2ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(float2);
+        } else if (object instanceof float[]) {
+            Float1 float1 = new Float1((float[]) object);
+            //System.out.println("d1 size: " + float1.data.length);
+            Float1ToClearCLBufferConverter converter = new Float1ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(float1);
+        } else if (object instanceof char[][][]) {
+            Char3 char3 = new Char3((char[][][]) object);
+            //System.out.println("b3 size: " + byte3.data.length + "/" + byte3.data[0].length + "/" + byte3.data[0][0].length);
+            Char3ToClearCLBufferConverter converter = new Char3ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(char3);
+        } else if (object instanceof char[][]) {
+            Char2 char2 = new Char2((char[][]) object);
+            //System.out.println("b2 size: " + byte2.data.length + "/" + byte2.data[0].length);
+            Char2ToClearCLBufferConverter converter = new Char2ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(char2);
+        } else if (object instanceof char[]) {
+            Char1 char1 = new Char1((char[]) object);
+            //System.out.println("b1 size: " + byte1.data.length);
+            Char1ToClearCLBufferConverter converter = new Char1ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(char1);
+
+        } else if (object instanceof byte[][][]) {
+            Byte3 byte3 = new Byte3((byte[][][]) object);
+            //System.out.println("b3 size: " + byte3.data.length + "/" + byte3.data[0].length + "/" + byte3.data[0][0].length);
+            Byte3ToClearCLBufferConverter converter = new Byte3ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(byte3);
+        } else if (object instanceof byte[][]) {
+            Byte2 byte2 = new Byte2((byte[][]) object);
+            //System.out.println("b2 size: " + byte2.data.length + "/" + byte2.data[0].length);
+            Byte2ToClearCLBufferConverter converter = new Byte2ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(byte2);
+        } else if (object instanceof byte[]) {
+            Byte1 byte1 = new Byte1((byte[]) object);
+            //System.out.println("b1 size: " + byte1.data.length);
+            Byte1ToClearCLBufferConverter converter = new Byte1ToClearCLBufferConverter();
+            converter.setCLIJ(clij);
+            result = converter.convert(byte1);
+        } else {
+            throw new IllegalArgumentException("Conversion of " + object +
+                    " / " + object.getClass().getName() + " not supported");
+        }
+        return result;
+    }
+
+    public ClearCLBuffer pushMat(Object object) {
+        ClearCLBuffer result = pushMatXYZ(object);
+        if (result.getDimension() != 3) {
+            ClearCLBuffer transposed = create(new long[]{result.getHeight(), result.getWidth()}, result.getNativeType());
+            getCLIJ2().transposeXY(result, transposed);
+            result.close();
+            return transposed;
+        } else {
+            ClearCLBuffer transposed = create(new long[]{result.getDepth(), result.getHeight(), result.getWidth()}, result.getNativeType());
+            getCLIJ2().transposeXZ(result, transposed);
+            result.close();
+            return transposed;
+        }
+    }
+
+    public Object pullMat(ClearCLBuffer input) {
+        ClearCLBuffer buffer = input;
+        if (buffer.getDimension() == 1 || (buffer.getHeight() == 1 && buffer.getDepth() == 1)) {
+            buffer = create(new long[]{input.getHeight(), input.getWidth()}, input.getNativeType());
+            transposeXY(input, buffer);
+        } else if (buffer.getDimension() == 2 || (buffer.getDepth() == 1)) {
+            buffer = create(new long[]{input.getHeight(), input.getWidth()}, input.getNativeType());
+            transposeXY(input, buffer);
+        } else if (buffer.getDimension() == 3) {
+            buffer = create(new long[]{input.getDepth(), input.getHeight(), input.getWidth()}, input.getNativeType());
+            transposeXZ(input, buffer);
+        }
+        Object result = pullMatXYZ(buffer);
+        buffer.close();
+        return result;
+    }
+
+    public Object pullMatXYZ(ClearCLBuffer input) {
+        ClearCLBuffer buffer = input;
+
+        Object result = null;
+        if (input.getNativeType() == NativeTypeEnum.Double) {
+            if (buffer.getDimension() == 1 || (buffer.getHeight() == 1 && buffer.getDepth() == 1)) {
+                result = new ClearCLBufferToDouble2Converter().convert(buffer).data[1];
+            } else if (buffer.getDimension() == 2 || (buffer.getDepth() == 1)) {
+                result = new ClearCLBufferToDouble2Converter().convert(buffer).data;
+            } else if (buffer.getDimension() == 3) {
+                result = new ClearCLBufferToDouble3Converter().convert(buffer).data;
+            } else {
+                throw new IllegalArgumentException("Conversion of " + buffer +
+                        " / " + buffer.getClass().getName() + " not supported");
+            }
+        } else if (input.getNativeType() == Float) {
+                if (buffer.getDimension() == 1 || (buffer.getHeight() == 1 && buffer.getDepth() == 1)) {
+                    result = new ClearCLBufferToFloat2Converter().convert(buffer).data[1];
+                } else if (buffer.getDimension() == 2 || (buffer.getDepth() == 1)) {
+                    result = new ClearCLBufferToFloat2Converter().convert(buffer).data;
+                } else if (buffer.getDimension() == 3) {
+                    result = new ClearCLBufferToFloat3Converter().convert(buffer).data;
+                } else {
+                    throw new IllegalArgumentException("Conversion of " + buffer +
+                            " / " + buffer.getClass().getName() + " not supported");
+                }
+        } else if (input.getNativeType() == UnsignedShort) {
+            if (buffer.getDimension() == 1 || (buffer.getHeight() == 1 && buffer.getDepth() == 1)) {
+                result = new ClearCLBufferToChar2Converter().convert(buffer).data[1];
+            } else if (buffer.getDimension() == 2 || (buffer.getDepth() == 1)) {
+                result = new ClearCLBufferToChar2Converter().convert(buffer).data;
+            } else if (buffer.getDimension() == 3) {
+                result = new ClearCLBufferToChar3Converter().convert(buffer).data;
+            } else {
+                throw new IllegalArgumentException("Conversion of " + buffer +
+                        " / " + buffer.getClass().getName() + " not supported");
+            }
+        } else if (input.getNativeType() == UnsignedByte) {
+            if (buffer.getDimension() == 1 || (buffer.getHeight() == 1 && buffer.getDepth() == 1)) {
+                result = new ClearCLBufferToByte2Converter().convert(buffer).data[1];
+            } else if (buffer.getDimension() == 2 || (buffer.getDepth() == 1)) {
+                result = new ClearCLBufferToByte2Converter().convert(buffer).data;
+            } else if (buffer.getDimension() == 3) {
+                result = new ClearCLBufferToByte3Converter().convert(buffer).data;
+            } else {
+                throw new IllegalArgumentException("Conversion of " + buffer +
+                        " / " + buffer.getClass().getName() + " not supported");
+            }
+        }
+        return result;
     }
 
     public void pullToRAI(Object object, RandomAccessibleInterval target) {
@@ -371,11 +548,72 @@ public class CLIJ2 implements CLIJ2Ops {
      */
     public ClearCLBuffer transfer(ClearCLBuffer input) {
         ClearCLBuffer output = create(input);
+        transferTo(input, output);
+        return output;
+    }
+
+    /**
+     * Transfer a buffer between different OpenCLDevices
+     * @param input
+     * @param output
+     * @return
+     */
+    public void transferTo(ClearCLBuffer input, ClearCLBuffer output) {
         //System.out.println("Transfer from: " + input);
         //System.out.println("Transfer to: " + output);
         ByteBuffer buffer = ByteBuffer.allocate((int) input.getSizeInBytes());
         input.writeTo(buffer, true);
         output.readFrom(buffer, true);
-        return output;
+
+    }
+
+    public boolean doTimeTracing() {
+        return doTimeTracing;
+    }
+
+    public void setDoTimeTracing(boolean doTimeTracing) {
+        this.doTimeTracing = doTimeTracing;
+        if (doTimeTracing) {
+            resetTimeTraces();
+            recordMethodStart("timeTracing");
+        } else {
+            recordMethodEnd("timeTracing");
+        }
+    }
+
+    public String getTimeTraces() {
+        return timeTraces.toString();
+    }
+
+    Stack<Long> times;
+    public void recordMethodStart(String method) {
+        for (int i = 0; i < times.size(); i++) {
+            timeTraces.append(" ");
+        }
+        timeTraces.append("> " + method + "\n");
+        times.push(System.nanoTime());
+
+    }
+
+    StringBuilder timeTraces = new StringBuilder();
+    public void recordMethodEnd(String method) {
+        double duration = (double)(System.nanoTime() - times.pop()) / 1000000;
+        int charCount = 0;
+        for (int i = 0; i < times.size(); i++) {
+            timeTraces.append(" ");
+            charCount++;
+        }
+        timeTraces.append("< " + method);
+        charCount += method.length();
+        for (int i = charCount; i < 60; i++) {
+            timeTraces.append(" ");
+        }
+        timeTraces.append("" + duration + " ms");
+        timeTraces.append("\n");
+    }
+
+    public void resetTimeTraces() {
+        timeTraces = new StringBuilder();
+        times = new Stack<Long>();
     }
 }

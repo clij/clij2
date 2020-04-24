@@ -26,7 +26,7 @@ public class FloodFillDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public boolean executeCL() {
-        return floodFillDiamond(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]), asFloat(args[3]));
+        return getCLIJ2().floodFillDiamond((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]), asFloat(args[3]));
     }
 
     public static boolean floodFillDiamond(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Float valueToReplace, Float valueReplacement) {

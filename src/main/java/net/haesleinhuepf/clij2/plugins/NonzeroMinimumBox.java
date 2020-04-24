@@ -27,7 +27,7 @@ public class NonzeroMinimumBox extends AbstractCLIJ2Plugin implements CLIJMacroP
         ClearCLBuffer output = (ClearCLBuffer) (args[1]);
 
         ClearCLBuffer flag = getCLIJ2().create(new long[]{1,1,1}, output.getNativeType());
-        nonzeroMinimumBox(getCLIJ2(), input, flag, output, null).close();
+        getCLIJ2().nonzeroMinimumBox(input, flag, output, null).close();
         flag.close();
         return true;
     }

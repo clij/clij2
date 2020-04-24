@@ -30,7 +30,7 @@ public class StatisticsOfBackgroundAndLabelledPixels extends AbstractCLIJ2Plugin
         ResultsTable resultsTable = ResultsTable.getResultsTable();
 
 
-        statisticsOfBackgroundAndLabelledPixels(getCLIJ2(), inputImage, inputLabelMap, resultsTable);
+        getCLIJ2().statisticsOfBackgroundAndLabelledPixels(inputImage, inputLabelMap, resultsTable);
 
         resultsTable.show("Results");
         return true;
@@ -54,7 +54,8 @@ public class StatisticsOfBackgroundAndLabelledPixels extends AbstractCLIJ2Plugin
     public String getDescription() {
         return "Determines bounding box, area (in pixels/voxels), min, max and mean intensity \n" +
                 " of background and labelled objects in a label map and corresponding pixels in the original image.\n\n" +
-                "Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.";
+                "Instead of a label map, you can also use a binary image as a binary image is a label map with just one label." +
+                "\n\nThis method is executed on the CPU and not on the GPU/OpenCL device.";
     }
 
     @Override

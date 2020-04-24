@@ -24,7 +24,7 @@ public class Mask extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOp
 
     @Override
     public boolean executeCL() {
-        return mask(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        return getCLIJ2().mask((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
     }
 
     public static boolean mask(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface mask, ClearCLImageInterface dst) {

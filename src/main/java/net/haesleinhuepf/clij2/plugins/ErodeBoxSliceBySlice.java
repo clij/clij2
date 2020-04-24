@@ -24,7 +24,7 @@ public class ErodeBoxSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMac
 
     @Override
     public boolean executeCL() {
-         return erodeBoxSliceBySlice(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+         return getCLIJ2().erodeBoxSliceBySlice((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean erodeBoxSliceBySlice(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {

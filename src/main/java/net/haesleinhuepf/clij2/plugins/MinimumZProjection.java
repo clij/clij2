@@ -22,7 +22,7 @@ public class MinimumZProjection extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public boolean executeCL() {
-        return minimumZProjection(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().minimumZProjection((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean minimumZProjection(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst_min) {

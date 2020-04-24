@@ -30,7 +30,7 @@ public class ApplyVectorField2D extends AbstractCLIJ2Plugin implements CLIJMacro
             ClearCLImage input = getCLIJ2().create(inputBuffer.getDimensions(), CLIJUtilities.nativeToChannelType(inputBuffer.getNativeType()));
             getCLIJ2().copy(inputBuffer, input);
 
-            applyVectorField(getCLIJ2(),
+            getCLIJ2().applyVectorField(
                     input,
                     (ClearCLBuffer)( args[1]),
                     (ClearCLBuffer)( args[2]),
@@ -39,7 +39,7 @@ public class ApplyVectorField2D extends AbstractCLIJ2Plugin implements CLIJMacro
 
             getCLIJ2().release(input);
         } else {
-            applyVectorField(getCLIJ2(),
+            getCLIJ2().applyVectorField(
                     (ClearCLBuffer)( args[0]),
                     (ClearCLBuffer)( args[1]),
                     (ClearCLBuffer)( args[2]),

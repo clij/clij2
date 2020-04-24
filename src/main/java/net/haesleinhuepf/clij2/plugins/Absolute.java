@@ -24,7 +24,7 @@ public class Absolute extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public boolean executeCL() {
-        return absolute(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().absolute((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean absolute(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {

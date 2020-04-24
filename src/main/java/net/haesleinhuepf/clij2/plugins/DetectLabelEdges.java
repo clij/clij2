@@ -20,7 +20,7 @@ public class DetectLabelEdges extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public boolean executeCL() {
-        return detectLabelEdges(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().detectLabelEdges((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean detectLabelEdges(CLIJ2 clij2, ClearCLImageInterface src_label_map, ClearCLBuffer dst_edge_image) {

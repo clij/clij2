@@ -24,7 +24,7 @@ public class ErodeSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public boolean executeCL() {
-        return erodeSphere(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().erodeSphere((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean erodeSphere(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {

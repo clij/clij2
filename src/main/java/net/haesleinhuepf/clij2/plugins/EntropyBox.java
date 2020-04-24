@@ -31,7 +31,7 @@ public class EntropyBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
         int radiusY = asInteger(args[3]);
         int radiusZ = asInteger(args[4]);
 
-        boolean result = entropyBox(getCLIJ2(), input, output, radiusX, radiusY, radiusZ);
+        boolean result = getCLIJ2().entropyBox(input, output, radiusX, radiusY, radiusZ);
         return result;
     }
 

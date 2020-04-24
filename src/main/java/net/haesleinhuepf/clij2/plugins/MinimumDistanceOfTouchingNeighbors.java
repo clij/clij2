@@ -22,9 +22,7 @@ public class MinimumDistanceOfTouchingNeighbors extends AbstractCLIJ2Plugin impl
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        boolean result = minimumDistanceOfTouchingNeighbors(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
-        releaseBuffers(args);
+        boolean result = getCLIJ2().minimumDistanceOfTouchingNeighbors((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]),  (ClearCLBuffer) (args[2]));
         return result;
     }
 

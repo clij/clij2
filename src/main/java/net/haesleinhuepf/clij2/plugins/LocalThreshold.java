@@ -21,7 +21,7 @@ public class LocalThreshold extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public boolean executeCL() {
-        return localThreshold(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        return getCLIJ2().localThreshold((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
     }
 
     public static boolean localThreshold(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface threshold, ClearCLImageInterface dst) {

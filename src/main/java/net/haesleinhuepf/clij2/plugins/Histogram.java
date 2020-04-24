@@ -34,7 +34,7 @@ public class Histogram extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
         Float minimumGreyValue = asFloat(args[3]);
         Float maximumGreyValue = asFloat(args[4]);
         Boolean determineMinMax = asBoolean(args[5]);
-        return histogram(getCLIJ2(), src, histogram, numberOfBins, minimumGreyValue, maximumGreyValue, determineMinMax, true);
+        return getCLIJ2().histogram(src, histogram, numberOfBins, minimumGreyValue, maximumGreyValue, determineMinMax, true);
     }
 
     public static float[] histogram(CLIJ2 clij2, ClearCLBuffer image, Float minGreyValue, Float maxGreyValue, Integer numberOfBins) {

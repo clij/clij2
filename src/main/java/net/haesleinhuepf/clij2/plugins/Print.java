@@ -1,7 +1,5 @@
 package net.haesleinhuepf.clij2.plugins;
 
-import ij.ImagePlus;
-import ij.process.ImageProcessor;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -16,17 +14,17 @@ import org.scijava.plugin.Plugin;
  *         March 2020 in Bordeaux
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_print")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_print")
 public class Print extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
 
-        return print(getCLIJ2(), (ClearCLBuffer) args[0]);
+        return getCLIJ2().print((ClearCLBuffer) args[0]);
     }
 
     public static boolean print(CLIJ2 clij2, ClearCLImageInterface input) {
-        System.out.println(GetAsString.getAsString(clij2, input));
+        System.out.println(PullString.pullString(clij2, input));
         return true;
     }
 

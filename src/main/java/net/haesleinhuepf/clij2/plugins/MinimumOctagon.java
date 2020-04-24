@@ -23,7 +23,7 @@ public class MinimumOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public boolean executeCL() {
-        return minimumOctagon(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return getCLIJ2().minimumOctagon((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
     }
 
     public static boolean minimumOctagon(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Integer iterations) {

@@ -20,7 +20,7 @@ public class Invert extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
     @Override
     public boolean executeCL() {
 
-        return invert(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().invert((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean invert(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {

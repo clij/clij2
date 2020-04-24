@@ -27,7 +27,7 @@ public class ResliceRadial extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public boolean executeCL() {
-        boolean result = resliceRadial(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[3]), asFloat(args[4]), asFloat(args[5]), asFloat(args[6]), asFloat(args[7]), asFloat(args[8]));
+        boolean result = getCLIJ2().resliceRadial((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[3]), asFloat(args[4]), asFloat(args[5]), asFloat(args[6]), asFloat(args[7]), asFloat(args[8]));
         return result;
     }
 

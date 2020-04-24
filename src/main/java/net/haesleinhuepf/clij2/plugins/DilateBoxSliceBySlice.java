@@ -24,7 +24,7 @@ public class DilateBoxSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public boolean executeCL() {
-        dilateBoxSliceBySlice(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        getCLIJ2().dilateBoxSliceBySlice((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return true;
     }
 

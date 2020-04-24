@@ -20,7 +20,7 @@ public class Set extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpe
 
     @Override
     public boolean executeCL() {
-        return set(getCLIJ2(), (ClearCLBuffer)( args[0]),  asFloat(args[1]));
+        return getCLIJ2().set((ClearCLBuffer)( args[0]),  asFloat(args[1]));
     }
 
     public static boolean set(CLIJ2 clij2, ClearCLImageInterface clImage, Float value) {

@@ -25,7 +25,7 @@ public class BinaryEdgeDetection extends AbstractCLIJ2Plugin implements CLIJMacr
         ClearCLBuffer src = (ClearCLBuffer)( args[0]);
         ClearCLBuffer dst = (ClearCLBuffer)( args[1]);
 
-        binaryEdgeDetection(getCLIJ2(), src, dst);
+        getCLIJ2().binaryEdgeDetection(src, dst);
 
         return true;
     }

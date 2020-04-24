@@ -22,7 +22,7 @@ public class GetSorensenDiceCoefficient extends AbstractCLIJ2Plugin implements C
         ClearCLBuffer buffer1 = (ClearCLBuffer)( args[0]);
         ClearCLBuffer buffer2 = (ClearCLBuffer)( args[1]);
 
-        double sorensenDiceCoefficient = getSorensenDiceCoefficient(getCLIJ2(), buffer1, buffer2);
+        double sorensenDiceCoefficient = getCLIJ2().getSorensenDiceCoefficient(buffer1, buffer2);
 
 
         ((Double[])args[2])[0] = sorensenDiceCoefficient;

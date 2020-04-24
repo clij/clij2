@@ -22,7 +22,7 @@ public class MaximumXProjection extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public boolean executeCL() {
-        return maximumXProjection(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().maximumXProjection((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean maximumXProjection(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst_max) {

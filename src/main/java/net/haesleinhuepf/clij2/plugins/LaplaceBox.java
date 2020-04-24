@@ -26,7 +26,7 @@ public class LaplaceBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
         ClearCLBuffer input = (ClearCLBuffer) (args[0]);
         ClearCLBuffer output = (ClearCLBuffer) (args[1]);
 
-        boolean result = laplaceBox(getCLIJ2(), input, output);
+        boolean result = getCLIJ2().laplaceBox(input, output);
         return result;
     }
 

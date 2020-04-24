@@ -23,7 +23,7 @@ public class ResliceRight extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public boolean executeCL() {
-        return resliceRight(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().resliceRight((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
 

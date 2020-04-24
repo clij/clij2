@@ -14,7 +14,7 @@ import org.scijava.plugin.Plugin;
  * Author: @haesleinhuepf
  * 12 2018
  */
-
+@Deprecated
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_affineTransform")
 public class AffineTransform extends AffineTransform3D implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
     @Override

@@ -22,7 +22,7 @@ public class DetectMinimaSliceBySliceBox extends AbstractCLIJ2Plugin implements 
 
     @Override
     public boolean executeCL() {
-        return detectMinimaSliceBySliceBox(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return getCLIJ2().detectMinimaSliceBySliceBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
     }
 
     public static boolean detectMinimaSliceBySliceBox(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Integer radius) {

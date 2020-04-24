@@ -27,7 +27,7 @@ public class DistanceMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
         ClearCLBuffer src = (ClearCLBuffer)( args[0]);
         ClearCLBuffer dst = (ClearCLBuffer)( args[1]);
 
-        distanceMap(getCLIJ2(), src, dst);
+        getCLIJ2().distanceMap(src, dst);
 
         return true;
     }

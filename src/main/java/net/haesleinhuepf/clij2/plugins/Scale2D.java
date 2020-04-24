@@ -29,9 +29,8 @@ public class Scale2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
         ClearCLBuffer input = ((ClearCLBuffer) args[0]);
         ClearCLBuffer output = ((ClearCLBuffer) args[1]);
-        CLIJ2 clij2 = getCLIJ2();
 
-        return scale2D(clij2, input, output, scaleFactorX, scaleFactorY, scaleAroundCenter);
+        return getCLIJ2().scale2D(input, output, scaleFactorX, scaleFactorY, scaleAroundCenter);
     }
 
     public static boolean scale(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float factor) {

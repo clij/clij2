@@ -25,7 +25,7 @@ public class MinimumOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public boolean executeCL() {
-        double minVal = minimumOfMaskedPixels(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        double minVal = getCLIJ2().minimumOfMaskedPixels((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
 
 
         ResultsTable table = ResultsTable.getResultsTable();

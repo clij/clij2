@@ -24,7 +24,7 @@ public class ErodeBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public boolean executeCL() {
-        return erodeBox(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().erodeBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean erodeBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {

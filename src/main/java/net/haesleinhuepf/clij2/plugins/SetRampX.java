@@ -20,7 +20,7 @@ public class SetRampX extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public boolean executeCL() {
-        boolean result = setRampX(getCLIJ2(), (ClearCLBuffer)( args[0]));
+        boolean result = getCLIJ2().setRampX((ClearCLBuffer)( args[0]));
         return result;
     }
 

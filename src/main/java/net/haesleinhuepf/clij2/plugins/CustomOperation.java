@@ -41,7 +41,7 @@ public class CustomOperation extends AbstractCLIJ2Plugin implements CLIJMacroPlu
             images.put(parameterName, imageParameter);
         }
 
-        return customOperation(getCLIJ2(), operation_code, global_code, images);
+        return getCLIJ2().customOperation(operation_code, global_code, images);
     }
 
     public static boolean customOperation(CLIJ2 clij2, String operation_code, String global_code, HashMap<String, ClearCLBuffer> images) {

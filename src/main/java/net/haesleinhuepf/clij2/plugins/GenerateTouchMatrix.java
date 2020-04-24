@@ -20,7 +20,7 @@ public class GenerateTouchMatrix extends AbstractCLIJ2Plugin implements CLIJMacr
 
     @Override
     public boolean executeCL() {
-        boolean result = generateTouchMatrix(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        boolean result = getCLIJ2().generateTouchMatrix((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return result;
     }
 

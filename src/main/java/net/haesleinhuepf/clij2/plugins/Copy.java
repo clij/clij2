@@ -24,7 +24,7 @@ public class Copy extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOp
 
     @Override
     public boolean executeCL() {
-        return copy(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().copy((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean copy(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {

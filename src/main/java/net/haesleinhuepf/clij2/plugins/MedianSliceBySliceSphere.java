@@ -27,7 +27,7 @@ public class MedianSliceBySliceSphere extends AbstractCLIJ2Plugin implements CLI
         int radiusX = asInteger(args[2]);
         int radiusY = asInteger(args[3]);
 
-        return median3DSliceBySliceSphere(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
+        return getCLIJ2().median3DSliceBySliceSphere((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), radiusX, radiusY);
     }
 
     public static boolean median3DSliceBySliceSphere(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY) {

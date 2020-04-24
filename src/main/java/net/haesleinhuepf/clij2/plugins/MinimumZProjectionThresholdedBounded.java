@@ -21,9 +21,7 @@ public class MinimumZProjectionThresholdedBounded extends AbstractCLIJ2Plugin im
 
     @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
-        boolean result = minimumZProjectionThresholdedBounded(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]), asInteger(args[3]), asInteger(args[4]));
-        releaseBuffers(args);
+        boolean result = getCLIJ2().minimumZProjectionThresholdedBounded((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]), asInteger(args[3]), asInteger(args[4]));
         return result;
     }
 

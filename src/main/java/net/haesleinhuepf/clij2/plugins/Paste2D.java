@@ -20,7 +20,7 @@ public class Paste2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
     @Override
     public boolean executeCL() {
-        boolean result = paste(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
+        boolean result = getCLIJ2().paste((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
         return result;
     }
 
@@ -33,6 +33,9 @@ public class Paste2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
         parameters.put("src", src);
         parameters.put("destination_x", destination_x);
         parameters.put("destination_y", destination_y);
+        if (src.getDimension() == 3) {
+            parameters.put("destination_z", 0);
+        }
         parameters.put("dst", dst);
         clij2.execute(Paste2D.class, "paste_" + src.getDimension() + "d_x.cl", "paste_" + src.getDimension() + "d", src.getDimensions(), src.getDimensions(), parameters);
         return true;
