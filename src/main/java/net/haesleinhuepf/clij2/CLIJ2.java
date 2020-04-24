@@ -605,7 +605,7 @@ public class CLIJ2 implements CLIJ2Ops {
         }
         timeTraces.append("< " + method);
         charCount += method.length();
-        for (int i = charCount; i < 60; i++) {
+        for (int i = charCount; i < 30; i++) {
             timeTraces.append(" ");
         }
         timeTraces.append("" + duration + " ms");
