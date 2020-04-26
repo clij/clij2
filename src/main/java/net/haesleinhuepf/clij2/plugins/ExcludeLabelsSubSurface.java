@@ -40,7 +40,7 @@ public class ExcludeLabelsSubSurface extends AbstractCLIJ2Plugin implements CLIJ
         }
 
         ClearCLBuffer label_index_map = clij2.create(new long[]{max_label, 1, 1}, clij2.Float);
-        clij2.setRampX(label_index_map);
+        //clij2.setRampX(label_index_map);
 
 
 
