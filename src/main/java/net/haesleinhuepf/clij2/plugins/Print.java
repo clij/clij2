@@ -1,5 +1,6 @@
 package net.haesleinhuepf.clij2.plugins;
 
+import ij.IJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -19,8 +20,10 @@ public class Print extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJO
 
     @Override
     public boolean executeCL() {
-
-        return getCLIJ2().print((ClearCLBuffer) args[0]);
+        String string = getCLIJ2().pullString((ClearCLBuffer) args[0]);
+        IJ.log(string);
+        System.out.println(string);
+        return true;
     }
 
     public static boolean print(CLIJ2 clij2, ClearCLImageInterface input) {
