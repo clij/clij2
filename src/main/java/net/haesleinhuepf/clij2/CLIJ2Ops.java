@@ -5882,7 +5882,7 @@ public abstract interface CLIJ2Ops {
      * 
      * Hand over a binary flag list vector starting with a flag for the background, continuing with label1, label2, ...
      * 
-     * For example if you pass 0,0,1,1,0: Labels 1 and 4 will be removed. Labels 2 and 3 will be kept and renumbered to 1 and 2.
+     * For example if you pass 0,1,0,0,1: Labels 1 and 4 will be removed (those with a 1 in the vector will be excluded). Labels 2 and 3 will be kept and renumbered to 1 and 2.
      */
     default boolean excludeLabels(ClearCLBuffer binary_flaglist, ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination) {
         if (doTimeTracing()) {recordMethodStart("ExcludeLabels");}
