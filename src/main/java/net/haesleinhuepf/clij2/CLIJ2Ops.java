@@ -314,6 +314,7 @@ import net.haesleinhuepf.clij2.plugins.AdjacencyMatrixToTouchMatrix;
 import net.haesleinhuepf.clij2.plugins.PointlistToLabelledSpots;
 import net.haesleinhuepf.clij2.plugins.StatisticsOfImage;
 import net.haesleinhuepf.clij2.plugins.NClosestDistances;
+import net.haesleinhuepf.clij2.plugins.ExcludeLabels;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
@@ -5873,5 +5874,22 @@ public abstract interface CLIJ2Ops {
         return result;
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.ExcludeLabels
+    //----------------------------------------------------
+    /**
+     * This operation removes labels from a labelmap and renumbers the remaining labels. 
+     * 
+     * Hand over a binary flag list vector starting with a flag for the background, continuing with label1, label2, ...
+     * 
+     * For example if you pass 0,0,1,1,0: Labels 1 and 4 will be removed. Labels 2 and 3 will be kept and renumbered to 1 and 2.
+     */
+    default boolean excludeLabels(ClearCLBuffer binary_flaglist, ClearCLBuffer label_map_input, ClearCLBuffer label_map_destination) {
+        if (doTimeTracing()) {recordMethodStart("ExcludeLabels");}
+        boolean result = ExcludeLabels.excludeLabels(getCLIJ2(), binary_flaglist, label_map_input, label_map_destination);
+        if (doTimeTracing()) {recordMethodEnd("ExcludeLabels");}
+        return result;
+    }
+
 }
-// 380 methods generated.
+// 381 methods generated.
