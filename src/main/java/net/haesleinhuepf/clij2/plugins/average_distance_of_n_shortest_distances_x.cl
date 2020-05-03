@@ -13,27 +13,30 @@ IMAGE_dst_indexlist_TYPE dst_indexlist, int nPoints) {
 
   int initialized_values = 0;
 
-  for (int y = 0; y < height; y++) {
-    float distance = READ_src_distancematrix_IMAGE(src_distancematrix, sampler, POS_src_distancematrix_INSTANCE(pointIndex, y, 0, 0)).x;
+  // start at 1 to exclude background
+  for (int y = 1; y < height; y++) {
+    if (pointIndex != y) { // exclude distance to self
+        float distance = READ_src_distancematrix_IMAGE(src_distancematrix, sampler, POS_src_distancematrix_INSTANCE(pointIndex, y, 0, 0)).x;
 
-    if (initialized_values < nPoints) {
-      initialized_values++;
-      distances[initialized_values - 1] = distance;
-      indices[initialized_values - 1] = y;
-    }
-    // sort by insert
-    for (int i = initialized_values - 1; i >= 0; i--) {
-        if (distance > distances[i]) {
-            break;
+        if (initialized_values < nPoints) {
+          initialized_values++;
+          distances[initialized_values - 1] = distance;
+          indices[initialized_values - 1] = y;
         }
-        if (distance < distances[i] && (i == 0 || distance >= distances[i - 1])) {
-           for (int j = initialized_values - 1; j > i; j--) {
-                indices[j] = indices[j - 1];
-                distances[j] = distances[j - 1];
-           }
-           distances[i] = distance;
-           indices[i] = y;
-           break;
+        // sort by insert
+        for (int i = initialized_values - 1; i >= 0; i--) {
+            if (distance > distances[i]) {
+                break;
+            }
+            if (distance < distances[i] && (i == 0 || distance >= distances[i - 1])) {
+               for (int j = initialized_values - 1; j > i; j--) {
+                    indices[j] = indices[j - 1];
+                    distances[j] = distances[j - 1];
+               }
+               distances[i] = distance;
+               indices[i] = y;
+               break;
+            }
         }
     }
   }
