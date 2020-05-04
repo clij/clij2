@@ -22,7 +22,7 @@ public class PullString extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
     @Override
     public boolean executeCL() {
         String result = getCLIJ2().pullString((ClearCLBuffer) args[0]);
-        ((String[])args[0])[0] = result;
+        ((String[])args[1])[0] = result;
         return true;
 
     }
