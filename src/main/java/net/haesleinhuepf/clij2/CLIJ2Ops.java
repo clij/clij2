@@ -315,6 +315,9 @@ import net.haesleinhuepf.clij2.plugins.PointlistToLabelledSpots;
 import net.haesleinhuepf.clij2.plugins.StatisticsOfImage;
 import net.haesleinhuepf.clij2.plugins.NClosestDistances;
 import net.haesleinhuepf.clij2.plugins.ExcludeLabels;
+import net.haesleinhuepf.clij2.plugins.AverageDistanceOfNFarOffPoints;
+import net.haesleinhuepf.clij2.plugins.StandardDeviationOfTouchingNeighbors;
+import net.haesleinhuepf.clij2.plugins.NeighborsOfNeighbors;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
@@ -5891,5 +5894,48 @@ public abstract interface CLIJ2Ops {
         return result;
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.AverageDistanceOfNFarOffPoints
+    //----------------------------------------------------
+    /**
+     * Determines the average of the n far off (most distant) points for every point in a distance matrix.
+     * 
+     * This corresponds to the average of the n maximum values (rows) for each column of the distance matrix.
+     */
+    default boolean averageDistanceOfNFarOffPoints(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        if (doTimeTracing()) {recordMethodStart("AverageDistanceOfNFarOffPoints");}
+        boolean result = AverageDistanceOfNFarOffPoints.averageDistanceOfNFarOffPoints(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("AverageDistanceOfNFarOffPoints");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.StandardDeviationOfTouchingNeighbors
+    //----------------------------------------------------
+    /**
+     * Takes a touch matrix and a vector of values to determine the standard deviation value among touching neighbors for every object. 
+     * 
+     * 
+     */
+    default boolean standardDeviationOfTouchingNeighbors(ClearCLBuffer values, ClearCLBuffer touch_matrix, ClearCLBuffer standard_deviation_values_destination) {
+        if (doTimeTracing()) {recordMethodStart("StandardDeviationOfTouchingNeighbors");}
+        boolean result = StandardDeviationOfTouchingNeighbors.standardDeviationOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, standard_deviation_values_destination);
+        if (doTimeTracing()) {recordMethodEnd("StandardDeviationOfTouchingNeighbors");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.NeighborsOfNeighbors
+    //----------------------------------------------------
+    /**
+     * Determines neighbors of neigbors from touch matrix and saves the result as a new touch matrix.
+     */
+    default boolean neighborsOfNeighbors(ClearCLBuffer touch_matrix, ClearCLBuffer neighbor_matrix_destination) {
+        if (doTimeTracing()) {recordMethodStart("NeighborsOfNeighbors");}
+        boolean result = NeighborsOfNeighbors.neighborsOfNeighbors(getCLIJ2(), touch_matrix, neighbor_matrix_destination);
+        if (doTimeTracing()) {recordMethodEnd("NeighborsOfNeighbors");}
+        return result;
+    }
+
 }
-// 381 methods generated.
+// 384 methods generated.
