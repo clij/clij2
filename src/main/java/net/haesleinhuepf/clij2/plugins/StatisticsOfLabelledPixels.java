@@ -54,11 +54,11 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         SUM_DISTANCE_TO_MASS_CENTER(28),
         MEAN_DISTANCE_TO_MASS_CENTER(29),
         MAX_DISTANCE_TO_MASS_CENTER(30),
-        MAX_MEAN_DISTANCE_TO_MASS_CENTER_RADIO(31),
+        MAX_MEAN_DISTANCE_TO_MASS_CENTER_RATIO(31),
         SUM_DISTANCE_TO_CENTROID(32),
         MEAN_DISTANCE_TO_CENTROID(33),
         MAX_DISTANCE_TO_CENTROID(34),
-        MAX_MEAN_DISTANCE_TO_CENTROID_RADIO(35);
+        MAX_MEAN_DISTANCE_TO_CENTROID_RATIO(35);
         static final int NUMBER_OF_ENTRIES = 36;
 
         public final int value;
@@ -125,11 +125,11 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         entries.add(STATISTICS_ENTRY.SUM_DISTANCE_TO_MASS_CENTER);
         entries.add(STATISTICS_ENTRY.MEAN_DISTANCE_TO_MASS_CENTER);
         entries.add(STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER);
-        entries.add(STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_MASS_CENTER_RADIO);
+        entries.add(STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_MASS_CENTER_RATIO);
         entries.add(STATISTICS_ENTRY.SUM_DISTANCE_TO_CENTROID);
         entries.add(STATISTICS_ENTRY.MEAN_DISTANCE_TO_CENTROID);
         entries.add(STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID);
-        entries.add(STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_CENTROID_RADIO);
+        entries.add(STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_CENTROID_RATIO);
 
 
         for (int line = 0; line < statistics.length; line++) {
@@ -552,8 +552,8 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
             statistics[0][j][STATISTICS_ENTRY.MEAN_DISTANCE_TO_MASS_CENTER.value] = statistics[0][j][STATISTICS_ENTRY.SUM_DISTANCE_TO_MASS_CENTER.value] / statistics[0][j][STATISTICS_ENTRY.PIXEL_COUNT.value];
             statistics[0][j][STATISTICS_ENTRY.MEAN_DISTANCE_TO_CENTROID.value] = statistics[0][j][STATISTICS_ENTRY.SUM_DISTANCE_TO_CENTROID.value] / statistics[0][j][STATISTICS_ENTRY.PIXEL_COUNT.value];
 
-            statistics[0][j][STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_MASS_CENTER_RADIO.value] = statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER.value] / statistics[0][j][STATISTICS_ENTRY.MEAN_DISTANCE_TO_MASS_CENTER.value];
-            statistics[0][j][STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_CENTROID_RADIO.value] = statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID.value] / statistics[0][j][STATISTICS_ENTRY.MEAN_DISTANCE_TO_CENTROID.value];
+            statistics[0][j][STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_MASS_CENTER_RATIO.value] = statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER.value] / statistics[0][j][STATISTICS_ENTRY.MEAN_DISTANCE_TO_MASS_CENTER.value];
+            statistics[0][j][STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_CENTROID_RATIO.value] = statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID.value] / statistics[0][j][STATISTICS_ENTRY.MEAN_DISTANCE_TO_CENTROID.value];
         }
 
         return statistics[0];
