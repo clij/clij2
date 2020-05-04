@@ -50,9 +50,16 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         SUM_Z(24),
         CENTROID_X(25),
         CENTROID_Y(26),
-        CENTROID_Z(27);
-
-        static final int NUMBER_OF_ENTRIES = 28;
+        CENTROID_Z(27),
+        SUM_DISTANCE_TO_MASS_CENTER(28),
+        MEAN_DISTANCE_TO_MASS_CENTER(29),
+        MAX_DISTANCE_TO_MASS_CENTER(30),
+        MAX_MEAN_DISTANCE_TO_MASS_CENTER_RADIO(31),
+        SUM_DISTANCE_TO_CENTROID(32),
+        MEAN_DISTANCE_TO_CENTROID(33),
+        MAX_DISTANCE_TO_CENTROID(34),
+        MAX_MEAN_DISTANCE_TO_CENTROID_RADIO(35);
+        static final int NUMBER_OF_ENTRIES = 36;
 
         public final int value;
 
@@ -115,6 +122,15 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         entries.add(STATISTICS_ENTRY.CENTROID_X);
         entries.add(STATISTICS_ENTRY.CENTROID_Y);
         entries.add(STATISTICS_ENTRY.CENTROID_Z);
+        entries.add(STATISTICS_ENTRY.SUM_DISTANCE_TO_MASS_CENTER);
+        entries.add(STATISTICS_ENTRY.MEAN_DISTANCE_TO_MASS_CENTER);
+        entries.add(STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER);
+        entries.add(STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_MASS_CENTER_RADIO);
+        entries.add(STATISTICS_ENTRY.SUM_DISTANCE_TO_CENTROID);
+        entries.add(STATISTICS_ENTRY.MEAN_DISTANCE_TO_CENTROID);
+        entries.add(STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID);
+        entries.add(STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_CENTROID_RADIO);
+
 
         for (int line = 0; line < statistics.length; line++) {
             resultsTable.incrementCounter();
@@ -282,13 +298,17 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         private final int startLabelIndex;
         private final double[][] statistics;
         private final double[] squaredDifferencesFromMean;
+        private final int width;
+        private final int z;
 
-        SecondOrderStatistician(float[] pixels, float[] labels, int startLabelIndex, double[][] statistics, double[] squaredDifferencesFromMean) {
+        SecondOrderStatistician(float[] pixels, float[] labels, int startLabelIndex, int width, int z, double[][] statistics, double[] squaredDifferencesFromMean) {
             this.pixels = pixels;
             this.labels = labels;
             this.startLabelIndex = startLabelIndex;
             this.statistics = statistics;
             this.squaredDifferencesFromMean = squaredDifferencesFromMean;
+            this.width = width;
+            this.z = z;
         }
 
         @Override
@@ -302,6 +322,8 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
                 //float[] pixels = (float[]) imp.getProcessor().getPixels();
                 //float[] labels = lab!=null?(float[]) lab.getProcessor().getPixels():null;
 
+                int x = 0;
+                int y = 0;
                 for (int i = 0; i < pixels.length; i ++) {
 
                     int index = labels!=null?(int) labels[i]:0;
@@ -311,7 +333,45 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
                         double value = pixels[i];
 
                         squaredDifferencesFromMean[targetIndex] += Math.pow(value - statistics[targetIndex][STATISTICS_ENTRY.MEAN_INTENSITY.value], 2);
+
+                        double mass_center_x = statistics[targetIndex][STATISTICS_ENTRY.MASS_CENTER_X.value];
+                        double mass_center_y = statistics[targetIndex][STATISTICS_ENTRY.MASS_CENTER_Y.value];
+                        double mass_center_z = statistics[targetIndex][STATISTICS_ENTRY.MASS_CENTER_Z.value];
+
+                        double distance = Math.sqrt(
+                                Math.pow(mass_center_x - x, 2) +
+                                Math.pow(mass_center_y - y, 2) +
+                                Math.pow(mass_center_z - z, 2)
+                        );
+
+                        if (statistics[targetIndex][STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER.value] < distance) {
+                            statistics[targetIndex][STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER.value] = distance;
+                        }
+                        statistics[targetIndex][STATISTICS_ENTRY.SUM_DISTANCE_TO_MASS_CENTER.value] += distance;
+
+                        double center_x = statistics[targetIndex][STATISTICS_ENTRY.CENTROID_X.value];
+                        double center_y = statistics[targetIndex][STATISTICS_ENTRY.CENTROID_Y.value];
+                        double center_z = statistics[targetIndex][STATISTICS_ENTRY.CENTROID_Z.value];
+
+                        distance = Math.sqrt(
+                                Math.pow(center_x - x, 2) +
+                                Math.pow(center_y - y, 2) +
+                                Math.pow(center_z - z, 2)
+                        );
+
+                        if (statistics[targetIndex][STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID.value] < distance) {
+                            statistics[targetIndex][STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID.value] = distance;
+                        }
+                        statistics[targetIndex][STATISTICS_ENTRY.SUM_DISTANCE_TO_CENTROID.value] += distance;
+
                     }
+
+                    x++;
+                    if (x >= width) {
+                        x = 0;
+                        y++;
+                    }
+
                 }
            // }
 
@@ -424,7 +484,22 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
 
         for (int t = 0; t < num_threads; t++) {
             for (int j = 0; j < statistics[0].length; j++) {
-                statistics[t+1][j][STATISTICS_ENTRY.MEAN_INTENSITY.value] = statistics[0][j][STATISTICS_ENTRY.MEAN_INTENSITY.value];
+                statistics[t + 1][j][STATISTICS_ENTRY.MEAN_INTENSITY.value] = statistics[0][j][STATISTICS_ENTRY.MEAN_INTENSITY.value];
+
+                statistics[t + 1][j][STATISTICS_ENTRY.MASS_CENTER_X.value] = statistics[0][j][STATISTICS_ENTRY.MASS_CENTER_X.value];
+                statistics[t + 1][j][STATISTICS_ENTRY.MASS_CENTER_Y.value] = statistics[0][j][STATISTICS_ENTRY.MASS_CENTER_Y.value];
+                statistics[t + 1][j][STATISTICS_ENTRY.MASS_CENTER_Z.value] = statistics[0][j][STATISTICS_ENTRY.MASS_CENTER_Z.value];
+                statistics[t + 1][j][STATISTICS_ENTRY.CENTROID_X.value] = statistics[0][j][STATISTICS_ENTRY.CENTROID_X.value];
+                statistics[t + 1][j][STATISTICS_ENTRY.CENTROID_Y.value] = statistics[0][j][STATISTICS_ENTRY.CENTROID_Y.value];
+                statistics[t + 1][j][STATISTICS_ENTRY.CENTROID_Z.value] = statistics[0][j][STATISTICS_ENTRY.CENTROID_Z.value];
+
+
+                statistics[t + 1][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER.value] = 0;
+                statistics[t + 1][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID.value] = 0;
+                if (t == 0) {
+                    statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER.value] = 0;
+                    statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID.value] = 0;
+                }
             }
         }
 
@@ -436,6 +511,8 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
                     statisticians[t].pixels,
                     statisticians[t].labels,
                     startLabelIndex,
+                    (int) inputImage.getWidth(),
+                    t, // t corresponds to z-position
                     statistics[t + 1],
                     squaredDifferencesFromMean[t + 1]
             ));
@@ -455,9 +532,15 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
 //            labelMap.close();
 //        }
 
+
+
         for (int t = 0; t < num_threads; t++) {
             for (int j = 0; j < statistics[0].length; j++) {
                 squaredDifferencesFromMean[0][j] += squaredDifferencesFromMean[t+1][j];
+                statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER.value] = Math.max(statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER.value], statistics[t + 1][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER.value]);
+                statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID.value] = Math.max(statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID.value], statistics[t + 1][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID.value]);
+                statistics[0][j][STATISTICS_ENTRY.SUM_DISTANCE_TO_MASS_CENTER.value] = statistics[0][j][STATISTICS_ENTRY.SUM_DISTANCE_TO_MASS_CENTER.value] + statistics[t + 1][j][STATISTICS_ENTRY.SUM_DISTANCE_TO_MASS_CENTER.value];
+                statistics[0][j][STATISTICS_ENTRY.SUM_DISTANCE_TO_CENTROID.value] = statistics[0][j][STATISTICS_ENTRY.SUM_DISTANCE_TO_CENTROID.value] + statistics[t + 1][j][STATISTICS_ENTRY.SUM_DISTANCE_TO_CENTROID.value];
             }
         }
 
@@ -465,6 +548,12 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
             statistics[0][j][STATISTICS_ENTRY.STANDARD_DEVIATION_INTENSITY.value] =
                     Math.sqrt(squaredDifferencesFromMean[0][j] /
                             statistics[0][j][STATISTICS_ENTRY.PIXEL_COUNT.value]);
+
+            statistics[0][j][STATISTICS_ENTRY.MEAN_DISTANCE_TO_MASS_CENTER.value] = statistics[0][j][STATISTICS_ENTRY.SUM_DISTANCE_TO_MASS_CENTER.value] / statistics[0][j][STATISTICS_ENTRY.PIXEL_COUNT.value];
+            statistics[0][j][STATISTICS_ENTRY.MEAN_DISTANCE_TO_CENTROID.value] = statistics[0][j][STATISTICS_ENTRY.SUM_DISTANCE_TO_CENTROID.value] / statistics[0][j][STATISTICS_ENTRY.PIXEL_COUNT.value];
+
+            statistics[0][j][STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_MASS_CENTER_RADIO.value] = statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER.value] / statistics[0][j][STATISTICS_ENTRY.MEAN_DISTANCE_TO_MASS_CENTER.value];
+            statistics[0][j][STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_CENTROID_RADIO.value] = statistics[0][j][STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID.value] / statistics[0][j][STATISTICS_ENTRY.MEAN_DISTANCE_TO_CENTROID.value];
         }
 
         return statistics[0];
@@ -745,4 +834,8 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
     public String getAvailableForDimensions() {
         return "2D, 3D";
     }
+
+
+
+
 }
