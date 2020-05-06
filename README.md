@@ -37,14 +37,9 @@ If you search for support, please open a thread on the [image.sc](https://image.
   * [Reference](https://clij.github.io/clij2-docs/reference)
   * [Cheat sheets](https://clij.github.io/clij2-docs/CLIJ2-cheatsheet_V3.pdf)
   * [Release notes](https://github.com/clij/clij2/releases)
-  * [Release cycle](https://clij.github.io/clij2-docs/release_cycle)
+  * [Release cycle](https://clij.github.io/clij-docs/release_cycle)
   * [Future perspective: clEsperanto](http://clesperanto.net)
   
-* CLIJ versus CLIJ2 
-  * [CLIJ documentation (archived)](https://github.com/clij/clij-docs)
-  * [What's different between CLIJ1, CLIJ2 and CLIJx?](https://clij.github.io/clij2-docs/clij12xAPIcomparison)
-  * [CLIJ - CLIJ2 transition guide](clij2_transition_notes)
-
 * Tutorials
   * [Basics](https://clij.github.io/clij2-docs/md/basics/)
   * [Combining CLIJ and CLIJ2](https://clij.github.io/clij2-docs/md/clij1_clij2_combination/)
@@ -62,10 +57,11 @@ If you search for support, please open a thread on the [image.sc](https://image.
     * [Voronoi diagrams](https://clij.github.io/clij2-docs/md/voronoi/)
 
   * Working with matrices and graphs
-    * [Mulitiply vectors and matrices](https://clij.github.io/clij2-docs/md/multiply_vectors_matrices)
+    * [Multiply vectors and matrices](https://clij.github.io/clij2-docs/md/multiply_vectors_matrices)
     * [Matrix multiplication](https://clij.github.io/clij2-docs/md/matrix_multiply/)
     * [Spots, pointlists, matrices and tables](https://clij.github.io/clij2-docs/md/spots_pointlists_matrices_tables/)
     * [Filtering in graphs](https://clij.github.io/clij2-docs/md/filtering_in_graphs/)
+    * [Filtering between touching neighbors](https://clij.github.io/clij2-docs/md/mean_of_touching_neighbors)
     * [Neighbors of neighbors](https://clij.github.io/clij2-docs/md/neighbors_of_neighbors)
     * [Tribolium embryo morphometry](https://clij.github.io/clij2-docs/md/tribolium_morphometry/)
     * [Superpixel segmentation](https://clij.github.io/clij2-docs/md/superpixel_segmentation/)
@@ -79,15 +75,20 @@ If you search for support, please open a thread on the [image.sc](https://image.
     * [Measure speedup](https://clij.github.io/clij2-docs/md/benchmarking/)
     * [Detailed time tracing](https://clij.github.io/clij2-docs/md/time_tracing/)
     * [Comparing and benchmarking workflows](https://clij.github.io/clij2-docs/md/compare_workflows/)
-    * [Comparing image rotation ImageJ vs. CLIJ](https://clij.github.io/clij2-docs/md/rotate_comparison/)
+    * [Comparing image rotation ImageJ vs. CLIJ](https://clij.github.io/clij2-docs/md/rotate_comparison_IJ_CLIJ/)
     
 * Example code
   * [ImageJ macro](https://github.com/clij/clij2-docs/tree/master/src/main/macro)
   * [Icy javascript](https://github.com/clij/clicy/tree/master/src/main/javascript)
   * [Icy protocols](https://github.com/clij/clicy/tree/master/src/main/protocols)
   * [Matlab](https://github.com/clij/clatlab/tree/master/src/main/matlab)
+  
 * FAQ / support
   * [Frequently asked questions](https://clij.github.io/clij-docs/faq)
+  * CLIJ versus CLIJ2 
+    * [CLIJ documentation (not yet archived)](https://github.com/clij/clij-docs)
+    * [What's different between CLIJ1, CLIJ2 and CLIJx?](https://clij.github.io/clij2-docs/clij12xAPIcomparison)
+    * [CLIJ - CLIJ2 transition guide (under construction)](clij2_transition_notes)
   * [Troubleshooting](https://clij.github.io/clij-docs/troubleshooting)
   * [Support](https://image.sc)
   * [Imprint](https://clij.github.io/imprint)
