@@ -63,7 +63,7 @@ public class ResliceRadial extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
         parameters.put("scaleX", scaleFactorX);
         parameters.put("scaleY", scaleFactorY);
 
-        clij2.execute(ResliceRadial.class, "reslice_radial_interpolate_x.cl", "reslice_radial", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(ResliceRadial.class, "reslice_radial_interpolate_" + image.getDimension() + "d_x.cl", "reslice_radial_" + image.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
 
         clij2.release(image);
         return true;

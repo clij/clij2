@@ -6,7 +6,7 @@
 #define SAMPLER_ADDRESS CLK_ADDRESS_CLAMP
 #endif
 
-__kernel void reslice_radial(
+__kernel void reslice_radial_3d(
     IMAGE_dst_TYPE dst,
     IMAGE_src_TYPE src,
     float deltaAngle,
