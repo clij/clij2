@@ -34,6 +34,7 @@ import java.util.Stack;
  */
 public class CLIJ2 implements CLIJ2Ops {
     private static CLIJ2 instance;
+    private final long max_num_bytes;
     private boolean doTimeTracing = false;
 
     protected CLIJ clij;
@@ -59,6 +60,7 @@ public class CLIJ2 implements CLIJ2Ops {
     public CLIJ2(CLIJ clij) {
         this.clij = clij;
         mCLKernelExecutor = new CLKernelExecutor(clij.getClearCLContext());
+        max_num_bytes = clij.getClearCLContext().getDevice().getMaxMemoryAllocationSizeInBytes();
     }
 
     public static CLIJ2 getInstance() {
@@ -309,12 +311,12 @@ public class CLIJ2 implements CLIJ2Ops {
     }
 
     public ClearCLBuffer create(ClearCLBuffer buffer) {
-        ClearCLBuffer result = clij.create(buffer);
+        ClearCLBuffer result = create(buffer.getDimensions(),  buffer.getNativeType());
         return result;
     }
 
     public ClearCLImage create(ClearCLImage image) {
-        ClearCLImage result = clij.create(image);
+        ClearCLImage result = clij.create(image.getDimensions(), image.getChannelDataType());
         return result;
     }
 
@@ -341,13 +343,26 @@ public class CLIJ2 implements CLIJ2Ops {
 
 
     public ClearCLBuffer create(long[] dimensions, NativeTypeEnum typeEnum) {
+        checkMaxImageSize(dimensions, typeEnum.getSizeInBytes());
         ClearCLBuffer buffer = clij.create(dimensions, typeEnum);
         return buffer;
     }
 
     public ClearCLImage create(long[] dimensions, ImageChannelDataType typeEnum) {
+        checkMaxImageSize(dimensions, typeEnum.getNativeType().getSizeInBytes());
         ClearCLImage image = clij.create(dimensions, typeEnum);
         return image;
+    }
+
+    private void checkMaxImageSize(long[] dimensions, long bytes_per_pixel) {
+        long num_pixels = 1;
+        for (long dim : dimensions) {
+            num_pixels = num_pixels * dim;
+        }
+        long num_bytes = num_pixels * bytes_per_pixel;
+        if (num_bytes > max_num_bytes) {
+            System.out.println("CLIJ2 Warning: You're creating an image with size " + num_bytes + ", which exeeds your GPUs capabilities (max " + max_num_bytes + ").");
+        }
     }
 
     public void execute(String programFilename, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants) {
