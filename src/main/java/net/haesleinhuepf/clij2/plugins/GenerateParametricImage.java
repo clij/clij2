@@ -22,7 +22,7 @@ public class GenerateParametricImage extends AbstractCLIJ2Plugin implements CLIJ
 
     @Override
     public boolean executeCL() {
-        boolean result = generateParametricImage(getCLIJ2(), (ClearCLBuffer) (args[0]),(ClearCLBuffer) (args[1]), (ClearCLBuffer) (args[2]));
+        boolean result = getCLIJ2().generateParametricImage((ClearCLBuffer) (args[0]),(ClearCLBuffer) (args[1]), (ClearCLBuffer) (args[2]));
         return result;
     }
 

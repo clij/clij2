@@ -21,11 +21,11 @@ public class GenerateParametricImageFromResultsTableColumn extends AbstractCLIJ2
 
     @Override
     public boolean executeCL() {
-        boolean result = generateParametricImage(getCLIJ2(), (ClearCLBuffer) (args[0]),(ClearCLBuffer) (args[1]), ResultsTable.getResultsTable(), args[2].toString());
+        boolean result = getCLIJ2().generateParametricImageFromResultsTableColumn((ClearCLBuffer) (args[0]),(ClearCLBuffer) (args[1]), ResultsTable.getResultsTable(), args[2].toString());
         return result;
     }
 
-    public static boolean generateParametricImage(CLIJ2 clij2, ClearCLImageInterface label_map, ClearCLImageInterface parametric_image_destination, ResultsTable table, String columnName) {
+    public static boolean generateParametricImageFromResultsTableColumn(CLIJ2 clij2, ClearCLImageInterface label_map, ClearCLImageInterface parametric_image_destination, ResultsTable table, String columnName) {
         if ( table == null ) {
             throw new IllegalArgumentException("GenerateParametricImageFromResultsTableColumn error: There is no table open.");
         }

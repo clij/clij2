@@ -28,7 +28,7 @@ public class ExcludeLabelsWithValuesOutOfRange extends AbstractCLIJ2Plugin imple
         float min = asFloat(args[3]);
         float max = asFloat(args[3]);
 
-        return excludeLabelsWithValuesOutOfRange(getCLIJ2(), values, label_map_in, label_map_out, min, max);
+        return getCLIJ2().excludeLabelsWithValuesOutOfRange( values, label_map_in, label_map_out, min, max);
     }
 
     public static boolean excludeLabelsWithValuesOutOfRange(CLIJ2 clij2, ClearCLBuffer values, ClearCLBuffer label_map_in, ClearCLBuffer label_map_out, Float min, Float max) {

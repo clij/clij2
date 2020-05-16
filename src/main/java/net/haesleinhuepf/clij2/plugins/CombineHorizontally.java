@@ -19,7 +19,7 @@ public class CombineHorizontally extends AbstractCLIJ2Plugin implements CLIJMacr
 
     @Override
     public boolean executeCL() {
-        return combineHorizontally(getCLIJ2(), (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), (ClearCLImageInterface)(args[2]));
+        return getCLIJ2().combineHorizontally((ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), (ClearCLImageInterface)(args[2]));
     }
 
     public static boolean combineHorizontally(CLIJ2 clij2, ClearCLImageInterface stack1, ClearCLImageInterface stack2, ClearCLImageInterface dst) {
