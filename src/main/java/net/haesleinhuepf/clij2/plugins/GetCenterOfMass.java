@@ -19,15 +19,10 @@ public class GetCenterOfMass extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-
-        ResultsTable table = ResultsTable.getResultsTable();
-        table.incrementCounter();
-
-
         ClearCLBuffer input = (ClearCLBuffer)( args[0]);
 
         double[] center = getCLIJ2().getCenterOfMass(input);
-        for (int v = 0; v < 6; v++) {
+        for (int v = 0; v < center.length; v++) {
             ((Double[]) args[v + 1])[0] = center[v];
         }
         return true;
@@ -40,7 +35,7 @@ public class GetCenterOfMass extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Number centerOfMassX, ByRef Number centerOfMassY, , ByRef Number centerOfMassZ";
+        return "Image source, ByRef Number centerOfMassX, ByRef Number centerOfMassY, ByRef Number centerOfMassZ";
     }
 
     @Override
