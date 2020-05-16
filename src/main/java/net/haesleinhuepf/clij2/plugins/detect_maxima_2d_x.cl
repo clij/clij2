@@ -1,11 +1,12 @@
 
 __kernel void detect_maxima_2d(
         IMAGE_src_TYPE src,
-        IMAGE_dst_TYPE dst,
-        __private int radius
+        IMAGE_dst_TYPE dst
 )
 {
     const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
+
+    int radius = 1;
 
     int2 pos = {get_global_id(0), get_global_id(1)};
     float localMax = READ_src_IMAGE(src, sampler, pos).x - 1;

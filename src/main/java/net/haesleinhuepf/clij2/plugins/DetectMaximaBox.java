@@ -23,20 +23,25 @@ public class DetectMaximaBox extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-        return getCLIJ2().detectMaximaBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return getCLIJ2().detectMaximaBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[2]), asInteger(args[2]));
     }
 
-    public static boolean detectMaximaBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radius) {
+    public static boolean detectMaximaBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
         assertDifferent(src, dst);
-
-        HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put("src", src);
-        parameters.put("dst", dst);
-        parameters.put("radius", radius);
         if (!checkDimensions(src.getDimension(), dst.getDimension())) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (detectOptima)");
         }
+
+        ClearCLBuffer temp = clij2.create(dst.getDimensions(), clij2.Float);
+        clij2.meanBox(src, temp, radiusX, radiusY, radiusZ);
+
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src", temp);
+        parameters.put("dst", dst);
+
         clij2.execute(DetectMaximaBox.class, "detect_maxima_" + src.getDimension() + "d_x.cl", "detect_maxima_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+
+        temp.close();
         return true;
     }
 

@@ -19,33 +19,16 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
  * December 2018
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_detectMinimaBox")
-public class DetectMinimaBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class DetectMinima2DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
-        return getCLIJ2().detectMinimaBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[2]), asInteger(args[2]));
-    }
-
-    public static boolean detectMinimaBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {
-        assertDifferent(src, dst);
-        if (!checkDimensions(src.getDimension(), dst.getDimension())) {
-            throw new IllegalArgumentException("Error: number of dimensions don't match! (detectOptima)");
-        }
-
-        ClearCLBuffer temp = clij2.create(dst.getDimensions(), clij2.Float);
-        clij2.meanBox(src, temp, radiusX, radiusY, 0);
-
-        HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put("src", temp);
-        parameters.put("dst", dst);
-        clij2.execute(DetectMaxima2DBox.class, "detect_minima_" + src.getDimension() + "d_x.cl", "detect_minima_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
-        temp.close();
-        return true;
+        return getCLIJ2().detectMinimaBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), 0);
     }
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination, Number radius";
+        return "Image source, ByRef Image destination, Number radiusX, Number radiusY";
     }
 
     @Override

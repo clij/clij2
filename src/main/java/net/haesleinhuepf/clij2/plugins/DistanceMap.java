@@ -50,10 +50,10 @@ public class DistanceMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
             flag.readFrom(FloatBuffer.wrap(flagValue), true);
 
             if (iteration % 2 == 0 ) {
-                localPositiveMinimum(clij2, temp1, temp2, flag);
+                localPositiveMinimumDiamond(clij2, temp1, temp2, flag);
                 clij2.addImages(temp3, temp2, temp4);
             } else {
-                localPositiveMinimum(clij2, temp2, temp1, flag);
+                localPositiveMinimumBox(clij2, temp2, temp1, flag);
                 clij2.addImages(temp4, temp1, temp3);
             }
 
@@ -75,13 +75,24 @@ public class DistanceMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
         return true;
     }
 
-    private static boolean localPositiveMinimum(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, ClearCLImageInterface flag_dst) {
+    private static boolean localPositiveMinimumBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, ClearCLImageInterface flag_dst) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
         parameters.put("flag_dst", flag_dst);
 
-        clij2.execute(DistanceMap.class, "distancemap_localPositiveMinimum" + dst.getDimension() + "d_x.cl", "distancemap_local_positive_minimum_box_" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(DistanceMap.class, "distancemap_localPositiveMinimum_box_" + dst.getDimension() + "d_x.cl", "distancemap_local_positive_minimum_box_" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters);
+
+        return true;
+    }
+
+    private static boolean localPositiveMinimumDiamond(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, ClearCLImageInterface flag_dst) {
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src", src);
+        parameters.put("dst", dst);
+        parameters.put("flag_dst", flag_dst);
+
+        clij2.execute(DistanceMap.class, "distancemap_localPositiveMinimum_diamond_" + dst.getDimension() + "d_x.cl", "distancemap_local_positive_minimum_diamond_" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters);
 
         return true;
     }

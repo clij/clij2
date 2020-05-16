@@ -22,20 +22,23 @@ public class DetectMinimaSliceBySliceBox extends AbstractCLIJ2Plugin implements 
 
     @Override
     public boolean executeCL() {
-        return getCLIJ2().detectMinimaSliceBySliceBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return getCLIJ2().detectMinimaSliceBySliceBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[2]));
     }
 
-    public static boolean detectMinimaSliceBySliceBox(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Integer radius) {
+    public static boolean detectMinimaSliceBySliceBox(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY) {
         assertDifferent(src, dst);
-
-        HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put("src", src);
-        parameters.put("dst", dst);
-        parameters.put("radius", radius);
         if (!checkDimensions(src.getDimension(), dst.getDimension())) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (detectOptima)");
         }
+
+        ClearCLBuffer temp = clij2.create(dst.getDimensions(), clij2.Float);
+        clij2.meanBox(src, temp, radiusX, radiusY, 0);
+
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src", temp);
+        parameters.put("dst", dst);
         clij2.execute(DetectMinimaSliceBySliceBox.class, "detect_minima_3d_slice_by_slice_x.cl", "detect_minima_3d_slice_by_slice", dst.getDimensions(), dst.getDimensions(), parameters);
+        temp.close();
         return true;
     }
 

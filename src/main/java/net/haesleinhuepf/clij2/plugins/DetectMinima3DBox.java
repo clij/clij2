@@ -1,0 +1,39 @@
+package net.haesleinhuepf.clij2.plugins;
+
+import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
+import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
+import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
+import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
+import org.scijava.plugin.Plugin;
+
+/**
+ * Author: @haesleinhuepf
+ * December 2018
+ */
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_detectMinimaBox")
+public class DetectMinima3DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+
+    @Override
+    public boolean executeCL() {
+        return getCLIJ2().detectMinimaBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
+    }
+
+    @Override
+    public String getParameterHelpText() {
+        return "Image source, ByRef Image destination, Number radiusX, Number radiusY, Number radiusZ";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Detects local minima in a given square/cubic neighborhood. \n\n" +
+                "Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a \n" +
+                "lower intensity, and to 0 otherwise.";
+    }
+
+    @Override
+    public String getAvailableForDimensions() {
+        return "2D, 3D";
+    }
+
+}

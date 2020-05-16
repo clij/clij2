@@ -22,27 +22,31 @@ public class DetectMaximaSliceBySliceBox extends AbstractCLIJ2Plugin implements 
 
     @Override
     public boolean executeCL() {
-        return getCLIJ2().detectMaximaSliceBySliceBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]));
+        return getCLIJ2().detectMaximaSliceBySliceBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[2]));
     }
 
 
-    public static boolean detectMaximaSliceBySliceBox(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Integer radius) {
+    public static boolean detectMaximaSliceBySliceBox(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY) {
         assertDifferent(src, dst);
-
-        HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put("src", src);
-        parameters.put("dst", dst);
-        parameters.put("radius", radius);
         if (!checkDimensions(src.getDimension(), dst.getDimension())) {
             throw new IllegalArgumentException("Error: number of dimensions don't match! (detectOptima)");
         }
+
+        ClearCLBuffer temp = clij2.create(dst.getDimensions(), clij2.Float);
+        clij2.meanBox(src, temp, radiusX, radiusY, 0);
+
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("src", temp);
+        parameters.put("dst", dst);
+
         clij2.execute(DetectMaximaSliceBySliceBox.class, "detect_maxima_3d_slice_by_slice_x.cl", "detect_maxima_3d_slice_by_slice", dst.getDimensions(), dst.getDimensions(), parameters);
+        temp.close();
         return true;
     }
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination, Number radius";
+        return "Image source, ByRef Image destination, Number radiusX, Number radiusY";
     }
 
     @Override
