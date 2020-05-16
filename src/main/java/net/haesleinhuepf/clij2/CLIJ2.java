@@ -361,8 +361,12 @@ public class CLIJ2 implements CLIJ2Ops {
         }
         long num_bytes = num_pixels * bytes_per_pixel;
         if (num_bytes > max_num_bytes) {
-            System.out.println("CLIJ2 Warning: You're creating an image with size " + num_bytes + ", which exeeds your GPUs capabilities (max " + max_num_bytes + ").");
+            warn("CLIJ2 Warning: You're creating an image with size " + num_bytes + " bytes, which exeeds your GPUs capabilities (max " + max_num_bytes + " bytes).");
         }
+    }
+
+    public void warn(String text) {
+        System.out.println(text);
     }
 
     public void execute(String programFilename, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants) {
@@ -631,4 +635,6 @@ public class CLIJ2 implements CLIJ2Ops {
         timeTraces = new StringBuilder();
         times = new Stack<Long>();
     }
+
+
 }
