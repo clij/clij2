@@ -94,7 +94,7 @@ public class ResliceRadial extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public String getAvailableForDimensions() {
-        return "3D";
+        return "2D, 3D";
     }
 
 }
