@@ -36,22 +36,30 @@ public class ExcludeLabels extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
             return true;
         }
 
+        ClearCLBuffer newIndexList = clij2.create(flaglist.getDimensions(), NativeTypeEnum.Float);
+        clij2.copy(flaglist, newIndexList);
+
         float[] label_indices = new float[(int) flaglist.getWidth()];
-        flaglist.writeTo(FloatBuffer.wrap(label_indices), true);
+        newIndexList.writeTo(FloatBuffer.wrap(label_indices), true);
 
         int count = 1;
         for (int i = 0; i < label_indices.length; i++) {
+            System.out.print("i " + i + " " + label_indices[i]);
             if (i > 0 && label_indices[i] == 0) {
+                System.out.println(" keep");
                 label_indices[i] = count;
                 count++;
             } else {
+                System.out.println(" exclude");
                 label_indices[i] = 0;
             }
         }
 
-        flaglist.readFrom(FloatBuffer.wrap(label_indices), true);
+        newIndexList.readFrom(FloatBuffer.wrap(label_indices), true);
 
-        clij2.replaceIntensities(label_map_in, flaglist, label_map_out);
+        clij2.replaceIntensities(label_map_in, newIndexList, label_map_out);
+
+        newIndexList.close();
 
         return true;
     }

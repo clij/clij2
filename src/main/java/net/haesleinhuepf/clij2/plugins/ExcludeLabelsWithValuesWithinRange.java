@@ -24,7 +24,7 @@ public class ExcludeLabelsWithValuesWithinRange extends AbstractCLIJ2Plugin impl
         ClearCLBuffer label_map_out = (ClearCLBuffer)( args[2]);
 
         float min = asFloat(args[3]);
-        float max = asFloat(args[3]);
+        float max = asFloat(args[4]);
 
         return getCLIJ2().excludeLabelsWithValuesWithinRange( values, label_map_in, label_map_out, min, max);
     }
@@ -33,9 +33,8 @@ public class ExcludeLabelsWithValuesWithinRange extends AbstractCLIJ2Plugin impl
         ClearCLBuffer below = clij2.create(values.getDimensions(), NativeTypeEnum.UnsignedByte);
         ClearCLBuffer above = clij2.create(values.getDimensions(), NativeTypeEnum.UnsignedByte);
 
-        clij2.smallerConstant(values, below, max);
-        clij2.greaterConstant(values, above, min);
-
+        clij2.smallerOrEqualConstant(values, below, max);
+        clij2.greaterOrEqualConstant(values, above, min);
         ClearCLBuffer temp = clij2.create(values.getDimensions(), NativeTypeEnum.UnsignedByte);
 
         clij2.binaryAnd(below, above, temp);
