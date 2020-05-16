@@ -30,8 +30,4 @@ public abstract class AbstractCLIJ2Plugin extends AbstractCLIJPlugin {
         }
         return clij2;
     }
-
-    public static Integer asInteger(Object number) {
-        return AbstractCLIJPlugin.asInteger(number);
-    }
 }
