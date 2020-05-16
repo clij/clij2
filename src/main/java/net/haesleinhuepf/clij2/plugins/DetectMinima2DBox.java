@@ -16,9 +16,9 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
 
 /**
  * Author: @haesleinhuepf
- * December 2018
+ *         May 2020
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_detectMinimaBox")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_detectMinima2DBox")
 public class DetectMinima2DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

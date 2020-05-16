@@ -18,12 +18,18 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
  * Author: @haesleinhuepf
  * December 2018
  */
+@Deprecated
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_detectMinimaBox")
 public class DetectMinimaBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public boolean executeCL() {
         return getCLIJ2().detectMinimaBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[2]), asInteger(args[2]));
+    }
+
+    @Deprecated
+    public static boolean detectMinimaBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radius) {
+        return detectMinimaBox(clij2, src, dst, radius, radius, radius);
     }
 
     public static boolean detectMinimaBox(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer radiusX, Integer radiusY, Integer radiusZ) {

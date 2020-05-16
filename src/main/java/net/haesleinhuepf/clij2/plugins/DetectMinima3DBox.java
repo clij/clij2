@@ -9,9 +9,9 @@ import org.scijava.plugin.Plugin;
 
 /**
  * Author: @haesleinhuepf
- * December 2018
+ *         May 2020
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_detectMinimaBox")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_detectMinima3DBox")
 public class DetectMinima3DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override

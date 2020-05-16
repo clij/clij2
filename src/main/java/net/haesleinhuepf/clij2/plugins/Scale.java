@@ -14,6 +14,7 @@ import org.scijava.plugin.Plugin;
  * 12 2018
  */
 
+@Deprecated
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_scale")
 public class Scale extends Scale3D implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 

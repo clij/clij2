@@ -16,7 +16,7 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
 
 /**
  * Author: @haesleinhuepf
- * December 2018
+ *         May 2020
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_detectMaxima3DBox")
 public class DetectMaxima3DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
