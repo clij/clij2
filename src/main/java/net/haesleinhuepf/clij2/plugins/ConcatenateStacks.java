@@ -25,6 +25,10 @@ public class ConcatenateStacks extends AbstractCLIJ2Plugin implements CLIJMacroP
     }
 
     public static boolean concatenateStacks(CLIJ2 clij2, ClearCLImageInterface stack1, ClearCLImageInterface stack2, ClearCLImageInterface dst) {
+        if (stack1.getWidth() != stack2.getWidth() || stack1.getHeight() != stack2.getHeight())  {
+            clij2.set(dst, 0);
+        }
+
         clij2.paste(stack1, dst, 0, 0, 0);
         clij2.paste(stack2, dst, 0, 0, stack1.getDepth());
         return true;
@@ -34,7 +38,11 @@ public class ConcatenateStacks extends AbstractCLIJ2Plugin implements CLIJMacroP
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
         ClearCLBuffer stack1 = (ClearCLBuffer) args[0];
         ClearCLBuffer stack2 = (ClearCLBuffer) args[1];
-        return getCLIJ2().create(new long[]{stack1.getWidth(), stack2.getWidth(), stack1.getDepth() + stack2.getDepth()});
+        return getCLIJ2().create(new long[]{
+                Math.max(stack1.getWidth(), stack2.getWidth()),
+                Math.max(stack1.getHeight(), stack2.getHeight()),
+                stack1.getDepth() + stack2.getDepth()
+        }, input.getNativeType());
     }
 
     @Override
