@@ -8,7 +8,7 @@ import org.scijava.plugin.Plugin;
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_blur2D")
 public class Blur2D extends GaussianBlur2D {
     @Override
-    public String getParameterHelpText() {
-        return super.getParameterHelpText() + "\n\nDEPRECATED: This method is deprecated. Use gaussianBlur2D instead.";
+    public String getDescription() {
+        return super.getDescription() + "\n\nDEPRECATED: This method is deprecated. Use gaussianBlur2D instead.";
     }
 }
