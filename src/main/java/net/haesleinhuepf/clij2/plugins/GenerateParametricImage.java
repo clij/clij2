@@ -34,7 +34,7 @@ public class GenerateParametricImage extends AbstractCLIJ2Plugin implements CLIJ
     @Override
     public String getDescription() {
         return "Take a labelmap and a vector of values to replace label 1 with the 1st value in the vector. \n\n" +
-                "Note that indexing in the vector starts at zero. The 0th endepthtry corresponds to background in the label map." +
+                "Note that indexing in the vector starts at zero. The 0th entry corresponds to background in the label map." +
                 "Internally this method just calls ReplaceIntensities.\n";
     }
 
