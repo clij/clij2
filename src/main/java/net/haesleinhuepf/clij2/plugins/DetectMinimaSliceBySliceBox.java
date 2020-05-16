@@ -22,7 +22,7 @@ public class DetectMinimaSliceBySliceBox extends AbstractCLIJ2Plugin implements 
 
     @Override
     public boolean executeCL() {
-        return getCLIJ2().detectMinimaSliceBySliceBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[2]));
+        return getCLIJ2().detectMinimaSliceBySliceBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
     }
 
     public static boolean detectMinimaSliceBySliceBox(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Integer radiusX, Integer radiusY) {
@@ -44,7 +44,7 @@ public class DetectMinimaSliceBySliceBox extends AbstractCLIJ2Plugin implements 
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination, Number radius";
+        return "Image source, ByRef Image destination, Number radiusX, Number RadiusY";
     }
 
     @Override

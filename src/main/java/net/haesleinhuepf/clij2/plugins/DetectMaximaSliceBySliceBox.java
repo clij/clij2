@@ -22,7 +22,7 @@ public class DetectMaximaSliceBySliceBox extends AbstractCLIJ2Plugin implements 
 
     @Override
     public boolean executeCL() {
-        return getCLIJ2().detectMaximaSliceBySliceBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[2]));
+        return getCLIJ2().detectMaximaSliceBySliceBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
     }
 
 
