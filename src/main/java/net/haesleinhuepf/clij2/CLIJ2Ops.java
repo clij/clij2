@@ -87,9 +87,11 @@ import net.haesleinhuepf.clij2.plugins.DetectLabelEdges;
 import net.haesleinhuepf.clij2.plugins.CountTouchingNeighbors;
 import net.haesleinhuepf.clij2.plugins.ReplaceIntensities;
 import net.haesleinhuepf.clij2.plugins.AverageDistanceOfNClosestPoints;
+import net.haesleinhuepf.clij2.plugins.SaveAsTIF;
 import net.haesleinhuepf.clij2.plugins.TouchMatrixToMesh;
 import net.haesleinhuepf.clij2.plugins.Resample;
 import net.haesleinhuepf.clij2.plugins.EqualizeMeanIntensitiesOfSlices;
+import net.haesleinhuepf.clij2.plugins.Watershed;
 import net.haesleinhuepf.clij2.plugins.ResliceRadial;
 import net.haesleinhuepf.clij2.plugins.Sobel;
 import net.haesleinhuepf.clij2.plugins.Absolute;
@@ -318,6 +320,20 @@ import net.haesleinhuepf.clij2.plugins.ExcludeLabels;
 import net.haesleinhuepf.clij2.plugins.AverageDistanceOfNFarOffPoints;
 import net.haesleinhuepf.clij2.plugins.StandardDeviationOfTouchingNeighbors;
 import net.haesleinhuepf.clij2.plugins.NeighborsOfNeighbors;
+import net.haesleinhuepf.clij2.plugins.GenerateParametricImage;
+import net.haesleinhuepf.clij2.plugins.GenerateParametricImageFromResultsTableColumn;
+import net.haesleinhuepf.clij2.plugins.ExcludeLabelsWithValuesOutOfRange;
+import net.haesleinhuepf.clij2.plugins.ExcludeLabelsWithValuesWithinRange;
+import net.haesleinhuepf.clij2.plugins.CombineVertically;
+import net.haesleinhuepf.clij2.plugins.CombineHorizontally;
+import net.haesleinhuepf.clij2.plugins.ReduceStack;
+import net.haesleinhuepf.clij2.plugins.DetectMinima2DBox;
+import net.haesleinhuepf.clij2.plugins.DetectMaxima2DBox;
+import net.haesleinhuepf.clij2.plugins.DetectMinima3DBox;
+import net.haesleinhuepf.clij2.plugins.DetectMaxima3DBox;
+import net.haesleinhuepf.clij2.plugins.DepthColorProjection;
+import net.haesleinhuepf.clij2.plugins.GenerateBinaryOverlapMatrix;
+import net.haesleinhuepf.clij2.plugins.ResliceRadialTop;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
@@ -369,6 +385,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean connectedComponentsLabeling(ClearCLImageInterface binary_input, ClearCLImageInterface labeling_destination) {
+        System.out.println("connectedComponentsLabeling is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("ConnectedComponentsLabeling");}
         boolean result = ConnectedComponentsLabeling.connectedComponentsLabeling(getCLIJ2(), binary_input, labeling_destination);
         if (doTimeTracing()) {recordMethodEnd("ConnectedComponentsLabeling");}
@@ -819,6 +836,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ResultsTable image2DToResultsTable(ClearCLBuffer arg1, ResultsTable arg2) {
+        System.out.println("image2DToResultsTable is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("Image2DToResultsTable");}
         ResultsTable result = Image2DToResultsTable.image2DToResultsTable(getCLIJ2(), arg1, arg2);
         if (doTimeTracing()) {recordMethodEnd("Image2DToResultsTable");}
@@ -830,6 +848,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ResultsTable image2DToResultsTable(ClearCLImage arg1, ResultsTable arg2) {
+        System.out.println("image2DToResultsTable is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("Image2DToResultsTable");}
         ResultsTable result = Image2DToResultsTable.image2DToResultsTable(getCLIJ2(), arg1, arg2);
         if (doTimeTracing()) {recordMethodEnd("Image2DToResultsTable");}
@@ -861,6 +880,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default long[] getSize(ClearCLBuffer source) {
+        System.out.println("getSize is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("GetSize");}
         long[] result = GetSize.getSize(getCLIJ2(), source);
         if (doTimeTracing()) {recordMethodEnd("GetSize");}
@@ -1727,6 +1747,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean averageDistanceOfClosestPoints(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        System.out.println("averageDistanceOfClosestPoints is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("AverageDistanceOfNClosestPoints");}
         boolean result = AverageDistanceOfNClosestPoints.averageDistanceOfClosestPoints(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
         if (doTimeTracing()) {recordMethodEnd("AverageDistanceOfNClosestPoints");}
@@ -1742,6 +1763,19 @@ public abstract interface CLIJ2Ops {
         if (doTimeTracing()) {recordMethodStart("AverageDistanceOfNClosestPoints");}
         boolean result = AverageDistanceOfNClosestPoints.averageDistanceOfNClosestPoints(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
         if (doTimeTracing()) {recordMethodEnd("AverageDistanceOfNClosestPoints");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.SaveAsTIF
+    //----------------------------------------------------
+    /**
+     * Pulls an image from the GPU memory and saves it as TIF to disc.
+     */
+    default boolean saveAsTIF(ClearCLBuffer input, String filename) {
+        if (doTimeTracing()) {recordMethodStart("SaveAsTIF");}
+        boolean result = SaveAsTIF.saveAsTIF(getCLIJ2(), input, filename);
+        if (doTimeTracing()) {recordMethodEnd("SaveAsTIF");}
         return result;
     }
 
@@ -1767,6 +1801,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean resample(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5, boolean arg6) {
+        System.out.println("resample is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("Resample");}
         boolean result = Resample.resample(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue(), arg6);
         if (doTimeTracing()) {recordMethodEnd("Resample");}
@@ -1809,6 +1844,19 @@ public abstract interface CLIJ2Ops {
     }
 
 
+    // net.haesleinhuepf.clij2.plugins.Watershed
+    //----------------------------------------------------
+    /**
+     * Apply a binary watershed to a binary image and introduces black pixels between objects.
+     */
+    default boolean watershed(ClearCLBuffer binary_source, ClearCLBuffer destination) {
+        if (doTimeTracing()) {recordMethodStart("Watershed");}
+        boolean result = Watershed.watershed(getCLIJ2(), binary_source, destination);
+        if (doTimeTracing()) {recordMethodEnd("Watershed");}
+        return result;
+    }
+
+
     // net.haesleinhuepf.clij2.plugins.ResliceRadial
     //----------------------------------------------------
     /**
@@ -1816,6 +1864,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean radialProjection(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+        System.out.println("radialProjection is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("ResliceRadial");}
         boolean result = ResliceRadial.radialProjection(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue());
         if (doTimeTracing()) {recordMethodEnd("ResliceRadial");}
@@ -2170,6 +2219,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ClearCLKernel minimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3) {
+        System.out.println("minimumBox is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("MinimumOctagon");}
         ClearCLKernel result = MinimumOctagon.minimumBox(getCLIJ2(), arg1, arg2, arg3);
         if (doTimeTracing()) {recordMethodEnd("MinimumOctagon");}
@@ -2181,6 +2231,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ClearCLKernel minimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3) {
+        System.out.println("minimumDiamond is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("MinimumOctagon");}
         ClearCLKernel result = MinimumOctagon.minimumDiamond(getCLIJ2(), arg1, arg2, arg3);
         if (doTimeTracing()) {recordMethodEnd("MinimumOctagon");}
@@ -2210,6 +2261,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ClearCLKernel maximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3) {
+        System.out.println("maximumBox is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("MaximumOctagon");}
         ClearCLKernel result = MaximumOctagon.maximumBox(getCLIJ2(), arg1, arg2, arg3);
         if (doTimeTracing()) {recordMethodEnd("MaximumOctagon");}
@@ -2221,6 +2273,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default ClearCLKernel maximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLKernel arg3) {
+        System.out.println("maximumDiamond is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("MaximumOctagon");}
         ClearCLKernel result = MaximumOctagon.maximumDiamond(getCLIJ2(), arg1, arg2, arg3);
         if (doTimeTracing()) {recordMethodEnd("MaximumOctagon");}
@@ -2267,6 +2320,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean subtract(ClearCLImageInterface subtrahend, ClearCLImageInterface minuend, ClearCLImageInterface destination) {
+        System.out.println("subtract is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("SubtractImages");}
         boolean result = SubtractImages.subtract(getCLIJ2(), subtrahend, minuend, destination);
         if (doTimeTracing()) {recordMethodEnd("SubtractImages");}
@@ -2649,6 +2703,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean fillHistogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        System.out.println("fillHistogram is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("Histogram");}
         boolean result = Histogram.fillHistogram(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
         if (doTimeTracing()) {recordMethodEnd("Histogram");}
@@ -3131,6 +3186,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean rotateLeft(ClearCLImageInterface source, ClearCLImageInterface destination) {
+        System.out.println("rotateLeft is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("RotateCounterClockwise");}
         boolean result = RotateCounterClockwise.rotateLeft(getCLIJ2(), source, destination);
         if (doTimeTracing()) {recordMethodEnd("RotateCounterClockwise");}
@@ -3161,6 +3217,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean rotateRight(ClearCLImageInterface source, ClearCLImageInterface destination) {
+        System.out.println("rotateRight is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("RotateClockwise");}
         boolean result = RotateClockwise.rotateRight(getCLIJ2(), source, destination);
         if (doTimeTracing()) {recordMethodEnd("RotateClockwise");}
@@ -3379,6 +3436,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean countNonZeroPixelsLocally(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        System.out.println("countNonZeroPixelsLocally is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("CountNonZeroPixels2DSphere");}
         boolean result = CountNonZeroPixels2DSphere.countNonZeroPixelsLocally(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
         if (doTimeTracing()) {recordMethodEnd("CountNonZeroPixels2DSphere");}
@@ -3393,6 +3451,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean countNonZeroPixelsLocallySliceBySlice(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        System.out.println("countNonZeroPixelsLocallySliceBySlice is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("CountNonZeroPixelsSliceBySliceSphere");}
         boolean result = CountNonZeroPixelsSliceBySliceSphere.countNonZeroPixelsLocallySliceBySlice(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
         if (doTimeTracing()) {recordMethodEnd("CountNonZeroPixelsSliceBySliceSphere");}
@@ -3427,6 +3486,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean countNonZeroVoxelsLocally(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        System.out.println("countNonZeroVoxelsLocally is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("CountNonZeroVoxels3DSphere");}
         boolean result = CountNonZeroVoxels3DSphere.countNonZeroVoxelsLocally(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
         if (doTimeTracing()) {recordMethodEnd("CountNonZeroVoxels3DSphere");}
@@ -3466,6 +3526,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default double sumPixels(ClearCLImageInterface source) {
+        System.out.println("sumPixels is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("SumOfAllPixels");}
         double result = SumOfAllPixels.sumPixels(getCLIJ2(), source);
         if (doTimeTracing()) {recordMethodEnd("SumOfAllPixels");}
@@ -3513,6 +3574,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean downsample(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        System.out.println("downsample is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("Downsample2D");}
         boolean result = Downsample2D.downsample(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
         if (doTimeTracing()) {recordMethodEnd("Downsample2D");}
@@ -3525,6 +3587,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean downsample2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        System.out.println("downsample2D is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("Downsample2D");}
         boolean result = Downsample2D.downsample2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
         if (doTimeTracing()) {recordMethodEnd("Downsample2D");}
@@ -3540,6 +3603,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean downsample(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        System.out.println("downsample is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("Downsample3D");}
         boolean result = Downsample3D.downsample(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
         if (doTimeTracing()) {recordMethodEnd("Downsample3D");}
@@ -3552,6 +3616,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean downsample3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        System.out.println("downsample3D is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("Downsample3D");}
         boolean result = Downsample3D.downsample3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
         if (doTimeTracing()) {recordMethodEnd("Downsample3D");}
@@ -4057,6 +4122,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean blur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        System.out.println("blur is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("GaussianBlur2D");}
         boolean result = GaussianBlur2D.blur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
         if (doTimeTracing()) {recordMethodEnd("GaussianBlur2D");}
@@ -4070,6 +4136,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean blur2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        System.out.println("blur2D is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("GaussianBlur2D");}
         boolean result = GaussianBlur2D.blur2D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
         if (doTimeTracing()) {recordMethodEnd("GaussianBlur2D");}
@@ -4114,6 +4181,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean blur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        System.out.println("blur is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("GaussianBlur3D");}
         boolean result = GaussianBlur3D.blur(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
         if (doTimeTracing()) {recordMethodEnd("GaussianBlur3D");}
@@ -4127,6 +4195,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean blur3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        System.out.println("blur3D is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("GaussianBlur3D");}
         boolean result = GaussianBlur3D.blur3D(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
         if (doTimeTracing()) {recordMethodEnd("GaussianBlur3D");}
@@ -4402,9 +4471,22 @@ public abstract interface CLIJ2Ops {
      * Detects local minima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
      * there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
      */
+    @Deprecated
     default boolean detectMinimaBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
+        System.out.println("detectMinimaBox is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("DetectMinimaBox");}
         boolean result = DetectMinimaBox.detectMinimaBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("DetectMinimaBox");}
+        return result;
+    }
+
+    /**
+     * Detects local minima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
+     * there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
+     */
+    default boolean detectMinimaBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        if (doTimeTracing()) {recordMethodStart("DetectMinimaBox");}
+        boolean result = DetectMinimaBox.detectMinimaBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
         if (doTimeTracing()) {recordMethodEnd("DetectMinimaBox");}
         return result;
     }
@@ -4416,9 +4498,22 @@ public abstract interface CLIJ2Ops {
      * Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
      * there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
      */
+    @Deprecated
     default boolean detectMaximaBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
+        System.out.println("detectMaximaBox is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("DetectMaximaBox");}
         boolean result = DetectMaximaBox.detectMaximaBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        if (doTimeTracing()) {recordMethodEnd("DetectMaximaBox");}
+        return result;
+    }
+
+    /**
+     * Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
+     * there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
+     */
+    default boolean detectMaximaBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
+        if (doTimeTracing()) {recordMethodStart("DetectMaximaBox");}
+        boolean result = DetectMaximaBox.detectMaximaBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
         if (doTimeTracing()) {recordMethodEnd("DetectMaximaBox");}
         return result;
     }
@@ -4431,9 +4526,9 @@ public abstract interface CLIJ2Ops {
      * processed slice by slice. Pixels in the resulting image are set to 1 if there is no other pixel in a 
      * given radius which has a higher intensity, and to 0 otherwise.
      */
-    default boolean detectMaximaSliceBySliceBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+    default boolean detectMaximaSliceBySliceBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("DetectMaximaSliceBySliceBox");}
-        boolean result = DetectMaximaSliceBySliceBox.detectMaximaSliceBySliceBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        boolean result = DetectMaximaSliceBySliceBox.detectMaximaSliceBySliceBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
         if (doTimeTracing()) {recordMethodEnd("DetectMaximaSliceBySliceBox");}
         return result;
     }
@@ -4446,9 +4541,9 @@ public abstract interface CLIJ2Ops {
      * processed slice by slice. Pixels in the resulting image are set to 1 if there is no other pixel in a 
      * given radius which has a lower intensity, and to 0 otherwise.
      */
-    default boolean detectMinimaSliceBySliceBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
+    default boolean detectMinimaSliceBySliceBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("DetectMinimaSliceBySliceBox");}
-        boolean result = DetectMinimaSliceBySliceBox.detectMinimaSliceBySliceBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
+        boolean result = DetectMinimaSliceBySliceBox.detectMinimaSliceBySliceBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
         if (doTimeTracing()) {recordMethodEnd("DetectMinimaSliceBySliceBox");}
         return result;
     }
@@ -4659,6 +4754,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean shiftIntensitiesToCloseGaps(ClearCLBuffer arg1, ClearCLBuffer arg2) {
+        System.out.println("shiftIntensitiesToCloseGaps is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("CloseIndexGapsInLabelMap");}
         boolean result = CloseIndexGapsInLabelMap.shiftIntensitiesToCloseGaps(getCLIJ2(), arg1, arg2);
         if (doTimeTracing()) {recordMethodEnd("CloseIndexGapsInLabelMap");}
@@ -4676,6 +4772,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        System.out.println("scale is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("Scale");}
         boolean result = Scale.scale(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue(), new Double (arg5).floatValue());
         if (doTimeTracing()) {recordMethodEnd("Scale");}
@@ -5088,6 +5185,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default double[] sumPixelsSliceByslice(ClearCLImageInterface arg1) {
+        System.out.println("sumPixelsSliceByslice is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("SumImageSliceBySlice");}
         double[] result = SumImageSliceBySlice.sumPixelsSliceByslice(getCLIJ2(), arg1);
         if (doTimeTracing()) {recordMethodEnd("SumImageSliceBySlice");}
@@ -5126,6 +5224,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean multiplySliceBySliceWithScalars(ClearCLImageInterface arg1, ClearCLImageInterface arg2, float[] arg3) {
+        System.out.println("multiplySliceBySliceWithScalars is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("MultiplyImageStackWithScalars");}
         boolean result = MultiplyImageStackWithScalars.multiplySliceBySliceWithScalars(getCLIJ2(), arg1, arg2, arg3);
         if (doTimeTracing()) {recordMethodEnd("MultiplyImageStackWithScalars");}
@@ -5321,6 +5420,7 @@ public abstract interface CLIJ2Ops {
      */
     @Deprecated
     default boolean resultsTableToImage2D(ClearCLBuffer arg1, ResultsTable arg2) {
+        System.out.println("resultsTableToImage2D is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("ResultsTableToImage2D");}
         boolean result = ResultsTableToImage2D.resultsTableToImage2D(getCLIJ2(), arg1, arg2);
         if (doTimeTracing()) {recordMethodEnd("ResultsTableToImage2D");}
@@ -5937,5 +6037,154 @@ public abstract interface CLIJ2Ops {
         return result;
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.GenerateParametricImage
+    //----------------------------------------------------
+    /**
+     * Take a labelmap and a vector of values to replace label 1 with the 1st value in the vector. 
+     * 
+     * Note that indexing in the vector starts at zero. The 0th entry corresponds to background in the label map.Internally this method just calls ReplaceIntensities.
+     * 
+     */
+    default boolean generateParametricImage(ClearCLImageInterface parameter_value_vector, ClearCLImageInterface label_map, ClearCLImageInterface parametric_image_destination) {
+        if (doTimeTracing()) {recordMethodStart("GenerateParametricImage");}
+        boolean result = GenerateParametricImage.generateParametricImage(getCLIJ2(), parameter_value_vector, label_map, parametric_image_destination);
+        if (doTimeTracing()) {recordMethodEnd("GenerateParametricImage");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.GenerateParametricImageFromResultsTableColumn
+    //----------------------------------------------------
+    /**
+     * Take a labelmap and a column from the results table to replace label 1 with the 1st value in the vector. 
+     * 
+     * Note that indexing in the table column starts at zero. The results table should contain a line at the beginningrepresenting the background.
+     * 
+     */
+    default boolean generateParametricImageFromResultsTableColumn(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ResultsTable arg3, String arg4) {
+        if (doTimeTracing()) {recordMethodStart("GenerateParametricImageFromResultsTableColumn");}
+        boolean result = GenerateParametricImageFromResultsTableColumn.generateParametricImageFromResultsTableColumn(getCLIJ2(), arg1, arg2, arg3, arg4);
+        if (doTimeTracing()) {recordMethodEnd("GenerateParametricImageFromResultsTableColumn");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.ExcludeLabelsWithValuesOutOfRange
+    //----------------------------------------------------
+    /**
+     * This operation removes labels from a labelmap and renumbers the remaining labels. 
+     * 
+     * Hand over a vector of values and a range specifying which labels with which values are eliminated.
+     */
+    default boolean excludeLabelsWithValuesOutOfRange(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, double arg4, double arg5) {
+        if (doTimeTracing()) {recordMethodStart("ExcludeLabelsWithValuesOutOfRange");}
+        boolean result = ExcludeLabelsWithValuesOutOfRange.excludeLabelsWithValuesOutOfRange(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("ExcludeLabelsWithValuesOutOfRange");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.ExcludeLabelsWithValuesWithinRange
+    //----------------------------------------------------
+    /**
+     * This operation removes labels from a labelmap and renumbers the remaining labels. 
+     * 
+     * Hand over a vector of values and a range specifying which labels with which values are eliminated.
+     */
+    default boolean excludeLabelsWithValuesWithinRange(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, double arg4, double arg5) {
+        if (doTimeTracing()) {recordMethodStart("ExcludeLabelsWithValuesWithinRange");}
+        boolean result = ExcludeLabelsWithValuesWithinRange.excludeLabelsWithValuesWithinRange(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("ExcludeLabelsWithValuesWithinRange");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.CombineVertically
+    //----------------------------------------------------
+    /**
+     * Combines two images or stacks in Y.
+     */
+    default boolean combineVertically(ClearCLImageInterface stack1, ClearCLImageInterface stack2, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("CombineVertically");}
+        boolean result = CombineVertically.combineVertically(getCLIJ2(), stack1, stack2, destination);
+        if (doTimeTracing()) {recordMethodEnd("CombineVertically");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.CombineHorizontally
+    //----------------------------------------------------
+    /**
+     * Combines two images or stacks in X.
+     */
+    default boolean combineHorizontally(ClearCLImageInterface stack1, ClearCLImageInterface stack2, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("CombineHorizontally");}
+        boolean result = CombineHorizontally.combineHorizontally(getCLIJ2(), stack1, stack2, destination);
+        if (doTimeTracing()) {recordMethodEnd("CombineHorizontally");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.ReduceStack
+    //----------------------------------------------------
+    /**
+     * Reduces the number of slices in a stack by a given factor.
+     * With the offset you have control which slices stay: 
+     * * With factor 3 and offset 0, slices 0, 3, 6,... are kept. * With factor 4 and offset 1, slices 1, 5, 9,... are kept.
+     */
+    default boolean reduceStack(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
+        if (doTimeTracing()) {recordMethodStart("ReduceStack");}
+        boolean result = ReduceStack.reduceStack(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("ReduceStack");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.DetectMinima2DBox
+    //----------------------------------------------------
+
+    // net.haesleinhuepf.clij2.plugins.DetectMaxima2DBox
+    //----------------------------------------------------
+
+    // net.haesleinhuepf.clij2.plugins.DetectMinima3DBox
+    //----------------------------------------------------
+
+    // net.haesleinhuepf.clij2.plugins.DetectMaxima3DBox
+    //----------------------------------------------------
+
+    // net.haesleinhuepf.clij2.plugins.DepthColorProjection
+    //----------------------------------------------------
+    /**
+     * Determines a maximum projection of an image stack and does a color coding of the determined arg Z (position of the found maximum). 
+     * 
+     * Second parameter is a Lookup-Table in the form of an 8-bit image stack 255 pixels wide, 1 pixel high with 3 planes representing red, green and blue intensities.
+     * Resulting image is a 3D image with three Z-planes representing red, green and blue channels.
+     */
+    default boolean depthColorProjection(ClearCLImageInterface arg1, ClearCLBuffer arg2, ClearCLBuffer arg3, double arg4, double arg5) {
+        if (doTimeTracing()) {recordMethodStart("DepthColorProjection");}
+        boolean result = DepthColorProjection.depthColorProjection(getCLIJ2(), arg1, arg2, arg3, new Double (arg4).floatValue(), new Double (arg5).floatValue());
+        if (doTimeTracing()) {recordMethodEnd("DepthColorProjection");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.GenerateBinaryOverlapMatrix
+    //----------------------------------------------------
+    /**
+     * Takes two labelmaps with n and m labels and generates a (n+1)*(m+1) matrix where all pixels are set to 0 exept those where labels overlap between the label maps. 
+     * 
+     * For example, if labels 3 in labelmap1 and 4 in labelmap2 are touching then the pixel (3,4) in the matrix will be set to 1.
+     */
+    default boolean generateBinaryOverlapMatrix(ClearCLBuffer label_map1, ClearCLBuffer label_map2, ClearCLBuffer touch_matrix_destination) {
+        if (doTimeTracing()) {recordMethodStart("GenerateBinaryOverlapMatrix");}
+        boolean result = GenerateBinaryOverlapMatrix.generateBinaryOverlapMatrix(getCLIJ2(), label_map1, label_map2, touch_matrix_destination);
+        if (doTimeTracing()) {recordMethodEnd("GenerateBinaryOverlapMatrix");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.ResliceRadialTop
+    //----------------------------------------------------
 }
-// 384 methods generated.
+// 397 methods generated.
