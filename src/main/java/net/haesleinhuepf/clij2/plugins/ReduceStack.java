@@ -19,7 +19,7 @@ public class ReduceStack extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public boolean executeCL() {
-        return getCLIJ2().reduceStack( (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), asInteger(args[2]), asInteger(args[2]));
+        return getCLIJ2().reduceStack( (ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), asInteger(args[2]), asInteger(args[3]));
     }
 
     public static boolean reduceStack(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst, Integer factor, Integer offset) {
