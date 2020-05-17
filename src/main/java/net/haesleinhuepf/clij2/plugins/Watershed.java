@@ -38,8 +38,8 @@ public class Watershed extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
         clij2.release(localMaxima);
 
         ClearCLBuffer labelMap = clij2.create(thresholded);
-        clij2.labelSpots(localMaxima2, labelMap);
-        //ConnectedComponentsLabeling.connectedComponentsLabeling(clij2, localMaxima2, labelMap);
+        //clij2.labelSpots(localMaxima2, labelMap);
+        ConnectedComponentsLabeling.connectedComponentsLabeling(clij2, localMaxima2, labelMap);
         clij2.release(localMaxima2);
 
         ClearCLBuffer labelMap2 = clij2.create(thresholded);
