@@ -29,7 +29,7 @@ public class Histogram extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
     @Override
     public boolean executeCL() {
         ClearCLBuffer src = (ClearCLBuffer) (args[0]);
-        ClearCLBuffer histogram = (ClearCLBuffer) (args[0]);
+        ClearCLBuffer histogram = (ClearCLBuffer) (args[1]);
         Integer numberOfBins = asInteger(args[2]);
         Float minimumGreyValue = asFloat(args[3]);
         Float maximumGreyValue = asFloat(args[4]);
