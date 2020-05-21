@@ -17,7 +17,7 @@ public class GenerateParametricImage extends AbstractCLIJ2Plugin implements CLIJ
 
     @Override
     public String getParameterHelpText() {
-        return "Image parameter_value_vector, Image label_map, ByRef Image parametric_image_destination";
+        return "Image label_map, Image parameter_value_vector, ByRef Image parametric_image_destination";
     }
 
     @Override
@@ -26,7 +26,7 @@ public class GenerateParametricImage extends AbstractCLIJ2Plugin implements CLIJ
         return result;
     }
 
-    public static boolean generateParametricImage(CLIJ2 clij2, ClearCLImageInterface parameter_value_vector, ClearCLImageInterface label_map, ClearCLImageInterface parametric_image_destination) {
+    public static boolean generateParametricImage(CLIJ2 clij2, ClearCLImageInterface label_map, ClearCLImageInterface parameter_value_vector,  ClearCLImageInterface parametric_image_destination) {
        clij2.replaceIntensities(parameter_value_vector, label_map, parametric_image_destination);
        return true;
     }
