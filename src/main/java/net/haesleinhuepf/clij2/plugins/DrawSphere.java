@@ -22,6 +22,12 @@ import java.util.HashMap;
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_drawSphere")
 public class DrawSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
+
+    @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, 5, 5, 5, 3, 3, 3, 255};
+    }
+
     @Override
     public String getParameterHelpText() {
         return "ByRef Image destination, Number x, Number y, Number z, Number radius_x, Number radius_y, Number radius_z, Number value";

@@ -17,6 +17,11 @@ import org.scijava.plugin.Plugin;
 public class LabelToMask extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, 1};
+    }
+
+    @Override
     public boolean executeCL() {
         boolean result = getCLIJ2().labelToMask((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
         return result;

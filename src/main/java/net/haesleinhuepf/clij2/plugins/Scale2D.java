@@ -21,6 +21,11 @@ import org.scijava.plugin.Plugin;
 public class Scale2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, 1, 1, true};
+    }
+
+    @Override
     public boolean executeCL() {
         float scaleFactorX = asFloat(args[2]);
         float scaleFactorY = asFloat(args[3]);

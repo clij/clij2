@@ -12,6 +12,12 @@ import org.scijava.plugin.Plugin;
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_equalizeMeanIntensitiesOfSlices")
 public class EqualizeMeanIntensitiesOfSlices extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
+
+    @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, 0};
+    }
+
     @Override
     public String getParameterHelpText() {
         return "Image input, ByRef Image destination, Number referenceSlice";

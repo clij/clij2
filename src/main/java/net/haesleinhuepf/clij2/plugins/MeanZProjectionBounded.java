@@ -21,10 +21,13 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
 public class MeanZProjectionBounded extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, 0, 100};
+    }
+
+    @Override
     public boolean executeCL() {
-        Object[] args = openCLBufferArgs();
         boolean result = meanZProjectionBounded(clij, (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));
-        releaseBuffers(args);
         return result;
     }
 

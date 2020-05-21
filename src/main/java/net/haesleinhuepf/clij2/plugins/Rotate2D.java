@@ -21,6 +21,11 @@ import org.scijava.plugin.Plugin;
 public class Rotate2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, 0, true};
+    }
+
+    @Override
     public boolean executeCL() {
         float angle = (float)(-asFloat(args[2]) / 180.0f * Math.PI);
         boolean rotateAroundCenter = asBoolean(args[3]);

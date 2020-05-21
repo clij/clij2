@@ -13,16 +13,18 @@ import org.scijava.plugin.Plugin;
 public class DifferenceOfGaussian3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, 2, 2, 2, 10, 10, 10};
+    }
+
+    @Override
     public String getParameterHelpText() {
         return "Image input, ByRef Image destination, Number sigma1x, Number sigma1y, Number sigma1z, Number sigma2x, Number sigma2y, Number sigma2z";
     }
 
     @Override
     public boolean executeCL() {
-
-        Object[] args = openCLBufferArgs();
         boolean result = getCLIJ2().differenceOfGaussian((ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]), asFloat(args[2]), asFloat(args[3]), asFloat(args[4]), asFloat(args[5]), asFloat(args[6]), asFloat(args[7]));
-        releaseBuffers(args);
         return result;
     }
 

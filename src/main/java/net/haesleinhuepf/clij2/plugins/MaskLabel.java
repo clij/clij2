@@ -19,6 +19,11 @@ import java.util.HashMap;
 public class MaskLabel extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, null, 1};
+    }
+
+    @Override
     public boolean executeCL() {
         boolean result = getCLIJ2().maskLabel((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]), asFloat(args[3]));
         return result;

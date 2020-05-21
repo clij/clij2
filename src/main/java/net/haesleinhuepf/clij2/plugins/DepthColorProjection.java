@@ -22,6 +22,11 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
 public class DepthColorProjection extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, null, 0, 255};
+    }
+
+    @Override
     public boolean executeCL() {
         boolean result = depthColorProjection(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]), asFloat(args[3]), asFloat(args[4]));
         return result;

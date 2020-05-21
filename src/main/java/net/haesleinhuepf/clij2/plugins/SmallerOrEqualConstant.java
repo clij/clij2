@@ -18,6 +18,12 @@ import java.util.HashMap;
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_smallerOrEqualConstant")
 public class SmallerOrEqualConstant extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
+
+    @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, 0};
+    }
+
     @Override
     public boolean executeCL() {
         boolean result = getCLIJ2().smallerOrEqualConstant((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));

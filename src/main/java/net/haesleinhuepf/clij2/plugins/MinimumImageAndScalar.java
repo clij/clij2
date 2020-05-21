@@ -23,6 +23,11 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
 public class MinimumImageAndScalar extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, 0};
+    }
+
+    @Override
     public boolean executeCL() {
         return getCLIJ2().minimumImageAndScalar((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
     }

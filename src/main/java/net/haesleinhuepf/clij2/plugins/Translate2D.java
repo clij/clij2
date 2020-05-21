@@ -21,6 +21,11 @@ import org.scijava.plugin.Plugin;
 public class Translate2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, 0, 0};
+    }
+
+    @Override
     public boolean executeCL() {
         float translateX = -asFloat(args[2]);
         float translateY = -asFloat(args[3]);

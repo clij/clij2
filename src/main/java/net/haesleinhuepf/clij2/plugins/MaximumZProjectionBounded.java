@@ -21,6 +21,11 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
 public class MaximumZProjectionBounded extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, 0, 100};
+    }
+
+    @Override
     public boolean executeCL() {
         Object[] args = openCLBufferArgs();
         boolean result = getCLIJ2().maximumZProjectionBounded((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]));

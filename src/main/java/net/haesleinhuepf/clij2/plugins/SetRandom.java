@@ -27,6 +27,11 @@ import java.util.Random;
 public class SetRandom extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, 0, 255, 0};
+    }
+
+    @Override
     public boolean executeCL() {
 
         ClearCLBuffer buffer = (ClearCLBuffer) args[0];

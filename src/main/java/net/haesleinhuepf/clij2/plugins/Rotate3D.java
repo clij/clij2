@@ -21,6 +21,11 @@ import org.scijava.plugin.Plugin;
 public class Rotate3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, 0, 0, 0, true};
+    }
+
+    @Override
     public boolean executeCL() {
         float angleX = (float)(-asFloat(args[2]) / 180.0f * Math.PI);
         float angleY = (float)(-asFloat(args[3]) / 180.0f * Math.PI);

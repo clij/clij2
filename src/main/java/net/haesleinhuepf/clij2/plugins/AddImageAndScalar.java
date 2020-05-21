@@ -22,6 +22,11 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
 public class AddImageAndScalar extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, Double.valueOf(1)};
+    }
+
+    @Override
     public boolean executeCL() {
         return getCLIJ2().addImageAndScalar((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
     }

@@ -22,6 +22,12 @@ import java.util.HashMap;
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_drawBox")
 public class DrawBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
+
+    @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, 0, 0, 0, 10, 10, 10, 255};
+    }
+
     @Override
     public String getParameterHelpText() {
         return "ByRef Image destination, Number x, Number y, Number z, Number width, Number height, Number depth, Number value";

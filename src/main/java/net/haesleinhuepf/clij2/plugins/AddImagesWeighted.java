@@ -21,6 +21,11 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
 public class AddImagesWeighted extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, null, null, Double.valueOf(1), Double.valueOf(1)};
+    }
+
+    @Override
     public boolean executeCL() {
         return getCLIJ2().addImagesWeighted((ClearCLImageInterface)( args[0]), (ClearCLImageInterface)(args[1]), (ClearCLImageInterface)(args[2]), asFloat(args[3]), asFloat(args[4]));
     }

@@ -20,6 +20,11 @@ import java.util.HashMap;
 public class SetColumn extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
+    protected Object[] getDefaultValues() {
+        return new Object[]{null, 0, 0};
+    }
+
+    @Override
     public boolean executeCL() {
         return getCLIJ2().setColumn((ClearCLBuffer)( args[0]), asInteger(args[1]), asFloat(args[2]));
     }
