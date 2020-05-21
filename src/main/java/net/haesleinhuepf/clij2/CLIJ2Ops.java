@@ -334,6 +334,7 @@ import net.haesleinhuepf.clij2.plugins.DetectMaxima3DBox;
 import net.haesleinhuepf.clij2.plugins.DepthColorProjection;
 import net.haesleinhuepf.clij2.plugins.GenerateBinaryOverlapMatrix;
 import net.haesleinhuepf.clij2.plugins.ResliceRadialTop;
+import net.haesleinhuepf.clij2.plugins.Convolve;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
@@ -6046,9 +6047,9 @@ public abstract interface CLIJ2Ops {
      * Note that indexing in the vector starts at zero. The 0th entry corresponds to background in the label map.Internally this method just calls ReplaceIntensities.
      * 
      */
-    default boolean generateParametricImage(ClearCLImageInterface parameter_value_vector, ClearCLImageInterface label_map, ClearCLImageInterface parametric_image_destination) {
+    default boolean generateParametricImage(ClearCLImageInterface label_map, ClearCLImageInterface parameter_value_vector, ClearCLImageInterface parametric_image_destination) {
         if (doTimeTracing()) {recordMethodStart("GenerateParametricImage");}
-        boolean result = GenerateParametricImage.generateParametricImage(getCLIJ2(), parameter_value_vector, label_map, parametric_image_destination);
+        boolean result = GenerateParametricImage.generateParametricImage(getCLIJ2(), label_map, parameter_value_vector, parametric_image_destination);
         if (doTimeTracing()) {recordMethodEnd("GenerateParametricImage");}
         return result;
     }
@@ -6186,5 +6187,20 @@ public abstract interface CLIJ2Ops {
 
     // net.haesleinhuepf.clij2.plugins.ResliceRadialTop
     //----------------------------------------------------
+
+    // net.haesleinhuepf.clij2.plugins.Convolve
+    //----------------------------------------------------
+    /**
+     * Convolve the image with a given kernel image.
+     * 
+     * It is recommended that the kernel image has an odd size in X, Y and Z.
+     */
+    default boolean convolve(ClearCLBuffer source, ClearCLBuffer convolution_kernel, ClearCLBuffer destination) {
+        if (doTimeTracing()) {recordMethodStart("Convolve");}
+        boolean result = Convolve.convolve(getCLIJ2(), source, convolution_kernel, destination);
+        if (doTimeTracing()) {recordMethodEnd("Convolve");}
+        return result;
+    }
+
 }
-// 397 methods generated.
+// 398 methods generated.
