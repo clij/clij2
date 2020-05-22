@@ -42,7 +42,7 @@ kernel void histogram_2d(
     for (int x = 0; x < image_width; x+= step_size_x) {
         float clr = READ_src_IMAGE(src, sampler, (int2)(x, y)).x;
         uint   indx_x;
-        indx_x = convert_uint_sat( (clr - minimum) * (float)(GET_IMAGE_WIDTH(dst_histogram)) / range );
+        indx_x = convert_uint_sat( (clr - minimum) * (float)(GET_IMAGE_WIDTH(dst_histogram) - 1) / range );
         tmp_histogram[indx_x]++;
     }
 
