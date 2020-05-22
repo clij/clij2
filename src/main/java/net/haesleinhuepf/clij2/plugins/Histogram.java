@@ -170,7 +170,13 @@ public class Histogram extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getDescription() {
-        return "Determines the histogram of a given image.";
+        return "Determines the histogram of a given image.\n\n" +
+                "The histogram image is of dimensions number_of_bins/1/1; a 3D image with height=1 and depth=1. \n" +
+                "Histogram bins contain the number of pixels with intensity in this corresponding bin. \n" +
+                "The histogram bins are uniformly distributed between given minimum and maximum grey value intensity. \n" +
+                "If the flag determine_min_max is set, minimum and maximum intensity will be determined. \n" +
+                "When calling this operation many times, it is recommended to determine minimum and maximum intensity \n" +
+                "once at the beginning and handing over these values.";
     }
 
     @Override
