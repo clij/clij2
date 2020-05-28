@@ -25,7 +25,7 @@ public class CentroidsOfLabels extends AbstractCLIJ2Plugin implements CLIJMacroP
         table.incrementCounter();
 
         ClearCLBuffer labelmap = (ClearCLBuffer)( args[0]);
-        ClearCLBuffer pointlist = (ClearCLBuffer)( args[0]);
+        ClearCLBuffer pointlist = (ClearCLBuffer)( args[1]);
 
         getCLIJ2().centroidsOfLabels(labelmap, pointlist);
 
@@ -69,7 +69,7 @@ public class CentroidsOfLabels extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getParameterHelpText() {
-        return "Image source";
+        return "Image source, ByRef Image pointlist_destination";
     }
 
     @Override
