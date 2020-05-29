@@ -2,7 +2,7 @@ __constant sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_T
 
 __kernel void not_equal_3d(
     IMAGE_src1_TYPE src1,
-    IMAGE_srd2_TYPE src2,
+    IMAGE_src2_TYPE src2,
     IMAGE_dst_TYPE dst
 )
 {
