@@ -20,8 +20,8 @@ import java.nio.CharBuffer;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_pullToCurrentZSlice")
-public class PullToCurrentZSlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_pullToCurrentSlice")
+public class PullToCurrentSlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
     public String getParameterHelpText() {
@@ -32,11 +32,11 @@ public class PullToCurrentZSlice extends AbstractCLIJ2Plugin implements CLIJMacr
     public boolean executeCL() {
         ClearCLBuffer slice = (ClearCLBuffer) (args[0]);
         ImagePlus imp = WindowManager.getImage((String)args[1]);
-        pullToCurrentZSlice(getCLIJ2(), slice, imp);
+        pullToCurrentSlice(getCLIJ2(), slice, imp);
         return true;
     }
 
-    public static void pullToCurrentZSlice(CLIJ2 clij2, ClearCLBuffer input, ImagePlus target) {
+    public static void pullToCurrentSlice(CLIJ2 clij2, ClearCLBuffer input, ImagePlus target) {
         ImageProcessor ip = target.getProcessor();
         if (input.getWidth() == target.getWidth() && input.getHeight() == target.getHeight()) {
             if (input.getNativeType() == NativeTypeEnum.Float && ip.getBitDepth() == 32) {
@@ -63,7 +63,7 @@ public class PullToCurrentZSlice extends AbstractCLIJ2Plugin implements CLIJMacr
 
     @Override
     public String getDescription() {
-        return "Pulls a two dimenstion image from the GPU memory and enters it in the current/given image stack at the selected slice.\n\n" +
+        return "Pulls a two dimensional image from the GPU memory and enters it in the current/given image stack at the selected slice.\n\n" +
                 "If image type and/or dimensions don't fit a paste operation will be performed in the background, this may limit performance.";
     }
 
