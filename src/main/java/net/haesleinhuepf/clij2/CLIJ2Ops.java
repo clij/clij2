@@ -4788,9 +4788,9 @@ public abstract interface CLIJ2Ops {
      * 
      * It writes the resulting  coordinates in a pointlist image. Depending on the dimensionality d of the labelmap and the number  of labels n, the pointlist image will have n*d pixels.
      */
-    default boolean centroidsOfLabels(ClearCLBuffer arg1, ClearCLBuffer arg2) {
+    default boolean centroidsOfLabels(ClearCLBuffer source, ClearCLBuffer pointlist_destination) {
         if (doTimeTracing()) {recordMethodStart("CentroidsOfLabels");}
-        boolean result = CentroidsOfLabels.centroidsOfLabels(getCLIJ2(), arg1, arg2);
+        boolean result = CentroidsOfLabels.centroidsOfLabels(getCLIJ2(), source, pointlist_destination);
         if (doTimeTracing()) {recordMethodEnd("CentroidsOfLabels");}
         return result;
     }
@@ -5899,8 +5899,12 @@ public abstract interface CLIJ2Ops {
      * Takes a labelled image and dilates the labels using a octagon shape until they touch. 
      * 
      * The pixels where  the regions touched are afterwards returned as binary image which corresponds to the Voronoi diagram.
+     * 
+     * DEPRECATED: Use VoronoiLabelin instead.
      */
+    @Deprecated
     default boolean labelVoronoiOctagon(ClearCLBuffer label_map, ClearCLBuffer label_voronoi_destination) {
+        System.out.println("labelVoronoiOctagon is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("LabelVoronoiOctagon");}
         boolean result = LabelVoronoiOctagon.labelVoronoiOctagon(getCLIJ2(), label_map, label_voronoi_destination);
         if (doTimeTracing()) {recordMethodEnd("LabelVoronoiOctagon");}
