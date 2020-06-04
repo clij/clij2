@@ -335,6 +335,8 @@ import net.haesleinhuepf.clij2.plugins.DepthColorProjection;
 import net.haesleinhuepf.clij2.plugins.GenerateBinaryOverlapMatrix;
 import net.haesleinhuepf.clij2.plugins.ResliceRadialTop;
 import net.haesleinhuepf.clij2.plugins.Convolve;
+import net.haesleinhuepf.clij2.plugins.UndefinedToZero;
+import net.haesleinhuepf.clij2.plugins.GenerateJaccardIndexMatrix;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
@@ -6206,5 +6208,34 @@ public abstract interface CLIJ2Ops {
         return result;
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.UndefinedToZero
+    //----------------------------------------------------
+    /**
+     * Copies all pixels instead those which are not a number (NaN) or infinity (inf), which are replaced by 0.
+     */
+    default boolean undefinedToZero(ClearCLBuffer source, ClearCLBuffer destination) {
+        if (doTimeTracing()) {recordMethodStart("UndefinedToZero");}
+        boolean result = UndefinedToZero.undefinedToZero(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("UndefinedToZero");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.GenerateJaccardIndexMatrix
+    //----------------------------------------------------
+    /**
+     * Takes two labelmaps with n and m labels_2 and generates a (n+1)*(m+1) matrix where all labels_1 are set to 0 exept those where labels_2 overlap between the label maps. 
+     * 
+     * For the remaining labels_1, the value will be between 0 and 1 indicating the overlap as measured by the Jaccard Index.
+     * Major parts of this operation run on the CPU.
+     */
+    default boolean generateJaccardIndexMatrix(ClearCLBuffer label_map1, ClearCLBuffer label_map2, ClearCLBuffer jaccard_index_matrix_destination) {
+        if (doTimeTracing()) {recordMethodStart("GenerateJaccardIndexMatrix");}
+        boolean result = GenerateJaccardIndexMatrix.generateJaccardIndexMatrix(getCLIJ2(), label_map1, label_map2, jaccard_index_matrix_destination);
+        if (doTimeTracing()) {recordMethodEnd("GenerateJaccardIndexMatrix");}
+        return result;
+    }
+
 }
-// 398 methods generated.
+// 400 methods generated.
