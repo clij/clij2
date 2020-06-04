@@ -9,6 +9,7 @@ import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import org.scijava.plugin.Plugin;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
@@ -37,7 +38,7 @@ public class DivideImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
         parameters.put("dst", dst);
 
         if (!checkDimensions(src.getDimension(), src1.getDimension(), dst.getDimension())) {
-            throw new IllegalArgumentException("Error: number of dimensions don't match! (addImageAndScalar)");
+            throw new IllegalArgumentException("Error: number of dimensions don't match! (divideImages): " + Arrays.toString(src.getDimensions()) + " vs " + Arrays.toString(src1.getDimensions()) + " vs " + Arrays.toString(dst.getDimensions()));
         }
 
         clij2.execute(DivideImages.class, "divide_images_" + src.getDimension() + "d_x.cl", "divide_images_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
