@@ -35,7 +35,7 @@ public class LaplaceDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
-        clij2.execute(LaplaceDiamond.class, "laplace_diamond_" + src.getDimension() + "d.cl", "laplace_diamond_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(LaplaceDiamond.class, "laplace_diamond_" + src.getDimension() + "d_x.cl", "laplace_diamond_" + src.getDimension() + "d", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
 
