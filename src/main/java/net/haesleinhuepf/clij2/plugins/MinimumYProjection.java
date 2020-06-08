@@ -56,7 +56,7 @@ public class MinimumYProjection extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getAvailableForDimensions() {
-        return "3D";
+        return "3D -> 2D";
     }
 
 }

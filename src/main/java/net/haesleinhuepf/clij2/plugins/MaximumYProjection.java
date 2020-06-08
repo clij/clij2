@@ -47,7 +47,7 @@ public class MaximumYProjection extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getDescription() {
-        return "Determines the maximum projection of an image along X.";
+        return "Determines the maximum intensity projection of an image along X.";
     }
 
     @Override

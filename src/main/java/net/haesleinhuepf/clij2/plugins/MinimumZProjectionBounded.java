@@ -55,12 +55,12 @@ public class MinimumZProjectionBounded extends AbstractCLIJ2Plugin implements CL
 
     @Override
     public String getDescription() {
-        return "Determines the minimum projection of an image along Z within a given z range.";
+        return "Determines the minimum intensity projection of an image along Z within a given z range.";
     }
 
     @Override
     public String getAvailableForDimensions() {
-        return "3D";
+        return "3D -> 2D";
     }
 
 }

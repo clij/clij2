@@ -54,12 +54,12 @@ public class MeanZProjectionBounded extends AbstractCLIJPlugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Determines the mean projection of an image along Z within a given z range.";
+        return "Determines the mean average intensity projection of an image along Z within a given z range.";
     }
 
     @Override
     public String getAvailableForDimensions() {
-        return "3D";
+        return "3D -> 2D";
     }
 
 }

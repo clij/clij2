@@ -46,12 +46,12 @@ public class MedianZProjection extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getDescription() {
-        return "Determines the median projection of an image stack along Z.";
+        return "Determines the median intensity projection of an image stack along Z.";
     }
 
     @Override
     public String getAvailableForDimensions() {
-        return "3D";
+        return "3D -> 2D";
     }
 
 }

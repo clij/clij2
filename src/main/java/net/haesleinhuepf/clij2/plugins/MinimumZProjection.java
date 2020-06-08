@@ -51,12 +51,12 @@ public class MinimumZProjection extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getDescription() {
-        return "Determines the minimum projection of an image along Z.";
+        return "Determines the minimum intensity projection of an image along Z.";
     }
 
     @Override
     public String getAvailableForDimensions() {
-        return "3D";
+        return "3D -> 2D";
     }
 
 }

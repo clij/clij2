@@ -50,12 +50,12 @@ public class MeanZProjection extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getDescription() {
-        return "Determines the mean average projection of an image along Z.";
+        return "Determines the mean average intensity projection of an image along Z.";
     }
 
     @Override
     public String getAvailableForDimensions() {
-        return "3D";
+        return "3D -> 2D";
     }
 
 }

@@ -46,12 +46,12 @@ public class StandardDeviationZProjection extends AbstractCLIJ2Plugin implements
 
     @Override
     public String getDescription() {
-        return "Determines the standard deviation projection of an image stack along Z.";
+        return "Determines the standard deviation intensity projection of an image stack along Z.";
     }
 
     @Override
     public String getAvailableForDimensions() {
-        return "3D";
+        return "3D -> 2D";
     }
 
 }
