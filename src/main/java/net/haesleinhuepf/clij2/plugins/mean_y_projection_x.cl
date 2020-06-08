@@ -1,5 +1,5 @@
 
-__kernel void minimum_y_projection (
+__kernel void mean_y_projection (
     IMAGE_dst_TYPE dst,
     IMAGE_src_TYPE src
 ) {
@@ -14,5 +14,5 @@ __kernel void minimum_y_projection (
     sum = sum + READ_src_IMAGE(src,sampler,POS_src_INSTANCE(x,y,z,0)).x;
     count++;
   }
-  WRITE_dst_IMAGE(dst,POS_dst_INSTANCE(x,y,0,0), CONVERT_dst_PIXEL_TYPE(sum / count));
+  WRITE_dst_IMAGE(dst,POS_dst_INSTANCE(x,z,0,0), CONVERT_dst_PIXEL_TYPE(sum / count));
 }
