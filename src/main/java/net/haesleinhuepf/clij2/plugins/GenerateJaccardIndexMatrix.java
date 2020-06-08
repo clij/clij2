@@ -58,10 +58,13 @@ public class GenerateJaccardIndexMatrix extends AbstractCLIJ2Plugin implements C
         ClearCLBuffer false_negatives = clij2.create(true_positives.getWidth(), 1);
         ClearCLBuffer false_positives = clij2.create(1, true_positives.getHeight());
 
+        clij2.sumYProjection(true_positives, false_negatives);
+        clij2.sumXProjection(true_positives, false_positives);
+
         ClearCLBuffer temp1 = clij2.create(true_positives);
         ClearCLBuffer temp2 = clij2.create(true_positives);
 
-        clij2.addImages(true_positives, false_negatives, temp1);
+        clij2.addImagesWeighted(true_positives, false_negatives, temp1, -1, 1);
         clij2.addImages(temp1, false_positives, temp2);
 
         clij2.divideImages(true_positives, temp2, dst_jaccard_index_matrix);
@@ -161,39 +164,4 @@ public class GenerateJaccardIndexMatrix extends AbstractCLIJ2Plugin implements C
         return "2D, 3D";
     }
 
-    public static void main(String... args) {
-        CLIJ2 clij2 = CLIJ2.getInstance();
-
-        ClearCLBuffer image1 = clij2.pushString("" +
-                "1 1 0 0\n" +
-                "1 1 2 2\n\n" +
-                "1 1 0 0\n" +
-                "1 1 2 2");
-
-        ClearCLBuffer image2 = clij2.pushString("" +
-                "1 1 0 2\n" +
-                "1 1 0 2\n\n" +
-                "1 1 0 2\n" +
-                "1 1 0 2");
-
-        ClearCLBuffer ref = clij2.pushString("" +
-                "0.5 0 0.5\n" +
-                "0 1 0\n" +
-                "0.5 0 0.5");
-
-
-        ClearCLBuffer jaccard_matrix = clij2.create(3, 3);
-
-        GenerateJaccardIndexMatrix.generateJaccardIndexMatrix(clij2, image1, image2, jaccard_matrix);
-
-        clij2.print(jaccard_matrix);
-
-
-        ClearCLBuffer jaccard_matrix_0 = clij2.create(3, 3);
-
-        UndefinedToZero.undefinedToZero(clij2, jaccard_matrix, jaccard_matrix_0);
-
-        clij2.print(jaccard_matrix_0);
-
-    }
 }
