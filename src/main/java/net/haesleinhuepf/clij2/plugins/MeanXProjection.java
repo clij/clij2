@@ -45,7 +45,7 @@ public class MeanXProjection extends AbstractCLIJ2Plugin implements CLIJMacroPlu
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input)
     {
-        return getCLIJ2().create(new long[]{input.getWidth(), input.getHeight()}, input.getNativeType());
+        return getCLIJ2().create(new long[]{input.getDepth(), input.getHeight()}, input.getNativeType());
     }
 
     @Override
