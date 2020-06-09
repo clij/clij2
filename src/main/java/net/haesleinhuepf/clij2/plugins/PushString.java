@@ -70,7 +70,13 @@ public class PushString extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
         int depth = image.split("\n\n").length;
         int height = image.split("\n\n")[0].split("\n").length;
         int width = image.split("\n\n")[0].split("\n")[0].split(" ").length;
-        ClearCLBuffer buffer = clij2.create(new long[]{width, height, depth}, NativeTypeEnum.Float);
+
+        ClearCLBuffer buffer;
+        if (depth > 1) {
+            buffer = clij2.create(new long[]{width, height, depth}, NativeTypeEnum.Float);
+        } else {
+            buffer = clij2.create(new long[]{width, height}, NativeTypeEnum.Float);
+        }
         pushString(clij2, buffer, image);
         return buffer;
     }
@@ -81,7 +87,11 @@ public class PushString extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
         int depth = image.split("\n\n").length;
         int height = image.split("\n\n")[0].split("\n").length;
         int width = image.split("\n\n")[0].split("\n")[0].split(" ").length;
-        return clij.create(new long[]{width, height, depth}, NativeTypeEnum.Float);
+        if (depth > 1) {
+            return clij.create(new long[]{width, height, depth}, NativeTypeEnum.Float);
+        } else {
+            return clij.create(new long[]{width, height}, NativeTypeEnum.Float);
+        }
     }
 
     @Override
