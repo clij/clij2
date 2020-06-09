@@ -73,7 +73,7 @@ public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroP
                 at.concatenate(rotateTransform);
             } else if (commandParts[0].compareTo("translatex") == 0) {
                 net.imglib2.realtransform.AffineTransform2D translateTransform = new net.imglib2.realtransform.AffineTransform2D();
-                translateTransform.translate(Double.parseDouble(commandParts[1]), 0, 0);
+                translateTransform.translate(Double.parseDouble(commandParts[1]), 0);
                 at.concatenate(translateTransform);
             } else if (commandParts[0].compareTo("translatey") == 0) {
                 net.imglib2.realtransform.AffineTransform2D translateTransform = new net.imglib2.realtransform.AffineTransform2D();
