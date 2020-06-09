@@ -31,7 +31,7 @@ public class SetWhereXgreaterThanY extends AbstractCLIJ2Plugin implements CLIJMa
         parameters.put("value", value);
 
         clij2.activateSizeIndependentKernelCompilation();
-        clij2.execute(SetWhereXgreaterThanY.class, "setWhereXgreaterThanY_" + clImage.getDimension() + "d_x.cl", "set_where_x_greater_than_y_" + clImage.getDimension() + "d", clImage.getDimensions(), clImage.getDimensions(),  parameters);
+        clij2.execute(SetWhereXgreaterThanY.class, "set_where_x_greater_than_y_" + clImage.getDimension() + "d_x.cl", "set_where_x_greater_than_y_" + clImage.getDimension() + "d", clImage.getDimensions(), clImage.getDimensions(),  parameters);
         return true;
     }
 

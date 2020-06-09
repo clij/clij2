@@ -35,7 +35,7 @@ public class BinaryEdgeDetection extends AbstractCLIJ2Plugin implements CLIJMacr
         parameters.put("src", src);
         parameters.put("dst", dst);
 
-        clij2.execute(BinaryEdgeDetection.class, "binaryEdgeDetection" + dst.getDimension() + "d_x.cl", "binary_edge_detection_diamond_image" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(BinaryEdgeDetection.class, "binary_edge_detection_" + dst.getDimension() + "d_x.cl", "binary_edge_detection_" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters);
 
         return true;
     }

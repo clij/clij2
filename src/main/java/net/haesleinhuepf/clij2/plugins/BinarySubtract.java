@@ -38,7 +38,7 @@ public class BinarySubtract extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         parameters.put("dst", dst);
 
 
-        clij2.execute(BinarySubtract.class, "binarySubtract" + dst.getDimension() + "d_x.cl", "binary_subtract_image" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(BinarySubtract.class, "binary_subtract_" + dst.getDimension() + "d_x.cl", "binary_subtract_" + dst.getDimension() +  "d", dst.getDimensions(), dst.getDimensions(), parameters);
 
         return true;
     }
