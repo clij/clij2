@@ -27,11 +27,11 @@ __kernel void apply_vectorfield_2d(
   float x = i+0.5f;
   float y = j+0.5f;
 
+  const POS_vectorX_TYPE posX = POS_vectorX_INSTANCE(i, j, 0, 0);
+  const POS_vectorY_TYPE posY = POS_vectorY_INSTANCE(i, j, 0, 0);
 
-  int2 pos = (int2){i, j};
-
-  float x2 = x + (float)(READ_vectorX_IMAGE(vectorX, sampler, pos).x);
-  float y2 = y + (float)(READ_vectorY_IMAGE(vectorY, sampler, pos).x);
+  float x2 = x + (float)(READ_vectorX_IMAGE(vectorX, sampler, posX).x);
+  float y2 = y + (float)(READ_vectorY_IMAGE(vectorY, sampler, posY).x);
 
 
   int2 coord_norm = (int2)(x2, y2);
@@ -44,5 +44,6 @@ __kernel void apply_vectorfield_2d(
   }
 
 
-  WRITE_dst_IMAGE(dst, pos, CONVERT_dst_PIXEL_TYPE(pix));
+  const POS_dst_TYPE posD = POS_dst_INSTANCE(i, j, 0, 0);
+  WRITE_dst_IMAGE(dst, posD, CONVERT_dst_PIXEL_TYPE(pix));
 }
