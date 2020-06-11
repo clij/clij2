@@ -15,5 +15,5 @@ __kernel void minimum_x_projection (
       min = value;
     }
   }
-  WRITE_dst_min_IMAGE(dst_max,POS_dst_min_INSTANCE(z,y,0,0), CONVERT_dst_min_PIXEL_TYPE(min));
+  WRITE_dst_min_IMAGE(dst_min,POS_dst_min_INSTANCE(z,y,0,0), CONVERT_dst_min_PIXEL_TYPE(min));
 }
