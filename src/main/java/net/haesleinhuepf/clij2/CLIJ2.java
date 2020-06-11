@@ -22,7 +22,7 @@ import net.imglib2.view.Views;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 
@@ -369,41 +369,41 @@ public class CLIJ2 implements CLIJ2Ops {
         System.out.println(text);
     }
 
-    public void execute(String programFilename, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants) {
+    public void execute(String programFilename, String kernelname, long[] dimensions, long[] globalsizes, Map<String, Object> parameters, Map<String, Object> constants) {
         ClearCLKernel kernel = executeSubsequently(null, programFilename, kernelname,  dimensions, globalsizes, parameters, constants, null);
         kernel.close();
     }
 
-    public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants) {
+    public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, Map<String, Object> parameters, Map<String, Object> constants) {
         ClearCLKernel kernel = executeSubsequently(anchorClass, programFilename, kernelname,  dimensions, globalsizes, parameters, constants, null);
         kernel.close();
     }
 
-    public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters) {
+    public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, Map<String, Object> parameters) {
         ClearCLKernel kernel = executeSubsequently(anchorClass, programFilename, kernelname,  dimensions, globalsizes, parameters, null);
         kernel.close();
     }
 
-    public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, long[] localSizes, HashMap<String, Object> parameters) {
+    public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, long[] localSizes, Map<String, Object> parameters) {
         ClearCLKernel kernel = executeSubsequently(anchorClass, programFilename, kernelname,  dimensions, globalsizes, localSizes, parameters, null,null);
         kernel.close();
     }
 
-    public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, long[] localSizes, HashMap<String, Object> parameters, HashMap<String, Object> constants) {
+    public void execute(Class anchorClass, String programFilename, String kernelname, long[] dimensions, long[] globalsizes, long[] localSizes, Map<String, Object> parameters, Map<String, Object> constants) {
         ClearCLKernel kernel = executeSubsequently(anchorClass, programFilename, kernelname,  dimensions, globalsizes, localSizes, parameters, constants,null);
         kernel.close();
     }
 
-    public ClearCLKernel executeSubsequently(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, ClearCLKernel kernel) {
+    public ClearCLKernel executeSubsequently(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, Map<String, Object> parameters, ClearCLKernel kernel) {
         return executeSubsequently(anchorClass, pProgramFilename, pKernelname, dimensions, globalsizes, parameters, null, kernel);
     }
 
 
-    public ClearCLKernel executeSubsequently(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants, ClearCLKernel kernel) {
+    public ClearCLKernel executeSubsequently(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, Map<String, Object> parameters, Map<String, Object> constants, ClearCLKernel kernel) {
         return executeSubsequently(anchorClass, pProgramFilename, pKernelname, dimensions, globalsizes, null, parameters, constants, kernel);
     }
 
-    public synchronized ClearCLKernel executeSubsequently(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, long[] localSizes, HashMap<String, Object> parameters, HashMap<String, Object> constants, ClearCLKernel kernel) {
+    public synchronized ClearCLKernel executeSubsequently(Class anchorClass, String pProgramFilename, String pKernelname, long[] dimensions, long[] globalsizes, long[] localSizes, Map<String, Object> parameters, Map<String, Object> constants, ClearCLKernel kernel) {
 
         final ClearCLKernel[] result = {kernel};
 
@@ -432,32 +432,32 @@ public class CLIJ2 implements CLIJ2Ops {
 
 
 
-    public void executeCode(String sourceCode, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants) {
+    public void executeCode(String sourceCode, String kernelname, long[] dimensions, long[] globalsizes, Map<String, Object> parameters, Map<String, Object> constants) {
         ClearCLKernel kernel = executeCodeSubsequently(sourceCode, kernelname,  dimensions, globalsizes, parameters, constants, null);
         kernel.close();
     }
 
-    public void executeCode(String sourceCode, String kernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters) {
+    public void executeCode(String sourceCode, String kernelname, long[] dimensions, long[] globalsizes, Map<String, Object> parameters) {
         ClearCLKernel kernel = executeCodeSubsequently(sourceCode, kernelname,  dimensions, globalsizes, parameters, null);
         kernel.close();
     }
 
-    public void executeCode(String sourceCode, String kernelname, long[] dimensions, long[] globalsizes, long[] localSizes, HashMap<String, Object> parameters) {
+    public void executeCode(String sourceCode, String kernelname, long[] dimensions, long[] globalsizes, long[] localSizes, Map<String, Object> parameters) {
         ClearCLKernel kernel = executeCodeSubsequently(sourceCode, kernelname,  dimensions, globalsizes, localSizes, parameters, null,null);
         kernel.close();
     }
 
-    public ClearCLKernel executeCodeSubsequently(String sourceCode, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, ClearCLKernel kernel) {
+    public ClearCLKernel executeCodeSubsequently(String sourceCode, String pKernelname, long[] dimensions, long[] globalsizes, Map<String, Object> parameters, ClearCLKernel kernel) {
         return executeCodeSubsequently(sourceCode, pKernelname, dimensions, globalsizes, parameters, null, kernel);
     }
 
 
-    public ClearCLKernel executeCodeSubsequently(String sourceCode, String pKernelname, long[] dimensions, long[] globalsizes, HashMap<String, Object> parameters, HashMap<String, Object> constants, ClearCLKernel kernel) {
+    public ClearCLKernel executeCodeSubsequently(String sourceCode, String pKernelname, long[] dimensions, long[] globalsizes, Map<String, Object> parameters, Map<String, Object> constants, ClearCLKernel kernel) {
         return executeCodeSubsequently(sourceCode, pKernelname, dimensions, globalsizes, null, parameters, constants, kernel);
     }
 
 
-    public ClearCLKernel executeCodeSubsequently(String sourceCode, String pKernelname, long[] dimensions, long[] globalsizes, long[] localSizes, HashMap<String, Object> parameters, HashMap<String, Object> constants, ClearCLKernel kernel) {
+    public ClearCLKernel executeCodeSubsequently(String sourceCode, String pKernelname, long[] dimensions, long[] globalsizes, long[] localSizes, Map<String, Object> parameters, Map<String, Object> constants, ClearCLKernel kernel) {
 
         final ClearCLKernel[] result = {kernel};
 
