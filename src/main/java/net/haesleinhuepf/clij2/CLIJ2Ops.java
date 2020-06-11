@@ -1883,8 +1883,10 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes a radial projection of an image stack. Starting point for the line is the center in any 
-     * X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
+     * Computes a radial projection of an image stack. 
+     * 
+     * Starting point for the line is the given point in any 
+     * X/Y-plane of a given input image stack. Furthermore, radius of the resulting projection must be given and scaling factors in X and Y in case pixels are not isotropic.This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
      */
     default boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
         if (doTimeTracing()) {recordMethodStart("ResliceRadial");}
@@ -1894,8 +1896,10 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes a radial projection of an image stack. Starting point for the line is the center in any 
-     * X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
+     * Computes a radial projection of an image stack. 
+     * 
+     * Starting point for the line is the given point in any 
+     * X/Y-plane of a given input image stack. Furthermore, radius of the resulting projection must be given and scaling factors in X and Y in case pixels are not isotropic.This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
      */
     default boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
         if (doTimeTracing()) {recordMethodStart("ResliceRadial");}
@@ -1905,8 +1909,10 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes a radial projection of an image stack. Starting point for the line is the center in any 
-     * X/Y-plane of a given input image stack. This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
+     * Computes a radial projection of an image stack. 
+     * 
+     * Starting point for the line is the given point in any 
+     * X/Y-plane of a given input image stack. Furthermore, radius of the resulting projection must be given and scaling factors in X and Y in case pixels are not isotropic.This operation is similar to ImageJs 'Radial Reslice' method but offers less flexibility.
      */
     default boolean resliceRadial(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8) {
         if (doTimeTracing()) {recordMethodStart("ResliceRadial");}
@@ -2225,7 +2231,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local minimum of a pixels rectangular neighborhood. 
+     * 
+     * The rectangles size is specified by 
      * its half-width and half-height (radius).
      */
     @Deprecated
@@ -2267,7 +2275,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local maximum of a pixels rectangular neighborhood. 
+     * 
+     * The rectangles size is specified by 
      * its half-width and half-height (radius).
      */
     @Deprecated
@@ -2650,7 +2660,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.ApplyVectorField2D
     //----------------------------------------------------
     /**
-     * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
+     * Deforms an image according to distances provided in the given vector images.
+     * 
+     *  It is recommended to use 32-bit images for input, output and vector images. 
      */
     default boolean applyVectorField(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("ApplyVectorField2D");}
@@ -2660,7 +2672,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
+     * Deforms an image according to distances provided in the given vector images.
+     * 
+     *  It is recommended to use 32-bit images for input, output and vector images. 
      */
     default boolean applyVectorField2D(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("ApplyVectorField2D");}
@@ -2673,7 +2687,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.ApplyVectorField3D
     //----------------------------------------------------
     /**
-     * Deforms an image according to distances provided in the given vector images. It is recommended to use 32-bit images for input, output and vector images. 
+     * Deforms an image according to distances provided in the given vector images.
+     * 
+     *  It is recommended to use 32-bit images for input, output and vector images. 
      */
     default boolean applyVectorField(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLImageInterface arg4, ClearCLImageInterface arg5) {
         if (doTimeTracing()) {recordMethodStart("ApplyVectorField3D");}
@@ -2683,7 +2699,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Deforms an image stack according to distances provided in the given vector image stacks. It is recommended to use 32-bit image stacks for input, output and vector image stacks. 
+     * Deforms an image stack according to distances provided in the given vector image stacks.
+     * 
+     * It is recommended to use 32-bit image stacks for input, output and vector image stacks. 
      */
     default boolean applyVectorField3D(ClearCLImageInterface source, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface vectorZ, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("ApplyVectorField3D");}
@@ -2697,6 +2715,7 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Determines the maximum projection of an image stack along Z.
+     * 
      * Furthermore, another 2D image is generated with pixels containing the z-index where the maximum was found (zero based).
      */
     default boolean argMaximumZProjection(ClearCLImageInterface source, ClearCLImageInterface destination_max, ClearCLImageInterface destination_arg_max) {
@@ -2723,6 +2742,13 @@ public abstract interface CLIJ2Ops {
 
     /**
      * Determines the histogram of a given image.
+     * 
+     * The histogram image is of dimensions number_of_bins/1/1; a 3D image with height=1 and depth=1. 
+     * Histogram bins contain the number of pixels with intensity in this corresponding bin. 
+     * The histogram bins are uniformly distributed between given minimum and maximum grey value intensity. 
+     * If the flag determine_min_max is set, minimum and maximum intensity will be determined. 
+     * When calling this operation many times, it is recommended to determine minimum and maximum intensity 
+     * once at the beginning and handing over these values.
      */
     default boolean histogram(ClearCLBuffer arg1, ClearCLBuffer arg2) {
         if (doTimeTracing()) {recordMethodStart("Histogram");}
@@ -2733,6 +2759,13 @@ public abstract interface CLIJ2Ops {
 
     /**
      * Determines the histogram of a given image.
+     * 
+     * The histogram image is of dimensions number_of_bins/1/1; a 3D image with height=1 and depth=1. 
+     * Histogram bins contain the number of pixels with intensity in this corresponding bin. 
+     * The histogram bins are uniformly distributed between given minimum and maximum grey value intensity. 
+     * If the flag determine_min_max is set, minimum and maximum intensity will be determined. 
+     * When calling this operation many times, it is recommended to determine minimum and maximum intensity 
+     * once at the beginning and handing over these values.
      */
     default boolean histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, boolean arg6) {
         if (doTimeTracing()) {recordMethodStart("Histogram");}
@@ -2743,6 +2776,13 @@ public abstract interface CLIJ2Ops {
 
     /**
      * Determines the histogram of a given image.
+     * 
+     * The histogram image is of dimensions number_of_bins/1/1; a 3D image with height=1 and depth=1. 
+     * Histogram bins contain the number of pixels with intensity in this corresponding bin. 
+     * The histogram bins are uniformly distributed between given minimum and maximum grey value intensity. 
+     * If the flag determine_min_max is set, minimum and maximum intensity will be determined. 
+     * When calling this operation many times, it is recommended to determine minimum and maximum intensity 
+     * once at the beginning and handing over these values.
      */
     default boolean histogram(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, boolean arg6, boolean arg7) {
         if (doTimeTracing()) {recordMethodStart("Histogram");}
@@ -2753,6 +2793,13 @@ public abstract interface CLIJ2Ops {
 
     /**
      * Determines the histogram of a given image.
+     * 
+     * The histogram image is of dimensions number_of_bins/1/1; a 3D image with height=1 and depth=1. 
+     * Histogram bins contain the number of pixels with intensity in this corresponding bin. 
+     * The histogram bins are uniformly distributed between given minimum and maximum grey value intensity. 
+     * If the flag determine_min_max is set, minimum and maximum intensity will be determined. 
+     * When calling this operation many times, it is recommended to determine minimum and maximum intensity 
+     * once at the beginning and handing over these values.
      */
     default float[] histogram(ClearCLBuffer arg1, double arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("Histogram");}
@@ -2763,6 +2810,13 @@ public abstract interface CLIJ2Ops {
 
     /**
      * Determines the histogram of a given image.
+     * 
+     * The histogram image is of dimensions number_of_bins/1/1; a 3D image with height=1 and depth=1. 
+     * Histogram bins contain the number of pixels with intensity in this corresponding bin. 
+     * The histogram bins are uniformly distributed between given minimum and maximum grey value intensity. 
+     * If the flag determine_min_max is set, minimum and maximum intensity will be determined. 
+     * When calling this operation many times, it is recommended to determine minimum and maximum intensity 
+     * once at the beginning and handing over these values.
      */
     default ClearCLBuffer histogram(ClearCLBuffer arg1) {
         if (doTimeTracing()) {recordMethodStart("Histogram");}
@@ -2776,7 +2830,9 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on 
-     * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one 
+     * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
+     * 
+     *  Enter one 
      * of these methods in the method text field:
      * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
      */
@@ -2789,7 +2845,9 @@ public abstract interface CLIJ2Ops {
 
     /**
      * The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on 
-     * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method. Enter one 
+     * the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.
+     * 
+     *  Enter one 
      * of these methods in the method text field:
      * [Default, Huang, Intermodes, IsoData, IJ_IsoData, Li, MaxEntropy, Mean, MinError, Minimum, Moments, Otsu, Percentile, RenyiEntropy, Shanbhag, Triangle, Yen]
      */
@@ -2804,7 +2862,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Threshold
     //----------------------------------------------------
     /**
-     * Computes a binary image with pixel values 0 and 1. All pixel values x of a given input image with 
+     * Computes a binary image with pixel values 0 and 1. 
+     * 
+     * All pixel values x of a given input image with 
      * value larger or equal to a given threshold t will be set to 1.
      * 
      * f(x,t) = (1 if (x >= t); (0 otherwise))
@@ -2824,6 +2884,7 @@ public abstract interface CLIJ2Ops {
     /**
      * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
      * pixels x and y with the binary OR operator |.
+     * 
      * All pixel values except 0 in the input images are interpreted as 1.<pre>f(x, y) = x | y</pre>
      */
     default boolean binaryOr(ClearCLImageInterface operand1, ClearCLImageInterface operand2, ClearCLImageInterface destination) {
@@ -2856,6 +2917,7 @@ public abstract interface CLIJ2Ops {
     /**
      * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
      * pixels x and y with the binary operators AND &, OR | and NOT ! implementing the XOR operator.
+     * 
      * All pixel values except 0 in the input images are interpreted as 1.
      * 
      * <pre>f(x, y) = (x & !y) | (!x & y)</pre>
@@ -2873,6 +2935,7 @@ public abstract interface CLIJ2Ops {
     /**
      * Computes a binary image (containing pixel values 0 and 1) from an image X by negating its pixel values
      * x using the binary NOT operator !
+     * 
      * All pixel values except 0 in the input image are interpreted as 1.
      * 
      * <pre>f(x) = !x</pre>
@@ -2888,7 +2951,8 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.ErodeSphere
     //----------------------------------------------------
     /**
-     * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
+     * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image. 
+     * 
      * The erosion takes the von-Neumann-neighborhood (4 pixels in 2D and 6 pixels in 3d) into account.
      * The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
      */
@@ -2903,7 +2967,8 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.ErodeBox
     //----------------------------------------------------
     /**
-     * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
+     * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image. 
+     * 
      * The erosion takes the Moore-neighborhood (8 pixels in 2D and 26 pixels in 3d) into account.
      * The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
      * 
@@ -2921,7 +2986,8 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.ErodeSphereSliceBySlice
     //----------------------------------------------------
     /**
-     * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
+     * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image. 
+     * 
      * The erosion takes the von-Neumann-neighborhood (4 pixels in 2D and 6 pixels in 3d) into account.
      * The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
      * 
@@ -2938,7 +3004,8 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.ErodeBoxSliceBySlice
     //----------------------------------------------------
     /**
-     * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
+     * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image. 
+     * 
      * The erosion takes the Moore-neighborhood (8 pixels in 2D and 26 pixels in 3d) into account.
      * The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
      * 
@@ -2959,6 +3026,7 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
+     * 
      * The dilation takes the von-Neumann-neighborhood (4 pixels in 2D and 6 pixels in 3d) into account.
      * The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
      */
@@ -2974,6 +3042,7 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
+     * 
      * The dilation takes the Moore-neighborhood (8 pixels in 2D and 26 pixels in 3d) into account.
      * The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
      * 
@@ -2992,6 +3061,7 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
+     * 
      * The dilation takes the von-Neumann-neighborhood (4 pixels in 2D and 6 pixels in 3d) into account.
      * The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
      * 
@@ -3009,6 +3079,7 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
+     * 
      * The dilation takes the Moore-neighborhood (8 pixels in 2D and 26 pixels in 3d) into account.
      * The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
      * 
@@ -3062,7 +3133,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Crop2D
     //----------------------------------------------------
     /**
-     * Crops a given rectangle out of a given image.
+     * Crops a given rectangle out of a given image. 
      * 
      * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
      */
@@ -3074,7 +3145,7 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Crops a given rectangle out of a given image.
+     * Crops a given rectangle out of a given image. 
      * 
      * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
      */
@@ -3089,7 +3160,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Crop3D
     //----------------------------------------------------
     /**
-     * Crops a given rectangle out of a given image.
+     * Crops a given rectangle out of a given image. 
      * 
      * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
      */
@@ -3101,7 +3172,7 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Crops a given sub-stack out of a given image stack.
+     * Crops a given sub-stack out of a given image stack. 
      * 
      * Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.
      */
@@ -3191,7 +3262,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Rotates a given input image by 90 degrees counter-clockwise. For that, X and Y axis of an image stack
+     * Rotates a given input image by 90 degrees counter-clockwise. 
+     * 
+     * For that, X and Y axis of an image stack
      * are flipped. This operation is similar to ImageJs 'Reslice [/]' method but offers less flexibility 
      * such as interpolation.
      */
@@ -3222,7 +3295,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Rotates a given input image by 90 degrees clockwise. For that, X and Y axis of an image stack
+     * Rotates a given input image by 90 degrees counter-clockwise. 
+     * 
+     * For that, X and Y axis of an image stack
      * are flipped. This operation is similar to ImageJs 'Reslice [/]' method but offers less flexibility 
      * such as interpolation.
      */
@@ -3239,7 +3314,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Mask
     //----------------------------------------------------
     /**
-     * Computes a masked image by applying a mask to an image. All pixel values x of image X will be copied
+     * Computes a masked image by applying a mask to an image. 
+     * 
+     * All pixel values x of image X will be copied
      * to the destination image in case pixel value m at the same position in the mask image is not equal to 
      * zero.
      * 
@@ -3256,7 +3333,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MaskStackWithPlane
     //----------------------------------------------------
     /**
-     * Computes a masked image by applying a 2D mask to an image stack. All pixel values x of image X will be copied
+     * Computes a masked image by applying a 2D mask to an image stack. 
+     * 
+     * All pixel values x of image X will be copied
      * to the destination image in case pixel value m at the same spatial position in the mask image is not equal to 
      * zero.
      * 
@@ -3273,7 +3352,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MaximumZProjection
     //----------------------------------------------------
     /**
-     * Determines the maximum projection of an image along Z.
+     * Determines the maximum intensity projection of an image along Z.
      */
     default boolean maximumZProjection(ClearCLImageInterface source, ClearCLImageInterface destination_max) {
         if (doTimeTracing()) {recordMethodStart("MaximumZProjection");}
@@ -3286,7 +3365,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MeanZProjection
     //----------------------------------------------------
     /**
-     * Determines the mean average projection of an image along Z.
+     * Determines the mean average intensity projection of an image along Z.
      */
     default boolean meanZProjection(ClearCLImageInterface source, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("MeanZProjection");}
@@ -3299,7 +3378,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MinimumZProjection
     //----------------------------------------------------
     /**
-     * Determines the minimum projection of an image along Z.
+     * Determines the minimum intensity projection of an image along Z.
      */
     default boolean minimumZProjection(ClearCLImageInterface source, ClearCLImageInterface destination_sum) {
         if (doTimeTracing()) {recordMethodStart("MinimumZProjection");}
@@ -3327,7 +3406,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.DivideImages
     //----------------------------------------------------
     /**
-     * Divides two images X and Y by each other pixel wise.
+     * Divides two images X and Y by each other pixel wise. 
      * 
      * <pre>f(x, y) = x / y</pre>
      */
@@ -3342,7 +3421,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MaximumImages
     //----------------------------------------------------
     /**
-     * Computes the maximum of a pair of pixel values x, y from two given images X and Y.
+     * Computes the maximum of a pair of pixel values x, y from two given images X and Y. 
      * 
      * <pre>f(x, y) = max(x, y)</pre>
      */
@@ -3357,7 +3436,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MaximumImageAndScalar
     //----------------------------------------------------
     /**
-     * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
+     * Computes the maximum of a constant scalar s and each pixel value x in a given image X. 
      * 
      * <pre>f(x, s) = max(x, s)</pre>
      */
@@ -3387,7 +3466,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MinimumImageAndScalar
     //----------------------------------------------------
     /**
-     * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
+     * Computes the minimum of a constant scalar s and each pixel value x in a given image X.
      * 
      * <pre>f(x, s) = min(x, s)</pre>
      */
@@ -3417,7 +3496,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MultiplyStackWithPlane
     //----------------------------------------------------
     /**
-     * Multiplies all pairs of pixel values x and y from an image stack X and a 2D image Y. x and y are at 
+     * Multiplies all pairs of pixel values x and y from an image stack X and a 2D image Y. 
+     * 
+     * x and y are at 
      * the same spatial position within a plane.
      * 
      * <pre>f(x, y) = x * y</pre>
@@ -3433,7 +3514,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.CountNonZeroPixels2DSphere
     //----------------------------------------------------
     /**
-     * Counts non-zero pixels in a sphere around every pixel.Put the number in the result image.
+     * Counts non-zero pixels in a sphere around every pixel. 
+     * 
+     * Put the number in the result image.
      */
     default boolean countNonZeroPixels2DSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("CountNonZeroPixels2DSphere");}
@@ -3470,7 +3553,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Counts non-zero pixels in a sphere around every pixel slice by slice in a stack and puts the resulting number in the destination image stack.
+     * Counts non-zero pixels in a sphere around every pixel slice by slice in a stack. 
+     * 
+     *  It puts the resulting number in the destination image stack.
      */
     default boolean countNonZeroPixelsSliceBySliceSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("CountNonZeroPixelsSliceBySliceSphere");}
@@ -3483,7 +3568,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.CountNonZeroVoxels3DSphere
     //----------------------------------------------------
     /**
-     * Counts non-zero voxels in a sphere around every voxel.Put the number in the result image.
+     * Counts non-zero voxels in a sphere around every voxel. 
+     * 
+     * Put the number in the result image.
      */
     default boolean countNonZeroVoxels3DSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
         if (doTimeTracing()) {recordMethodStart("CountNonZeroVoxels3DSphere");}
@@ -3508,7 +3595,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.SumZProjection
     //----------------------------------------------------
     /**
-     * Determines the sum projection of an image along Z.
+     * Determines the sum intensity projection of an image along Z.
      */
     default boolean sumZProjection(ClearCLImageInterface source, ClearCLImageInterface destination_sum) {
         if (doTimeTracing()) {recordMethodStart("SumZProjection");}
@@ -3521,7 +3608,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.SumOfAllPixels
     //----------------------------------------------------
     /**
-     * Determines the sum of all pixels in a given image. It will be stored in a new row of ImageJs
+     * Determines the sum of all pixels in a given image. 
+     * 
+     * It will be stored in a new row of ImageJs
      * Results table in the column 'Sum'.
      */
     default double sumOfAllPixels(ClearCLImageInterface source) {
@@ -3532,7 +3621,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Determines the sum of all pixels in a given image. It will be stored in a new row of ImageJs
+     * Determines the sum of all pixels in a given image. 
+     * 
+     * It will be stored in a new row of ImageJs
      * Results table in the column 'Sum'.
      */
     @Deprecated
@@ -3548,7 +3639,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.CenterOfMass
     //----------------------------------------------------
     /**
-     * Determines the center of mass of an image or image stack and writes the result in the results table
+     * Determines the center of mass of an image or image stack. 
+     * 
+     * It writes the result in the results table
      * in the columns MassX, MassY and MassZ.
      */
     default double[] centerOfMass(ClearCLBuffer source) {
@@ -3562,7 +3655,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Invert
     //----------------------------------------------------
     /**
-     * Computes the negative value of all pixels in a given image. It is recommended to convert images to 
+     * Computes the negative value of all pixels in a given image. 
+     * 
+     * It is recommended to convert images to 
      * 32-bit float before applying this operation.
      * 
      * <pre>f(x) = - x</pre>
@@ -3580,7 +3675,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Downsample2D
     //----------------------------------------------------
     /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
+     * Scales an image using given scaling factors for X and Y dimensions. 
+     * 
+     * The nearest-neighbor method
      * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
      */
     @Deprecated
@@ -3593,7 +3690,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
+     * Scales an image using given scaling factors for X and Y dimensions. 
+     * 
+     * The nearest-neighbor method
      * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
      */
     @Deprecated
@@ -3609,7 +3708,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Downsample3D
     //----------------------------------------------------
     /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
+     * Scales an image using given scaling factors for X and Y dimensions. 
+     * 
+     * The nearest-neighbor method
      * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
      */
     @Deprecated
@@ -3622,7 +3723,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Scales an image using given scaling factors for X and Y dimensions. The nearest-neighbor method
+     * Scales an image using given scaling factors for X and Y dimensions. 
+     * 
+     * The nearest-neighbor method
      * is applied. In ImageJ the method which is similar is called 'Interpolation method: none'.
      */
     @Deprecated
@@ -3638,7 +3741,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.DownsampleSliceBySliceHalfMedian
     //----------------------------------------------------
     /**
-     * Scales an image using scaling factors 0.5 for X and Y dimensions. The Z dimension stays untouched. Thus, each slice is processed separately.
+     * Scales an image using scaling factors 0.5 for X and Y dimensions. The Z dimension stays untouched. 
+     * 
+     * Thus, each slice is processed separately.
      * The median method is applied. Thus, each pixel value in the destination image equals to the median of
      * four corresponding pixels in the source image.
      */
@@ -3669,7 +3774,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.GradientX
     //----------------------------------------------------
     /**
-     * Computes the gradient of gray values along X. Assuming a, b and c are three adjacent
+     * Computes the gradient of gray values along X. 
+     * 
+     * Assuming a, b and c are three adjacent
      *  pixels in X direction. In the target image will be saved as: <pre>b' = c - a;</pre>
      */
     default boolean gradientX(ClearCLBuffer source, ClearCLBuffer destination) {
@@ -3683,7 +3790,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.GradientY
     //----------------------------------------------------
     /**
-     * Computes the gradient of gray values along Y. Assuming a, b and c are three adjacent
+     * Computes the gradient of gray values along Y. 
+     * 
+     * Assuming a, b and c are three adjacent
      *  pixels in Y direction. In the target image will be saved as: <pre>b' = c - a;</pre>
      */
     default boolean gradientY(ClearCLBuffer source, ClearCLBuffer destination) {
@@ -3697,7 +3806,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.GradientZ
     //----------------------------------------------------
     /**
-     * Computes the gradient of gray values along Z. Assuming a, b and c are three adjacent
+     * Computes the gradient of gray values along Z. 
+     * 
+     * Assuming a, b and c are three adjacent
      *  pixels in Z direction. In the target image will be saved as: <pre>b' = c - a;</pre>
      */
     default boolean gradientZ(ClearCLBuffer source, ClearCLBuffer destination) {
@@ -3724,7 +3835,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Mean2DBox
     //----------------------------------------------------
     /**
-     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local mean average of a pixels rectangular neighborhood. 
+     * 
+     * The rectangles size is specified by 
      * its half-width and half-height (radius).
      */
     default boolean mean2DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
@@ -3738,7 +3851,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Mean2DSphere
     //----------------------------------------------------
     /**
-     * Computes the local mean average of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
+     * Computes the local mean average of a pixels ellipsoidal neighborhood. 
+     * 
+     * The ellipses size is specified by 
      * its half-width and half-height (radius).
      */
     default boolean mean2DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
@@ -3752,7 +3867,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Mean3DBox
     //----------------------------------------------------
     /**
-     * Computes the local mean average of a pixels cube neighborhood. The cubes size is specified by 
+     * Computes the local mean average of a pixels cube neighborhood. 
+     * 
+     * The cubes size is specified by 
      * its half-width, half-height and half-depth (radius).
      */
     default boolean mean3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
@@ -3763,7 +3880,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes the local mean average of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local mean average of a pixels rectangular neighborhood. 
+     * 
+     * The rectangles size is specified by 
      * its half-width and half-height (radius).
      */
     default boolean meanBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
@@ -3777,7 +3896,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Mean3DSphere
     //----------------------------------------------------
     /**
-     * Computes the local mean average of a pixels spherical neighborhood. The spheres size is specified by 
+     * Computes the local mean average of a pixels spherical neighborhood. 
+     * 
+     * The spheres size is specified by 
      * its half-width, half-height and half-depth (radius).
      */
     default boolean mean3DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
@@ -3792,7 +3913,9 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Computes the local mean average of a pixels ellipsoidal 2D neighborhood in an image stack 
-     * slice by slice. The ellipses size is specified by its half-width and half-height (radius).
+     * slice by slice. 
+     * 
+     * The ellipses size is specified by its half-width and half-height (radius).
      * 
      * This filter is applied slice by slice in 2D.
      */
@@ -3807,7 +3930,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MeanOfAllPixels
     //----------------------------------------------------
     /**
-     * Determines the mean average of all pixels in a given image. It will be stored in a new row of ImageJs
+     * Determines the mean average of all pixels in a given image. 
+     * 
+     * It will be stored in a new row of ImageJs
      * Results table in the column 'Mean'.
      */
     default double meanOfAllPixels(ClearCLImageInterface source) {
@@ -3821,7 +3946,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Median2DBox
     //----------------------------------------------------
     /**
-     * Computes the local median of a pixels rectangular neighborhood. The rectangle is specified by 
+     * Computes the local median of a pixels rectangular neighborhood. 
+     * 
+     * The rectangle is specified by 
      * its half-width and half-height (radius).
      * 
      * For technical reasons, the area of the rectangle must have less than 1000 pixels.
@@ -3837,7 +3964,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Median2DSphere
     //----------------------------------------------------
     /**
-     * Computes the local median of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
+     * Computes the local median of a pixels ellipsoidal neighborhood. 
+     * 
+     * The ellipses size is specified by 
      * its half-width and half-height (radius).
      * 
      * For technical reasons, the area of the ellipse must have less than 1000 pixels.
@@ -3853,7 +3982,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Median3DBox
     //----------------------------------------------------
     /**
-     * Computes the local median of a pixels cuboid neighborhood. The cuboid size is specified by 
+     * Computes the local median of a pixels cuboid neighborhood. 
+     * 
+     * The cuboid size is specified by 
      * its half-width, half-height and half-depth (radius).
      * 
      * For technical reasons, the volume of the cuboid must contain less than 1000 voxels.
@@ -3869,7 +4000,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Median3DSphere
     //----------------------------------------------------
     /**
-     * Computes the local median of a pixels spherical neighborhood. The spheres size is specified by 
+     * Computes the local median of a pixels spherical neighborhood. 
+     * 
+     * The spheres size is specified by 
      * its half-width, half-height and half-depth (radius).
      * 
      * For technical reasons, the volume of the sphere must contain less than 1000 voxels.
@@ -3921,7 +4054,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Maximum2DSphere
     //----------------------------------------------------
     /**
-     * Computes the local maximum of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
+     * Computes the local maximum of a pixels ellipsoidal neighborhood. 
+     * 
+     * The ellipses size is specified by 
      * its half-width and half-height (radius).
      */
     default boolean maximum2DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
@@ -3935,7 +4070,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Maximum3DSphere
     //----------------------------------------------------
     /**
-     * Computes the local maximum of a pixels spherical neighborhood. The spheres size is specified by 
+     * Computes the local maximum of a pixels spherical neighborhood. 
+     * 
+     * The spheres size is specified by 
      * its half-width, half-height and half-depth (radius).
      */
     default boolean maximum3DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
@@ -3949,7 +4086,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Maximum2DBox
     //----------------------------------------------------
     /**
-     * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local maximum of a pixels rectangular neighborhood. 
+     * 
+     * The rectangles size is specified by 
      * its half-width and half-height (radius).
      */
     default boolean maximum2DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
@@ -3960,7 +4099,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local maximum of a pixels rectangular neighborhood. 
+     * 
+     * The rectangles size is specified by 
      * its half-width and half-height (radius).
      */
     default boolean maximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
@@ -3974,7 +4115,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Maximum3DBox
     //----------------------------------------------------
     /**
-     * Computes the local maximum of a pixels cube neighborhood. The cubes size is specified by 
+     * Computes the local maximum of a pixels cube neighborhood. 
+     * 
+     * The cubes size is specified by 
      * its half-width, half-height and half-depth (radius).
      */
     default boolean maximum3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
@@ -3985,7 +4128,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes the local maximum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local maximum of a pixels rectangular neighborhood. 
+     * 
+     * The rectangles size is specified by 
      * its half-width and half-height (radius).
      */
     default boolean maximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
@@ -4016,7 +4161,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Minimum2DSphere
     //----------------------------------------------------
     /**
-     * Computes the local minimum of a pixels ellipsoidal neighborhood. The ellipses size is specified by 
+     * Computes the local minimum of a pixels ellipsoidal neighborhood. 
+     * 
+     * The ellipses size is specified by 
      * its half-width and half-height (radius).
      */
     default boolean minimum2DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
@@ -4030,7 +4177,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Minimum3DSphere
     //----------------------------------------------------
     /**
-     * Computes the local minimum of a pixels spherical neighborhood. The spheres size is specified by 
+     * Computes the local minimum of a pixels spherical neighborhood. 
+     * 
+     * The spheres size is specified by 
      * its half-width, half-height and half-depth (radius).
      */
     default boolean minimum3DSphere(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
@@ -4044,7 +4193,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Minimum2DBox
     //----------------------------------------------------
     /**
-     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local minimum of a pixels rectangular neighborhood. 
+     * 
+     * The rectangles size is specified by 
      * its half-width and half-height (radius).
      */
     default boolean minimum2DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
@@ -4055,7 +4206,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local minimum of a pixels rectangular neighborhood. 
+     * 
+     * The rectangles size is specified by 
      * its half-width and half-height (radius).
      */
     default boolean minimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
@@ -4069,7 +4222,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Minimum3DBox
     //----------------------------------------------------
     /**
-     * Computes the local minimum of a pixels cube neighborhood. The cubes size is specified by 
+     * Computes the local minimum of a pixels cube neighborhood. 
+     * 
+     * The cubes size is specified by 
      * its half-width, half-height and half-depth (radius).
      */
     default boolean minimum3DBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
@@ -4080,7 +4235,9 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes the local minimum of a pixels rectangular neighborhood. The rectangles size is specified by 
+     * Computes the local minimum of a pixels rectangular neighborhood. 
+     * 
+     * The rectangles size is specified by 
      * its half-width and half-height (radius).
      */
     default boolean minimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
@@ -4127,9 +4284,13 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.GaussianBlur2D
     //----------------------------------------------------
     /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. 
+     * 
+     * Thus, the filterkernel can have non-isotropic shape.
      * 
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
+     * 
+     * DEPRECATED: This method is deprecated. Use gaussianBlur2D instead.
      */
     @Deprecated
     default boolean blur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
@@ -4141,9 +4302,13 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. 
+     * 
+     * Thus, the filterkernel can have non-isotropic shape.
      * 
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
+     * 
+     * DEPRECATED: This method is deprecated. Use gaussianBlur2D instead.
      */
     @Deprecated
     default boolean blur2D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
@@ -4186,9 +4351,13 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.GaussianBlur3D
     //----------------------------------------------------
     /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. Thus, the filterkernel can have non-isotropic shape.
+     * Computes the Gaussian blurred image of an image given two sigma values in X and Y. 
+     * 
+     * Thus, the filterkernel can have non-isotropic shape.
      * 
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
+     * 
+     * DEPRECATED: This method is deprecated. Use gaussianBlur2D instead.
      */
     @Deprecated
     default boolean blur(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
@@ -4200,9 +4369,13 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Computes the Gaussian blurred image of an image given two sigma values in X, Y and Z. Thus, the filterkernel can have non-isotropic shape.
+     * Computes the Gaussian blurred image of an image given two sigma values in X, Y and Z. 
+     * 
+     * Thus, the filterkernel can have non-isotropic shape.
      * 
      * The implementation is done separable. In case a sigma equals zero, the direction is not blurred.
+     * 
+     * DEPRECATED: This method is deprecated. Use gaussianBlur3D instead.
      */
     @Deprecated
     default boolean blur3D(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
@@ -4301,7 +4474,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Rotate2D
     //----------------------------------------------------
     /**
-     * Rotates an image in plane. All angles are entered in degrees. If the image is not rotated around 
+     * Rotates an image in plane. 
+     * 
+     * All angles are entered in degrees. If the image is not rotated around 
      * the center, it is rotated around the coordinate origin.
      * 
      * It is recommended to apply the rotation to an isotropic image.
@@ -4317,7 +4492,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Rotate3D
     //----------------------------------------------------
     /**
-     * Rotates an image stack in 3D. All angles are entered in degrees. If the image is not rotated around 
+     * Rotates an image stack in 3D. 
+     * 
+     * All angles are entered in degrees. If the image is not rotated around 
      * the center, it is rotated around the coordinate origin.
      * 
      * It is recommended to apply the rotation to an isotropic image stack.
@@ -4333,7 +4510,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Scale2D
     //----------------------------------------------------
     /**
-     * DEPRECATED: CLIJ scale() is deprecated. Use scale2D or scale3D instead!
+     * Scales an image with a given factor.
      */
     default boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
         if (doTimeTracing()) {recordMethodStart("Scale2D");}
@@ -4343,7 +4520,7 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * DEPRECATED: CLIJ scale() is deprecated. Use scale2D or scale3D instead!
+     * Scales an image with a given factor.
      */
     default boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("Scale2D");}
@@ -4479,8 +4656,10 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.DetectMinimaBox
     //----------------------------------------------------
     /**
-     * Detects local minima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
-     * there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
+     * Detects local minima in a given square/cubic neighborhood. 
+     * 
+     * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a 
+     * lower intensity, and to 0 otherwise.
      */
     @Deprecated
     default boolean detectMinimaBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
@@ -4492,8 +4671,10 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Detects local minima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
-     * there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
+     * Detects local minima in a given square/cubic neighborhood. 
+     * 
+     * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a 
+     * lower intensity, and to 0 otherwise.
      */
     default boolean detectMinimaBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
         if (doTimeTracing()) {recordMethodStart("DetectMinimaBox");}
@@ -4506,8 +4687,10 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.DetectMaximaBox
     //----------------------------------------------------
     /**
-     * Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
-     * there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
+     * Detects local maxima in a given square/cubic neighborhood. 
+     * 
+     * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a 
+     * higher intensity, and to 0 otherwise.
      */
     @Deprecated
     default boolean detectMaximaBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
@@ -4519,8 +4702,10 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Detects local maxima in a given square/cubic neighborhood. Pixels in the resulting image are set to 1 if
-     * there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
+     * Detects local maxima in a given square/cubic neighborhood. 
+     * 
+     * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a 
+     * higher intensity, and to 0 otherwise.
      */
     default boolean detectMaximaBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4, double arg5) {
         if (doTimeTracing()) {recordMethodStart("DetectMaximaBox");}
@@ -4533,9 +4718,10 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.DetectMaximaSliceBySliceBox
     //----------------------------------------------------
     /**
-     * Detects local maxima in a given square neighborhood of an input image stack. The input image stack is 
-     * processed slice by slice. Pixels in the resulting image are set to 1 if there is no other pixel in a 
-     * given radius which has a higher intensity, and to 0 otherwise.
+     * Detects local maxima in a given square neighborhood of an input image stack. 
+     * 
+     * The input image stack is processed slice by slice. Pixels in the resulting image are set to 1 if 
+     * there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
      */
     default boolean detectMaximaSliceBySliceBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("DetectMaximaSliceBySliceBox");}
@@ -4548,9 +4734,10 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.DetectMinimaSliceBySliceBox
     //----------------------------------------------------
     /**
-     * Detects local minima in a given square neighborhood of an input image stack. The input image stack is 
-     * processed slice by slice. Pixels in the resulting image are set to 1 if there is no other pixel in a 
-     * given radius which has a lower intensity, and to 0 otherwise.
+     * Detects local minima in a given square neighborhood of an input image stack. 
+     * 
+     * The input image stack is processed slice by slice. Pixels in the resulting image are set to 1 if 
+     * there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
      */
     default boolean detectMinimaSliceBySliceBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("DetectMinimaSliceBySliceBox");}
@@ -4563,7 +4750,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MaximumOfAllPixels
     //----------------------------------------------------
     /**
-     * Determines the maximum of all pixels in a given image. It will be stored in a new row of ImageJs
+     * Determines the maximum of all pixels in a given image. 
+     * 
+     * It will be stored in a new row of ImageJs
      * Results table in the column 'Max'.
      */
     default double maximumOfAllPixels(ClearCLImageInterface source) {
@@ -4577,7 +4766,9 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MinimumOfAllPixels
     //----------------------------------------------------
     /**
-     * Determines the minimum of all pixels in a given image. It will be stored in a new row of ImageJs
+     * Determines the minimum of all pixels in a given image. 
+     * 
+     * It will be stored in a new row of ImageJs
      * Results table in the column 'Min'.
      */
     default double minimumOfAllPixels(ClearCLImageInterface source) {
@@ -4779,7 +4970,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Scale
     //----------------------------------------------------
     /**
-     * DEPRECATED: CLIJ scale() is deprecated. Use scale2D or scale3D instead!
+     * Scales an image with a given factor.
      */
     @Deprecated
     default boolean scale(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
