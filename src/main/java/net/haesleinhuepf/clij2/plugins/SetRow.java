@@ -51,8 +51,7 @@ public class SetRow extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getDescription() {
-        return "Sets all pixel values x of a given row in X to a constant value v.\n\n" +
-                "<pre>f(x) = v</pre>";
+        return "Sets all pixel values x of a given row in X to a constant value v.";
     }
 
     @Override
