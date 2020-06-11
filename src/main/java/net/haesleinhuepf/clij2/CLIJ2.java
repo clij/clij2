@@ -17,6 +17,7 @@ import net.haesleinhuepf.clij2.converters.implementations.*;
 import net.haesleinhuepf.clij2.plugins.Clear;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
+import net.imglib2.type.logic.BitType;
 import net.imglib2.type.numeric.RealType;
 import net.imglib2.view.Views;
 
@@ -118,6 +119,11 @@ public class CLIJ2 implements CLIJ2Ops {
 
     public RandomAccessibleInterval pullRAI(Object object) {
         return clij.convert(object, RandomAccessibleInterval.class);
+    }
+
+    public RandomAccessibleInterval<BitType> pullBinaryRAI(Object object) {
+        ClearCLBuffer buffer = convert(object, ClearCLBuffer.class);
+        return clij.pullBinaryRAI(buffer);
     }
 
     public ClearCLBuffer pushMatXYZ(Object object) {
