@@ -22,7 +22,7 @@ public class MinimumYProjection extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public boolean executeCL() {
-        return minimumYProjection(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().minimumYProjection((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean minimumYProjection(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst_min) {

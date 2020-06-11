@@ -22,7 +22,7 @@ public class GenerateTouchCountMatrix extends AbstractCLIJ2Plugin implements CLI
 
     @Override
     public boolean executeCL() {
-        boolean result = generateTouchCountMatrix(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        boolean result = getCLIJ2().generateTouchCountMatrix((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return result;
     }
 

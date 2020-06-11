@@ -22,7 +22,7 @@ public class MeanXProjection extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-        return meanXProjection(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
+        return getCLIJ2().meanXProjection((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
     public static boolean meanXProjection(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {

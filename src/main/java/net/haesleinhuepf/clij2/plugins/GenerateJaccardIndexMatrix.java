@@ -20,7 +20,7 @@ public class GenerateJaccardIndexMatrix extends AbstractCLIJ2Plugin implements C
 
     @Override
     public boolean executeCL() {
-        boolean result = generateJaccardIndexMatrix(getCLIJ2(), (ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
+        boolean result = getCLIJ2().generateJaccardIndexMatrix((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), (ClearCLBuffer)(args[2]));
         return result;
     }
 
