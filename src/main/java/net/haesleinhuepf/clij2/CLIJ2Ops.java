@@ -337,6 +337,14 @@ import net.haesleinhuepf.clij2.plugins.ResliceRadialTop;
 import net.haesleinhuepf.clij2.plugins.Convolve;
 import net.haesleinhuepf.clij2.plugins.UndefinedToZero;
 import net.haesleinhuepf.clij2.plugins.GenerateJaccardIndexMatrix;
+import net.haesleinhuepf.clij2.plugins.GenerateTouchCountMatrix;
+import net.haesleinhuepf.clij2.plugins.MinimumXProjection;
+import net.haesleinhuepf.clij2.plugins.MinimumYProjection;
+import net.haesleinhuepf.clij2.plugins.MeanXProjection;
+import net.haesleinhuepf.clij2.plugins.MeanYProjection;
+import net.haesleinhuepf.clij2.plugins.SquaredDifference;
+import net.haesleinhuepf.clij2.plugins.AbsoluteDifference;
+import net.haesleinhuepf.clij2.plugins.ReplacePixelsIfZero;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
@@ -530,7 +538,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MedianZProjection
     //----------------------------------------------------
     /**
-     * Determines the median projection of an image stack along Z.
+     * Determines the median intensity projection of an image stack along Z.
      */
     default boolean medianZProjection(ClearCLImageInterface source, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("MedianZProjection");}
@@ -652,7 +660,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.StandardDeviationZProjection
     //----------------------------------------------------
     /**
-     * Determines the standard deviation projection of an image stack along Z.
+     * Determines the standard deviation intensity projection of an image stack along Z.
      */
     default boolean standardDeviationZProjection(ClearCLImageInterface source, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("StandardDeviationZProjection");}
@@ -2030,7 +2038,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MaximumXProjection
     //----------------------------------------------------
     /**
-     * Determines the maximum projection of an image along X.
+     * Determines the maximum intensity projection of an image along X.
      */
     default boolean maximumXProjection(ClearCLImageInterface source, ClearCLImageInterface destination_max) {
         if (doTimeTracing()) {recordMethodStart("MaximumXProjection");}
@@ -2043,7 +2051,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MaximumYProjection
     //----------------------------------------------------
     /**
-     * Determines the maximum projection of an image along X.
+     * Determines the maximum intensity projection of an image along X.
      */
     default boolean maximumYProjection(ClearCLImageInterface source, ClearCLImageInterface destination_max) {
         if (doTimeTracing()) {recordMethodStart("MaximumYProjection");}
@@ -2056,7 +2064,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MaximumZProjectionBounded
     //----------------------------------------------------
     /**
-     * Determines the maximum projection of an image along Z within a given z range.
+     * Determines the maximum intensity projection of an image along Z within a given z range.
      */
     default boolean maximumZProjectionBounded(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("MaximumZProjectionBounded");}
@@ -2069,7 +2077,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MinimumZProjectionBounded
     //----------------------------------------------------
     /**
-     * Determines the minimum projection of an image along Z within a given z range.
+     * Determines the minimum intensity projection of an image along Z within a given z range.
      */
     default boolean minimumZProjectionBounded(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("MinimumZProjectionBounded");}
@@ -2082,7 +2090,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MeanZProjectionBounded
     //----------------------------------------------------
     /**
-     * Determines the mean projection of an image along Z within a given z range.
+     * Determines the mean average intensity projection of an image along Z within a given z range.
      */
     default boolean meanZProjectionBounded(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("MeanZProjectionBounded");}
@@ -2149,7 +2157,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MinimumZProjectionThresholdedBounded
     //----------------------------------------------------
     /**
-     * Determines the minimum projection of all pixels in an image above a given threshold along Z within a given z range.
+     * Determines the minimum intensity projection of all pixels in an image above a given threshold along Z within a given z range.
      */
     default boolean minimumZProjectionThresholdedBounded(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
         if (doTimeTracing()) {recordMethodStart("MinimumZProjectionThresholdedBounded");}
@@ -6237,5 +6245,113 @@ public abstract interface CLIJ2Ops {
         return result;
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.GenerateTouchCountMatrix
+    //----------------------------------------------------
+    /**
+     * Takes a label map with n labels and generates a (n+1)*(n+1) matrix where all pixels are set the number of pixels where labels touch (diamond neighborhood). 
+     * 
+     * Major parts of this operation run on the CPU.
+     */
+    default boolean generateTouchCountMatrix(ClearCLBuffer label_map, ClearCLBuffer touch_count_matrix_destination) {
+        if (doTimeTracing()) {recordMethodStart("GenerateTouchCountMatrix");}
+        boolean result = GenerateTouchCountMatrix.generateTouchCountMatrix(getCLIJ2(), label_map, touch_count_matrix_destination);
+        if (doTimeTracing()) {recordMethodEnd("GenerateTouchCountMatrix");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.MinimumXProjection
+    //----------------------------------------------------
+    /**
+     * Determines the minimum intensity projection of an image along Y.
+     */
+    default boolean minimumXProjection(ClearCLImageInterface source, ClearCLImageInterface destination_sum) {
+        if (doTimeTracing()) {recordMethodStart("MinimumXProjection");}
+        boolean result = MinimumXProjection.minimumXProjection(getCLIJ2(), source, destination_sum);
+        if (doTimeTracing()) {recordMethodEnd("MinimumXProjection");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.MinimumYProjection
+    //----------------------------------------------------
+    /**
+     * Determines the minimum intensity projection of an image along Y.
+     */
+    default boolean minimumYProjection(ClearCLImageInterface source, ClearCLImageInterface destination_sum) {
+        if (doTimeTracing()) {recordMethodStart("MinimumYProjection");}
+        boolean result = MinimumYProjection.minimumYProjection(getCLIJ2(), source, destination_sum);
+        if (doTimeTracing()) {recordMethodEnd("MinimumYProjection");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.MeanXProjection
+    //----------------------------------------------------
+    /**
+     * Determines the mean average intensity projection of an image along X.
+     */
+    default boolean meanXProjection(ClearCLImageInterface source, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("MeanXProjection");}
+        boolean result = MeanXProjection.meanXProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("MeanXProjection");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.MeanYProjection
+    //----------------------------------------------------
+    /**
+     * Determines the mean average intensity projection of an image along Y.
+     */
+    default boolean meanYProjection(ClearCLImageInterface source, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("MeanYProjection");}
+        boolean result = MeanYProjection.meanYProjection(getCLIJ2(), source, destination);
+        if (doTimeTracing()) {recordMethodEnd("MeanYProjection");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.SquaredDifference
+    //----------------------------------------------------
+    /**
+     * Determines the squared difference pixel by pixel between two images.
+     */
+    default boolean squaredDifference(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
+        if (doTimeTracing()) {recordMethodStart("SquaredDifference");}
+        boolean result = SquaredDifference.squaredDifference(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodEnd("SquaredDifference");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.AbsoluteDifference
+    //----------------------------------------------------
+    /**
+     * Determines the absolute difference pixel by pixel between two images.
+     */
+    default boolean absoluteDifference(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
+        if (doTimeTracing()) {recordMethodStart("AbsoluteDifference");}
+        boolean result = AbsoluteDifference.absoluteDifference(getCLIJ2(), source1, source2, destination);
+        if (doTimeTracing()) {recordMethodEnd("AbsoluteDifference");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.ReplacePixelsIfZero
+    //----------------------------------------------------
+    /**
+     * Replaces pixel values x with y in case x is zero.
+     * 
+     * This functionality is comparable to ImageJs image calculator operator 'transparent zero'.
+     */
+    default boolean replacePixelsIfZero(ClearCLImageInterface input1, ClearCLImageInterface input2, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("ReplacePixelsIfZero");}
+        boolean result = ReplacePixelsIfZero.replacePixelsIfZero(getCLIJ2(), input1, input2, destination);
+        if (doTimeTracing()) {recordMethodEnd("ReplacePixelsIfZero");}
+        return result;
+    }
+
 }
-// 400 methods generated.
+// 408 methods generated.
