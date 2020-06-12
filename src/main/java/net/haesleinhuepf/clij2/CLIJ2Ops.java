@@ -816,8 +816,6 @@ public abstract interface CLIJ2Ops {
      * 
      * Otherwise the pixel is not overwritten.
      * If you want to initialize an identity transfrom matrix, set all pixels to 0 first.
-     * 
-     * <pre>f(a) = v</pre>
      */
     default boolean setWhereXequalsY(ClearCLImageInterface arg1, double arg2) {
         if (doTimeTracing()) {recordMethodStart("SetWhereXequalsY");}
@@ -3314,7 +3312,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Mask
     //----------------------------------------------------
     /**
-     * Computes a masked image by applying a mask to an image. 
+     * Computes a masked image by applying a binary mask to an image. 
      * 
      * All pixel values x of image X will be copied
      * to the destination image in case pixel value m at the same position in the mask image is not equal to 
@@ -3333,7 +3331,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MaskStackWithPlane
     //----------------------------------------------------
     /**
-     * Computes a masked image by applying a 2D mask to an image stack. 
+     * Computes a masked image by applying a binary 2D mask to an image stack. 
      * 
      * All pixel values x of image X will be copied
      * to the destination image in case pixel value m at the same spatial position in the mask image is not equal to 
@@ -4786,8 +4784,6 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Sets all pixel values x of a given column in X to a constant value v.
-     * 
-     * <pre>f(x) = v</pre>
      */
     default boolean setColumn(ClearCLImageInterface arg1, double arg2, double arg3) {
         if (doTimeTracing()) {recordMethodStart("SetColumn");}
@@ -4801,8 +4797,6 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Sets all pixel values x of a given row in X to a constant value v.
-     * 
-     * <pre>f(x) = v</pre>
      */
     default boolean setRow(ClearCLImageInterface arg1, double arg2, double arg3) {
         if (doTimeTracing()) {recordMethodStart("SetRow");}
@@ -4891,8 +4885,6 @@ public abstract interface CLIJ2Ops {
      * 
      * Otherwise the pixel is not overwritten.
      * If you want to initialize an identity transfrom matrix, set all pixels to 0 first.
-     * 
-     * <pre>f(a) = v</pre>
      */
     default boolean setWhereXgreaterThanY(ClearCLImageInterface arg1, double arg2) {
         if (doTimeTracing()) {recordMethodStart("SetWhereXgreaterThanY");}
@@ -4909,8 +4901,6 @@ public abstract interface CLIJ2Ops {
      * 
      * Otherwise the pixel is not overwritten.
      * If you want to initialize an identity transfrom matrix, set all pixels to 0 first.
-     * 
-     * <pre>f(a) = v</pre>
      */
     default boolean setWhereXsmallerThanY(ClearCLImageInterface arg1, double arg2) {
         if (doTimeTracing()) {recordMethodStart("SetWhereXsmallerThanY");}
@@ -5323,8 +5313,6 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Sets all pixel values x of a given plane in X to a constant value v.
-     * 
-     * <pre>f(x) = v</pre>
      */
     default boolean setPlane(ClearCLImageInterface arg1, double arg2, double arg3) {
         if (doTimeTracing()) {recordMethodStart("SetPlane");}
