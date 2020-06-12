@@ -8,12 +8,12 @@ Matlab and Java. It comes with hundreds of operations for
 [binarizing](https://clij.github.io/clij2-docs/reference__binary),
 [labeling](https://clij.github.io/clij2-docs/reference__label),
 [measuring](https://clij.github.io/clij2-docs/reference__measurement) in images,
-[projections](https://clij.github.io/clij2-docs/reference__project) and
-[transformations](https://clij.github.io/clij2-docs/reference__transform), 
+[projections](https://clij.github.io/clij2-docs/reference__project),
+[transformations](https://clij.github.io/clij2-docs/reference__transform) and 
 [mathematical operations](https://clij.github.io/clij2-docs/reference__math) for images. 
 While most of these are classical image processing operations, CLIJ2 also allows performing operations on 
 [matrices](https://clij.github.io/clij2-docs/reference__matrix) potentially representing
-[neighborhood relationships between cells](https://clij.github.io/clij2-docs/reference__neighbor).
+[neighborhood relationships](https://clij.github.io/clij2-docs/reference__neighbor) between [cells](https://clij.github.io/clij2-docs/md/neighbors_of_neighbors) and pixels.
 
 <img src="./images/curtain.gif" width="245">
 
