@@ -1,7 +1,7 @@
 title: CLIJ2
 logo: /images/clij2_logo.png
 description: CLIJ2
-show_downloads: true
+show_downloads: false
 google_analytics:
 theme: jekyll-theme-minimal
 plugins:
