@@ -90,7 +90,15 @@ If you search for support, please open a thread on the [image.sc](https://image.
     * [Detailed time tracing](https://clij.github.io/clij2-docs/md/time_tracing/)
     * [Comparing and benchmarking workflows](https://clij.github.io/clij2-docs/md/compare_workflows/)
     * [Comparing image rotation ImageJ vs. CLIJ](https://clij.github.io/clij2-docs/md/rotate_comparison_IJ_CLIJ/)
-      
+
+* Media
+  * [YouTube NEUBIAS Academy @home](https://youtu.be/uMj0OS1TiQE)
+  * [NEUBIAS Symposium 2020, Bordeaux](https://git.mpi-cbg.de/rhaase/clij_neubias_2020)
+  * [NEUBIAS Training School TS14, Bordeaux](https://git.mpi-cbg.de/rhaase/neubias_ts14)
+  * [MTZ Image Processing Seminar, TU Dresden](https://git.mpi-cbg.de/rhaase/clij_mtz_2020)
+  * [Quantitative BioImaging Conference 2020, Oxford](slides/2020-01-QBI_SmartMicroscopy_Haase_V2.pdf)
+  * [NEUBIAS Training School TS13, Porto](https://git.mpi-cbg.de/rhaase/neubias_ts14)
+     
 * Example code
   * [ImageJ macro](https://github.com/clij/clij2-docs/tree/master/src/main/macro)
   * [Icy javascript](https://github.com/clij/clicy/tree/master/src/main/javascript)
