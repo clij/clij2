@@ -1,7 +1,7 @@
-title: CLIJ2 (BETA test release)
+title: CLIJ2
 logo: /images/clij2_logo.png
-description: CLIJ2 (BETA test release)
-show_downloads: false
+description: CLIJ2
+show_downloads: true
 google_analytics:
 theme: jekyll-theme-minimal
 plugins:
