@@ -7,6 +7,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.util.Arrays;
@@ -21,7 +22,11 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_divideImages")
-public class DivideImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class DivideImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
+    @Override
+    public String getCategories() {
+        return "Math";
+    }
 
     @Override
     public boolean executeCL() {

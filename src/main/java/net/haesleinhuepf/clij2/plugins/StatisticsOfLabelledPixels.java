@@ -9,6 +9,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
@@ -20,7 +21,11 @@ import java.util.ArrayList;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_statisticsOfLabelledPixels")
-public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
+    @Override
+    public String getCategories() {
+        return "Measurement";
+    }
 
     public enum STATISTICS_ENTRY {
         IDENTIFIER(0),

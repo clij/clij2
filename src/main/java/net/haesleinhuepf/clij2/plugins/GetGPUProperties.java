@@ -5,6 +5,7 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -12,7 +13,11 @@ import org.scijava.plugin.Plugin;
  *         September 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_getGPUProperties")
-public class GetGPUProperties extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class GetGPUProperties extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
+    @Override
+    public String getCategories() {
+        return "Measurements";
+    }
 
     @Override
     public boolean executeCL() {

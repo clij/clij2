@@ -9,6 +9,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import net.imglib2.realtransform.AffineTransform2D;
 import net.imglib2.realtransform.AffineTransform3D;
 import org.scijava.plugin.Plugin;
@@ -18,8 +19,11 @@ import org.scijava.plugin.Plugin;
  * 12 2018
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_resample")
-public class Resample extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
-
+public class Resample extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
+    @Override
+    public String getCategories() {
+        return "Transform";
+    }
 
     @Override
     protected Object[] getDefaultValues() {
