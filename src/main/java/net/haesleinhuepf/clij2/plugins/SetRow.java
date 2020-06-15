@@ -51,7 +51,7 @@ public class SetRow extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Number rowIndex, Number value";
+        return "Image source, Number row_index, Number value";
     }
 
     @Override

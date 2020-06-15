@@ -51,7 +51,7 @@ public class SetColumn extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Number columnIndex, Number value";
+        return "Image source, Number column_index, Number value";
     }
 
     @Override

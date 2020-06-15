@@ -52,7 +52,7 @@ public class SetPlane extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Number rowIndex, Number value";
+        return "Image source, Number plane_index, Number value";
     }
 
     @Override
