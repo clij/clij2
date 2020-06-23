@@ -46,7 +46,7 @@ If you search for support, please open a thread on the [image.sc](https://image.
     * [Fiji update site](https://clij.github.io/clij2-docs/installationInFiji)
     * [Icy](https://github.com/clij/clicy)
     * [Matlab](https://github.com/clij/clatlab)
-    * [Maven/Java](https://github.com/clij/clij2-docs/dependingViaMaven)
+    * [Maven/Java](https://clij.github.io/clij2-docs/dependingViaMaven)
   * [Cheat sheets](https://clij.github.io/clij2-docs/CLIJ2-cheatsheet_V3.pdf)
   * [Reference](https://clij.github.io/clij2-docs/reference)
   * [Release notes](https://github.com/clij/clij2/releases)
@@ -117,7 +117,7 @@ If you search for support, please open a thread on the [image.sc](https://image.
 * FAQ / support
   * [Frequently asked questions](https://clij.github.io/clij2-docs/faq)
   * CLIJ versus CLIJ2
-    * [CLIJ documentation (archived)](https://github.com/clij/clij-docs)
+    * [CLIJ documentation (archived)](https://clij.github.io/clij2-docs/clij-docs)
     * [CLIJ BioRxiv preprint (archived)](https://doi.org/10.1101/660704)
     * [What's different between CLIJ1, CLIJ2 and CLIJx?](https://clij.github.io/clij2-docs/clij12xAPIcomparison)
     * [CLIJ - CLIJ2 transition guide (under construction)](clij2_transition_notes)
