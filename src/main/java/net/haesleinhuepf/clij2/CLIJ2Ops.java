@@ -345,6 +345,8 @@ import net.haesleinhuepf.clij2.plugins.MeanYProjection;
 import net.haesleinhuepf.clij2.plugins.SquaredDifference;
 import net.haesleinhuepf.clij2.plugins.AbsoluteDifference;
 import net.haesleinhuepf.clij2.plugins.ReplacePixelsIfZero;
+import net.haesleinhuepf.clij2.plugins.VoronoiLabeling;
+import net.haesleinhuepf.clij2.plugins.ExtendLabelingViaVoronoi;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
@@ -6532,5 +6534,35 @@ public abstract interface CLIJ2Ops {
         return result;
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.VoronoiLabeling
+    //----------------------------------------------------
+    /**
+     * Takes a binary image, labels connected components and dilates the regions using a octagon shape until they touch. 
+     * 
+     * The resulting label map is written to the output.
+     */
+    default boolean voronoiLabeling(ClearCLBuffer input, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("VoronoiLabeling");}
+        boolean result = VoronoiLabeling.voronoiLabeling(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("VoronoiLabeling");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.ExtendLabelingViaVoronoi
+    //----------------------------------------------------
+    /**
+     * Takes a label map image and dilates the regions using a octagon shape until they touch. 
+     * 
+     * The resulting label map is written to the output.
+     */
+    default boolean extendLabelingViaVoronoi(ClearCLBuffer input, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("ExtendLabelingViaVoronoi");}
+        boolean result = ExtendLabelingViaVoronoi.extendLabelingViaVoronoi(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("ExtendLabelingViaVoronoi");}
+        return result;
+    }
+
 }
-// 408 methods generated.
+// 410 methods generated.
