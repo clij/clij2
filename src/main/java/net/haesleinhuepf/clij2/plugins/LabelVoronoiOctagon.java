@@ -17,7 +17,6 @@ import java.nio.FloatBuffer;
  * Author: @haesleinhuepf
  *         April 2020
  */
-@Deprecated
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_labelVoronoiOctagon")
 public class LabelVoronoiOctagon extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
@@ -26,7 +25,6 @@ public class LabelVoronoiOctagon extends AbstractCLIJ2Plugin implements CLIJMacr
         return getCLIJ2().labelVoronoiOctagon((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
     }
 
-    @Deprecated
     public static boolean labelVoronoiOctagon(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst) {
         //CLIJx.getInstance().stopWatch("");
 
@@ -94,8 +92,7 @@ public class LabelVoronoiOctagon extends AbstractCLIJ2Plugin implements CLIJMacr
     @Override
     public String getDescription() {
         return "Takes a labelled image and dilates the labels using a octagon shape until they touch. \n\nThe pixels where " +
-                " the regions touched are afterwards returned as binary image which corresponds to the Voronoi diagram.\n\n" +
-                "DEPRECATED: Use VoronoiLabelin instead.";
+                " the regions touched are afterwards returned as binary image which corresponds to the Voronoi diagram.";
     }
 
     @Override
