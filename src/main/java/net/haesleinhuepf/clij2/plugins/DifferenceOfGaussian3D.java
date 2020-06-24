@@ -42,8 +42,8 @@ public class DifferenceOfGaussian3D extends AbstractCLIJ2Plugin implements CLIJM
         ClearCLBuffer temp1 = clij2.create(input);
         ClearCLBuffer temp2 = clij2.create(input);
 
-        clij2.blur(input, temp1, sigma1x, sigma1y, sigma1z);
-        clij2.blur(input, temp2, sigma2x, sigma2y, sigma2z);
+        clij2.gaussianBlur(input, temp1, sigma1x, sigma1y, sigma1z);
+        clij2.gaussianBlur(input, temp2, sigma2x, sigma2y, sigma2z);
 
         clij2.subtractImages(temp1, temp2, output);
 
