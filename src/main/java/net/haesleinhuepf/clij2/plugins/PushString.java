@@ -96,7 +96,7 @@ public class PushString extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
 
     @Override
     public String getParameterHelpText() {
-        return "Image destination, Array input, Number width, Number height, Number depth";
+        return "ByRef Image destination, String input, Number width, Number height, Number depth";
     }
 
     @Override
