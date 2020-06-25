@@ -6090,12 +6090,8 @@ public abstract interface CLIJ2Ops {
      * Takes a labelled image and dilates the labels using a octagon shape until they touch. 
      * 
      * The pixels where  the regions touched are afterwards returned as binary image which corresponds to the Voronoi diagram.
-     * 
-     * DEPRECATED: Use VoronoiLabelin instead.
      */
-    @Deprecated
     default boolean labelVoronoiOctagon(ClearCLBuffer label_map, ClearCLBuffer label_voronoi_destination) {
-        System.out.println("labelVoronoiOctagon is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("LabelVoronoiOctagon");}
         boolean result = LabelVoronoiOctagon.labelVoronoiOctagon(getCLIJ2(), label_map, label_voronoi_destination);
         if (doTimeTracing()) {recordMethodEnd("LabelVoronoiOctagon");}
