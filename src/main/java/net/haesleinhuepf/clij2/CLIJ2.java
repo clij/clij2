@@ -350,14 +350,24 @@ public class CLIJ2 implements CLIJ2Ops {
 
     public ClearCLBuffer create(long[] dimensions, NativeTypeEnum typeEnum) {
         checkMaxImageSize(dimensions, typeEnum.getSizeInBytes());
-        ClearCLBuffer buffer = clij.create(dimensions, typeEnum);
-        return buffer;
+
+        try {
+            return clij.create(dimensions, typeEnum);
+        } catch (Exception e) {
+            System.out.println(clij.humanReadableErrorMessage(e.getMessage()));
+            throw (e);
+        }
     }
 
     public ClearCLImage create(long[] dimensions, ImageChannelDataType typeEnum) {
         checkMaxImageSize(dimensions, typeEnum.getNativeType().getSizeInBytes());
-        ClearCLImage image = clij.create(dimensions, typeEnum);
-        return image;
+
+        try {
+            return clij.create(dimensions, typeEnum);
+        } catch (Exception e) {
+            System.out.println(clij.humanReadableErrorMessage(e.getMessage()));
+            throw(e);
+        }
     }
 
     private void checkMaxImageSize(long[] dimensions, long bytes_per_pixel) {
@@ -367,7 +377,31 @@ public class CLIJ2 implements CLIJ2Ops {
         }
         long num_bytes = num_pixels * bytes_per_pixel;
         if (num_bytes > max_num_bytes) {
-            warn("CLIJ2 Warning: You're creating an image with size " + num_bytes + " bytes, which exeeds your GPUs capabilities (max " + max_num_bytes + " bytes).");
+            warn("CLIJ2 Warning: You're creating an image with size " + humanReadableBytes(num_bytes) + ", which exceeds your GPUs capabilities (max " + humanReadableBytes(max_num_bytes) + ").");
+        }
+    }
+
+    private String humanReadableBytes(double num_bytes) {
+        if (num_bytes > 1024) {
+            num_bytes = num_bytes / 1024;
+            if (num_bytes > 1024) {
+                num_bytes = num_bytes / 1024;
+                if (num_bytes > 1024) {
+                    num_bytes = num_bytes / 1024;
+                    if (num_bytes > 1024) {
+                        num_bytes = num_bytes / 1024;
+                        return "" + ((double)((long)(num_bytes * 10))/10) + " terabytes";
+                    } else {
+                        return "" + ((double)((long)(num_bytes * 10))/10) + " gigabytes";
+                    }
+                } else {
+                    return "" + ((double)((long)(num_bytes * 10))/10) + " megabytes";
+                }
+            } else {
+                return "" + ((double)((long)(num_bytes * 10))/10) + " kilobytes";
+            }
+        } else {
+            return "" + ((double)((long)(num_bytes * 10))/10) + " bytes";
         }
     }
 
@@ -428,7 +462,12 @@ public class CLIJ2 implements CLIJ2Ops {
             mCLKernelExecutor.setGlobalSizes(globalsizes);
             mCLKernelExecutor.setLocalSizes(localSizes);
 
-            result[0] = mCLKernelExecutor.enqueue(waitForKernelFinish, kernel);
+            try {
+                result[0] = mCLKernelExecutor.enqueue(waitForKernelFinish, kernel);
+            } catch (Exception e) {
+                System.out.println(clij.humanReadableErrorMessage(e.getMessage()));
+                throw(e);
+            }
 
             mCLKernelExecutor.setImageSizeIndependentCompilation(false);
         });
@@ -482,7 +521,13 @@ public class CLIJ2 implements CLIJ2Ops {
             mCLKernelExecutor.setGlobalSizes(globalsizes);
             mCLKernelExecutor.setLocalSizes(localSizes);
 
-            result[0] = mCLKernelExecutor.enqueue(waitForKernelFinish, kernel);
+//            result[0] = mCLKernelExecutor.enqueue(waitForKernelFinish, kernel);
+            try {
+                result[0] = mCLKernelExecutor.enqueue(waitForKernelFinish, kernel);
+            } catch (Exception e) {
+                System.out.println(clij.humanReadableErrorMessage(e.getMessage()));
+                throw(e);
+            }
 
             mCLKernelExecutor.setImageSizeIndependentCompilation(false);
         });
