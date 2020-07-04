@@ -44,13 +44,13 @@ public class ExcludeLabels extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
         int count = 1;
         for (int i = 0; i < label_indices.length; i++) {
-            System.out.print("i " + i + " " + label_indices[i]);
+            //System.out.print("i " + i + " " + label_indices[i]);
             if (i > 0 && label_indices[i] == 0) {
-                System.out.println(" keep");
+                //System.out.println(" keep");
                 label_indices[i] = count;
                 count++;
             } else {
-                System.out.println(" exclude");
+                //System.out.println(" exclude");
                 label_indices[i] = 0;
             }
         }

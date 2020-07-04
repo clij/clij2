@@ -28,7 +28,7 @@ public class LabelledSpotsToPointList extends AbstractCLIJ2Plugin implements CLI
     public static boolean labelledSpotsToPointList(CLIJ2 clij2, ClearCLBuffer input_labelmap, ClearCLBuffer output) {
 
         HashMap<String, Object> parameters = new HashMap<String, Object>();
-        System.out.println("src: " + input_labelmap);
+        //System.out.println("src: " + input_labelmap);
         parameters.put("src", input_labelmap);
         parameters.put("dst_point_list", output);
 
