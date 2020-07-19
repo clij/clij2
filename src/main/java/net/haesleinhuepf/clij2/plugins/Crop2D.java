@@ -27,7 +27,7 @@ public class Crop2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     protected Object[] getDefaultValues() {
-        return new Object[]{null, null, 0, 0};
+        return new Object[]{null, null, 0, 0, 100, 100};
     }
 
     @Override

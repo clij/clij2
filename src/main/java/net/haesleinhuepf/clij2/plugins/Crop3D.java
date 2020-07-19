@@ -30,7 +30,7 @@ public class Crop3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
         if (default_values != null) {
             return default_values;
         }
-        return new Object[]{null, null, 0, 0, 0};
+        return new Object[]{null, null, 0, 0, 0, 100, 100, 10};
     }
 
     @Override
