@@ -222,6 +222,8 @@ import net.haesleinhuepf.clij2.plugins.PullBinary;
 import net.haesleinhuepf.clij2.plugins.Push;
 import net.haesleinhuepf.clij2.plugins.PushCurrentSlice;
 import net.haesleinhuepf.clij2.plugins.PushCurrentZStack;
+import net.haesleinhuepf.clij2.plugins.PushCurrentSelection;
+import net.haesleinhuepf.clij2.plugins.PushCurrentSliceSelection;
 import net.haesleinhuepf.clij2.plugins.Release;
 import net.haesleinhuepf.clij2.plugins.AddImageAndScalar;
 import net.haesleinhuepf.clij2.plugins.DetectMinimaBox;
@@ -4633,6 +4635,12 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
 
     // net.haesleinhuepf.clij2.plugins.PushCurrentZStack
+    //----------------------------------------------------
+
+    // net.haesleinhuepf.clij2.plugins.PushCurrentSelection
+    //----------------------------------------------------
+
+    // net.haesleinhuepf.clij2.plugins.PushCurrentSliceSelection
     //----------------------------------------------------
 
     // net.haesleinhuepf.clij2.plugins.Release
