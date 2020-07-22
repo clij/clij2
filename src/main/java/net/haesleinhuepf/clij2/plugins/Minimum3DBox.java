@@ -26,7 +26,7 @@ public class Minimum3DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 10, 10, 10};
     }
 

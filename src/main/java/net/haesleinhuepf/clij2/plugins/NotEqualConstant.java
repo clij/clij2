@@ -24,7 +24,7 @@ public class NotEqualConstant extends AbstractCLIJ2Plugin implements CLIJMacroPl
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0};
     }
 

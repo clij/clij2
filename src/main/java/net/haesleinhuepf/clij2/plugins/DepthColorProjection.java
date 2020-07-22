@@ -22,7 +22,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
 public class DepthColorProjection extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, null, 0, 255};
     }
 

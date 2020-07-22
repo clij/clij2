@@ -25,7 +25,7 @@ public class SetPlane extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, 0, 0};
     }
 

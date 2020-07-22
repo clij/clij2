@@ -24,7 +24,7 @@ public class Paste2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0, 0};
     }
 

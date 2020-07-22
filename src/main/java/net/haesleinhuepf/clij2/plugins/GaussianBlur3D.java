@@ -23,7 +23,7 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.executeSeparableKe
 public class GaussianBlur3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, ProcessableInTiles {
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 2, 2, 2};
     }
 

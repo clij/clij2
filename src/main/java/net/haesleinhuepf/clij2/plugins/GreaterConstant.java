@@ -25,7 +25,7 @@ public class GreaterConstant extends AbstractCLIJ2Plugin implements CLIJMacroPlu
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0};
     }
 

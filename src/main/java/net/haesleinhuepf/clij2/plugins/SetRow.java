@@ -25,7 +25,7 @@ public class SetRow extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, 0, 0};
     }
 

@@ -28,7 +28,7 @@ public class Median3DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 2, 2, 2};
     }
 

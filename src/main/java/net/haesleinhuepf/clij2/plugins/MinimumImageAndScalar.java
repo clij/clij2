@@ -28,7 +28,7 @@ public class MinimumImageAndScalar extends AbstractCLIJ2Plugin implements CLIJMa
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0};
     }
 

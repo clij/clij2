@@ -26,7 +26,7 @@ public class Translate2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0, 0};
     }
 

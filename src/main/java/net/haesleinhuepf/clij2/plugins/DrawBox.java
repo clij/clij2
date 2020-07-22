@@ -24,7 +24,7 @@ public class DrawBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
 
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, 0, 0, 0, 10, 10, 10, 255};
     }
 

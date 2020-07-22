@@ -25,7 +25,7 @@ public class EqualConstant extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0};
     }
 

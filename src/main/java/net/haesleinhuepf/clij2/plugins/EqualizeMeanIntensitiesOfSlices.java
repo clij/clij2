@@ -19,7 +19,7 @@ public class EqualizeMeanIntensitiesOfSlices extends AbstractCLIJ2Plugin impleme
 
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0};
     }
 

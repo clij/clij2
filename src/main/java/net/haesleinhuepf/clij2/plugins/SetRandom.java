@@ -32,7 +32,7 @@ public class SetRandom extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, 0, 255, 0};
     }
 

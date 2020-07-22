@@ -26,7 +26,7 @@ public class Resample extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0, 0, 0, true};
     }
 

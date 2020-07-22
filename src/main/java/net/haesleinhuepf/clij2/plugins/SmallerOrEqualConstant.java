@@ -25,7 +25,7 @@ public class SmallerOrEqualConstant extends AbstractCLIJ2Plugin implements CLIJM
 
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0};
     }
 

@@ -18,7 +18,7 @@ public class DifferenceOfGaussian3D extends AbstractCLIJ2Plugin implements CLIJM
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 2, 2, 2, 10, 10, 10};
     }
 

@@ -24,7 +24,7 @@ public class Set extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpe
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, 0};
     }
 

@@ -25,7 +25,7 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
 public class FloodFillDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0, 1};
     }
 

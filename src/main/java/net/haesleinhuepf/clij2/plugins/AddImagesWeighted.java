@@ -26,7 +26,7 @@ public class AddImagesWeighted extends AbstractCLIJ2Plugin implements CLIJMacroP
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, null, Double.valueOf(1), Double.valueOf(1)};
     }
 

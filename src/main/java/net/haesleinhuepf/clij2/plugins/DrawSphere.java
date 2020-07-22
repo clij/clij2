@@ -24,7 +24,7 @@ public class DrawSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
 
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, 5, 5, 5, 3, 3, 3, 255};
     }
 

@@ -14,7 +14,7 @@ import org.scijava.plugin.Plugin;
 public class TopHatBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, ProcessableInTiles {
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 10, 10, 10};
     }
 

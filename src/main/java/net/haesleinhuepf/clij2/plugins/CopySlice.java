@@ -26,7 +26,7 @@ public class CopySlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0};
     }
 

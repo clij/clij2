@@ -27,7 +27,7 @@ public class MultiplyImageAndCoordinate extends AbstractCLIJ2Plugin implements C
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0};
     }
 

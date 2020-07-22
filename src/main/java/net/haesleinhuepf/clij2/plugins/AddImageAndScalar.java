@@ -27,7 +27,7 @@ public class AddImageAndScalar extends AbstractCLIJ2Plugin implements CLIJMacroP
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, Double.valueOf(1)};
     }
 

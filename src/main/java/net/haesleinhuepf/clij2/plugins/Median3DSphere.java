@@ -28,7 +28,7 @@ public class Median3DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlug
     }
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 2, 2, 2};
     }
 

@@ -21,7 +21,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
 public class MeanZProjectionBounded extends AbstractCLIJPlugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 0, 100};
     }
 

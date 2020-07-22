@@ -28,7 +28,7 @@ public class SubtractImageFromScalar extends AbstractCLIJ2Plugin implements CLIJ
 
 
     @Override
-    protected Object[] getDefaultValues() {
+    public Object[] getDefaultValues() {
         return new Object[]{null, null, 255};
     }
 
