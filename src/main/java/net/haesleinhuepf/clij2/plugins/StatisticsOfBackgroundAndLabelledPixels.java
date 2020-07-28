@@ -49,6 +49,12 @@ public class StatisticsOfBackgroundAndLabelledPixels extends AbstractCLIJ2Plugin
         return StatisticsOfLabelledPixels.statisticsArrayToResultsTable(statistics, resultsTable);
     }
 
+    public static double[][] statisticsOfBackgroundAndLabelledPixels(CLIJ2 clij2, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap) {
+        int numberOfLabels = (int) clij2.maximumOfAllPixels(inputLabelMap);
+
+        return clij2.statisticsOfLabelledPixels(inputImage, inputLabelMap, 0, numberOfLabels);
+    }
+
 
     @Override
     public String getParameterHelpText() {

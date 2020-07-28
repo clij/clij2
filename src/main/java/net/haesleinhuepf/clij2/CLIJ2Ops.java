@@ -349,6 +349,7 @@ import net.haesleinhuepf.clij2.plugins.AbsoluteDifference;
 import net.haesleinhuepf.clij2.plugins.ReplacePixelsIfZero;
 import net.haesleinhuepf.clij2.plugins.VoronoiLabeling;
 import net.haesleinhuepf.clij2.plugins.ExtendLabelingViaVoronoi;
+import net.haesleinhuepf.clij2.plugins.CentroidsOfBackgroundAndLabels;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
@@ -5803,6 +5804,21 @@ public abstract interface CLIJ2Ops {
      * 
      * This method is executed on the CPU and not on the GPU/OpenCL device.
      */
+    default double[][] statisticsOfBackgroundAndLabelledPixels(ClearCLBuffer input, ClearCLBuffer labelmap) {
+        if (doTimeTracing()) {recordMethodStart("StatisticsOfBackgroundAndLabelledPixels");}
+        double[][] result = StatisticsOfBackgroundAndLabelledPixels.statisticsOfBackgroundAndLabelledPixels(getCLIJ2(), input, labelmap);
+        if (doTimeTracing()) {recordMethodEnd("StatisticsOfBackgroundAndLabelledPixels");}
+        return result;
+    }
+
+    /**
+     * Determines bounding box, area (in pixels/voxels), min, max and mean intensity 
+     *  of background and labelled objects in a label map and corresponding pixels in the original image.
+     * 
+     * Instead of a label map, you can also use a binary image as a binary image is a label map with just one label.
+     * 
+     * This method is executed on the CPU and not on the GPU/OpenCL device.
+     */
     default ResultsTable statisticsOfBackgroundAndLabelledPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, ResultsTable arg3) {
         if (doTimeTracing()) {recordMethodStart("StatisticsOfBackgroundAndLabelledPixels");}
         ResultsTable result = StatisticsOfBackgroundAndLabelledPixels.statisticsOfBackgroundAndLabelledPixels(getCLIJ2(), arg1, arg2, arg3);
@@ -6568,5 +6584,20 @@ public abstract interface CLIJ2Ops {
         return result;
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.CentroidsOfBackgroundAndLabels
+    //----------------------------------------------------
+    /**
+     * Determines the centroids of all labels in a label image or image stack. 
+     * 
+     * It writes the resulting  coordinates in a pointlist image. Depending on the dimensionality d of the labelmap and the number  of labels n, the pointlist image will have n*d pixels.
+     */
+    default boolean centroidsOfBackgroundAndLabels(ClearCLBuffer source, ClearCLBuffer pointlist_destination) {
+        if (doTimeTracing()) {recordMethodStart("CentroidsOfBackgroundAndLabels");}
+        boolean result = CentroidsOfBackgroundAndLabels.centroidsOfBackgroundAndLabels(getCLIJ2(), source, pointlist_destination);
+        if (doTimeTracing()) {recordMethodEnd("CentroidsOfBackgroundAndLabels");}
+        return result;
+    }
+
 }
-// 410 methods generated.
+// 412 methods generated.
