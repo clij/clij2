@@ -6588,7 +6588,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.CentroidsOfBackgroundAndLabels
     //----------------------------------------------------
     /**
-     * Determines the centroids of all labels in a label image or image stack. 
+     * Determines the centroids of the background and all labels in a label image or image stack. 
      * 
      * It writes the resulting  coordinates in a pointlist image. Depending on the dimensionality d of the labelmap and the number  of labels n, the pointlist image will have n*d pixels.
      */
