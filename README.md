@@ -69,6 +69,7 @@ If you search for support, please open a thread on the [image.sc](https://image.
     * [Binary images](https://clij.github.io/clij2-docs/md/binary_processing/)
     * [Working with regions of interest (ROIs)](https://clij.github.io/clij2-docs/md/working_with_rois/)
     * [Voronoi diagrams](https://clij.github.io/clij2-docs/md/voronoi/)
+    * [Label maps and voronoi diagrams](https://clij.github.io/clij2-docs/md/labelmap_voronoi)
 
   * Working with matrices and graphs
     * [Multiply vectors and matrices](https://clij.github.io/clij2-docs/md/multiply_vectors_matrices)
@@ -91,13 +92,16 @@ If you search for support, please open a thread on the [image.sc](https://image.
     * [Comparing and benchmarking workflows](https://clij.github.io/clij2-docs/md/compare_workflows/)
     * [Comparing image rotation ImageJ vs. CLIJ](https://clij.github.io/clij2-docs/md/rotate_comparison_IJ_CLIJ/)
 
-* Media
+* Media (external resources)
+  * [How CLIJ2 can make your bio-image analysis workflows incredibly fast, FocalPlane](https://focalplane.biologists.com/2020/07/14/how-clij-can-make-your-image-analysis-incredibly-fast/)
   * [YouTube NEUBIAS Academy @home](https://youtu.be/uMj0OS1TiQE)
-  * [NEUBIAS Symposium 2020, Bordeaux](https://git.mpi-cbg.de/rhaase/clij_neubias_2020)
-  * [NEUBIAS Training School TS14, Bordeaux](https://git.mpi-cbg.de/rhaase/neubias_ts14)
-  * [MTZ Image Processing Seminar, TU Dresden](https://git.mpi-cbg.de/rhaase/clij_mtz_2020)
-  * [Quantitative BioImaging Conference 2020, Oxford](slides/2020-01-QBI_SmartMicroscopy_Haase_V2.pdf)
-  * [NEUBIAS Training School TS13, Porto](https://git.mpi-cbg.de/rhaase/neubias_ts14)
+  * [NEUBIAS Symposium 2020, Invited talk, Bordeaux](https://git.mpi-cbg.de/rhaase/clij_neubias_2020)
+  * [NEUBIAS Training School TS14, Teaching session, Bordeaux](https://git.mpi-cbg.de/rhaase/neubias_ts14)
+  * [MTZ Image Processing Seminar, Teaching session, TU Dresden](https://git.mpi-cbg.de/rhaase/clij_mtz_2020)
+  * [Quantitative BioImaging Conference 2020, Selected talk, Oxford](slides/2020-01-QBI_SmartMicroscopy_Haase_V2.pdf)
+  * [Fast, Faster, CLIJ, News, Center for Systems Biology Dresden](https://www.csbdresden.de/news-events/news/article/2019/11/18/fast-faster-clij/)
+  * [CLIJ: GPU-accelerated image processing for everyone, Article, Nature Methods](https://www.nature.com/articles/s41592-019-0650-1)
+  * [NEUBIAS Training School TS13, Teaching session, Porto](https://git.mpi-cbg.de/rhaase/neubias_ts14)
      
 * Example code
   * [ImageJ macro](https://github.com/clij/clij2-docs/tree/master/src/main/macro)
@@ -114,13 +118,20 @@ If you search for support, please open a thread on the [image.sc](https://image.
   * [CLIJ2 development](https://clij.github.io/clij2-docs/development)
   * [CLIJ2 plugin template](https://github.com/clij/clij2-plugin-template)
 
+* Further reading (external resources)
+  * [GPU Image Processing using OpenCL, Harald Scheidl, TowardsDataScience](https://towardsdatascience.com/get-started-with-gpu-image-processing-15e34b787480)
+  * [OpenCL SGEMM tuning for Kepler, Cedric Nugteren, SURFsara](https://cnugteren.github.io/tutorial/pages/page1.html)
+  * [OpenCL: A Hands-on Introduction, Tim Mattson, Intel](https://www.nersc.gov/assets/pubs_presos/MattsonTutorialSC14.pdf)
+  * [OpenCL 1.2 Quick Reference, Khronos Group](https://www.khronos.org/files/opencl-1-2-quick-reference-card.pdf)
+  * [OpenCL 1.2 Specifications, Khronos Group](https://www.khronos.org/registry/OpenCL/specs/opencl-1.2.pdf)
+
 * FAQ / support
   * [Frequently asked questions](https://clij.github.io/clij2-docs/faq)
   * CLIJ versus CLIJ2
-    * [CLIJ documentation (archived)](https://clij.github.io/clij2-docs/clij-docs)
+    * [CLIJ documentation (archived)](https://clij.github.io/clij-docs)
     * [CLIJ BioRxiv preprint (archived)](https://doi.org/10.1101/660704)
     * [What's different between CLIJ1, CLIJ2 and CLIJx?](https://clij.github.io/clij2-docs/clij12xAPIcomparison)
-    * [CLIJ - CLIJ2 transition guide (under construction)](clij2_transition_notes)
+    * [CLIJ - CLIJ2 transition guide (under construction)](https://clij.github.io/clij2-docs/clij2_transition_notes)
   * [Troubleshooting](https://clij.github.io/clij2-docs/troubleshooting)
   * [Support](https://image.sc)
   * [Imprint](https://clij.github.io/imprint)
@@ -153,6 +164,7 @@ Matthias Arzt (MPI-CBG),
 Nico Stuurman (UCSF),
 Nik Cordes (Los Alamos National Laboratory),
 Ofra Golani (Weizmann Institute of Science),
+Patrick Dummer, 
 Peter Haub,
 Pete Bankhead (University of Edinburgh),
 Pit Kludig,
