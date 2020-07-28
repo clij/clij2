@@ -13,5 +13,4 @@ __kernel void generate_binary_overlap_matrix_2d(
   float label2 = READ_IMAGE(src_label_map2, sampler, POS_src_label_map2_INSTANCE(x, y, 0, 0)).x;
 
   WRITE_dst_matrix_IMAGE(dst_matrix, (POS_dst_matrix_INSTANCE(label1, label2, 0, 0)), CONVERT_dst_matrix_PIXEL_TYPE(1));
-  WRITE_dst_matrix_IMAGE(dst_matrix, (POS_dst_matrix_INSTANCE(label2, label1, 0, 0)), CONVERT_dst_matrix_PIXEL_TYPE(1));
 }
