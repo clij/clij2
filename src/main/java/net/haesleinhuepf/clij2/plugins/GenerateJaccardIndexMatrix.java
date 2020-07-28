@@ -54,7 +54,7 @@ public class GenerateJaccardIndexMatrix extends AbstractCLIJ2Plugin implements C
             }
         }
 
-        ClearCLBuffer true_positives = clij2.pushMat(matrix);
+        ClearCLBuffer true_positives = clij2.pushMatXYZ(matrix);
         ClearCLBuffer false_negatives = clij2.create(true_positives.getWidth(), 1);
         ClearCLBuffer false_positives = clij2.create(1, true_positives.getHeight());
 
