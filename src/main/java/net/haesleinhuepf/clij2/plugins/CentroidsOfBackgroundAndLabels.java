@@ -79,7 +79,7 @@ public class CentroidsOfBackgroundAndLabels extends AbstractCLIJ2Plugin implemen
 
     @Override
     public String getDescription() {
-        return "Determines the centroids of all labels in a label image or image stack. \n\nIt writes the resulting " +
+        return "Determines the centroids of the background and all labels in a label image or image stack. \n\nIt writes the resulting " +
                 " coordinates in a pointlist image. Depending on the dimensionality d of the labelmap and the number " +
                 " of labels n, the pointlist image will have n*d pixels.";
     }
