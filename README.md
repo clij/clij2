@@ -43,8 +43,9 @@ If you search for support, please open a thread on the [image.sc](https://image.
   * [Introduction for ImageJ Macro users](https://clij.github.io/clij2-docs/macro_intro)
   * [Introduction for Java developers](https://clij.github.io/clij2-docs/api_intro)
   * Installation
-    * [Fiji update site](https://clij.github.io/clij2-docs/installationInFiji)
+    * [Fiji](https://clij.github.io/clij2-docs/installationInFiji)
     * [Icy](https://github.com/clij/clicy)
+    * [ImageJ](https://clij.github.io/clij2-imagej1/)
     * [Matlab](https://github.com/clij/clatlab)
     * [Maven/Java](https://clij.github.io/clij2-docs/dependingViaMaven)
   * [Cheat sheets](https://clij.github.io/clij2-docs/CLIJ2-cheatsheet_V3.pdf)
