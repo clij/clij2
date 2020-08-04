@@ -34,7 +34,7 @@ public class ExcludeLabelsOnEdges extends AbstractCLIJ2Plugin implements CLIJMac
             clij2.set(label_map_out, 0f);
             return true;
         }
-        float[] label_indices = new float[max_label];
+        float[] label_indices = new float[max_label + 1];
 
         for (int i = 0; i < label_indices.length; i++) {
             label_indices[i] = i;
