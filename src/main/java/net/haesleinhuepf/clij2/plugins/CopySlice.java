@@ -49,7 +49,7 @@ public class CopySlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
         } else if (src.getDimension() == 3 && dst.getDimension() == 2) {
             clij2.execute(CopySlice.class, "copy_slice_from_3d_x.cl", "copy_slice_from_3d", dst.getDimensions(), dst.getDimensions(), parameters);
         } else {
-            System.out.println("Warning: Images have wrong dimension. Must be 3D->2D or 2D->3D.");
+            //System.out.println("Warning: Images have wrong dimension. Must be 3D->2D or 2D->3D.");
             clij2.copy(src, dst);
         }
         return true;
