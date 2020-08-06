@@ -100,10 +100,6 @@ public class GenerateTouchCountMatrix extends AbstractCLIJ2Plugin implements CLI
 
 
     private static class Statistician implements Runnable{
-
-
-        private ClearCLBuffer label_map_1_slice;
-        private ClearCLBuffer label_map_2_slice;
         private final int width;
         private final int height;
         private final int zPlane;
@@ -153,7 +149,7 @@ public class GenerateTouchCountMatrix extends AbstractCLIJ2Plugin implements CLI
                         tps[label_2][label_1]++;
                     }
                 }
-                if (label_map_2_slice != null) {
+                if (labels_2 != null) {
                     label_1 = (int) labels_1[i];
                     label_2 = (int) labels_2[i];
                     if (label_1 > label_2) {
