@@ -41,7 +41,7 @@ public class BoundingBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
     public static double[] boundingBox(CLIJ2 clij2, ClearCLBuffer buffer) {
         double[] result;
 
-        ClearCLBuffer temp1 = clij2.create(buffer.getDimensions(), buffer.getNativeType());
+        ClearCLBuffer temp1 = clij2.create(buffer.getDimensions(), clij2.Float);
 
         // X
         clij2.multiplyImageAndCoordinate(buffer, temp1, 0);
