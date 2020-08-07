@@ -110,6 +110,11 @@ public class DistanceMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
     }
 
     @Override
+    public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
+        return getCLIJ2().create(input.getDimensions(), NativeTypeEnum.Float);
+    }
+
+    @Override
     public String getAvailableForDimensions() {
         return "2D, 3D";
     }
