@@ -350,6 +350,7 @@ import net.haesleinhuepf.clij2.plugins.ReplacePixelsIfZero;
 import net.haesleinhuepf.clij2.plugins.VoronoiLabeling;
 import net.haesleinhuepf.clij2.plugins.ExtendLabelingViaVoronoi;
 import net.haesleinhuepf.clij2.plugins.CentroidsOfBackgroundAndLabels;
+import net.haesleinhuepf.clij2.plugins.GetMeanOfMaskedPixels;
 // this is generated code. See src/test/java/net/haesleinhuepf/clijx/codegenerator for details
 public abstract interface CLIJ2Ops {
    CLIJ getCLIJ();
@@ -6599,5 +6600,20 @@ public abstract interface CLIJ2Ops {
         return result;
     }
 
+
+    // net.haesleinhuepf.clij2.plugins.GetMeanOfMaskedPixels
+    //----------------------------------------------------
+    /**
+     * Determines the mean of all pixels in a given image which have non-zero value in a corresponding mask image. 
+     * 
+     * It will be stored in the variable mean_of_masked_pixels.
+     */
+    default double getMeanOfMaskedPixels(ClearCLBuffer arg1, ClearCLBuffer arg2) {
+        if (doTimeTracing()) {recordMethodStart("GetMeanOfMaskedPixels");}
+        double result = GetMeanOfMaskedPixels.getMeanOfMaskedPixels(getCLIJ2(), arg1, arg2);
+        if (doTimeTracing()) {recordMethodEnd("GetMeanOfMaskedPixels");}
+        return result;
+    }
+
 }
-// 412 methods generated.
+// 413 methods generated.
