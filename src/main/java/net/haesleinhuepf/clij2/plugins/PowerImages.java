@@ -1,6 +1,7 @@
 package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -50,5 +51,10 @@ public class PowerImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
     @Override
     public String getAvailableForDimensions() {
         return "2D, 3D";
+    }
+
+    @Override
+    public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
+        return getCLIJ2().create(input.getDimensions(), NativeTypeEnum.Float);
     }
 }
