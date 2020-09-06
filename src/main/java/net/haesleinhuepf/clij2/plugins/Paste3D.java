@@ -43,7 +43,9 @@ public class Paste3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
         parameters.put("src", src);
         parameters.put("destination_x", destination_x);
         parameters.put("destination_y", destination_y);
-        parameters.put("destination_z", destination_z);
+        if (src.getDimension() > 2) {
+            parameters.put("destination_z", destination_z);
+        }
         parameters.put("dst", dst);
         clij2.execute(Paste3D.class, "paste_" + src.getDimension() + "d_x.cl", "paste_"+ src.getDimension() +"d", src.getDimensions(), src.getDimensions(), parameters);
         return true;
