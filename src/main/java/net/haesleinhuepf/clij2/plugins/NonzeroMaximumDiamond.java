@@ -53,7 +53,9 @@ public class NonzeroMaximumDiamond extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getDescription() {
-        return "Apply a maximum filter (diamond shape) to the input image. \n\nThe radius is fixed to 1 and pixels with value 0 are ignored.";
+        return "Apply a maximum filter (diamond shape) to the input image. \n\nThe radius is fixed to 1 and pixels with value 0 are ignored.\n" +
+                "Note: Pixels with 0 value in the input image will not be overwritten in the output image.\n" +
+                "Thus, the result image should be initialized by copying the original image in advance.";
     }
 
     @Override

@@ -54,7 +54,10 @@ public class NonzeroMinimumBox extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getDescription() {
-        return "Apply a minimum filter (box shape) to the input image. \n\nThe radius is fixed to 1 and pixels with value 0 are ignored.";
+        return "Apply a minimum filter (box shape) to the input image. \n\nThe radius is fixed to 1 and pixels with value 0 are ignored.\n" +
+                "Note: Pixels with 0 value in the input image will not be overwritten in the output image.\n" +
+                "Thus, the result image should be initialized by copying the original image in advance.";
+
     }
 
     @Override
