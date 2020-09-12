@@ -9,6 +9,7 @@ import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.HasAuthor;
 import net.haesleinhuepf.clij2.utilities.HasLicense;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
@@ -22,7 +23,7 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
  *         March 2020
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_floodFillDiamond")
-public class FloodFillDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
+public class FloodFillDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
 
     @Override
     public Object[] getDefaultValues() {
@@ -110,33 +111,8 @@ public class FloodFillDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPl
         return "2D, 3D";
     }
 
-
     @Override
-    public String getAuthorName() {
-        return "Robert Haase translated original work by Ignacio Arganda-Carreras";
-    }
-
-    @Override
-    public String getLicense() {
-        return "\n" +
-                "Code was translated from " +
-                " \n\n" +
-                " Skeletonize3D plugin for ImageJ(C).\n" +
-                " Copyright (C) 2008 Ignacio Arganda-Carreras \n" +
-                " \n" +
-                " This program is free software; you can redistribute it and/or\n" +
-                " modify it under the terms of the GNU General Public License\n" +
-                " as published by the Free Software Foundation (http://www.gnu.org/licenses/gpl.txt )\n" +
-                "\n" +
-                " This program is distributed in the hope that it will be useful,\n" +
-                " but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
-                " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
-                " GNU General Public License for more details.\n" +
-                " \n" +
-                " You should have received a copy of the GNU General Public License\n" +
-                " along with this program; if not, write to the Free Software\n" +
-                " Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n" +
-                " \n" +
-                "";
+    public String getCategories() {
+        return "Filter";
     }
 }
