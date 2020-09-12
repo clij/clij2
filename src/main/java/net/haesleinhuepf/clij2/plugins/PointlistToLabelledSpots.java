@@ -74,8 +74,7 @@ public class PointlistToLabelledSpots extends AbstractCLIJ2Plugin implements CLI
 
     @Override
     public String getDescription() {
-        return "Takes a pointlist with dimensions n*d with n point coordinates in d dimensions and a touch matrix of \n" +
-                "size n*n to draw lines from all points to points if the corresponding pixel in the touch matrix is 1.";
+        return "Takes a pointlist with dimensions n times d with n point coordinates in d dimensions and labels corresponding pixels.";
     }
 
     @Override
