@@ -7,6 +7,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
@@ -16,7 +17,7 @@ import java.nio.FloatBuffer;
  *         June 2020
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_generateJaccardIndexMatrix")
-public class GenerateJaccardIndexMatrix extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class GenerateJaccardIndexMatrix extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
 
     @Override
     public boolean executeCL() {
@@ -81,6 +82,11 @@ public class GenerateJaccardIndexMatrix extends AbstractCLIJ2Plugin implements C
     @Override
     public String getParameterHelpText() {
         return "Image label_map1, Image label_map2, ByRef Image jaccard_index_matrix_destination";
+    }
+
+    @Override
+    public String getCategories() {
+        return "Measurement, Graph";
     }
 
 

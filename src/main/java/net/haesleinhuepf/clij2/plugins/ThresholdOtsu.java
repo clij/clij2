@@ -8,6 +8,7 @@ import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.HasAuthor;
 import net.haesleinhuepf.clij2.utilities.HasLicense;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -17,7 +18,12 @@ import org.scijava.plugin.Plugin;
  *         February 2020
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_thresholdOtsu")
-public class ThresholdOtsu extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
+public class ThresholdOtsu extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense, IsCategorized {
+
+    @Override
+    public String getCategories() {
+        return "Binary, Segmentation";
+    }
 
     @Override
     public boolean executeCL() {

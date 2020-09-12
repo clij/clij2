@@ -8,6 +8,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -16,7 +17,7 @@ import org.scijava.plugin.Plugin;
  */
 @Deprecated
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_affineTransform")
-public class AffineTransform extends AffineTransform3D implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class AffineTransform extends AffineTransform3D implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
     @Override
     public boolean executeCL() {
         ClearCLImageInterface input = (ClearCLImageInterface) args[0];
@@ -58,5 +59,10 @@ public class AffineTransform extends AffineTransform3D implements CLIJMacroPlugi
     @Override
     public String getAvailableForDimensions() {
         return "2D, 3D";
+    }
+
+    @Override
+    public String getCategories() {
+        return "Transform";
     }
 }

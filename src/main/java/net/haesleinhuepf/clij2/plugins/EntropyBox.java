@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class EntropyBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, IsCategorized {
     @Override
     public String getCategories() {
-        return "Filter";
+        return "Measurements,Filter";
     }
 
     @Override

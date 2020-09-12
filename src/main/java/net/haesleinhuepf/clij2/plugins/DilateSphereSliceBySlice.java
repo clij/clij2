@@ -7,6 +7,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_dilateSphereSliceBySlice")
-public class DilateSphereSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class DilateSphereSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
 
     @Override
     public boolean executeCL() {
@@ -56,6 +57,11 @@ public class DilateSphereSliceBySlice extends AbstractCLIJ2Plugin implements CLI
     @Override
     public String getAvailableForDimensions() {
         return "3D";
+    }
+
+    @Override
+    public String getCategories() {
+        return "Binary, Filter";
     }
 
 }

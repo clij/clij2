@@ -8,12 +8,13 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_generateParametricImage")
-public class GenerateParametricImage extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class GenerateParametricImage extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
 
     @Override
     public String getParameterHelpText() {
@@ -41,5 +42,10 @@ public class GenerateParametricImage extends AbstractCLIJ2Plugin implements CLIJ
     @Override
     public String getAvailableForDimensions() {
         return "2D, 3D";
+    }
+
+    @Override
+    public String getCategories() {
+        return "Label, Measurement, Visualisation";
     }
 }

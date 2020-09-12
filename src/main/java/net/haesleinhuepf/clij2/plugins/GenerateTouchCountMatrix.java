@@ -7,6 +7,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
@@ -18,7 +19,7 @@ import java.util.Arrays;
  *         June 2020
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_generateTouchCountMatrix")
-public class GenerateTouchCountMatrix extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class GenerateTouchCountMatrix extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
 
     @Override
     public boolean executeCL() {
@@ -96,6 +97,11 @@ public class GenerateTouchCountMatrix extends AbstractCLIJ2Plugin implements CLI
     @Override
     public String getParameterHelpText() {
         return "Image label_map, ByRef Image touch_count_matrix_destination";
+    }
+
+    @Override
+    public String getCategories() {
+        return "Label, Measurement, Graph";
     }
 
 

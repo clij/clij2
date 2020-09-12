@@ -8,6 +8,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -64,5 +65,4 @@ public class MeanSquaredError extends AbstractCLIJ2Plugin implements CLIJMacroPl
     public String getAvailableForDimensions() {
         return "2D, 3D";
     }
-
 }

@@ -7,6 +7,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
@@ -18,7 +19,7 @@ import java.util.HashMap;
  *         April 2020
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_excludeLabels")
-public class ExcludeLabels extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class ExcludeLabels extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
 
     @Override
     public boolean executeCL() {
@@ -86,5 +87,10 @@ public class ExcludeLabels extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
         ClearCLBuffer labelmap =(ClearCLBuffer)( args[1]);
         return getCLIJ2().create(labelmap);
+    }
+
+    @Override
+    public String getCategories() {
+        return "Label, Filter";
     }
 }

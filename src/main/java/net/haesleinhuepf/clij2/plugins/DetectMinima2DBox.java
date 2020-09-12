@@ -7,6 +7,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -19,7 +20,7 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
  *         May 2020
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_detectMinima2DBox")
-public class DetectMinima2DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class DetectMinima2DBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
 
     @Override
     public boolean executeCL() {
@@ -43,4 +44,8 @@ public class DetectMinima2DBox extends AbstractCLIJ2Plugin implements CLIJMacroP
         return "2D, 3D";
     }
 
+    @Override
+    public String getCategories() {
+        return "Binary, Detection";
+    }
 }

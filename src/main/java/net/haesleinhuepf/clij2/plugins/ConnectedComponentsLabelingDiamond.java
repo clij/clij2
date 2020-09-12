@@ -4,6 +4,7 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 //import net.haesleinhuepf.clijx.CLIJx;
@@ -17,7 +18,7 @@ import org.scijava.plugin.Plugin;
  * 06 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_connectedComponentsLabelingDiamond")
-public class ConnectedComponentsLabelingDiamond extends ConnectedComponentsLabeling {
+public class ConnectedComponentsLabelingDiamond extends ConnectedComponentsLabeling implements IsCategorized {
 
     @Override
     public boolean executeCL() {
@@ -41,5 +42,10 @@ public class ConnectedComponentsLabelingDiamond extends ConnectedComponentsLabel
     @Override
     public String getDescription() {
         return "Performs connected components analysis inspecting the diamond neighborhood of every pixel to a binary image and generates a label map.";
+    }
+
+    @Override
+    public String getCategories() {
+        return "Label";
     }
 }

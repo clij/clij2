@@ -14,6 +14,7 @@ import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
 import net.haesleinhuepf.clij2.utilities.HasAuthor;
 import net.haesleinhuepf.clij2.utilities.HasLicense;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
@@ -27,7 +28,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_affineTransform2D")
-public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
+public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense, IsCategorized {
 
     @Override
     public boolean executeCL() {
@@ -227,5 +228,10 @@ public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroP
                 " CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\n" +
                 " OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n" +
                 " OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.";
+    }
+
+    @Override
+    public String getCategories() {
+        return "Transform";
     }
 }

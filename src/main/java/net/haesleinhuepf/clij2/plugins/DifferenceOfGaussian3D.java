@@ -14,7 +14,7 @@ import org.scijava.plugin.Plugin;
 public class DifferenceOfGaussian3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
     @Override
     public String getCategories() {
-        return "Filter";
+        return "Background, Filter";
     }
 
     @Override

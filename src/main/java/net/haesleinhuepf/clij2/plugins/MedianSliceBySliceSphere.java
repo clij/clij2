@@ -8,6 +8,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij.utilities.CLKernelExecutor;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.radiusToKernelSize;
  * 12 2018
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_medianSliceBySliceSphere")
-public class MedianSliceBySliceSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class MedianSliceBySliceSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
 
     @Override
     public Object[] getDefaultValues() {
@@ -71,4 +72,8 @@ public class MedianSliceBySliceSphere extends AbstractCLIJ2Plugin implements CLI
         return "3D";
     }
 
+    @Override
+    public String getCategories() {
+        return "Filter";
+    }
 }

@@ -10,6 +10,7 @@ import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.HasAuthor;
 import net.haesleinhuepf.clij2.utilities.HasLicense;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.util.Arrays;
@@ -23,7 +24,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  * January 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_automaticThreshold")
-public class AutomaticThreshold extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense {
+public class AutomaticThreshold extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense, IsCategorized {
 
     @Override
     public boolean executeCL() {
@@ -91,5 +92,10 @@ public class AutomaticThreshold extends AbstractCLIJ2Plugin implements CLIJMacro
                 "\n\n" +
                 "Detailed documentation on the implemented methods can be found online: " +
                 "https://imagej.net/Auto_Threshold";
+    }
+
+    @Override
+    public String getCategories() {
+        return "Binary, Segmentation";
     }
 }

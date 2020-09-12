@@ -8,6 +8,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.numeric.RealType;
@@ -25,7 +26,7 @@ import java.nio.FloatBuffer;
  * 06 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_closeIndexGapsInLabelMap")
-public class CloseIndexGapsInLabelMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class CloseIndexGapsInLabelMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
 
     @Override
     public boolean executeCL() {
@@ -290,5 +291,10 @@ public class CloseIndexGapsInLabelMap extends AbstractCLIJ2Plugin implements CLI
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
         return clij.create(input.getDimensions(), NativeTypeEnum.Float);
+    }
+
+    @Override
+    public String getCategories() {
+        return "Label";
     }
 }

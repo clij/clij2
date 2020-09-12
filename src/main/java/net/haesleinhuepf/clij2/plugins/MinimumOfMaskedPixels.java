@@ -25,7 +25,7 @@ import java.util.HashMap;
 public class MinimumOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
     @Override
     public String getCategories() {
-        return "Measurements";
+        return "Binary,Measurements";
     }
 
     @Override

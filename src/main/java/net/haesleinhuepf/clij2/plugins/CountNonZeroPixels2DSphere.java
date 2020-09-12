@@ -22,7 +22,7 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.radiusToKernelSize;
 public class CountNonZeroPixels2DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
     @Override
     public String getCategories() {
-        return "Measurements";
+        return "Measurements, Filter";
     }
 
     @Override

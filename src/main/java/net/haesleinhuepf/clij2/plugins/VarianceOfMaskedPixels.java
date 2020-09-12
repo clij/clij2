@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class VarianceOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
     @Override
     public String getCategories() {
-        return "Measurement";
+        return "Binary, Measurement";
     }
 
     @Override

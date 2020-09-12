@@ -19,7 +19,7 @@ import org.scijava.plugin.Plugin;
 public class SquaredDifference extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
     @Override
     public String getCategories() {
-        return "Math";
+        return "Math, Filter";
     }
 
     @Override

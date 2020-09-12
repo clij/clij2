@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class NClosestPoints extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
     @Override
     public String getCategories() {
-        return "Measurements";
+        return "Graph, Measurements";
     }
 
     @Override

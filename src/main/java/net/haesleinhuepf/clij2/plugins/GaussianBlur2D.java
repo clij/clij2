@@ -9,6 +9,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -16,7 +17,7 @@ import org.scijava.plugin.Plugin;
  * 12 2018
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_gaussianBlur2D")
-public class GaussianBlur2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class GaussianBlur2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
     @Override
     public Object[] getDefaultValues() {
         return new Object[]{null, null, 2, 2};
@@ -80,4 +81,8 @@ public class GaussianBlur2D extends AbstractCLIJ2Plugin implements CLIJMacroPlug
         return "2D";
     }
 
+    @Override
+    public String getCategories() {
+        return "Filter";
+    }
 }

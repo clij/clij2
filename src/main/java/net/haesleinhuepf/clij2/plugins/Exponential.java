@@ -30,7 +30,7 @@ import java.util.HashMap;
 public class Exponential extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, IsCategorized {
     @Override
     public String getCategories() {
-        return "Math";
+        return "Math, Filter";
     }
 
     @Override

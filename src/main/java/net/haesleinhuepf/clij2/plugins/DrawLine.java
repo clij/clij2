@@ -7,6 +7,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ import java.util.HashMap;
  * 08 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_drawLine")
-public class DrawLine extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
+public class DrawLine extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
 
 
     @Override
@@ -94,5 +95,10 @@ public class DrawLine extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
     @Override
     public String getAvailableForDimensions() {
         return "2D, 3D";
+    }
+
+    @Override
+    public String getCategories() {
+        return "Visualisation";
     }
 }
