@@ -559,7 +559,8 @@ public abstract interface CLIJ2Ops {
     /**
      * Apply a minimum filter (diamond shape) to the input image. 
      * 
-     * The radius is fixed to 1 and pixels with value 0 are ignored.
+     * The radius is fixed to 1 and pixels with value 0 are ignored.Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
      */
     default boolean nonzeroMinimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
         if (doTimeTracing()) {recordMethodStart("NonzeroMinimumDiamond");}
@@ -571,7 +572,8 @@ public abstract interface CLIJ2Ops {
     /**
      * Apply a minimum filter (diamond shape) to the input image. 
      * 
-     * The radius is fixed to 1 and pixels with value 0 are ignored.
+     * The radius is fixed to 1 and pixels with value 0 are ignored.Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
      */
     default ClearCLKernel nonzeroMinimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLKernel arg4) {
         if (doTimeTracing()) {recordMethodStart("NonzeroMinimumDiamond");}
@@ -1627,6 +1629,8 @@ public abstract interface CLIJ2Ops {
      * Apply a maximum filter (diamond shape) to the input image. 
      * 
      * The radius is fixed to 1 and pixels with value 0 are ignored.
+     * Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
      */
     default boolean nonzeroMaximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
         if (doTimeTracing()) {recordMethodStart("NonzeroMaximumDiamond");}
@@ -1639,6 +1643,8 @@ public abstract interface CLIJ2Ops {
      * Apply a maximum filter (diamond shape) to the input image. 
      * 
      * The radius is fixed to 1 and pixels with value 0 are ignored.
+     * Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
      */
     default ClearCLKernel nonzeroMaximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLKernel arg4) {
         if (doTimeTracing()) {recordMethodStart("NonzeroMaximumDiamond");}
@@ -2116,6 +2122,8 @@ public abstract interface CLIJ2Ops {
      * Apply a maximum filter (box shape) to the input image. 
      * 
      * The radius is fixed to 1 and pixels with value 0 are ignored.
+     * Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
      */
     default boolean nonzeroMaximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
         if (doTimeTracing()) {recordMethodStart("NonzeroMaximumBox");}
@@ -2128,6 +2136,8 @@ public abstract interface CLIJ2Ops {
      * Apply a maximum filter (box shape) to the input image. 
      * 
      * The radius is fixed to 1 and pixels with value 0 are ignored.
+     * Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
      */
     default ClearCLKernel nonzeroMaximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLKernel arg4) {
         if (doTimeTracing()) {recordMethodStart("NonzeroMaximumBox");}
@@ -2143,6 +2153,8 @@ public abstract interface CLIJ2Ops {
      * Apply a minimum filter (box shape) to the input image. 
      * 
      * The radius is fixed to 1 and pixels with value 0 are ignored.
+     * Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
      */
     default boolean nonzeroMinimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
         if (doTimeTracing()) {recordMethodStart("NonzeroMinimumBox");}
@@ -2155,6 +2167,8 @@ public abstract interface CLIJ2Ops {
      * Apply a minimum filter (box shape) to the input image. 
      * 
      * The radius is fixed to 1 and pixels with value 0 are ignored.
+     * Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
      */
     default ClearCLKernel nonzeroMinimumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, ClearCLKernel arg4) {
         if (doTimeTracing()) {recordMethodStart("NonzeroMinimumBox");}
@@ -6153,8 +6167,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.PointlistToLabelledSpots
     //----------------------------------------------------
     /**
-     * Takes a pointlist with dimensions n*d with n point coordinates in d dimensions and a touch matrix of 
-     * size n*n to draw lines from all points to points if the corresponding pixel in the touch matrix is 1.
+     * Takes a pointlist with dimensions n times d with n point coordinates in d dimensions and labels corresponding pixels.
      */
     default boolean pointlistToLabelledSpots(ClearCLBuffer pointlist, ClearCLBuffer spots_destination) {
         if (doTimeTracing()) {recordMethodStart("PointlistToLabelledSpots");}
