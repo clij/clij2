@@ -2,6 +2,7 @@ package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.enums.ImageChannelDataType;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -58,9 +59,9 @@ public class Resample extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
                 0, 0, factorZ, 0);
 
         if (linearInterpolation) {
-            ClearCLImage inputImage = clij2.create(input.getDimensions(), CLIJUtilities.nativeToChannelType(input.getNativeType()));
+            ClearCLImage inputImage = clij2.create(input.getDimensions(), ImageChannelDataType.Float);
             clij2.copy(input, inputImage);
-            ClearCLImage outputImage = clij2.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
+            ClearCLImage outputImage = clij2.create(output.getDimensions(), ImageChannelDataType.Float);
 
             clij2.affineTransform3D(inputImage, outputImage, at);
             inputImage.close();
@@ -91,9 +92,9 @@ public class Resample extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
                 0, factorY, 0);
 
         if (linearInterpolation) {
-            ClearCLImage inputImage = clij2.create(input.getDimensions(), CLIJUtilities.nativeToChannelType(input.getNativeType()));
+            ClearCLImage inputImage = clij2.create(input.getDimensions(), ImageChannelDataType.Float);
             clij2.copy(input, inputImage);
-            ClearCLImage outputImage = clij2.create(output.getDimensions(), CLIJUtilities.nativeToChannelType(output.getNativeType()));
+            ClearCLImage outputImage = clij2.create(output.getDimensions(), ImageChannelDataType.Float);
 
             clij2.affineTransform2D(inputImage, outputImage, at);
             inputImage.close();

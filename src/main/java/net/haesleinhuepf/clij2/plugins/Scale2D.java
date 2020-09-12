@@ -2,6 +2,8 @@ package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.enums.ImageChannelDataType;
+import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -75,7 +77,7 @@ public class Scale2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
         if (!clij2.hasImageSupport()) {
             return clij2.affineTransform2D(input, output, AffineTransform.matrixToFloatArray2D(at));
         } else {
-            ClearCLImage image = clij2.create(input.getDimensions(), CLIJUtilities.nativeToChannelType(input.getNativeType()));
+            ClearCLImage image = clij2.create(input.getDimensions(), ImageChannelDataType.Float);
             clij2.copy(input, image);
             clij2.affineTransform2D(image, output, AffineTransform.matrixToFloatArray2D(at));
             clij2.release(image);

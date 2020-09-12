@@ -2,6 +2,7 @@ package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.enums.ImageChannelDataType;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -55,7 +56,7 @@ public class ResliceRadial extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
     public static boolean resliceRadial(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer dst, Float deltaAngle, Float startAngleDegrees, Float centerX, Float centerY, Float scaleFactorX, Float scaleFactorY) {
         assertDifferent(src, dst);
 
-        ClearCLImage image = clij2.create(src.getDimensions(), CLIJUtilities.nativeToChannelType(src.getNativeType()));
+        ClearCLImage image = clij2.create(src.getDimensions(), ImageChannelDataType.Float);
         clij2.copy(src, image);
 
         HashMap<String, Object> parameters = new HashMap<>();

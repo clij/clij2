@@ -2,6 +2,7 @@ package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.enums.ImageChannelDataType;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -95,7 +96,7 @@ public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroP
         if (!clij2.hasImageSupport()) {
             return affineTransform2D(clij2, input, output, net.haesleinhuepf.clij.utilities.AffineTransform.matrixToFloatArray2D(at));
         } else {
-            ClearCLImage inputImage = clij2.create(input.getDimensions(), CLIJUtilities.nativeToChannelType(input.getNativeType()));
+            ClearCLImage inputImage = clij2.create(input.getDimensions(), ImageChannelDataType.Float);
             clij2.copy(input, inputImage);
 
             boolean result = affineTransform2D(clij2, inputImage, output, net.haesleinhuepf.clij.utilities.AffineTransform.matrixToFloatArray2D(at));

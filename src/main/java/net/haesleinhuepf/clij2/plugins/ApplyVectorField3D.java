@@ -2,6 +2,7 @@ package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
+import net.haesleinhuepf.clij.clearcl.enums.ImageChannelDataType;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
@@ -27,7 +28,7 @@ public class ApplyVectorField3D extends AbstractCLIJ2Plugin implements CLIJMacro
     public boolean executeCL() {
         if (clij.hasImageSupport()) {
             ClearCLBuffer inputBuffer = (ClearCLBuffer)( args[0]);
-            ClearCLImage input = getCLIJ2().create(inputBuffer.getDimensions(), CLIJUtilities.nativeToChannelType(inputBuffer.getNativeType()));
+            ClearCLImage input = getCLIJ2().create(inputBuffer.getDimensions(), ImageChannelDataType.Float);
             getCLIJ2().copy(inputBuffer, input);
 
             getCLIJ2().applyVectorField(
