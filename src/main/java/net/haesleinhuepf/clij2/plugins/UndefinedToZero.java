@@ -31,7 +31,7 @@ public class UndefinedToZero extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public boolean executeCL() {
-        boolean result = getCLIJ2().smallerConstant((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asFloat(args[2]));
+        boolean result = getCLIJ2().undefinedToZero((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]));
         return result;
     }
 
