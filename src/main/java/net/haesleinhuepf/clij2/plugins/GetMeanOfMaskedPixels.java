@@ -25,7 +25,7 @@ public class GetMeanOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMa
     public boolean executeCL() {
         double meanGreyValue = getCLIJ2().getMeanOfMaskedPixels((ClearCLBuffer)( args[0]), (ClearCLBuffer)( args[1]));
 
-        ((Double[])args[1])[0] = meanGreyValue;
+        ((Double[])args[2])[0] = meanGreyValue;
 
         return true;
     }
@@ -37,7 +37,7 @@ public class GetMeanOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Number mean_of_masked_pixels";
+        return "Image source, Image mask, ByRef Number mean_of_masked_pixels";
     }
 
     @Override
