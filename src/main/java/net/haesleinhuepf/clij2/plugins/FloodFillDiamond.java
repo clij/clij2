@@ -1,5 +1,8 @@
 package net.haesleinhuepf.clij2.plugins;
 
+import ij.IJ;
+import ij.ImageJ;
+import ij.ImagePlus;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLKernel;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -78,12 +81,14 @@ public class FloodFillDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPl
             parameters.put("value_replacement", valueReplacement);
             parameters.put("dimension", dimension);
 
+            System.out.println("Bf");
             kernel = clij2.executeSubsequently(FloodFillDiamond.class, "flood_fill_diamond_x.cl", "flood_fill_diamond", dst.getDimensions(), dst.getDimensions(), parameters, kernel);
+            System.out.println("Af");
 
             flag.writeTo(floatBuffer, true);
 
             //clij2.print(dst);
-            //System.out.println("---");
+            System.out.println("---");
         }
 
         if (flipFlag) {
@@ -115,4 +120,27 @@ public class FloodFillDiamond extends AbstractCLIJ2Plugin implements CLIJMacroPl
     public String getCategories() {
         return "Filter";
     }
+
+    //
+    public static void main(String[] args) {
+        new ImageJ();
+        ImagePlus imp = IJ.openImage("C:/users/rober/Desktop/binary.tif");
+        imp.setRoi(0,0, 100, 100);
+        IJ.run(imp, "Crop", "");
+
+        CLIJ2 clij2 = CLIJ2.getInstance();
+
+        ClearCLBuffer in = clij2.push(imp);
+        ClearCLBuffer out = clij2.create(in);
+
+        long time = System.currentTimeMillis();
+        clij2.binaryFillHoles(in, out);
+        System.out.println("duration: " + (System.currentTimeMillis() - time));
+
+
+
+
+    }
+
+
 }

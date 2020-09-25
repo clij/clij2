@@ -18,43 +18,99 @@ __kernel void flood_fill_diamond(
   const int z = (dimension == 3)?get_global_id(2):0;
 
   const POS_src_TYPE pos = POS_src_INSTANCE(x, y, z, 0);
+  const POS_dst_TYPE pos_dst = POS_dst_INSTANCE(x, y, z, 0);
 
-  float pixel = READ_IMAGE(src, sampler, pos).x;
-  if (pixel != value_to_replace) {
-    WRITE_IMAGE (dst, pos, CONVERT_dst_PIXEL_TYPE(pixel));
-    return; // pixel is not changed.
-  }
+  int counter = 0;
 
-  bool doReplace = false;
+  while(counter < 55) {
+      counter++;
+      float pixel = READ_IMAGE(src, sampler, pos).x;
+      if (pixel != value_to_replace) {
+        WRITE_IMAGE (dst, pos, CONVERT_dst_PIXEL_TYPE(pixel));
+        //return; // pixel is not changed.
+      } else {
+          bool doReplace = false;
 
-  if(READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(-1, 0, 0, 0)).x == value_replacement ) {
-    doReplace = true;
-  }
-  if (!doReplace && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(1, 0, 0, 0)).x == value_replacement ) {
-    doReplace = true;
-  }
-  if (!doReplace && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, -1, 0, 0)).x == value_replacement ) {
-    doReplace = true;
-  }
-  if (!doReplace && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 1, 0, 0)).x == value_replacement ) {
-    doReplace = true;
-  }
+          if(READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(-1, 0, 0, 0)).x == value_replacement ) {
+            doReplace = true;
+          }
+          if (!doReplace && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(1, 0, 0, 0)).x == value_replacement ) {
+            doReplace = true;
+          }
+          if (!doReplace && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, -1, 0, 0)).x == value_replacement ) {
+            doReplace = true;
+          }
+          if (!doReplace && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 1, 0, 0)).x == value_replacement ) {
+            doReplace = true;
+          }
 
-  if (dimension == 3) {
-      if (!doReplace && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 0, -1, 0)).x == value_replacement ) {
-        doReplace = true;
+          if (dimension == 3) {
+              if (!doReplace && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 0, -1, 0)).x == value_replacement ) {
+                doReplace = true;
+              }
+              if (!doReplace && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 0, 1, 0)).x == value_replacement ) {
+                doReplace = true;
+              }
+          }
+
+          if(doReplace) {
+            WRITE_IMAGE (flag_dst, POS_flag_dst_INSTANCE(0, 0, 0, 0), 1);
+            WRITE_IMAGE (dst, pos_dst, CONVERT_dst_PIXEL_TYPE(value_replacement));
+          } else {
+            WRITE_IMAGE (dst, pos_dst, CONVERT_dst_PIXEL_TYPE(pixel));
+          }
       }
-      if (!doReplace && READ_IMAGE(src, sampler, pos + POS_src_INSTANCE(0, 0, 1, 0)).x == value_replacement ) {
-        doReplace = true;
+
+      // -------------------------------------------------------------------------------------------------------------------
+      barrier(CLK_LOCAL_MEM_FENCE);
+      int flag = READ_IMAGE (flag_dst, sampler, POS_flag_dst_INSTANCE(0, 0, 0, 0)).x;
+      if (flag == 0) {
+        return;
       }
+      if (x == 0 && y == 0 && z == 0) {
+        printf("flag: %d", flag);
+        WRITE_IMAGE (flag_dst, POS_flag_dst_INSTANCE(0, 0, 0, 0), 0);
+      }
+      barrier(CLK_LOCAL_MEM_FENCE);
+      // -------------------------------------------------------------------------------------------------------------------
+      pixel = READ_IMAGE(dst, sampler, pos_dst).x;
+        if (pixel != value_to_replace) {
+          WRITE_IMAGE (src, pos, CONVERT_dst_PIXEL_TYPE(pixel));
+          //return; // pixel is not changed.
+        } else {
+
+            bool doReplace = false;
+
+            if(READ_IMAGE(dst, sampler, pos_dst + POS_dst_INSTANCE(-1, 0, 0, 0)).x == value_replacement ) {
+              doReplace = true;
+            }
+            if (!doReplace && READ_IMAGE(dst, sampler, pos_dst + POS_dst_INSTANCE(1, 0, 0, 0)).x == value_replacement ) {
+              doReplace = true;
+            }
+            if (!doReplace && READ_IMAGE(dst, sampler, pos_dst + POS_dst_INSTANCE(0, -1, 0, 0)).x == value_replacement ) {
+              doReplace = true;
+            }
+            if (!doReplace && READ_IMAGE(dst, sampler, pos_dst + POS_dst_INSTANCE(0, 1, 0, 0)).x == value_replacement ) {
+              doReplace = true;
+            }
+
+            if (dimension == 3) {
+                if (!doReplace && READ_IMAGE(dst, sampler, pos_dst + POS_dst_INSTANCE(0, 0, -1, 0)).x == value_replacement ) {
+                  doReplace = true;
+                }
+                if (!doReplace && READ_IMAGE(dst, sampler, pos_dst + POS_dst_INSTANCE(0, 0, 1, 0)).x == value_replacement ) {
+                  doReplace = true;
+                }
+            }
+
+            if(doReplace) {
+              WRITE_IMAGE (flag_dst, POS_flag_dst_INSTANCE(0, 0, 0, 0), 1);
+              WRITE_IMAGE (src, pos, CONVERT_dst_PIXEL_TYPE(value_replacement));
+            } else {
+              WRITE_IMAGE (src, pos, CONVERT_dst_PIXEL_TYPE(pixel));
+            }
+        }
+     // -------------------------------------------------------------------------------------------------------------------
+     barrier(CLK_LOCAL_MEM_FENCE);
   }
-
-  if(doReplace) {
-    WRITE_IMAGE (flag_dst, POS_flag_dst_INSTANCE(0, 0, 0, 0), 1);
-    WRITE_IMAGE (dst, pos, CONVERT_dst_PIXEL_TYPE(value_replacement));
-  } else {
-    WRITE_IMAGE (dst, pos, CONVERT_dst_PIXEL_TYPE(pixel));
-  }
-
-
 }
