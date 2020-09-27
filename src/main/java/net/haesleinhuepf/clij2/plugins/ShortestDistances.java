@@ -34,7 +34,7 @@ public class ShortestDistances extends AbstractCLIJ2Plugin implements CLIJMacroP
 
         TransposeYZ.transposeYZ(clij2, input, temp);
 
-        clij2.show(temp, "temp");
+        //clij2.show(temp, "temp");
 
         MinimumZProjectionThresholdedBounded.minimumZProjectionThresholdedBounded(clij2, temp, output, -1f, 1, (int)temp.getDepth());
 
