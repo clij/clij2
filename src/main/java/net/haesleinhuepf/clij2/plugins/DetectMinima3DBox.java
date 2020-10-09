@@ -5,6 +5,7 @@ import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
+import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.HasClassifiedInputOutput;
 import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
@@ -29,6 +30,10 @@ public class DetectMinima3DBox extends AbstractCLIJ2Plugin implements CLIJMacroP
     @Override
     public boolean executeCL() {
         return getCLIJ2().detectMinimaBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), asInteger(args[4]));
+    }
+
+    public static boolean detectMinima3DBox(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Integer radius_x, Integer radius_y, Integer radius_z) {
+        return clij2.detectMinimaBox(input, output, radius_x, radius_y, radius_z);
     }
 
     @Override

@@ -37,6 +37,10 @@ public class DetectMaxima2DBox extends AbstractCLIJ2Plugin implements CLIJMacroP
         return getCLIJ2().detectMaximaBox((ClearCLBuffer)( args[0]), (ClearCLBuffer)(args[1]), asInteger(args[2]), asInteger(args[3]), 0);
     }
 
+    public static boolean detectMaxima2DBox(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Integer radius_x, Integer radius_y) {
+        return clij2.detectMaximaBox(input, output, radius_x, radius_y, 0);
+    }
+
     @Override
     public String getParameterHelpText() {
         return "Image source, ByRef Image destination, Number radiusX, Number radiusY";

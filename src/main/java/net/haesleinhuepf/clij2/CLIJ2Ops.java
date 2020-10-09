@@ -6373,15 +6373,67 @@ public abstract interface CLIJ2Ops {
 
     // net.haesleinhuepf.clij2.plugins.DetectMinima2DBox
     //----------------------------------------------------
+    /**
+     * Detects local minima in a given square/cubic neighborhood. 
+     * 
+     * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a 
+     * lower intensity, and to 0 otherwise.
+     */
+    default boolean detectMinima2DBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        if (doTimeTracing()) {recordMethodStart("DetectMinima2DBox");}
+        boolean result = DetectMinima2DBox.detectMinima2DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("DetectMinima2DBox");}
+        return result;
+    }
+
 
     // net.haesleinhuepf.clij2.plugins.DetectMaxima2DBox
     //----------------------------------------------------
+    /**
+     * Detects local maxima in a given square/cubic neighborhood. 
+     * 
+     * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a 
+     * higher intensity, and to 0 otherwise.
+     */
+    default boolean detectMaxima2DBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
+        if (doTimeTracing()) {recordMethodStart("DetectMaxima2DBox");}
+        boolean result = DetectMaxima2DBox.detectMaxima2DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
+        if (doTimeTracing()) {recordMethodEnd("DetectMaxima2DBox");}
+        return result;
+    }
+
 
     // net.haesleinhuepf.clij2.plugins.DetectMinima3DBox
     //----------------------------------------------------
+    /**
+     * Detects local minima in a given square/cubic neighborhood. 
+     * 
+     * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a 
+     * lower intensity, and to 0 otherwise.
+     */
+    default boolean detectMinima3DBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        if (doTimeTracing()) {recordMethodStart("DetectMinima3DBox");}
+        boolean result = DetectMinima3DBox.detectMinima3DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("DetectMinima3DBox");}
+        return result;
+    }
+
 
     // net.haesleinhuepf.clij2.plugins.DetectMaxima3DBox
     //----------------------------------------------------
+    /**
+     * Detects local maxima in a given square/cubic neighborhood. 
+     * 
+     * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a 
+     * higher intensity, and to 0 otherwise.
+     */
+    default boolean detectMaxima3DBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
+        if (doTimeTracing()) {recordMethodStart("DetectMaxima3DBox");}
+        boolean result = DetectMaxima3DBox.detectMaxima3DBox(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue(), new Double (arg5).intValue());
+        if (doTimeTracing()) {recordMethodEnd("DetectMaxima3DBox");}
+        return result;
+    }
+
 
     // net.haesleinhuepf.clij2.plugins.DepthColorProjection
     //----------------------------------------------------
@@ -6629,4 +6681,4 @@ public abstract interface CLIJ2Ops {
     }
 
 }
-// 413 methods generated.
+// 417 methods generated.
