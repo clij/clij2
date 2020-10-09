@@ -11,10 +11,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij.utilities.AffineTransform;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
-import net.haesleinhuepf.clij2.utilities.CLIJUtilities;
-import net.haesleinhuepf.clij2.utilities.HasAuthor;
-import net.haesleinhuepf.clij2.utilities.HasLicense;
-import net.haesleinhuepf.clij2.utilities.IsCategorized;
+import net.haesleinhuepf.clij2.utilities.*;
 import org.scijava.plugin.Plugin;
 
 import java.nio.FloatBuffer;
@@ -28,7 +25,17 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_affineTransform2D")
-public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense, IsCategorized {
+public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, HasLicense, IsCategorized, HasClassifiedInputOutput {
+    @Override
+    public String getInputType() {
+        return "Image";
+    }
+
+    @Override
+    public String getOutputType() {
+        return "Image";
+    }
+
 
     @Override
     public boolean executeCL() {

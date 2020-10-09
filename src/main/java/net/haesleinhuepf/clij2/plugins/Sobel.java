@@ -7,6 +7,7 @@ import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.HasAuthor;
+import net.haesleinhuepf.clij2.utilities.HasClassifiedInputOutput;
 import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
@@ -19,7 +20,17 @@ import java.util.HashMap;
  *         November 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_sobel")
-public class Sobel extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, IsCategorized {
+public class Sobel extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, IsCategorized, HasClassifiedInputOutput {
+    @Override
+    public String getInputType() {
+        return "Image";
+    }
+
+    @Override
+    public String getOutputType() {
+        return "Image";
+    }
+
     @Override
     public String getCategories() {
         return "Filter";

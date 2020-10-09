@@ -7,6 +7,7 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.HasClassifiedInputOutput;
 import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
@@ -20,7 +21,16 @@ import static net.haesleinhuepf.clij.utilities.CLIJUtilities.assertDifferent;
  */
 
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_binaryOr")
-public class BinaryOr extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized {
+public class BinaryOr extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized, HasClassifiedInputOutput {
+    @Override
+    public String getInputType() {
+        return "Binary Image";
+    }
+
+    @Override
+    public String getOutputType() {
+        return "Binary Image";
+    }
 
     @Override
     public boolean executeCL() {
@@ -62,6 +72,6 @@ public class BinaryOr extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getCategories() {
-        return "Binary, Filter";
+        return "Binary, Math";
     }
 }

@@ -4,6 +4,7 @@ import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.HasClassifiedInputOutput;
 import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
@@ -18,7 +19,16 @@ import org.scijava.plugin.Plugin;
  * 06 2019
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_connectedComponentsLabelingDiamond")
-public class ConnectedComponentsLabelingDiamond extends ConnectedComponentsLabeling implements IsCategorized {
+public class ConnectedComponentsLabelingDiamond extends ConnectedComponentsLabeling implements IsCategorized, HasClassifiedInputOutput {
+    @Override
+    public String getInputType() {
+        return "Binary Image";
+    }
+
+    @Override
+    public String getOutputType() {
+        return "Label Image";
+    }
 
     @Override
     public boolean executeCL() {
