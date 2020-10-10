@@ -243,9 +243,10 @@ public class AffineTransform3D extends AbstractCLIJ2Plugin implements CLIJMacroP
     @Override
     public String getDescription() {
         return "Applies an affine transform to a 3D image.\n\n" +
-                "Deprecation note: In the next major release this operation will deprecate and the replacement \n" +
+                "The transform describes how coordinates in the target image are transformed to coordinates in the source image.\n" +
+                "This may appear unintuitive and will be changed in the next major release. The replacement \n" +
                 "affineTransform (currently part of CLIJx) will apply inverted transforms compared to this operation.\n" +
-                "Individual transforms must be separated by spaces.\n\n" +
+                "Individual transforms must be separated by spaces.\n" +
                 "Supported transforms:\n" +
                 "\n* -center: translate the coordinate origin to the center of the image" +
                 "\n* center: translate the coordinate origin back to the initial origin" +
