@@ -242,10 +242,13 @@ public class AffineTransform3D extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getDescription() {
-        return "Applies an affine transform to a 3D image. Individual transforms must be separated by spaces.\n\n" +
-                "Supported transforms:" +
-                "\n* center: translate the coordinate origin to the center of the image" +
-                "\n* -center: translate the coordinate origin back to the initial origin" +
+        return "Applies an affine transform to a 3D image.\n\n" +
+                "Deprecation note: In the next major release this operation will deprecate and the replacement \n" +
+                "affineTransform (currently part of CLIJx) will apply inverted transforms compared to this operation.\n" +
+                "Individual transforms must be separated by spaces.\n\n" +
+                "Supported transforms:\n" +
+                "\n* -center: translate the coordinate origin to the center of the image" +
+                "\n* center: translate the coordinate origin back to the initial origin" +
                 "\n* rotate=[angle]: rotate in X/Y plane (around Z-axis) by the given angle in degrees" +
                 "\n* rotateX=[angle]: rotate in Y/Z plane (around X-axis) by the given angle in degrees" +
                 "\n* rotateY=[angle]: rotate in X/Z plane (around Y-axis) by the given angle in degrees" +
@@ -264,7 +267,7 @@ public class AffineTransform3D extends AbstractCLIJ2Plugin implements CLIJMacroP
                 "\n* translateY=[distance]: translate along X-axis by distance given in pixels" +
                 "\n* translateZ=[distance]: translate along X-axis by distance given in pixels" +
                 "\n\nExample transform:" +
-                "\ntransform = \"center scale=2 rotate=45 -center\";";
+                "\ntransform = \"-center scale=2 rotate=45 center\";";
     }
 
     @Override
