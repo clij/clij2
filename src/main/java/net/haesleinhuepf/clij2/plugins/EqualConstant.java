@@ -27,7 +27,7 @@ public class EqualConstant extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public String getOutputType() {
-        return "Image";
+        return "Binary Image";
     }
 
     @Override

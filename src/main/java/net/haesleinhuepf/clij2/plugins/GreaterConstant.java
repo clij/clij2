@@ -27,7 +27,7 @@ public class GreaterConstant extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getOutputType() {
-        return "Image";
+        return "Binary Image";
     }
 
     @Override

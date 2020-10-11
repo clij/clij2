@@ -27,7 +27,7 @@ public class GreaterOrEqual extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getOutputType() {
-        return "Image";
+        return "Binary Image";
     }
 
     @Override

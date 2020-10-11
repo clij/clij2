@@ -27,7 +27,7 @@ public class Equal extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJO
 
     @Override
     public String getOutputType() {
-        return "Image";
+        return "Binary Image";
     }
 
 

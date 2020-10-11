@@ -26,7 +26,7 @@ public class NotEqualConstant extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public String getOutputType() {
-        return "Image";
+        return "Binary Image";
     }
 
     @Override

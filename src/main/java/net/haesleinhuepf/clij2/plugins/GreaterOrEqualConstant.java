@@ -27,7 +27,7 @@ public class GreaterOrEqualConstant extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getOutputType() {
-        return "Image";
+        return "Binary Image";
     }
 
     @Override
