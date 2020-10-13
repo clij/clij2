@@ -61,7 +61,7 @@ public class Convolve extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image convolution_kernel, Image destination";
+        return "Image source, Image convolution_kernel, ByRef Image destination";
     }
 
     @Override
