@@ -48,13 +48,15 @@ public class GenerateTouchCountMatrix extends AbstractCLIJ2Plugin implements CLI
 
         ArrayList<float[]> buffers = new ArrayList<>();
 
+        ClearCLBuffer label_map_slice = clij2.create(src_label_map1.getWidth(), src_label_map1.getHeight());
+
+
         for (int i = 0; i < num_threads; i++) {
             float[] labels_1;
             if (i == 0) {
-                ClearCLBuffer label_map_1_slice = clij2.create(src_label_map1.getWidth(), src_label_map1.getHeight());
-                clij2.copySlice(src_label_map1, label_map_1_slice, i);
-                labels_1 = new float[(int) (label_map_1_slice.getWidth() * label_map_1_slice.getHeight())];
-                label_map_1_slice.writeTo(FloatBuffer.wrap(labels_1), true);
+                clij2.copySlice(src_label_map1, label_map_slice, i);
+                labels_1 = new float[(int) (label_map_slice.getWidth() * label_map_slice.getHeight())];
+                label_map_slice.writeTo(FloatBuffer.wrap(labels_1), true);
 
                 buffers.add(labels_1);
             } else {
@@ -63,10 +65,9 @@ public class GenerateTouchCountMatrix extends AbstractCLIJ2Plugin implements CLI
 
             float[] labels_2;
             if (i < num_threads - 1) {
-                ClearCLBuffer label_map_2_slice = clij2.create(src_label_map1.getWidth(), src_label_map1.getHeight());
-                clij2.copySlice(src_label_map1, label_map_2_slice, i + 1);
-                labels_2 = new float[(int) (label_map_2_slice.getWidth() * label_map_2_slice.getHeight())];
-                label_map_2_slice.writeTo(FloatBuffer.wrap(labels_2), true);
+                clij2.copySlice(src_label_map1, label_map_slice, i + 1);
+                labels_2 = new float[(int) (label_map_slice.getWidth() * label_map_slice.getHeight())];
+                label_map_slice.writeTo(FloatBuffer.wrap(labels_2), true);
 
                 buffers.add(labels_2);
             } else {
@@ -78,6 +79,8 @@ public class GenerateTouchCountMatrix extends AbstractCLIJ2Plugin implements CLI
             threads[i] = new Thread(statisticians[i]);
             threads[i].start();
         }
+        label_map_slice.close();
+
         for (int i = 0; i < num_threads; i++) {
             try {
                 threads[i].join();
