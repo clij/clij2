@@ -105,7 +105,7 @@ public class ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements 
         if (iterationCount[0] % 2 == 0) {
             clij2.copy(temp1, temp3);
         } else {
-            clij2.copy(temp1, temp3);
+            clij2.copy(temp2, temp3);
         }
         if (flipkernel != null) {
             flipkernel.close();
