@@ -38,7 +38,7 @@ public class CentroidsOfBackgroundAndLabels extends AbstractCLIJ2Plugin implemen
     }
 
     public static boolean centroidsOfBackgroundAndLabels(CLIJ2 clij2, ClearCLBuffer labelMap, ClearCLBuffer pointlist) {
-        double[][] statistics = clij2.statisticsOfLabelledPixels(labelMap, labelMap);
+        double[][] statistics = clij2.statisticsOfBackgroundAndLabelledPixels(labelMap, labelMap);
 
         float[] coordinates = new float[(int) (pointlist.getWidth() * pointlist.getHeight())];
 
