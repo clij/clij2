@@ -43,11 +43,11 @@ public class BottomHatSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlu
         ClearCLBuffer temp2 = clij2.create(input);
 
         if (input.getDimension() == 3) {
-            clij2.minimum3DSphere(input, temp1, radiusX, radiusX, radiusZ);
-            clij2.maximum3DSphere(temp1, temp2, radiusX, radiusY, radiusZ);
+            clij2.maximum3DSphere(input, temp1, radiusX, radiusX, radiusZ);
+            clij2.minimum3DSphere(temp1, temp2, radiusX, radiusY, radiusZ);
         } else {
-            clij2.minimum2DSphere(input, temp1, radiusX, radiusX);
-            clij2.maximum2DSphere(temp1, temp2, radiusX, radiusY);
+            clij2.maximum2DSphere(input, temp1, radiusX, radiusX);
+            clij2.minimum2DSphere(temp1, temp2, radiusX, radiusY);
         }
         clij2.subtractImages(input, temp2, output);
 
