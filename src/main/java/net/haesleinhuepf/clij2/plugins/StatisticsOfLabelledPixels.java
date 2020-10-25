@@ -152,7 +152,7 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         return statisticsOfLabelledPixels(clij2, inputImage, inputLabelMap, 1, numberOfLabels);
     }
 
-    public static double[] statisticsOfLabelledPixels(CLIJ2 clij2, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, int labelIndex) {
+    public static double[] statisticsOfLabelledPixels(CLIJ2 clij2, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, Integer labelIndex) {
         return statisticsOfLabelledPixels(clij2, inputImage, inputLabelMap, labelIndex, labelIndex)[0];
     }
 
@@ -384,7 +384,7 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
     }
 
     // as it's super slow on the GPU, let's do it on the CPU
-    public static double[][] statisticsOfLabelledPixels(CLIJ2 clij2, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, int startLabelIndex, int endLabelIndex) {
+    public static double[][] statisticsOfLabelledPixels(CLIJ2 clij2, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, Integer startLabelIndex, Integer endLabelIndex) {
         int num_threads = (int) inputImage.getDepth();
 
         double[][][] statistics = new double[num_threads + 1][endLabelIndex - startLabelIndex + 1][STATISTICS_ENTRY.NUMBER_OF_ENTRIES];
@@ -564,7 +564,7 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
         return statistics[0];
     }
 
-    public static double[][] statisticsOfLabelledPixels_single_threaded(CLIJ2 clij2, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, int startLabelIndex, int endLabelIndex) {
+    public static double[][] statisticsOfLabelledPixels_single_threaded(CLIJ2 clij2, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, Integer startLabelIndex, Integer endLabelIndex) {
         double[][] statistics = new double[endLabelIndex - startLabelIndex + 1][STATISTICS_ENTRY.NUMBER_OF_ENTRIES];
         boolean[] initializedFlags = new boolean[statistics.length];
 

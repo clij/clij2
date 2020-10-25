@@ -68,7 +68,7 @@ public class PushArray extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
         return true;
     }
 
-    public static ClearCLBuffer pushArray(CLIJ2 clij2, float[] array, int width, int height, int depth) {
+    public static ClearCLBuffer pushArray(CLIJ2 clij2, float[] array, Integer width, Integer height, Integer depth) {
         ClearCLBuffer buffer = clij2.create(width, height, depth);
         FloatBuffer floatBuffer = FloatBuffer.wrap(array);
         buffer.readFrom(floatBuffer, true);
