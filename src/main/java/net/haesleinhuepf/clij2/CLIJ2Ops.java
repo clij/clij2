@@ -737,9 +737,11 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.GenerateDistanceMatrix
     //----------------------------------------------------
     /**
-     * Takes two images containing coordinates and builds up a matrix containing distance between the points. 
+     * Computes the distance between all point coordinates given in two point lists.
      * 
-     * Convention: image width represents number of points, height represents dimensionality (2D, 3D, ... 10D). The result image has width the first input image and height equals to the width of the second input image.
+     * Takes two images containing pointlists (dimensionality n * d, n: number of points and d: dimensionality) and builds up a matrix containing the distances between these points. 
+     * 
+     * Convention: Given two point lists with dimensionality n * d and m * d, the distance matrix will be of size(n + 1) * (m + 1). The first row and column contain zeros. They represent the distance of the objects to a theoretical background object. In that way, distance matrices are of the same size as touch matrices (see generateTouchMatrix). Thus, one can threshold a distance matrix to generate a touch matrix out of it for drawing meshes.
      */
     default boolean generateDistanceMatrix(ClearCLBuffer coordinate_list1, ClearCLBuffer coordinate_list2, ClearCLBuffer distance_matrix_destination) {
         if (doTimeTracing()) {recordMethodStart("GenerateDistanceMatrix");}
@@ -1351,9 +1353,9 @@ public abstract interface CLIJ2Ops {
      * 
      * This method is executed on the CPU and not on the GPU/OpenCL device.
      */
-    default double[] statisticsOfLabelledPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3) {
+    default double[] statisticsOfLabelledPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
         if (doTimeTracing()) {recordMethodStart("StatisticsOfLabelledPixels");}
-        double[] result = StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), arg1, arg2, arg3);
+        double[] result = StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), arg1, arg2, new Double (arg3).intValue());
         if (doTimeTracing()) {recordMethodEnd("StatisticsOfLabelledPixels");}
         return result;
     }
@@ -1381,9 +1383,9 @@ public abstract interface CLIJ2Ops {
      * 
      * This method is executed on the CPU and not on the GPU/OpenCL device.
      */
-    default double[][] statisticsOfLabelledPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4) {
+    default double[][] statisticsOfLabelledPixels(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("StatisticsOfLabelledPixels");}
-        double[][] result = StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), arg1, arg2, arg3, arg4);
+        double[][] result = StatisticsOfLabelledPixels.statisticsOfLabelledPixels(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
         if (doTimeTracing()) {recordMethodEnd("StatisticsOfLabelledPixels");}
         return result;
     }
@@ -1391,9 +1393,9 @@ public abstract interface CLIJ2Ops {
     /**
      * 
      */
-    default double[][] statisticsOfLabelledPixels_single_threaded(ClearCLBuffer arg1, ClearCLBuffer arg2, int arg3, int arg4) {
+    default double[][] statisticsOfLabelledPixels_single_threaded(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("StatisticsOfLabelledPixels");}
-        double[][] result = StatisticsOfLabelledPixels.statisticsOfLabelledPixels_single_threaded(getCLIJ2(), arg1, arg2, arg3, arg4);
+        double[][] result = StatisticsOfLabelledPixels.statisticsOfLabelledPixels_single_threaded(getCLIJ2(), arg1, arg2, new Double (arg3).intValue(), new Double (arg4).intValue());
         if (doTimeTracing()) {recordMethodEnd("StatisticsOfLabelledPixels");}
         return result;
     }
@@ -6037,9 +6039,9 @@ public abstract interface CLIJ2Ops {
     /**
      * Converts an array to an image.
      */
-    default ClearCLBuffer pushArray(float[] arg1, int arg2, int arg3, int arg4) {
+    default ClearCLBuffer pushArray(float[] arg1, double arg2, double arg3, double arg4) {
         if (doTimeTracing()) {recordMethodStart("PushArray");}
-        ClearCLBuffer result = PushArray.pushArray(getCLIJ2(), arg1, arg2, arg3, arg4);
+        ClearCLBuffer result = PushArray.pushArray(getCLIJ2(), arg1, new Double (arg2).intValue(), new Double (arg3).intValue(), new Double (arg4).intValue());
         if (doTimeTracing()) {recordMethodEnd("PushArray");}
         return result;
     }
