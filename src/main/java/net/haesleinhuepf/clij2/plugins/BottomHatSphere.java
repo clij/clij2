@@ -49,7 +49,7 @@ public class BottomHatSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlu
             clij2.maximum2DSphere(input, temp1, radiusX, radiusX);
             clij2.minimum2DSphere(temp1, temp2, radiusX, radiusY);
         }
-        clij2.subtractImages(input, temp2, output);
+        clij2.subtractImages(temp2, input, output);
 
         temp1.close();
         temp2.close();

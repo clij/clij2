@@ -49,7 +49,7 @@ public class BottomHatBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
             clij2.maximum2DBox(input, temp1, radiusX, radiusX);
             clij2.minimum2DBox(temp1, temp2, radiusX, radiusY);
         }
-        clij2.subtractImages(input, temp2, output);
+        clij2.subtractImages(temp2, input, output);
 
         clij2.release(temp1);
         clij2.release(temp2);
