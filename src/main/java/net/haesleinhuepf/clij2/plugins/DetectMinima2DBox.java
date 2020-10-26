@@ -56,7 +56,7 @@ public class DetectMinima2DBox extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getAvailableForDimensions() {
-        return "2D, 3D";
+        return "2D";
     }
 
     @Override

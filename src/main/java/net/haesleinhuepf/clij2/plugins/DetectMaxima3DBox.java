@@ -55,7 +55,7 @@ public class DetectMaxima3DBox extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getAvailableForDimensions() {
-        return "2D, 3D";
+        return "3D";
     }
 
     @Override
