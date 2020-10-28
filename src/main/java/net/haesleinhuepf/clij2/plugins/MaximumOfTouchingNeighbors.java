@@ -75,7 +75,14 @@ public class MaximumOfTouchingNeighbors extends AbstractCLIJ2Plugin implements C
     @Override
     public String getDescription() {
         return "Takes a touch matrix and a vector of values to determine the maximum value among touching neighbors for every object. \n\n" +
-                "";
+                "Parameters\n" +
+                "----------\n" +
+                "values : Image\n" +
+                "    A vector of values corresponding to the labels of which the maximum should be determined.\n" +
+                "touch_matrix : Image\n" +
+                "    A touch_matrix specifying which labels are taken into account for neighborhood relationships.\n" +
+                "maximum_values_destination : Image\n" +
+                "    A the resulting vector of maximum values in the neighborhood.\n";
     }
 
     @Override

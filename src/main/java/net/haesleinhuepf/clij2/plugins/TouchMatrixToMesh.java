@@ -89,7 +89,15 @@ public class TouchMatrixToMesh extends AbstractCLIJ2Plugin implements CLIJMacroP
     @Override
     public String getDescription() {
         return "Takes a pointlist with dimensions n*d with n point coordinates in d dimensions and a touch matrix of \n" +
-                "size n*n to draw lines from all points to points if the corresponding pixel in the touch matrix is 1.";
+                "size n*n to draw lines from all points to points if the corresponding pixel in the touch matrix is 1.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "pointlist : Image\n" +
+                "    n*d matrix representing n coordinates with d dimensions.\n" +
+                "touch_matrix : Image\n" +
+                "    A 2D binary matrix with 1 in pixels (i,j) where label i touches label j.\n" +
+                "mehs_destination : Image\n" +
+                "    The output image where results are written into.\n";
     }
 
     @Override

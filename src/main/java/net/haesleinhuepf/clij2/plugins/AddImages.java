@@ -52,7 +52,15 @@ public class AddImages extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
     @Override
     public String getDescription() {
         return "Calculates the sum of pairs of pixels x and y of two images X and Y.\n\n" +
-                "<pre>f(x, y) = x + y</pre>";
+                "<pre>f(x, y) = x + y</pre>\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "summand1 : Image\n" +
+                "    The first input image to added.\n" +
+                "summand2 : Image\n" +
+                "    The second image to be added.\n" +
+                "destination : Image\n" +
+                "    The output image where results are written into.\n";
     }
 
     @Override

@@ -59,7 +59,16 @@ public class AbsoluteDifference extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getDescription() {
-        return "Determines the absolute difference pixel by pixel between two images.";
+        return "Determines the absolute difference pixel by pixel between two images.\n\n" +
+                "<pre>f(x, y) = |x - y| </pre>\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "source1 : Image\n" +
+                "    The input image to be subtracted from.\n" +
+                "source2 : Image\n" +
+                "    The input image which is subtracted.\n" +
+                "destination : Image\n" +
+                "    The output image  where results are written into.\n";
     }
 
     @Override

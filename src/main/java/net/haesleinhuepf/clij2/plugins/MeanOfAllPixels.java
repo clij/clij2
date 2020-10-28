@@ -46,7 +46,11 @@ public class MeanOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacroPlu
     @Override
     public String getDescription() {
         return "Determines the mean average of all pixels in a given image. \n\nIt will be stored in a new row of ImageJs\n" +
-                "Results table in the column 'Mean'.";
+                "Results table in the column 'Mean'." +
+                "Parameters\n" +
+                "----------\n" +
+                "source : Image\n" +
+                "    The image of which the mean average of all pixels or voxels will be determined.\n";
     }
 
     @Override

@@ -99,7 +99,11 @@ public class MaximumOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacro
     @Override
     public String getDescription() {
         return "Determines the maximum of all pixels in a given image. \n\nIt will be stored in a new row of ImageJs\n" +
-                "Results table in the column 'Max'.";
+                "Results table in the column 'Max'.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "source : Image\n" +
+                "    The image of which the maximum of all pixels or voxels will be determined.\n";
     }
 
     @Override

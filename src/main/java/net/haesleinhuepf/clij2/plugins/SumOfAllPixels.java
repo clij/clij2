@@ -78,7 +78,11 @@ public class SumOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacroPlug
     @Override
     public String getDescription() {
         return "Determines the sum of all pixels in a given image. \n\nIt will be stored in a new row of ImageJs\n" +
-                "Results table in the column 'Sum'.";
+                "Results table in the column 'Sum'.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "source : Image\n" +
+                "    The image of which all pixels or voxels will be summed.\n";
     }
 
     @Override

@@ -68,7 +68,16 @@ public class NotEqualConstant extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public String getDescription() {
-        return "Determines if two images A and B equal pixel wise.\n\nf(a, b) = 1 if a != b; 0 otherwise. ";
+        return "Determines if two images A and B equal pixel wise.\n\n" +
+                "f(a, b) = 1 if a != b; 0 otherwise." +
+                "Parameters\n" +
+                "----------\n" +
+                "source : Image\n" +
+                "    The image where every pixel is compared to the constant.\n" +
+                "destination : Image\n" +
+                "    The resulting binary image where pixels will be 1 only if source1 and source2 equal in the given pixel.\n" +
+                "constant : float\n" +
+                "    The constant where every pixel is compared to.\n";
     }
     
     @Override

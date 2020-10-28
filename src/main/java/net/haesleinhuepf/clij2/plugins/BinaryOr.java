@@ -62,7 +62,15 @@ public class BinaryOr extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
         return "Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of\n" +
                 "pixels x and y with the binary OR operator |.\n\n" +
                 "All pixel values except 0 in the input images are interpreted as 1." +
-                "<pre>f(x, y) = x | y</pre>";
+                "<pre>f(x, y) = x | y</pre>\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "operand1 : Image\n" +
+                "    The first binary input image to be processed.\n" +
+                "operand2 : Image\n" +
+                "    The second binary input image to be processed.\n" +
+                "destination : Image\n" +
+                "    The output image where results are written into.\n";
     }
 
     @Override

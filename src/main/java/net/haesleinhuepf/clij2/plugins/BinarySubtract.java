@@ -61,7 +61,15 @@ public class BinarySubtract extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getDescription() {
-        return "Subtracts one binary image from another.";
+        return "Subtracts one binary image from another.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "minuend : Image\n" +
+                "    The first binary input image to be processed.\n" +
+                "suubtrahend : Image\n" +
+                "    The second binary input image to be subtracted from the first.\n" +
+                "destination : Image\n" +
+                "    The output image where results are written into.\n";
     }
 
     @Override

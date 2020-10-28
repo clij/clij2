@@ -63,7 +63,15 @@ public class NotEqual extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getDescription() {
-        return "Determines if two images A and B equal pixel wise.\n\nf(a, b) = 1 if a != b; 0 otherwise. ";
+        return "Determines if two images A and B equal pixel wise.\n\nf(a, b) = 1 if a != b; 0 otherwise.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "source1 : Image\n" +
+                "    The first image to be compared with.\n" +
+                "source2 : Image\n" +
+                "    The second image to be compared with the first.\n" +
+                "destination : Image\n" +
+                "    The resulting binary image where pixels will be 1 only if source1 and source2 are not equal in the given pixel.\n";
     }
     
     @Override

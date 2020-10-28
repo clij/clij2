@@ -72,7 +72,19 @@ public class AddImagesWeighted extends AbstractCLIJ2Plugin implements CLIJMacroP
     @Override
     public String getDescription() {
         return "Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b." +
-                "\n\n<pre>f(x, y, a, b) = x * a + y * b</pre>";
+                "\n\n<pre>f(x, y, a, b) = x * a + y * b</pre>\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "summand1 : Image\n" +
+                "    The first input image to added.\n" +
+                "summand2 : Image\n" +
+                "    The second image to be added.\n" +
+                "destination : Image\n" +
+                "    The output image where results are written into.\n" +
+                "factor1 : float\n" +
+                "    The constant number which will be multiplied with each pixel of summand1 before adding it.\n" +
+                "factor2 : float\n" +
+                "    The constant number which will be multiplied with each pixel of summand2 before adding it.\n";
     }
 
     @Override

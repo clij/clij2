@@ -55,7 +55,14 @@ public class AdjacencyMatrixToTouchMatrix extends AbstractCLIJ2Plugin implements
 
     @Override
     public String getDescription() {
-        return "Converts a adjacency matrix in a touch matrix";
+        return "Converts a adjacency matrix in a touch matrix.\n\n" +
+                "An adjacency matrix is symmetric while a touch matrix is typically not.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "adjacency_matrix : Image\n" +
+                "    The input adjacency matrix to be read from.\n" +
+                "touch_matrix : Image\n" +
+                "    The output touch matrix to be written into.\n";
     }
 
     @Override
