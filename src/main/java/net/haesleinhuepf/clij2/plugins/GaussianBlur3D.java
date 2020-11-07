@@ -82,7 +82,7 @@ public class GaussianBlur3D extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination, Number sigmaX, Number sigmaY, Number sigmaZ";
+        return "Image source, ByRef Image destination, Number sigma_x, Number sigma_y, Number sigma_z";
     }
 
 

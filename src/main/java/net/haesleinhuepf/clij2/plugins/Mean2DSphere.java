@@ -66,7 +66,7 @@ public class Mean2DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination, Number radiusX, Number radiusY";
+        return "Image source, ByRef Image destination, Number radius_x, Number radius_y";
     }
 
     @Override

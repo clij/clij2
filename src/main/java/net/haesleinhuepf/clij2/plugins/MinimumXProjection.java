@@ -52,7 +52,7 @@ public class MinimumXProjection extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination_sum";
+        return "Image source, ByRef Image destination_min";
     }
 
     @Override

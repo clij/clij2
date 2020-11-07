@@ -67,7 +67,8 @@ public class GenerateTouchMatrix extends AbstractCLIJ2Plugin implements CLIJMacr
     @Override
     public String getDescription() {
         return "Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where all pixels are set to 0 exept those where labels are touching. \n\n" +
-                "Only half of the matrix is filled (with x < y). For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.";
+                "Only half of the matrix is filled (with x < y). For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.\n" +
+                "The touch matrix is a representation of a region adjacency graph\n";
     }
 
     @Override

@@ -66,7 +66,7 @@ public class Crop2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination, Number startX, Number startY, Number width, Number height";
+        return "Image source, ByRef Image destination, Number start_x, Number start_z, Number width, Number height";
     }
 
     @Override

@@ -96,7 +96,7 @@ public class TouchMatrixToMesh extends AbstractCLIJ2Plugin implements CLIJMacroP
                 "    n*d matrix representing n coordinates with d dimensions.\n" +
                 "touch_matrix : Image\n" +
                 "    A 2D binary matrix with 1 in pixels (i,j) where label i touches label j.\n" +
-                "mehs_destination : Image\n" +
+                "mesh_destination : Image\n" +
                 "    The output image where results are written into.\n";
     }
 
