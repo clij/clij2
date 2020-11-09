@@ -40,6 +40,8 @@ public class LabelSpots extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, 
     }
 
     public static boolean labelSpots(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output) {
+        clij2.set(output, 0);
+
         ClearCLBuffer spotCountPerX = clij2.create(new long[]{input.getDepth(), input.getHeight()});
         clij2.sumXProjection(input, spotCountPerX);
 
