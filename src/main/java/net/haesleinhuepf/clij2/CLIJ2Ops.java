@@ -367,6 +367,16 @@ public abstract interface CLIJ2Ops {
      * pixels x and y with the binary union operator |.
      * 
      * All pixel values except 0 in the input images are interpreted as 1.<pre>f(x, y) = x | y</pre>
+     * 
+     * Parameters
+     * ----------
+     * operand1 : Image
+     *     The first binary input image to be processed.
+     * operand2 : Image
+     *     The second binary input image to be processed.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean binaryUnion(ClearCLBuffer operand1, ClearCLBuffer operand2, ClearCLBuffer destination) {
         if (doTimeTracing()) {recordMethodStart("BinaryUnion");}
@@ -384,6 +394,16 @@ public abstract interface CLIJ2Ops {
      * All pixel values except 0 in the input images are interpreted as 1.
      * 
      * <pre>f(x, y) = x & y</pre>
+     * 
+     * Parameters
+     * ----------
+     * operand1 : Image
+     *     The first binary input image to be processed.
+     * operand2 : Image
+     *     The second binary input image to be processed.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean binaryIntersection(ClearCLBuffer operand1, ClearCLBuffer operand2, ClearCLBuffer destination) {
         if (doTimeTracing()) {recordMethodStart("BinaryIntersection");}
@@ -562,6 +582,19 @@ public abstract interface CLIJ2Ops {
      * The radius is fixed to 1 and pixels with value 0 are ignored.Note: Pixels with 0 value in the input image will not be overwritten in the output image.
      * Thus, the result image should be initialized by copying the original image in advance.
      */
+    default boolean nonzeroMinimumDiamond(ClearCLImageInterface input, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("NonzeroMinimumDiamond");}
+        boolean result = NonzeroMinimumDiamond.nonzeroMinimumDiamond(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMinimumDiamond");}
+        return result;
+    }
+
+    /**
+     * Apply a minimum filter (diamond shape) to the input image. 
+     * 
+     * The radius is fixed to 1 and pixels with value 0 are ignored.Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
+     */
     default boolean nonzeroMinimumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
         if (doTimeTracing()) {recordMethodStart("NonzeroMinimumDiamond");}
         boolean result = NonzeroMinimumDiamond.nonzeroMinimumDiamond(getCLIJ2(), arg1, arg2, arg3);
@@ -682,6 +715,20 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Applies a top-hat filter for background subtraction to the input image.
+     * 
+     * Parameters
+     * ----------
+     * input : Image
+     *     The input image where the background is subtracted from.
+     * destination : Image
+     *     The output image where results are written into.
+     * radius_x : Image
+     *     Radius of the background determination region in X.
+     * radius_y : Image
+     *     Radius of the background determination region in Y.
+     * radius_z : Image
+     *     Radius of the background determination region in Z.
+     * 
      */
     default boolean topHatBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
         if (doTimeTracing()) {recordMethodStart("TopHatBox");}
@@ -695,6 +742,20 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Applies a top-hat filter for background subtraction to the input image.
+     * 
+     * Parameters
+     * ----------
+     * input : Image
+     *     The input image where the background is subtracted from.
+     * destination : Image
+     *     The output image where results are written into.
+     * radius_x : Image
+     *     Radius of the background determination region in X.
+     * radius_y : Image
+     *     Radius of the background determination region in Y.
+     * radius_z : Image
+     *     Radius of the background determination region in Z.
+     * 
      */
     default boolean topHatSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
         if (doTimeTracing()) {recordMethodStart("TopHatSphere");}
@@ -784,6 +845,14 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Transpose X and Y axes of an image.
+     * 
+     * Parameters
+     * ----------
+     * input : Image
+     *     The input image.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean transposeXY(ClearCLBuffer input, ClearCLBuffer destination) {
         if (doTimeTracing()) {recordMethodStart("TransposeXY");}
@@ -797,6 +866,14 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Transpose X and Z axes of an image.
+     * 
+     * Parameters
+     * ----------
+     * input : Image
+     *     The input image.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean transposeXZ(ClearCLBuffer input, ClearCLBuffer destination) {
         if (doTimeTracing()) {recordMethodStart("TransposeXZ");}
@@ -810,6 +887,14 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Transpose Y and Z axes of an image.
+     * 
+     * Parameters
+     * ----------
+     * input : Image
+     *     The input image.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean transposeYZ(ClearCLBuffer input, ClearCLBuffer destination) {
         if (doTimeTracing()) {recordMethodStart("TransposeYZ");}
@@ -951,9 +1036,19 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.Equal
     //----------------------------------------------------
     /**
-     * Determines if two images A and B equal pixel wise. 
+     * Determines if two images A and B equal pixel wise.
      * 
-     * <pre>f(a, b) = 1 if a == b; 0 otherwise.</pre> 
+     * <pre>f(a, b) = 1 if a == b; 0 otherwise.</pre>
+     * 
+     * Parameters
+     * ----------
+     * source1 : Image
+     *     The first image to be compared with.
+     * source2 : Image
+     *     The second image to be compared with the first.
+     * destination : Image
+     *     The resulting binary image where pixels will be 1 only if source1 and source2 equal in the given pixel.
+     * 
      */
     default boolean equal(ClearCLImageInterface source1, ClearCLImageInterface source2, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("Equal");}
@@ -1028,7 +1123,17 @@ public abstract interface CLIJ2Ops {
     /**
      * Determines if two images A and B equal pixel wise.
      * 
-     * f(a, b) = 1 if a != b; 0 otherwise. 
+     * f(a, b) = 1 if a != b; 0 otherwise.
+     * 
+     * Parameters
+     * ----------
+     * source1 : Image
+     *     The first image to be compared with.
+     * source2 : Image
+     *     The second image to be compared with the first.
+     * destination : Image
+     *     The resulting binary image where pixels will be 1 only if source1 and source2 are not equal in the given pixel.
+     * 
      */
     default boolean notEqual(ClearCLImageInterface source1, ClearCLImageInterface source2, ClearCLBuffer destination) {
         if (doTimeTracing()) {recordMethodStart("NotEqual");}
@@ -1043,7 +1148,17 @@ public abstract interface CLIJ2Ops {
     /**
      * Determines if an image A and a constant b are equal.
      * 
-     * <pre>f(a, b) = 1 if a == b; 0 otherwise.</pre> 
+     * <pre>f(a, b) = 1 if a == b; 0 otherwise.</pre>
+     * 
+     * Parameters
+     * ----------
+     * source : Image
+     *     The image where every pixel is compared to the constant.
+     * destination : Image
+     *     The resulting binary image where pixels will be 1 only if source1 and source2 equal in the given pixel.
+     * constant : float
+     *     The constant where every pixel is compared to.
+     * 
      */
     default boolean equalConstant(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
         if (doTimeTracing()) {recordMethodStart("EqualConstant");}
@@ -1118,7 +1233,15 @@ public abstract interface CLIJ2Ops {
     /**
      * Determines if two images A and B equal pixel wise.
      * 
-     * f(a, b) = 1 if a != b; 0 otherwise. 
+     * f(a, b) = 1 if a != b; 0 otherwise.Parameters
+     * ----------
+     * source : Image
+     *     The image where every pixel is compared to the constant.
+     * destination : Image
+     *     The resulting binary image where pixels will be 1 only if source1 and source2 equal in the given pixel.
+     * constant : float
+     *     The constant where every pixel is compared to.
+     * 
      */
     default boolean notEqualConstant(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3) {
         if (doTimeTracing()) {recordMethodStart("NotEqualConstant");}
@@ -1289,6 +1412,14 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Determines the maximum intensity in an image, but only in pixels which have non-zero values in another mask image.
+     * 
+     * Parameters
+     * ----------
+     * source : Image
+     *     The image of which the minimum of all pixels or voxels where mask=1 will be determined.
+     * mask : Image
+     *     A binary image marking all pixels with 1 which should be taken into accout.
+     * 
      */
     default double maximumOfMaskedPixels(ClearCLBuffer source, ClearCLBuffer mask) {
         if (doTimeTracing()) {recordMethodStart("MaximumOfMaskedPixels");}
@@ -1549,6 +1680,16 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Subtracts one binary image from another.
+     * 
+     * Parameters
+     * ----------
+     * minuend : Image
+     *     The first binary input image to be processed.
+     * suubtrahend : Image
+     *     The second binary input image to be subtracted from the first.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean binarySubtract(ClearCLImageInterface minuend, ClearCLImageInterface subtrahend, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("BinarySubtract");}
@@ -1563,6 +1704,14 @@ public abstract interface CLIJ2Ops {
     /**
      * Determines pixels/voxels which are on the surface of binary objects and sets only them to 1 in the 
      * destination image. All other pixels are set to 0.
+     * 
+     * Parameters
+     * ----------
+     * source : Image
+     *     The binary input image where edges will be searched.
+     * destination : Image
+     *     The output image where edge pixels will be 1.
+     * 
      */
     default boolean binaryEdgeDetection(ClearCLImageInterface source, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("BinaryEdgeDetection");}
@@ -1634,6 +1783,20 @@ public abstract interface CLIJ2Ops {
      * Note: Pixels with 0 value in the input image will not be overwritten in the output image.
      * Thus, the result image should be initialized by copying the original image in advance.
      */
+    default boolean nonzeroMaximumDiamond(ClearCLImageInterface input, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("NonzeroMaximumDiamond");}
+        boolean result = NonzeroMaximumDiamond.nonzeroMaximumDiamond(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMaximumDiamond");}
+        return result;
+    }
+
+    /**
+     * Apply a maximum filter (diamond shape) to the input image. 
+     * 
+     * The radius is fixed to 1 and pixels with value 0 are ignored.
+     * Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
+     */
     default boolean nonzeroMaximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
         if (doTimeTracing()) {recordMethodStart("NonzeroMaximumDiamond");}
         boolean result = NonzeroMaximumDiamond.nonzeroMaximumDiamond(getCLIJ2(), arg1, arg2, arg3);
@@ -1661,6 +1824,16 @@ public abstract interface CLIJ2Ops {
     /**
      * Apply a local maximum filter to an image which only overwrites pixels with value 0.
      */
+    default boolean onlyzeroOverwriteMaximumDiamond(ClearCLImageInterface input, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("OnlyzeroOverwriteMaximumDiamond");}
+        boolean result = OnlyzeroOverwriteMaximumDiamond.onlyzeroOverwriteMaximumDiamond(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("OnlyzeroOverwriteMaximumDiamond");}
+        return result;
+    }
+
+    /**
+     * Apply a local maximum filter to an image which only overwrites pixels with value 0.
+     */
     default boolean onlyzeroOverwriteMaximumDiamond(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
         if (doTimeTracing()) {recordMethodStart("OnlyzeroOverwriteMaximumDiamond");}
         boolean result = OnlyzeroOverwriteMaximumDiamond.onlyzeroOverwriteMaximumDiamond(getCLIJ2(), arg1, arg2, arg3);
@@ -1681,6 +1854,16 @@ public abstract interface CLIJ2Ops {
 
     // net.haesleinhuepf.clij2.plugins.OnlyzeroOverwriteMaximumBox
     //----------------------------------------------------
+    /**
+     * Apply a local maximum filter to an image which only overwrites pixels with value 0.
+     */
+    default boolean onlyzeroOverwriteMaximumBox(ClearCLImageInterface input, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("OnlyzeroOverwriteMaximumBox");}
+        boolean result = OnlyzeroOverwriteMaximumBox.onlyzeroOverwriteMaximumBox(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("OnlyzeroOverwriteMaximumBox");}
+        return result;
+    }
+
     /**
      * Apply a local maximum filter to an image which only overwrites pixels with value 0.
      */
@@ -1708,6 +1891,8 @@ public abstract interface CLIJ2Ops {
      * Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where all pixels are set to 0 exept those where labels are touching. 
      * 
      * Only half of the matrix is filled (with x < y). For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.
+     * The touch matrix is a representation of a region adjacency graph
+     * 
      */
     default boolean generateTouchMatrix(ClearCLBuffer label_map, ClearCLBuffer touch_matrix_destination) {
         if (doTimeTracing()) {recordMethodStart("GenerateTouchMatrix");}
@@ -1808,6 +1993,16 @@ public abstract interface CLIJ2Ops {
     /**
      * Takes a pointlist with dimensions n*d with n point coordinates in d dimensions and a touch matrix of 
      * size n*n to draw lines from all points to points if the corresponding pixel in the touch matrix is 1.
+     * 
+     * Parameters
+     * ----------
+     * pointlist : Image
+     *     n*d matrix representing n coordinates with d dimensions.
+     * touch_matrix : Image
+     *     A 2D binary matrix with 1 in pixels (i,j) where label i touches label j.
+     * mesh_destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean touchMatrixToMesh(ClearCLBuffer pointlist, ClearCLBuffer touch_matrix, ClearCLBuffer mesh_destination) {
         if (doTimeTracing()) {recordMethodStart("TouchMatrixToMesh");}
@@ -1953,6 +2148,14 @@ public abstract interface CLIJ2Ops {
      * Computes the absolute value of every individual pixel x in a given image.
      * 
      * <pre>f(x) = |x| </pre>
+     * 
+     * Parameters
+     * ----------
+     * source : Image
+     *     The input image to be processed.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean absolute(ClearCLImageInterface source, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("Absolute");}
@@ -1979,6 +2182,20 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Apply a bottom-hat filter for background subtraction to the input image.
+     * 
+     * Parameters
+     * ----------
+     * input : Image
+     *     The input image where the background is subtracted from.
+     * destination : Image
+     *     The output image where results are written into.
+     * radius_x : Image
+     *     Radius of the background determination region in X.
+     * radius_y : Image
+     *     Radius of the background determination region in Y.
+     * radius_z : Image
+     *     Radius of the background determination region in Z.
+     * 
      */
     default boolean bottomHatBox(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
         if (doTimeTracing()) {recordMethodStart("BottomHatBox");}
@@ -1992,6 +2209,20 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Applies a bottom-hat filter for background subtraction to the input image.
+     * 
+     * Parameters
+     * ----------
+     * input : Image
+     *     The input image where the background is subtracted from.
+     * destination : Image
+     *     The output image where results are written into.
+     * radius_x : Image
+     *     Radius of the background determination region in X.
+     * radius_y : Image
+     *     Radius of the background determination region in Y.
+     * radius_z : Image
+     *     Radius of the background determination region in Z.
+     * 
      */
     default boolean bottomHatSphere(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5) {
         if (doTimeTracing()) {recordMethodStart("BottomHatSphere");}
@@ -2127,6 +2358,20 @@ public abstract interface CLIJ2Ops {
      * Note: Pixels with 0 value in the input image will not be overwritten in the output image.
      * Thus, the result image should be initialized by copying the original image in advance.
      */
+    default boolean nonzeroMaximumBox(ClearCLImageInterface input, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("NonzeroMaximumBox");}
+        boolean result = NonzeroMaximumBox.nonzeroMaximumBox(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMaximumBox");}
+        return result;
+    }
+
+    /**
+     * Apply a maximum filter (box shape) to the input image. 
+     * 
+     * The radius is fixed to 1 and pixels with value 0 are ignored.
+     * Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
+     */
     default boolean nonzeroMaximumBox(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3) {
         if (doTimeTracing()) {recordMethodStart("NonzeroMaximumBox");}
         boolean result = NonzeroMaximumBox.nonzeroMaximumBox(getCLIJ2(), arg1, arg2, arg3);
@@ -2151,6 +2396,20 @@ public abstract interface CLIJ2Ops {
 
     // net.haesleinhuepf.clij2.plugins.NonzeroMinimumBox
     //----------------------------------------------------
+    /**
+     * Apply a minimum filter (box shape) to the input image. 
+     * 
+     * The radius is fixed to 1 and pixels with value 0 are ignored.
+     * Note: Pixels with 0 value in the input image will not be overwritten in the output image.
+     * Thus, the result image should be initialized by copying the original image in advance.
+     */
+    default boolean nonzeroMinimumBox(ClearCLImageInterface input, ClearCLImageInterface destination) {
+        if (doTimeTracing()) {recordMethodStart("NonzeroMinimumBox");}
+        boolean result = NonzeroMinimumBox.nonzeroMinimumBox(getCLIJ2(), input, destination);
+        if (doTimeTracing()) {recordMethodEnd("NonzeroMinimumBox");}
+        return result;
+    }
+
     /**
      * Apply a minimum filter (box shape) to the input image. 
      * 
@@ -2328,6 +2587,16 @@ public abstract interface CLIJ2Ops {
      * Calculates the sum of pairs of pixels x and y of two images X and Y.
      * 
      * <pre>f(x, y) = x + y</pre>
+     * 
+     * Parameters
+     * ----------
+     * summand1 : Image
+     *     The first input image to added.
+     * summand2 : Image
+     *     The second image to be added.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean addImages(ClearCLImageInterface summand1, ClearCLImageInterface summand2, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("AddImages");}
@@ -2343,6 +2612,20 @@ public abstract interface CLIJ2Ops {
      * Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b.
      * 
      * <pre>f(x, y, a, b) = x * a + y * b</pre>
+     * 
+     * Parameters
+     * ----------
+     * summand1 : Image
+     *     The first input image to added.
+     * summand2 : Image
+     *     The second image to be added.
+     * destination : Image
+     *     The output image where results are written into.
+     * factor1 : float
+     *     The constant number which will be multiplied with each pixel of summand1 before adding it.
+     * factor2 : float
+     *     The constant number which will be multiplied with each pixel of summand2 before adding it.
+     * 
      */
     default boolean addImagesWeighted(ClearCLImageInterface arg1, ClearCLImageInterface arg2, ClearCLImageInterface arg3, double arg4, double arg5) {
         if (doTimeTracing()) {recordMethodStart("AddImagesWeighted");}
@@ -2956,6 +3239,16 @@ public abstract interface CLIJ2Ops {
      * pixels x and y with the binary OR operator |.
      * 
      * All pixel values except 0 in the input images are interpreted as 1.<pre>f(x, y) = x | y</pre>
+     * 
+     * Parameters
+     * ----------
+     * operand1 : Image
+     *     The first binary input image to be processed.
+     * operand2 : Image
+     *     The second binary input image to be processed.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean binaryOr(ClearCLImageInterface operand1, ClearCLImageInterface operand2, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("BinaryOr");}
@@ -2973,6 +3266,16 @@ public abstract interface CLIJ2Ops {
      * All pixel values except 0 in the input images are interpreted as 1.
      * 
      * <pre>f(x, y) = x & y</pre>
+     * 
+     * Parameters
+     * ----------
+     * operand1 : Image
+     *     The first binary input image to be processed.
+     * operand2 : Image
+     *     The second binary input image to be processed.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean binaryAnd(ClearCLImageInterface operand1, ClearCLImageInterface operand2, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("BinaryAnd");}
@@ -2991,6 +3294,16 @@ public abstract interface CLIJ2Ops {
      * All pixel values except 0 in the input images are interpreted as 1.
      * 
      * <pre>f(x, y) = (x & !y) | (!x & y)</pre>
+     * 
+     * Parameters
+     * ----------
+     * operand1 : Image
+     *     The first binary input image to be processed.
+     * operand2 : Image
+     *     The second binary input image to be processed.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean binaryXOr(ClearCLImageInterface operand1, ClearCLImageInterface operand2, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("BinaryXOr");}
@@ -3009,6 +3322,14 @@ public abstract interface CLIJ2Ops {
      * All pixel values except 0 in the input image are interpreted as 1.
      * 
      * <pre>f(x) = !x</pre>
+     * 
+     * Parameters
+     * ----------
+     * source : Image
+     *     The binary input image to be inverted.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean binaryNot(ClearCLImageInterface source, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("BinaryNot");}
@@ -3450,9 +3771,9 @@ public abstract interface CLIJ2Ops {
     /**
      * Determines the minimum intensity projection of an image along Z.
      */
-    default boolean minimumZProjection(ClearCLImageInterface source, ClearCLImageInterface destination_sum) {
+    default boolean minimumZProjection(ClearCLImageInterface source, ClearCLImageInterface destination_min) {
         if (doTimeTracing()) {recordMethodStart("MinimumZProjection");}
-        boolean result = MinimumZProjection.minimumZProjection(getCLIJ2(), source, destination_sum);
+        boolean result = MinimumZProjection.minimumZProjection(getCLIJ2(), source, destination_min);
         if (doTimeTracing()) {recordMethodEnd("MinimumZProjection");}
         return result;
     }
@@ -3554,6 +3875,16 @@ public abstract interface CLIJ2Ops {
      * Multiplies all pixels value x in a given image X with a constant scalar s.
      * 
      * <pre>f(x, s) = x * s</pre>
+     * 
+     * Parameters
+     * ----------
+     * source : Image
+     *     The input image to be multiplied with a constant.
+     * destination : Image
+     *     The output image where results are written into.
+     * scalar : float
+     *     The number with which every pixel will be multiplied with.
+     * 
      */
     default boolean multiplyImageAndScalar(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
         if (doTimeTracing()) {recordMethodStart("MultiplyImageAndScalar");}
@@ -3682,6 +4013,12 @@ public abstract interface CLIJ2Ops {
      * 
      * It will be stored in a new row of ImageJs
      * Results table in the column 'Sum'.
+     * 
+     * Parameters
+     * ----------
+     * source : Image
+     *     The image of which all pixels or voxels will be summed.
+     * 
      */
     default double sumOfAllPixels(ClearCLImageInterface source) {
         if (doTimeTracing()) {recordMethodStart("SumOfAllPixels");}
@@ -3695,6 +4032,12 @@ public abstract interface CLIJ2Ops {
      * 
      * It will be stored in a new row of ImageJs
      * Results table in the column 'Sum'.
+     * 
+     * Parameters
+     * ----------
+     * source : Image
+     *     The image of which all pixels or voxels will be summed.
+     * 
      */
     @Deprecated
     default double sumPixels(ClearCLImageInterface source) {
@@ -4003,7 +4346,11 @@ public abstract interface CLIJ2Ops {
      * Determines the mean average of all pixels in a given image. 
      * 
      * It will be stored in a new row of ImageJs
-     * Results table in the column 'Mean'.
+     * Results table in the column 'Mean'.Parameters
+     * ----------
+     * source : Image
+     *     The image of which the mean average of all pixels or voxels will be determined.
+     * 
      */
     default double meanOfAllPixels(ClearCLImageInterface source) {
         if (doTimeTracing()) {recordMethodStart("MeanOfAllPixels");}
@@ -4342,6 +4689,16 @@ public abstract interface CLIJ2Ops {
      * Multiplies all pairs of pixel values x and y from two image X and Y.
      * 
      * <pre>f(x, y) = x * y</pre>
+     * 
+     * Parameters
+     * ----------
+     * factor1 : Image
+     *     The first input image to be multiplied.
+     * factor2 : Image
+     *     The second image to be multiplied.
+     * destination : Image
+     *     The output image where results are written into.
+     * 
      */
     default boolean multiplyImages(ClearCLImageInterface factor1, ClearCLImageInterface factor2, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("MultiplyImages");}
@@ -4720,6 +5077,16 @@ public abstract interface CLIJ2Ops {
      * Adds a scalar value s to all pixels x of a given image X.
      * 
      * <pre>f(x, s) = x + s</pre>
+     * 
+     * Parameters
+     * ----------
+     * source : Image
+     *     The input image where scalare should be added.
+     * destination : Image
+     *     The output image where results are written into.
+     * scalar : float
+     *     The constant number which will be added to all pixels.
+     * 
      */
     default boolean addImageAndScalar(ClearCLImageInterface arg1, ClearCLImageInterface arg2, double arg3) {
         if (doTimeTracing()) {recordMethodStart("AddImageAndScalar");}
@@ -4830,6 +5197,12 @@ public abstract interface CLIJ2Ops {
      * 
      * It will be stored in a new row of ImageJs
      * Results table in the column 'Max'.
+     * 
+     * Parameters
+     * ----------
+     * source : Image
+     *     The image of which the maximum of all pixels or voxels will be determined.
+     * 
      */
     default double maximumOfAllPixels(ClearCLImageInterface source) {
         if (doTimeTracing()) {recordMethodStart("MaximumOfAllPixels");}
@@ -4846,6 +5219,12 @@ public abstract interface CLIJ2Ops {
      * 
      * It will be stored in a new row of ImageJs
      * Results table in the column 'Min'.
+     * 
+     * Parameters
+     * ----------
+     * source : Image
+     *     The image of which the minimum of all pixels or voxels will be determined.
+     * 
      */
     default double minimumOfAllPixels(ClearCLImageInterface source) {
         if (doTimeTracing()) {recordMethodStart("MinimumOfAllPixels");}
@@ -5806,6 +6185,14 @@ public abstract interface CLIJ2Ops {
     /**
      * Takes a touch matrix and a vector of values to determine the mean value among touching neighbors for every object. 
      * 
+     * Parameters
+     * ----------
+     * values : Image
+     *     A vector of values corresponding to the labels of which the mean average should be determined.
+     * touch_matrix : Image
+     *     A touch_matrix specifying which labels are taken into account for neighborhood relationships.
+     * mean_values_destination : Image
+     *     A the resulting vector of mean average values in the neighborhood.
      * 
      */
     default boolean meanOfTouchingNeighbors(ClearCLBuffer values, ClearCLBuffer touch_matrix, ClearCLBuffer mean_values_destination) {
@@ -5821,6 +6208,14 @@ public abstract interface CLIJ2Ops {
     /**
      * Takes a touch matrix and a vector of values to determine the minimum value among touching neighbors for every object. 
      * 
+     * Parameters
+     * ----------
+     * values : Image
+     *     A vector of values corresponding to the labels of which the minimum should be determined.
+     * touch_matrix : Image
+     *     A touch_matrix specifying which labels are taken into account for neighborhood relationships.
+     * minimum_values_destination : Image
+     *     A the resulting vector of minimum values in the neighborhood.
      * 
      */
     default boolean minimumOfTouchingNeighbors(ClearCLBuffer values, ClearCLBuffer touch_matrix, ClearCLBuffer minimum_values_destination) {
@@ -5836,6 +6231,14 @@ public abstract interface CLIJ2Ops {
     /**
      * Takes a touch matrix and a vector of values to determine the maximum value among touching neighbors for every object. 
      * 
+     * Parameters
+     * ----------
+     * values : Image
+     *     A vector of values corresponding to the labels of which the maximum should be determined.
+     * touch_matrix : Image
+     *     A touch_matrix specifying which labels are taken into account for neighborhood relationships.
+     * maximum_values_destination : Image
+     *     A the resulting vector of maximum values in the neighborhood.
      * 
      */
     default boolean maximumOfTouchingNeighbors(ClearCLBuffer values, ClearCLBuffer touch_matrix, ClearCLBuffer maximum_values_destination) {
@@ -6206,7 +6609,17 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.AdjacencyMatrixToTouchMatrix
     //----------------------------------------------------
     /**
-     * Converts a adjacency matrix in a touch matrix
+     * Converts a adjacency matrix in a touch matrix.
+     * 
+     * An adjacency matrix is symmetric while a touch matrix is typically not.
+     * 
+     * Parameters
+     * ----------
+     * adjacency_matrix : Image
+     *     The input adjacency matrix to be read from.
+     * touch_matrix : Image
+     *     The output touch matrix to be written into.
+     * 
      */
     default boolean adjacencyMatrixToTouchMatrix(ClearCLBuffer adjacency_matrix, ClearCLBuffer touch_matrix) {
         if (doTimeTracing()) {recordMethodStart("AdjacencyMatrixToTouchMatrix");}
@@ -6585,9 +6998,9 @@ public abstract interface CLIJ2Ops {
     /**
      * Determines the minimum intensity projection of an image along Y.
      */
-    default boolean minimumXProjection(ClearCLImageInterface source, ClearCLImageInterface destination_sum) {
+    default boolean minimumXProjection(ClearCLImageInterface source, ClearCLImageInterface destination_min) {
         if (doTimeTracing()) {recordMethodStart("MinimumXProjection");}
-        boolean result = MinimumXProjection.minimumXProjection(getCLIJ2(), source, destination_sum);
+        boolean result = MinimumXProjection.minimumXProjection(getCLIJ2(), source, destination_min);
         if (doTimeTracing()) {recordMethodEnd("MinimumXProjection");}
         return result;
     }
@@ -6598,9 +7011,9 @@ public abstract interface CLIJ2Ops {
     /**
      * Determines the minimum intensity projection of an image along Y.
      */
-    default boolean minimumYProjection(ClearCLImageInterface source, ClearCLImageInterface destination_sum) {
+    default boolean minimumYProjection(ClearCLImageInterface source, ClearCLImageInterface destination_min) {
         if (doTimeTracing()) {recordMethodStart("MinimumYProjection");}
-        boolean result = MinimumYProjection.minimumYProjection(getCLIJ2(), source, destination_sum);
+        boolean result = MinimumYProjection.minimumYProjection(getCLIJ2(), source, destination_min);
         if (doTimeTracing()) {recordMethodEnd("MinimumYProjection");}
         return result;
     }
@@ -6649,6 +7062,18 @@ public abstract interface CLIJ2Ops {
     //----------------------------------------------------
     /**
      * Determines the absolute difference pixel by pixel between two images.
+     * 
+     * <pre>f(x, y) = |x - y| </pre>
+     * 
+     * Parameters
+     * ----------
+     * source1 : Image
+     *     The input image to be subtracted from.
+     * source2 : Image
+     *     The input image which is subtracted.
+     * destination : Image
+     *     The output image  where results are written into.
+     * 
      */
     default boolean absoluteDifference(ClearCLBuffer source1, ClearCLBuffer source2, ClearCLBuffer destination) {
         if (doTimeTracing()) {recordMethodStart("AbsoluteDifference");}
@@ -6733,4 +7158,4 @@ public abstract interface CLIJ2Ops {
     }
 
 }
-// 417 methods generated.
+// 423 methods generated.
