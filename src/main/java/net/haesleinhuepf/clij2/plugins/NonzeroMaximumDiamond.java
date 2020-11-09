@@ -43,6 +43,15 @@ public class NonzeroMaximumDiamond extends AbstractCLIJ2Plugin implements CLIJMa
         return result;
     }
 
+
+    public static boolean nonzeroMaximumDiamond(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {
+        ClearCLBuffer flag = clij2.create(1,1,1);
+        ClearCLKernel kernel = nonzeroMaximumDiamond(clij2, src, flag, dst, null);
+        kernel.close();
+        flag.close();
+        return true;
+    }
+
     public static boolean nonzeroMaximumDiamond(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface flag, ClearCLImageInterface dst) {
         ClearCLKernel kernel = nonzeroMaximumDiamond(clij2, src, flag, dst, null);
         kernel.close();

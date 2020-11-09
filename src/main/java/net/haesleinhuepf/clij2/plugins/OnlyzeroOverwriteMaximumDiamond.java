@@ -61,6 +61,15 @@ public class OnlyzeroOverwriteMaximumDiamond extends AbstractCLIJ2Plugin impleme
         return true;
     }
 
+    public static boolean onlyzeroOverwriteMaximumDiamond(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {
+        ClearCLBuffer flag = clij2.create(1,1,1);
+        ClearCLKernel kernel = onlyzeroOverwriteMaximumDiamond(clij2, src, flag, dst, null);
+        kernel.close();
+        flag.close();
+        return true;
+    }
+
+
     @Override
     public String getDescription() {
         return "Apply a local maximum filter to an image which only overwrites pixels with value 0.";
