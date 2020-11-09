@@ -35,7 +35,7 @@ public class ReplaceIntensity extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, ByRef Image destination, Number oldValue, Number newValue";
+        return "Image input, ByRef Image destination, Number value_to_replace, Number value_replacement";
     }
 
     @Override

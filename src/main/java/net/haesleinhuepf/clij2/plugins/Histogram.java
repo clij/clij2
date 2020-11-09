@@ -181,7 +181,7 @@ public class Histogram extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination, Number numberOfBins, Number minimumGreyValue, Number maximumGreyValue, Boolean determineMinAndMax";
+        return "Image source, ByRef Image destination, Number number_of_bins, Number minimum_intensity, Number maximum_intensity, Boolean determine_min_max";
     }
 
     @Override

@@ -67,7 +67,7 @@ public class Mean3DSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination, Number radiusX, Number radiusY, Number radiusZ";
+        return "Image source, ByRef Image destination, Number radius_x, Number radius_y, Number radius_z";
     }
 
     @Override

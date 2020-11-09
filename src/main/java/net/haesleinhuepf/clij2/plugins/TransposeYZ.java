@@ -56,7 +56,13 @@ public class TransposeYZ extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public String getDescription() {
-        return "Transpose Y and Z axes of an image.";
+        return "Transpose Y and Z axes of an image.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "input : Image\n" +
+                "    The input image.\n" +
+                "destination : Image\n" +
+                "    The output image where results are written into.\n";
     }
 
     @Override

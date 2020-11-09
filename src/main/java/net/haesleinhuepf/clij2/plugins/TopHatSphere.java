@@ -68,7 +68,19 @@ public class TopHatSphere extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
 
     @Override
     public String getDescription() {
-        return "Applies a top-hat filter for background subtraction to the input image.";
+        return "Applies a top-hat filter for background subtraction to the input image.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "input : Image\n" +
+                "    The input image where the background is subtracted from.\n" +
+                "destination : Image\n" +
+                "    The output image where results are written into.\n" +
+                "radius_x : Image\n" +
+                "    Radius of the background determination region in X.\n" +
+                "radius_y : Image\n" +
+                "    Radius of the background determination region in Y.\n" +
+                "radius_z : Image\n" +
+                "    Radius of the background determination region in Z.\n";
     }
 
     @Override

@@ -69,7 +69,16 @@ public class MultiplyImageAndScalar extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getDescription() {
-        return "Multiplies all pixels value x in a given image X with a constant scalar s.\n\n<pre>f(x, s) = x * s</pre>";
+        return "Multiplies all pixels value x in a given image X with a constant scalar s.\n\n" +
+                "<pre>f(x, s) = x * s</pre>\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "source : Image\n" +
+                "    The input image to be multiplied with a constant.\n" +
+                "destination : Image\n" +
+                "    The output image where results are written into.\n" +
+                "scalar : float\n" +
+                "    The number with which every pixel will be multiplied with.\n";
     }
 
     @Override

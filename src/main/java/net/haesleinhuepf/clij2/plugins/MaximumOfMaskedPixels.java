@@ -83,7 +83,13 @@ public class MaximumOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMa
     @Override
     public String getDescription() {
         return "Determines the maximum intensity in an image, but only in pixels which have non-zero values in another" +
-                " mask image.";
+                " mask image.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "source : Image\n" +
+                "    The image of which the minimum of all pixels or voxels where mask=1 will be determined.\n" +
+                "mask : Image\n" +
+                "    A binary image marking all pixels with 1 which should be taken into accout.\n";
     }
 
     @Override
