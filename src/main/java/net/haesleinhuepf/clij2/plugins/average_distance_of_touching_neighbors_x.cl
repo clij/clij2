@@ -33,6 +33,9 @@ __kernel void average_distance_of_touching_neighbors (
   }
 
   float average = sum / count;
+  if (count == 0) {
+    average = 0;
+  }
   WRITE_dst_average_distance_list_IMAGE(dst_average_distance_list, (POS_dst_average_distance_list_INSTANCE(label_id, 0, 0, 0)), CONVERT_dst_average_distance_list_PIXEL_TYPE(average));
 }
 
