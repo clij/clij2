@@ -56,7 +56,12 @@ public class SumOfAllPixels extends AbstractCLIJ2Plugin implements CLIJMacroPlug
             clij2.execute(SumOfAllPixels.class, "sum_z_projection_x.cl", "sum_z_projection", clReducedImage.getDimensions(), clReducedImage.getDimensions(), parameters);
         }
 
-        RandomAccessibleInterval rai = clij2.convert(clReducedImage, RandomAccessibleInterval.class);
+        ClearCLBuffer temp = clij2.create(1, clReducedImage.getHeight());
+        clij2.sumXProjection(clReducedImage, temp);
+
+        RandomAccessibleInterval rai = clij2.convert(temp, RandomAccessibleInterval.class);
+        temp.close();
+
         Cursor cursor = Views.iterable(rai).cursor();
         float sum = 0;
         while (cursor.hasNext()) {
