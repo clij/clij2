@@ -1,5 +1,7 @@
 package net.haesleinhuepf.clij2.plugins;
 
+import ij.IJ;
+import ij.ImagePlus;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
@@ -45,6 +47,18 @@ public class Copy extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOp
 
     public static boolean copy(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface dst) {
         assertDifferent(src, dst);
+        //////////////////////
+        // This is a workaround introduced because of a bug on Ubuntu Linux using and Intel(R) HD Graphics Kabylake Desktop GT1.5 (i7-8550U)
+        if (src.getDimension() == 2 && dst.getDimension() == 2 && clij2.getGPUName().contains("Intel(R) HD Graphics Kabylake Desktop GT1.5")) {
+            System.out.println("WARNING (CLIJ2.copy): The OpenCL device you are using is known to cause trouble. Consider updating your OpenCL driver and runtime.");
+            System.out.println("Read more: https://clij.github.io/clij2-docs/troubleshooting#intel_icd");
+            ClearCLBuffer buffer = clij2.create(new long[]{src.getWidth(), src.getHeight(), 1}, src.getNativeType());
+            clij2.copySlice(src, buffer, 0);
+            clij2.copySlice(buffer, dst, 0);
+            buffer.close();
+            return true;
+        }
+        //////////////////////
 
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
@@ -72,5 +86,17 @@ public class Copy extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOp
     @Override
     public String getAvailableForDimensions() {
         return "2D, 3D";
+    }
+
+
+
+    public static void main(String[] args) {
+        ImagePlus imp = IJ.openImage("/home/haase/data/blobs.tif");
+        CLIJ2 clij2 = CLIJ2.getInstance();
+        System.out.println(clij2.getGPUName());
+        ClearCLBuffer pushed = clij2.push(imp);
+        ClearCLBuffer result = clij2.create(pushed);
+        clij2.copy(pushed, result);
+        clij2.show(result, "result");
     }
 }
