@@ -9,8 +9,8 @@ __kernel void copy_slice_to_3d (
   const int dx = get_global_id(0);
   const int dy = get_global_id(1);
 
-  const int2 pos2 = (int2){dx,dy};
-  const int4 pos4 = (int4){dx,dy,slice,0};
+  const POS_src_TYPE pos2 = POS_src_INSTANCE(dx, dy, 0, 0);
+  const POS_dst_TYPE pos4 = POS_dst_INSTANCE(dx, dy, slice, 0);
 
   const float out = READ_src_IMAGE(src,sampler,pos2).x;
   WRITE_dst_IMAGE(dst,pos4, CONVERT_dst_PIXEL_TYPE(out));

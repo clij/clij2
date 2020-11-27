@@ -7,9 +7,9 @@ __kernel void copy_2d(
   const int dx = get_global_id(0);
   const int dy = get_global_id(1);
 
+  const POS_src_TYPE pos_src = POS_src_INSTANCE(dx, dy, 0, 0);
+  const POS_dst_TYPE pos_dst = POS_dst_INSTANCE(dx, dy, 0, 0);
 
-  const int2 pos = (int2){dx,dy};
-
-  const float out = READ_src_IMAGE(src,sampler,pos).x;
-  WRITE_dst_IMAGE(dst,pos, CONVERT_dst_PIXEL_TYPE(out));
+  const float out = READ_IMAGE(src, sampler, pos_src).x;
+  WRITE_dst_IMAGE(dst,pos_dst, CONVERT_dst_PIXEL_TYPE(out));
 }
