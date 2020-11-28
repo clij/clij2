@@ -31,6 +31,8 @@ public class SetNonZeroPixelsToPixelIndex extends AbstractCLIJ2Plugin implements
         parameters.clear();
         parameters.put("src", src);
         parameters.put("dst", dst);
+        parameters.put("offset", new Integer(1));
+
         clij2.execute(SetNonZeroPixelsToPixelIndex.class, "set_nonzero_pixels_to_pixelindex_x.cl", "set_nonzero_pixels_to_pixelindex", dst.getDimensions(), dst.getDimensions(), parameters);
         return true;
     }
