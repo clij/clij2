@@ -73,9 +73,8 @@ public class Paste2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLI
     {
         int x = asInteger(args[2]);
         int y = asInteger(args[3]);
-        int z = asInteger(args[4]);
 
-        return clij.createCLBuffer(new long[]{input.getWidth() + x, input.getHeight() + y, input.getDepth() + z}, input.getNativeType());
+        return clij.createCLBuffer(new long[]{input.getWidth() + x, input.getHeight() + y}, input.getNativeType());
     }
 
     @Override
