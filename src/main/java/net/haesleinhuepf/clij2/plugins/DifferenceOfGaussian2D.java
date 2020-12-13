@@ -66,7 +66,21 @@ public class DifferenceOfGaussian2D extends AbstractCLIJ2Plugin implements CLIJM
     @Override
     public String getDescription() {
         return "Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.\n\n" +
-                "It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.";
+                "It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "input : Image\n" +
+                "    The input image to be processed.\n" +
+                "destination : Image\n" +
+                "    The output image where results are written into.\n" +
+                "sigma1_x : float\n" +
+                "    Sigma of the first Gaussian filter in x\n" +
+                "sigma1_y : float\n" +
+                "    Sigma of the first Gaussian filter in y\n" +
+                "sigma2_x : float\n" +
+                "    Sigma of the second Gaussian filter in x\n" +
+                "sigma2_y : float\n" +
+                "    Sigma of the second Gaussian filter in y";
     }
 
     @Override

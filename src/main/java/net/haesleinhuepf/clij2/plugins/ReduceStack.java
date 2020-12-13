@@ -62,7 +62,7 @@ public class ReduceStack extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, ByRef Image destination, Number reductionFactor, Number offset";
+        return "Image input, ByRef Image destination, Number reduction_factor, Number offset";
     }
 
     @Override

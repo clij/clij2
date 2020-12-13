@@ -54,7 +54,7 @@ public class GenerateBinaryOverlapMatrix extends AbstractCLIJ2Plugin implements 
 
     @Override
     public String getParameterHelpText() {
-        return "Image label_map1, Image label_map2, ByRef Image touch_matrix_destination";
+        return "Image label_map1, Image label_map2, ByRef Image binary_overlap_matrix_destination";
     }
 
     @Override

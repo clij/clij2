@@ -33,7 +33,7 @@ public class MedianOfTouchingNeighbors extends AbstractCLIJ2Plugin implements CL
 
     @Override
     public String getParameterHelpText() {
-        return "Image values, Image touch_matrix, ByRef Image mean_values_destination";
+        return "Image values, Image touch_matrix, ByRef Image median_values_destination";
     }
 
     @Override

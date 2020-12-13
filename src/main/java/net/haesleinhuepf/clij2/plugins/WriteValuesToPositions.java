@@ -54,7 +54,7 @@ public class WriteValuesToPositions extends AbstractCLIJ2Plugin implements CLIJM
 
     @Override
     public String getParameterHelpText() {
-        return "Image positionsAndValues, ByRef Image destination";
+        return "Image positions_and_values, ByRef Image destination";
     }
 
     @Override

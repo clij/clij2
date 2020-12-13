@@ -152,7 +152,7 @@ public class Resample extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination, Number factorX, Number factorY, Number factorZ, Boolean linearInterpolation";
+        return "Image source, ByRef Image destination, Number factor_x, Number factor_y, Number factor_z, Boolean linear_interpolation";
     }
 
 
