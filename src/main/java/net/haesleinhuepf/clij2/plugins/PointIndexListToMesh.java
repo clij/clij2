@@ -37,7 +37,7 @@ public class PointIndexListToMesh extends AbstractCLIJ2Plugin implements CLIJMac
 
     @Override
     public String getParameterHelpText() {
-        return "Image pointlist, Image indexList, ByRef Image mesh_destination";
+        return "Image pointlist, Image indexlist, ByRef Image mesh_destination";
     }
 
     @Override
