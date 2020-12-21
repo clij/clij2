@@ -452,6 +452,21 @@ public abstract interface CLIJ2Ops {
      * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
      * 
      * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
+     * 
+     * Parameters
+     * ----------
+     * input : Image
+     *     The input image to be processed.
+     * destination : Image
+     *     The output image where results are written into.
+     * sigma1_x : float
+     *     Sigma of the first Gaussian filter in x
+     * sigma1_y : float
+     *     Sigma of the first Gaussian filter in y
+     * sigma2_x : float
+     *     Sigma of the second Gaussian filter in x
+     * sigma2_y : float
+     *     Sigma of the second Gaussian filter in y
      */
     default boolean differenceOfGaussian(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, double arg6) {
         if (doTimeTracing()) {recordMethodStart("DifferenceOfGaussian2D");}
@@ -464,6 +479,21 @@ public abstract interface CLIJ2Ops {
      * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
      * 
      * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
+     * 
+     * Parameters
+     * ----------
+     * input : Image
+     *     The input image to be processed.
+     * destination : Image
+     *     The output image where results are written into.
+     * sigma1_x : float
+     *     Sigma of the first Gaussian filter in x
+     * sigma1_y : float
+     *     Sigma of the first Gaussian filter in y
+     * sigma2_x : float
+     *     Sigma of the second Gaussian filter in x
+     * sigma2_y : float
+     *     Sigma of the second Gaussian filter in y
      */
     default boolean differenceOfGaussian2D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, double arg6) {
         if (doTimeTracing()) {recordMethodStart("DifferenceOfGaussian2D");}
@@ -479,6 +509,21 @@ public abstract interface CLIJ2Ops {
      * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
      * 
      * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
+     * 
+     * Parameters
+     * ----------
+     * input : Image
+     *     The input image to be processed.
+     * destination : Image
+     *     The output image where results are written into.
+     * sigma1_x : float
+     *     Sigma of the first Gaussian filter in x
+     * sigma1_y : float
+     *     Sigma of the first Gaussian filter in y
+     * sigma2_x : float
+     *     Sigma of the second Gaussian filter in x
+     * sigma2_y : float
+     *     Sigma of the second Gaussian filter in y
      */
     default boolean differenceOfGaussian(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8) {
         if (doTimeTracing()) {recordMethodStart("DifferenceOfGaussian3D");}
@@ -491,6 +536,25 @@ public abstract interface CLIJ2Ops {
      * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
      * 
      * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
+     * 
+     * Parameters
+     * ----------
+     * input : Image
+     *     The input image to be processed.
+     * destination : Image
+     *     The output image where results are written into.
+     * sigma1_x : float
+     *     Sigma of the first Gaussian filter in x
+     * sigma1_y : float
+     *     Sigma of the first Gaussian filter in y
+     * sigma1_z : float
+     *     Sigma of the first Gaussian filter in z
+     * sigma2_x : float
+     *     Sigma of the second Gaussian filter in x
+     * sigma2_y : float
+     *     Sigma of the second Gaussian filter in y
+     * sigma2_z : float
+     *     Sigma of the second Gaussian filter in z
      */
     default boolean differenceOfGaussian3D(ClearCLBuffer arg1, ClearCLBuffer arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8) {
         if (doTimeTracing()) {recordMethodStart("DifferenceOfGaussian3D");}
@@ -967,9 +1031,9 @@ public abstract interface CLIJ2Ops {
      * 
      * The value v will be written at position x/y[/z] in the target image.
      */
-    default boolean writeValuesToPositions(ClearCLBuffer positionsAndValues, ClearCLBuffer destination) {
+    default boolean writeValuesToPositions(ClearCLBuffer positions_and_values, ClearCLBuffer destination) {
         if (doTimeTracing()) {recordMethodStart("WriteValuesToPositions");}
-        boolean result = WriteValuesToPositions.writeValuesToPositions(getCLIJ2(), positionsAndValues, destination);
+        boolean result = WriteValuesToPositions.writeValuesToPositions(getCLIJ2(), positions_and_values, destination);
         if (doTimeTracing()) {recordMethodEnd("WriteValuesToPositions");}
         return result;
     }
@@ -2487,9 +2551,9 @@ public abstract interface CLIJ2Ops {
     /**
      * Meshes all points in a given point list which are indiced in a corresponding index list.
      */
-    default boolean pointIndexListToMesh(ClearCLBuffer pointlist, ClearCLBuffer indexList, ClearCLBuffer mesh_destination) {
+    default boolean pointIndexListToMesh(ClearCLBuffer pointlist, ClearCLBuffer indexlist, ClearCLBuffer mesh_destination) {
         if (doTimeTracing()) {recordMethodStart("PointIndexListToMesh");}
-        boolean result = PointIndexListToMesh.pointIndexListToMesh(getCLIJ2(), pointlist, indexList, mesh_destination);
+        boolean result = PointIndexListToMesh.pointIndexListToMesh(getCLIJ2(), pointlist, indexlist, mesh_destination);
         if (doTimeTracing()) {recordMethodEnd("PointIndexListToMesh");}
         return result;
     }
@@ -6517,9 +6581,9 @@ public abstract interface CLIJ2Ops {
      * 
      * 
      */
-    default boolean medianOfTouchingNeighbors(ClearCLBuffer values, ClearCLBuffer touch_matrix, ClearCLBuffer mean_values_destination) {
+    default boolean medianOfTouchingNeighbors(ClearCLBuffer values, ClearCLBuffer touch_matrix, ClearCLBuffer median_values_destination) {
         if (doTimeTracing()) {recordMethodStart("MedianOfTouchingNeighbors");}
-        boolean result = MedianOfTouchingNeighbors.medianOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, mean_values_destination);
+        boolean result = MedianOfTouchingNeighbors.medianOfTouchingNeighbors(getCLIJ2(), values, touch_matrix, median_values_destination);
         if (doTimeTracing()) {recordMethodEnd("MedianOfTouchingNeighbors");}
         return result;
     }
@@ -6923,9 +6987,9 @@ public abstract interface CLIJ2Ops {
      * 
      * For example, if labels 3 in labelmap1 and 4 in labelmap2 are touching then the pixel (3,4) in the matrix will be set to 1.
      */
-    default boolean generateBinaryOverlapMatrix(ClearCLBuffer label_map1, ClearCLBuffer label_map2, ClearCLBuffer touch_matrix_destination) {
+    default boolean generateBinaryOverlapMatrix(ClearCLBuffer label_map1, ClearCLBuffer label_map2, ClearCLBuffer binary_overlap_matrix_destination) {
         if (doTimeTracing()) {recordMethodStart("GenerateBinaryOverlapMatrix");}
-        boolean result = GenerateBinaryOverlapMatrix.generateBinaryOverlapMatrix(getCLIJ2(), label_map1, label_map2, touch_matrix_destination);
+        boolean result = GenerateBinaryOverlapMatrix.generateBinaryOverlapMatrix(getCLIJ2(), label_map1, label_map2, binary_overlap_matrix_destination);
         if (doTimeTracing()) {recordMethodEnd("GenerateBinaryOverlapMatrix");}
         return result;
     }
