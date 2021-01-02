@@ -43,7 +43,7 @@ public class MinimumDistanceOfTouchingNeighbors extends AbstractCLIJ2Plugin impl
         HashMap<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("src_distance_matrix", distance_matrix);
         parameters.put("src_touch_matrix", touch_matrix);
-        parameters.put("dst_minimum_distance_list", minimum_distancelist_destination);
+        parameters.put("dst_distance_list", minimum_distancelist_destination);
 
         long[] globalSizes = new long[]{distance_matrix.getWidth()};
 
