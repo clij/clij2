@@ -41,9 +41,14 @@ public class NeighborsOfNeighbors extends AbstractCLIJ2Plugin implements CLIJMac
     }
 
     public static boolean neighborsOfNeighbors(CLIJ2 clij2, ClearCLBuffer touch_matrix, ClearCLBuffer neighbor_matrix) {
+        ClearCLBuffer adjacency_matrix = clij2.create(touch_matrix);
+        clij2.touchMatrixToAdjacencyMatrix(touch_matrix, adjacency_matrix);
+
         ClearCLBuffer temp = clij2.create(touch_matrix);
-        clij2.multiplyMatrix(touch_matrix, touch_matrix, temp);
-        clij2.greaterConstant(temp, neighbor_matrix, 0);
+        clij2.multiplyMatrix(adjacency_matrix, adjacency_matrix, temp);
+        clij2.greaterConstant(temp, adjacency_matrix, 0);
+        clij2.adjacencyMatrixToTouchMatrix(adjacency_matrix, neighbor_matrix);
+        adjacency_matrix.close();
         temp.close();
         return true;
     }
