@@ -26,8 +26,6 @@ public class CentroidsOfLabels extends AbstractCLIJ2Plugin implements CLIJMacroP
     @Override
     public boolean executeCL() {
 
-        ResultsTable table = ResultsTable.getResultsTable();
-        table.incrementCounter();
 
         ClearCLBuffer labelmap = (ClearCLBuffer)( args[0]);
         ClearCLBuffer pointlist = (ClearCLBuffer)( args[1]);

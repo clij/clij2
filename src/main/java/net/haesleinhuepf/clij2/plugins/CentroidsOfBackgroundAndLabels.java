@@ -26,9 +26,6 @@ public class CentroidsOfBackgroundAndLabels extends AbstractCLIJ2Plugin implemen
     @Override
     public boolean executeCL() {
 
-        ResultsTable table = ResultsTable.getResultsTable();
-        table.incrementCounter();
-
         ClearCLBuffer labelmap = (ClearCLBuffer)( args[0]);
         ClearCLBuffer pointlist = (ClearCLBuffer)( args[1]);
 
@@ -69,7 +66,7 @@ public class CentroidsOfBackgroundAndLabels extends AbstractCLIJ2Plugin implemen
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
         int numberOfLabels = (int)getCLIJ2().maximumOfAllPixels(input);
         int numberOfDimensions = (int)input.getDimension();
-        return getCLIJ2().create(new long[]{numberOfLabels, numberOfDimensions});
+        return getCLIJ2().create(new long[]{numberOfLabels + 1, numberOfDimensions});
     }
 
     @Override
