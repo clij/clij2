@@ -61,7 +61,7 @@ public class AutomaticThreshold extends AbstractCLIJ2Plugin implements CLIJMacro
             maximumGreyValue = null;
         }
 
-        return automaticThreshold(clij2, src, dst, userSelectedMethod, minimumGreyValue, maximumGreyValue, 256);
+        return automaticThreshold(clij2, src, dst, userSelectedMethod, minimumGreyValue, maximumGreyValue, numberOfBins);
     }
 
 
