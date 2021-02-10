@@ -387,23 +387,6 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
     public static double[][] statisticsOfLabelledPixels(CLIJ2 clij2, ClearCLBuffer inputImage, ClearCLBuffer inputLabelMap, Integer startLabelIndex, Integer endLabelIndex) {
         int num_threads = (int) inputImage.getDepth();
 
-        double[][][] statistics = new double[num_threads + 1][endLabelIndex - startLabelIndex + 1][STATISTICS_ENTRY.NUMBER_OF_ENTRIES];
-
-        Thread[] threads = new Thread[num_threads];
-        Statistician[] statisticians = new Statistician[num_threads];
-        for (int i = 0; i < num_threads; i++) {
-            statisticians[i] = new Statistician(statistics[i + 1], clij2, inputImage, inputLabelMap, startLabelIndex, endLabelIndex, i);
-            threads[i] = new Thread(statisticians[i]);
-            threads[i].start();
-        }
-        for (int i = 0; i < num_threads; i++) {
-            try {
-                threads[i].join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
         STATISTICS_ENTRY[] indices_to_min_collect = {
                 STATISTICS_ENTRY.BOUNDING_BOX_X,
                 STATISTICS_ENTRY.BOUNDING_BOX_Y,
@@ -426,6 +409,37 @@ public class StatisticsOfLabelledPixels extends AbstractCLIJ2Plugin implements C
                 STATISTICS_ENTRY.SUM_Y,
                 STATISTICS_ENTRY.SUM_Z
         };
+
+        double[][][] statistics = new double[num_threads + 1][endLabelIndex - startLabelIndex + 1][STATISTICS_ENTRY.NUMBER_OF_ENTRIES];
+
+        for (int t = 0; t < num_threads; t++) {
+            for (int j = 0; j < statistics[0].length; j++) {
+                for (STATISTICS_ENTRY entry : indices_to_max_collect) {
+                    statistics[t + 1][j][entry.value] = -Double.MAX_VALUE;
+                }
+                for (STATISTICS_ENTRY entry : indices_to_min_collect) {
+                    statistics[t + 1][j][entry.value] = Double.MAX_VALUE;
+                }
+            }
+        }
+
+
+
+        Thread[] threads = new Thread[num_threads];
+        Statistician[] statisticians = new Statistician[num_threads];
+        for (int i = 0; i < num_threads; i++) {
+            statisticians[i] = new Statistician(statistics[i + 1], clij2, inputImage, inputLabelMap, startLabelIndex, endLabelIndex, i);
+            threads[i] = new Thread(statisticians[i]);
+            threads[i].start();
+        }
+        for (int i = 0; i < num_threads; i++) {
+            try {
+                threads[i].join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         for (int t = 0; t < num_threads; t++) {
             for (int j = 0; j < statistics[0].length; j++) {
