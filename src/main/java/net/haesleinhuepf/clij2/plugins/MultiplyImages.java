@@ -69,7 +69,7 @@ public class MultiplyImages extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getDescription() {
-        return "Multiplies all pairs of pixel values x and y from two image X and Y.\n\n" +
+        return "Multiplies all pairs of pixel values x and y from two images X and Y.\n\n" +
                 "<pre>f(x, y) = x * y</pre>\n\n" +
                 "Parameters\n" +
                 "----------\n" +
