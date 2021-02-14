@@ -96,7 +96,7 @@ public class SumImageSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMac
 
     @Override
     public String getDescription() {
-        return "Sums all pixels slice by slice and returns them in an array.";
+        return "Sums all pixels slice by slice and returns the sums in a vector.";
     }
 
     @Override
