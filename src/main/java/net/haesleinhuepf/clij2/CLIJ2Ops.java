@@ -4750,7 +4750,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MultiplyImages
     //----------------------------------------------------
     /**
-     * Multiplies all pairs of pixel values x and y from two image X and Y.
+     * Multiplies all pairs of pixel values x and y from two images X and Y.
      * 
      * <pre>f(x, y) = x * y</pre>
      * 
@@ -5872,7 +5872,7 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.SumImageSliceBySlice
     //----------------------------------------------------
     /**
-     * Sums all pixels slice by slice and returns them in an array.
+     * Sums all pixels slice by slice and returns the sums in a vector.
      */
     default boolean sumImageSliceBySlice(ClearCLImageInterface source, ClearCLImageInterface destination) {
         if (doTimeTracing()) {recordMethodStart("SumImageSliceBySlice");}
@@ -5882,7 +5882,7 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
-     * Sums all pixels slice by slice and returns them in an array.
+     * Sums all pixels slice by slice and returns the sums in a vector.
      */
     default double[] sumImageSliceBySlice(ClearCLImageInterface arg1) {
         if (doTimeTracing()) {recordMethodStart("SumImageSliceBySlice");}
