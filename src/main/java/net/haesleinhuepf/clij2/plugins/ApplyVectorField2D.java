@@ -67,16 +67,16 @@ public class ApplyVectorField2D extends AbstractCLIJ2Plugin implements CLIJMacro
     }
 
 
-    public static boolean applyVectorField(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface vectorX, ClearCLImageInterface vectorY, ClearCLImageInterface dst) {
+    public static boolean applyVectorField(CLIJ2 clij2, ClearCLImageInterface src, ClearCLImageInterface vector_x, ClearCLImageInterface vector_y, ClearCLImageInterface dst) {
         assertDifferent(src, dst);
-        assertDifferent(vectorX, dst);
-        assertDifferent(vectorY, dst);
+        assertDifferent(vector_x, dst);
+        assertDifferent(vector_y, dst);
 
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("src", src);
         parameters.put("dst", dst);
-        parameters.put("vectorX", vectorX);
-        parameters.put("vectorY", vectorY);
+        parameters.put("vectorX", vector_x);
+        parameters.put("vectorY", vector_y);
 
         if (src instanceof ClearCLImage) {
             clij2.execute(ApplyVectorField2D.class, "apply_vectorfield_2d_interpolate_x.cl", "apply_vectorfield_2d_interpolate", src.getDimensions(), src.getDimensions(), parameters);
@@ -88,13 +88,23 @@ public class ApplyVectorField2D extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, Image vectorX, Image vectorY, ByRef Image destination";
+        return "Image source, Image vector_x, Image vector_y, ByRef Image destination";
     }
 
     @Override
     public String getDescription() {
         return "Deforms an image according to distances provided in the given vector images.\n\n " +
-                "It is recommended to use 32-bit images for input, output and vector images. ";
+                "It is recommended to use 32-bit images for input, output and vector images.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "source : Image\n" +
+                "    The input image to be processed.\n" +
+                "vector_x : Image\n" +
+                "    Pixels in this image describe the distance in X direction pixels should be shifted during warping.\n" +
+                "vector_y : Image\n" +
+                "    Pixels in this image describe the distance in Y direction pixels should be shifted during warping.\n" +
+                "destination : Image\n" +
+                "    The output image where results are written into.\n";
     }
 
     @Override

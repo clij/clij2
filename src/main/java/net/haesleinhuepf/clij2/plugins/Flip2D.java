@@ -68,7 +68,7 @@ public class Flip2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getDescription() {
-        return "Flips an image in X and/or Y direction depending on boolean flags.";
+        return "Flips an image in X and/or Y direction depending on if flip_x and/or flip_y are set to true or false.";
     }
 
     @Override

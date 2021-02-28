@@ -71,7 +71,7 @@ public class Flip3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
 
     @Override
     public String getDescription() {
-        return "Flips an image in X, Y and/or Z direction depending on boolean flags.";
+        return "Flips an image in X, Y and/or Z direction depending on if flip_x, flip_y and/or flip_z are set to true or false.";
     }
 
     @Override

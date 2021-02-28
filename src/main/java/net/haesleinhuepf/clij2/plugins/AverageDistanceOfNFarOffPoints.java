@@ -33,7 +33,7 @@ public class AverageDistanceOfNFarOffPoints extends AbstractCLIJ2Plugin implemen
 
     @Override
     public String getParameterHelpText() {
-        return "Image distance_matrix, ByRef Image distance+_list_destination, Number nFarOffPointsTofind";
+        return "Image distance_matrix, ByRef Image distance+_list_destination, Number n_far_off_points_to_find";
     }
 
     @Override
@@ -74,7 +74,16 @@ public class AverageDistanceOfNFarOffPoints extends AbstractCLIJ2Plugin implemen
     @Override
     public String getDescription() {
         return "Determines the average of the n far off (most distant) points for every point in a distance matrix.\n\n" +
-                "This corresponds to the average of the n maximum values (rows) for each column of the distance matrix.";
+                "This corresponds to the average of the n maximum values (rows) for each column of the distance matrix.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "distance_matrix : Image\n" +
+                "    The a distance matrix to be processed.\n" +
+                "distance_list_destination : Image\n" +
+                "    A vector image with the same width as the distance matrix and height=1, depth=1.\n" +
+                "    Determined average distances will be written into this vector.\n" +
+                "n_far_off_points_to_find : Number\n" +
+                "    Number of largest distances which should be averaged.\n";
     }
 
     @Override

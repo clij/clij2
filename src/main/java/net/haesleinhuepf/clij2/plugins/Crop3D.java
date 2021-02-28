@@ -88,7 +88,26 @@ public class Crop3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJ
     @Override
     public String getDescription() {
         return "Crops a given sub-stack out of a given image stack. \n\n" +
-                "Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.";
+                "Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.\n\n"+
+                "Parameters\n" +
+                "----------\n" +
+                "source : Image\n" +
+                "    The image where a part will be cropped out.\n" +
+                "destination : Image\n" +
+                "    The cropped image will be stored in this variable.\n" +
+                "start_x : Number\n" +
+                "    The horizontal position of the region to crop in the source image.\n" +
+                "start_y : Number\n" +
+                "    The vertical position of the region to crop in the source image.\n" +
+                "start_z : Number\n" +
+                "    The slice position of the region to crop in the source image. Slices are counted 0-based; the first slice is z=0.\n" +
+                "width : Number\n" +
+                "    The width of the region to crop in the source image.\n" +
+                "height : Number\n" +
+                "    The height of the region to crop in the source image.\n" +
+                "depth : Number\n" +
+                "    The depth of the region to crop in the source image.\n";
+
     }
 
     @Override

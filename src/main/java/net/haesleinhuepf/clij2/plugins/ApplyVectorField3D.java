@@ -100,7 +100,19 @@ public class ApplyVectorField3D extends AbstractCLIJ2Plugin implements CLIJMacro
     @Override
     public String getDescription() {
         return "Deforms an image stack according to distances provided in the given vector image stacks.\n\n" +
-                "It is recommended to use 32-bit image stacks for input, output and vector image stacks. ";
+                "It is recommended to use 32-bit image stacks for input, output and vector image stacks.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "source : Image\n" +
+                "    The input image to be processed.\n" +
+                "vector_x : Image\n" +
+                "    Pixels in this image describe the distance in X direction pixels should be shifted during warping.\n" +
+                "vector_y : Image\n" +
+                "    Pixels in this image describe the distance in Y direction pixels should be shifted during warping.\n" +
+                "vector_z : Image\n" +
+                "    Pixels in this image describe the distance in Z direction pixels should be shifted during warping.\n" +
+                "destination : Image\n" +
+                "    The output image where results are written into.\n";
     }
 
     @Override

@@ -37,7 +37,17 @@ public class Create2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public String getDescription() {
-        return "Allocated memory for a new 2D image in the GPU memory. \n\nBitDepth must be 8 (unsigned byte), 16 (unsigned short) or 32 (float).";
+        return "Allocated memory for a new 2D image in the GPU memory.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "destination : Image\n" +
+                "    The new image will be stored in this variable.\n" +
+                "width : Number\n" +
+                "    The width of the new image.\n" +
+                "height : Number\n" +
+                "    The height of the new image.\n" +
+                "bit-depth : Number\n" +
+                "    The bit-depth of the new image. Can be either 8, 16 or 32, to create an image of unsigned-byte, unsigned-short or float type.\n";
     }
 
     @Override

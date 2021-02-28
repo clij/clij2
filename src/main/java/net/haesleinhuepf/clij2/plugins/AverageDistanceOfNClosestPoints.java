@@ -33,7 +33,7 @@ public class AverageDistanceOfNClosestPoints extends AbstractCLIJ2Plugin impleme
 
     @Override
     public String getParameterHelpText() {
-        return "Image distance_matrix, ByRef Image distance_list_destination, Number nClosestPointsTofind";
+        return "Image distance_matrix, ByRef Image distance_list_destination, Number n_closest_points_to_find";
     }
 
     @Override
@@ -78,7 +78,16 @@ public class AverageDistanceOfNClosestPoints extends AbstractCLIJ2Plugin impleme
     @Override
     public String getDescription() {
         return "Determines the average of the n closest points for every point in a distance matrix.\n\n" +
-                "This corresponds to the average of the n minimum values (rows) for each column of the distance matrix.";
+                "This corresponds to the average of the n minimum values (rows) for each column of the distance matrix.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "distance_matrix : Image\n" +
+                "    The a distance matrix to be processed.\n" +
+                "distance_list_destination : Image\n" +
+                "    A vector image with the same width as the distance matrix and height=1, depth=1.\n" +
+                "    Determined average distances will be written into this vector.\n" +
+                "n_closest_points_to_find : Number\n" +
+                "    Number of smallest distances which should be averaged.\n";
     }
 
     @Override

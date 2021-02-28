@@ -184,6 +184,15 @@ public class AffineTransform2D extends AbstractCLIJ2Plugin implements CLIJMacroP
                 "This may appear unintuitive and will be changed in the next major release. The replacement \n" +
                 "affineTransform (currently part of CLIJx) will apply inverted transforms compared to this operation.\n" +
                 "Individual transforms must be separated by spaces.\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "source : Image\n" +
+                "    The input image to be processed.\n" +
+                "destination : Image\n" +
+                "    The output image where results are written into.\n" +
+                "transform : String\n" +
+                "    A space-separated list of individual transforms. Syntrax see below.\n" +
+                "\n" +
                 "Supported transforms:\n" +
                 "\n* -center: translate the coordinate origin to the center of the image" +
                 "\n* center: translate the coordinate origin back to the initial origin" +

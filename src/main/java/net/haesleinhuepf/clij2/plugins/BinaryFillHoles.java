@@ -83,7 +83,16 @@ public class BinaryFillHoles extends AbstractCLIJ2Plugin implements CLIJMacroPlu
 
     @Override
     public String getDescription() {
-        return "Fills holes (pixels with value 0 surrounded by pixels with value 1) in a binary image.";
+        return "Fills holes (pixels with value 0 surrounded by pixels with value 1) in a binary image.\n\n" +
+                "Note: This function is known to perform slowly on large images. Consider using the extension \n" +
+                "CLIJx_morphoLibJFillHoles(input, destination) instead.\n" +
+                "Read more: http://clij.github.io/assistant/installation#extensions\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "source : Image\n" +
+                "    The binary input image where holes will be filled.\n" +
+                "destination : Image\n" +
+                "    The output image where true pixels will be 1.\n";
     }
 
     @Override

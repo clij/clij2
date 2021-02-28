@@ -49,7 +49,13 @@ public class DetectLabelEdges extends AbstractCLIJ2Plugin implements CLIJMacroPl
 
     @Override
     public String getDescription() {
-        return "Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.";
+        return "Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.\n\n"+
+                "Parameters\n" +
+                "----------\n" +
+                "label_map : Image\n" +
+                "    The label image where edges between labels will be detected.\n" +
+                "edge_image_destination : Number\n" +
+                "    Binary image where edges were marked with value 1 and all other pixels will be set to 0.\n";
     }
 
     @Override

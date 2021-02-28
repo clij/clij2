@@ -67,7 +67,16 @@ public class AverageDistanceOfTouchingNeighbors extends AbstractCLIJ2Plugin impl
     @Override
     public String getDescription() {
         return "Takes a touch matrix and a distance matrix to determine the average distance of touching neighbors \n " +
-                "for every object.";
+                "for every object.\n\n" +
+                "Parameters\n" +
+                "----------\n" +
+                "distance_matrix : Image\n" +
+                "    The a distance matrix to be processed.\n" +
+                "touch_matrix : Image\n" +
+                "    The binary touch matrix describing which distances should be taken into account.\n" +
+                "distance_list_destination : Image\n" +
+                "    A vector image with the same width as the distance matrix and height=1, depth=1.\n" +
+                "    Determined average distances will be written into this vector.\n";
     }
 
     @Override
