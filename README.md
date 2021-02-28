@@ -58,6 +58,7 @@ If you search for support, please open a thread on the [image.sc](https://image.
     * [Maven/Java](https://clij.github.io/clij2-docs/dependingViaMaven)
   * [Cheat sheets](https://clij.github.io/clij2-docs/CLIJ2-cheatsheet_V3.pdf)
   * [Reference](https://clij.github.io/clij2-docs/reference)
+  * [Frequently asked questions](https://clij.github.io/clij2-docs/faq)
   * [Release notes](https://github.com/clij/clij2/releases)
   * [Community guidelines](https://clij.github.io/clij2-docs/community_guidelines)
   * [Release cycle](https://clij.github.io/clij2-docs/release_cycle)    
@@ -68,7 +69,9 @@ If you search for support, please open a thread on the [image.sc](https://image.
   
 * Tutorials
   * [Basics](https://clij.github.io/clij2-docs/md/basics/)
-  * [Combining CLIJ and CLIJ2](https://clij.github.io/clij2-docs/md/clij1_clij2_combination/)
+  * [Basic image processing](https://clij.github.io/clij2-docs/md/basic_image_processing/)
+  * [Binary images, label images and parametric images](https://clij.github.io/clij2-docs/md/image_types/)
+  * [Processing multi-channel time-lapse data](https://clij.github.io/clij2-docs/md/process_multichannel_timelapse/)
   * Filtering and processing images
     * [Crop and paste images](https://clij.github.io/clij2-docs/md/crop_and_paste/)
     * [Gaussian blur](https://clij.github.io/clij2-docs/md/blur/)
@@ -78,10 +81,12 @@ If you search for support, please open a thread on the [image.sc](https://image.
 
   * Segmentation and labelling
     * [Labeling](https://clij.github.io/clij2-docs/md/labeling/)
+    * [3D Image Segmentation](https://clij.github.io/clij2-docs/md/image_segmentation_3d/)
     * [Binary images](https://clij.github.io/clij2-docs/md/binary_processing/)
     * [Working with regions of interest (ROIs)](https://clij.github.io/clij2-docs/md/working_with_rois/)
     * [Voronoi diagrams](https://clij.github.io/clij2-docs/md/voronoi/)
     * [Label maps and voronoi diagrams](https://clij.github.io/clij2-docs/md/labelmap_voronoi)
+    * [Custom clij functions for image segmentation](https://clij.github.io/clij2-docs/md/custom_clij_macro_functions/)
 
   * Working with matrices and graphs
     * [Multiply vectors and matrices](https://clij.github.io/clij2-docs/md/multiply_vectors_matrices)
@@ -95,7 +100,8 @@ If you search for support, please open a thread on the [image.sc](https://image.
     
   * Statistics and measurements
     * [Images statistics](https://clij.github.io/clij2-docs/md/image_statistics/)
-    * [Pixel statistics on labelled images](https://clij.github.io/clij2-docs/md/measure_statistics/)
+    * [Pixel statistics on labeled images](https://clij.github.io/clij2-docs/md/measure_statistics/)
+    * [Count neighbors](https://clij.github.io/clij2-docs/md/count_neighbors/)
     * [Working with tables](https://clij.github.io/clij2-docs/md/tables/)
     * [Colocalisation measurements using Jaccard index and Sorensen/Dice coefficient](https://clij.github.io/clij2-docs/md/measure_overlap/)
     * [Measuring presence of objects between channels](https://clij.github.io/clij2-docs/md/count_overlap_between_channels/)
@@ -142,8 +148,8 @@ If you search for support, please open a thread on the [image.sc](https://image.
   * [OpenCL 1.2 Specifications, Khronos Group](https://www.khronos.org/registry/OpenCL/specs/opencl-1.2.pdf)
 
 * FAQ / support
-  * [Frequently asked questions](https://clij.github.io/clij2-docs/faq)
   * CLIJ versus CLIJ2
+    * [Combining CLIJ and CLIJ2](https://clij.github.io/clij2-docs/md/clij1_clij2_combination/)
     * [CLIJ documentation (archived)](https://clij.github.io/clij-docs)
     * [CLIJ BioRxiv preprint (archived)](https://doi.org/10.1101/660704)
     * [What's different between CLIJ1, CLIJ2 and CLIJx?](https://clij.github.io/clij2-docs/clij12xAPIcomparison)
