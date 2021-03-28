@@ -1,5 +1,6 @@
 package net.haesleinhuepf.clij2;
 
+import ij.IJ;
 import ij.ImagePlus;
 import ij.plugin.Duplicator;
 import net.haesleinhuepf.clij.CLIJ;
@@ -21,6 +22,8 @@ import net.imglib2.type.logic.BitType;
 import net.imglib2.type.numeric.RealType;
 import net.imglib2.view.Views;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.Map;
@@ -62,6 +65,39 @@ public class CLIJ2 implements CLIJ2Ops {
         this.clij = clij;
         mCLKernelExecutor = new CLKernelExecutor(clij.getClearCLContext());
         max_num_bytes = clij.getClearCLContext().getDevice().getMaxMemoryAllocationSizeInBytes();
+    }
+
+    static {
+        checkInstallation();
+    }
+
+    private static  void checkInstallation() {
+        try {
+            String dir = IJ.getDirectory("imagej");
+            if (!dir.contains("null") && dir.toLowerCase().contains("fiji")) {
+                // we're in a Fiji folder
+                File plugins_dir = new File(dir + "/plugins");
+                if (jarExists(plugins_dir, "clij2_") && !jarExists(plugins_dir, "clij_")) {
+                    System.out.println("CLIJ2 is not installed correctly. Please activate the 'clij' update site");
+                }
+                if (jarExists(plugins_dir, "clijx-assistant-bonej") && !jarExists(plugins_dir, "bonej-legacy")) {
+                    System.out.println("CLIJx extension for BoneJ is not installed correctly. Please activate the 'BoneJ' update site");
+                }
+                if (jarExists(plugins_dir, "clijx-assistant-morpholibj_") && !jarExists(plugins_dir, "MorphoLibJ_")) {
+                    System.out.println("CLIJx extension for MorpholibJ is not installed correctly. Please activate the 'IJPB-Plugins' update site");
+                }
+                if (jarExists(plugins_dir, "clijx-assistant-imagej3dsuite_") && !jarExists(plugins_dir, "mcib3d-suite")) {
+                    System.out.println("CLIJx extension for the ImageJ 3D Suite is not installed correctly. Please activate the '3D ImageJ Suite' update site");
+                }
+            }
+        }catch (Exception e) {
+            System.out.println("Error while checking the CLIJ2 installation:");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static boolean jarExists(File folder, String name) {
+        return folder.list((dir, name1) -> name1.contains(name)).length > 0;
     }
 
     public static CLIJ2 getInstance() {
