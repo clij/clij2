@@ -42,7 +42,7 @@ public class ConnectedComponentsLabelingDiamond extends ConnectedComponentsLabel
     }
 
     public static boolean connectedComponentsLabelingDiamond(CLIJ2 clij2, ClearCLImageInterface input, ClearCLImageInterface output) {
-        return connectedComponentsLabeling_internal(clij2, input, output, true, true);
+        return connectedComponentsLabeling_internal(clij2, input, output, true, false);
     }
 
     public static boolean connectedComponentsLabelingDiamond(CLIJ2 clij2, ClearCLImageInterface input, ClearCLImageInterface output, boolean forceContinousLabeling) {
