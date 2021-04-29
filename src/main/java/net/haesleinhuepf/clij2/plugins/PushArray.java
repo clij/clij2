@@ -90,12 +90,12 @@ public class PushArray extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getDescription() {
-        return "Converts an array to an image.";
+        return "Converts an array to a 3D image stack.";
     }
 
     @Override
     public String getAvailableForDimensions() {
-        return "2D, 3D";
+        return "3D";
     }
 
 }
