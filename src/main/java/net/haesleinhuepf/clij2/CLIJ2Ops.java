@@ -6392,6 +6392,8 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.GetAutomaticThreshold
     //----------------------------------------------------
     /**
+     * Determines a threshold according to a given method and saves it to the threshold_value variable.
+     * 
      * The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on 
      * the GPU to determine a threshold value as similar as possible to ImageJ 'Apply Threshold' method. 
      * 
@@ -6407,6 +6409,8 @@ public abstract interface CLIJ2Ops {
     }
 
     /**
+     * Determines a threshold according to a given method and saves it to the threshold_value variable.
+     * 
      * The automatic thresholder utilizes the threshold methods from ImageJ on a histogram determined on 
      * the GPU to determine a threshold value as similar as possible to ImageJ 'Apply Threshold' method. 
      * 
