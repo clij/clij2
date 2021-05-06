@@ -8,13 +8,13 @@
 	<parent>
 		<groupId>net.haesleinhuepf</groupId>
 		<artifactId>clij-parent-pom</artifactId>
-		<version>2.2.1.0</version>
+		<version>2.3.0.6</version>
 		<relativePath />
 	</parent>
 
 	<groupId>net.haesleinhuepf</groupId>
 	<artifactId>clij2_</artifactId>
-	<version>2.2.1.0</version>
+	<version>2.3.0.6</version>
 
 	<name>clij2_</name>
 	<description>clij2</description>
@@ -108,19 +108,7 @@
 			<id>scijava.public</id>
 			<url>https://maven.scijava.org/content/groups/public</url>
 		</repository>
-		<repository>
-			<id>clij</id>
-			<url>http://dl.bintray.com/haesleinhuepf/clij</url>
-		</repository>
 	</repositories>
-
-	<distributionManagement>
-		<repository>
-			<id>bintray-haesleinhuepf-snapshots</id>
-			<name>bintray-snapshots</name>
-			<url>https://api.bintray.com/maven/haesleinhuepf/clij/clij2_/;publish=1</url>
-		</repository>
-	</distributionManagement>
 
 	<build>
 		<plugins>
