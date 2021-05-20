@@ -68,7 +68,7 @@ public class PushArray2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
     }
 
     public static ClearCLBuffer pushArray2D(CLIJ2 clij2, float[] array, Integer width, Integer height) {
-        return pushArray(clij2, array, width, height)
+        return pushArray(clij2, array, width, height);
     }
     public static ClearCLBuffer pushArray(CLIJ2 clij2, float[] array, Integer width, Integer height) {
         ClearCLBuffer buffer = clij2.create(width, height);
