@@ -30,10 +30,15 @@ public class MaximumTouchingNeighborDistanceMap extends AbstractCLIJ2Plugin impl
 
     @Override
     public boolean executeCL() {
-        return maximumNeighborDistanceMap(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1]);
+        return maximumTouchingNeighborDistanceMap(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1]);
     }
 
+    @Deprecated
     public static boolean maximumNeighborDistanceMap(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result) {
+        return maximumTouchingNeighborDistanceMap(clij2, pushed, result);
+    }
+
+    public static boolean maximumTouchingNeighborDistanceMap(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result) {
         int number_of_labels = (int)clij2.maximumOfAllPixels(pushed);
         ClearCLBuffer touch_matrix = clij2.create(number_of_labels + 1, number_of_labels + 1);
         clij2.generateTouchMatrix(pushed, touch_matrix);

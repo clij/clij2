@@ -30,10 +30,15 @@ public class TouchingNeighborDistanceRangeRatioMap extends AbstractCLIJ2Plugin i
 
     @Override
     public boolean executeCL() {
-        return neighborDistanceRangeRatioMap(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1]);
+        return touchingNeighborDistanceRangeRatioMap(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1]);
     }
 
+    @Deprecated
     public static boolean neighborDistanceRangeRatioMap(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result) {
+        return touchingNeighborDistanceRangeRatioMap(clij2, pushed, result);
+    }
+
+    public static boolean touchingNeighborDistanceRangeRatioMap(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result) {
         int number_of_labels = (int)clij2.maximumOfAllPixels(pushed);
         ClearCLBuffer touch_matrix = clij2.create(number_of_labels + 1, number_of_labels + 1);
         clij2.generateTouchMatrix(pushed, touch_matrix);
