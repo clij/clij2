@@ -35,7 +35,7 @@ public class DrawMeshBetweenNNearestLabels extends AbstractCLIJ2Plugin implement
 
     @Deprecated
     public static boolean drawMeshBetweenNClosestLabels(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result, Integer number_of_closest_labels) {
-        drawMeshBetweenNNearestLabels(clij2, pushed, result, number_of_closest_labels);
+        return drawMeshBetweenNNearestLabels(clij2, pushed, result, number_of_closest_labels);
     }
     public static boolean drawMeshBetweenNNearestLabels(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result, Integer number_of_closest_labels) {
         int number_of_labels = (int)clij2.maximumOfAllPixels(pushed);
