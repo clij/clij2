@@ -32,6 +32,10 @@ public class ReduceLabelsToCentroids extends AbstractCLIJ2Plugin implements CLIJ
         return reduceLabelsToCentroids(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1]);
     }
 
+    public static boolean reduceLabelsToLabelledSpots(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result) {
+        return reduceLabelsToCentroids(clij2, pushed, result);
+    }
+
     public static boolean reduceLabelsToCentroids(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result) {
         int number_of_labels = (int)clij2.maximumOfAllPixels(pushed);
         ClearCLBuffer positions = clij2.create(number_of_labels + 1,pushed.getDimension(), 1);

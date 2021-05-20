@@ -36,6 +36,10 @@ public class DilateLabels extends AbstractCLIJ2Plugin implements CLIJMacroPlugin
         return dilateLabels(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1], asInteger(args[2]));
     }
 
+    public static boolean extendLabelsWithMaximumRadius(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result, Integer radius) {
+        return dilateLabels(clij2, pushed, result, radius);
+    }
+
     public static boolean dilateLabels(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result, Integer radius) {
         ClearCLBuffer temp = clij2.create(result);
         clij2.copy(pushed, temp);

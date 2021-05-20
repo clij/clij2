@@ -42,6 +42,11 @@ public class ErodeLabels extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
         return erodeLabels(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1], asInteger(args[2]), asBoolean(args[3]));
     }
 
+    @Deprecated
+    public static boolean shrinkLabels(CLIJ2 clij2, ClearCLBuffer labels_input, ClearCLBuffer labels_destination, Integer radius, Boolean relabel_islands) {
+        return erodeLabels(clij2, labels_input, labels_destination, radius, relabel_islands);
+    }
+
     public static boolean erodeLabels(CLIJ2 clij2, ClearCLBuffer labels_input, ClearCLBuffer labels_destination, Integer radius, Boolean relabel_islands) {
         if (radius <= 0) {
             clij2.copy(labels_input, labels_destination);
