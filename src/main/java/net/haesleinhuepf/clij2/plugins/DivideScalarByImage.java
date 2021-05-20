@@ -24,7 +24,7 @@ import static net.haesleinhuepf.clij2.utilities.CLIJUtilities.checkDimensions;
  * February 2021
  */
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_divideScalarByImage")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_divideScalarByImage")
 public class DivideScalarByImage extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized, HasClassifiedInputOutput {
     @Override
     public String getInputType() {
