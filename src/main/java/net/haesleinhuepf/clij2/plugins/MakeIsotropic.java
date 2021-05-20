@@ -13,7 +13,7 @@ import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import net.imglib2.realtransform.AffineTransform3D;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_makeIsotropic")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_makeIsotropic")
 public class MakeIsotropic extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized, HasClassifiedInputOutput {
     @Override
     public String getInputType() {
