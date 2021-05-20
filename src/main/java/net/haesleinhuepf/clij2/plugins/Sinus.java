@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clij2;
+package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
