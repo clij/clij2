@@ -15,7 +15,7 @@ import net.haesleinhuepf.clijx.CLIJx;
 import net.haesleinhuepf.clijx.utilities.AbstractCLIJxPlugin;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_excludeLabelsOutsideSizeRange")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_excludeLabelsOutsideSizeRange")
 public class ExcludeLabelsOutsideSizeRange extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized, HasClassifiedInputOutput {
     @Override
     public String getInputType() {

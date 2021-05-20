@@ -15,7 +15,7 @@ import org.scijava.plugin.Plugin;
  * Author: @haesleinhuepf
  *         January 2021
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_generateNNearestNeighborsMatrix")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_generateNNearestNeighborsMatrix")
 public class GenerateNNearestNeighborsMatrix extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized, HasClassifiedInputOutput {
     @Override
     public String getInputType() {
