@@ -45,7 +45,7 @@ public class ZPositionProjection extends AbstractCLIJ2Plugin implements CLIJMacr
         parameters.put("position", position);
         parameters.put("dst", dst);
 
-        clij2.execute(MeanZProjectionBelowThreshold.class, "z_position_projection_x.cl", "z_position_projection", dst.getDimensions(), dst.getDimensions(), parameters);
+        clij2.execute(ZPositionProjection.class, "z_position_projection_x.cl", "z_position_projection", dst.getDimensions(), dst.getDimensions(), parameters);
 
         return true;
     }

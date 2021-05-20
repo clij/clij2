@@ -1,4 +1,4 @@
-package net.haesleinhuepf.clij2;
+package net.haesleinhuepf.clij2.plugins;
 
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
@@ -7,12 +7,13 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.plugins.GenerateProximalNeighborsMatrix;
 import net.haesleinhuepf.clij2.utilities.HasClassifiedInputOutput;
 import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_touchingNeighborCountMap")
-public class TouchingNeighborCountMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized, HasClassifiedInputOutput {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_proximalNeighborCountMap")
+public class ProximalNeighborCountMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized, HasClassifiedInputOutput {
     @Override
     public String getInputType() {
         return "Label Image";
@@ -26,18 +27,31 @@ public class TouchingNeighborCountMap extends AbstractCLIJ2Plugin implements CLI
 
     @Override
     public String getParameterHelpText() {
-        return "Image input, ByRef Image destination";
+        return "Image input, ByRef Image destination, Number min_distance, Number max_distance";
     }
 
     @Override
     public boolean executeCL() {
-        return touchingNeighborCountMap(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1]);
+        return proximalNeighborCountMap(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1], asFloat(args[2]), asFloat(args[3]));
     }
 
-    public static boolean touchingNeighborCountMap(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result) {
+    @Override
+    public Object[] getDefaultValues() {
+        return new Object[]{null, null, 0, Float.MAX_VALUE};
+    }
+
+    public static boolean proximalNeighborCountMap(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result, Float min_distance, Float max_distance) {
         int number_of_labels = (int)clij2.maximumOfAllPixels(pushed);
+        ClearCLBuffer pointlist = clij2.create(number_of_labels, pushed.getDimension());
+        clij2.centroidsOfLabels(pushed, pointlist);
+
+        ClearCLBuffer distance_matrix = clij2.create(number_of_labels + 1, number_of_labels + 1);
+        clij2.generateDistanceMatrix(pointlist,pointlist,distance_matrix);
+        pointlist.close();
+
         ClearCLBuffer touch_matrix = clij2.create(number_of_labels + 1, number_of_labels + 1);
-        clij2.generateTouchMatrix(pushed, touch_matrix);
+        GenerateProximalNeighborsMatrix.generateProximalNeighborsMatrix(clij2, distance_matrix, touch_matrix, min_distance, max_distance);
+        distance_matrix.close();
 
         ClearCLBuffer touch_count_vector = clij2.create(number_of_labels + 1, 1, 1);
         clij2.countTouchingNeighbors(touch_matrix, touch_count_vector);
@@ -60,7 +74,7 @@ public class TouchingNeighborCountMap extends AbstractCLIJ2Plugin implements CLI
 
     @Override
     public String getDescription() {
-        return "Takes a label map, determines which labels touch and replaces every label with the number of touching neighboring labels.\n\n";
+        return "Takes a label map, determines which labels are within a given distance range and replaces every label with the number of neighboring labels.\n\n";
     }
 
     @Override

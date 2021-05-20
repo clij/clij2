@@ -16,8 +16,6 @@ import net.haesleinhuepf.clij2.plugins.OnlyzeroOverwriteMaximumBox;
 import net.haesleinhuepf.clij2.plugins.StatisticsOfLabelledPixels;
 import net.haesleinhuepf.clij2.utilities.HasClassifiedInputOutput;
 import net.haesleinhuepf.clij2.utilities.IsCategorized;
-import net.haesleinhuepf.clijx.CLIJx;
-import net.haesleinhuepf.clijx.clij2wrappers.Clear;
 import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
@@ -83,25 +81,4 @@ public class EuclideanDistanceFromLabelCentroidMap extends AbstractCLIJ2Plugin i
         return "Label, Measurements";
     }
 
-    public static void main(String[] args) {
-        new ImageJ();
-
-        ImagePlus imp = IJ.openImage("src/test/resources/blobs.tif");
-
-        CLIJx clijx = CLIJx.getInstance();
-
-        ClearCLBuffer input = clijx.push(imp);
-        ClearCLBuffer binary = clijx.create(input);
-        ClearCLBuffer labels = clijx.create(input);
-        ClearCLBuffer edcm = clijx.create(input.getDimensions(), input.getNativeType());
-
-        clijx.thresholdOtsu(input, binary);
-        clijx.connectedComponentsLabelingBox(binary, labels);
-
-        euclideanDistanceFromLabelCentroidMap(clijx, labels, edcm);
-
-        clijx.show(edcm, "edcm");
-
-
-    }
 }
