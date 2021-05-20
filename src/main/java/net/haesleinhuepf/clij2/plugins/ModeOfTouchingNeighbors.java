@@ -12,7 +12,7 @@ import org.scijava.plugin.Plugin;
 
 import java.util.HashMap;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_modeOfTouchingNeighbors")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_modeOfTouchingNeighbors")
 public class ModeOfTouchingNeighbors extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation {
 
     @Override
