@@ -51,7 +51,7 @@ public class MaximumOfTouchingNeighbors extends AbstractCLIJ2Plugin implements C
         parameters.put("src_touch_matrix", touch_matrix);
         parameters.put("dst_values", dst_values);
 
-        // it is possible to use measurent vectors, which have one element less because they don't
+        // it is possible to use measurement vectors, which have one element less because they don't
         // contain a measurement for the background
         if (touch_matrix.getWidth() == src_values.getWidth() + 1) {
             parameters.put("x_correction", -1);

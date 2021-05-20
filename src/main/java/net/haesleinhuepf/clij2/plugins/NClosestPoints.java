@@ -32,21 +32,50 @@ public class NClosestPoints extends AbstractCLIJ2Plugin implements CLIJMacroPlug
     }
 
     public static boolean nClosestPoints(CLIJ2 clij2, ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination) {
-        //ClearCLBuffer temp = clij.create(new long[]{input.getWidth(), 1, input.getHeight()}, input.getNativeType());
+        boolean ignore_background = false;
+        boolean ignore_self = false;
+        return nClosestPoints(clij2, distance_matrix, indexlist_destination, ignore_background, ignore_self);
+    }
+
+    public static boolean nClosestPoints(CLIJ2 clij2, ClearCLBuffer distance_matrix, ClearCLBuffer indexlist_destination, boolean ignore_background, boolean ignore_self) {
+        ClearCLBuffer distance_matrix_internal = distance_matrix;
+        if (ignore_background) {
+            distance_matrix_internal = clij2.create(new long[]{distance_matrix.getWidth() - 1, distance_matrix.getHeight() - 1}, NativeTypeEnum.Float);
+            clij2.crop(distance_matrix, distance_matrix_internal, 1, 1);
+        }
+
+        if (ignore_self) {
+            if (!ignore_background) {
+                distance_matrix_internal = clij2.create(new long[]{distance_matrix.getWidth(), distance_matrix.getHeight()}, NativeTypeEnum.Float);
+                clij2.copy(distance_matrix, distance_matrix_internal);
+            }
+            clij2.setWhereXequalsY(distance_matrix, Float.MAX_VALUE);
+        }
 
         if (indexlist_destination.getHeight() > 1000) {
             System.out.println("Warning: NClosestPoints is limited to n=1000 for technical reasons.");
         }
 
         HashMap<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("src_distancematrix", distance_matrix);
+        parameters.put("src_distancematrix", distance_matrix_internal);
         parameters.put("dst_indexlist", indexlist_destination);
 
-        long[] globalSizes = new long[]{distance_matrix.getWidth(), 1, 1};
+        long[] globalSizes = new long[]{distance_matrix_internal.getWidth(), 1, 1};
         clij2.activateSizeIndependentKernelCompilation();
         clij2.execute(NClosestPoints.class, "n_shortest_points_x.cl", "find_n_closest_points", globalSizes, globalSizes, parameters);
 
-        //temp.close();
+        if (distance_matrix_internal != distance_matrix) {
+            distance_matrix_internal.close();
+        }
+
+        if (ignore_background) {
+            ClearCLBuffer temp = clij2.create(indexlist_destination);
+            clij2.copy(indexlist_destination, temp);
+            clij2.addImageAndScalar(temp, indexlist_destination, 1);
+            temp.close();
+        }
+
+            //temp.close();
         return true;
     }
 
