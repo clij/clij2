@@ -21,7 +21,7 @@ import java.util.HashMap;
  * Author: @ruthhwj, @haesleinhuepf
  *         November 2020
  */
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_tenengradSliceBySlice")
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_tenengradSliceBySlice")
 public class TenengradSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, HasAuthor, IsCategorized, HasClassifiedInputOutput {
     @Override
     public String getInputType() {
@@ -75,6 +75,6 @@ public class TenengradSliceBySlice extends AbstractCLIJ2Plugin implements CLIJMa
 
     @Override
     public String getAuthorName() {
-        return "Robert Haase";
+        return "Robert Haase based on Work by Uwe Schmidt";
     }
 }

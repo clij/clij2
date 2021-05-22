@@ -75,6 +75,6 @@ public class Tenengrad extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getAuthorName() {
-        return "Robert Haase";
+        return "Robert Haase based on Work by Uwe Schmidt";
     }
 }
