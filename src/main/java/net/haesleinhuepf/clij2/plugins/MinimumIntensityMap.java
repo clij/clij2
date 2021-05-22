@@ -67,7 +67,7 @@ public class MinimumIntensityMap extends AbstractCLIJ2Plugin implements CLIJMacr
 
     @Override
     public String getDescription() {
-        return "Takes an image and a corresponding label map, determines the mean intensity per label and replaces every label with the that number.\n\nThis results in a parametric image expressing mean object intensity.";
+        return "Takes an image and a corresponding label map, determines the minimum intensity per label and replaces every label with the that number.\n\nThis results in a parametric image expressing mean object intensity.";
     }
 
     @Override

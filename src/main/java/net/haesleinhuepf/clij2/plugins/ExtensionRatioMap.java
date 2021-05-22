@@ -67,7 +67,8 @@ public class ExtensionRatioMap extends AbstractCLIJ2Plugin implements CLIJMacroP
 
     @Override
     public String getDescription() {
-        return "Takes a label map, determines for every label the maximum distance of any pixel to the centroid and replaces every label with the that number.\n\n";
+        return "Takes a label map, determines for every label the extension ratio and replaces every label with the that number.\n\n" +
+                "The extension ratio is the maximum distance of any pixel in the label to the label centroid divided by the average distance of all pixels in the label to the centroid.";
     }
 
     @Override
