@@ -13,8 +13,8 @@ import net.haesleinhuepf.clij2.utilities.HasClassifiedInputOutput;
 import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_labelPixelCountMap")
-public class LabelPixelCountMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized, HasClassifiedInputOutput {
+@Plugin(type = CLIJMacroPlugin.class, name = "CLIJ2_meanExtensionMap")
+public class MeanExtensionMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized, HasClassifiedInputOutput {
     @Override
     public String getInputType() {
         return "Label Image";
@@ -25,7 +25,6 @@ public class LabelPixelCountMap extends AbstractCLIJ2Plugin implements CLIJMacro
         return "Image";
     }
 
-
     @Override
     public String getParameterHelpText() {
         return "Image input, ByRef Image destination";
@@ -33,17 +32,22 @@ public class LabelPixelCountMap extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public boolean executeCL() {
-        return labelPixelCountMap(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1]);
+        return labelMeanExtensionMap(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1]);
     }
 
-    public static boolean labelPixelCountMap(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result) {
+    @Deprecated
+    public static boolean labelMeanExtensionMap(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result) {
+        return meanExtensionMap(clij2, pushed, result);
+    }
+
+    public static boolean meanExtensionMap(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result) {
         int number_of_labels = (int)clij2.maximumOfAllPixels(pushed);
         ClearCLBuffer size_array = clij2.create(number_of_labels + 1,1, 1);
 
         ResultsTable table = new ResultsTable();
         clij2.statisticsOfBackgroundAndLabelledPixels(pushed, pushed, table);
 
-        clij2.pushResultsTableColumn(size_array, table, StatisticsOfLabelledPixels.STATISTICS_ENTRY.PIXEL_COUNT.toString());
+        clij2.pushResultsTableColumn(size_array, table, StatisticsOfLabelledPixels.STATISTICS_ENTRY.MEAN_DISTANCE_TO_CENTROID.toString());
 
         // ignore background measurement
         clij2.setColumn(size_array, 0, 0);
@@ -62,7 +66,7 @@ public class LabelPixelCountMap extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getDescription() {
-        return "Takes a label map, determines the number of pixels per label and replaces every label with the that number.\n\nThis results in a parametric image expressing area or volume.";
+        return "Takes a label map, determines for every label the mean distance of any pixel to the centroid and replaces every label with the that number.\n\n";
     }
 
     @Override
