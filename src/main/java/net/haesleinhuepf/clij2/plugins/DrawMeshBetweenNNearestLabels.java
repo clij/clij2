@@ -33,10 +33,6 @@ public class DrawMeshBetweenNNearestLabels extends AbstractCLIJ2Plugin implement
         return drawMeshBetweenNNearestLabels(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1], asInteger(args[2]));
     }
 
-    @Deprecated
-    public static boolean drawMeshBetweenNClosestLabels(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result, Integer number_of_closest_labels) {
-        return drawMeshBetweenNNearestLabels(clij2, pushed, result, number_of_closest_labels);
-    }
     public static boolean drawMeshBetweenNNearestLabels(CLIJ2 clij2, ClearCLBuffer pushed, ClearCLBuffer result, Integer number_of_closest_labels) {
         int number_of_labels = (int)clij2.maximumOfAllPixels(pushed);
         //System.out.println("Labels count " + number_of_labels);
