@@ -33,7 +33,7 @@ public class PixelCountMap extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
 
     @Override
     public boolean executeCL() {
-        return labelPixelCountMap(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1]);
+        return pixelCountMap(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1]);
     }
 
     @Deprecated
