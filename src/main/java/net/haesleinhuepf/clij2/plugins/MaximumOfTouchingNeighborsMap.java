@@ -51,7 +51,7 @@ public class MaximumOfTouchingNeighborsMap extends AbstractCLIJ2Plugin implement
 
     public static boolean maximumOfTouchingNeighborsMap(CLIJ2 clij2, ClearCLBuffer parametric_map, ClearCLBuffer label_map, ClearCLBuffer parametric_map_destination, Integer radius, Boolean ignore_touching_background) {
 
-        if (radius == 0) {
+        if (radius < 1) {
             clij2.copy(parametric_map, parametric_map_destination);
             return true;
         }
