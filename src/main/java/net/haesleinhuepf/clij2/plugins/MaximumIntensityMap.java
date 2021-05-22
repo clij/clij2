@@ -36,6 +36,7 @@ public class MaximumIntensityMap extends AbstractCLIJ2Plugin implements CLIJMacr
         return labelMaximumIntensityMap(getCLIJ2(), (ClearCLBuffer) args[0], (ClearCLBuffer) args[1], (ClearCLBuffer) args[2]);
     }
 
+    @Deprecated
     public static boolean labelMaximumIntensityMap(CLIJ2 clij2, ClearCLBuffer intensity_image, ClearCLBuffer label_map, ClearCLBuffer result) {
         return maximumIntensityMap(clij2, intensity_image, label_map, result);
     }
