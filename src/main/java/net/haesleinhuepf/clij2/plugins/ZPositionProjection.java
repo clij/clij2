@@ -64,7 +64,7 @@ public class ZPositionProjection extends AbstractCLIJ2Plugin implements CLIJMacr
     @Override
     public String getDescription() {
         return "Project a defined Z-slice of a 3D stack into a 2D image.\n\n" +
-                "The slice is determined using a separate 2D image.";
+                "Which Z-slice is defined as the z_position image, which represents an altitude map.";
     }
 
     @Override

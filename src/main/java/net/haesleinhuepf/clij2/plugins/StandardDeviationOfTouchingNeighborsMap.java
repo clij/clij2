@@ -95,7 +95,7 @@ public class StandardDeviationOfTouchingNeighborsMap extends AbstractCLIJ2Plugin
     @Override
     public String getDescription() {
         return "Takes a label image and a parametric intensity image and will replace each labels value in the parametric image\n" +
-                "by the standard deviation value of neighboring labels. The radius of the neighborhood can be configured:\n" +
+                "by the standard deviation value of touching neighbor labels. The radius of the neighborhood can be configured:\n" +
                 "* radius 0: Nothing is replaced\n" +
                 "* radius 1: direct neighbors are taken into account\n" +
                 "* radius 2: neighbors and neighbors or neighbors are taken into account\n" +

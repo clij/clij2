@@ -65,7 +65,11 @@ public class VoronoiOtsuLabeling extends AbstractCLIJ2Plugin implements CLIJMacr
 
     @Override
     public String getDescription() {
-        return "Applies two Gaussian blurs, spot detection, Otsu-thresholding and Voronoi-labeling.\n" +
+        return "Labeles objects directly from grey-value images.\n\n" +
+                "The two sigma parameters allow tuning the segmentation result. " +
+                "The first sigma controls how close detected cells can be (spot_sigma) and the second controls how " +
+                "precise segmented objects are outlined (outline_sigma)." +
+                "Under the hood, this filter applies two Gaussian blurs, spot detection, Otsu-thresholding and Voronoi-labeling.\n" +
                 "The thresholded binary image is flooded using the Voronoi approach starting from the found local maxima.\n" +
                 "Noise-removal sigma for spot detection and thresholding can be configured separately.";
     }

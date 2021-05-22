@@ -60,7 +60,7 @@ public class TouchingNeighborCountMap extends AbstractCLIJ2Plugin implements CLI
 
     @Override
     public String getDescription() {
-        return "Takes a label map, determines which labels touch and replaces every label with the number of touching neighboring labels.\n\n";
+        return "Takes a label map, determines which labels touch and replaces every label with the number of touching neighbor labels.\n\n";
     }
 
     @Override

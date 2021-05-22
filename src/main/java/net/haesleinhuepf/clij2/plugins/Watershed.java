@@ -226,7 +226,9 @@ public class Watershed extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, C
 
     @Override
     public String getDescription() {
-        return "Apply a binary watershed to a binary image and introduces black pixels between objects.";
+        return "Apply a binary watershed to a binary image and introduces black pixels between objects.\n\n" +
+                "Note: This parallel GPU-accelerated approach delivers results of limited quality." +
+                "See the web for alternatives: https://github.com/clij/clij2/issues/18";
     }
 
     @Override

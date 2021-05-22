@@ -80,8 +80,9 @@ public class TouchingNeighborDistanceRangeRatioMap extends AbstractCLIJ2Plugin i
 
     @Override
     public String getDescription() {
-        return "Takes a label map, determines which labels touch and replaces every label with the minimum distance to their neighboring labels.\n\n" +
-                "To determine the distances, the centroid of the labels is determined internally.";
+        return "Takes a label map, determines which labels touch and replaces every label with the distance range ratio " +
+                "(maximum distance divided by minimum distance) to their neighboring labels.\n\n" +
+                "To determine the distances, the centroids of the labels is determined internally.";
     }
 
     @Override

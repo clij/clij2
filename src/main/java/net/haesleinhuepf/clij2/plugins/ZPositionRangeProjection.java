@@ -72,7 +72,8 @@ public class ZPositionRangeProjection extends AbstractCLIJ2Plugin implements CLI
     @Override
     public String getDescription() {
         return "Project multiple Z-slices of a 3D stack into a new 3D stack.\n\n" +
-                "The slices are defined using a separate 2D image containing z-positions and two numbers defining the range.";
+                "Which Z-slice is defined as the z_position image, which represents an altitude map. " +
+                "The two additional numbers define the range relative to the given z-position.";
     }
 
     @Override
