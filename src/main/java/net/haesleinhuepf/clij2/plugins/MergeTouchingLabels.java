@@ -117,34 +117,6 @@ public class MergeTouchingLabels extends AbstractCLIJ2Plugin implements CLIJMacr
         return "2D, 3D";
     }
 
-    public static void main(String ... args) {
-        new ImageJ();
-
-
-        CLIJ2 clij2 = CLIJ2.getInstance("HD");
-        System.out.println(clij2.getGPUName());
-
-        ClearCLBuffer input = clij2.pushString("" +
-                "1 1 0 2 0 3 0 0 0 0\n" +
-                "1 1 2 2 0 3 0 0 4 5\n" +
-                "1 0 0 2 0 0 0 0 4 5\n" +
-                "7 7 7 7 7 7 7 7 7 6"
-        );
-
-        ClearCLBuffer output = clij2.create(input);
-
-
-        mergeTouchingLabels(clij2, input, output);
-
-        clij2.print(output);
-
-        input.close();
-        output.close();
-
-        System.out.println(clij2.reportMemory());
-    }
-
-
     @Override
     public String getCategories() {
         return "Label, Filter";
