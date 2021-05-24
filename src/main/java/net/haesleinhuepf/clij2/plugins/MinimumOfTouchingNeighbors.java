@@ -59,10 +59,10 @@ public class MinimumOfTouchingNeighbors extends AbstractCLIJ2Plugin implements C
         // contain a measurement for the background
         if (touch_matrix.getWidth() == src_values.getWidth() + 1) {
             parameters.put("x_correction", -1);
-            System.out.println("cooorrr -1");
+            //System.out.println("cooorrr -1");
         } else {
             parameters.put("x_correction", 0);
-            System.out.println("cooorrr 0");
+            //System.out.println("cooorrr 0");
         }
 
         long[] globalSizes = new long[]{src_values.getWidth()};
