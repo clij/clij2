@@ -34,10 +34,18 @@ public class GenerateNNearestNeighborsMatrix extends AbstractCLIJ2Plugin impleme
     }
 
     public static boolean generateNNearestNeighborsMatrix(CLIJ2 clij2, ClearCLBuffer distance_matrix, ClearCLBuffer touch_matrix_destination, Integer n) {
-        if (n < 1) {
-            System.out.println("Warning: generateNNearestNeighborsMatrix with n < 1 doesn't make much sense. N is set to 1.");
-            n = 1;
+        if (n < 0) {
+            System.out.println("Warning: generateNNearestNeighborsMatrix with n < 0 doesn't make much sense. N is set to 0.");
+            n = 0;
         }
+
+        if (n == 0) {
+            System.out.println("Warning: generateNNearestNeighborsMatrix n == 0 means only objects are neighbors of themselves.");
+            clij2.set(touch_matrix_destination, 0);
+            clij2.setWhereXequalsY(touch_matrix_destination, 1);
+            return true;
+        }
+
         ClearCLBuffer index_list = clij2.create(new long[]{distance_matrix.getWidth(), n});
         clij2.setRow(distance_matrix, 0, Float.MAX_VALUE);
         clij2.setColumn(distance_matrix, 0, Float.MAX_VALUE);
