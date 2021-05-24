@@ -39,12 +39,13 @@ public class TouchingNeighborCountMap extends AbstractCLIJ2Plugin implements CLI
         ClearCLBuffer touch_matrix = clij2.create(number_of_labels + 1, number_of_labels + 1);
         clij2.generateTouchMatrix(pushed, touch_matrix);
 
+        // ignore measurement for background
+        clij2.setColumn(touch_matrix, 0, 0);
+
         ClearCLBuffer touch_count_vector = clij2.create(number_of_labels + 1, 1, 1);
         clij2.countTouchingNeighbors(touch_matrix, touch_count_vector);
         touch_matrix.close();
 
-        // ignore measurement for background
-        clij2.setColumn(touch_count_vector, 0, 0);
 
         clij2.replaceIntensities(pushed, touch_count_vector, result);
         touch_count_vector.close();
