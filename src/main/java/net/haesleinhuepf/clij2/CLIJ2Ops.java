@@ -401,6 +401,7 @@ import net.haesleinhuepf.clij2.plugins.MaximumTouchingNeighborDistanceMap;
 import net.haesleinhuepf.clij2.plugins.MinimumTouchingNeighborDistanceMap;
 import net.haesleinhuepf.clij2.plugins.TouchingNeighborDistanceRangeRatioMap;
 import net.haesleinhuepf.clij2.plugins.VoronoiOtsuLabeling;
+import net.haesleinhuepf.clij2.plugins.VisualizeOutlinesOnOriginal;
 import net.haesleinhuepf.clij2.plugins.MaskedVoronoiLabeling;
 import net.haesleinhuepf.clij2.plugins.PullToResultsTableColumn;
 import net.haesleinhuepf.clij2.plugins.ModeOfTouchingNeighbors;
@@ -7103,6 +7104,16 @@ public abstract interface CLIJ2Ops {
         return result;
     }
 
+    /**
+     * Converts a touch matrix in an adjacency matrix
+     */
+    default boolean touchMatrixToAdjacencyMatrix(ClearCLBuffer arg1, ClearCLBuffer arg2, boolean arg3) {
+        if (doTimeTracing()) {recordMethodStart("TouchMatrixToAdjacencyMatrix");}
+        boolean result = TouchMatrixToAdjacencyMatrix.touchMatrixToAdjacencyMatrix(getCLIJ2(), arg1, arg2, arg3);
+        if (doTimeTracing()) {recordMethodEnd("TouchMatrixToAdjacencyMatrix");}
+        return result;
+    }
+
 
     // net.haesleinhuepf.clij2.plugins.AdjacencyMatrixToTouchMatrix
     //----------------------------------------------------
@@ -7931,13 +7942,15 @@ public abstract interface CLIJ2Ops {
     // net.haesleinhuepf.clij2.plugins.MinimumIntensityMap
     //----------------------------------------------------
     /**
+     * Takes an image and a corresponding label map, determines the minimum intensity per label and replaces every label with the that number.
      * 
+     * This results in a parametric image expressing mean object intensity.
      */
     @Deprecated
-    default boolean labelMinimumIntensityMap(ClearCLBuffer arg1, ClearCLBuffer arg2, ClearCLBuffer arg3) {
+    default boolean labelMinimumIntensityMap(ClearCLBuffer intensity_image, ClearCLBuffer label_map, ClearCLBuffer destination) {
         System.out.println("labelMinimumIntensityMap is deprecated. Check the documentation for a replacement. https://clij.github.io/clij2-doccs/reference");
         if (doTimeTracing()) {recordMethodStart("MinimumIntensityMap");}
-        boolean result = MinimumIntensityMap.labelMinimumIntensityMap(getCLIJ2(), arg1, arg2, arg3);
+        boolean result = MinimumIntensityMap.labelMinimumIntensityMap(getCLIJ2(), intensity_image, label_map, destination);
         if (doTimeTracing()) {recordMethodEnd("MinimumIntensityMap");}
         return result;
     }
@@ -8534,6 +8547,19 @@ public abstract interface CLIJ2Ops {
         if (doTimeTracing()) {recordMethodStart("VoronoiOtsuLabeling");}
         boolean result = VoronoiOtsuLabeling.voronoiOtsuLabeling(getCLIJ2(), arg1, arg2, new Double (arg3).floatValue(), new Double (arg4).floatValue());
         if (doTimeTracing()) {recordMethodEnd("VoronoiOtsuLabeling");}
+        return result;
+    }
+
+
+    // net.haesleinhuepf.clij2.plugins.VisualizeOutlinesOnOriginal
+    //----------------------------------------------------
+    /**
+     * Combines an intensity image and a label (or binary) image so that you can see segmentation outlines on the intensity image.
+     */
+    default boolean visualizeOutlinesOnOriginal(ClearCLBuffer intensity, ClearCLBuffer labels, ClearCLBuffer destination) {
+        if (doTimeTracing()) {recordMethodStart("VisualizeOutlinesOnOriginal");}
+        boolean result = VisualizeOutlinesOnOriginal.visualizeOutlinesOnOriginal(getCLIJ2(), intensity, labels, destination);
+        if (doTimeTracing()) {recordMethodEnd("VisualizeOutlinesOnOriginal");}
         return result;
     }
 
@@ -9386,4 +9412,4 @@ public abstract interface CLIJ2Ops {
     }
 
 }
-// 532 methods generated.
+// 534 methods generated.
