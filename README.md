@@ -210,6 +210,7 @@ supercomputing center-path to exascale project,
 project number CZ.02.1.01/0.0/0.0/16_013/0001791
 within the Operational Programme Research, Development
 and Education.
+We also acknowledge the support by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) under Germany’s Excellence Strategy – EXC2068 - Cluster of Excellence Physics of Life of TU Dresden.
 
 [Imprint](https://clij.github.io/imprint)
   
