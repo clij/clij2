@@ -103,7 +103,7 @@ public class LabelVoronoiOctagon extends AbstractCLIJ2Plugin implements CLIJMacr
 
     @Override
     public String getDescription() {
-        return "Takes a labelled image and dilates the labels using a octagon shape until they touch. \n\nThe pixels where " +
+        return "Takes a labeled image and dilates the labels using a octagon shape until they touch. \n\nThe pixels where " +
                 " the regions touched are afterwards returned as binary image which corresponds to the Voronoi diagram.";
     }
 

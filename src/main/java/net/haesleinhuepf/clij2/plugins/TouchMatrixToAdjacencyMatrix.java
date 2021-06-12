@@ -50,10 +50,16 @@ public class TouchMatrixToAdjacencyMatrix extends AbstractCLIJ2Plugin implements
     }
 
     public static boolean touchMatrixToAdjacencyMatrix(CLIJ2 clij2, ClearCLBuffer touch_matrix, ClearCLBuffer adjacency_matrix) {
+        return touchMatrixToAdjacencyMatrix(clij2, touch_matrix, adjacency_matrix, false);
+    }
+
+    public static boolean touchMatrixToAdjacencyMatrix(CLIJ2 clij2, ClearCLBuffer touch_matrix, ClearCLBuffer adjacency_matrix, boolean self_adjacent) {
         ClearCLBuffer temp = clij2.create(touch_matrix);
         clij2.transposeXY(touch_matrix, temp);
         clij2.addImages(temp, touch_matrix, adjacency_matrix);
-
+        if (self_adjacent) {
+            clij2.setWhereXequalsY(adjacency_matrix, 1);
+        }
         temp.close();
 
         return true;

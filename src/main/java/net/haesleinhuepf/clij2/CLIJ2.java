@@ -362,6 +362,16 @@ public class CLIJ2 implements CLIJ2Ops {
         return result;
     }
 
+    public ClearCLBuffer create_like(ClearCLBuffer buffer) {
+        ClearCLBuffer result = create(buffer.getDimensions(),  buffer.getNativeType());
+        return result;
+    }
+
+    public ClearCLImage create_like(ClearCLImage image) {
+        ClearCLImage result = clij.create(image.getDimensions(), image.getChannelDataType());
+        return result;
+    }
+
     public ClearCLBuffer create(long dimensionX, long dimensionY, long dimensionZ) {
         return create(new long[]{dimensionX, dimensionY, dimensionZ}, NativeTypeEnum.Float);
     }
