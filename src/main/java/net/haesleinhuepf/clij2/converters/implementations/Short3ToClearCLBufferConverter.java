@@ -7,7 +7,7 @@ import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij2.converters.helptypes.Short3;
 import org.scijava.plugin.Plugin;
 
-import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 
 @Plugin(type = CLIJConverterPlugin.class)
 public class Short3ToClearCLBufferConverter extends AbstractCLIJConverter<Short3, ClearCLBuffer> {

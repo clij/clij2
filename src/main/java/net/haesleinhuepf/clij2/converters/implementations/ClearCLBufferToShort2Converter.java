@@ -19,7 +19,7 @@ public class ClearCLBufferToShort2Converter extends AbstractCLIJConverter<ClearC
         Short2 target = new Short2(new short[(int)source.getWidth()][(int)source.getHeight()]);
         short[] array = new short[(int)(source.getWidth() * source.getHeight())];
 
-        IntBuffer buffer = IntBuffer.wrap(array);
+        ShortBuffer buffer = ShortBuffer.wrap(array);
         source.writeTo(buffer, true);
 
         int count = 0;
