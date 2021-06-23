@@ -371,6 +371,18 @@ public class CLIJ2 implements CLIJ2Ops {
                 throw new IllegalArgumentException("Conversion of " + buffer +
                         " / " + buffer.getClass().getName() + " not supported");
             }
+            
+        } else if (input.getNativeType() == UnsignedInt) {
+            if (buffer.getDimension() == 1 || (buffer.getHeight() == 1 && buffer.getDepth() == 1)) {
+                result = new ClearCLBufferToInteger2Converter().convert(buffer).data[1];
+            } else if (buffer.getDimension() == 2 || (buffer.getDepth() == 1)) {
+                result = new ClearCLBufferToInteger2Converter().convert(buffer).data;
+            } else if (buffer.getDimension() == 3) {
+                result = new ClearCLBufferToInteger3Converter().convert(buffer).data;
+            } else {
+                throw new IllegalArgumentException("Conversion of " + buffer +
+                        " / " + buffer.getClass().getName() + " not supported");
+            }
 
         } else if (input.getNativeType() == UnsignedByte) {
             if (buffer.getDimension() == 1 || (buffer.getHeight() == 1 && buffer.getDepth() == 1)) {
