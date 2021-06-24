@@ -372,7 +372,7 @@ public class CLIJ2 implements CLIJ2Ops {
                         " / " + buffer.getClass().getName() + " not supported");
             }
             
-        } else if (input.getNativeType() == UnsignedInt) {
+        } else if (input.getNativeType() == NativeTypeEnum.UnsignedInt) {
             if (buffer.getDimension() == 1 || (buffer.getHeight() == 1 && buffer.getDepth() == 1)) {
                 result = new ClearCLBufferToInteger2Converter().convert(buffer).data[1];
             } else if (buffer.getDimension() == 2 || (buffer.getDepth() == 1)) {
