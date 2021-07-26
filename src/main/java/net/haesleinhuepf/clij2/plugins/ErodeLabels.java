@@ -84,7 +84,7 @@ public class ErodeLabels extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
                 clij2.copy(temp, labels_destination);
             }
             clij2.notEqualConstant(labels_destination, temp, 0);
-            clij2.connectedComponentsLabelingBox(temp, labels_destination);
+            clij2.connectedComponentsLabelingDiamond(temp, labels_destination);
         } else {
             if (radius % 2 != 0) {
                 clij2.copy(labels_destination, temp);
