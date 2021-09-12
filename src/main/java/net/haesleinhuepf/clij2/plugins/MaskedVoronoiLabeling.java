@@ -48,9 +48,9 @@ public class MaskedVoronoiLabeling extends AbstractCLIJ2Plugin implements CLIJMa
     public static boolean maskedVoronoiLabeling(CLIJ2 clij2, ClearCLBuffer src, ClearCLBuffer mask, ClearCLImageInterface dst) {
         //CLIJx.getInstance().stopWatch("");
 
-        ClearCLImage flip = clij2.create(dst.getDimensions(), ImageChannelDataType.Float);
-        ClearCLImage flop = clij2.create(flip);
-        ClearCLImage flup = clij2.create(flip);
+        ClearCLBuffer flip = clij2.create(dst.getDimensions(), NativeTypeEnum.Float);
+        ClearCLBuffer flop = clij2.create(flip);
+        ClearCLBuffer flup = clij2.create(flip);
         clij2.addImageAndScalar(mask, flup, -1);
         //CLIJx.getInstance().stopWatch("alloc");
 
