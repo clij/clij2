@@ -86,24 +86,24 @@ If you search for support, please open a thread on the [image.sc](https://image.
   * [CLIJ2 plugin template](https://github.com/clij/clij2-plugin-template)
 
 ### Filtering images
-* [Image filtering using the assitant](https://clij.github.io/assistant/filtering)
-* [Gamma correction using the assitant](https://clij.github.io/assistant/gamma_correction)
+* [Image filtering using the assistant](https://clij.github.io/assistant/filtering)
+* [Gamma correction using the assistant](https://clij.github.io/assistant/gamma_correction)
 * [Gaussian blur](https://clij.github.io/clij2-docs/md/blur/)
 * [Drosophila embryo cell counting](https://clij.github.io/clij2-docs/md/drosophila_max_cylinder_projection/)
 
 ### Transforming images
-* [Crop, Pan & zoom using the assitant](https://clij.github.io/assistant/crop_pan_zoom)
-* [Cylinder projection using the assitant](https://clij.github.io/assistant/cylinder_projection)
-* [Sphere projection using the assitant](https://clij.github.io/assistant/sphere_projection)
+* [Crop, Pan & zoom using the assistant](https://clij.github.io/assistant/crop_pan_zoom)
+* [Cylinder projection using the assistant](https://clij.github.io/assistant/cylinder_projection)
+* [Sphere projection using the assistant](https://clij.github.io/assistant/sphere_projection)
 * [Crop and paste images](https://clij.github.io/clij2-docs/md/crop_and_paste/)
 * [Maximum projections](https://clij.github.io/clij2-docs/md/maximumProjection/)
 * [Warp images](https://clij.github.io/clij2-docs/md/applyVectorFieldMD/)
 
 ### Segmentation and labelling
 * [Spot detection](https://clij.github.io/clij2-docs/md/spot_detection/)
-* [Nuclei segmentation using the assitant](https://clij.github.io/assistant/segmentation_nuclei)
-* [Cell segmentation based on membranes using the assitant](https://clij.github.io/assistant/segmentation_cells)
-* [Optimize parameters for binarization using the assitant](https://clij.github.io/assistant/parameter_optimization)
+* [Nuclei segmentation using the assistant](https://clij.github.io/assistant/segmentation_nuclei)
+* [Cell segmentation based on membranes using the assistant](https://clij.github.io/assistant/segmentation_cells)
+* [Optimize parameters for binarization using the assistant](https://clij.github.io/assistant/parameter_optimization)
 * [Labeling](https://clij.github.io/clij2-docs/md/labeling/)
 * [3D Image Segmentation](https://clij.github.io/clij2-docs/md/image_segmentation_3d/)
 * [Binary images](https://clij.github.io/clij2-docs/md/binary_processing/)
