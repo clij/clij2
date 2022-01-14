@@ -63,7 +63,7 @@ public class SumYProjection extends AbstractCLIJ2Plugin implements CLIJMacroPlug
 
     @Override
     public String getDescription() {
-        return "Determines the sum intensity projection of an image along Z.";
+        return "Determines the sum intensity projection of an image along Y.";
     }
 
     @Override

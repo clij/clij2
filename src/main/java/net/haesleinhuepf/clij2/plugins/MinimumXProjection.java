@@ -63,7 +63,7 @@ public class MinimumXProjection extends AbstractCLIJ2Plugin implements CLIJMacro
 
     @Override
     public String getDescription() {
-        return "Determines the minimum intensity projection of an image along Y.";
+        return "Determines the minimum intensity projection of an image along X.";
     }
 
     @Override
