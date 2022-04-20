@@ -37,7 +37,7 @@ public class MeanOfMaskedPixels extends AbstractCLIJ2Plugin implements CLIJMacro
         ClearCLBuffer tempBinary = clij2.create(clImage);
         // todo: if we can be sure that the mask has really only 0 and 1 pixel values, we can skip this first step:
         ClearCLBuffer tempMultiplied = clij2.create(clImage);
-        EqualConstant.equalConstant(clij2, mask, tempBinary, 1f);
+        NotEqualConstant.notEqualConstant(clij2, mask, tempBinary, 0f);
         clij2.mask(clImage, tempBinary, tempMultiplied);
         double sum = clij2.sumPixels(tempMultiplied);
         double count = clij2.sumPixels(tempBinary);
