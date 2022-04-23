@@ -43,27 +43,33 @@ public class BoundingBox extends AbstractCLIJ2Plugin implements CLIJMacroPlugin,
 
         ClearCLBuffer temp1 = clij2.create(buffer.getDimensions(), clij2.Float);
 
+        // turns any image into a 0 1 binary
+        clij2.greaterOrEqualConstant(buffer, temp1, 1f);
+
+        ClearCLBuffer temp2 = clij2.create(buffer.getDimensions(), clij2.Float);
+
         // X
-        clij2.multiplyImageAndCoordinate(buffer, temp1, 0);
-        double maxX = clij2.maximumOfAllPixels(temp1);
-        double minX = MinimumOfMaskedPixels.minimumOfMaskedPixels(clij2, temp1, buffer);
+        clij2.multiplyImageAndCoordinate(temp1, temp2, 0);
+        double maxX = clij2.maximumOfAllPixels(temp2);
+        double minX = MinimumOfMaskedPixels.minimumOfMaskedPixels(clij2, temp2, buffer);
 
         // y
-        clij2.multiplyImageAndCoordinate(buffer, temp1, 1);
-        double maxY = clij2.maximumOfAllPixels(temp1);
-        double minY = MinimumOfMaskedPixels.minimumOfMaskedPixels(clij2, temp1, buffer);
+        clij2.multiplyImageAndCoordinate(temp1, temp2, 1);
+        double maxY = clij2.maximumOfAllPixels(temp2);
+        double minY = MinimumOfMaskedPixels.minimumOfMaskedPixels(clij2, temp2, buffer);
 
         if (buffer.getDimension() > 2) {
             // z
-            clij2.multiplyImageAndCoordinate(buffer, temp1, 2);
-            double maxZ = clij2.maximumOfAllPixels(temp1);
-            double minZ = MinimumOfMaskedPixels.minimumOfMaskedPixels(clij2, temp1, buffer);
+            clij2.multiplyImageAndCoordinate(temp1, temp2, 2);
+            double maxZ = clij2.maximumOfAllPixels(temp2);
+            double minZ = MinimumOfMaskedPixels.minimumOfMaskedPixels(clij2, temp2, buffer);
 
             result = new double[]{minX, minY, minZ, maxX - minX + 1, maxY - minY + 1, maxZ - minZ + 1};
         } else {
             result = new double[]{minX, minY, 0, maxX - minX + 1, maxY - minY + 1, 0};
         }
         clij2.release(temp1);
+        clij2.release(temp2);
         return  result;
     }
 
