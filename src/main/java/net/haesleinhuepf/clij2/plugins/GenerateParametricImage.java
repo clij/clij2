@@ -38,7 +38,7 @@ public class GenerateParametricImage extends AbstractCLIJ2Plugin implements CLIJ
     }
 
     public static boolean generateParametricImage(CLIJ2 clij2, ClearCLImageInterface label_map, ClearCLImageInterface parameter_value_vector,  ClearCLImageInterface parametric_image_destination) {
-       clij2.replaceIntensities(parameter_value_vector, label_map, parametric_image_destination);
+       clij2.replaceIntensities(label_map, parameter_value_vector, parametric_image_destination);
        return true;
     }
 
