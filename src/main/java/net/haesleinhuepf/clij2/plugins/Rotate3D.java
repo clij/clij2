@@ -44,9 +44,9 @@ public class Rotate3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public boolean executeCL() {
-        float angleX = (float)(-asFloat(args[2]) / 180.0f * Math.PI);
-        float angleY = (float)(-asFloat(args[3]) / 180.0f * Math.PI);
-        float angleZ = (float)(-asFloat(args[4]) / 180.0f * Math.PI);
+        float angleX = asFloat(args[2]);
+        float angleY = asFloat(args[3]);
+        float angleZ = asFloat(args[4]);
         boolean rotateAroundCenter = asBoolean(args[5]);
 
 
@@ -58,15 +58,20 @@ public class Rotate3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
     }
 
 
-    public static boolean rotate3D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float angleX, Float angleY, Float angleZ, Boolean rotateAroundCenter) {
+    public static boolean rotate3D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float angle_x_in_degrees, Float angle_y_in_degrees, Float angle_z_in_degrees, Boolean rotateAroundCenter) {
+
+        angle_x_in_degrees = (float)(-asFloat(angle_x_in_degrees) / 180.0f * Math.PI);
+        angle_y_in_degrees = (float)(-asFloat(angle_y_in_degrees) / 180.0f * Math.PI);
+        angle_z_in_degrees = (float)(-asFloat(angle_z_in_degrees) / 180.0f * Math.PI);
+
         AffineTransform3D at = new AffineTransform3D();
 
         if (rotateAroundCenter) {
             at.translate(-input.getWidth() / 2, -input.getHeight() / 2, -input.getDepth() / 2);
         }
-        at.rotate(0, angleX);
-        at.rotate(1, angleY);
-        at.rotate(2, angleZ);
+        at.rotate(0, angle_x_in_degrees);
+        at.rotate(1, angle_y_in_degrees);
+        at.rotate(2, angle_z_in_degrees);
         if (rotateAroundCenter) {
             at.translate(input.getWidth() / 2, input.getHeight() / 2, input.getDepth() / 2);
         }
@@ -80,18 +85,11 @@ public class Rotate3D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
             clij2.release(image);
             return true;
         }
-        /*
-        Rotate3D rotate3D = new Rotate3D();
-        rotate3D.setClij(clij2.getClij());
-        rotate3D.setArgs(new Object[]{input, output, angleX, angleY, angleZ, rotateAroundCenter});
-        return rotate3D.executeCL();
-
-         */
     }
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination, Number angleX, Number angleY, Number angleZ, Boolean rotateAroundCenter";
+        return "Image source, ByRef Image destination, Number angle_x_in_degrees, Number angle_y_in_degrees, Number angle_z_in_degrees, Boolean rotateAroundCenter";
     }
 
     @Override

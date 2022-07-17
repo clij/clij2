@@ -44,7 +44,7 @@ public class Rotate2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public boolean executeCL() {
-        float angle = (float)(-asFloat(args[2]) / 180.0f * Math.PI);
+        float angle = asFloat(args[2]);
         boolean rotateAroundCenter = asBoolean(args[3]);
 
 
@@ -54,15 +54,17 @@ public class Rotate2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
         return getCLIJ2().rotate2D(input, output, angle, rotateAroundCenter);
     }
 
-    public static boolean rotate2D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float angle, Boolean rotateAroundCenter) {
+    public static boolean rotate2D(CLIJ2 clij2, ClearCLBuffer input, ClearCLBuffer output, Float angle_in_degrees, Boolean rotateAroundCenter) {
 
+
+        angle_in_degrees = (float)(-asFloat(angle_in_degrees) / 180.0f * Math.PI);
 
         AffineTransform2D at = new AffineTransform2D();
 
         if (rotateAroundCenter) {
             at.translate(-input.getWidth() / 2, -input.getHeight() / 2);
         }
-        at.rotate(angle);
+        at.rotate(angle_in_degrees);
         if (rotateAroundCenter) {
             at.translate(input.getWidth() / 2, input.getHeight() / 2);
         }
@@ -76,18 +78,11 @@ public class Rotate2D extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
             clij2.release(image);
             return true;
         }
-        /*
-        Rotate2D rotate2D = new Rotate2D();
-        rotate2D.setClij(clij2.getClij());
-        rotate2D.setArgs(new Object[]{input, output, angle, rotateAroundCenter});
-        return rotate2D.executeCL();
-
-         */
     }
 
     @Override
     public String getParameterHelpText() {
-        return "Image source, ByRef Image destination, Number angle, Boolean rotateAroundCenter";
+        return "Image source, ByRef Image destination, Number angle_in_degrees, Boolean rotateAroundCenter";
     }
 
     @Override
