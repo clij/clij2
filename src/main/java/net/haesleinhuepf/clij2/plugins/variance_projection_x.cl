@@ -13,5 +13,5 @@ __kernel void squared_sum_project(
     float value = READ_src_IMAGE(src,sampler,POS_src_INSTANCE(x,y,z,0)).x;
     sum = sum + pow(value - mean_intensity, 2);
   }
-  WRITE_dst_IMAGE(dst,POS_dst_INSTANCE(x,y,0,0), CONVERT_sum_PIXEL_TYPE(sum));
+  WRITE_dst_IMAGE(dst,POS_dst_INSTANCE(x,y,0,0), CONVERT_dst_PIXEL_TYPE(sum));
 }
