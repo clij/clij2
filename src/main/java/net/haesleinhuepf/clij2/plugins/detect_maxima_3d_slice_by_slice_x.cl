@@ -18,12 +18,13 @@ __kernel void detect_maxima_3d_slice_by_slice(
         {
             int z = 0;
             const int4 localPos = pos + (int4){ x, y, z, 0};
+            if (localPos.x >= 0 && localPos.y >= 0) {
+                float value = READ_src_IMAGE(src, sampler, localPos).x;
 
-            float value = READ_src_IMAGE(src, sampler, localPos).x;
-
-            if (value > localMax) {
-                localMax = value;
-                localMaxPos = localPos;
+                if (value > localMax) {
+                    localMax = value;
+                    localMaxPos = localPos;
+                }
             }
         }
     }

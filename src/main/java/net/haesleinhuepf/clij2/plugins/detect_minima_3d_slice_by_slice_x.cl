@@ -18,12 +18,13 @@ __kernel void detect_minima_3d_slice_by_slice(
         {
             int z = 0;
             const int4 localPos = pos + (int4){ x, y, z, 0};
+            if (localPos.x >= 0 && localPos.y >= 0) {
+                float value = READ_src_IMAGE(src, sampler, localPos).x;
 
-            float value = READ_src_IMAGE(src, sampler, localPos).x;
-
-            if (value < localMin) {
-                localMin = value;
-                localMinPos = localPos;
+                if (value < localMin) {
+                    localMin = value;
+                    localMinPos = localPos;
+                }
             }
         }
     }

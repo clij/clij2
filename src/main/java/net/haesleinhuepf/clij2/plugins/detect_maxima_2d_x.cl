@@ -17,13 +17,13 @@ __kernel void detect_maxima_2d(
         for(int y = -radius; y < radius + 1; y++)
         {
             const int2 localPos = pos + (int2){ x, y};
-
-            float value = READ_src_IMAGE(src, sampler, localPos).x;
-            if (value > localMax) {
-                localMax = value;
-                localMaxPos = localPos;
+            if (localPos.x >= 0 && localPos.y >= 0) {
+                float value = READ_src_IMAGE(src, sampler, localPos).x;
+                if (value > localMax) {
+                    localMax = value;
+                    localMaxPos = localPos;
+                }
             }
-
         }
     }
 

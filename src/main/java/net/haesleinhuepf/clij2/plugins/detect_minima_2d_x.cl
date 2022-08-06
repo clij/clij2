@@ -17,12 +17,13 @@ __kernel void detect_minima_2d(
         for(int y = -radius; y < radius + 1; y++)
         {
             const int2 localPos = pos + (int2){ x, y};
+            if (localPos.x >= 0 && localPos.y >= 0) {
+                float value = READ_src_IMAGE(src, sampler, localPos).x;
 
-            float value = READ_src_IMAGE(src, sampler, localPos).x;
-
-            if (value < localMin) {
-                localMin = value;
-                localMinPos = localPos;
+                if (value < localMin) {
+                    localMin = value;
+                    localMinPos = localPos;
+                }
             }
         }
     }

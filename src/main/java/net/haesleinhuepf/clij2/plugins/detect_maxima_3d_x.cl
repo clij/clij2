@@ -27,13 +27,13 @@ __kernel void detect_maxima_3d(
             for(int z = -radius; z < radius + 1; z++)
             {
                 const POS_src_TYPE localPos = POS_src_INSTANCE( i + x, j + y, k + z, 0);
+                if (localPos.x >= 0 && localPos.y >= 0 && localPos.z >= 0) {
+                    float value = READ_src_IMAGE(src, sampler, localPos).x;
 
-                float value = READ_src_IMAGE(src, sampler, localPos).x;
-
-                
-                if (value > localMax) {
-                    localMax = value;
-                    localMaxPos = localPos;
+                    if (value > localMax) {
+                        localMax = value;
+                        localMaxPos = localPos;
+                    }
                 }
             }
         }
