@@ -51,8 +51,8 @@ public class SubStack extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
     @Override
     public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input)
     {
-        int start_z = asInteger(args[3]);
-        int end_z = asInteger(args[4]);
+        int start_z = asInteger(args[2]);
+        int end_z = asInteger(args[3]);
 
         int range = end_z - start_z + 1;
 
