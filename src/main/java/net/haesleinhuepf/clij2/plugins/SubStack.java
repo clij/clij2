@@ -66,7 +66,7 @@ public class SubStack extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CL
 
     @Override
     public Object[] getDefaultValues() {
-        return new Object[]{null, null, 0, 100000000};
+        return new Object[]{null, null, 0, 10};
     }
 
     @Override
