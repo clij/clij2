@@ -70,7 +70,7 @@ public class CountNonZeroPixels extends AbstractCLIJ2Plugin implements CLIJMacro
 
         RandomAccessibleInterval rai = clij2.convert(clReducedImage, RandomAccessibleInterval.class);
         Cursor cursor = Views.iterable(rai).cursor();
-        float sum = 0;
+        long sum = 0;
         while (cursor.hasNext()) {
             sum += ((RealType) cursor.next()).getRealFloat();
         }
