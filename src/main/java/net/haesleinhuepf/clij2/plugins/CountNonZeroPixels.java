@@ -72,7 +72,7 @@ public class CountNonZeroPixels extends AbstractCLIJ2Plugin implements CLIJMacro
         Cursor cursor = Views.iterable(rai).cursor();
         long sum = 0;
         while (cursor.hasNext()) {
-            sum += ((RealType) cursor.next()).getRealFloat();
+            sum +=  (long) ((RealType) cursor.next()).getRealFloat();
         }
 
         if (clImage != clReducedImage) {
