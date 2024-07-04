@@ -3,6 +3,8 @@ package net.haesleinhuepf.clij2.plugins;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.clearcl.ClearCLImage;
 import net.haesleinhuepf.clij.clearcl.enums.ImageChannelDataType;
+import net.haesleinhuepf.clij.clearcl.interfaces.ClearCLImageInterface;
+import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij.macro.CLIJMacroPlugin;
 import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
@@ -45,15 +47,18 @@ public class MakeIsotropic extends AbstractCLIJ2Plugin implements CLIJMacroPlugi
         float scale1Y = (float) (original_voxel_size_y / new_voxel_size);
         float scale1Z = (float) (original_voxel_size_z / new_voxel_size);
 
-        ClearCLImage temp = clij2.create(pushed.getDimensions(), ImageChannelDataType.Float);
-
-        clij2.copy(pushed, temp);
 
         AffineTransform3D scaleTransform = new AffineTransform3D();
         scaleTransform.scale(1.0 / scale1X, 1.0 / scale1Y, 1.0 / scale1Z);
-        clij2.affineTransform3D(temp, result, scaleTransform);
 
-        temp.close();
+        if (!clij2.hasImageSupport()) {
+            clij2.affineTransform3D(pushed, result, scaleTransform);
+        } else {
+            ClearCLImage temp = clij2.create(pushed.getDimensions(), ImageChannelDataType.Float);
+            clij2.copy(pushed, temp);
+            clij2.affineTransform3D(temp, result, scaleTransform);
+            temp.close();
+        }
 
         return true;
     }
